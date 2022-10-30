@@ -253,13 +253,7 @@ export default function Profile({ user, setUser }) {
               </div>
             </div>
           ) : (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 4fr",
-                marginTop: "150px",
-              }}
-            >
+            <div className="profilePage">
               <div
                 style={{
                   display: "flex",
