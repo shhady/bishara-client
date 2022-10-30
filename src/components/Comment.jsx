@@ -385,7 +385,9 @@ export default function Comment({ course, courseId, chooseVideo }) {
                 </span>
               )}
               {url ? (
-                <span style={{ textAlign: "center" }}>يمكنك رفع فيديو اخر</span>
+                <Link to="/profile">
+                  <button style={{ textAlign: "center" }}>الملف الشخصي</button>
+                </Link>
               ) : null}
             </div>
           </div>
