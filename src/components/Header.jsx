@@ -600,7 +600,7 @@ export default function Header({ user, setUser, socket }) {
               className="menuMobile"
               style={{
                 // textAlign: "center",
-                border: "1px solid gray",
+                // border: "1px solid gray",
                 padding: "2px",
               }}
               onClick={() => setOpenMenu(!openMenu)}
