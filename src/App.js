@@ -49,14 +49,7 @@ export default function App() {
   }, [user]);
   useEffect(() => {
     if (!userId) return;
-    setSocket(
-      io("https://dawrafun1.herokuapp.com/", {
-        withCredentials: true,
-        extraHeaders: {
-          "my-custom-header": "abcd",
-        },
-      })
-    );
+    setSocket(io("https://dawrafun1.herokuapp.com/"));
     console.log(socket);
   }, [userId]);
 
