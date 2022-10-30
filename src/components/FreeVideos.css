@@ -1,0 +1,74 @@
+.mainVideos{
+    height: 70vh;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+.learnFromTheBest{
+    color:#e14f3d;
+    background:#ffdfda;
+    border-radius:5px;
+    padding: 5px;
+    margin-top: 100px;
+    width: 30%;
+    margin: 60px auto;
+    /* align-self: center; */
+}
+.buttons{
+    display: flex;
+    flex-direction: column;
+}
+.trustUs{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+.buttonP{
+    height: 20%;
+    cursor: pointer;
+    text-align: right;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+    background: rgb(161, 160, 160)
+}
+.buttonO{
+    height: 20%;
+    cursor: pointer;
+    width: 80%;
+    margin: auto;
+    /* margin-top: 1rem; */
+    text-align: right;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: rgb(161, 160, 160)
+}
+.buttonO:hover{
+    border: 2px solid black;
+}
+.buttonP:hover{
+    border: 2px solid black;
+}
+
+@media(max-width:768px){
+    .mainVideos{
+        display: grid;
+        grid-template-columns:repeat(1, 1fr)
+    }
+    .buttonP{
+        width: 80%;
+        height: 40%;
+        margin-bottom: 10px;
+    }
+    .buttonO{
+        width: 80%;
+        height: 40%;
+        margin-bottom: 10px;
+
+    }
+    .videos{
+        width: 100%;
+        margin:auto;
+    }
+}

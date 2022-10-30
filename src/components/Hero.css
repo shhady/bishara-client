@@ -1,0 +1,117 @@
+.hero{
+    margin-top: 12vh;
+    height: 90vh;  
+    background-image: url("https://images.pexels.com/photos/159448/piano-instrument-music-keys-159448.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");  
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    box-shadow: 0 8px 16px 12px rgb(43, 42, 42), 0 12px 24px 0 rgba(43, 42, 42);
+}
+
+.coverblack{
+    height: 100%;
+    background: rgba(27,26,31,255);
+    opacity: 0.99;
+    z-index: 1;
+}
+.cards{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    width: 90%;
+    margin: auto;
+    color: white;
+}
+.cardPiano{
+    background-image: url("https://images.unsplash.com/photo-1579685055980-48dd748d862e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    border: 1px solid white;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(254, 253, 253, 0.2), 0 6px 20px 0 rgba(250, 248, 248, 0.19);
+    height: 50vh;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden
+}
+
+.cardOud{
+    background-image: url("https://images.unsplash.com/photo-1593550573849-1d608bb469ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid white;
+    margin-left: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(254, 253, 253, 0.2), 0 6px 20px 0 rgba(250, 248, 248, 0.19);
+    height: 50vh;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden
+}
+.cardViolin{
+    background-image: url("https://images.unsplash.com/photo-1460036521480-ff49c08c2781?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dmlvbGlufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    border: 1px solid white;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(254, 253, 253, 0.2), 0 6px 20px 0 rgba(250, 248, 248, 0.19);
+    height: 50vh;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden
+}
+
+.title{
+    color: white;
+    text-align: center;
+    margin-top: 8rem;
+}
+.wcoverblack{
+    width: 100%;
+    height: 100%;
+    background: rgba(109, 76, 76, 0.7);
+    /* opacity: 0.7; */
+    /* z-index: 1; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+h1{
+    z-index: 3;
+}
+
+@media (max-width:735px) {
+    .cards{
+        width: 100%;
+        gap:.5rem;
+        display: grid;
+    grid-template-columns: repeat(1,1fr);
+
+    }
+    .cardPiano{
+        height: 20vh;
+        width: 100%;
+    }
+    .cardOud{
+        height: 20vh;
+        width: 100%;
+
+    }
+    .cardViolin{
+            height: 20vh;
+            width: 100%;
+    }
+    .title{
+        margin-top: 0rem
+    }
+}

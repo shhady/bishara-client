@@ -1,0 +1,42 @@
+
+.mainSignin{
+    background-color: rgba(255,255,255,0.7);
+    height: 97vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.SigninContainer{
+    background-color:  rgba(255,255,255,0.5);
+    box-shadow:12px 8px 16px 12px rgb(212, 210, 210), 0 8px 16px 12px rgb(212, 210, 210), 0 12px 24px 0 rgb(212, 210, 210);
+    height: 90vh;
+    width:40vw;
+}
+@media (max-width: 768px){
+    .SigninContainer{
+        width:80vw;
+    }
+}
+
+.titleSingin{
+    text-align: center;
+    margin-top:10%;
+}
+/* .emailinput, .passwordinput{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin: 10px;
+    padding: 5px;
+} */
+
+.forminputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+input, button{
+    margin-top: 20px;
+    margin-left: 10px;
+}

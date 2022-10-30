@@ -1,0 +1,14 @@
+.profileButtons{
+    display: grid;
+    grid-template-columns:repeat(4,1fr);
+    gap: 1rem;
+    margin-top: 30px
+}
+@media (max-width: 568px) {
+    .profileButtons{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 1rem;
+        margin-top: 30px
+    }
+}

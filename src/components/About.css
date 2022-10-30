@@ -1,0 +1,24 @@
+.aboutus{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    height: 90vh;
+}
+.instimage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.aboutSection{
+    /* width: 60%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 768px){
+    .aboutus{
+        display: grid;
+        grid-template-columns: repeat(1,1fr)
+    }
+}

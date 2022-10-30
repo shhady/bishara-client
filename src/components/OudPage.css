@@ -1,0 +1,12 @@
+.mainContainer{
+    margin-top: 20vh;
+    color: white;
+   
+}
+
+.postsContainer{
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr; */
+    border: 1px solid white
+}
+
