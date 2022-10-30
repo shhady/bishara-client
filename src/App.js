@@ -50,7 +50,7 @@ export default function App() {
   useEffect(() => {
     if (!userId) return;
     setSocket(
-      io("https://newdawrat.herokuapp.com//", {
+      io("https://dawrafun1.herokuapp.com/", {
         withCredentials: true,
         extraHeaders: {
           "my-custom-header": "abcd",
