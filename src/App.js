@@ -49,7 +49,7 @@ export default function App() {
   }, [user]);
   useEffect(() => {
     if (!userId) return;
-    setSocket(io("https://test-dawratfun.herokuapp.com/"));
+    setSocket(io("http://localhost:5000"));
     console.log(socket);
   }, [userId]);
 
