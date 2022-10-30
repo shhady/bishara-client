@@ -3,6 +3,8 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { io } from "socket.io-client";
+import { Link } from "react-router-dom";
+
 export default function Comment({ course, courseId, chooseVideo }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [ownerId, setOwnerId] = useState(localStorage.getItem("ownerId"));
