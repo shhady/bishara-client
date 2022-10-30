@@ -85,7 +85,7 @@ export default function Comment({ course, courseId, chooseVideo }) {
   }, [url]);
 
   useEffect(() => {
-    setSocket(io("https://test-dawratfun.herokuapp.com/"));
+    setSocket(io("https://newdawrat.herokuapp.com/"));
     console.log(socket);
   }, []);
   useEffect(() => {
