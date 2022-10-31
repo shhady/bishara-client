@@ -232,7 +232,8 @@ export default function Header({ user, setUser, socket }) {
           <div
             style={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "flex-start",
+              paddingRight: "20px",
               alignItems: "center",
             }}
           >
@@ -339,6 +340,7 @@ export default function Header({ user, setUser, socket }) {
                   border: "none",
                   height: "100%",
                   display: "flex",
+                  paddingLeft: "20px",
                 }}
               >
                 <Link to="/profile">
@@ -438,6 +440,7 @@ export default function Header({ user, setUser, socket }) {
                       <div
                         style={{
                           display: "flex",
+                          paddingRight: "20px",
                           flexDirection: "column",
                           justifyContent: "center",
                           alignItems: "center",
@@ -596,7 +599,7 @@ export default function Header({ user, setUser, socket }) {
         </div>
         <div className="header-down">
           <div className="Menu-message">
-            <div></div>
+            {/* <div></div> */}
             <div
               className="menuMobile"
               style={{
@@ -683,7 +686,9 @@ export default function Header({ user, setUser, socket }) {
 
           <div
             style={{
-              padding: "2px",
+              display: "flex",
+              justifyContent: "flex-end",
+              paddingLeft: "20px",
               border: "1px solid white",
               cursor: "pointer",
               position: "relative",

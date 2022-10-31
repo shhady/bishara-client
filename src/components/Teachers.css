@@ -13,9 +13,9 @@
     /* border: 1px solid black;
     border-radius: 5px; */
     border-radius: 10px;
-background: #fafafa;
-box-shadow:  5px 5px 10px #cbcbcb,
-             -5px -5px 10px #ffffff;
+    background: #fafafa;
+    box-shadow:  5px 5px 10px #cbcbcb,
+      -5px -5px 10px #ffffff;
     padding:3px
 }
 
