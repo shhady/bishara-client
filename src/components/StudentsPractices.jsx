@@ -42,12 +42,22 @@ export default function StudentsPractices({ user }) {
 
   const addTeacherVideoReply = (practice) => {
     const addTheVideo = async () => {
-      await axios.patch(
-        process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`,
-        {
-          videoReply: url,
-        }
-      );
+      await axios
+        .patch(
+          process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`,
+          {
+            videoReply: url,
+          }
+        )
+        .then(async () => {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/practices`
+          );
+          const filterData = res.data.filter(
+            (practice) => practice.teacherId === userId
+          );
+          setTeacherPractices(filterData);
+        });
     };
     addTheVideo();
     setUrl(null);
@@ -149,18 +159,39 @@ export default function StudentsPractices({ user }) {
           <div>
             الدرس:
             {practice.video}
-            <br />
-            التمرين:
           </div>
           <div>
-            <div>
-              <video
-                key={practice.myPractice}
-                controls
-                style={{ width: "100%", height: "250px" }}
-              >
-                <source src={practice.myPractice} type="video/mp4" />
-              </video>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "10px",
+              }}
+            >
+              <div>
+                <span> التمرين:</span>
+                <video
+                  key={practice.myPractice}
+                  controls
+                  style={{ width: "100%", height: "250px" }}
+                >
+                  <source src={practice.myPractice} type="video/mp4" />
+                </video>
+              </div>
+              <div>
+                {practice.videoReply ? (
+                  <>
+                    <span>رد المعلم</span>
+                    <video
+                      key={practice.videoReply}
+                      controls
+                      style={{ width: "100%", height: "250px" }}
+                    >
+                      <source src={practice.videoReply} type="video/mp4" />
+                    </video>
+                  </>
+                ) : null}
+              </div>
             </div>
             <div>
               {/* {practice.reply && showLastReply ? (
