@@ -2,15 +2,13 @@
     background-color:#e14f3d;
     color: white;
     width: 70px;
-    margin-bottom: 40px;
+    margin-bottom: auto;
 
 }
 .SendVideoReply{
-    
         display: grid;
         grid-template-columns:1fr 1fr;
         border-bottom: 1px solid black;
-
 }
 .allvideoreply{
     display: grid;

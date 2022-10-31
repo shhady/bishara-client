@@ -18,6 +18,7 @@ export default function StudentsPractices({ user }) {
     const formData = new FormData();
     formData.append("file", video);
     formData.append("upload_preset", "bisharaHaroni");
+    setPracticeId(practice._id);
     // formData.append("cloud_name", "shhady");
     axios
       .post("https://api.cloudinary.com/v1_1/shhady/upload", formData, {
@@ -28,7 +29,7 @@ export default function StudentsPractices({ user }) {
         },
       })
       .then((res) => setUrl(res.data.url))
-      .then(() => setPracticeId(practice._id))
+      // .then(() => setPracticeId(practice._id))
       // .then((data) => {
       //   (data.url);
       // })
@@ -227,7 +228,15 @@ export default function StudentsPractices({ user }) {
                   <div>
                     {practiceId === practice._id ? (
                       <div className="SendVideoReply">
-                        <div style={{ minWidth: "70px" }}>
+                        <div
+                          style={{
+                            minWidth: "70px",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "flex-end",
+                            alignItems: "center",
+                          }}
+                        >
                           {fileUpload && (
                             <span style={{ textAlign: "center" }}>
                               {" "}
@@ -236,7 +245,14 @@ export default function StudentsPractices({ user }) {
                           )}
                         </div>
                         {url ? (
-                          <div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
                             <button
                               onClick={() => addTeacherVideoReply(practice)}
                               className="btnSendVideoReply"
