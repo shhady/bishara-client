@@ -63,7 +63,7 @@ export default function Courses() {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          marginTop: "20px",
+          marginTop: "20%",
         }}
       >
         <div className="spinner">
