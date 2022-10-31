@@ -76,19 +76,33 @@ button{
 }
 .registerBox{
     /* border: 1px solid gray; */
-    border-style: outset;
-    border-radius: 5px;
+    /* border-style: outset; */
+    border-radius: 10px;
+    background: linear-gradient(145deg, #e1e1e1, #ffffff);
+    box-shadow:  1px 1px 16px #dbdada,
+                 -1px -1px 16px #ffffff;
+    /* border-radius: 5px; */
 }
 .registerBox:hover{
-    border-style: inset;
+    /* border-style: inset; */
+    border-radius: 50px;
+background: #fafafa;
+box-shadow:  20px 20px 60px #d5d5d5,
+             -20px -20px 60px #ffffff;
 }
 
 .logOutHeader{
-    border-style: outset;
-    border-radius: 5px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #e1e1e1, #ffffff);
+    box-shadow:  1px 1px 16px #dbdada,
+                 -1px -1px 16px #ffffff;
 }
 .logOutHeader:hover{
-        border-style: inset;
+        /* border-style: inset; */
+        border-radius: 50px;
+background: #fafafa;
+box-shadow:  20px 20px 60px #d5d5d5,
+             -20px -20px 60px #ffffff;
 
 }
 .notificationNotification{

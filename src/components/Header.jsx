@@ -549,6 +549,7 @@ export default function Header({ user, setUser, socket }) {
                       // borderRadius: "5px",
                       height: "30px",
                       padding: "3px",
+                      color: "black",
                     }}
                     className="registerBox"
                   >
@@ -614,11 +615,20 @@ export default function Header({ user, setUser, socket }) {
                 <h3 className="headeroud">المدرسين</h3>
               </div>
             </Link>
-            <Link to="/courses" style={{ textDecoration: "none" }}>
-              <div>
-                <h3 className="headeroud">الدورات الموسيقية</h3>
-              </div>
-            </Link>
+            {user ? (
+              <Link to="/courses" style={{ textDecoration: "none" }}>
+                <div>
+                  <h3 className="headeroud">الدورات الموسيقية</h3>
+                </div>
+              </Link>
+            ) : (
+              <Link to="/auth" style={{ textDecoration: "none" }}>
+                <div>
+                  <h3 className="headeroud">الدورات الموسيقية</h3>
+                </div>
+              </Link>
+            )}
+
             {/* <Link to="Piano" style={{ textDecoration: "none" }}>
               <div>
                 <h3 className="headerpiano">نوتات موسيقية</h3>
