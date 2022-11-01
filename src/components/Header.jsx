@@ -233,7 +233,7 @@ export default function Header({ user, setUser, socket }) {
             style={{
               display: "flex",
               justifyContent: "flex-start",
-              paddingRight: "20px",
+              paddingRight: "15px",
               alignItems: "center",
             }}
           >
