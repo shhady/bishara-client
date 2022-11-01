@@ -440,7 +440,7 @@ export default function Header({ user, setUser, socket }) {
                       <div
                         style={{
                           display: "flex",
-                          paddingRight: "20px",
+                          // paddingRight: "20px",
                           flexDirection: "column",
                           justifyContent: "center",
                           alignItems: "center",
@@ -573,6 +573,7 @@ export default function Header({ user, setUser, socket }) {
                         flexDirection: "column",
                         justifyContent: "center",
                         alignItems: "center",
+                        marginLeft: "20px",
                       }}
                     >
                       تسجيل الدخول
