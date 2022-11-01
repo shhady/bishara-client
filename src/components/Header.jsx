@@ -644,27 +644,29 @@ export default function Header({ user, setUser, socket }) {
               </div>
             </Link>
           </div>
-          <div
-            style={{
-              padding: "2px",
-              border: "1px solid white",
-              cursor: "pointer",
-              position: "relative",
-            }}
-            onClick={() => {
-              if (uniques.length === 0) {
-                history.push("/messenger");
-              } else {
-                setOpenNotificationsMessage(!openNotificationsMessage);
-              }
-              // history.push("/messenger");
-            }}
-          >
-            <FontAwesomeIcon icon={faMessage} />
-            {uniques.length > 0 ? (
-              <div className="notificationMessage">{uniques.length}</div>
-            ) : null}
-          </div>
+          {user ? (
+            <div
+              style={{
+                padding: "2px",
+                border: "1px solid white",
+                cursor: "pointer",
+                position: "relative",
+              }}
+              onClick={() => {
+                if (uniques.length === 0) {
+                  history.push("/messenger");
+                } else {
+                  setOpenNotificationsMessage(!openNotificationsMessage);
+                }
+                // history.push("/messenger");
+              }}
+            >
+              <FontAwesomeIcon icon={faMessage} />
+              {uniques.length > 0 ? (
+                <div className="notificationMessage">{uniques.length}</div>
+              ) : null}
+            </div>
+          ) : null}
 
           {openNotificationsMessage ? (
             <div className="notificationMessage-container">
@@ -684,27 +686,28 @@ export default function Header({ user, setUser, socket }) {
               </div>
             </div>
           ) : null}
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              paddingLeft: "20px",
-              border: "1px solid white",
-              cursor: "pointer",
-              position: "relative",
-            }}
-          >
-            <FontAwesomeIcon icon={faBell} onClick={clickOnBill} />
-            {notificationNotification.length > 0 ? (
-              <div
-                className="notificationNotification"
-                onClick={() => setOpenNotifications(!openNotifications)}
-              >
-                .
-              </div>
-            ) : null}
-          </div>
+          {user ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                paddingLeft: "20px",
+                border: "1px solid white",
+                cursor: "pointer",
+                position: "relative",
+              }}
+            >
+              <FontAwesomeIcon icon={faBell} onClick={clickOnBill} />
+              {notificationNotification.length > 0 ? (
+                <div
+                  className="notificationNotification"
+                  onClick={() => setOpenNotifications(!openNotifications)}
+                >
+                  .
+                </div>
+              ) : null}
+            </div>
+          ) : null}
 
           {openNotifications ? (
             <div className="notification-container">

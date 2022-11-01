@@ -148,7 +148,7 @@ export default function Comment({ course, courseId, chooseVideo }) {
     return courseComments?.map((comment, i) => {
       return (
         <div key={i} style={{ border: "1px solid gray", padding: "5px" }}>
-          <div>
+          <div style={{ color: "black", fontWeight: "bold" }}>
             {comment.firstName}
             {"  "}
             {comment.lastName}:
