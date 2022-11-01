@@ -601,17 +601,21 @@ export default function Header({ user, setUser, socket }) {
         <div className="header-down">
           <div className="Menu-message">
             {/* <div></div> */}
-            <div
-              className="menuMobile"
-              style={{
-                // textAlign: "center",
-                // border: "1px solid gray",
-                padding: "2px",
-              }}
-              onClick={() => setOpenMenu(!openMenu)}
-            >
-              {!openMenu ? <FontAwesomeIcon icon={faBars} /> : "X اغلاق"}{" "}
-            </div>
+            {user ? (
+              <>
+                <div
+                  className="menuMobile"
+                  style={{
+                    // textAlign: "center",
+                    // border: "1px solid gray",
+                    padding: "2px",
+                  }}
+                  onClick={() => setOpenMenu(!openMenu)}
+                >
+                  {!openMenu ? <FontAwesomeIcon icon={faBars} /> : "X اغلاق"}{" "}
+                </div>
+              </>
+            ) : null}
           </div>
           <div className="menu-details-computer">
             <Link to="/teachers" style={{ textDecoration: "none" }}>
