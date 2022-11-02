@@ -717,7 +717,14 @@ export default function Header({ user, setUser, socket }) {
                 >
                   {notificationNumber.length}
                 </div>
-              ) : null}
+              ) : (
+                <>
+                  <div
+                    // className="notificationNotification"
+                    onClick={() => setOpenNotifications(!openNotifications)}
+                  ></div>
+                </>
+              )}
             </div>
           ) : null}
 
