@@ -33,6 +33,7 @@ export default function Header({ user, setUser, socket }) {
     setNotificationNumber(backNot.filter((number) => number.read === false));
   }, [backNot]);
 
+  console.log(notificationNumber);
   useEffect(() => {
     if (!user) return;
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
