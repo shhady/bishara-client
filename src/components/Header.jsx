@@ -149,6 +149,7 @@ export default function Header({ user, setUser, socket }) {
           const result = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/comments/`
           );
+          console.log(result);
           setBackNot(
             result.data.filter((comment) => comment.courseOwnerId === userId)
           );
@@ -197,7 +198,7 @@ export default function Header({ user, setUser, socket }) {
         );
       });
   };
-
+  console.log(backNot);
   const uniques = notificationMessage
     .map((obj) => {
       return obj.userName;
