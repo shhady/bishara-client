@@ -27,6 +27,12 @@ export default function Header({ user, setUser, socket }) {
     useState(false);
   const [backNot, setBackNot] = useState([]);
   const [userId, setUserId] = useState(null);
+  const [notificationNumber, setNotificationNumber] = useState([]);
+
+  useEffect(() => {
+    setNotificationNumber(backNot.filter((number) => number.read === false));
+  }, [backNot]);
+
   useEffect(() => {
     if (!user) return;
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
@@ -43,7 +49,7 @@ export default function Header({ user, setUser, socket }) {
     };
     comments();
   }, [userId]);
-  console.log(backNot);
+  console.log(backNot.filter((comment) => comment.read === false));
 
   const clickOnBill = () => {
     setOpenNotifications(!openNotifications);
@@ -105,6 +111,7 @@ export default function Header({ user, setUser, socket }) {
     setUser(null);
     setNotificationNotification([]);
     setNotificationMessage([]);
+    setOpenNotifications(false);
   };
 
   const handleLogoutStudent = async () => {
@@ -703,12 +710,12 @@ export default function Header({ user, setUser, socket }) {
               }}
             >
               <FontAwesomeIcon icon={faBell} onClick={clickOnBill} />
-              {notificationNotification.length > 0 ? (
+              {notificationNumber.length > 0 ? (
                 <div
                   className="notificationNotification"
                   onClick={() => setOpenNotifications(!openNotifications)}
                 >
-                  .
+                  {notificationNumber.length}
                 </div>
               ) : null}
             </div>
