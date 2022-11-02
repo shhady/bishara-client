@@ -54,16 +54,19 @@ export default function Header({ user, setUser, socket }) {
   const clickOnBill = () => {
     setOpenNotifications(!openNotifications);
     setNotificationNotification([]);
+    console.log("bill clicked");
+  };
+  console.log(openNotifications);
+
+  useEffect(() => {
     const comments = async () => {
       const result = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/comments/`
       );
-      setBackNot(
-        result.data.filter((comment) => comment.courseOwnerId === userId)
-      );
+      setBackNot(result.data);
     };
     comments();
-  };
+  }, []);
   // useEffect(() => {
   //   setSocket(io("http://localhost:8900"));
   //   console.log(socket);
@@ -708,23 +711,17 @@ export default function Header({ user, setUser, socket }) {
                 cursor: "pointer",
                 position: "relative",
               }}
+              onClick={clickOnBill}
             >
-              <FontAwesomeIcon icon={faBell} onClick={clickOnBill} />
+              <FontAwesomeIcon icon={faBell} />
               {notificationNumber.length > 0 ? (
                 <div
                   className="notificationNotification"
-                  onClick={() => setOpenNotifications(!openNotifications)}
+                  // onClick={() => setOpenNotifications(!openNotifications)}
                 >
                   {notificationNumber.length}
                 </div>
-              ) : (
-                <>
-                  <div
-                    // className="notificationNotification"
-                    onClick={() => setOpenNotifications(!openNotifications)}
-                  ></div>
-                </>
-              )}
+              ) : null}
             </div>
           ) : null}
 
