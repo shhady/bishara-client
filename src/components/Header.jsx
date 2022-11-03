@@ -53,7 +53,7 @@ export default function Header({ user, setUser, socket }) {
 
   const clickOnBill = () => {
     setOpenNotifications(!openNotifications);
-    setNotificationNotification([]);
+    // setNotificationNotification([]);
     console.log("bill clicked");
   };
   console.log(openNotifications);
@@ -155,15 +155,15 @@ export default function Header({ user, setUser, socket }) {
             read: true,
           }
         )
-        .then(async () => {
-          const result = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/comments/`
-          );
-          console.log(result);
-          setBackNot(
-            result.data.filter((comment) => comment.courseOwnerId === userId)
-          );
-        })
+        // .then(async () => {
+        //   const result = await axios.get(
+        //     process.env.REACT_APP_BACKEND_URL + `/comments/`
+        //   );
+        //   console.log(result);
+        //   setBackNot(
+        //     result.data.filter((comment) => comment.courseOwnerId === userId)
+        //   );
+        // })
         .then(window.localStorage.setItem("courseId", notification.theCourse))
         .then(history.push({ pathname: `/course/${notification.theCourse}` }))
         .then(window.location.reload());
@@ -726,22 +726,7 @@ export default function Header({ user, setUser, socket }) {
           ) : null}
 
           {openNotifications ? (
-            <div className="notification-container">
-              {drawNotifications()}
-              {/* <div
-                style={{
-                  border: "1px solid gray",
-                  background: "skyblue",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  setOpenNotifications(!openNotifications);
-                  setNotificationNotification([]);
-                }}
-              >
-                حذف جميع الاشعارات
-              </div> */}
-            </div>
+            <div className="notification-container">{drawNotifications()}</div>
           ) : null}
           {openMenu && (
             <div className="menu-details">
