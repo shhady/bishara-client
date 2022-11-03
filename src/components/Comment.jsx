@@ -158,7 +158,7 @@ export default function Comment({ course, courseId, chooseVideo }) {
             <div>
               {comment.replies.map((reply, i) => (
                 <div key={i}>
-                  <div>
+                  <div style={{ color: "black", fontWeight: "bold" }}>
                     <FontAwesomeIcon icon={faReply} /> {reply.firstName}{" "}
                     {reply.lastName}:
                   </div>

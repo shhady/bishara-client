@@ -56,7 +56,6 @@ export default function Header({ user, setUser, socket }) {
     // setNotificationNotification([]);
     console.log("bill clicked");
   };
-  console.log(openNotifications);
 
   useEffect(() => {
     const comments = async () => {
@@ -155,6 +154,7 @@ export default function Header({ user, setUser, socket }) {
             read: true,
           }
         )
+        .then(() => setNotificationNumber(notificationNumber.length - 1))
         // .then(async () => {
         //   const result = await axios.get(
         //     process.env.REACT_APP_BACKEND_URL + `/comments/`
@@ -172,7 +172,10 @@ export default function Header({ user, setUser, socket }) {
     // setNotificationClicked(!notificationClicked);
     // setCourseIdNew(notification.courseid);
     setOpenNotifications(!openNotifications);
+    console.log(notificationNumber.length);
   };
+
+  console.log(notificationNumber.length);
 
   const drawNotifications = () => {
     return backNot
@@ -745,11 +748,6 @@ export default function Header({ user, setUser, socket }) {
                   <h3 className="headeroud">الدورات الموسيقية</h3>
                 </div>
               </Link>
-              {/* <Link to="Piano" style={{ textDecoration: "none" }}>
-                <div onClick={() => setOpenMenu(!openMenu)}>
-                  <h3 className="headerpiano">نوتات موسيقية</h3>
-                </div>
-              </Link> */}
               <Link to="" style={{ textDecoration: "none" }}>
                 <div onClick={() => setOpenMenu(!openMenu)}>
                   <h3 className="headerpiano">الاشتراك </h3>
