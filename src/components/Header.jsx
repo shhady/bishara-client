@@ -757,11 +757,6 @@ export default function Header({ user, setUser, socket }) {
               </Link>
             </div>
           )}
-          {/* <div className="menuMobile">
-            {" "}
-            <FontAwesomeIcon icon={faBars} />
-            القائمة
-          </div> */}
         </div>
       </div>
     </div>
