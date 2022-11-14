@@ -17,9 +17,6 @@ export default function OudPage({ user, setUser }) {
   return (
     <div className="mainContainer">
       <div className="first">
-        <div>
-          <Oudvideo />
-        </div>
         <div className="firstContent">
           <h2>دروس ودورات من أفضل عازفي العود في العالم.</h2>
           <div>
@@ -35,6 +32,9 @@ export default function OudPage({ user, setUser }) {
               <button className="btn-PianoPage">تسجيل دخول</button>
             </Link>
           )}
+        </div>
+        <div>
+          <Oudvideo />
         </div>
       </div>
       <div className="second">

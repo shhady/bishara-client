@@ -17,9 +17,6 @@ export default function PianoPage({ user, setUser }) {
   return (
     <div className="mainContainer">
       <div className="first">
-        <div>
-          <Pianovideo />
-        </div>
         <div className="firstContent">
           <h2>دروس ودورات من أفضل عازفي البيانو في العالم.</h2>
           <div>
@@ -35,6 +32,9 @@ export default function PianoPage({ user, setUser }) {
               <button className="btn-PianoPage">تسجيل دخول</button>
             </Link>
           )}
+        </div>
+        <div>
+          <Pianovideo />
         </div>
       </div>
       <div className="second">

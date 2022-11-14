@@ -17,9 +17,6 @@ export default function ViolinPage({ user, setUser }) {
   return (
     <div className="mainContainer">
       <div className="first">
-        <div>
-          <Violinvideo />
-        </div>
         <div className="firstContent">
           <h2>دروس ودورات من أفضل عازفي الكمان في العالم.</h2>
           <div>
@@ -35,6 +32,9 @@ export default function ViolinPage({ user, setUser }) {
               <button className="btn-PianoPage">تسجيل دخول</button>
             </Link>
           )}
+        </div>
+        <div>
+          <Violinvideo />
         </div>
       </div>
       <div className="second">
