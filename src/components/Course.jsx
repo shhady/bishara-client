@@ -91,13 +91,21 @@ export default function Course() {
       // }
       setEpisode("");
       if (!courseId) return console.log("addeddd");
-      await axios.put(
-        process.env.REACT_APP_BACKEND_URL + `/courses/${courseId}`,
-        {
+      await axios
+        .put(process.env.REACT_APP_BACKEND_URL + `/courses/${courseId}`, {
           episode,
           url,
-        }
-      );
+        })
+        .then(() => {
+          const fetch = async () => {
+            const res = await axios.get(
+              process.env.REACT_APP_BACKEND_URL + `/courses/${courseId}`
+            );
+            console.log(res.data);
+            setCourse(res.data);
+          };
+          fetch();
+        });
     };
     fetch();
   }, [url]);
