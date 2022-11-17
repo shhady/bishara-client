@@ -16,7 +16,9 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
 
   useEffect(() => {
     const conv = async () => {
-      const result = await axios.get("http://localhost:5000/conversations");
+      const result = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + "/conversations"
+      );
       setConversations(result.data.map((members) => members.members));
     };
     conv();
