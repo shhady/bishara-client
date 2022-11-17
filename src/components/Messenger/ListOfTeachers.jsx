@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 export default function ListOfTeachers({ currentId, setCurrentChat }) {
   const [teachers, setTeachers] = useState(null);
+  const [conversations, setConversations] = useState([]);
   console.log(currentId);
   useEffect(() => {
     const teachers = async () => {
@@ -13,17 +14,43 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
     teachers();
   }, []);
 
+  useEffect(() => {
+    const conv = async () => {
+      const result = await axios.get("http://localhost:5000/conversations");
+      setConversations(result.data.map((members) => members.members));
+    };
+    conv();
+  }, []);
+  console.log(conversations);
   console.log(teachers);
   if (!teachers) return null;
 
   const handleClick = async (teacher) => {
     console.log(teacher._id);
+    let existingConversations = conversations;
+    let newConversation = [currentId, teacher._id];
+    existingConversations = JSON.stringify(existingConversations);
+    newConversation = JSON.stringify(newConversation);
 
-    try {
+    let c = existingConversations.indexOf(newConversation);
+    if (c != -1) {
+      const conv = async () => {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_URL +
+            `/conversations/find/${currentId}/${teacher._id}`
+        );
+        setCurrentChat(res.data);
+      };
+      conv();
+      console.log("exists");
+    } else {
       await axios
         .post(process.env.REACT_APP_BACKEND_URL + "/conversations", {
           receiverId: teacher._id,
           senderId: currentId,
+        })
+        .then(() => {
+          conversations.push([...conversations, [currentId, teacher._id]]);
         })
         .then(async () => {
           const res = await axios.get(
@@ -32,9 +59,27 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
           );
           setCurrentChat(res.data);
         });
-    } catch (error) {
-      console.log(error);
     }
+    console.log(conversations);
+    // try {
+    //   await axios
+    //     .post(process.env.REACT_APP_BACKEND_URL + "/conversations", {
+    //       receiverId: teacher._id,
+    //       senderId: currentId,
+    //     })
+    //     // .then(() => {
+    //     //   conversations.push([...conversations, [currentId, teacher._id]]);
+    //     // })
+    //     .then(async () => {
+    //       const res = await axios.get(
+    //         process.env.REACT_APP_BACKEND_URL +
+    //           `/conversations/find/${currentId}/${teacher._id}`
+    //       );
+    //       setCurrentChat(res.data);
+    //     });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const Draw = () => {

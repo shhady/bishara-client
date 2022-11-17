@@ -116,7 +116,7 @@ export default function Messenger({ user, setUser, socket }) {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
+  console.log(conversations);
   return (
     <div className="messenger">
       <div className="chatMenu">
