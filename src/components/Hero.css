@@ -86,6 +86,10 @@
     /* justify-content: center; */
     align-items: center;
 }
+.wcoverblack:hover{
+    background: none;
+    transition: all 0.2s
+}
 h1{
     z-index: 3;
 }

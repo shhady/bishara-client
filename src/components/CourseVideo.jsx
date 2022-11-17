@@ -67,7 +67,7 @@ export default function CourseVideo({ chooseVideo, setChooseVideo, course }) {
           <>
             {videoMatch ? (
               <>
-                {course.owner === user.teacher?._id ? (
+                {course.owner === user?.teacher?._id ? (
                   <div>
                     <button onClick={deleteVideo}>حذف الدرس</button>
                   </div>

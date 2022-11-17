@@ -39,6 +39,7 @@ export default function Comment({ course, courseId, chooseVideo }) {
   });
 
   useEffect(() => {
+    if (!user) return;
     const userF = user.user ? user.user.firstName : user.teacher.firstName;
     const userL = user.user ? user.user.lastName : user.teacher.lastName;
     const userid = user.user ? user.user._id : user.teacher._id;
@@ -363,7 +364,7 @@ export default function Comment({ course, courseId, chooseVideo }) {
 
   return (
     <div>
-      {user.user ? (
+      {user?.user ? (
         <>
           <div
             style={{
