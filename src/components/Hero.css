@@ -36,9 +36,14 @@
     height: 50vh;
     cursor: pointer;
     border-radius: 10px;
-    overflow: hidden
+    overflow: hidden;
+    color: white;
+
 }
 
+.cardPiano:hover{
+    color: transparent;
+}
 .cardOud{
     background-image: url("https://images.unsplash.com/photo-1593550573849-1d608bb469ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80");
     background-repeat: no-repeat;
@@ -50,7 +55,12 @@
     height: 50vh;
     cursor: pointer;
     border-radius: 10px;
-    overflow: hidden
+    overflow: hidden;
+    color: white;
+
+}
+.cardOud:hover{
+    color: transparent;
 }
 .cardViolin{
     background-image: url("https://images.unsplash.com/photo-1460036521480-ff49c08c2781?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dmlvbGlufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60");
@@ -67,7 +77,11 @@
     height: 50vh;
     cursor: pointer;
     border-radius: 10px;
-    overflow: hidden
+    overflow: hidden;
+    color: white;
+}
+.cardViolin:hover{
+    color:transparent;
 }
 
 .title{
@@ -88,7 +102,8 @@
 }
 .wcoverblack:hover{
     background: none;
-    transition: all 0.2s
+    transition: all 0.2s;
+    color: transparent;
 }
 h1{
     z-index: 3;

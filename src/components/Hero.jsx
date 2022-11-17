@@ -17,9 +17,7 @@ export default function Hero() {
             <div className="cardPiano">
               <div className="wcoverblack">
                 <div>
-                  <h1 style={{ textDecoration: "none", color: "white" }}>
-                    بيانو
-                  </h1>
+                  <h1 style={{ textDecoration: "none" }}>بيانو</h1>
                 </div>
               </div>
             </div>
@@ -28,9 +26,7 @@ export default function Hero() {
             <div className="cardOud">
               <div className="wcoverblack">
                 <div>
-                  <h1 style={{ color: "white", textDecoration: "none" }}>
-                    عود
-                  </h1>
+                  <h1 style={{ textDecoration: "none" }}>عود</h1>
                 </div>
               </div>
             </div>
@@ -39,9 +35,7 @@ export default function Hero() {
             <div className="cardViolin">
               <div className="wcoverblack">
                 <div>
-                  <h1 style={{ textDecoration: "none", color: "white" }}>
-                    كمان
-                  </h1>
+                  <h1 style={{ textDecoration: "none" }}>كمان</h1>
                 </div>
               </div>
             </div>
