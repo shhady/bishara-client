@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 export default function ListOfTeachers({ currentId, setCurrentChat }) {
   const [teachers, setTeachers] = useState(null);
-
+  console.log(currentId);
   useEffect(() => {
     const teachers = async () => {
       const res = await axios.get(
@@ -17,13 +17,21 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
   if (!teachers) return null;
 
   const handleClick = async (teacher) => {
-    console.log(teacher);
+    console.log(teacher._id);
+
     try {
-      const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL +
-          `/conversations/find/${currentId}/${teacher._id}`
-      );
-      setCurrentChat(res.data);
+      await axios
+        .post(process.env.REACT_APP_BACKEND_URL + "/conversations", {
+          receiverId: teacher._id,
+          senderId: currentId,
+        })
+        .then(async () => {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL +
+              `/conversations/find/${currentId}/${teacher._id}`
+          );
+          setCurrentChat(res.data);
+        });
     } catch (error) {
       console.log(error);
     }

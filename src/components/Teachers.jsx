@@ -34,13 +34,13 @@ export default function Teachers({ user, setUser }) {
     getPrevent();
   }, []);
 
-  console.log(preventChat);
+  console.log(checkChat);
 
-  const handleClick = (teacher) => {
-    setSelectedTeacher(teacher._id);
-    setCheckChat({ senderId: userId, receiverId: teacher._id });
-    setChat({ senderId: userId, receiverId: teacher._id });
-  };
+  // const handleClick = (teacher) => {
+  //   setSelectedTeacher(teacher._id);
+  //   setCheckChat({ senderId: userId, receiverId: teacher._id });
+  //   setChat({ senderId: userId, receiverId: teacher._id });
+  // };
 
   useEffect(() => {
     if (!chat) return;
@@ -123,14 +123,14 @@ export default function Teachers({ user, setUser }) {
           </div>
           <div style={{ textAlign: "center" }}>{teacher.about}</div>
           <div>
-            <button
+            {/* <button
               // onClick={() => {
               //   setSelectedTeacher(teacher._id);
               // }}
               onClick={() => handleClick(teacher)}
             >
               تحدث مع الاستاذ
-            </button>
+            </button> */}
           </div>
         </div>
       );
