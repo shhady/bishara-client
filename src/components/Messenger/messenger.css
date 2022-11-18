@@ -79,4 +79,10 @@
         width: 70%;
         height:40px;
     }
+    .chatMenuWrapper{
+        margin-top: 15px;
+    }
+    .chatBoxWrapper{
+        height: 95%
+    }
 }
