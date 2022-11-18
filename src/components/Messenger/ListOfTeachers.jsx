@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./messenger.css";
 export default function ListOfTeachers({ currentId, setCurrentChat }) {
   const [teachers, setTeachers] = useState(null);
   const [conversations, setConversations] = useState([]);
@@ -36,7 +37,7 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
     newConversation = JSON.stringify(newConversation);
 
     let c = existingConversations.indexOf(newConversation);
-    if (c != -1) {
+    if (c !== -1) {
       const conv = async () => {
         const res = await axios.get(
           process.env.REACT_APP_BACKEND_URL +
@@ -99,9 +100,9 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
         >
           {teacher._id === teacherId ? (
             <div
+              className="chatSelectedTeacher"
               style={{
                 cursor: "pointer",
-                backgroundColor: "grey",
                 width: "100%",
                 display: "flex",
                 justifyContent: "flex-start",
@@ -117,7 +118,7 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
                   style={{ borderRadius: "50%", marginLeft: "5px" }}
                 />
               </div>
-              <div style={{ cursor: "pointer", backgroundColor: "grey" }}>
+              <div style={{ cursor: "pointer" }}>
                 {teacher?.firstName}
                 {"  "}
                 {teacher?.lastName}

@@ -4,6 +4,10 @@
     display: flex;
 
 }
+.chatSelectedTeacher{
+    background-color: rgb(237, 234, 230);
+    border-left: 4px solid rgb(224, 134, 134)
+}
 .chatMenu{
     flex: 2;
     border: 1px solid gray;
