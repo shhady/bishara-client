@@ -82,7 +82,9 @@
     .chatMenuWrapper{
         margin-top: 15px;
     }
-    .chatBoxWrapper{
-        height: 95%
-    }
+    .chatMenuWrapper, .chatBoxWrapper, .chatOnlineWrapper{
+        padding: 10px;
+        background: white;
+        height: 95%;
+    } 
 }
