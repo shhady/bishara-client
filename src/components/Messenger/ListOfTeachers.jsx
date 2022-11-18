@@ -3,6 +3,7 @@ import axios from "axios";
 export default function ListOfTeachers({ currentId, setCurrentChat }) {
   const [teachers, setTeachers] = useState(null);
   const [conversations, setConversations] = useState([]);
+  const [teacherId, setTeacherId] = useState(null);
   console.log(currentId);
   useEffect(() => {
     const teachers = async () => {
@@ -28,7 +29,7 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
   if (!teachers) return null;
 
   const handleClick = async (teacher) => {
-    console.log(teacher._id);
+    setTeacherId(teacher._id);
     let existingConversations = conversations;
     let newConversation = [currentId, teacher._id];
     existingConversations = JSON.stringify(existingConversations);
@@ -89,27 +90,57 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
       return (
         <div
           style={{
+            marginTop: "10px",
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
-            marginTop: "10px",
           }}
           onClick={() => handleClick(teacher)}
         >
-          <div style={{ cursor: "pointer" }}>
-            <img
-              src={teacher?.avatar}
-              alt={teacher?.name}
-              width="40px"
-              height="40px"
-              style={{ borderRadius: "50%", marginLeft: "5px" }}
-            />
-          </div>
-          <div style={{ cursor: "pointer" }}>
-            {teacher?.firstName}
-            {"  "}
-            {teacher?.lastName}
-          </div>
+          {teacher._id === teacherId ? (
+            <div
+              style={{
+                cursor: "pointer",
+                backgroundColor: "grey",
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}
+            >
+              <div>
+                <img
+                  src={teacher?.avatar}
+                  alt={teacher?.name}
+                  width="40px"
+                  height="40px"
+                  style={{ borderRadius: "50%", marginLeft: "5px" }}
+                />
+              </div>
+              <div style={{ cursor: "pointer", backgroundColor: "grey" }}>
+                {teacher?.firstName}
+                {"  "}
+                {teacher?.lastName}
+              </div>
+            </div>
+          ) : (
+            <>
+              <div style={{ cursor: "pointer" }}>
+                <img
+                  src={teacher?.avatar}
+                  alt={teacher?.name}
+                  width="40px"
+                  height="40px"
+                  style={{ borderRadius: "50%", marginLeft: "5px" }}
+                />
+              </div>
+              <div style={{ cursor: "pointer" }}>
+                {teacher?.firstName}
+                {"  "}
+                {teacher?.lastName}
+              </div>
+            </>
+          )}
         </div>
       );
     });
