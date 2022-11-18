@@ -182,9 +182,9 @@ export default function Messenger({ user, setUser, socket }) {
               }}
             >
               <span>
-                لم تبدأ بأي دوره تابعة لهذا المدرس لكي تستطيع التحدث معه
-                <br />
-                يجب ان تبدأ بتعلم دوره تابعة للاستاذ لفتح محادثة
+                <h1 className="clickToOpenChat">
+                  اضغط على اسم المدرس لبدأ محادثة
+                </h1>
               </span>
             </div>
           )}

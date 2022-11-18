@@ -8,6 +8,9 @@
     background-color: rgb(237, 234, 230);
     border-left: 4px solid rgb(224, 134, 134)
 }
+.clickToOpenChat{
+    color: rgba(152, 148, 141, 0.7)
+}
 .chatMenu{
     flex: 2;
     border: 1px solid gray;
