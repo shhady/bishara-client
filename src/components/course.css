@@ -28,7 +28,7 @@
     /* background-color: rgb(234, 232, 232); */
     border-radius: 10px;
     background: #fafafa;
-    box-shadow:  10px 10px 30px #656262,
+    box-shadow:  10px 10px 30px #aba8a8,
       -5px -5px 10px #ffffff;
     padding:3px
 }
@@ -82,5 +82,8 @@
         align-items: center;
         border-bottom: 1px solid black
       
+}
+.buttonChooseVideo{
+    height: 30px;
 }
 }
