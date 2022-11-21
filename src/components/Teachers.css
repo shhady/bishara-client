@@ -18,6 +18,16 @@
       -5px -5px 10px #ffffff;
     padding:3px
 }
+.videosRight{
+    border-radius: 10px;
+    background: #fafafa;
+    box-shadow:  5px 5px 10px #cbcbcb,
+      -5px -5px 10px #ffffff;
+    padding:3px
+}
+.videosRight:hover{
+    background: rgb(218, 217, 217)
+}
 
 .loading{
     display: flex;

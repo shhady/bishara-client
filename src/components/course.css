@@ -21,12 +21,21 @@
     width: 90%;
     height: 50px;
     margin-top: 10px;
-    background-color: rgb(234, 232, 232)
+    cursor: pointer;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    /* background-color: rgb(234, 232, 232); */
+    border-radius: 10px;
+    background: #fafafa;
+    box-shadow:  10px 10px 30px #656262,
+      -5px -5px 10px #ffffff;
+    padding:3px
 }
 .buttonChooseVideo:hover{
-    background-color: rgb(159, 156, 156);
-    color: white;
-    transition:ease-in .3s
+    background-color: rgb(208, 203, 203);
+    color: black;
+    transition:ease-in .2s
 }
 .uploadVideos{
         display: flex;

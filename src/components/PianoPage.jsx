@@ -34,7 +34,25 @@ export default function PianoPage({ user, setUser }) {
           )}
         </div>
         <div>
-          <Pianovideo />
+          {/* <Pianovideo /> */}
+          {/* <video
+            controls
+            style={{ width: "100%", height: "370px", marginTop: "10px" }}
+          >
+            <source
+              src="https://www.youtube.com/embed/9GejeXh-zKE"
+              type="video/mp4"
+            />
+          </video> */}
+          <iframe
+            width="642"
+            height="361"
+            src="https://www.youtube.com/embed/9GejeXh-zKE"
+            title="Fadi a"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
       <div className="second">

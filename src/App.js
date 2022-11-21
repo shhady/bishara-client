@@ -33,6 +33,7 @@ const Auth = React.lazy(() => import("./components/Auth/Auth"));
 const PianoPage = React.lazy(() => import("./components/PianoPage"));
 const OudPage = React.lazy(() => import("./components/OudPage"));
 const ViolinPage = React.lazy(() => import("./components/ViolinPage"));
+const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
 
 // const Oud = React.lazy(() => import("./components/Oud"));
 // const Piano = React.lazy(() => import("./components/PianoPage"));
@@ -70,6 +71,10 @@ export default function App() {
           <Route path="/auth" exact>
             <Auth user={user} setUser={setUser} />
           </Route>
+          <Route path="/TestYoutube" exact>
+            <TestYoutube user={user} setUser={setUser} />
+          </Route>
+
           <Route path="/CreateTeacher" exact component={CreateTeacher} />
           <Route path="/profile" exact>
             <Profile user={user} setUser={setUser} />

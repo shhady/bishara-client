@@ -140,20 +140,20 @@ export default function Course() {
       return (
         <div key={i}>
           {markedButton === episode.episode ? (
-            <button
+            <div
               className="buttonChooseVideo"
               onClick={() => clickToOpenVideo(episode)}
               style={{ backgroundColor: "grey" }}
             >
               {episode.episode}
-            </button>
+            </div>
           ) : (
-            <button
+            <div
               className="buttonChooseVideo"
               onClick={() => clickToOpenVideo(episode)}
             >
               {episode.episode}
-            </button>
+            </div>
           )}
         </div>
       );
