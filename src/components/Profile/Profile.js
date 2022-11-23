@@ -46,10 +46,14 @@ export default function Profile({ user, setUser }) {
   const handleUpdateAvatar = () => {
     console.log(avatar);
     const changePhoto = async () => {
-      await axios.patch(
-        process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
-        avatar
-      );
+      await axios
+        .patch(
+          process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
+          avatar
+        )
+        .then(() => {
+          setUser({ ...user, avatar: avatar });
+        });
     };
     changePhoto();
   };
