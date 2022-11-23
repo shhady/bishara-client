@@ -221,45 +221,6 @@ export default function Course() {
   return (
     <>
       <div style={{ marginTop: "130px" }}>{showData()}</div>
-      {userId === course?.owner ? (
-        <div className="teacherSection">
-          <div>
-            <button style={{ width: "100%" }} onClick={deletecourse}>
-              حذف الدوره بشكل كامل
-            </button>
-          </div>
-          <div className="uploadVideos">
-            <span>قم برفع الدروس حسب الترتيب</span>
-            <input
-              name="episode"
-              placeholder="اسم الدرس"
-              onChange={handleepisode}
-              value={episode}
-              required
-              className="episodeNameInput"
-            />
-            <input
-              type="file"
-              onChange={(e) => setVideo(e.target.files[0])}
-              onClick={() => setUrl(null)}
-            />
-            <button onClick={postDetails} className="submitVideo">
-              Submit
-            </button>
-          </div>
-          <div style={{ minWidth: "70px" }}>
-            {fileUpload && (
-              <span style={{ textAlign: "center" }}>
-                {" "}
-                تم رفع {fileUpload.percentComplete}%
-              </span>
-            )}
-            {url ? (
-              <span style={{ textAlign: "center" }}>يمكنك رفع فيديو اخر</span>
-            ) : null}
-          </div>
-        </div>
-      ) : null}
 
       <div className="videosAndComments">
         <div>
@@ -291,6 +252,45 @@ export default function Course() {
             {/* <Comment course={course} courseId={courseId} /> */}
           </div>
         </div>
+        {userId === course?.owner ? (
+          <div className="teacherSection">
+            <div className="uploadVideos">
+              <span>قم برفع الدروس حسب الترتيب</span>
+              <input
+                name="episode"
+                placeholder="اسم الدرس"
+                onChange={handleepisode}
+                value={episode}
+                required
+                className="episodeNameInput"
+              />
+              <input
+                type="file"
+                onChange={(e) => setVideo(e.target.files[0])}
+                onClick={() => setUrl(null)}
+              />
+              <button onClick={postDetails} className="submitVideo">
+                Submit
+              </button>
+            </div>
+            <div style={{ minWidth: "70px" }}>
+              {fileUpload && (
+                <span style={{ textAlign: "center" }}>
+                  {" "}
+                  تم رفع {fileUpload.percentComplete}%
+                </span>
+              )}
+              {url ? (
+                <span style={{ textAlign: "center" }}>يمكنك رفع فيديو اخر</span>
+              ) : null}
+            </div>
+            <div>
+              <button style={{ width: "100%" }} onClick={deletecourse}>
+                حذف الدوره بشكل كامل
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import FileBase from "react-file-base64";
 import "./profile.css";
 export default function Profile({ user, setUser }) {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -11,6 +12,7 @@ export default function Profile({ user, setUser }) {
   const [userPractices, setUserPractices] = useState([]);
   const [userId, setUserId] = useState(null);
   const [practiceId, setPracticeId] = useState(null);
+  const [avatar, setAvatar] = useState(null);
 
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
@@ -41,6 +43,16 @@ export default function Profile({ user, setUser }) {
     setUser(null);
   };
 
+  const handleUpdateAvatar = () => {
+    console.log(avatar);
+    const changePhoto = async () => {
+      await axios.patch(
+        process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
+        avatar
+      );
+    };
+    changePhoto();
+  };
   const handleUserLogoutFromAllDevices = async () => {
     const response = await axios.post(
       process.env.REACT_APP_BACKEND_URL + `/users/logoutAll`,
@@ -227,6 +239,12 @@ export default function Profile({ user, setUser }) {
                 height="150"
                 style={{ borderRadius: "50%" }}
               />
+              <FileBase
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) => setAvatar({ avatar: base64 })}
+              />
+              <input type="submit" onClick={handleUpdateAvatar} />
               <h2>
                 {user.teacher.firstName}
                 {"  "}
