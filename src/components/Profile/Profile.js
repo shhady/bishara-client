@@ -58,7 +58,7 @@ export default function Profile({ user, setUser }) {
     };
     fetch();
     // console.log(teacherDetails);
-  }, [user, userId]);
+  }, [userId]);
   // console.log(teacherAvatar);
   const handleUpdateAvatar = () => {
     console.log(avatar);
