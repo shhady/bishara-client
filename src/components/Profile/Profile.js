@@ -12,8 +12,8 @@ export default function Profile({ user, setUser }) {
   const [userPractices, setUserPractices] = useState([]);
   const [userId, setUserId] = useState(null);
   const [practiceId, setPracticeId] = useState(null);
-  const [avatar, setAvatar] = useState(window.localStorage.getItem("avatar"));
-  console.log(avatar.avatar);
+  const [avatar, setAvatar] = useState(null);
+
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
     setUserId(userid);
@@ -233,23 +233,31 @@ export default function Profile({ user, setUser }) {
               }}
             >
               {" "}
-              <img
-                src={avatar.avatar ? avatar.avatar : avatar}
-                alt={user.teacher.firstName}
-                width="150"
-                height="150"
-                style={{ borderRadius: "50%" }}
-              />
-              <div style={{ display: "flex", marginTop: "10px" }}>
-                <FileBase
-                  type="file"
-                  multiple={false}
-                  onDone={({ base64 }) => setAvatar({ avatar: base64 })}
+              {avatar ? (
+                <img
+                  src={avatar.avatar}
+                  alt={user.teacher.firstName}
+                  width="150"
+                  height="150"
+                  style={{ borderRadius: "50%" }}
                 />
-                <button type="submit" onClick={handleUpdateAvatar}>
-                  تثبيت
-                </button>
-              </div>
+              ) : (
+                <img
+                  src={user.teacher.avatar}
+                  alt={user.teacher.firstName}
+                  width="150"
+                  height="150"
+                  style={{ borderRadius: "50%" }}
+                />
+              )}
+              <FileBase
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) => setAvatar({ avatar: base64 })}
+              />
+              <button type="submit" onClick={handleUpdateAvatar}>
+                تثبيت
+              </button>
               <h2>
                 {user.teacher.firstName}
                 {"  "}

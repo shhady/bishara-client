@@ -28,9 +28,7 @@ export default function Header({ user, setUser, socket }) {
   const [backNot, setBackNot] = useState([]);
   const [userId, setUserId] = useState(null);
   const [notificationNumber, setNotificationNumber] = useState([]);
-  const [updatedAvatar, setUpdatedAvatar] = useState(
-    window.localStorage.getItem("avatar")
-  );
+
   useEffect(() => {
     setNotificationNumber(backNot.filter((number) => number.read === false));
   }, [backNot]);
@@ -313,7 +311,7 @@ export default function Header({ user, setUser, socket }) {
                       }}
                     >
                       <img
-                        src={updatedAvatar ? updatedAvatar : null}
+                        src={user.teacher.avatar}
                         alt={user.teacher.firstName}
                         style={{
                           height: "40px",
