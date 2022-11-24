@@ -313,7 +313,7 @@ export default function Header({ user, setUser, socket }) {
                       }}
                     >
                       <img
-                        src={updatedAvatar}
+                        src={updatedAvatar ? updatedAvatar : null}
                         alt={user.teacher.firstName}
                         style={{
                           height: "40px",
