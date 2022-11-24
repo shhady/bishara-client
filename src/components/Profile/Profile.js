@@ -15,10 +15,12 @@ export default function Profile({ user, setUser }) {
   const [avatar, setAvatar] = useState(null);
   const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(true);
   const [teacherDetails, setTeacherDetails] = useState(null);
-
+  const [teacherAvatar, setTeacherAvatar] = useState(null);
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
+    const userAvatar = user.teacher ? user.teacher.avatar : null;
     setUserId(userid);
+    setTeacherAvatar(userAvatar);
   }, [user]);
   console.log(userId);
   const handleLogoutFromAllDevices = async () => {
@@ -52,11 +54,12 @@ export default function Profile({ user, setUser }) {
         process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
       );
       setTeacherDetails(result.data);
+      setTeacherAvatar(result.data.avatar);
     };
     fetch();
-    console.log(teacherDetails);
+    // console.log(teacherDetails);
   }, [user, userId]);
-
+  // console.log(teacherAvatar);
   const handleUpdateAvatar = () => {
     console.log(avatar);
     const changePhoto = async () => {
@@ -71,6 +74,7 @@ export default function Profile({ user, setUser }) {
               process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
             );
             setTeacherDetails(result.data);
+            setTeacherAvatar(result.data.avatar);
           };
           fetch();
         });
@@ -259,7 +263,7 @@ export default function Profile({ user, setUser }) {
             >
               {" "}
               <img
-                src={teacherDetails ? teacherDetails.avatar : null}
+                src={teacherAvatar}
                 alt={user.teacher.firstName}
                 width="150"
                 height="150"
