@@ -240,7 +240,7 @@ export default function Profile({ user, setUser }) {
                 height="150"
                 style={{ borderRadius: "50%" }}
               />
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex", marginTop: "10px" }}>
                 <FileBase
                   type="file"
                   multiple={false}
