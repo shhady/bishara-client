@@ -15,12 +15,10 @@ export default function Profile({ user, setUser }) {
   const [avatar, setAvatar] = useState(null);
   const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(true);
   const [teacherDetails, setTeacherDetails] = useState(null);
-  const [teacherAvatar, setTeacherAvatar] = useState(null);
+
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
-    const userAvatar = user.teacher ? user.teacher.avatar : null;
     setUserId(userid);
-    setTeacherAvatar(userAvatar);
   }, [user]);
   console.log(userId);
   const handleLogoutFromAllDevices = async () => {
@@ -48,39 +46,36 @@ export default function Profile({ user, setUser }) {
     setUser(null);
   };
 
-  useEffect(() => {
-    const fetch = async () => {
-      const result = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
-      );
-      setTeacherDetails(result.data);
-      setTeacherAvatar(result.data.avatar);
-    };
-    fetch();
-    // console.log(teacherDetails);
-  }, [userId]);
-  // console.log(teacherAvatar);
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const result = await axios.get(
+  //       process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
+  //     );
+  //     setTeacherDetails(result.data);
+  //   };
+  //   fetch();
+  //   console.log(teacherDetails);
+  // }, [user, userId]);
+
   const handleUpdateAvatar = () => {
     console.log(avatar);
     const changePhoto = async () => {
-      await axios
-        .patch(
-          process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
-          avatar
-        )
-        .then(() => {
-          const fetch = async () => {
-            const result = await axios.get(
-              process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
-            );
-            setTeacherDetails(result.data);
-            setTeacherAvatar(result.data.avatar);
-          };
-          fetch();
-        });
+      await axios.patch(
+        process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
+        avatar
+      );
+      // .then(() => {
+      //   const fetch = async () => {
+      //     const result = await axios.get(
+      //       process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
+      //     );
+      //     setTeacherDetails(result.data);
+      //   };
+      //   fetch();
+      // });
     };
     changePhoto();
-    window.localStorage.setItem("avatar", avatar.avatar);
+    // window.localStorage.setItem("avatar", avatar.avatar);
     setShowButtonAvatarUpdate(false);
   };
   const handleUserLogoutFromAllDevices = async () => {
@@ -263,7 +258,7 @@ export default function Profile({ user, setUser }) {
             >
               {" "}
               <img
-                src={teacherAvatar}
+                src={user.teacher.avatar}
                 alt={user.teacher.firstName}
                 width="150"
                 height="150"
