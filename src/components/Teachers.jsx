@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Teachers.css";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 export default function Teachers({ user, setUser }) {
   const [teachers, setTeachers] = useState(null);
-  const [selectedTeacher, setSelectedTeacher] = useState(null);
-  const [checkChat, setCheckChat] = useState(null);
-  const [chat, setChat] = useState(null);
-  const [userId, setUserId] = useState("");
+  // const [selectedTeacher, setSelectedTeacher] = useState(null);
+  // const [checkChat, setCheckChat] = useState(null);
+  // const [chat, setChat] = useState(null);
+  // const [userId, setUserId] = useState("");
   // const [allChats, setAllChats] = useState(null);
-  const [preventChat, setPreventChat] = useState([]);
-  const history = useHistory();
-  window.onpopstate = () => {
-    history.push("/");
-  };
-  useEffect(() => {
-    if (!user) return;
-    user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
-  }, [user]);
+  // const [preventChat, setPreventChat] = useState([]);
+  // const history = useHistory();
+  // window.onpopstate = () => {
+  //   history.push("/");
+  // };
+  // useEffect(() => {
+  //   if (!user) return;
+  //   user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
+  // }, [user]);
 
   // useEffect(() => {
   //   const getPrevent = async () => {
@@ -34,7 +34,7 @@ export default function Teachers({ user, setUser }) {
   //   getPrevent();
   // }, []);
 
-  console.log(checkChat);
+  // console.log(checkChat);
 
   // const handleClick = (teacher) => {
   //   setSelectedTeacher(teacher._id);
@@ -103,7 +103,7 @@ export default function Teachers({ user, setUser }) {
       </div>
     );
 
-  console.log(selectedTeacher);
+  // console.log(selectedTeacher);
 
   const drawData = () => {
     return teachers.map((teacher, i) => {
