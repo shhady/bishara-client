@@ -14,11 +14,13 @@ export default function Profile({ user, setUser }) {
   const [practiceId, setPracticeId] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(true);
+  const [teacherDetails, setTeacherDetails] = useState(null);
 
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
     setUserId(userid);
   }, [user]);
+  console.log(userId);
   const handleLogoutFromAllDevices = async () => {
     const response = await axios.post(
       process.env.REACT_APP_BACKEND_URL + `/teachers/logoutAll`,
@@ -44,13 +46,34 @@ export default function Profile({ user, setUser }) {
     setUser(null);
   };
 
+  useEffect(() => {
+    const fetch = async () => {
+      const result = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
+      );
+      setTeacherDetails(result.data);
+    };
+    fetch();
+    console.log(teacherDetails);
+  }, [user, userId]);
+
   const handleUpdateAvatar = () => {
     console.log(avatar);
     const changePhoto = async () => {
-      await axios.patch(
-        process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
-        avatar
-      );
+      await axios
+        .patch(
+          process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
+          avatar
+        )
+        .then(() => {
+          const fetch = async () => {
+            const result = await axios.get(
+              process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
+            );
+            setTeacherDetails(result.data);
+          };
+          fetch();
+        });
     };
     changePhoto();
     window.localStorage.setItem("avatar", avatar.avatar);
@@ -235,36 +258,27 @@ export default function Profile({ user, setUser }) {
               }}
             >
               {" "}
-              {avatar ? (
-                <img
-                  src={avatar.avatar}
-                  alt={user.teacher.firstName}
-                  width="150"
-                  height="150"
-                  style={{ borderRadius: "50%" }}
-                />
-              ) : (
-                <img
-                  src={user.teacher.avatar}
-                  alt={user.teacher.firstName}
-                  width="150"
-                  height="150"
-                  style={{ borderRadius: "50%" }}
-                />
-              )}
+              <img
+                src={teacherDetails ? teacherDetails.avatar : null}
+                alt={user.teacher.firstName}
+                width="150"
+                height="150"
+                style={{ borderRadius: "50%" }}
+              />
               <div style={{ display: "flex" }}>
                 <FileBase
                   type="file"
                   multiple={false}
-                  onDone={({ base64 }) => setAvatar({ avatar: base64 })}
+                  onDone={({ base64 }) => {
+                    setAvatar({ avatar: base64 });
+                    setShowButtonAvatarUpdate(true);
+                  }}
                 />
                 {showButtonAvatarUpdate ? (
                   <button type="submit" onClick={handleUpdateAvatar}>
                     تثبيت
                   </button>
-                ) : (
-                  "تم"
-                )}
+                ) : null}
               </div>
               <h2>
                 {user.teacher.firstName}
