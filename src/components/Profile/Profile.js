@@ -12,8 +12,8 @@ export default function Profile({ user, setUser }) {
   const [userPractices, setUserPractices] = useState([]);
   const [userId, setUserId] = useState(null);
   const [practiceId, setPracticeId] = useState(null);
-  const [avatar, setAvatar] = useState(null);
-
+  const [avatar, setAvatar] = useState(window.localStorage.getItem("avatar"));
+  console.log(avatar.avatar);
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
     setUserId(userid);
@@ -46,16 +46,13 @@ export default function Profile({ user, setUser }) {
   const handleUpdateAvatar = () => {
     console.log(avatar);
     const changePhoto = async () => {
-      await axios
-        .patch(
-          process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
-          avatar
-        )
-        .then(() => {
-          setUser({ ...user, avatar: avatar });
-        });
+      await axios.patch(
+        process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
+        avatar
+      );
     };
     changePhoto();
+    window.localStorage.setItem("avatar", avatar.avatar);
   };
   const handleUserLogoutFromAllDevices = async () => {
     const response = await axios.post(
@@ -237,18 +234,22 @@ export default function Profile({ user, setUser }) {
             >
               {" "}
               <img
-                src={user.teacher.avatar}
+                src={avatar.avatar ? avatar.avatar : avatar}
                 alt={user.teacher.firstName}
                 width="150"
                 height="150"
                 style={{ borderRadius: "50%" }}
               />
-              <FileBase
-                type="file"
-                multiple={false}
-                onDone={({ base64 }) => setAvatar({ avatar: base64 })}
-              />
-              <input type="submit" onClick={handleUpdateAvatar} />
+              <div style={{ display: "flex" }}>
+                <FileBase
+                  type="file"
+                  multiple={false}
+                  onDone={({ base64 }) => setAvatar({ avatar: base64 })}
+                />
+                <button type="submit" onClick={handleUpdateAvatar}>
+                  تثبيت
+                </button>
+              </div>
               <h2>
                 {user.teacher.firstName}
                 {"  "}
