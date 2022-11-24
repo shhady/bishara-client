@@ -13,6 +13,7 @@ export default function Profile({ user, setUser }) {
   const [userId, setUserId] = useState(null);
   const [practiceId, setPracticeId] = useState(null);
   const [avatar, setAvatar] = useState(null);
+  const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(true);
 
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
@@ -53,6 +54,7 @@ export default function Profile({ user, setUser }) {
     };
     changePhoto();
     window.localStorage.setItem("avatar", avatar.avatar);
+    setShowButtonAvatarUpdate(false);
   };
   const handleUserLogoutFromAllDevices = async () => {
     const response = await axios.post(
@@ -250,14 +252,20 @@ export default function Profile({ user, setUser }) {
                   style={{ borderRadius: "50%" }}
                 />
               )}
-              <FileBase
-                type="file"
-                multiple={false}
-                onDone={({ base64 }) => setAvatar({ avatar: base64 })}
-              />
-              <button type="submit" onClick={handleUpdateAvatar}>
-                تثبيت
-              </button>
+              <div style={{ display: "flex" }}>
+                <FileBase
+                  type="file"
+                  multiple={false}
+                  onDone={({ base64 }) => setAvatar({ avatar: base64 })}
+                />
+                {showButtonAvatarUpdate ? (
+                  <button type="submit" onClick={handleUpdateAvatar}>
+                    تثبيت
+                  </button>
+                ) : (
+                  "تم"
+                )}
+              </div>
               <h2>
                 {user.teacher.firstName}
                 {"  "}
