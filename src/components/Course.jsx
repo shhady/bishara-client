@@ -222,37 +222,8 @@ export default function Course() {
     <>
       <div style={{ marginTop: "130px" }}>{showData()}</div>
 
-      <div className="videosAndComments">
-        <div>
-          {showButtons()}{" "}
-          {/* {buttonNew.length > 0
-            ? buttonNew.map((button, i) => (
-                <button
-                  key={i}
-                  className="buttonChooseVideo"
-                  onClick={chooseVideoAfterUpload}
-                >
-                  {button}
-                </button>
-              ))
-            : null} */}
-        </div>
-        {/* <div>{showVideos()}</div> */}
-        <div>
-          <CourseVideo
-            chooseVideo={chooseVideo}
-            setChooseVideo={setChooseVideo}
-            course={course}
-          />
-          <div
-            style={{
-              marginTop: "10px",
-            }}
-          >
-            {/* <Comment course={course} courseId={courseId} /> */}
-          </div>
-        </div>
-        {userId === course?.owner ? (
+      {userId === course?.owner ? (
+        <div className="videosAndComments">
           <div className="teacherSection">
             <div className="uploadVideos">
               <span>قم برفع الدروس حسب الترتيب</span>
@@ -290,8 +261,75 @@ export default function Course() {
               </button>
             </div>
           </div>
-        ) : null}
-      </div>
+          <div className="videosAndButtons">
+            <div>
+              {showButtons()}{" "}
+              {/* {buttonNew.length > 0
+            ? buttonNew.map((button, i) => (
+                <button
+                  key={i}
+                  className="buttonChooseVideo"
+                  onClick={chooseVideoAfterUpload}
+                >
+                  {button}
+                </button>
+              ))
+            : null} */}
+            </div>
+            {/* <div>{showVideos()}</div> */}
+            <div>
+              <CourseVideo
+                chooseVideo={chooseVideo}
+                setChooseVideo={setChooseVideo}
+                course={course}
+              />
+              <div
+                style={{
+                  marginTop: "10px",
+                }}
+              >
+                {/* <Comment course={course} courseId={courseId} /> */}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="videosAndComments1">
+            <div className="videosAndButtons">
+              <div>
+                {showButtons()}{" "}
+                {/* {buttonNew.length > 0
+            ? buttonNew.map((button, i) => (
+                <button
+                  key={i}
+                  className="buttonChooseVideo"
+                  onClick={chooseVideoAfterUpload}
+                >
+                  {button}
+                </button>
+              ))
+            : null} */}
+              </div>
+              {/* <div>{showVideos()}</div> */}
+              <div>
+                <CourseVideo
+                  chooseVideo={chooseVideo}
+                  setChooseVideo={setChooseVideo}
+                  course={course}
+                />
+                <div
+                  style={{
+                    marginTop: "10px",
+                  }}
+                >
+                  {/* <Comment course={course} courseId={courseId} /> */}
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }

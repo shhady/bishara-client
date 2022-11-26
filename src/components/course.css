@@ -13,10 +13,12 @@
 
 .videosAndComments{
     display: grid;
-    grid-template-columns:  1fr 2fr 1fr;
+    grid-template-columns:  1fr 5fr;
+}
+.videosAndComments1{
+    display: grid;
 }
 .detailsOfCourse{
-    
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -63,6 +65,10 @@
     margin-left: 10px;
     margin-top: 20px;
 }
+.videosAndButtons{
+    display:grid;
+    grid-template-columns:1fr 4fr;
+}
 .teacherSection{
         height: 60vh;
         display: flex;
@@ -88,13 +94,20 @@
         margin: 10px 0px;
     }
     .teacherSection{
-    
+        height: 40vh;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
         border-bottom: 1px solid black
-      
+}
+.videosAndButtons{
+    display:grid;
+    grid-template-columns:1fr 4fr;
+}
+.videosAndComments{
+    display: grid;
+    grid-template-columns: 1fr;
 }
 .buttonChooseVideo{
     height: 30px;
