@@ -52,8 +52,8 @@ export default function App() {
     if (!userId) return;
     setSocket(
       io(
-        "https://dawrafun1.herokuapp.com/" ||
-          "https://bisharaserver.herokuapp.com/"
+        // "https://dawrafun1.herokuapp.com/" ||
+        "https://bisharaserver.herokuapp.com/"
       )
     );
     console.log(socket);
