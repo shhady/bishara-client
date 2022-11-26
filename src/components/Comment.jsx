@@ -58,7 +58,7 @@ export default function Comment({ course, courseId, chooseVideo }) {
     formData.append("upload_preset", "bisharaHaroni");
     // formData.append("cloud_name", "shhady");
     axios
-      .post("https://api.cloudinary.com/v1_1/shhady/upload", formData, {
+      .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
         onUploadProgress: (p) => {
           const percentComplete = Math.round((p.loaded * 100) / p.total);
           setFileUpload({ fileName: video.name, percentComplete });
@@ -90,8 +90,8 @@ export default function Comment({ course, courseId, chooseVideo }) {
   useEffect(() => {
     setSocket(
       io(
-        "https://dawrafun1.herokuapp.com/" ||
-          "https://bisharaserver.herokuapp.com/"
+        // "https://dawrafun1.herokuapp.com/" ||
+        "https://bisharaserver.herokuapp.com/"
       )
     );
     console.log(socket);

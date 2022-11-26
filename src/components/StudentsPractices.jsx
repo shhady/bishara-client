@@ -21,7 +21,7 @@ export default function StudentsPractices({ user }) {
     setPracticeId(practice._id);
     // formData.append("cloud_name", "shhady");
     axios
-      .post("https://api.cloudinary.com/v1_1/shhady/upload", formData, {
+      .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
         onUploadProgress: (p) => {
           const percentComplete = Math.round((p.loaded * 100) / p.total);
           setFileUpload({ fileName: video.name, percentComplete });
