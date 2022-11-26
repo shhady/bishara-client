@@ -50,7 +50,12 @@ export default function App() {
   }, [user]);
   useEffect(() => {
     if (!userId) return;
-    setSocket(io("https://dawrafun1.herokuapp.com/"));
+    setSocket(
+      io(
+        "https://dawrafun1.herokuapp.com/" ||
+          "https://bisharaserver.herokuapp.com/"
+      )
+    );
     console.log(socket);
   }, [userId]);
 
