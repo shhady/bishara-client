@@ -342,8 +342,9 @@ export default function Header({ user, setUser, socket }) {
           <div
             className="menuMobile"
             style={{
-              minWidth: "15px",
-              padding: "2px",
+              marginLeft: "70px",
+              // minWidth: "60px",
+              // padding: "2px",
             }}
             onClick={() => setOpenMenu(!openMenu)}
           >
@@ -354,7 +355,7 @@ export default function Header({ user, setUser, socket }) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              paddingRight: "15px",
+              // paddingRight: "15px",
               alignItems: "center",
             }}
           >
@@ -364,7 +365,7 @@ export default function Header({ user, setUser, socket }) {
                 alt="logo"
                 className="logoImage"
               /> */}
-              <h2 style={{ color: "black" }}>FUNAN</h2>
+              <h2 style={{ color: "black", marginLeft: "70px" }}>FUNAN</h2>
             </Link>
           </div>
           {teachersHover ? (
@@ -633,7 +634,8 @@ export default function Header({ user, setUser, socket }) {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "space-between",
+                  justifyContent: "space-around",
+                  height: "70%",
                   // alignItems: "center",
                   // textAlign: "center",
                   width: "100%",
