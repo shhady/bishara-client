@@ -4,6 +4,28 @@
     grid-template-columns: repeat(5,1fr);
     gap: 1rem;
 }
+.teacherHeader{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
+.loader {
+    border: 11px solid #f3f3f3; /* Light grey */
+    border-top: 11px solid #565757; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
 .teacher{
     display: flex;
@@ -44,7 +66,7 @@
     gap: 1rem;
     }
 }
-
+/* 
 .spinner {
     margin-top: 20%;
 }
@@ -91,4 +113,4 @@
     transform:
     translateY(-50px) scalex(1);
     }
-}
+} */

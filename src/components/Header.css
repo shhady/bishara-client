@@ -1,17 +1,23 @@
 .header{
-    /* display: grid;
-    grid-template-columns: repeat(2,1fr);  */
-    /* display:flex; */
-    justify-content:space-around;
-    text-align: center;
-    border-bottom: 1px solid black;
+    height:80px;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    box-shadow:
+                rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px;
+    
+    padding:3px;
     background-color: white;
     top:0;
+    right:0;
     position: fixed;
     width: 100%;
+    margin:auto;
     z-index: 3;
     }
 .middle{
+    width:100%;
     display:flex;
     justify-content:space-between;
     text-align: center;
@@ -20,12 +26,7 @@
 button{
     cursor: pointer;
 }
-/* .auth{
-    display:flex;
-    justify-content:center;
-    align-items: center;
-    
-} */
+
 .Register{
     margin-right: 2rem;
 }
@@ -37,10 +38,11 @@ button{
     cursor: pointer;
     border-bottom: 3px solid transparent;
     color:#6e6b6b;
-    margin-right: 3rem;
+    /* margin-right: 3rem; */
+    
 }
 .headerpiano:hover, .headeroud:hover{
-    border-bottom: 3px solid rgb(231, 108, 108);
+    border-bottom: 3px solid rgb(25, 24, 24);
     transition: all 0.5s;
     color:black
 }
@@ -53,38 +55,30 @@ button{
 .menuMobile{
     display: none;
 }
-.header-down{
-    display: grid;
-    grid-template-columns: 1fr 2fr .333fr .333fr .333fr;
-    /* justify-content: space-evenly; */
-    align-items: center;
-}
+
     .menu-details{
-        display: flex;
-        justify-content: center;
-        align-items: center
+        display: none;
     }
 .menu-details-computer{
-    display: flex;
-        justify-content: center;
+    width:50%;
+         display: flex;
+        justify-content: space-around;
         align-items: center;
-        width: 100%;
+        text-align: center;
 }
 .Menu-message{
     display: flex;
     justify-content: space-around
 }
 .registerBox{
-    /* border: 1px solid gray; */
-    /* border-style: outset; */
+   
     border-radius: 10px;
     background: linear-gradient(145deg, #e1e1e1, #ffffff);
     box-shadow:  1px 1px 16px #dbdada,
                  -1px -1px 16px #ffffff;
-    /* border-radius: 5px; */
+   
 }
 .registerBox:hover{
-    /* border-style: inset; */
     border-radius: 50px;
 background: #fafafa;
 box-shadow:  20px 20px 60px #d5d5d5,
@@ -98,7 +92,6 @@ box-shadow:  20px 20px 60px #d5d5d5,
                  -1px -1px 16px #ffffff;
 }
 .logOutHeader:hover{
-        /* border-style: inset; */
         border-radius: 50px;
 background: #fafafa;
 box-shadow:  20px 20px 60px #d5d5d5,
@@ -139,20 +132,35 @@ box-shadow:  20px 20px 60px #d5d5d5,
     background: white
     
 }
-@media (max-width: 1010px){
+@media (max-width: 867px){
+    .header{
+        height:60px;
+        width: 100vw;
+    }
     .logoImage{
         width:60px;
         height:40px
     }
-    /* .headerpiano, .headeroud{
-        display: none;
-    } */
+  
     .menu-details{
         display: flex;
         flex-direction: column;
+        /* justify-content: space-around; */
+        align-items:center;
+        position:fixed;
+        top:0;
+        right:0;
+        height:100%;
+        width:100%;
+        background:black;
+        color: white;
+        transition: all 0.5s;
+    }
+    span{
+        color:white
     }
     .menuMobile{
-        /* visibility:visible; */
+        visibility:visible;
         display: block
     }
     .menu-details-computer{
@@ -184,27 +192,6 @@ box-shadow:  20px 20px 60px #d5d5d5,
     }
 }
 
-@media(max-width: 1000px) and (min-width: 500px){
-    .notificationMessage{
-        margin-right: 43%;
-    }
-    .notificationNotification{
-        margin-right: 43%;
 
-    }
-}
 
-.pianoHeader, .oudHeader, .violinHeader{
-    color: #555;
-}   
-@media (max-width: 564px) {
-    .pianoHeader{
-        display: none;
-    }   
-    .oudHeader{
-        display: none;
-    } 
-    .violinHeader{
-        display: none;
-    }
-}
+

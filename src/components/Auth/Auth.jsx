@@ -52,7 +52,7 @@ export default function Auth({ user, setUser }) {
     e.preventDefault();
     try {
       const result = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + `/teachers/login`,
+        `https://bisharaserver.herokuapp.com/teachers/login`,
         studentlogin
       );
       window.localStorage.setItem("profile", JSON.stringify(result.data));

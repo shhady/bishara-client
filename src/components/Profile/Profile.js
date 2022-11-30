@@ -4,6 +4,10 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import FileBase from "react-file-base64";
 import "./profile.css";
+import { Input, Button } from "@chakra-ui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
+
 export default function Profile({ user, setUser }) {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
@@ -13,7 +17,7 @@ export default function Profile({ user, setUser }) {
   const [userId, setUserId] = useState(null);
   const [practiceId, setPracticeId] = useState(null);
   const [avatar, setAvatar] = useState(null);
-  const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(true);
+  const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(false);
   const [teacherDetails, setTeacherDetails] = useState(null);
 
   useEffect(() => {
@@ -264,15 +268,33 @@ export default function Profile({ user, setUser }) {
                 height="150"
                 style={{ borderRadius: "50%" }}
               />
-              <div style={{ display: "flex" }}>
-                <FileBase
+              <div
+                style={{
+                  display: "flex",
+                  width: "20%",
+                  justifyContent: "space-around",
+                }}
+              >
+                {/* <FileBase
                   type="file"
                   multiple={false}
                   onDone={({ base64 }) => {
                     setAvatar({ avatar: base64 });
                     setShowButtonAvatarUpdate(true);
                   }}
+                /> */}
+                <Input
+                  type="file"
+                  id="changeProfilePic"
+                  hidden
+                  onClick={() => setShowButtonAvatarUpdate(true)}
                 />
+                {!showButtonAvatarUpdate ? (
+                  <Button as="label" htmlFor="changeProfilePic">
+                    <FontAwesomeIcon icon={faCamera} />
+                  </Button>
+                ) : null}
+
                 {showButtonAvatarUpdate ? (
                   <button type="submit" onClick={handleUpdateAvatar}>
                     تثبيت

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Header.css";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import TeachersPop from "./TeachersPop";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +12,11 @@ import {
   faBars,
   faMessage,
   faBell,
+  faChalkboardUser,
+  faMusic,
+  faUsersRays,
 } from "@fortawesome/free-solid-svg-icons";
+
 // import { io } from "socket.io-client";
 // import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 export default function Header({ user, setUser, socket }) {
@@ -28,7 +33,8 @@ export default function Header({ user, setUser, socket }) {
   const [backNot, setBackNot] = useState([]);
   const [userId, setUserId] = useState(null);
   const [notificationNumber, setNotificationNumber] = useState([]);
-
+  const [isHovering, setIsHovering] = useState(false);
+  const [teachersHover, setTeachersHover] = useState(false);
   useEffect(() => {
     setNotificationNumber(backNot.filter((number) => number.read === false));
   }, [backNot]);
@@ -114,6 +120,7 @@ export default function Header({ user, setUser, socket }) {
     setNotificationNotification([]);
     setNotificationMessage([]);
     setOpenNotifications(false);
+    setIsHovering(!isHovering);
   };
 
   const handleLogoutStudent = async () => {
@@ -239,58 +246,195 @@ export default function Header({ user, setUser, socket }) {
     });
   };
 
+  const handleMouseOver = () => {
+    setIsHovering(!isHovering);
+    console.log("niceee");
+  };
+
   return (
-    <div>
+    <div style={{ width: "100%", margin: "auto" }}>
       <div className="header">
+        {isHovering ? (
+          <div
+            style={{
+              zIndex: "5",
+              top: 85,
+              position: "fixed",
+              backgroundColor: "white",
+              left: 1,
+              width: "150px",
+              boxShadow:
+                "rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px",
+              textAlign: "center",
+              height: "300px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
+            }}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            {user ? (
+              <div
+                style={{
+                  borderBottom: "1px solid gray",
+                  width: "80%",
+                  margin: " 20px auto",
+                  paddingBottom: "15px",
+                  paddingTop: "15px",
+                }}
+              >
+                {user.teacher ? (
+                  <div>
+                    {user.teacher.firstName}
+                    {"  "}
+                    {user.teacher.lastName}
+                  </div>
+                ) : (
+                  <div>
+                    {user.user.firstName}
+                    {"  "}
+                    {user.user.lastName}
+                  </div>
+                )}
+              </div>
+            ) : null}
+
+            <div style={{ width: "80%", margin: "auto" }}>الملف الشخصي</div>
+            {user?.teacher?.role === "admin" ? (
+              <Link to="/CreateTeacher" style={{ textDecoration: "none" }}>
+                <div
+                  style={{ width: "80%", margin: "auto", marginTop: "20px" }}
+                >
+                  تسجيل معلمين
+                </div>
+              </Link>
+            ) : null}
+            <div style={{ width: "80%", margin: "20px auto" }}>الاشعارات</div>
+            <div
+              style={{ width: "80%", margin: " auto", marginBottom: "20px" }}
+            >
+              الرسائل المباشره
+            </div>
+            <div style={{ width: "80%", margin: "auto" }}>الاسئلة المتكررة</div>
+            <div
+              style={{
+                width: "80%",
+                margin: "20px auto",
+                borderTop: "1px solid grey",
+                paddingBottom: "15px",
+                paddingTop: "15px",
+              }}
+            >
+              {user ? (
+                <>
+                  {user.teacher ? (
+                    <div onClick={handleLogoutTeacher}>خروج</div>
+                  ) : (
+                    <div onClick={handleLogoutStudent}>خروج</div>
+                  )}
+                </>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
+
         <div className="middle">
+          <div
+            className="menuMobile"
+            style={{
+              minWidth: "15px",
+              padding: "2px",
+            }}
+            onClick={() => setOpenMenu(!openMenu)}
+          >
+            {!openMenu ? <FontAwesomeIcon icon={faBars} /> : null}{" "}
+          </div>
           <div
             style={{
               display: "flex",
-              justifyContent: "flex-start",
+              flexDirection: "column",
+              justifyContent: "center",
               paddingRight: "15px",
               alignItems: "center",
             }}
           >
-            <Link to="/">
-              <img
+            <Link to="/" style={{ textDecoration: "none" }}>
+              {/* <img
                 src="https://res.cloudinary.com/shhady/image/upload/v1666188610/avatars/wjph4gkbarqbnntmpcvw.jpg"
                 alt="logo"
                 className="logoImage"
-              />
+              /> */}
+              <h2 style={{ color: "black" }}>FUNAN</h2>
             </Link>
-            <Link to="/PianoPage" style={{ textDecoration: "none" }}>
+          </div>
+          {teachersHover ? (
+            <div
+              style={{
+                zIndex: "5",
+                top: 85,
+                position: "fixed",
+                backgroundColor: "white",
+                // margin: "auto",
+                left: "25%",
+                width: "50%",
+                boxShadow:
+                  "rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px",
+              }}
+              onMouseLeave={() => setTeachersHover(false)}
+            >
+              <TeachersPop setTeachersHover={setTeachersHover} />
+            </div>
+          ) : null}
+          <div className="menu-details-computer">
+            <div
+              onMouseOver={() => setTeachersHover(false)}
+              style={{ height: "80px", color: "transparent" }}
+            >
+              1
+            </div>
+            <Link to="/teachers" style={{ textDecoration: "none" }}>
               <div
-                className="pianoHeader"
-                style={{
-                  marginLeft: "20px",
-                  marginRight: "20px",
-                  cursor: "pointer",
-                }}
+                className="headeroud"
+                onMouseOver={() => setTeachersHover(true)}
               >
-                <h3>بيانو</h3>
+                <div>
+                  <FontAwesomeIcon icon={faChalkboardUser} />
+                </div>
+                <div>المدرسين</div>
               </div>
             </Link>
-            <Link to="/OudPage" style={{ textDecoration: "none" }}>
-              <div
-                className="oudHeader"
-                style={{
-                  marginLeft: "20px",
-                  cursor: "pointer",
-                }}
-              >
-                <h3>عود</h3>
+            {user ? (
+              <Link to="/courses" style={{ textDecoration: "none" }}>
+                <div
+                  className="headeroud"
+                  onMouseOver={() => setTeachersHover(false)}
+                >
+                  <div>
+                    <FontAwesomeIcon icon={faMusic} />
+                  </div>
+                  <div>الدورات الموسيقية</div>
+                </div>
+              </Link>
+            ) : (
+              <Link to="/auth" style={{ textDecoration: "none" }}>
+                <div className="headeroud">
+                  <div>
+                    <FontAwesomeIcon icon={faMusic} />
+                  </div>
+                  <div>الدورات الموسيقية</div>
+                </div>
+              </Link>
+            )}
+
+            <Link to="" style={{ textDecoration: "none" }}>
+              <div className="headerpiano">
+                <div>
+                  <FontAwesomeIcon icon={faUsersRays} />
+                </div>
+                <div>الاشتراك </div>
               </div>
             </Link>
-            <Link to="/ViolinPage" style={{ textDecoration: "none" }}>
-              <div
-                className="violinHeader"
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <h3>كمان</h3>{" "}
-              </div>
-            </Link>
+            <div onMouseOver={() => setTeachersHover(false)}></div>
           </div>
           <div
             style={{
@@ -300,253 +444,96 @@ export default function Header({ user, setUser, socket }) {
             }}
           >
             {user ? (
-              <div>
-                {user.teacher ? (
-                  <Link to="/profile" style={{ textDecoration: "none" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <img
-                        src={user.teacher.avatar}
-                        alt={user.teacher.firstName}
-                        style={{
-                          height: "40px",
-                          width: "40px",
-                          borderRadius: "50%",
-                          marginLeft: "10px",
-                          marginRight: "10px",
-                        }}
-                      />
-                      {user.teacher.firstName} {user.teacher.lastName}
-                    </div>
-                  </Link>
-                ) : (
-                  <Link to="/profile" style={{ textDecoration: "none" }}>
-                    <>
-                      <FontAwesomeIcon icon={faUser} /> {user.user.firstName}{" "}
-                      {user.user.lastName}
-                    </>
-                  </Link>
-                )}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {user ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      paddingLeft: "20px",
+                      border: "1px solid white",
+                      cursor: "pointer",
+                      position: "relative",
+                    }}
+                    onClick={clickOnBill}
+                  >
+                    <FontAwesomeIcon icon={faBell} />
+                    {notificationNumber.length > 0 ? (
+                      <div className="notificationNotification">
+                        {notificationNumber.length}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+                {user ? (
+                  <div
+                    style={{
+                      padding: "2px",
+                      border: "1px solid white",
+                      cursor: "pointer",
+                      position: "relative",
+                    }}
+                    onMouseOver={() => setIsHovering(false)}
+                    onClick={() => {
+                      if (uniques.length === 0) {
+                        history.push("/messenger");
+                      } else {
+                        setOpenNotificationsMessage(!openNotificationsMessage);
+                      }
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faMessage} />
+                    {uniques.length > 0 ? (
+                      <div className="notificationMessage">
+                        {uniques.length}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
             ) : (
               <div style={{ visibility: "hidden" }}>X</div>
             )}
-
-            {/* <div>
-            <Link to="/">
-              <img
-                src="https://res.cloudinary.com/shhady/image/upload/v1666188610/avatars/wjph4gkbarqbnntmpcvw.jpg"
-                alt="logo"
-                className="logoImage"
-              />
-            </Link>
-          </div> */}
-
             {user ? (
-              <div
-                className="auth"
-                style={{
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  paddingLeft: "20px",
-                }}
-              >
-                <Link to="/profile">
+              <>
+                {user.teacher ? (
                   <div
                     style={{
                       display: "flex",
-                      justifyContent: "center",
                       alignItems: "center",
+                      justifyContent: "center",
                     }}
+                    onMouseOver={() => setIsHovering(true)}
                   >
-                    {/* <h4>
-                    {user.teacher ? user.teacher.lastName : user.user.lastName}
-                  </h4> */}
-                    {/* <h4 style={{ marginRight: "5px" }}>
-                    {user.teacher
-                      ? user.teacher.firstName
-                      : user.user.firstName}
-                  </h4> */}
-                    {"  "}
-                    {/* {user.teacher ? (
                     <img
-                      src={user.teacher ? user.teacher.avatar : "profile.jpg"}
-                      alt={user.teacher?.image}
+                      src={user.teacher.avatar}
+                      alt={user.teacher.firstName}
                       style={{
                         height: "40px",
+                        width: "40px",
                         borderRadius: "50%",
-                        marginLeft: "10px",
-                        marginRight: "10px",
+                        marginLeft: "20px",
+                        marginRight: "20px",
                       }}
                     />
-                  ) : (
+                  </div>
+                ) : (
+                  <Link to="/profile" style={{ textDecoration: "none" }}>
                     <div
-                      style={{
-                        margin: "3px",
-                        padding: "3px",
-                        borderRadius: "50%",
-                        border: "1px solid gray",
-                      }}
+                      style={{ marginLeft: "20px", marginRight: "20px" }}
+                      onMouseOver={() => setIsHovering(true)}
                     >
                       <FontAwesomeIcon icon={faUser} />
                     </div>
-                  )} */}
-                  </div>
-                </Link>
-                {user.teacher ? (
-                  // <div
-                  //   style={{
-                  //     display: "flex",
-                  //     alignItems: "center",
-                  //     justifyContent: "center",
-                  //   }}
-                  // >
-                  //   <button
-                  //     onClick={handleLogoutTeacher}
-                  //     style={{
-                  //       border: "none",
-                  //       width: "10rem",
-                  //       cursor: "pointer",
-                  //     }}
-                  //   >
-                  //     خروج
-                  //   </button>
-                  <div
-                    style={{
-                      display: "flex",
-                      // flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      // border: "1px solid gray",
-                      borderRadius: "10px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <div
-                      onClick={handleLogoutTeacher}
-                      style={{
-                        display: "flex",
-                        marginRight: "10px",
-                        // border: "1px solid gray",
-                        borderRadius: "5px",
-                        height: "30px",
-                        padding: "0px 5px ",
-                      }}
-                      className="logOutHeader"
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginLeft: "2px",
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faArrowRightFromBracket} />{" "}
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          // paddingRight: "20px",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        خروج
-                      </div>
-                    </div>
-
-                    {user?.teacher?.role === "admin" ? (
-                      <Link
-                        to="/CreateTeacher"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            marginRight: "10px",
-                            // background: "#cdcaca",
-                            cursor: "pointer",
-                            height: "30px",
-                            padding: "0px 5px",
-                          }}
-                          className="logOutHeader"
-                        >
-                          تسجيل معلمين
-                        </div>
-                        {/* <button
-                        style={{
-                          border: "none",
-                          width: "10rem",
-                          cursor: "pointer",
-                        }}
-                      >
-                        تسجيل معلمين
-                      </button> */}
-                      </Link>
-                    ) : null}
-                  </div>
-                ) : (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      // border: "1px solid gray",
-                      // borderRadius: "10px",
-                      cursor: "pointer",
-                      marginRight: "10px",
-                    }}
-                    className="logOutHeader"
-                  >
-                    <div
-                      onClick={handleLogoutStudent}
-                      style={{
-                        display: "flex",
-                        // border: "1px solid gray",
-                        borderRadius: "10px",
-                        height: "30px",
-                        padding: "3px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginLeft: "2px",
-                        }}
-                      >
-                        {" "}
-                        <FontAwesomeIcon icon={faArrowRightFromBracket} />
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        خروج
-                      </div>
-                    </div>
-                  </div>
+                  </Link>
                 )}
-              </div>
+              </>
             ) : (
               <div
                 className="auth"
@@ -561,9 +548,6 @@ export default function Header({ user, setUser, socket }) {
                   <div
                     style={{
                       display: "flex",
-                      // borderStyle: "outset",
-                      // border: "1px solid gray",
-                      // borderRadius: "5px",
                       height: "30px",
                       padding: "3px",
                       color: "black",
@@ -598,93 +582,9 @@ export default function Header({ user, setUser, socket }) {
             )}
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-          }}
-        >
-          {/* <div></div>
-          <div className="menuMobile">
-            {" "}
-            <FontAwesomeIcon icon={faBars} />
-            القائمة
-          </div> */}
-        </div>
-        <div className="header-down">
-          <div className="Menu-message">
-            {/* <div></div> */}
-            {user ? (
-              <>
-                <div
-                  className="menuMobile"
-                  style={{
-                    // textAlign: "center",
-                    // border: "1px solid gray",
-                    padding: "2px",
-                  }}
-                  onClick={() => setOpenMenu(!openMenu)}
-                >
-                  {!openMenu ? <FontAwesomeIcon icon={faBars} /> : "X اغلاق"}{" "}
-                </div>
-              </>
-            ) : null}
-          </div>
-          <div className="menu-details-computer">
-            <Link to="/teachers" style={{ textDecoration: "none" }}>
-              <div>
-                <h3 className="headeroud">المدرسين</h3>
-              </div>
-            </Link>
-            {user ? (
-              <Link to="/courses" style={{ textDecoration: "none" }}>
-                <div>
-                  <h3 className="headeroud">الدورات الموسيقية</h3>
-                </div>
-              </Link>
-            ) : (
-              <Link to="/auth" style={{ textDecoration: "none" }}>
-                <div>
-                  <h3 className="headeroud">الدورات الموسيقية</h3>
-                </div>
-              </Link>
-            )}
 
-            {/* <Link to="Piano" style={{ textDecoration: "none" }}>
-              <div>
-                <h3 className="headerpiano">نوتات موسيقية</h3>
-              </div>
-            </Link> */}
-            <Link to="" style={{ textDecoration: "none" }}>
-              <div>
-                <h3 className="headerpiano">الاشتراك </h3>
-              </div>
-            </Link>
-          </div>
-          {user ? (
-            <div
-              style={{
-                padding: "2px",
-                border: "1px solid white",
-                cursor: "pointer",
-                position: "relative",
-              }}
-              onClick={() => {
-                if (uniques.length === 0) {
-                  history.push("/messenger");
-                } else {
-                  setOpenNotificationsMessage(!openNotificationsMessage);
-                }
-                // history.push("/messenger");
-              }}
-            >
-              <FontAwesomeIcon icon={faMessage} />
-              {uniques.length > 0 ? (
-                <div className="notificationMessage">{uniques.length}</div>
-              ) : null}
-            </div>
-          ) : null}
+        <div className="header-down">
+          <div className="Menu-message">{user ? <></> : null}</div>
 
           {openNotificationsMessage ? (
             <div className="notificationMessage-container">
@@ -704,55 +604,106 @@ export default function Header({ user, setUser, socket }) {
               </div>
             </div>
           ) : null}
-          {user ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                paddingLeft: "20px",
-                border: "1px solid white",
-                cursor: "pointer",
-                position: "relative",
-              }}
-              onClick={clickOnBill}
-            >
-              <FontAwesomeIcon icon={faBell} />
-              {notificationNumber.length > 0 ? (
-                <div
-                  className="notificationNotification"
-                  // onClick={() => setOpenNotifications(!openNotifications)}
-                >
-                  {notificationNumber.length}
-                </div>
-              ) : null}
-            </div>
-          ) : null}
 
           {openNotifications ? (
             <div className="notification-container">{drawNotifications()}</div>
           ) : null}
           {openMenu && (
             <div className="menu-details">
-              <Link to="/" style={{ textDecoration: "none" }}>
-                <div onClick={() => setOpenMenu(!openMenu)}>
-                  <h3 className="headeroud">الرئيسية</h3>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "90%",
+                }}
+              >
+                <h3
+                  style={{ color: "white", cursor: "pointer" }}
+                  onClick={() => {
+                    setOpenMenu(!openMenu);
+                  }}
+                >
+                  X
+                </h3>
+                <h2 style={{ color: "white" }}>FUNAN</h2>
+                <span style={{ color: "black" }}>X</span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  // alignItems: "center",
+                  // textAlign: "center",
+                  width: "100%",
+                  marginRight: "10px",
+                }}
+              >
+                <Link to="/" style={{ textDecoration: "none" }}>
+                  <div onClick={() => setOpenMenu(!openMenu)}>
+                    <h3 style={{ color: "white" }}>الرئيسية</h3>
+                  </div>
+                </Link>
+                <Link to="/teachers" style={{ textDecoration: "none" }}>
+                  <div onClick={() => setOpenMenu(!openMenu)}>
+                    <h3 style={{ color: "white" }}>المدرسين</h3>
+                  </div>
+                </Link>
+                <Link to="/courses" style={{ textDecoration: "none" }}>
+                  <div
+                    onClick={() => setOpenMenu(!openMenu)}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <h3
+                      style={{
+                        color: "white",
+                        borderBottom: "1px solid white",
+                        width: "40%",
+                      }}
+                    >
+                      الدورات الموسيقية
+                    </h3>
+                    <Link to="/PianoPage" style={{ textDecoration: "none" }}>
+                      <span onClick={() => setOpenMenu(!openMenu)}>بيانو</span>
+                    </Link>
+                    <Link to="/PianoPage" style={{ textDecoration: "none" }}>
+                      <span
+                        style={{ margin: "20px 0px" }}
+                        onClick={() => setOpenMenu(!openMenu)}
+                      >
+                        عود
+                      </span>
+                    </Link>
+                    <Link to="/PianoPage" style={{ textDecoration: "none" }}>
+                      <span onClick={() => setOpenMenu(!openMenu)}>كمان</span>
+                    </Link>
+                  </div>
+                </Link>
+                <Link to="" style={{ textDecoration: "none" }}>
+                  <div onClick={() => setOpenMenu(!openMenu)}>
+                    <h3 style={{ color: "white" }}>الاشتراك </h3>
+                  </div>
+                </Link>
+                <div>
+                  {user ? (
+                    <>
+                      {user.teacher ? (
+                        <div onClick={handleLogoutTeacher}>
+                          <h3>خروج</h3>
+                        </div>
+                      ) : (
+                        <div onClick={handleLogoutStudent}>
+                          <h3>خروج</h3>
+                        </div>
+                      )}
+                    </>
+                  ) : null}
                 </div>
-              </Link>
-              <Link to="/teachers" style={{ textDecoration: "none" }}>
-                <div onClick={() => setOpenMenu(!openMenu)}>
-                  <h3 className="headeroud">المدرسين</h3>
-                </div>
-              </Link>
-              <Link to="/courses" style={{ textDecoration: "none" }}>
-                <div onClick={() => setOpenMenu(!openMenu)}>
-                  <h3 className="headeroud">الدورات الموسيقية</h3>
-                </div>
-              </Link>
-              <Link to="" style={{ textDecoration: "none" }}>
-                <div onClick={() => setOpenMenu(!openMenu)}>
-                  <h3 className="headerpiano">الاشتراك </h3>
-                </div>
-              </Link>
+              </div>
             </div>
           )}
         </div>
