@@ -34,7 +34,7 @@ export default function Hero() {
     <div className="hero" style={{ backgroundImage: images[1] }}>
       <div className="coverblack">
         <div>Text Here</div>
-        <button>click</button>
+        <button>اشتراك</button>
       </div>
       {/* <div className="coverblack"> */}
       {/* <div className="title">
