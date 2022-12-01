@@ -528,7 +528,7 @@ export default function Header({ user, setUser, socket }) {
                   // <Link to="/profile" style={{ textDecoration: "none" }}>
                   <div
                     style={{ marginLeft: "20px", marginRight: "20px" }}
-                    onMouseOver={() => setIsHovering(true)}
+                    onMouseOver={() => setIsHovering(!isHovering)}
                   >
                     <FontAwesomeIcon icon={faUser} />
                   </div>
