@@ -510,7 +510,7 @@ export default function Header({ user, setUser, socket }) {
                       alignItems: "center",
                       justifyContent: "center",
                     }}
-                    onMouseOver={() => setIsHovering(true)}
+                    onMouseOver={() => setIsHovering(!isHovering)}
                   >
                     <img
                       src={user.teacher.avatar}
