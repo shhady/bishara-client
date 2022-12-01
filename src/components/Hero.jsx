@@ -28,6 +28,7 @@ export default function Hero() {
     if (autoScroll) {
       auto();
     }
+    return () => clearInterval(slideInterval);
   }, [currentSlide]);
   return (
     <div className="hero">
@@ -41,7 +42,15 @@ export default function Hero() {
             key={i}
           >
             {i === currentSlide && (
-              <div style={{ width: "100%", height: "100%" }}>
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                }}
+              >
                 <img src={slide.image} alt="slide" width="100%" height="100%" />
                 <div className="content">
                   <h1>{slide.heading}</h1>
