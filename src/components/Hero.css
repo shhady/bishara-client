@@ -1,18 +1,121 @@
 .hero{
+    width:100%;
     margin-top: 80px;
-    height: calc(100vh - 100px); 
-    background-repeat: no-repeat;
-    background-size: cover;
+    height: 80vh; 
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
+    position:relative;
+    overflow: hidden;
     /* background-position: bottom; */
     /* box-shadow: 0 8px 16px 12px rgb(43, 42, 42), 0 12px 24px 0 rgba(43, 42, 42); */
 }
-.myVideo {
-  /* position: fixed; */
-  
-  width: 100%;
-  height: 100%;
+.slide{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    opacity:0;
+    transform: translateX(-50%);
+    transition: all 0.5 ease;
 }
 
+@media (min-width: 600px){
+    .slide img{
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+  background-position: center center;
+  background-size:cover;
+    }
+}
+
+.content{
+    position: absolute;
+    top:15rem;
+    /* right:10rem; */
+    width: 100%;
+    padding:2rem;
+    background: rgba(0,0,0,.2);
+    box-shadow:
+                rgb(0 0 0 / 6%) 0px 4px 8px,rgb(35 41 54 / 14%) 0px 12px 32px,rgb(35 41 54 / 14%) 0px 12px 32px, rgb(35 41 54 / 14%) 0px 12px 32px;
+    animation:slide-up 1s ease .5;
+    /* animation-fill-mode: forwards; */
+    /* visibility:hidden; */
+    align-items: center;
+    text-align: center;
+}
+
+@media (max-width: 740px){
+    .content{
+        width: 90%;
+        top:9rem;
+    }
+    .hero{
+        max-height: 50vh; 
+    }
+}
+.content > *{
+    color:white;
+    margin-bottom: 1rem;
+}
+.getStarted{
+    font-size: 16px;
+    background-color: white;
+    color: black;
+    transition:all 0.15s ease-in-out 0s;
+    border-radius: 30px;
+    padding: 5px 25px;
+    border:none;
+}
+.getStarted:hover{
+    background-color: rgb(237, 240, 240);
+}
+
+.current {
+    opacity:1;
+    transform: translateX(0);
+}
+
+.current .content{
+    opacity:1;
+
+}
+.arrow {
+    border: 2px solid white;
+    background:transparent;
+    color:white;
+    width:2rem;
+    height:2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    position:absolute;
+    z-index: 99;
+}
+
+.arrow:hover{
+    background-color: white;
+    color:black;
+}
+
+.next{
+    top:35%;
+    right:1.5rem;
+}
+.prev{
+    top:35%;
+    left:1.5rem;
+}
+@media (max-width: 740px){
+    .next{
+        top:20%;
+        right:1.5rem;
+    }
+    .prev{
+        top:20%;
+        left:1.5rem;
+    }
+}
 .coverblack{
     height: 50%;
     display: flex;
