@@ -97,7 +97,7 @@
     cursor: pointer;
     border-radius: 50%;
     position:absolute;
-    z-index: 99;
+    z-index: 90;
 }
 
 .arrow:hover{
