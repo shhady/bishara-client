@@ -6,15 +6,29 @@ export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideLength = sliderData.length;
 
+  const autoScroll = true;
+  let slideInterval;
+  let intervalTime = 5000;
+
   const nextSlide = () => {
-    setCurrentSlide(currentSlide + 1);
+    setCurrentSlide(currentSlide === slideLength - 1 ? 0 : currentSlide + 1);
   };
   const prevSlide = () => {
-    setCurrentSlide(currentSlide - 1);
+    setCurrentSlide(currentSlide === 0 ? slideLength - 1 : currentSlide - 1);
   };
+
+  function auto() {
+    slideInterval = setInterval(nextSlide, intervalTime);
+  }
+
   useEffect(() => {
     setCurrentSlide(0);
   }, []);
+  useEffect(() => {
+    if (autoScroll) {
+      auto();
+    }
+  }, [currentSlide]);
   return (
     <div className="hero">
       <AiOutlineArrowRight className="arrow next" onClick={prevSlide} />
@@ -27,8 +41,8 @@ export default function Hero() {
             key={i}
           >
             {i === currentSlide && (
-              <div>
-                <img src={slide.image} alt="slide" />
+              <div style={{ width: "100%", height: "100%" }}>
+                <img src={slide.image} alt="slide" width="100%" height="100%" />
                 <div className="content">
                   <h1>{slide.heading}</h1>
                   <p>{slide.desc}</p>
