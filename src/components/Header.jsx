@@ -365,7 +365,7 @@ export default function Header({ user, setUser, socket }) {
                 alt="logo"
                 className="logoImage"
               /> */}
-              <h2 style={{ color: "black", marginLeft: "70px" }}>FUNAN</h2>
+              <h2 style={{ color: "black", marginLeft: "20px" }}>FUNAN</h2>
             </Link>
           </div>
           {teachersHover ? (
@@ -525,14 +525,14 @@ export default function Header({ user, setUser, socket }) {
                     />
                   </div>
                 ) : (
-                  <Link to="/profile" style={{ textDecoration: "none" }}>
-                    <div
-                      style={{ marginLeft: "20px", marginRight: "20px" }}
-                      onMouseOver={() => setIsHovering(true)}
-                    >
-                      <FontAwesomeIcon icon={faUser} />
-                    </div>
-                  </Link>
+                  // <Link to="/profile" style={{ textDecoration: "none" }}>
+                  <div
+                    style={{ marginLeft: "20px", marginRight: "20px" }}
+                    onMouseOver={() => setIsHovering(true)}
+                  >
+                    <FontAwesomeIcon icon={faUser} />
+                  </div>
+                  // </Link>
                 )}
               </>
             ) : (
