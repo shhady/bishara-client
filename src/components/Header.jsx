@@ -255,85 +255,117 @@ export default function Header({ user, setUser, socket }) {
     <div style={{ width: "100%", margin: "auto" }}>
       <div className="header">
         {isHovering ? (
-          <div
-            style={{
-              zIndex: "5",
-              top: 85,
-              position: "fixed",
-              backgroundColor: "white",
-              left: 1,
-              width: "150px",
-              boxShadow:
-                "rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px",
-              textAlign: "center",
-              height: "300px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-around",
-            }}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            {user ? (
+          <div className="backgroundHover" onClick={() => setIsHovering(false)}>
+            <div
+              style={{
+                zIndex: "5",
+                top: 85,
+                position: "fixed",
+                backgroundColor: "white",
+                left: 1,
+                width: "150px",
+                boxShadow:
+                  "rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px",
+                textAlign: "center",
+                height: "400px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-around",
+              }}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              {user ? (
+                <div
+                  style={{
+                    borderBottom: "1px solid gray",
+                    width: "80%",
+                    margin: " 20px auto",
+                    paddingBottom: "15px",
+                    paddingTop: "15px",
+                  }}
+                >
+                  {user.teacher ? (
+                    <div>
+                      {user.teacher.firstName}
+                      {"  "}
+                      {user.teacher.lastName}
+                    </div>
+                  ) : (
+                    <div>
+                      {user.user.firstName}
+                      {"  "}
+                      {user.user.lastName}
+                    </div>
+                  )}
+                </div>
+              ) : null}
+              <Link to="/profile" style={{ textDecoration: "none" }}>
+                <div
+                  style={{ width: "80%", margin: "auto", color: "black" }}
+                  onClick={() => setIsHovering(false)}
+                >
+                  الملف الشخصي
+                </div>
+              </Link>
+              {user?.teacher?.role === "admin" ? (
+                <Link to="/CreateTeacher" style={{ textDecoration: "none" }}>
+                  <div
+                    style={{
+                      width: "80%",
+                      margin: "auto",
+                      marginTop: "20px",
+                      color: "black",
+                    }}
+                  >
+                    تسجيل معلمين
+                  </div>
+                </Link>
+              ) : null}
+              <div
+                style={{ width: "80%", margin: "auto" }}
+                onClick={() => setIsHovering(false)}
+              >
+                الاشعارات
+              </div>
+              <Link to="/messenger" style={{ textDecoration: "none" }}>
+                <div
+                  style={{
+                    width: "80%",
+                    margin: "auto",
+                    // marginBottom: "20px",
+                    color: "black",
+                  }}
+                  onClick={() => setIsHovering(false)}
+                >
+                  الرسائل المباشره
+                </div>
+              </Link>
+              <div
+                style={{ width: "80%", margin: "auto" }}
+                onClick={() => setIsHovering(false)}
+              >
+                الاسئلة المتكررة
+              </div>
               <div
                 style={{
-                  borderBottom: "1px solid gray",
                   width: "80%",
-                  margin: " 20px auto",
+                  margin: "20px auto",
+                  borderTop: "1px solid grey",
                   paddingBottom: "15px",
                   paddingTop: "15px",
                 }}
+                onClick={() => setIsHovering(false)}
               >
-                {user.teacher ? (
-                  <div>
-                    {user.teacher.firstName}
-                    {"  "}
-                    {user.teacher.lastName}
-                  </div>
-                ) : (
-                  <div>
-                    {user.user.firstName}
-                    {"  "}
-                    {user.user.lastName}
-                  </div>
-                )}
+                {user ? (
+                  <>
+                    {user.teacher ? (
+                      <div onClick={handleLogoutTeacher}>خروج</div>
+                    ) : (
+                      <div onClick={handleLogoutStudent}>خروج</div>
+                    )}
+                  </>
+                ) : null}
               </div>
-            ) : null}
-
-            <div style={{ width: "80%", margin: "auto" }}>الملف الشخصي</div>
-            {user?.teacher?.role === "admin" ? (
-              <Link to="/CreateTeacher" style={{ textDecoration: "none" }}>
-                <div
-                  style={{ width: "80%", margin: "auto", marginTop: "20px" }}
-                >
-                  تسجيل معلمين
-                </div>
-              </Link>
-            ) : null}
-            <div style={{ width: "80%", margin: "20px auto" }}>الاشعارات</div>
-            <div
-              style={{ width: "80%", margin: " auto", marginBottom: "20px" }}
-            >
-              الرسائل المباشره
-            </div>
-            <div style={{ width: "80%", margin: "auto" }}>الاسئلة المتكررة</div>
-            <div
-              style={{
-                width: "80%",
-                margin: "20px auto",
-                borderTop: "1px solid grey",
-                paddingBottom: "15px",
-                paddingTop: "15px",
-              }}
-            >
-              {user ? (
-                <>
-                  {user.teacher ? (
-                    <div onClick={handleLogoutTeacher}>خروج</div>
-                  ) : (
-                    <div onClick={handleLogoutStudent}>خروج</div>
-                  )}
-                </>
-              ) : null}
             </div>
           </div>
         ) : null}
