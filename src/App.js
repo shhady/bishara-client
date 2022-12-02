@@ -43,7 +43,8 @@ export default function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [socket, setSocket] = useState(null);
   const [userId, setUserId] = useState(null);
-
+  const [showArrows, setShowArrows] = useState(null);
+  console.log(showArrows);
   useEffect(() => {
     if (!user) return;
     user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
@@ -67,9 +68,15 @@ export default function App() {
     <div>
       <Suspense>
         <BrowserRouter>
-          <Header user={user} setUser={setUser} socket={socket} />
+          <Header
+            user={user}
+            setUser={setUser}
+            socket={socket}
+            showArrows={showArrows}
+            setShowArrows={setShowArrows}
+          />
           <Route path="/" exact>
-            <Home user={user} setUser={setUser} />
+            <Home user={user} setUser={setUser} showArrows={showArrows} />
           </Route>
           {/* <Route path="/Oud" exact component={Oud} />
           <Route path="/Piano" exact component={Piano} /> */}

@@ -5,10 +5,10 @@ import FreeVideos from "./FreeVideos";
 import About from "./About";
 import Footer from "./Footer";
 import FourBoxes from "./FourBoxes";
-export default function Home() {
+export default function Home({ showArrows }) {
   return (
     <div className="HomePage">
-      <Hero />
+      <Hero showArrows={showArrows} />
       <FourBoxes />
       <FreeVideos />
       <LearnTrainCom />

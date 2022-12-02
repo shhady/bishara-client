@@ -19,7 +19,7 @@ import {
 
 // import { io } from "socket.io-client";
 // import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-export default function Header({ user, setUser, socket }) {
+export default function Header({ user, setUser, socket, setShowArrows }) {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
   const history = useHistory();
@@ -257,9 +257,10 @@ export default function Header({ user, setUser, socket }) {
         {isHovering ? (
           <div className="backgroundHover" onClick={() => setIsHovering(false)}>
             <div
+              className="sideMenu"
               style={{
                 zIndex: "5",
-                top: 85,
+                // top: 85,
                 position: "fixed",
                 backgroundColor: "white",
                 left: 1,
@@ -378,7 +379,10 @@ export default function Header({ user, setUser, socket }) {
               // minWidth: "60px",
               // padding: "2px",
             }}
-            onClick={() => setOpenMenu(!openMenu)}
+            onClick={() => {
+              setOpenMenu(!openMenu);
+              setShowArrows(true);
+            }}
           >
             {!openMenu ? <FontAwesomeIcon icon={faBars} /> : null}{" "}
           </div>
@@ -490,7 +494,7 @@ export default function Header({ user, setUser, socket }) {
                       display: "flex",
                       justifyContent: "flex-end",
                       paddingLeft: "20px",
-                      border: "1px solid white",
+                      // border: "1px solid transparent",
                       cursor: "pointer",
                       position: "relative",
                     }}
@@ -508,7 +512,7 @@ export default function Header({ user, setUser, socket }) {
                   <div
                     style={{
                       padding: "2px",
-                      border: "1px solid white",
+                      // border: "1px solid white",
                       cursor: "pointer",
                       position: "relative",
                     }}
@@ -655,6 +659,7 @@ export default function Header({ user, setUser, socket }) {
                   style={{ color: "white", cursor: "pointer" }}
                   onClick={() => {
                     setOpenMenu(!openMenu);
+                    setShowArrows(false);
                   }}
                 >
                   X
@@ -675,7 +680,12 @@ export default function Header({ user, setUser, socket }) {
                 }}
               >
                 <Link to="/" style={{ textDecoration: "none" }}>
-                  <div onClick={() => setOpenMenu(!openMenu)}>
+                  <div
+                    onClick={() => {
+                      setOpenMenu(!openMenu);
+                      setShowArrows(false);
+                    }}
+                  >
                     <h3 style={{ color: "white" }}>الرئيسية</h3>
                   </div>
                 </Link>

@@ -24,6 +24,24 @@
     align-items: center;
     padding-right: 15px
 }
+.sideMenu{
+    top:85px;
+}
+
+/* .sideMenu{
+    position: fixed;
+    top: 85;
+    left: 1;
+    width: 150px;
+    z-index: 99;
+    background-color: white;
+    box-shadow:  rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px;
+    text-align: center;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+} */
 
 button{
     cursor: pointer;
@@ -146,6 +164,9 @@ box-shadow:  20px 20px 60px #d5d5d5,
         height:60px;
         width: 100vw;
     }
+    .sideMenu{
+        top:60px;
+    }
     .logoImage{
         width:60px;
         height:40px
@@ -158,6 +179,7 @@ box-shadow:  20px 20px 60px #d5d5d5,
     }
     .backgroundHover{
         position: fixed;
+        top: 60;
         height: 200vh;
         width: 100vw;
         background: rgba(98, 98, 100, 0.3);

@@ -40,7 +40,7 @@ export default function Conversation({ conversation, currentUser }) {
           alt="Img"
         />
 
-        <span className="nameConversation">
+        <span className="nameConversation" style={{ color: "black" }}>
           {user?.firstName}
           {"  "}
           {user?.lastName}
