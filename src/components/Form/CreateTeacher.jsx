@@ -13,6 +13,7 @@ export default function CreateTeacher() {
     password: "",
     confirmPassword: "",
     avatar: "",
+    cover: "",
     about: "",
   });
 
@@ -104,11 +105,38 @@ export default function CreateTeacher() {
             style={{ textAlign: "center", width: "60%", marginBottom: "20px" }}
           />
           {/* <input type="file" onChange={handleAvatar} /> */}
-          <FileBase
-            type="file"
-            multiple={false}
-            onDone={({ base64 }) => setTeacher({ ...teacher, avatar: base64 })}
-          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginTop: "10px",
+            }}
+          >
+            <div>صورة شخصيه</div>
+            <div>
+              <FileBase
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) =>
+                  setTeacher({ ...teacher, avatar: base64 })
+                }
+              />
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginTop: "20px",
+            }}
+          >
+            <label>صورة غلاف</label>
+            <FileBase
+              type="file"
+              multiple={false}
+              onDone={({ base64 }) => setTeacher({ ...teacher, cover: base64 })}
+            />
+          </div>
           <input
             className="createTeacherSubmit"
             type="submit"

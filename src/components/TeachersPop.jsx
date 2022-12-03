@@ -66,37 +66,50 @@ export default function TeachersPop({ setTeachersHover }) {
   };
 
   return (
-    <>
+    <div
+      style={{
+        position: "fixed",
+        height: "200vh",
+        width: "100vw",
+        background: "transparent",
+      }}
+      onClick={() => setTeachersHover(false)}
+    >
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "10px",
-          width: "90%",
-          margin: "auto",
-          borderBottom: "1px solid gray",
-          marginBottom: "20px",
-        }}
-        // onMouseOut={() => setTeachersHover(false)}
+        style={{ backgroundColor: "white", width: "50%" }}
+        onMouseLeave={() => setTeachersHover(false)}
       >
-        <div>المدرسين</div>
-        <Link to="/teachers" style={{ textDecoration: "none" }}>
-          <div
-            onClick={() => setTeachersHover(false)}
-            style={{ color: "black" }}
-          >
-            جميع المدرسين
-          </div>
-        </Link>
-      </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "10px",
+            width: "90%",
+            margin: "auto",
+            borderBottom: "1px solid gray",
+            marginBottom: "20px",
+            backgroundColor: "white",
+          }}
+        >
+          <div>المدرسين</div>
+          <Link to="/teachers" style={{ textDecoration: "none" }}>
+            <div
+              onClick={() => setTeachersHover(false)}
+              style={{ color: "black" }}
+            >
+              جميع المدرسين
+            </div>
+          </Link>
+        </div>
 
-      <div
-        className="teacherHeader"
-        // style={{ display: "grid", gridAutoColumns: "1fr 1fr 1fr 1fr 1fr" }}
-      >
-        {drawData()}
+        <div
+          className="teacherHeader"
+          // style={{ display: "grid", gridAutoColumns: "1fr 1fr 1fr 1fr 1fr" }}
+        >
+          {drawData()}
+        </div>
       </div>
-    </>
+    </div>
   );
 }
