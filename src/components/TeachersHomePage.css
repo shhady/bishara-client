@@ -1,5 +1,5 @@
 .TeachersHomePage{
-    height: 50vh;
+    height: 60vh;
 }
 .teacherAvatars{
     width: 90%;
@@ -8,6 +8,7 @@
     grid-template-columns: repeat(10,1fr);
     gap:2rem;
     overflow-x: scroll;
+    overflow-y: none;
 
 }
 @media (max-width: 768px){
@@ -25,7 +26,7 @@
 
 
 .teachersCard{
-    height: 200px;
+    height: 180px;
     display: flex;
     flex-direction: column;
     justify-content:space-around;
