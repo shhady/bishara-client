@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Teachers.css";
+import { Link } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
-export default function Teachers({ user, setUser }) {
+export default function Teachers({ user, setUser, setTeacher }) {
   const [teachers, setTeachers] = useState(null);
   // const [selectedTeacher, setSelectedTeacher] = useState(null);
   // const [checkChat, setCheckChat] = useState(null);
@@ -108,22 +109,30 @@ export default function Teachers({ user, setUser }) {
   const drawData = () => {
     return teachers.map((teacher, i) => {
       return (
-        <div className="teacher" key={i}>
-          <div>
-            <img
-              src={teacher.avatar}
-              alt={teacher.firstName}
-              height="150px"
-              width="150px"
-              style={{ borderRadius: "5px" }}
-            />
-          </div>
-          <div>
-            {teacher.firstName} {teacher.lastName}
-          </div>
-          <div style={{ textAlign: "center" }}>{teacher.about}</div>
-          <div>
-            {/* <button
+        // <></>
+        <Link to="/TeacherData" style={{ textDecoration: "none" }}>
+          <div
+            className="teacher"
+            key={i}
+            onClick={() => {
+              setTeacher(teacher._id);
+              window.localStorage.setItem("teacherId", teacher._id);
+            }}
+          >
+            <div>
+              <img
+                src={teacher.avatar}
+                alt={teacher.firstName}
+                height="150px"
+                width="150px"
+                style={{ borderRadius: "5px" }}
+              />
+            </div>
+            <div style={{ color: "black" }}>
+              {teacher.firstName} {teacher.lastName}
+            </div>
+            <div>
+              {/* <button
               // onClick={() => {
               //   setSelectedTeacher(teacher._id);
               // }}
@@ -131,8 +140,9 @@ export default function Teachers({ user, setUser }) {
             >
               تحدث مع الاستاذ
             </button> */}
+            </div>
           </div>
-        </div>
+        </Link>
       );
     });
   };

@@ -34,6 +34,7 @@ const PianoPage = React.lazy(() => import("./components/PianoPage"));
 const OudPage = React.lazy(() => import("./components/OudPage"));
 const ViolinPage = React.lazy(() => import("./components/ViolinPage"));
 const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
+const TeacherData = React.lazy(() => import("./components/TeacherData"));
 
 // const Oud = React.lazy(() => import("./components/Oud"));
 // const Piano = React.lazy(() => import("./components/PianoPage"));
@@ -44,7 +45,10 @@ export default function App() {
   const [socket, setSocket] = useState(null);
   const [userId, setUserId] = useState(null);
   const [showArrows, setShowArrows] = useState(null);
-  console.log(showArrows);
+  const [listId, setListId] = useState("");
+  const [course, setCourse] = useState(null);
+  const [teacher, setTeacher] = useState(null);
+  console.log(teacher);
   useEffect(() => {
     if (!user) return;
     user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
@@ -83,8 +87,23 @@ export default function App() {
           <Route path="/auth" exact>
             <Auth user={user} setUser={setUser} />
           </Route>
-          <Route path="/TestYoutube" exact>
-            <TestYoutube user={user} setUser={setUser} />
+          <Route path="/TestYoutube/:id" exact>
+            <TestYoutube
+              user={user}
+              setUser={setUser}
+              listId={listId}
+              course={course}
+            />
+          </Route>
+
+          <Route path="/TeacherData" exact>
+            <TeacherData
+              user={user}
+              setUser={setUser}
+              setTeacher={setTeacher}
+              teacher={teacher}
+              listId={listId}
+            />
           </Route>
 
           <Route path="/CreateTeacher" exact component={CreateTeacher} />
@@ -94,14 +113,27 @@ export default function App() {
           <Route path="/createcourse" exact component={CreateCourse} />
           {/* <Route path="/courses" exact component={Courses} /> */}
           <Route path="/courses" exact>
-            <Courses user={user} setUser={setUser} socket={socket} />
+            <Courses
+              user={user}
+              setUser={setUser}
+              socket={socket}
+              setListId={setListId}
+              list={listId}
+              setCourse={setCourse}
+              course={course}
+            />
           </Route>
           <Route path="/course/:id" exact>
             <Course user={user} setUser={setUser} socket={socket} />
           </Route>
           {/* <Route path="/teachers" exact component={Teachers} /> */}
           <Route path="/teachers" exact>
-            <Teachers user={user} setUser={setUser} />
+            <Teachers
+              user={user}
+              setUser={setUser}
+              setTeacher={setTeacher}
+              teacher={teacher}
+            />
           </Route>
           <Route path="/StudentsPractices" exact>
             <StudentsPractices user={user} setUser={setUser} />

@@ -32,6 +32,7 @@ export default function Course() {
     setEpisode(e.target.value);
   };
 
+  console.log(courseId);
   window.onpopstate = () => {
     history.push("/courses");
   };

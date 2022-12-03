@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Posts/styles.css";
 import { useHistory } from "react-router-dom";
-export default function Courses() {
+export default function Courses({ listId, setListId, setCourse }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [posts, setposts] = useState(null);
   const [userId, setUserId] = useState("");
   const [courseData, setCourseData] = useState(null);
-  const [course, setCourse] = useState(null);
+  // const [course, setCourse] = useState(null);
   const [filteredPosts, setFilteredposts] = useState([]);
   const [all, setAll] = useState(true);
   const [title, setTitle] = useState(null);
@@ -20,6 +20,7 @@ export default function Courses() {
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
   }, []);
 
+  console.log(user);
   useEffect(() => {
     // console.log(all);
     const fetch = async () => {
@@ -80,17 +81,18 @@ export default function Courses() {
     );
 
   const handleClick = (post) => {
-    console.log(post.owner);
+    console.log(post);
     setAll(true);
     // setSelectedTeacher(post.owner);
     // const res = await axios.get(process.env.REACT_APP_BACKEND_URL+`/courses/${post._id}`);
     // console.log(res);
     setCourseData(post._id);
-    history.push({ pathname: `/course/${post._id}`, id: post._id });
+    history.push({ pathname: `/testYoutube/${post._id}`, id: post._id });
     window.localStorage.setItem("courseId", post._id);
     window.localStorage.setItem("ownerId", post.owner);
-    // window.localStorage.setItem("courseId", post.owner);
-
+    window.localStorage.setItem("playlistId", post.playlistId);
+    setListId(post.playlistId);
+    setCourse(post);
     // history.push("/course");
   };
 

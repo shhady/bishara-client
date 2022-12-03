@@ -3,22 +3,41 @@ import axios from "axios";
 import "./Teachers.css";
 
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
-export default function TestYoutube() {
+export default function TestYoutube({ listId, course }) {
+  //prettier-ignore
+  // const [courseId, setCourseId] = useState(JSON.parse(localStorage.getItem("courseId")));
+  const [teacher, setTeacher] = useState("");
   const [videos, setVideos] = useState([]);
   const [videoSRC, setVideoSRC] = useState("9GejeXh-zKE");
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    console.log(course);
+  }, [videos]);
+  // console.log(courseId);
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(
-        `${youtubeurl}?part=snippet&playlistId=PLKAaUs9rBhZD6kCfB1l152CUiqlNU-TVo&maxResults=50&key=${process.env.REACT_APP_YOUTUBE_KEY}`
+        `${youtubeurl}?part=snippet&playlistId=${listId}&maxResults=50&key=${process.env.REACT_APP_YOUTUBE_KEY}`
       );
       setVideos(result.data.items);
+      setData(result.data.items[0].snippet.thumbnails.default.url);
       console.log("here is the fetch");
     };
     fetch();
   }, []);
-  console.log(videos);
+  console.log(data);
+  useEffect(() => {
+    const fetch = async () => {
+      const result = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/teachers/${course.owner}`
+      );
+      setTeacher(result.data);
+    };
+    fetch();
+  }, [course]);
+  console.log(teacher);
   const drawVideos = () => {
-    return videos.map((video) => {
+    return videos?.map((video) => {
       return (
         <div>
           <div>
@@ -33,7 +52,10 @@ export default function TestYoutube() {
                 cursor: "pointer",
                 // border: "1px solid grey",
               }}
-              onClick={() => setVideoSRC(video.snippet.resourceId.videoId)}
+              onClick={() => {
+                setVideoSRC(video.snippet.resourceId.videoId);
+                console.log(video);
+              }}
             >
               <div> {video.snippet.title}</div>
               <div>
@@ -51,27 +73,41 @@ export default function TestYoutube() {
     });
   };
   return (
-    <div
-      style={{
-        marginTop: "150px",
-        display: "grid",
-        gridTemplateColumns: "1fr 3fr",
-      }}
-    >
-      <div>{drawVideos()}</div>
-      <div>
-        <div style={{ width: "90%", marginTop: "3px" }}>
-          <iframe
+    <>
+      <div style={{ width: "100%", height: "30vh" }}>course Img</div>
+      <div className="profile-teacher">
+        <div style={{ width: "150px", height: "150px" }}>
+          <img
+            src={course.avatar}
+            alt="profile"
             width="100%"
-            height="361"
-            src={`https://www.youtube.com/embed/${videoSRC}`}
-            title="Fadi a"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+            height="100%"
+            style={{ borderRadius: "50%" }}
+          />
         </div>
       </div>
-    </div>
+      <div
+        style={{
+          marginTop: "150px",
+          display: "grid",
+          gridTemplateColumns: "1fr 3fr",
+        }}
+      >
+        <div>{drawVideos()}</div>
+        <div>
+          <div style={{ width: "90%", marginTop: "3px" }}>
+            <iframe
+              width="100%"
+              height="361"
+              src={`https://www.youtube.com/embed/${videoSRC}`}
+              title="Fadi a"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

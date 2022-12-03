@@ -32,26 +32,34 @@ export default function TeachersPop({ setTeachersHover }) {
 
   // console.log(selectedTeacher);
 
+  const addToLocal = (teacher) => {
+    window.localStorage.setItem("teacherId", teacher._id);
+  };
+
   const drawData = () => {
     return teachers.map((teacher, i) => {
       return (
         <div key={i} onClick={() => setTeachersHover(false)}>
-          <div>
-            <img
-              src={teacher.avatar}
-              alt={teacher.firstName}
-              height="150px"
-              width="150px"
-              style={{
-                borderRadius: "50%",
-                width: "80px",
-                height: "80px",
-              }}
-            />
+          <Link to="/TeacherData" style={{ textDecoration: "none" }}>
             <div>
-              {teacher.firstName} {teacher.lastName}
+              <img
+                src={teacher.avatar}
+                alt={teacher.firstName}
+                height="150px"
+                width="150px"
+                style={{
+                  borderRadius: "50%",
+                  width: "80px",
+                  height: "80px",
+                }}
+                onClick={() => addToLocal(teacher)}
+                // onClick={console.log(teacher._id)}
+              />
+              <div style={{ color: "black" }}>
+                {teacher.firstName} {teacher.lastName}
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       );
     });

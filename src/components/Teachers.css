@@ -4,6 +4,7 @@
     grid-template-columns: repeat(5,1fr);
     gap: 1rem;
 }
+
 .teacherHeader{
     display: grid;
     grid-template-columns: repeat(5,1fr);

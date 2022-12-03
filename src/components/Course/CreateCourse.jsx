@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import "./createCourse.css";
+const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
 // import Courses from "../Courses";
 export default function CreateCourse() {
@@ -12,8 +13,12 @@ export default function CreateCourse() {
     instrument: "",
     firstName: "",
     lastName: "",
+    title: "",
     avatar: "",
+    description: "",
     level: "",
+    playlistId: "",
+    coursePhoto: "",
     // videos: [],
   });
   const [final, setFinal] = useState(course);
@@ -42,6 +47,22 @@ export default function CreateCourse() {
     });
     // history.push("/courses/");
   };
+
+  useEffect(() => {
+    const fetch = async () => {
+      const result = await axios.get(
+        `${youtubeurl}?part=snippet&playlistId=${course.playlistId}&maxResults=50&key=${process.env.REACT_APP_YOUTUBE_KEY}`
+      );
+      // setVideos(result.data.items);
+      setCourse({
+        ...course,
+        coursePhoto: result.data.items[0].snippet.thumbnails.high.url,
+      });
+      console.log("here is the fetch");
+      console.log(result);
+    };
+    fetch();
+  }, [course.playlistId]);
 
   // const createNow = () => {};
   useEffect(() => {
@@ -87,6 +108,15 @@ export default function CreateCourse() {
             style={{ textAlign: "center", width: "60%" }}
             // onChange={handleChange}
           />
+          <input
+            placeholder="عنوان الدورة"
+            name="title"
+            onChange={(e) => setCourse({ ...course, title: e.target.value })}
+            style={{ textAlign: "center", width: "60%", marginTop: "20px" }}
+            // onChange={handleChange}
+            // autoFocus
+            required
+          />
           <select
             style={{
               textAlign: "center",
@@ -115,13 +145,30 @@ export default function CreateCourse() {
             <option value="متوسط">متوسط</option>
             <option value="متقدم">متقدم</option>
           </select>
-          {/* <input
-          placeholder=" الآلة الموسيقية"
-          name="instrument"
-          // onChange={handleChange}
-          autoFocus
-          required
-        /> */}
+
+          <input
+            placeholder="playlistId - from youtubeLink"
+            name="playlistId"
+            onChange={(e) =>
+              setCourse({ ...course, playlistId: e.target.value })
+            }
+            style={{ textAlign: "center", width: "60%", marginTop: "20px" }}
+            // onChange={handleChange}
+            // autoFocus
+            required
+          />
+          <textarea
+            placeholder="وصف الدورة"
+            name="description"
+            onChange={(e) =>
+              setCourse({ ...course, description: e.target.value })
+            }
+            style={{ textAlign: "center", width: "60%", marginTop: "20px" }}
+            // onChange={handleChange}
+            // autoFocus
+            required
+          />
+
           {/*  <input
           placeholder="المستوى"
           name="level"
