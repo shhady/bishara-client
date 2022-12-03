@@ -1,0 +1,33 @@
+.TeachersHomePage{
+    height: 50vh;
+}
+.teacherAvatars{
+    width: 90%;
+    margin:auto;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap:2rem;
+    overflow-x: scroll;
+
+}
+@media (max-width: 768px){
+
+    .teacherAvatars{
+        width: 90%;
+        margin:auto;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap:2rem;
+        overflow-x: scroll;
+    }
+
+}
+
+
+.teachersCard{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+}
