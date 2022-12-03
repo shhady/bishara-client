@@ -34,9 +34,37 @@ export default function TeacherData({ listId, teacher }) {
       (course) => course.owner === teacherId
     );
     setFilteredCourses(filteredCourses);
-  }, [courses]);
+  }, [courses, teacherId]);
   console.log(courses);
 
+  if (!teacherInfo)
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          marginTop: "300px",
+        }}
+      >
+        <div className="loader"></div>
+      </div>
+    );
+  if (!filteredCourses)
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          //   marginTop: "100px",
+        }}
+      >
+        <div className="loader"></div>
+      </div>
+    );
   const drawCourses = () => {
     return filteredCourses?.map((course) => {
       return (
@@ -62,7 +90,10 @@ export default function TeacherData({ listId, teacher }) {
             <div>{course.instrument}</div>
             <div>{course.level}</div>
           </div>
-          <div>{course.description}....</div>
+          <div style={{ width: "80%", margin: "auto" }}>
+            {course.description}....
+          </div>
+          <hr />
         </div>
       );
     });

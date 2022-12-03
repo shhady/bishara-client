@@ -41,37 +41,45 @@ export default function TeachersPop({ setTeachersHover }) {
     );
 
   // console.log(selectedTeacher);
+  const moveToTeacher = (teacher) => {
+    window.localStorage.setItem("teacherId", teacher._id);
+  };
 
   const drawData = () => {
     return teachers.map((teacher, i) => {
       return (
-        <div
-          key={i}
-          onClick={() => setTeachersHover(false)}
-          className="teachersCard"
-        >
-          <img
-            src={teacher.avatar}
-            alt={teacher.firstName}
-            minHeight="150px"
-            minWidth="150px"
-            style={{
-              borderRadius: "50%",
-              width: "150px",
-              height: "150px",
-            }}
-          />
+        <Link to="/TeacherData" style={{ textDecoration: "none" }}>
           <div
-            style={{
-              textAlign: "center",
-              fontWeight: "700",
-              fontSize: "1em",
+            key={i}
+            onClick={() => {
+              moveToTeacher(teacher);
             }}
+            className="teachersCard"
           >
-            {" "}
-            {teacher.firstName} {teacher.lastName}
+            <img
+              src={teacher.avatar}
+              alt={teacher.firstName}
+              minHeight="150px"
+              minWidth="150px"
+              style={{
+                borderRadius: "50%",
+                width: "150px",
+                height: "150px",
+              }}
+            />
+            <div
+              style={{
+                textAlign: "center",
+                fontWeight: "700",
+                fontSize: "1em",
+                color: "black",
+              }}
+            >
+              {" "}
+              {teacher.firstName} {teacher.lastName}
+            </div>
           </div>
-        </div>
+        </Link>
       );
     });
   };
