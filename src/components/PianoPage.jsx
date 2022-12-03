@@ -45,7 +45,7 @@ export default function PianoPage({ user, setUser }) {
             />
           </video> */}
           <iframe
-            width="642"
+            width="100%"
             height="361"
             src="https://www.youtube.com/embed/9GejeXh-zKE"
             title="Fadi a"
