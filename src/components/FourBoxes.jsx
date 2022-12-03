@@ -25,9 +25,7 @@ export default function FourBoxes() {
           <div className="box3">Violin</div>
         </Link>
         <Link to="" style={{ textDecoration: "none" }}>
-          <div style={{ backgroundColor: "red" }} className="box4">
-            Guitar
-          </div>
+          <div className="box4">Guitar</div>
         </Link>
       </div>
     </>
