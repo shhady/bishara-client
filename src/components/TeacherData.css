@@ -6,6 +6,9 @@
     gap: 2rem;
     align-items: center;
 }
+.teacherDataAll{
+    margin-top: 90px;
+}
 .coursesDrawCss{
     margin-top:40px;
     display: grid;
@@ -19,7 +22,9 @@
         display: grid;
         grid-template-columns:repeat(1,1fr);
         gap: 1rem;
-
+    }
+    .teacherDataAll{
+        margin-top: 65px;
     }
 }
 @media (min-width: 500px)and (max-width: 768px) {

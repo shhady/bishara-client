@@ -99,7 +99,7 @@ export default function TeacherData({ listId, teacher }) {
     });
   };
   return (
-    <div style={{ marginTop: "90px" }}>
+    <div className="teacherDataAll">
       <div
         // style={{
         //   width: "100%",
