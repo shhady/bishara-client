@@ -80,7 +80,7 @@ button{
         display: none;
     }
 .menu-details-computer{
-    width:50%;
+    width:20%;
          display: flex;
         justify-content: space-around;
         align-items: center;
