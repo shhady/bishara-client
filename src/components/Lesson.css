@@ -1,0 +1,102 @@
+.courseDataAll{
+    margin-top:90px
+}
+
+.main {
+    display:block;
+    position:relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.cover {
+    display:block;
+    position:relative;
+    height:40vh;
+    overflow:hidden;
+    z-index:1;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    /* background-image: url("https://images.unsplash.com/photo-1546058256-47154de4046c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHBpYW5vfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+.hrMargin{
+    width: 80%;
+    margin:auto
+}
+
+
+.cover img {
+    max-width:100%;
+    z-index:1;
+}
+.profile {
+    display:block;
+    position:relative;
+    border-radius:5px;
+    width:70%;
+    height:200px;
+    margin:-30px auto;
+    /* margin:  0 10px 20px; */
+    z-index:2;
+    display: grid;
+    grid-template-columns:1fr 3fr;
+    gap:.5rem;
+}
+.profile img {
+    max-width:100%;
+    z-index:1;
+}
+
+.lessonsVideos{
+    width: 90vw;
+    display: grid;
+    grid-template-columns:repeat(4,1fr)
+}
+
+@media (max-width: 768px){
+    .courseDataAll{
+        margin-top:70px
+    }  
+    .cover {
+        height:20vh;
+    }
+    .profile{
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+    width:100%;
+    margin: auto;
+    height:130px;
+
+    }
+    .hrMargin{
+        margin-top: 100px;
+    }
+}
+
+@media (max-width: 768px) and (min-width:500px) {
+    .lessonsVideos{
+        display: grid;
+        grid-template-columns:repeat(2,1fr)
+    }
+    .hrMargin{
+        margin-top: 100px;
+    }
+}
+
+@media (max-width:500px) {
+    .lessonsVideos{
+        display: grid;
+        grid-template-columns:repeat(1,1fr)
+    }
+    .hrMargin{
+        margin-top: 100px;
+    }
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeacherData.css";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 export default function TeacherData({ listId, teacher }) {
   console.log(teacher);
   const [teacherId, setTeacherId] = useState(localStorage.getItem("teacherId"));
@@ -70,34 +70,41 @@ export default function TeacherData({ listId, teacher }) {
         <div className="loader"></div>
       </div>
     );
+
+  const saveCourseLocal = (course) => {
+    window.localStorage.setItem("courseDetails", JSON.stringify(course));
+  };
   const drawCourses = () => {
-    return filteredCourses?.map((course) => {
+    return filteredCourses?.map((course, i) => {
       return (
-        <div>
-          <div>
-            <img
-              src={course.coursePhoto}
-              alt="hi"
-              width="100%"
-              height="200px"
-            />
-          </div>
-          <div style={{ textAlign: "center" }}>
-            <h2>{course.title}</h2>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-            <div>{course.instrument}</div>
-            <div>{course.level}</div>
-          </div>
-          <div style={{ width: "80%", margin: "auto" }}>
-            {course.description}....
-          </div>
+        <div onClick={() => saveCourseLocal(course)} key={i}>
+          <Link to="/Lessons" style={{ textDecoration: "none" }}>
+            <div>
+              <img
+                src={course.coursePhoto}
+                alt="hi"
+                width="100%"
+                height="200px"
+              />
+            </div>
+            <div style={{ textAlign: "center", color: "black" }}>
+              <h2>{course.title}</h2>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                color: "black",
+              }}
+            >
+              <div>{course.instrument}</div>
+              <div>{course.level}</div>
+            </div>
+            <div style={{ width: "80%", margin: "auto", color: "black" }}>
+              {course.description}....
+            </div>
+          </Link>
           <hr />
         </div>
       );
@@ -105,17 +112,7 @@ export default function TeacherData({ listId, teacher }) {
   };
   return (
     <div className="teacherDataAll">
-      <div
-        // style={{
-        //   width: "100%",
-        //   height: "20vh",
-        //   display: "flex",
-        //   flexDirection: "column",
-        //   justifyContent: "center",
-        //   alignItems: "center",
-        // }}
-        className="cover"
-      >
+      <div className="cover">
         <img
           src={
             teacherInfo.cover
@@ -125,6 +122,7 @@ export default function TeacherData({ listId, teacher }) {
           width="100%"
           height="100%"
           objectFit="fit"
+          alt="cover"
         />
       </div>
       <div className="profile">

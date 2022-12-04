@@ -41,7 +41,7 @@ export default function TeachersPop({ setTeachersHover }) {
       return (
         <div key={i} onClick={() => setTeachersHover(false)}>
           <Link to="/TeacherData" style={{ textDecoration: "none" }}>
-            <div>
+            <div style={{ cursor: "pointer" }}>
               <img
                 src={teacher.avatar}
                 alt={teacher.firstName}
@@ -96,7 +96,7 @@ export default function TeachersPop({ setTeachersHover }) {
           <Link to="/teachers" style={{ textDecoration: "none" }}>
             <div
               onClick={() => setTeachersHover(false)}
-              style={{ color: "black" }}
+              style={{ color: "black", cursor: "pointer" }}
             >
               جميع المدرسين
             </div>

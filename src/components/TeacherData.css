@@ -10,6 +10,8 @@
     margin-top: 90px;
 }
 .coursesDrawCss{
+    width:90%;
+    margin: auto;
     margin-top:40px;
     display: grid;
     grid-template-columns:repeat(3,1fr);

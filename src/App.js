@@ -35,6 +35,7 @@ const OudPage = React.lazy(() => import("./components/OudPage"));
 const ViolinPage = React.lazy(() => import("./components/ViolinPage"));
 const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
 const TeacherData = React.lazy(() => import("./components/TeacherData"));
+const Lessons = React.lazy(() => import("./components/Lessons"));
 
 // const Oud = React.lazy(() => import("./components/Oud"));
 // const Piano = React.lazy(() => import("./components/PianoPage"));
@@ -93,6 +94,16 @@ export default function App() {
               setUser={setUser}
               listId={listId}
               course={course}
+            />
+          </Route>
+
+          <Route path="/Lessons" exact>
+            <Lessons
+              user={user}
+              setUser={setUser}
+              setTeacher={setTeacher}
+              teacher={teacher}
+              listId={listId}
             />
           </Route>
 
