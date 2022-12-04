@@ -36,7 +36,7 @@ export default function Lessons() {
     return lessons?.map((lesson, i) => {
       return (
         <div key={i}>
-          <Link to="/Lesson">
+          <Link to="/Lesson" style={{ textDecoration: "none" }}>
             <div onClick={() => handleLessonClick(lesson)}>
               <div
                 style={{
@@ -78,7 +78,7 @@ export default function Lessons() {
               allowfullscreen
             ></iframe> */}
               </div>
-              <div>{lesson.snippet.title}</div>
+              <div style={{ textAlign: "center" }}>{lesson.snippet.title}</div>
             </div>
           </Link>
         </div>
