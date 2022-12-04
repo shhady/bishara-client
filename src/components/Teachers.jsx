@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Teachers.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 export default function Teachers({ user, setUser, setTeacher }) {
   const [teachers, setTeachers] = useState(null);
@@ -69,6 +69,11 @@ export default function Teachers({ user, setUser, setTeacher }) {
   //   startChat();
   //   console.log(preventChat);
   // }, [checkChat]);
+
+  const history = useHistory();
+  window.onpopstate = () => {
+    history.push("/");
+  };
 
   useEffect(() => {
     const fetch = async () => {

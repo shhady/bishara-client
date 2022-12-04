@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeacherData.css";
-
+import { useHistory } from "react-router-dom";
 export default function TeacherData({ listId, teacher }) {
   console.log(teacher);
   const [teacherId, setTeacherId] = useState(localStorage.getItem("teacherId"));
   const [teacherInfo, setTeacherInfo] = useState("");
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
+
+  const history = useHistory();
+  window.onpopstate = () => {
+    history.push("/teachers");
+  };
   //   console.log(localStorage.getItem("teacherId"));
   useEffect(() => {
     const fetch = async () => {
