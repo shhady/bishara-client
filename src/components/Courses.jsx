@@ -87,12 +87,14 @@ export default function Courses({ listId, setListId, setCourse }) {
     // const res = await axios.get(process.env.REACT_APP_BACKEND_URL+`/courses/${post._id}`);
     // console.log(res);
     setCourseData(post._id);
-    history.push({ pathname: `/testYoutube/${post._id}`, id: post._id });
+    history.push(`/Lessons`);
     window.localStorage.setItem("courseId", post._id);
     window.localStorage.setItem("ownerId", post.owner);
     window.localStorage.setItem("playlistId", post.playlistId);
     setListId(post.playlistId);
     setCourse(post);
+    window.localStorage.setItem("courseDetails", JSON.stringify(post));
+
     // history.push("/course");
   };
 

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./Lesson.css";
+import "./Lessons.css";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
 export default function Lessons() {
@@ -26,9 +29,60 @@ export default function Lessons() {
   }, [listId]);
   console.log(lessons);
 
+  const handleLessonClick = (lesson) => {
+    window.localStorage.setItem("lessonDetails", JSON.stringify(lesson));
+  };
   const drawLessons = () => {
-    return lessons?.map((lesson) => {
-      return <div>{lesson.snippet.title}</div>;
+    return lessons?.map((lesson, i) => {
+      return (
+        <div key={i}>
+          <Link to="/Lesson">
+            <div onClick={() => handleLessonClick(lesson)}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "150px",
+                  backgroundImage: `url(${lesson.snippet.thumbnails.high.url})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                <div
+                  style={{
+                    color: "white",
+                    background: "rgba(0,0,0,0.2)",
+                    width: "fit-content",
+                    borderRadius: "50%",
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCirclePlay} size="3x" />
+                </div>
+                {/* <img
+              src={lesson.snippet.thumbnails.high.url}
+              alt="photo"
+              width="100%"
+              height="150px"
+            /> */}
+                {/* <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/9GejeXh-zKE"
+              title="Fadi a"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe> */}
+              </div>
+              <div>{lesson.snippet.title}</div>
+            </div>
+          </Link>
+        </div>
+      );
     });
   };
 
