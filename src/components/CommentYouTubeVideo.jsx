@@ -56,6 +56,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
   };
   const handleSubmitComment = async () => {
     console.log(comment);
+    if (!myComment) return;
     setMyComment("");
     await axios
       .post(process.env.REACT_APP_BACKEND_URL + `/comments`, comment)
@@ -69,6 +70,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
         fetch();
       });
   };
+  console.log(myComment);
 
   useEffect(() => {
     const filterComment = () => {
