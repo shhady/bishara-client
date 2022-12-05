@@ -360,9 +360,19 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                 {user ? (
                   <>
                     {user.teacher ? (
-                      <div onClick={handleLogoutTeacher}>خروج</div>
+                      <div
+                        onClick={handleLogoutTeacher}
+                        style={{ cursor: "pointer" }}
+                      >
+                        خروج
+                      </div>
                     ) : (
-                      <div onClick={handleLogoutStudent}>خروج</div>
+                      <div
+                        onClick={handleLogoutStudent}
+                        style={{ cursor: "pointer" }}
+                      >
+                        خروج
+                      </div>
                     )}
                   </>
                 ) : null}
@@ -584,14 +594,14 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                 <Link to="/auth" style={{ textDecoration: "none" }}>
                   <div
                     style={{
-                      display: "flex",
-                      height: "30px",
-                      padding: "3px",
+                      //   display: "flex",
+                      //   height: "30px",
+                      //   padding: "3px",
                       color: "black",
                     }}
-                    className="registerBox"
+                    // className="registerBox"
                   >
-                    <div
+                    {/* <div
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -601,7 +611,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                       }}
                     >
                       <FontAwesomeIcon icon={faArrowRightToBracket} />
-                    </div>
+                    </div> */}
                     <div
                       style={{
                         display: "flex",

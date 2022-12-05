@@ -56,7 +56,8 @@ export default function TeachersPop({ setTeachersHover }) {
                 // onClick={console.log(teacher._id)}
               />
               <div style={{ color: "black" }}>
-                {teacher.firstName} {teacher.lastName}
+                {teacher.firstName} <br />
+                {teacher.lastName}
               </div>
             </div>
           </Link>
@@ -76,7 +77,14 @@ export default function TeachersPop({ setTeachersHover }) {
       onClick={() => setTeachersHover(false)}
     >
       <div
-        style={{ backgroundColor: "white", width: "50%" }}
+        style={{
+          backgroundColor: "white",
+          width: "50%",
+          border: "0.5px solid #dcdcdc",
+          borderTop: "none",
+          boxShadow:
+            "rgb(0 0 0 / 6%) 0px 2px 4px, rgb(35 41 54 / 14%) 0px 6px 16px",
+        }}
         onMouseLeave={() => setTeachersHover(false)}
       >
         <div
