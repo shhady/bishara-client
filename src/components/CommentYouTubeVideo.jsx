@@ -179,7 +179,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
                   backgroundColor: "#f0f2f5",
                   width: "fit-content",
                   borderRadius: "15px",
-                  padding: "5px 10px 0px 50px",
+                  padding: "5px 10px 0px 30px",
                   marginRight: "10px",
                   marginTop: "5px",
                 }}
@@ -216,6 +216,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
+                    paddingLeft: "10px",
                   }}
                 >
                   {" "}
@@ -243,7 +244,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
                       backgroundColor: "#f0f2f5",
                       width: "fit-content",
                       borderRadius: "15px",
-                      padding: "5px 10px 0px 50px",
+                      padding: "5px 10px 0px 30px",
                       marginRight: "10px",
                       marginTop: "5px",
                     }}
