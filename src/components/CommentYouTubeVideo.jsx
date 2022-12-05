@@ -176,35 +176,34 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
   };
   console.log(videoComments);
   return (
-    <div className="commentsSection">
-      <div className="CommentInput">
-        {userAvatar ? (
-          <>
-            <img
-              src={userAvatar}
-              alt="pofile"
-              style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-            />
-          </>
-        ) : (
-          <FontAwesomeIcon icon={faUser} size="2x" />
-        )}
-        <input
-          type="text"
-          placeholder="أضف تعليق"
-          value={myComment}
-          style={{
-            border: "none",
-            width: "80%",
-            borderBottom: "1px solid black",
-          }}
-          onChange={(e) => handleChangeComment(e)}
-        />
-        <button onClick={handleSubmitComment}>تثبيت</button>
-      </div>
+    <div>
+      <div className="commentsSection">
+        <div className="CommentInput">
+          {userAvatar ? (
+            <>
+              <img src={userAvatar} alt="pofile" className="imgComment" />
+            </>
+          ) : (
+            <FontAwesomeIcon icon={faUser} />
+          )}
+          <input
+            type="text"
+            placeholder="أضف تعليق"
+            value={myComment}
+            style={{
+              border: "none",
+              width: "70%",
+              borderBottom: "1px solid black",
+              margin: "0 0 5px 5px",
+            }}
+            onChange={(e) => handleChangeComment(e)}
+          />
+          <button onClick={handleSubmitComment}>تثبيت</button>
+        </div>
 
-      <div>
-        <p style={{ fontSize: "24px", textAlign: "center" }}>التعليقات</p>
+        <div>
+          <p style={{ fontSize: "24px", textAlign: "center" }}>التعليقات</p>
+        </div>
       </div>
       <div className="showcomments">{showComments()}</div>
     </div>
