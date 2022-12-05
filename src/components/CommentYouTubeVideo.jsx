@@ -255,7 +255,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
                         color: "black",
                       }}
                     >
-                      {reply.firstName} {reply.lastName}
+                      {reply.firstName} {reply.lastName}:
                     </span>
                     <p> {reply.reply}</p>
                   </div>
