@@ -14,6 +14,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
   const [courseComments, setCourseComments] = useState([]);
   const [videoComments, setVideoComments] = useState([]);
   const [myReply, setMyReply] = useState("");
+  const [theReply, setTheReply] = useState("");
   console.log(courseInfo);
   useEffect(() => {
     user.user
@@ -39,6 +40,33 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
 
   const handleChangeReply = (e) => {
     setMyReply(e.target.value);
+    setTheReply({
+      courseId: courseInfo._id,
+      PlayListId: courseInfo.playlistId,
+      videoId: lesson.snippet.resourceId.videoId,
+      firstName: userF,
+      lastName: userL,
+      userId: userId,
+      userAvatar: userAvatar,
+    });
+  };
+
+  const handleSubmitReply = async (comment) => {
+    console.log(theReply);
+    await axios
+      .put(process.env.REACT_APP_BACKEND_URL + `/comments/${comment._id}`, {
+        ...theReply,
+        reply: myReply,
+      })
+      .then(() => {
+        const fetch = async () => {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/comments`
+          );
+          setCourseComments(res.data);
+        };
+        fetch();
+      });
   };
   const handleChangeComment = async (e) => {
     setMyComment(e.target.value);
@@ -122,29 +150,118 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
               style={{
                 display: "flex",
                 justifyContent: "flex-start",
-                alignItems: "center",
+                alignItems: "flex-start",
               }}
             >
               <div>
-                <img
-                  src={comment.userAvatar}
-                  alt="profile"
-                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-                />
+                {comment.userAvatar ? (
+                  <img
+                    src={comment.userAvatar}
+                    alt="profile"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      padding: "5px 13px",
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faUser} />
+                  </div>
+                )}
               </div>
-              <div style={{ fontWeight: "bold", marginRight: "10px" }}>
-                {comment.firstName} {comment.lastName}:
+              <div
+                style={{
+                  backgroundColor: "#f0f2f5",
+                  width: "fit-content",
+                  borderRadius: "15px",
+                  padding: "5px 10px 0px 50px",
+                  marginRight: "10px",
+                  marginTop: "5px",
+                }}
+              >
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
+                >
+                  {comment.firstName} {comment.lastName}:
+                </span>
+                <br />
+                <p>{comment.comment}</p>
               </div>
             </div>
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={() => handleDeleteComment(comment)}
-            >
-              حذف
-            </div>
+            {comment.userid === userId ? (
+              <div>
+                <p
+                  style={{ cursor: "pointer", color: "black" }}
+                  onClick={() => handleDeleteComment(comment)}
+                >
+                  حذف
+                </p>
+                <p>تعديل</p>
+              </div>
+            ) : null}
           </div>
-          <div style={{ width: "90%", margin: "auto" }}>{comment.comment}</div>
-          <div>replies</div>
+          <div style={{ marginRight: "30px" }}>
+            {comment.replies?.map((reply) => {
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  {" "}
+                  {reply.userAvatar ? (
+                    <img
+                      src={reply.userAvatar}
+                      alt="profile"
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        padding: "5px 8px",
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faUser} />
+                    </div>
+                  )}
+                  <div
+                    style={{
+                      backgroundColor: "#f0f2f5",
+                      width: "fit-content",
+                      borderRadius: "15px",
+                      padding: "5px 10px 0px 50px",
+                      marginRight: "10px",
+                      marginTop: "5px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        color: "black",
+                      }}
+                    >
+                      {reply.firstName} {reply.lastName}
+                    </span>
+                    <p> {reply.reply}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
           <div
             style={{
               display: "flex",
@@ -168,7 +285,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
               }}
               onChange={(e) => handleChangeReply(e)}
             />
-            <button>تثبيت</button>
+            <button onClick={() => handleSubmitReply(comment)}>تثبيت</button>
 
             {/* ) : null} */}
           </div>
