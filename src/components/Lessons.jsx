@@ -3,7 +3,7 @@ import "./Lessons.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
 export default function Lessons() {
@@ -12,6 +12,8 @@ export default function Lessons() {
   );
   const [listId, setListId] = useState("");
   const [lessons, setLessons] = useState([]);
+  const history = useHistory();
+
   console.log(courseInfo);
   useEffect(() => {
     setListId(courseInfo.playlistId);
@@ -30,45 +32,51 @@ export default function Lessons() {
   console.log(lessons);
 
   const handleLessonClick = (lesson) => {
+    console.log(lesson);
+    history.push({
+      pathname: `/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`,
+      id: lesson.snippet.playlistId,
+    });
     window.localStorage.setItem("lessonDetails", JSON.stringify(lesson));
   };
   const drawLessons = () => {
     return lessons?.map((lesson, i) => {
       return (
         <div key={i}>
-          <Link to="/Lesson" style={{ textDecoration: "none" }}>
-            <div onClick={() => handleLessonClick(lesson)}>
+          {/* <Link to="/Lesson" style={{ textDecoration: "none" }}> */}
+          <div onClick={() => handleLessonClick(lesson)}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "150px",
+                backgroundImage: `url(${lesson.snippet.thumbnails.high.url})`,
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                cursor: "pointer",
+              }}
+            >
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  height: "150px",
-                  backgroundImage: `url(${lesson.snippet.thumbnails.high.url})`,
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
+                  color: "white",
+                  background: "rgba(0,0,0,0.2)",
+                  width: "fit-content",
+                  borderRadius: "50%",
                 }}
               >
-                <div
-                  style={{
-                    color: "white",
-                    background: "rgba(0,0,0,0.2)",
-                    width: "fit-content",
-                    borderRadius: "50%",
-                  }}
-                >
-                  <FontAwesomeIcon icon={faCirclePlay} size="3x" />
-                </div>
-                {/* <img
+                <FontAwesomeIcon icon={faCirclePlay} size="3x" />
+              </div>
+              {/* <img
               src={lesson.snippet.thumbnails.high.url}
               alt="photo"
               width="100%"
               height="150px"
             /> */}
-                {/* <iframe
+              {/* <iframe
               width="100%"
               height="100%"
               src="https://www.youtube.com/embed/9GejeXh-zKE"
@@ -77,10 +85,10 @@ export default function Lessons() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe> */}
-              </div>
-              <div style={{ textAlign: "center" }}>{lesson.snippet.title}</div>
             </div>
-          </Link>
+            <div style={{ textAlign: "center" }}>{lesson.snippet.title}</div>
+          </div>
+          {/* </Link> */}
         </div>
       );
     });

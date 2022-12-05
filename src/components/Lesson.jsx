@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Lesson.css";
 import { useHistory } from "react-router-dom";
+import CommentYouTubeVideo from "./CommentYouTubeVideo";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
 export default function Lesson() {
@@ -39,38 +40,68 @@ export default function Lesson() {
 
   const handleLessonClick = (lessonSuggest) => {
     console.log(lessonSuggest);
-    setLesson(lessonSuggest).then(() => {
-      window.localStorage.setItem(
-        "lessonDetails",
-        JSON.stringify(lessonSuggest)
-      );
+    setLesson(lessonSuggest);
+    history.push({
+      pathname: `/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`,
+      id: lesson.snippet.playlistId,
     });
+    window.localStorage.setItem("lessonDetails", JSON.stringify(lessonSuggest));
   };
   const drawSuggestions = () => {
     return lessons?.map((lessonSuggest, i) => {
       return (
         <div key={i} onClick={() => handleLessonClick(lessonSuggest)}>
           <div>
-            <div className="VideoSuggested">
-              <div
-                style={{
-                  position: "absolute",
-                  zIndex: 10,
-                  backgroundColor: "white",
-                  width: "30px",
-                  textAlign: "center",
-                  borderBottomLeftRadius: "50%",
-                }}
-              >
-                {lessonSuggest.snippet.position + 1}
+            {lesson.snippet.resourceId.videoId ===
+            lessonSuggest.snippet.resourceId.videoId ? (
+              <div className="VideoSuggested">
+                <div
+                  style={{
+                    position: "absolute",
+                    zIndex: 10,
+                    color: "white",
+                    backgroundColor: "rgba(0,0,0,0.6)",
+                    width: "100%",
+                    height: "100%",
+                    textAlign: "center",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  ...Playing
+                </div>
+                <img
+                  src={lessonSuggest.snippet.thumbnails.high.url}
+                  alt="suggested"
+                  width="110px"
+                  height="110px"
+                />
               </div>
-              <img
-                src={lessonSuggest.snippet.thumbnails.high.url}
-                alt="suggested"
-                width="110px"
-                height="110px"
-              />
-            </div>
+            ) : (
+              <div className="VideoSuggested">
+                <div
+                  style={{
+                    position: "absolute",
+                    zIndex: 10,
+                    backgroundColor: "white",
+                    width: "30px",
+                    textAlign: "center",
+                    borderBottomLeftRadius: "50%",
+                  }}
+                >
+                  {lessonSuggest.snippet.position + 1}
+                </div>
+                <img
+                  src={lessonSuggest.snippet.thumbnails.high.url}
+                  alt="suggested"
+                  width="110px"
+                  height="110px"
+                />
+              </div>
+            )}
+
             {/* <div>{lessonSuggest.snippet.title}</div> */}
           </div>
         </div>
@@ -104,6 +135,9 @@ export default function Lesson() {
         ></iframe>
       </div>
       <div className="suggestions">{drawSuggestions()}</div>
+      <div style={{ marginTop: "50px" }}>
+        <CommentYouTubeVideo lesson={lesson} courseInfo={courseInfo} />
+      </div>
     </div>
   );
 }

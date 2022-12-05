@@ -107,7 +107,7 @@ export default function App() {
               listId={listId}
             />
           </Route>
-          <Route path="/Lesson" exact>
+          <Route path="/Lesson/:id/:id" exact>
             <Lesson
               user={user}
               setUser={setUser}

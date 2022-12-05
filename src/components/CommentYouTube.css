@@ -1,0 +1,19 @@
+.commentsSection{
+    margin-top:80px;
+    width: 90%;
+    margin: auto;
+}
+.CommentInput{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content:space-around;
+    align-items:center;
+}
+.showcomments{
+    width: 80%;
+    margin: auto;
+    box-shadow:rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px;
+    padding: 10px;
+    
+}
