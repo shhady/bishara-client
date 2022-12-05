@@ -1,7 +1,7 @@
 .teachersCards{
-    margin-top: 150px;
+    /* margin-top: 150px; */
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(6,1fr);
     gap: 1rem;
 }
 
@@ -35,10 +35,10 @@
     align-items: center;
     /* border: 1px solid black;
     border-radius: 5px; */
-    border-radius: 10px;
-    background: #fafafa;
-    box-shadow:  5px 5px 10px #cbcbcb,
-      -5px -5px 10px #ffffff;
+    /* border-radius: 10px; */
+    /* background: #fafafa; */
+    /* box-shadow:  5px 5px 10px #cbcbcb,
+      -5px -5px 10px #ffffff; */
     padding:3px;
     cursor: pointer;
 }
@@ -61,13 +61,21 @@
     margin-top: 200px;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) and (min-width: 500px){
+    .teachersCards{
+        display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 1rem;
+    }
+}
+@media (max-width: 500px) {
     .teachersCards{
         display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 1rem;
     }
 }
+
 /* 
 .spinner {
     margin-top: 20%;

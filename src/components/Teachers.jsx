@@ -130,7 +130,7 @@ export default function Teachers({ user, setUser, setTeacher }) {
                 alt={teacher.firstName}
                 height="150px"
                 width="150px"
-                style={{ borderRadius: "5px" }}
+                style={{ borderRadius: "50%" }}
               />
             </div>
             <div style={{ color: "black" }}>
@@ -152,5 +152,25 @@ export default function Teachers({ user, setUser, setTeacher }) {
     });
   };
 
-  return <div className="teachersCards">{drawData()}</div>;
+  return (
+    <div>
+      <div
+        style={{
+          width: "100%",
+          marginTop: "90px",
+          height: "30vh",
+          background: "#fafafa",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div>
+          <h1>المدرسين</h1>
+        </div>
+      </div>
+      <div className="teachersCards">{drawData()}</div>
+    </div>
+  );
 }
