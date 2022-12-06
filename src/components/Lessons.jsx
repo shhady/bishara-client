@@ -14,7 +14,6 @@ export default function Lessons() {
   const [lessons, setLessons] = useState([]);
   const history = useHistory();
 
-  console.log(courseInfo);
   useEffect(() => {
     setListId(courseInfo.playlistId);
   }, [courseInfo]);
@@ -25,14 +24,11 @@ export default function Lessons() {
       );
       setLessons(result.data.items);
       //   setData(result.data.items[0].snippet.thumbnails.default.url);
-      console.log("here is the fetch");
     };
     fetch();
   }, [listId]);
-  console.log(lessons);
 
   const handleLessonClick = (lesson) => {
-    console.log(lesson);
     history.push({
       pathname: `/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`,
       id: lesson.snippet.playlistId,
@@ -83,7 +79,7 @@ export default function Lessons() {
               title="Fadi a"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe> */}
             </div>
             <div style={{ textAlign: "center" }}>{lesson.snippet.title}</div>

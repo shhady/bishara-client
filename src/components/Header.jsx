@@ -55,7 +55,6 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
     };
     comments();
   }, [userId]);
-  console.log(backNot.filter((comment) => comment.read === false));
 
   const clickOnBill = () => {
     // setOpenNotifications(!openNotifications);
@@ -90,8 +89,6 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
     });
   }, [socket]);
 
-  console.log(notificationNotification);
-  console.log(notificationMessage);
   const handleLogoutTeacher = async () => {
     const response = await axios.post(
       process.env.REACT_APP_BACKEND_URL + `/teachers/logout`,
@@ -152,7 +149,6 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
     setNotificationMessage([]);
   };
   const handleClickOnNotification = (notification) => {
-    console.log(notification);
     const setAsRead = async () => {
       await axios
         .patch(
@@ -179,10 +175,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
     // setNotificationClicked(!notificationClicked);
     // setCourseIdNew(notification.courseid);
     // setOpenNotifications(!openNotifications);
-    console.log(notificationNumber.length);
   };
-
-  console.log(notificationNumber.length);
 
   const drawNotifications = () => {
     return backNot
@@ -218,7 +211,6 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
         );
       });
   };
-  console.log(backNot);
   const uniques = notificationMessage
     .map((obj) => {
       return obj.userName;
@@ -227,7 +219,6 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
       return arr.indexOf(item) === index;
     });
 
-  console.log(uniques);
   const drawNotificationsMessages = () => {
     return uniques.map((notification, i) => {
       return (
@@ -248,7 +239,6 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
 
   const handleMouseOver = () => {
     setIsHovering(!isHovering);
-    console.log("niceee");
   };
 
   return (

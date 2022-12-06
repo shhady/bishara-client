@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CommentYouTube.css";
+import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -20,8 +21,13 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
   const [videoComments, setVideoComments] = useState([]);
   const [myReply, setMyReply] = useState("");
   const [theReply, setTheReply] = useState("");
+  const [replyId, setReplyId] = useState("");
   const [openDelete, setOpenDelete] = useState(false);
-  console.log(courseInfo);
+  const [openReply, setOpenReply] = useState(false);
+  const [commentId, setCommentId] = useState("");
+  const [replyToDeleteId, setReplyToDeleteId] = useState("");
+  const unique_id = uuid();
+  console.log(videoComments);
   useEffect(() => {
     user.user
       ? setUserF(user.user.firstName)
@@ -54,11 +60,14 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
       lastName: userL,
       userId: userId,
       userAvatar: userAvatar,
+      replyId: unique_id,
     });
   };
 
+  console.log(myReply);
   const handleSubmitReply = async (comment) => {
-    console.log(theReply);
+    if (!myReply) return;
+
     await axios
       .put(process.env.REACT_APP_BACKEND_URL + `/comments/${comment._id}`, {
         ...theReply,
@@ -72,7 +81,11 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
           setCourseComments(res.data);
         };
         fetch();
+      })
+      .then(() => {
+        setMyReply("");
       });
+    // setMyReply("");
   };
   const handleChangeComment = async (e) => {
     setMyComment(e.target.value);
@@ -135,6 +148,31 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
     };
     deleteTheComment();
   };
+  console.log(replyId);
+  const handleDeleteReply = async (comment) => {
+    console.log(comment._id);
+
+    //   .then(console.log(replyToDelete))
+
+    await axios
+      .put(
+        process.env.REACT_APP_BACKEND_URL + `/comment/reply/${comment._id}`,
+        {
+          replyId,
+        }
+      )
+      .then(async () => {
+        const freshComments = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + `/comments`
+        );
+        console.log(freshComments.data);
+        const resultComments = freshComments?.data.filter(
+          (comment) => comment.videoName === lesson.snippet.resourceId.videoId
+        );
+        setVideoComments(resultComments);
+        console.log(resultComments);
+      });
+  };
 
   //   const deleteReply = async (reply) => {
   //     const res = await axios.put(
@@ -147,9 +185,10 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
   //   };
 
   const showComments = () => {
-    return videoComments?.map((comment) => {
+    return videoComments?.map((comment, i) => {
       return (
         <div
+          key={i}
           style={{
             boxShadow:
               "rgb(0 0 0 / 6%) 0px 1px 2px, rgb(35 41 54 / 14%) 0px 3px 8px",
@@ -199,6 +238,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
                   padding: "5px 10px 0px 30px",
                   marginRight: "10px",
                   marginTop: "5px",
+                  minWidth: "180px",
                 }}
               >
                 <span
@@ -244,9 +284,10 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
             ) : null}
           </div>
           <div style={{ marginRight: "30px" }}>
-            {comment.replies?.map((reply) => {
+            {comment.replies?.map((reply, i) => {
               return (
                 <div
+                  key={i}
                   style={{
                     display: "flex",
                     justifyContent: "flex-start",
@@ -277,7 +318,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
                   <div
                     style={{
                       backgroundColor: "#f0f2f5",
-                      minWidth: "200px",
+                      minWidth: "150px",
                       borderRadius: "15px",
                       padding: "5px 10px 0px 15px",
                       marginRight: "10px",
@@ -304,12 +345,23 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
                       {reply.userId === userId ? (
                         <div
                           style={{ cursor: "pointer", display: "flex" }}
-                          onClick={() => setOpenDelete(!openDelete)}
+                          onClick={() => {
+                            setOpenDelete(!openDelete);
+                            setReplyId(reply.replyId);
+                          }}
                         >
-                          <FontAwesomeIcon icon={faEllipsisVertical} />
-                          {openDelete && (
-                            <div style={{ marginRight: "10px" }}>
+                          {reply.replyId == replyToDeleteId ? (
+                            <div
+                              style={{ marginRight: "10px" }}
+                              onClick={() => handleDeleteReply(comment)}
+                            >
                               <FontAwesomeIcon icon={faTrashCan} />
+                            </div>
+                          ) : (
+                            <div
+                              onClick={() => setReplyToDeleteId(reply.replyId)}
+                            >
+                              <FontAwesomeIcon icon={faEllipsisVertical} />
                             </div>
                           )}
                         </div>
@@ -332,20 +384,38 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
           >
             {/* {} */}
             {/* {comment._id === videoComments._id ? ( */}
-
-            <input
-              type="text"
-              placeholder="أضف رد"
-              value={comment._id === videoComments._id ? myReply : null}
-              style={{
-                border: "none",
-                borderBottom: "1px solid grey",
-                width: "90%",
-              }}
-              onChange={(e) => handleChangeReply(e)}
-            />
+            {comment._id === commentId ? (
+              <>
+                <input
+                  type="text"
+                  placeholder="أضف رد"
+                  value={myReply}
+                  autoFocus
+                  style={{
+                    border: "none",
+                    borderBottom: "1px solid grey",
+                    width: "90%",
+                  }}
+                  onChange={(e) => handleChangeReply(e)}
+                />
+              </>
+            ) : (
+              <div
+                style={{
+                  borderBottom: "1px solid #5f697d",
+                  color: "#5f697d",
+                  width: "90%",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  setCommentId(comment._id);
+                  setMyReply("");
+                }}
+              >
+                أضف رد
+              </div>
+            )}
             <button onClick={() => handleSubmitReply(comment)}>تثبيت</button>
-
             {/* ) : null} */}
           </div>
         </div>

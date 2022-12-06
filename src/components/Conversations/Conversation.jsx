@@ -5,10 +5,8 @@ export default function Conversation({ conversation, currentUser }) {
   const [user, setUser] = useState(null);
 
   //   console.log(user);
-  console.log(conversation);
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser);
-    console.log(friendId);
 
     const getUser = async () => {
       try {

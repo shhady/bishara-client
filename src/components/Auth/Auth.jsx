@@ -57,7 +57,6 @@ export default function Auth({ user, setUser }) {
       );
       window.localStorage.setItem("profile", JSON.stringify(result.data));
       window.localStorage.setItem("token", result.data.token);
-      console.log(result.data.teacher);
       setTeacherData(result.data);
       setUser(result.data);
 
@@ -79,7 +78,6 @@ export default function Auth({ user, setUser }) {
       // console.log(result.data.teacher);
       // setTeacherData(result.data);
       setUser(result.data);
-      console.log(result.data);
       history.push("/profile");
     } catch (error) {
       setShowLoginFailMessage(true);

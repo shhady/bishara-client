@@ -51,7 +51,6 @@ export default function App() {
   const [listId, setListId] = useState("");
   const [course, setCourse] = useState(null);
   const [teacher, setTeacher] = useState(null);
-  console.log(teacher);
   useEffect(() => {
     if (!user) return;
     user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);

@@ -15,15 +15,11 @@ export default function Post() {
     fetch();
   }, []);
 
-  console.log(posts);
-
   if (!posts) return null;
 
   const results = posts.filter((obj) => {
     return obj.instrument === "oud";
   });
-
-  console.log(results);
 
   const showData = () => {
     return results.map((result) => {

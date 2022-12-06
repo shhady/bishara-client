@@ -51,7 +51,6 @@ export default function Comment({ course, courseId, chooseVideo }) {
     });
   }, [user]);
 
-  console.log(user);
   const postDetails = () => {
     const formData = new FormData();
     formData.append("file", video);
@@ -77,7 +76,6 @@ export default function Comment({ course, courseId, chooseVideo }) {
 
   useEffect(() => {
     const fetch = async () => {
-      console.log(practiceInfo);
       if (!url) return;
       await axios.post(process.env.REACT_APP_BACKEND_URL + "/practices/", {
         ...practiceInfo,
@@ -94,17 +92,14 @@ export default function Comment({ course, courseId, chooseVideo }) {
         "https://bisharaserver.herokuapp.com/"
       )
     );
-    console.log(socket);
   }, []);
   useEffect(() => {
     setCourseid(course._id);
   }, [course]);
-  console.log(course._id);
   useEffect(() => {
     setVideoId(localStorage.getItem("videoId"));
     setVideoName(localStorage.getItem("videoName"));
   }, [chooseVideo]);
-  console.log(videoName);
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(

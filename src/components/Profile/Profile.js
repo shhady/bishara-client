@@ -24,7 +24,6 @@ export default function Profile({ user, setUser }) {
     const userid = user.user ? user.user._id : user.teacher._id;
     setUserId(userid);
   }, [user]);
-  console.log(userId);
   const handleLogoutFromAllDevices = async () => {
     const response = await axios.post(
       process.env.REACT_APP_BACKEND_URL + `/teachers/logoutAll`,
@@ -62,7 +61,6 @@ export default function Profile({ user, setUser }) {
   // }, [user, userId]);
 
   const handleUpdateAvatar = () => {
-    console.log(avatar);
     const changePhoto = async () => {
       await axios.patch(
         process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,

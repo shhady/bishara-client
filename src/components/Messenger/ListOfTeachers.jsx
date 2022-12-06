@@ -5,7 +5,6 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
   const [teachers, setTeachers] = useState(null);
   const [conversations, setConversations] = useState([]);
   const [teacherId, setTeacherId] = useState(null);
-  console.log(currentId);
   useEffect(() => {
     const teachers = async () => {
       const res = await axios.get(
@@ -25,8 +24,7 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
     };
     conv();
   }, []);
-  console.log(conversations);
-  console.log(teachers);
+
   if (!teachers) return null;
 
   const handleClick = async (teacher) => {
@@ -46,7 +44,6 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
         setCurrentChat(res.data);
       };
       conv();
-      console.log("exists");
     } else {
       await axios
         .post(process.env.REACT_APP_BACKEND_URL + "/conversations", {
@@ -64,7 +61,6 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
           setCurrentChat(res.data);
         });
     }
-    console.log(conversations);
     // try {
     //   await axios
     //     .post(process.env.REACT_APP_BACKEND_URL + "/conversations", {

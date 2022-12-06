@@ -16,15 +16,11 @@ export default function Post() {
     fetch();
   }, []);
 
-  console.log(posts);
-
   if (!posts) return null;
 
   const results = posts.filter((obj) => {
     return obj.instrument === "piano";
   });
-
-  console.log(results);
 
   const goToCourse = (result) => {
     history.push({ pathname: "/course", id: result._id });

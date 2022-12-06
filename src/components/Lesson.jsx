@@ -33,13 +33,11 @@ export default function Lesson() {
       );
       setLessons(result.data.items);
       //   setData(result.data.items[0].snippet.thumbnails.default.url);
-      console.log("here is the fetch");
     };
     fetch();
   }, [listId]);
 
   const handleLessonClick = (lessonSuggest) => {
-    console.log(lessonSuggest);
     setLesson(lessonSuggest);
     history.push({
       pathname: `/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`,
@@ -129,9 +127,9 @@ export default function Lesson() {
           height="400"
           src={`https://www.youtube.com/embed/${lesson.snippet.resourceId.videoId}`}
           title="Fadi a"
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
       </div>
       <div className="suggestions">{drawSuggestions()}</div>

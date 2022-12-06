@@ -49,9 +49,9 @@ export default function PianoPage({ user, setUser }) {
             height="361"
             src="https://www.youtube.com/embed/9GejeXh-zKE"
             title="Fadi a"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </div>
       </div>

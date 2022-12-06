@@ -27,9 +27,6 @@ export default function CreateCourse() {
   const lastName = useRef(user.teacher.lastName);
   const avatar = useRef(user.teacher.avatar);
 
-  console.log(firstName);
-  console.log(course);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setPopUp(true);
@@ -58,8 +55,6 @@ export default function CreateCourse() {
         ...course,
         coursePhoto: result.data.items[0].snippet.thumbnails.high.url,
       });
-      console.log("here is the fetch");
-      console.log(result);
     };
     fetch();
   }, [course.playlistId]);

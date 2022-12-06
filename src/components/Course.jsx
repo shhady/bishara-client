@@ -81,7 +81,6 @@ export default function Course() {
   };
   useEffect(() => {
     const fetch = async () => {
-      console.log(url);
       setFileUpload(null);
       if (!url) return;
       setChooseVideo({ url: url });
@@ -102,7 +101,6 @@ export default function Course() {
             const res = await axios.get(
               process.env.REACT_APP_BACKEND_URL + `/courses/${courseId}`
             );
-            console.log(res.data);
             setCourse(res.data);
           };
           fetch();
@@ -110,7 +108,6 @@ export default function Course() {
     };
     fetch();
   }, [url]);
-  console.log(buttonNew);
 
   useEffect(() => {
     const res = async () => {
@@ -118,7 +115,6 @@ export default function Course() {
         process.env.REACT_APP_BACKEND_URL + `/courses/${courseId}`
       );
       setCourse(getData.data);
-      console.log(getData.data.videos[getData.data.videos.length - 1]);
     };
     res();
     // window.localStorage.setItem("videoId", post.owner);
@@ -135,7 +131,6 @@ export default function Course() {
     window.localStorage.setItem("videoId", chosenVideo._id);
     window.localStorage.setItem("videoName", episode.episode);
   };
-  // console.log(chooseVideo);
   const showButtons = () => {
     return course?.videos.map((episode, i) => {
       return (

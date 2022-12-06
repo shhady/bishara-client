@@ -22,7 +22,6 @@ export default function Messenger({ user, setUser, socket }) {
       ? setUserName(`${user.teacher.firstName} ${user.teacher.lastName}`)
       : setUserName(`${user.user.firstName} ${user.user.lastName}`);
   }, [user.teacher, user.user]);
-  console.log(conversations);
   useEffect(() => {
     // socket.current = io("ws://localhost:8900");
     socket?.on("getMessage", (data) => {
@@ -46,7 +45,6 @@ export default function Messenger({ user, setUser, socket }) {
       : setUserAvatar("./Logo.JPG");
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
   }, [user.teacher, user.user]);
-  console.log(userId);
   useEffect(() => {
     const getConversations = async () => {
       try {
@@ -92,7 +90,6 @@ export default function Messenger({ user, setUser, socket }) {
     };
 
     const receiverId = currentChat.members.find((m) => m !== userId);
-    console.log(receiverId);
     socket?.emit("sendMessage", {
       senderId: userId,
       userName: userName,
@@ -116,7 +113,6 @@ export default function Messenger({ user, setUser, socket }) {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-  console.log(conversations);
   return (
     <div className="messenger">
       <div className="chatMenu">

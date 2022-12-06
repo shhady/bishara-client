@@ -24,9 +24,7 @@ export default function CourseVideo({ chooseVideo, setChooseVideo, course }) {
   //   };
   //   fetch();
   // }, [course]);
-  console.log(course);
-  console.log(chooseVideo?._id);
-  console.log(videoId);
+
   const deleteVideo = async () => {
     const res = await axios.put(
       process.env.REACT_APP_BACKEND_URL + `/course/${courseId}`,
@@ -42,7 +40,6 @@ export default function CourseVideo({ chooseVideo, setChooseVideo, course }) {
     setCourseId(localStorage.getItem("courseId"));
   }, [chooseVideo]);
   const showVideos = () => {
-    console.log(chooseVideo);
     return (
       <>
         {chooseVideo ? (

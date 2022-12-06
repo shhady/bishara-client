@@ -11,7 +11,7 @@ export default function TestYoutube({ listId, course }) {
   const [videoSRC, setVideoSRC] = useState("9GejeXh-zKE");
   const [data, setData] = useState(null);
   useEffect(() => {
-    console.log(course);
+    // console.log(course);
   }, [videos]);
   // console.log(courseId);
   useEffect(() => {
@@ -21,11 +21,9 @@ export default function TestYoutube({ listId, course }) {
       );
       setVideos(result.data.items);
       setData(result.data.items[0].snippet.thumbnails.default.url);
-      console.log("here is the fetch");
     };
     fetch();
   }, []);
-  console.log(data);
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(
@@ -35,7 +33,6 @@ export default function TestYoutube({ listId, course }) {
     };
     fetch();
   }, [course]);
-  console.log(teacher);
   const drawVideos = () => {
     return videos?.map((video) => {
       return (
@@ -54,7 +51,6 @@ export default function TestYoutube({ listId, course }) {
               }}
               onClick={() => {
                 setVideoSRC(video.snippet.resourceId.videoId);
-                console.log(video);
               }}
             >
               <div> {video.snippet.title}</div>
@@ -101,9 +97,9 @@ export default function TestYoutube({ listId, course }) {
               height="361"
               src={`https://www.youtube.com/embed/${videoSRC}`}
               title="Fadi a"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
         </div>

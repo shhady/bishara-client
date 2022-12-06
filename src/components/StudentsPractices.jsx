@@ -86,8 +86,6 @@ export default function StudentsPractices({ user }) {
   //   setTeacherPractices(res);
   // }, [allPracrices]);
 
-  console.log(teacherPractices);
-
   const handleReply = (e) => {
     setReply(e.target.value);
   };
@@ -113,8 +111,6 @@ export default function StudentsPractices({ user }) {
           );
           setTeacherPractices(filter);
           setMyReply("");
-          console.log(teacherPractices);
-          console.log(nowDo);
         });
     };
     addReply();
@@ -135,8 +131,6 @@ export default function StudentsPractices({ user }) {
   //   };
   //   fetchNew();
   // }, [doneAddingComment]);
-  console.log(myReply);
-  console.log(showReply);
 
   useEffect(() => {}, [doneAddingComment, nowDo]);
 

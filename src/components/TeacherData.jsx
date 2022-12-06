@@ -3,7 +3,6 @@ import axios from "axios";
 import "./TeacherData.css";
 import { Link, useHistory } from "react-router-dom";
 export default function TeacherData({ listId, teacher }) {
-  console.log(teacher);
   const [teacherId, setTeacherId] = useState(localStorage.getItem("teacherId"));
   const [teacherInfo, setTeacherInfo] = useState("");
   const [courses, setCourses] = useState([]);
@@ -40,7 +39,6 @@ export default function TeacherData({ listId, teacher }) {
     );
     setFilteredCourses(filteredCourses);
   }, [courses, teacherId]);
-  console.log(courses);
 
   if (!teacherInfo)
     return (
