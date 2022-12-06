@@ -14,7 +14,9 @@ export default function Lesson() {
     JSON.parse(localStorage.getItem("courseDetails"))
   );
   const [listId, setListId] = useState("");
-
+  const [videoChosen, setVideoChosen] = useState(
+    localStorage.getItem("videoName")
+  );
   const history = useHistory();
   window.onpopstate = () => {
     history.push("/lessons");
@@ -44,6 +46,10 @@ export default function Lesson() {
       id: lesson.snippet.playlistId,
     });
     window.localStorage.setItem("lessonDetails", JSON.stringify(lessonSuggest));
+    window.localStorage.setItem(
+      "videoName",
+      lessonSuggest.snippet.resourceId.videoId
+    );
   };
   const drawSuggestions = () => {
     return lessons?.map((lessonSuggest, i) => {

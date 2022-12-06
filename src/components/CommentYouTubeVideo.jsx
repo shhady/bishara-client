@@ -101,6 +101,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
       videoTitle: lesson.snippet.title,
       playlistId: courseInfo.playlistId,
       read: false,
+      lesson: lesson,
     });
   };
   const handleSubmitComment = async () => {
