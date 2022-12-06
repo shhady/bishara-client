@@ -37,6 +37,7 @@ const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
 const TeacherData = React.lazy(() => import("./components/TeacherData"));
 const Lessons = React.lazy(() => import("./components/Lessons"));
 const Lesson = React.lazy(() => import("./components/Lesson"));
+const Notifications = React.lazy(() => import("./components/Notifications"));
 
 // const Oud = React.lazy(() => import("./components/Oud"));
 // const Piano = React.lazy(() => import("./components/PianoPage"));
@@ -106,6 +107,9 @@ export default function App() {
               teacher={teacher}
               listId={listId}
             />
+          </Route>
+          <Route path="/Notifications" exact>
+            <Notifications user={user} setUser={setUser} />
           </Route>
           <Route path="/Lesson/:id/:id" exact>
             <Lesson

@@ -27,7 +27,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
   // const [socket, setSocket] = useState(null);
   const [notificationMessage, setNotificationMessage] = useState([]);
   const [notificationNotification, setNotificationNotification] = useState([]);
-  const [openNotifications, setOpenNotifications] = useState(false);
+  // const [openNotifications, setOpenNotifications] = useState(false);
   const [openNotificationsMessage, setOpenNotificationsMessage] =
     useState(false);
   const [backNot, setBackNot] = useState([]);
@@ -58,9 +58,9 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
   console.log(backNot.filter((comment) => comment.read === false));
 
   const clickOnBill = () => {
-    setOpenNotifications(!openNotifications);
+    // setOpenNotifications(!openNotifications);
     // setNotificationNotification([]);
-    console.log("bill clicked");
+    // console.log("bill clicked");
   };
 
   useEffect(() => {
@@ -119,7 +119,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
     setUser(null);
     setNotificationNotification([]);
     setNotificationMessage([]);
-    setOpenNotifications(false);
+    // setOpenNotifications(false);
     setIsHovering(!isHovering);
   };
 
@@ -178,7 +178,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
     setAsRead();
     // setNotificationClicked(!notificationClicked);
     // setCourseIdNew(notification.courseid);
-    setOpenNotifications(!openNotifications);
+    // setOpenNotifications(!openNotifications);
     console.log(notificationNumber.length);
   };
 
@@ -499,24 +499,29 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                 }}
               >
                 {user ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      paddingLeft: "20px",
-                      // border: "1px solid transparent",
-                      cursor: "pointer",
-                      position: "relative",
-                    }}
-                    onClick={clickOnBill}
-                  >
-                    <FontAwesomeIcon icon={faBell} />
-                    {notificationNumber.length > 0 ? (
-                      <div className="notificationNotification">
-                        {notificationNumber.length}
+                  <>
+                    <Link to="/Notifications">
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          paddingLeft: "20px",
+                          // border: "1px solid transparent",
+                          cursor: "pointer",
+                          position: "relative",
+                        }}
+                        // onClick={clickOnBill}
+                      >
+                        <FontAwesomeIcon icon={faBell} />
+                        {notificationNumber.length > 0 ? (
+                          <div
+                            className="notificationNotification"
+                            // style={{ position: "absolute" }}
+                          ></div>
+                        ) : null}
                       </div>
-                    ) : null}
-                  </div>
+                    </Link>
+                  </>
                 ) : null}
                 {user ? (
                   <div
@@ -652,9 +657,9 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
             </div>
           ) : null}
 
-          {openNotifications ? (
+          {/* {openNotifications ? (
             <div className="notification-container">{drawNotifications()}</div>
-          ) : null}
+          ) : null} */}
           {openMenu && (
             <div className="menu-details">
               <div

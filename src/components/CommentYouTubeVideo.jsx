@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CommentYouTube.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faTrashCan,
+  faPenToSquare,
+  faEllipsisVertical,
+} from "@fortawesome/free-solid-svg-icons";
 export default function CommentYouTubeVideo({ lesson, courseInfo }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [userF, setUserF] = useState("");
@@ -15,6 +20,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
   const [videoComments, setVideoComments] = useState([]);
   const [myReply, setMyReply] = useState("");
   const [theReply, setTheReply] = useState("");
+  const [openDelete, setOpenDelete] = useState(false);
   console.log(courseInfo);
   useEffect(() => {
     user.user
@@ -129,6 +135,17 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
     };
     deleteTheComment();
   };
+
+  //   const deleteReply = async (reply) => {
+  //     const res = await axios.put(
+  //       process.env.REACT_APP_BACKEND_URL + `/course/${comment._id}`,
+  //       {
+  //         reply.reply,
+  //       }
+  //     );
+  //     setChooseVideo(null);
+  //   };
+
   const showComments = () => {
     return videoComments?.map((comment) => {
       return (
@@ -197,14 +214,32 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
               </div>
             </div>
             {comment.userid === userId ? (
-              <div>
-                <p
-                  style={{ cursor: "pointer", color: "black" }}
-                  onClick={() => handleDeleteComment(comment)}
+              <div
+                style={{
+                  height: "70px",
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "flex-start",
+                }}
+              >
+                <div
+                  style={{
+                    cursor: "pointer",
+                    color: "black",
+                    width: "50px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
                 >
-                  حذف
-                </p>
-                <p>تعديل</p>
+                  <div>{/* <FontAwesomeIcon icon={faPenToSquare} /> */}</div>
+                  <div
+                    onClick={() => handleDeleteComment(comment)}
+                    style={{ color: "#5f697d" }}
+                  >
+                    <FontAwesomeIcon icon={faTrashCan} />
+                  </div>
+                </div>
               </div>
             ) : null}
           </div>
@@ -242,21 +277,44 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
                   <div
                     style={{
                       backgroundColor: "#f0f2f5",
-                      width: "fit-content",
+                      minWidth: "200px",
                       borderRadius: "15px",
-                      padding: "5px 10px 0px 30px",
+                      padding: "5px 10px 0px 15px",
                       marginRight: "10px",
                       marginTop: "5px",
                     }}
                   >
-                    <span
+                    <div
                       style={{
-                        fontWeight: "bold",
-                        color: "black",
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        marginTop: "3px",
                       }}
                     >
-                      {reply.firstName} {reply.lastName}:
-                    </span>
+                      <div
+                        style={{
+                          fontWeight: "bold",
+                          color: "black",
+                        }}
+                      >
+                        {reply.firstName} {reply.lastName}:
+                      </div>
+                      {reply.userId === userId ? (
+                        <div
+                          style={{ cursor: "pointer", display: "flex" }}
+                          onClick={() => setOpenDelete(!openDelete)}
+                        >
+                          <FontAwesomeIcon icon={faEllipsisVertical} />
+                          {openDelete && (
+                            <div style={{ marginRight: "10px" }}>
+                              <FontAwesomeIcon icon={faTrashCan} />
+                            </div>
+                          )}
+                        </div>
+                      ) : null}
+                    </div>
                     <p> {reply.reply}</p>
                   </div>
                 </div>
