@@ -83,12 +83,17 @@ export default function Notifications() {
     return userComments?.map((comment, i) => {
       return (
         <div
-          //   style={{ padding: "20px" }}
+          style={{ cursor: "pointer" }}
           key={i}
           onClick={() => handleClickOnNotification(comment)}
         >
           {comment.read === false ? (
-            <div style={{ padding: "20px", backgroundColor: "#e7f3ff" }}>
+            <div
+              style={{
+                padding: "20px",
+                backgroundColor: "#e7f3ff",
+              }}
+            >
               {" "}
               <div style={{ fontSize: "20px" }}>
                 {comment.firstName} {comment.lastName} {"  "}
@@ -102,8 +107,8 @@ export default function Notifications() {
               </div>
             </div>
           ) : (
-            <>
-              <div style={{ fontSize: "20px" }}>
+            <div style={{ fontSize: "20px", padding: "20px" }}>
+              <div>
                 {comment.firstName} {comment.lastName} {"  "}
                 علق على الدرس
                 {"  "} {comment.videoTitle}
@@ -113,7 +118,7 @@ export default function Notifications() {
                 {"   "}
                 {comment.createdAt.slice(11, 16)}
               </div>
-            </>
+            </div>
           )}
         </div>
       );
