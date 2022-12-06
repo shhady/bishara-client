@@ -98,6 +98,8 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
       courseOwnerId: courseInfo.owner,
       comment: e.target.value,
       videoName: lesson.snippet.resourceId.videoId,
+      videoTitle: lesson.snippet.title,
+      playlistId: courseInfo.playlistId,
       read: false,
     });
   };
@@ -172,17 +174,16 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
         setVideoComments(resultComments);
         console.log(resultComments);
       });
+    //     const newReplies = videoComments?.filter(
+    //       (reply) => reply._id === comment._id
+    //     );
+    //     console.log(newReplies[0].replies);
+    //     const afterDelete = newReplies[0].replies.filter(
+    //       (stayed) => stayed.replyId !== replyId
+    //     );
+    //     setOpenReply({ ...newReplies, replies: afterDelete });
+    //   });
   };
-
-  //   const deleteReply = async (reply) => {
-  //     const res = await axios.put(
-  //       process.env.REACT_APP_BACKEND_URL + `/course/${comment._id}`,
-  //       {
-  //         reply.reply,
-  //       }
-  //     );
-  //     setChooseVideo(null);
-  //   };
 
   const showComments = () => {
     return videoComments?.map((comment, i) => {

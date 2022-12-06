@@ -41,9 +41,57 @@ export default function Notifications() {
   }, [comments]);
 
   const drawComment = () => {
-    return userComments?.map((comment) => {
-      return <div>{comment.firstName}</div>;
+    return userComments?.map((comment, i) => {
+      return (
+        <div style={{ padding: "20px", backgroundColor: "#e7f3ff" }} key={i}>
+          {comment.read === false ? (
+            <>
+              {" "}
+              <div style={{ fontSize: "20px" }}>
+                {comment.firstName} {comment.lastName} {"  "}
+                علق على الدرس
+                {"  "} {comment.videoTitle}
+              </div>
+              <div>
+                {comment.createdAt.slice(0, 10)}
+                {"   "}
+                {comment.createdAt.slice(11, 16)}
+              </div>
+            </>
+          ) : (
+            <>
+              <div style={{ fontSize: "20px" }}>
+                {comment.firstName} {comment.lastName} {"  "}
+                علق على الدرس
+                {"  "} {comment.videoTitle}
+              </div>
+              <div>
+                {comment.createdAt.slice(0, 10)}
+                {"   "}
+                {comment.createdAt.slice(11, 16)}
+              </div>
+            </>
+          )}
+        </div>
+      );
     });
   };
-  return <div style={{ marginTop: "200px" }}>{drawComment()}</div>;
+  return (
+    <div style={{ marginTop: "100px" }}>
+      <div style={{ marginTop: "30px", textAlign: "center" }}>
+        <h2>الاشعارات</h2>
+      </div>
+      <div
+        style={{
+          width: "90%",
+          margin: "auto",
+          padding: "20px",
+          boxShadow:
+            "rgb(0 0 0 / 6%) 0px 1px 2px, rgb(35 41 54 / 14%) 0px 3px 8px",
+        }}
+      >
+        {drawComment()}
+      </div>
+    </div>
+  );
 }
