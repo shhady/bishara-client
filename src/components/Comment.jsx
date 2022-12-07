@@ -384,7 +384,7 @@ export default function Comment({ userId, userF, userL, courseInfo, lesson }) {
             <button onClick={postDetails}>ارفع التمرين</button>
             <div style={{ minWidth: "70px" }}>
               {fileUpload && (
-                <span style={{ textAlign: "center" }}>
+                <span style={{ textAlign: "center", color: "black" }}>
                   {" "}
                   تم رفع {fileUpload.percentComplete}%
                 </span>
