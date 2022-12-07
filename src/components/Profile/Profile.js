@@ -189,7 +189,7 @@ export default function Profile({ user, setUser }) {
               <div>
                 {" "}
                 الدورة:
-                {practice.courseName}, {practice.courseLevel}
+                {practice.courseName}
               </div>
               <div>
                 الدرس:

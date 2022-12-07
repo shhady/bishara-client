@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CommentYouTube.css";
+import Comment from "./Comment";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -104,6 +105,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
       lesson: lesson,
     });
   };
+  console.log(courseInfo);
   const handleSubmitComment = async () => {
     console.log(comment);
     if (!myComment) return;
@@ -378,7 +380,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
                             setReplyId(reply.replyId);
                           }}
                         >
-                          {reply.replyId == replyToDeleteId ? (
+                          {reply.replyId === replyToDeleteId ? (
                             <div
                               style={{ marginRight: "10px" }}
                               onClick={() => handleDeleteReply(comment)}
@@ -450,10 +452,17 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
       );
     });
   };
-  console.log(videoComments);
+  console.log(lesson);
   return (
     <div>
       <div className="commentsSection">
+        <Comment
+          userId={userId}
+          userF={userF}
+          userL={userL}
+          courseInfo={courseInfo}
+          lesson={lesson}
+        />
         <div className="CommentInput">
           {userAvatar ? (
             <>

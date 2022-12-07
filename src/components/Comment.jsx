@@ -5,25 +5,41 @@ import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
 
-export default function Comment({ course, courseId, chooseVideo }) {
+export default function Comment({ userId, userF, userL, courseInfo, lesson }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const [ownerId, setOwnerId] = useState(localStorage.getItem("ownerId"));
-  const [courseid, setCourseid] = useState(courseId);
-  const [videoId, setVideoId] = useState(localStorage.getItem("videoId"));
-  const [videoName, setVideoName] = useState(localStorage.getItem("videoName"));
+  // const [ownerId, setOwnerId] = useState(localStorage.getItem("ownerId"));
+  // const [comments, setComments] = useState(null);
+  // const [submited, setSubmited] = useState("");
+  // const [addComment, setAddComment] = useState({});
+  // const [courseComments, setCourseComments] = useState(null);
+  // const [courseid, setCourseid] = useState(courseId);
+  // const [myReply, setMyReply] = useState("");
+  // const [addReply, setAddReply] = useState({});
+  // const [clicked, setClicked] = useState("");
+  // const [replyingDone, setReplyingDone] = useState("");
+  // const [commentDone, setCommentDone] = useState("");
+  // const [videoId, setVideoId] = useState(localStorage.getItem("videoId"));
+  // const [videoName, setVideoName] = useState(localStorage.getItem("videoName"));
+  // const [doneAddingComment, setDoneAddingComment] = useState(false);
   const [socket, setSocket] = useState(null);
   const [url, setUrl] = useState(null);
   const [video, setVideo] = useState();
   const [fileUpload, setFileUpload] = useState(null);
   const [practiceInfo, setPracticeInfo] = useState({
-    teacherId: course.owner,
-    teacherFirstName: course.firstName,
-    teacherLastName: course.lastName,
-    courseId: course._id,
-    courseName: course.instrument,
-    courseLevel: course.level,
-    video: chooseVideo.episode,
+    // ownerId: user.user._id,
+    // studentFirstName: user.user.firstName,
+    // studentLastName: user.user.lastName,
+    // teacherId: course.owner,
+    // teacherFirstName: course.firstName,
+    // teacherLastName: course.lastName,
+    // courseId: course._id,
+    // courseName: course.instrument,
+    // courseLevel: course.level,
+    // video: chooseVideo.episode,
   });
+  console.log(userF);
+  console.log(lesson);
+  console.log(courseInfo);
 
   useEffect(() => {
     if (!user) return;
@@ -35,6 +51,13 @@ export default function Comment({ course, courseId, chooseVideo }) {
       studentFirstName: userF,
       studentLastName: userL,
       ownerId: userid,
+      teacherId: courseInfo.owner,
+      teacherFirstName: courseInfo.firstName,
+      teacherLastName: courseInfo.lastName,
+      courseId: courseInfo.playlistId,
+      courseName: courseInfo.title,
+      courseLevel: courseInfo.level,
+      video: lesson.snippet.title,
     });
   }, [user]);
 
@@ -52,6 +75,10 @@ export default function Comment({ course, courseId, chooseVideo }) {
         },
       })
       .then((res) => setUrl(res.data.url))
+      // .then((data) => {
+      //   (data.url);
+      // })
+      // .then(console.log(url))
       .catch((err) => {
         console.log(err);
       });
@@ -68,6 +95,8 @@ export default function Comment({ course, courseId, chooseVideo }) {
     fetch();
   }, [url]);
 
+  console.log(url);
+  console.log(practiceInfo);
   useEffect(() => {
     setSocket(
       io(
@@ -76,13 +105,13 @@ export default function Comment({ course, courseId, chooseVideo }) {
       )
     );
   }, []);
-  useEffect(() => {
-    setCourseid(course._id);
-  }, [course]);
-  useEffect(() => {
-    setVideoId(localStorage.getItem("videoId"));
-    setVideoName(localStorage.getItem("videoName"));
-  }, [chooseVideo]);
+  // useEffect(() => {
+  //   setCourseid(course._id);
+  // }, [course]);
+  // useEffect(() => {
+  //   setVideoId(localStorage.getItem("videoId"));
+  //   setVideoName(localStorage.getItem("videoName"));
+  // }, [chooseVideo]);
   // useEffect(() => {
   //   const fetch = async () => {
   //     const res = await axios.get(
@@ -93,6 +122,7 @@ export default function Comment({ course, courseId, chooseVideo }) {
   //   fetch();
   // }, []);
   // console.log(course);
+  // console.log(user.teacher._id);
   // useEffect(() => {
   //   const resultComments = comments?.filter(
   //     (comment) => comment.courseId === videoId
