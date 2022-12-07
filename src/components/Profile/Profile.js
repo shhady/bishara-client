@@ -6,7 +6,7 @@ import FileBase from "react-file-base64";
 import "./profile.css";
 import { Input, Button } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 export default function Profile() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -22,10 +22,10 @@ export default function Profile() {
   const [url, setUrl] = useState(null);
   const [image, setImage] = useState();
   const [fileUpload, setFileUpload] = useState(null);
-  const [profilePic, setProfilePic] = useState(
-    localStorage.getItem("profilePic")
-  );
-  console.log(profilePic);
+  //prettier-ignore
+  const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePic"));
+  console.log(profilePicture);
+  console.log(localStorage.getItem("profilePic"));
   const postDetails = () => {
     const formData = new FormData();
     formData.append("file", image);
@@ -43,17 +43,17 @@ export default function Profile() {
       // .then((data) => {
       //   (data.url);
       // })
-      // .then(console.log(url))
+      // .then(console.log(profilePic))
       .catch((err) => {
         console.log(err);
       });
   };
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
-    const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
+    // const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
     setUserId(userid);
     // console.log(userAvatar);
-    setProfilePic(userAvatar);
+    // setProfilePicture(userAvatar);
   }, [user]);
   const handleLogoutFromAllDevices = async () => {
     const response = await axios.post(
@@ -92,6 +92,7 @@ export default function Profile() {
   // }, [user, userId]);
 
   useEffect(() => {
+    if (!url) return;
     const changePhoto = async () => {
       await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
@@ -99,10 +100,12 @@ export default function Profile() {
         })
         .then(() => {
           window.localStorage.setItem("profilePic", url);
-          setProfilePic(url);
+          setProfilePicture(url);
         });
     };
     changePhoto();
+    console.log(url);
+
     setShowButtonAvatarUpdate(false);
   }, [url]);
   const handleUserLogoutFromAllDevices = async () => {
@@ -284,13 +287,31 @@ export default function Profile() {
               }}
             >
               {" "}
-              <img
-                src={profilePic}
-                alt={user.teacher.firstName}
-                width="150"
-                height="150"
-                style={{ borderRadius: "50%" }}
-              />
+              {profilePicture ? (
+                <img
+                  src={profilePicture}
+                  alt={user.teacher.firstName + "me"}
+                  width="150"
+                  height="150"
+                  style={{ borderRadius: "50%" }}
+                />
+              ) : (
+                <div
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    borderRadius: "50%",
+                    backgroundColor: "black",
+                    color: "white",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  أضف صورة شخصيه
+                </div>
+              )}
               <div
                 style={{
                   display: "flex",
@@ -298,14 +319,7 @@ export default function Profile() {
                   justifyContent: "space-around",
                 }}
               >
-                {fileUpload ? (
-                  <span style={{ textAlign: "center", color: "black" }}>
-                    {" "}
-                    {fileUpload.percentComplete === 100 ? (
-                      <FontAwesomeIcon icon={faCheck} />
-                    ) : null}
-                  </span>
-                ) : (
+                {!showButtonAvatarUpdate ? (
                   <input
                     type="file"
                     onChange={(e) => {
@@ -314,7 +328,7 @@ export default function Profile() {
                     }}
                     // onClick={() => setUrl(null)}
                   />
-                )}
+                ) : null}
                 {showButtonAvatarUpdate ? (
                   <button onClick={postDetails}>تثبيت</button>
                 ) : null}
