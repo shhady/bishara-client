@@ -58,6 +58,7 @@ export default function Auth({ user, setUser }) {
       window.localStorage.setItem("profile", JSON.stringify(result.data));
       window.localStorage.setItem("token", result.data.token);
       window.localStorage.setItem("profilePic", result.data.teacher.avatar);
+      window.localStorage.setItem("coverPic", result.data.teacher.cover);
 
       setTeacherData(result.data);
       console.log(result.data.teacher);

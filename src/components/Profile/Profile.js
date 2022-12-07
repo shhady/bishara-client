@@ -24,6 +24,10 @@ export default function Profile() {
   const [fileUpload, setFileUpload] = useState(null);
   //prettier-ignore
   const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePic"));
+  const [urlCover, setUrlCover] = useState(null);
+  //prettier-ignore
+  const [coverPicture, setCoverPicture] = useState(localStorage.getItem("coverPic"));
+
   console.log(profilePicture);
   console.log(localStorage.getItem("profilePic"));
   const postDetails = () => {
@@ -48,6 +52,47 @@ export default function Profile() {
         console.log(err);
       });
   };
+
+  const postDetailsCover = () => {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "bisharaHaroni");
+    // formData.append("cloud_name", "shhady");
+    axios
+      .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
+        onUploadProgress: (p) => {
+          const percentComplete = Math.round((p.loaded * 100) / p.total);
+          setFileUpload({ fileName: image.name, percentComplete });
+          console.log(`${percentComplete}% uploaded`);
+        },
+      })
+      .then((res) => setUrlCover(res.data.url))
+      // .then((data) => {
+      //   (data.url);
+      // })
+      // .then(console.log(profilePic))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    if (!urlCover) return;
+    const changePhoto = async () => {
+      await axios
+        .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
+          cover: urlCover,
+        })
+        .then(() => {
+          window.localStorage.setItem("coverPic", urlCover);
+          setCoverPicture(urlCover);
+        });
+    };
+    changePhoto();
+    console.log(url);
+
+    setShowButtonAvatarUpdate(false);
+  }, [urlCover]);
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
     // const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
@@ -283,18 +328,49 @@ export default function Profile() {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                marginTop: "200px",
+                marginTop: "90px",
               }}
             >
-              {" "}
+              <div
+                style={{
+                  backgroundImage: `url(${coverPicture})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  height: "200px",
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  alignItems: "flex-start",
+                  position: "relative",
+                }}
+              >
+                صورة غلاف
+                {!showButtonAvatarUpdate ? (
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      setImage(e.target.files[0]);
+                      setShowButtonAvatarUpdate(true);
+                    }}
+                    // onClick={() => setUrl(null)}
+                  />
+                ) : null}
+                {showButtonAvatarUpdate ? (
+                  <button onClick={postDetailsCover}>تثبيت</button>
+                ) : null}
+              </div>{" "}
               {profilePicture ? (
-                <img
-                  src={profilePicture}
-                  alt={user.teacher.firstName + "me"}
-                  width="150"
-                  height="150"
-                  style={{ borderRadius: "50%" }}
-                />
+                <div style={{ zIndex: "10", marginTop: "-80px" }}>
+                  <img
+                    src={profilePicture}
+                    alt={user.teacher.firstName + "me"}
+                    width="150"
+                    height="150"
+                    style={{ borderRadius: "50%" }}
+                  />
+                </div>
               ) : (
                 <div
                   style={{
@@ -355,7 +431,6 @@ export default function Profile() {
                 {"  "}
                 {user.teacher.lastName}
               </h2>
-              {user.teacher.instrument}
               <div className="profileButtons">
                 <button style={{ height: "40px" }} onClick={studentsPractices}>
                   تمارين الطلاب

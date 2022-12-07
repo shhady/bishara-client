@@ -521,12 +521,16 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
               >
                 {user ? (
                   <>
-                    <Link to="/Notifications">
+                    <Link
+                      to="/Notifications"
+                      style={{ textDecoration: "none" }}
+                    >
                       <div
                         style={{
                           display: "flex",
                           justifyContent: "flex-end",
                           paddingLeft: "20px",
+                          color: "black",
                           // border: "1px solid transparent",
                           cursor: "pointer",
                           position: "relative",
