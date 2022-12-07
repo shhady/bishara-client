@@ -186,6 +186,31 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
     //   });
   };
 
+  const handleClickOnNotification = (comment) => {
+    const setAsRead = async () => {
+      if (userId === comment.courseOwnerId) {
+        await axios
+          .patch(
+            process.env.REACT_APP_BACKEND_URL + `/comments/${comment._id}`,
+            {
+              read: true,
+            }
+          )
+          .then(
+            window.localStorage.setItem(
+              "lessonDetails",
+              JSON.stringify(comment.lesson)
+            )
+          );
+      } else {
+        console.log("not owner");
+      }
+
+      // .then(window.location.reload());
+    };
+    setAsRead();
+  };
+
   const showComments = () => {
     return videoComments?.map((comment, i) => {
       return (
@@ -195,6 +220,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
             boxShadow:
               "rgb(0 0 0 / 6%) 0px 1px 2px, rgb(35 41 54 / 14%) 0px 3px 8px",
           }}
+          onClick={() => handleClickOnNotification(comment)}
         >
           <div
             style={{

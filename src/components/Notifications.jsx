@@ -57,8 +57,6 @@ export default function Notifications() {
         //     result.data.filter((comment) => comment.courseOwnerId === userId)
         //   );
         // })
-        .then(window.localStorage.setItem("PlaylistId", comment.playlistId))
-        .then(window.localStorage.setItem("videoName", comment.videoName))
         .then(
           window.localStorage.setItem(
             "lessonDetails",
@@ -70,8 +68,8 @@ export default function Notifications() {
           history.push({
             pathname: `/Lesson/${comment.playlistId}/${comment.videoName}`,
           })
-        )
-        .then(window.location.reload());
+        );
+      // .then(window.location.reload());
     };
     setAsRead();
     // setNotificationClicked(!notificationClicked);

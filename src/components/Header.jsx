@@ -35,6 +35,9 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
   const [notificationNumber, setNotificationNumber] = useState([]);
   const [isHovering, setIsHovering] = useState(false);
   const [teachersHover, setTeachersHover] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [userComments, setUserComments] = useState([]);
+  const [redLightNotification, setRedLightNotification] = useState(false);
   useEffect(() => {
     setNotificationNumber(backNot.filter((number) => number.read === false));
   }, [backNot]);
@@ -148,69 +151,96 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
     setNotificationNotification([]);
     setNotificationMessage([]);
   };
-  const handleClickOnNotification = (notification) => {
-    const setAsRead = async () => {
-      await axios
-        .patch(
-          process.env.REACT_APP_BACKEND_URL + `/comments/${notification._id}`,
-          {
-            read: true,
-          }
-        )
-        .then(() => setNotificationNumber(notificationNumber.length - 1))
-        // .then(async () => {
-        //   const result = await axios.get(
-        //     process.env.REACT_APP_BACKEND_URL + `/comments/`
-        //   );
-        //   console.log(result);
-        //   setBackNot(
-        //     result.data.filter((comment) => comment.courseOwnerId === userId)
-        //   );
-        // })
-        .then(window.localStorage.setItem("courseId", notification.theCourse))
-        .then(history.push({ pathname: `/course/${notification.theCourse}` }))
-        .then(window.location.reload());
-    };
-    setAsRead();
-    // setNotificationClicked(!notificationClicked);
-    // setCourseIdNew(notification.courseid);
-    // setOpenNotifications(!openNotifications);
-  };
 
-  const drawNotifications = () => {
-    return backNot
-      ?.sort((a, b) => a.createdAt > b.createdAt)
-      .map((notification, i) => {
-        return (
-          <div key={i} style={{ display: "flex", flexDirection: "column" }}>
-            {notification.read ? (
-              <div
-                style={{
-                  border: "1px solid gray",
-                  padding: "5px",
-                }}
-                onClick={() => handleClickOnNotification(notification)}
-              >
-                {notification.firstName} {notification.lastName} علق على الدرس
-                {notification.videoName}
-              </div>
-            ) : (
-              <div
-                style={{
-                  border: "1px solid gray",
-                  padding: "5px",
-                  backgroundColor: "grey",
-                }}
-                onClick={() => handleClickOnNotification(notification)}
-              >
-                {notification.firstName} {notification.lastName} علق على الدرس
-                {notification.videoName}
-              </div>
-            )}
-          </div>
-        );
-      });
-  };
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/comments`
+      );
+      setComments(res.data);
+    };
+    fetch();
+  }, [user]);
+
+  useEffect(() => {
+    const filterComment = () => {
+      const specificComments = comments?.filter(
+        (comment) => comment.courseOwnerId === userId
+      );
+      const redlight = specificComments.find(
+        (comment) => comment.read === false
+      );
+      setRedLightNotification(redlight);
+      setUserComments(specificComments);
+      console.log(specificComments);
+    };
+    filterComment();
+  }, [comments, user]);
+  console.log(userComments);
+
+  // const handleClickOnNotification = (notification) => {
+  //   const setAsRead = async () => {
+  //     await axios
+  //       .patch(
+  //         process.env.REACT_APP_BACKEND_URL + `/comments/${notification._id}`,
+  //         {
+  //           read: true,
+  //         }
+  //       )
+  //       // .then(() => setNotificationNumber(notificationNumber.length - 1))
+  //       // .then(async () => {
+  //       //   const result = await axios.get(
+  //       //     process.env.REACT_APP_BACKEND_URL + `/comments/`
+  //       //   );
+  //       //   console.log(result);
+  //       //   setBackNot(
+  //       //     result.data.filter((comment) => comment.courseOwnerId === userId)
+  //       //   );
+  //       // })
+  //       .then(window.localStorage.setItem("courseId", notification.theCourse))
+  //       .then(history.push({ pathname: `/course/${notification.theCourse}` }))
+  //       .then(window.location.reload());
+  //   };
+  //   setAsRead();
+  //   // setNotificationClicked(!notificationClicked);
+  //   // setCourseIdNew(notification.courseid);
+  //   // setOpenNotifications(!openNotifications);
+  // };
+
+  // const drawNotifications = () => {
+  //   return backNot
+  //     ?.sort((a, b) => a.createdAt > b.createdAt)
+  //     .map((notification, i) => {
+  //       return (
+  //         <div key={i} style={{ display: "flex", flexDirection: "column" }}>
+  //           {notification.read ? (
+  //             <div
+  //               style={{
+  //                 border: "1px solid gray",
+  //                 padding: "5px",
+  //               }}
+  //               onClick={() => handleClickOnNotification(notification)}
+  //             >
+  //               {notification.firstName} {notification.lastName} علق على الدرس
+  //               {notification.videoName}
+  //             </div>
+  //           ) : (
+  //             <div
+  //               style={{
+  //                 border: "1px solid gray",
+  //                 padding: "5px",
+  //                 backgroundColor: "grey",
+  //               }}
+  //               onClick={() => handleClickOnNotification(notification)}
+  //             >
+  //               {notification.firstName} {notification.lastName} علق على الدرس
+  //               {notification.videoName}
+  //             </div>
+  //           )}
+  //         </div>
+  //       );
+  //     });
+  // };
   const uniques = notificationMessage
     .map((obj) => {
       return obj.userName;
@@ -433,6 +463,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
               <div
                 className="headeroud"
                 onMouseOver={() => setTeachersHover(true)}
+                onClick={() => setTeachersHover(false)}
               >
                 <div>
                   <FontAwesomeIcon icon={faChalkboardUser} />
@@ -500,10 +531,10 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                           cursor: "pointer",
                           position: "relative",
                         }}
-                        // onClick={clickOnBill}
+                        onClick={() => setRedLightNotification(false)}
                       >
                         <FontAwesomeIcon icon={faBell} />
-                        {notificationNumber.length > 0 ? (
+                        {redLightNotification ? (
                           <div
                             className="notificationNotification"
                             // style={{ position: "absolute" }}
