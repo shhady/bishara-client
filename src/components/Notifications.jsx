@@ -59,6 +59,12 @@ export default function Notifications() {
         // })
         .then(
           window.localStorage.setItem(
+            "courseDetails",
+            JSON.stringify(comment.courseDetails)
+          )
+        )
+        .then(
+          window.localStorage.setItem(
             "lessonDetails",
             JSON.stringify(comment.lesson)
           )

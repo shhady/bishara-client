@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import FileBase from "react-file-base64";
 import { useHistory } from "react-router-dom";
+
 import "./styles.css";
 export default function CreateTeacher() {
+  const [url, setUrl] = useState(null);
+  const [video, setVideo] = useState();
+  const [fileUpload, setFileUpload] = useState(null);
   // const [avatar, setAvatar] = useState("")
   const [teacher, setTeacher] = useState({
     firstName: "",
@@ -18,6 +22,28 @@ export default function CreateTeacher() {
   });
 
   const history = useHistory();
+  const postDetails = () => {
+    const formData = new FormData();
+    formData.append("file", video);
+    formData.append("upload_preset", "bisharaHaroni");
+    // formData.append("cloud_name", "shhady");
+    axios
+      .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
+        onUploadProgress: (p) => {
+          const percentComplete = Math.round((p.loaded * 100) / p.total);
+          setFileUpload({ fileName: video.name, percentComplete });
+          console.log(`${percentComplete}% uploaded`);
+        },
+      })
+      .then((res) => setUrl(res.data.url))
+      // .then((data) => {
+      //   (data.url);
+      // })
+      // .then(console.log(url))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

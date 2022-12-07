@@ -13,7 +13,7 @@ export default function Lesson() {
   const [courseInfo, setCourseInfo] = useState(
     JSON.parse(localStorage.getItem("courseDetails"))
   );
-  const [listId, setListId] = useState("");
+  const [listId, setListId] = useState(localStorage.getItem("playlistId"));
   const [videoChosen, setVideoChosen] = useState(
     localStorage.getItem("videoName")
   );
@@ -24,6 +24,7 @@ export default function Lesson() {
   useEffect(() => {
     setListId(courseInfo.playlistId);
   }, [courseInfo]);
+
   console.log(lesson);
   console.log(courseInfo);
   console.log(lessons);

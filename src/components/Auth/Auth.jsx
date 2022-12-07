@@ -57,7 +57,10 @@ export default function Auth({ user, setUser }) {
       );
       window.localStorage.setItem("profile", JSON.stringify(result.data));
       window.localStorage.setItem("token", result.data.token);
+      window.localStorage.setItem("profilePic", result.data.teacher.avatar);
+
       setTeacherData(result.data);
+      console.log(result.data.teacher);
       setUser(result.data);
 
       history.push("/profile");
@@ -75,6 +78,8 @@ export default function Auth({ user, setUser }) {
       );
       window.localStorage.setItem("profile", JSON.stringify(result.data));
       window.localStorage.setItem("token", result.data.token);
+      window.localStorage.setItem("profilePic", result.data.avatar);
+
       // console.log(result.data.teacher);
       // setTeacherData(result.data);
       setUser(result.data);

@@ -34,6 +34,7 @@ export default function Lessons() {
       id: lesson.snippet.playlistId,
     });
     window.localStorage.setItem("lessonDetails", JSON.stringify(lesson));
+    window.localStorage.setItem("courseOwnerId", courseInfo.owner);
   };
   const drawLessons = () => {
     return lessons?.map((lesson, i) => {

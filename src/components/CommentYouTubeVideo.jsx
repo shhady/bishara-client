@@ -12,6 +12,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 export default function CommentYouTubeVideo({ lesson, courseInfo }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [courseDetails, setCourseDetails] = useState(
+    JSON.parse(localStorage.getItem("courseDetails"))
+  );
   const [userF, setUserF] = useState("");
   const [userL, setUserL] = useState("");
   const [userId, setUserId] = useState("");
@@ -103,6 +106,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
       playlistId: courseInfo.playlistId,
       read: false,
       lesson: lesson,
+      courseDetails: courseDetails,
     });
   };
   console.log(courseInfo);
@@ -452,7 +456,7 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
       );
     });
   };
-  console.log(lesson);
+  console.log(videoComments);
   return (
     <div>
       <div className="commentsSection">

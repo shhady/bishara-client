@@ -585,7 +585,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                     onMouseOver={() => setIsHovering(!isHovering)}
                   >
                     <img
-                      src={user.teacher.avatar}
+                      src={localStorage.getItem("profilePic")}
                       alt={user.teacher.firstName}
                       style={{
                         height: "40px",

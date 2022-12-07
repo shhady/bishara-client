@@ -6,10 +6,10 @@ import FileBase from "react-file-base64";
 import "./profile.css";
 import { Input, Button } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-export default function Profile({ user, setUser }) {
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+export default function Profile() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
   const history = useHistory();
   const [allPractices, setAllPractices] = useState([]);
@@ -19,10 +19,41 @@ export default function Profile({ user, setUser }) {
   const [avatar, setAvatar] = useState(null);
   const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(false);
   const [teacherDetails, setTeacherDetails] = useState(null);
-
+  const [url, setUrl] = useState(null);
+  const [image, setImage] = useState();
+  const [fileUpload, setFileUpload] = useState(null);
+  const [profilePic, setProfilePic] = useState(
+    localStorage.getItem("profilePic")
+  );
+  console.log(profilePic);
+  const postDetails = () => {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "bisharaHaroni");
+    // formData.append("cloud_name", "shhady");
+    axios
+      .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
+        onUploadProgress: (p) => {
+          const percentComplete = Math.round((p.loaded * 100) / p.total);
+          setFileUpload({ fileName: image.name, percentComplete });
+          console.log(`${percentComplete}% uploaded`);
+        },
+      })
+      .then((res) => setUrl(res.data.url))
+      // .then((data) => {
+      //   (data.url);
+      // })
+      // .then(console.log(url))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
+    const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
     setUserId(userid);
+    // console.log(userAvatar);
+    setProfilePic(userAvatar);
   }, [user]);
   const handleLogoutFromAllDevices = async () => {
     const response = await axios.post(
@@ -60,26 +91,20 @@ export default function Profile({ user, setUser }) {
   //   console.log(teacherDetails);
   // }, [user, userId]);
 
-  const handleUpdateAvatar = () => {
+  useEffect(() => {
     const changePhoto = async () => {
-      await axios.patch(
-        process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
-        avatar
-      );
-      // .then(() => {
-      //   const fetch = async () => {
-      //     const result = await axios.get(
-      //       process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
-      //     );
-      //     setTeacherDetails(result.data);
-      //   };
-      //   fetch();
-      // });
+      await axios
+        .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
+          avatar: url,
+        })
+        .then(() => {
+          window.localStorage.setItem("profilePic", url);
+          setProfilePic(url);
+        });
     };
     changePhoto();
-    // window.localStorage.setItem("avatar", avatar.avatar);
     setShowButtonAvatarUpdate(false);
-  };
+  }, [url]);
   const handleUserLogoutFromAllDevices = async () => {
     const response = await axios.post(
       process.env.REACT_APP_BACKEND_URL + `/users/logoutAll`,
@@ -260,7 +285,7 @@ export default function Profile({ user, setUser }) {
             >
               {" "}
               <img
-                src={user.teacher.avatar}
+                src={profilePic}
                 alt={user.teacher.firstName}
                 width="150"
                 height="150"
@@ -269,19 +294,31 @@ export default function Profile({ user, setUser }) {
               <div
                 style={{
                   display: "flex",
-                  width: "20%",
+                  width: "50%",
                   justifyContent: "space-around",
                 }}
               >
-                {/* <FileBase
-                  type="file"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    setAvatar({ avatar: base64 });
-                    setShowButtonAvatarUpdate(true);
-                  }}
-                /> */}
-                <Input
+                {fileUpload ? (
+                  <span style={{ textAlign: "center", color: "black" }}>
+                    {" "}
+                    {fileUpload.percentComplete === 100 ? (
+                      <FontAwesomeIcon icon={faCheck} />
+                    ) : null}
+                  </span>
+                ) : (
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      setImage(e.target.files[0]);
+                      setShowButtonAvatarUpdate(true);
+                    }}
+                    // onClick={() => setUrl(null)}
+                  />
+                )}
+                {showButtonAvatarUpdate ? (
+                  <button onClick={postDetails}>تثبيت</button>
+                ) : null}
+                {/* <Input
                   type="file"
                   id="changeProfilePic"
                   hidden
@@ -297,7 +334,7 @@ export default function Profile({ user, setUser }) {
                   <button type="submit" onClick={handleUpdateAvatar}>
                     تثبيت
                   </button>
-                ) : null}
+                ) : null} */}
               </div>
               <h2>
                 {user.teacher.firstName}
