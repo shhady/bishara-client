@@ -18,6 +18,7 @@ export default function Profile() {
   const [practiceId, setPracticeId] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(false);
+  const [showButtonCoverUpdate, setShowButtonCoverUpdate] = useState(false);
   const [teacherDetails, setTeacherDetails] = useState(null);
   const [url, setUrl] = useState(null);
   const [image, setImage] = useState();
@@ -91,7 +92,7 @@ export default function Profile() {
     changePhoto();
     console.log(url);
 
-    setShowButtonAvatarUpdate(false);
+    setShowButtonCoverUpdate(false);
   }, [urlCover]);
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
@@ -347,17 +348,17 @@ export default function Profile() {
                 }}
               >
                 صورة غلاف
-                {!showButtonAvatarUpdate ? (
+                {!showButtonCoverUpdate ? (
                   <input
                     type="file"
                     onChange={(e) => {
                       setImage(e.target.files[0]);
-                      setShowButtonAvatarUpdate(true);
+                      setShowButtonCoverUpdate(true);
                     }}
                     // onClick={() => setUrl(null)}
                   />
                 ) : null}
-                {showButtonAvatarUpdate ? (
+                {showButtonCoverUpdate ? (
                   <button onClick={postDetailsCover}>تثبيت</button>
                 ) : null}
               </div>{" "}
