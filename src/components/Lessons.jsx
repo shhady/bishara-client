@@ -6,14 +6,16 @@ import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from "react-router-dom";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
-export default function Lessons() {
+export default function Lessons({ user }) {
   const [courseInfo, setCourseInfo] = useState(
     JSON.parse(localStorage.getItem("courseDetails"))
   );
   const [listId, setListId] = useState("");
   const [lessons, setLessons] = useState([]);
   const history = useHistory();
-
+  window.onpopstate = () => {
+    history.push("/TeacherData");
+  };
   useEffect(() => {
     setListId(courseInfo.playlistId);
   }, [courseInfo]);
@@ -29,10 +31,15 @@ export default function Lessons() {
   }, [listId]);
 
   const handleLessonClick = (lesson) => {
-    history.push({
-      pathname: `/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`,
-      id: lesson.snippet.playlistId,
-    });
+    if (user) {
+      history.push({
+        pathname: `/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`,
+        id: lesson.snippet.playlistId,
+      });
+    } else {
+      history.push("/auth");
+    }
+
     window.localStorage.setItem("lessonDetails", JSON.stringify(lesson));
     window.localStorage.setItem("courseOwnerId", courseInfo.owner);
   };
