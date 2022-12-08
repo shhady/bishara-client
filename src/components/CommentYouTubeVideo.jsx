@@ -79,7 +79,14 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
       .put(process.env.REACT_APP_BACKEND_URL + `/comments/${comment._id}`, {
         ...theReply,
         reply: myReply,
-        replyRead: false,
+      })
+      .then(async () => {
+        await axios.patch(
+          process.env.REACT_APP_BACKEND_URL + `/comments/${comment._id}`,
+          {
+            replyRead: false,
+          }
+        );
       })
       .then(() => {
         const fetch = async () => {
