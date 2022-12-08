@@ -10,6 +10,8 @@ export default function Notifications() {
   const [userL, setUserL] = useState("");
   const [userId, setUserId] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
+  const [userReplies, setUserReplies] = useState([]);
+  const [repliesShow, setRepliesShow] = useState([]);
   const history = useHistory();
   useEffect(() => {
     user.user
@@ -41,6 +43,32 @@ export default function Notifications() {
     };
     filterComment();
   }, [comments]);
+
+  useEffect(() => {
+    console.log(comments);
+    const filterReply = () => {
+      const specificReplies = comments?.filter(
+        (reply) => reply.userid === userId
+      );
+      setUserReplies(specificReplies);
+      console.log(specificReplies);
+    };
+    filterReply();
+  }, [comments]);
+
+  console.log(userReplies);
+
+  const drawReplies = () => {
+    return userReplies?.map((replies) => {
+      return replies.replies.map((reply) => {
+        return <div>{reply.firstName}</div>;
+      });
+    });
+    // .replies?.map((reply) => {
+    //   return <div>{reply.firstName}</div>;
+    // });
+  };
+  console.log(repliesShow);
 
   const handleClickOnNotification = (comment) => {
     const setAsRead = async () => {
@@ -142,6 +170,7 @@ export default function Notifications() {
             "rgb(0 0 0 / 6%) 0px 1px 2px, rgb(35 41 54 / 14%) 0px 3px 8px",
         }}
       >
+        {drawReplies()}
         {drawComment()}
       </div>
     </div>

@@ -65,6 +65,9 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
       userId: userId,
       userAvatar: userAvatar,
       replyId: unique_id,
+      lesson: lesson,
+      courseDetails: courseDetails,
+      read: false,
     });
   };
 
