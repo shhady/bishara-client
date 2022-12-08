@@ -108,6 +108,8 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
       videoTitle: lesson.snippet.title,
       playlistId: courseInfo.playlistId,
       read: false,
+      replyRead: false,
+
       lesson: lesson,
       courseDetails: courseDetails,
     });

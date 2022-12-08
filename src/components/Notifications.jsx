@@ -60,8 +60,42 @@ export default function Notifications() {
 
   const drawReplies = () => {
     return userReplies?.map((replies) => {
-      return replies.replies.map((reply) => {
-        return <div>{reply.firstName}</div>;
+      return replies.replies.map((reply, i) => {
+        return (
+          <div
+            style={{ cursor: "pointer" }}
+            key={i}
+            onClick={() => handleClickOnReply(replies)}
+          >
+            {replies.replyRead === "true" ? (
+              <div
+                style={{
+                  padding: "20px",
+                  backgroundColor: "white",
+                }}
+              >
+                <div style={{ fontSize: "20px" }}>
+                  {reply.firstName}
+                  {"  "}
+                  {reply.lastName} رد على تعليقك{" "}
+                </div>
+              </div>
+            ) : (
+              <div
+                style={{
+                  padding: "20px",
+                  backgroundColor: "#e7f3ff",
+                }}
+              >
+                <div style={{ fontSize: "20px" }}>
+                  {reply.firstName}
+                  {"  "}
+                  {reply.lastName} رد على تعليقك{" "}
+                </div>
+              </div>
+            )}
+          </div>
+        );
       });
     });
     // .replies?.map((reply) => {
@@ -69,6 +103,38 @@ export default function Notifications() {
     // });
   };
   console.log(repliesShow);
+
+  const handleClickOnReply = (replies) => {
+    console.log(replies.playlistId);
+    const setAsRead = async () => {
+      await axios
+        .patch(process.env.REACT_APP_BACKEND_URL + `/comments/${replies._id}`, {
+          replyRead: true,
+        })
+        .then(
+          window.localStorage.setItem(
+            "courseDetails",
+            JSON.stringify(replies.courseDetails)
+          )
+        )
+        .then(
+          window.localStorage.setItem(
+            "lessonDetails",
+            JSON.stringify(replies.lesson)
+          )
+        )
+
+        .then(
+          history.push({
+            pathname: `/Lesson/${replies.playlistId}/${replies.videoName}`,
+          })
+        );
+    };
+    setAsRead();
+    // setNotificationClicked(!notificationClicked);
+    // setCourseIdNew(notification.courseid);
+    // setOpenNotifications(!openNotifications);
+  };
 
   const handleClickOnNotification = (comment) => {
     const setAsRead = async () => {
