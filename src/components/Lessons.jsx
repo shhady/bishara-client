@@ -42,6 +42,7 @@ export default function Lessons({ user }) {
 
     window.localStorage.setItem("lessonDetails", JSON.stringify(lesson));
     window.localStorage.setItem("courseOwnerId", courseInfo.owner);
+    window.localStorage.setItem("playlistId", lesson.snippet.playlistId);
   };
   const drawLessons = () => {
     return lessons?.map((lesson, i) => {

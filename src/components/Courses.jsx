@@ -67,16 +67,16 @@ export default function Courses({ listId, setListId, setCourse }) {
           marginTop: "100px",
         }}
       >
-        <div className="spinner">
-          <div className="loader">
-            <div className="balls_container">
+        {/* <div className="spinner"> */}
+        <div className="loader">
+          {/* <div className="balls_container">
               <div className="ball"></div>
               <div className="ball"></div>
               <div className="ball"></div>
             </div>
-            <span>جاري تحميل البيانات</span>
-          </div>
+            <span>جاري تحميل البيانات</span> */}
         </div>
+        {/* </div> */}
       </div>
     );
 

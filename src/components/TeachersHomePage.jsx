@@ -70,7 +70,7 @@ export default function TeachersPop({ setTeachersHover }) {
             <div
               style={{
                 textAlign: "center",
-                fontWeight: "700",
+                fontWeight: "100",
                 fontSize: "1em",
                 color: "black",
               }}

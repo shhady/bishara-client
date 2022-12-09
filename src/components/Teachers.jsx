@@ -96,16 +96,16 @@ export default function Teachers({ user, setUser, setTeacher }) {
           marginTop: "100px",
         }}
       >
-        <div className="spinner">
-          <div className="loader">
-            <div className="balls_container">
+        {/* <div className="spinner"> */}
+        <div className="loader">
+          {/* <div className="balls_container">
               <div className="ball"></div>
               <div className="ball"></div>
               <div className="ball"></div>
             </div>
-            <span>جاري تحميل البيانات</span>
-          </div>
+            <span>جاري تحميل البيانات</span> */}
         </div>
+        {/* </div> */}
       </div>
     );
 
@@ -133,7 +133,7 @@ export default function Teachers({ user, setUser, setTeacher }) {
                 style={{ borderRadius: "50%" }}
               />
             </div>
-            <div style={{ color: "black" }}>
+            <div style={{ color: "black", fontWeight: "lighter" }}>
               {teacher.firstName} {teacher.lastName}
             </div>
             <div>

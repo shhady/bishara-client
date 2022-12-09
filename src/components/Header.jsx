@@ -466,9 +466,12 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                 onClick={() => setTeachersHover(false)}
               >
                 <div>
-                  <FontAwesomeIcon icon={faChalkboardUser} />
+                  <FontAwesomeIcon
+                    icon={faChalkboardUser}
+                    className="highlight"
+                  />
                 </div>
-                <div>المدرسين</div>
+                <div style={{ fontWeight: "80" }}>المدرسين</div>
               </div>
             </Link>
             {user ? (
