@@ -367,11 +367,12 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
           <div
             className="menuMobile"
             onClick={() => {
-              setOpenMenu(!openMenu);
               setShowArrows(true);
             }}
           >
-            <div>{!openMenu ? <FontAwesomeIcon icon={faBars} /> : null} </div>
+            <div onClick={() => setOpenMenu(!openMenu)}>
+              {!openMenu ? <FontAwesomeIcon icon={faBars} /> : null}{" "}
+            </div>
             <div>
               {user ? (
                 <>
