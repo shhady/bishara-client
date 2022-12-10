@@ -223,7 +223,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                 // top: 85,
                 position: "fixed",
                 backgroundColor: "white",
-                left: 1,
+                right: 1,
                 width: "150px",
                 boxShadow:
                   "rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px",
@@ -653,6 +653,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                   fontSize: "28px",
                   color: "black",
                   padding: "0px 20px",
+                  fontFamily: "Noto Sans Arabic,sans-serif",
                 }}
               >
                 FUNAN<b>.AI</b>
