@@ -14,6 +14,7 @@
     width: 100%;
     margin:auto;
     z-index: 99;
+    
     }
 .middle{
     width:100%;
@@ -21,7 +22,7 @@
     justify-content:space-between;
     text-align: center;
     align-items: center;
-    padding: 0px 70px
+    /* padding: 0px 70px */
 }
 .sideMenu{
     top:85px;
@@ -163,10 +164,23 @@ box-shadow:  20px 20px 60px #d5d5d5,
     width: 100vw;
     background: transparent;
 }
-@media (max-width: 867px){
+
+.blackBackgroundtext{
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.dontShowOnMobile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 768px){
     .header{
         height:60px;
         width: 100vw;
+        padding-left: 11px;
+        padding-right: 11px;
     }
     .sideMenu{
         top:60px;
@@ -177,10 +191,12 @@ box-shadow:  20px 20px 60px #d5d5d5,
     }
     .middle{
         display: grid;
-        grid-template-columns: repeat(3 ,1fr);
+        grid-template-columns: repeat(2 ,1fr);
         align-items: center;
-        padding: 0px 70px
-
+        padding-left: 11px;
+        padding-right: 11px; 
+        /* margin-left: 40px;
+        margin-right:40px; */
     }
     .backgroundHover{
         position: fixed;
@@ -192,7 +208,6 @@ box-shadow:  20px 20px 60px #d5d5d5,
     .menu-details{
         display: flex;
         flex-direction: column;
-        /* justify-content: space-around; */
         align-items:center;
         position:fixed;
         top:0;
@@ -203,25 +218,34 @@ box-shadow:  20px 20px 60px #d5d5d5,
         color: white;
         transition: all 0.5s;
         z-index: 99;
+        padding: 15px 10px 15px;
     }
     span{
         color:white
     }
     .menuMobile{
         visibility:visible;
-        display: block
+        max-width: 100%;
+
+        display: block;
+        display: flex;
+        justify-content:"center";
+        align-items:"center";
     }
     .menu-details-computer{
         display: none
     }
-    .header-down{
+    .dontShowOnMobile{
+        display: none;
+    }
+    /* .header-down{
         display: "flex";
         justify-content: space-around;
         margin-top: 10px;
         margin-bottom: 10px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-    }
+    } */
     .Menu-message{
         display: flex;
         padding-right: 15px;

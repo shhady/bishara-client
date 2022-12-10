@@ -119,8 +119,9 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
     setUser(null);
     setNotificationNotification([]);
     setNotificationMessage([]);
+    setOpenMenu(false);
     // setOpenNotifications(false);
-    setIsHovering(!isHovering);
+    setIsHovering(false);
   };
 
   const handleLogoutStudent = async () => {
@@ -148,8 +149,10 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
     dispatch({ type: "LOGOUT" });
     history.push("/");
     setUser(null);
+    setOpenMenu(false);
     setNotificationNotification([]);
     setNotificationMessage([]);
+    setIsHovering(false);
   };
 
   useEffect(() => {
@@ -178,69 +181,6 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
   }, [comments, user]);
   console.log(userComments);
 
-  // const handleClickOnNotification = (notification) => {
-  //   const setAsRead = async () => {
-  //     await axios
-  //       .patch(
-  //         process.env.REACT_APP_BACKEND_URL + `/comments/${notification._id}`,
-  //         {
-  //           read: true,
-  //         }
-  //       )
-  //       // .then(() => setNotificationNumber(notificationNumber.length - 1))
-  //       // .then(async () => {
-  //       //   const result = await axios.get(
-  //       //     process.env.REACT_APP_BACKEND_URL + `/comments/`
-  //       //   );
-  //       //   console.log(result);
-  //       //   setBackNot(
-  //       //     result.data.filter((comment) => comment.courseOwnerId === userId)
-  //       //   );
-  //       // })
-  //       .then(window.localStorage.setItem("courseId", notification.theCourse))
-  //       .then(history.push({ pathname: `/course/${notification.theCourse}` }))
-  //       .then(window.location.reload());
-  //   };
-  //   setAsRead();
-  //   // setNotificationClicked(!notificationClicked);
-  //   // setCourseIdNew(notification.courseid);
-  //   // setOpenNotifications(!openNotifications);
-  // };
-
-  // const drawNotifications = () => {
-  //   return backNot
-  //     ?.sort((a, b) => a.createdAt > b.createdAt)
-  //     .map((notification, i) => {
-  //       return (
-  //         <div key={i} style={{ display: "flex", flexDirection: "column" }}>
-  //           {notification.read ? (
-  //             <div
-  //               style={{
-  //                 border: "1px solid gray",
-  //                 padding: "5px",
-  //               }}
-  //               onClick={() => handleClickOnNotification(notification)}
-  //             >
-  //               {notification.firstName} {notification.lastName} علق على الدرس
-  //               {notification.videoName}
-  //             </div>
-  //           ) : (
-  //             <div
-  //               style={{
-  //                 border: "1px solid gray",
-  //                 padding: "5px",
-  //                 backgroundColor: "grey",
-  //               }}
-  //               onClick={() => handleClickOnNotification(notification)}
-  //             >
-  //               {notification.firstName} {notification.lastName} علق على الدرس
-  //               {notification.videoName}
-  //             </div>
-  //           )}
-  //         </div>
-  //       );
-  //     });
-  // };
   const uniques = notificationMessage
     .map((obj) => {
       return obj.userName;
@@ -274,7 +214,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
   return (
     <div style={{ width: "100%", margin: "auto" }}>
       <div className="header">
-        {isHovering ? (
+        {isHovering && user ? (
           <div className="backgroundHover" onClick={() => setIsHovering(false)}>
             <div
               className="sideMenu"
@@ -292,6 +232,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-around",
+                textAlign: "center",
               }}
               onMouseLeave={() => setIsHovering(false)}
             >
@@ -320,16 +261,23 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                   )}
                 </div>
               ) : null}
-              <Link to="/profile" style={{ textDecoration: "none" }}>
-                <div
-                  style={{ width: "80%", margin: "auto", color: "black" }}
-                  onClick={() => setIsHovering(false)}
+              <div
+                style={{ width: "80%", margin: "auto", color: "black" }}
+                onClick={() => setIsHovering(false)}
+              >
+                {" "}
+                <Link
+                  to="/profile"
+                  style={{ textDecoration: "none", color: "black" }}
                 >
                   الملف الشخصي
-                </div>
-              </Link>
+                </Link>
+              </div>
               {user?.teacher?.role === "admin" ? (
-                <Link to="/CreateTeacher" style={{ textDecoration: "none" }}>
+                <Link
+                  to="/CreateTeacher"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <div
                     style={{
                       width: "80%",
@@ -346,26 +294,37 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                 style={{ width: "80%", margin: "auto" }}
                 onClick={() => setIsHovering(false)}
               >
-                الاشعارات
+                <Link
+                  to="/Notifications"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  الاشعارات
+                </Link>
               </div>
-              <Link to="/messenger" style={{ textDecoration: "none" }}>
-                <div
-                  style={{
-                    width: "80%",
-                    margin: "auto",
-                    // marginBottom: "20px",
-                    color: "black",
-                  }}
-                  onClick={() => setIsHovering(false)}
+              <div
+                style={{
+                  width: "80%",
+                  margin: "auto",
+                  // marginBottom: "20px",
+                  color: "black",
+                }}
+                onClick={() => setIsHovering(false)}
+              >
+                {" "}
+                <Link
+                  to="/messenger"
+                  style={{ textDecoration: "none", color: "black" }}
                 >
                   الرسائل المباشره
-                </div>
-              </Link>
+                </Link>
+              </div>
               <div
                 style={{ width: "80%", margin: "auto" }}
                 onClick={() => setIsHovering(false)}
               >
-                الاسئلة المتكررة
+                <Link to="" style={{ textDecoration: "none", color: "black" }}>
+                  الاسئلة المتكررة
+                </Link>
               </div>
               <div
                 style={{
@@ -401,38 +360,211 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
           </div>
         ) : null}
 
-        <div className="middle">
+        <div
+          className="middle"
+          // style={{ marginLeft: "20px", marginRight: "20px" }}
+        >
           <div
             className="menuMobile"
-            style={{
-              marginLeft: "70px",
-              // minWidth: "60px",
-              // padding: "2px",
-            }}
             onClick={() => {
               setOpenMenu(!openMenu);
               setShowArrows(true);
             }}
           >
-            {!openMenu ? <FontAwesomeIcon icon={faBars} /> : null}{" "}
+            <div>{!openMenu ? <FontAwesomeIcon icon={faBars} /> : null} </div>
+            <div>
+              {user ? (
+                <>
+                  <Link to="/Notifications" style={{ textDecoration: "none" }}>
+                    <div
+                      style={{
+                        // display: "flex",
+                        // justifyContent: "flex-end",
+                        padding: "0px 20px",
+                        color: "black",
+                        // border: "1px solid transparent",
+                        cursor: "pointer",
+                        position: "relative",
+                      }}
+                      onClick={() => setRedLightNotification(false)}
+                    >
+                      <FontAwesomeIcon icon={faBell} />
+                      {redLightNotification ? (
+                        <div
+                          className="notificationNotification"
+                          // style={{ position: "absolute" }}
+                        ></div>
+                      ) : null}
+                    </div>
+                  </Link>
+                </>
+              ) : null}
+            </div>
+            <div>
+              {user ? (
+                <div
+                  style={{
+                    padding: "2px",
+                    // border: "1px solid white",
+                    cursor: "pointer",
+                    position: "relative",
+                  }}
+                  onMouseOver={() => setIsHovering(false)}
+                  onClick={() => {
+                    if (uniques.length === 0) {
+                      history.push("/messenger");
+                    } else {
+                      setOpenNotificationsMessage(!openNotificationsMessage);
+                    }
+                  }}
+                >
+                  <FontAwesomeIcon icon={faMessage} />
+                  {uniques.length > 0 ? (
+                    <div className="notificationMessage">{uniques.length}</div>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              // paddingRight: "15px",
-              alignItems: "center",
-            }}
-          >
-            <Link to="/" style={{ textDecoration: "none" }}>
-              {/* <img
-                src="https://res.cloudinary.com/shhady/image/upload/v1666188610/avatars/wjph4gkbarqbnntmpcvw.jpg"
-                alt="logo"
-                className="logoImage"
-              /> */}
-              <h2 style={{ color: "black", marginLeft: "20px" }}>FUNAN</h2>
-            </Link>
+
+          <div className="dontShowOnMobile">
+            {user ? (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {user ? (
+                  <div style={{ paddingRight: "20px" }}>
+                    {user.teacher ? (
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        onMouseOver={() => setIsHovering(!isHovering)}
+                      >
+                        <img
+                          src={localStorage.getItem("profilePic")}
+                          alt={user.teacher.firstName}
+                          style={{
+                            height: "40px",
+                            width: "40px",
+                            borderRadius: "50%",
+                            // marginLeft: "20px",
+                            // marginRight: "20px",
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      // <Link to="/profile" style={{ textDecoration: "none" }}>
+                      <div
+                        style={{ marginLeft: "20px", marginRight: "20px" }}
+                        onMouseOver={() => setIsHovering(!isHovering)}
+                      >
+                        <FontAwesomeIcon icon={faUser} />
+                      </div>
+                      // </Link>
+                    )}
+                  </div>
+                ) : (
+                  <div
+
+                  // style={{
+                  //   display: "flex",
+                  //   flexDirection: "column",
+                  //   justifyContent: "center",
+                  //   alignItems: "center",
+                  // }}
+                  ></div>
+                )}
+                {user ? (
+                  <>
+                    <Link
+                      to="/Notifications"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <div
+                        style={{
+                          // display: "flex",
+                          // justifyContent: "flex-end",
+                          // paddingLeft: "20px",
+                          color: "black",
+                          padding: "0px 20px",
+                          // border: "1px solid transparent",
+                          cursor: "pointer",
+                          position: "relative",
+                        }}
+                        onClick={() => setRedLightNotification(false)}
+                      >
+                        <FontAwesomeIcon icon={faBell} />
+                        {redLightNotification ? (
+                          <div
+                            className="notificationNotification"
+                            // style={{ position: "absolute" }}
+                          ></div>
+                        ) : null}
+                      </div>
+                    </Link>
+                  </>
+                ) : null}
+                {user ? (
+                  <div
+                    style={{
+                      // padding: "2px",
+
+                      // border: "1px solid white",
+                      cursor: "pointer",
+                      position: "relative",
+                    }}
+                    onMouseOver={() => setIsHovering(false)}
+                    onClick={() => {
+                      if (uniques.length === 0) {
+                        history.push("/messenger");
+                      } else {
+                        setOpenNotificationsMessage(!openNotificationsMessage);
+                      }
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faMessage} />
+                    {uniques.length > 0 ? (
+                      <div className="notificationMessage">
+                        {uniques.length}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+            ) : (
+              // <div style={{ visibility: "hidden" }}>X</div>
+              <Link to="/auth" style={{ textDecoration: "none" }}>
+                <div
+                  style={{
+                    //   display: "flex",
+                    //   height: "30px",
+                    //   padding: "3px",
+                    color: "black",
+                  }}
+                  // className="registerBox"
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: "20px",
+                      color: "black",
+                    }}
+                  >
+                    تسجيل الدخول
+                  </div>
+                </div>
+              </Link>
+            )}
           </div>
           {teachersHover ? (
             <div
@@ -510,290 +642,190 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
           <div
             style={{
               display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              justifyContent: "flex-end",
+              alignItems: "flex-end",
             }}
           >
-            {user ? (
+            <Link to="/" style={{ textDecoration: "none" }}>
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  fontSize: "28px",
+                  color: "black",
+                  padding: "0px 20px",
                 }}
               >
-                {user ? (
-                  <>
-                    <Link
-                      to="/Notifications"
-                      style={{ textDecoration: "none" }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          paddingLeft: "20px",
-                          color: "black",
-                          // border: "1px solid transparent",
-                          cursor: "pointer",
-                          position: "relative",
-                        }}
-                        onClick={() => setRedLightNotification(false)}
-                      >
-                        <FontAwesomeIcon icon={faBell} />
-                        {redLightNotification ? (
-                          <div
-                            className="notificationNotification"
-                            // style={{ position: "absolute" }}
-                          ></div>
-                        ) : null}
-                      </div>
-                    </Link>
-                  </>
-                ) : null}
-                {user ? (
-                  <div
-                    style={{
-                      padding: "2px",
-                      // border: "1px solid white",
-                      cursor: "pointer",
-                      position: "relative",
-                    }}
-                    onMouseOver={() => setIsHovering(false)}
-                    onClick={() => {
-                      if (uniques.length === 0) {
-                        history.push("/messenger");
-                      } else {
-                        setOpenNotificationsMessage(!openNotificationsMessage);
-                      }
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faMessage} />
-                    {uniques.length > 0 ? (
-                      <div className="notificationMessage">
-                        {uniques.length}
-                      </div>
-                    ) : null}
-                  </div>
-                ) : null}
-              </div>
-            ) : (
-              <div style={{ visibility: "hidden" }}>X</div>
-            )}
-            {user ? (
-              <>
-                {user.teacher ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                    onMouseOver={() => setIsHovering(!isHovering)}
-                  >
-                    <img
-                      src={localStorage.getItem("profilePic")}
-                      alt={user.teacher.firstName}
-                      style={{
-                        height: "40px",
-                        width: "40px",
-                        borderRadius: "50%",
-                        marginLeft: "20px",
-                        marginRight: "20px",
-                      }}
-                    />
-                  </div>
-                ) : (
-                  // <Link to="/profile" style={{ textDecoration: "none" }}>
-                  <div
-                    style={{ marginLeft: "20px", marginRight: "20px" }}
-                    onMouseOver={() => setIsHovering(!isHovering)}
-                  >
-                    <FontAwesomeIcon icon={faUser} />
-                  </div>
-                  // </Link>
-                )}
-              </>
-            ) : (
-              <div
-                className="auth"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Link to="/auth" style={{ textDecoration: "none" }}>
-                  <div
-                    style={{
-                      //   display: "flex",
-                      //   height: "30px",
-                      //   padding: "3px",
-                      color: "black",
-                    }}
-                    // className="registerBox"
-                  >
-                    {/* <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginLeft: "3px",
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faArrowRightToBracket} />
-                    </div> */}
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginLeft: "20px",
-                      }}
-                    >
-                      تسجيل الدخول
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            )}
+                FUNAN<b>.AI</b>
+              </div>{" "}
+            </Link>
           </div>
         </div>
 
-        <div className="header-down">
-          <div className="Menu-message">{user ? <></> : null}</div>
-
-          {openNotificationsMessage ? (
-            <div className="notificationMessage-container">
-              {drawNotificationsMessages()}
-              <div
-                style={{
-                  border: "1px solid gray",
-                  background: "skyblue",
-                  cursor: "pointer",
-                }}
+        {openMenu && (
+          <div className="menu-details">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "90%",
+              }}
+            >
+              <h3
+                style={{ color: "white", cursor: "pointer" }}
                 onClick={() => {
-                  setOpenNotificationsMessage(!openNotificationsMessage);
-                  setNotificationMessage([]);
+                  setOpenMenu(!openMenu);
+                  setShowArrows(false);
                 }}
               >
-                حذف جميع الاشعارات
-              </div>
+                X
+              </h3>
+              <span style={{ fontSize: "30px", color: "white" }}>
+                FUNAN<b>.AI</b>
+              </span>
+              <span style={{ color: "black" }}>X</span>
             </div>
-          ) : null}
-
-          {/* {openNotifications ? (
-            <div className="notification-container">{drawNotifications()}</div>
-          ) : null} */}
-          {openMenu && (
-            <div className="menu-details">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "90%",
-                }}
-              >
-                <h3
-                  style={{ color: "white", cursor: "pointer" }}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-around",
+                height: "70%",
+                // alignItems: "center",
+                // textAlign: "center",
+                width: "100%",
+                marginRight: "10px",
+              }}
+            >
+              {user ? null : (
+                <Link to="/auth" style={{ textDecoration: "none" }}>
+                  <div onClick={() => setOpenMenu(!openMenu)}>
+                    <span
+                      className="blackBackgroundtext"
+                      style={{ color: "white" }}
+                    >
+                      {" "}
+                      تسجيل الدخول
+                    </span>
+                  </div>
+                </Link>
+              )}
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <div
                   onClick={() => {
                     setOpenMenu(!openMenu);
                     setShowArrows(false);
                   }}
                 >
-                  X
-                </h3>
-                <h2 style={{ color: "white" }}>FUNAN</h2>
-                <span style={{ color: "black" }}>X</span>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-around",
-                  height: "70%",
-                  // alignItems: "center",
-                  // textAlign: "center",
-                  width: "100%",
-                  marginRight: "10px",
-                }}
-              >
-                <Link to="/" style={{ textDecoration: "none" }}>
-                  <div
-                    onClick={() => {
-                      setOpenMenu(!openMenu);
-                      setShowArrows(false);
-                    }}
+                  <span
+                    className="blackBackgroundtext"
+                    style={{ color: "white" }}
                   >
-                    <h3 style={{ color: "white" }}>الرئيسية</h3>
-                  </div>
-                </Link>
-                <Link to="/teachers" style={{ textDecoration: "none" }}>
-                  <div onClick={() => setOpenMenu(!openMenu)}>
-                    <h3 style={{ color: "white" }}>المدرسين</h3>
-                  </div>
-                </Link>
-                <Link to="/courses" style={{ textDecoration: "none" }}>
-                  <div
-                    onClick={() => setOpenMenu(!openMenu)}
+                    الرئيسية
+                  </span>
+                </div>
+              </Link>
+              <Link to="/courses" style={{ textDecoration: "none" }}>
+                <div
+                  onClick={() => setOpenMenu(!openMenu)}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <span
+                    className="blackBackgroundtext"
                     style={{
-                      display: "flex",
-                      flexDirection: "column",
+                      color: "white",
+                      width: "40%",
                     }}
                   >
-                    <h3
+                    الدورات الموسيقية
+                  </span>
+                </div>
+              </Link>
+              <Link to="/teachers" style={{ textDecoration: "none" }}>
+                <div onClick={() => setOpenMenu(!openMenu)}>
+                  <span
+                    className="blackBackgroundtext"
+                    style={{ color: "white" }}
+                  >
+                    المدرسين
+                  </span>
+                </div>
+              </Link>
+              <div style={{ color: "white", width: "50%" }}>
+                <hr />
+              </div>
+              {user ? (
+                <>
+                  <Link to="/profile" style={{ textDecoration: "none" }}>
+                    <div onClick={() => setOpenMenu(!openMenu)}>
+                      <span
+                        className="blackBackgroundtext"
+                        style={{ color: "white" }}
+                      >
+                        {" "}
+                        الملف الشخصي
+                      </span>
+                    </div>
+                  </Link>
+                  <Link to="/Notifications" style={{ textDecoration: "none" }}>
+                    <div onClick={() => setOpenMenu(!openMenu)}>
+                      <span
+                        className="blackBackgroundtext"
+                        style={{ color: "white" }}
+                      >
+                        الاشعارات
+                      </span>
+                    </div>
+                  </Link>
+                  <Link to="/messenger" style={{ textDecoration: "none" }}>
+                    <div
                       style={{
                         color: "white",
-                        borderBottom: "1px solid white",
-                        width: "40%",
                       }}
+                      onClick={() => setOpenMenu(!openMenu)}
                     >
-                      الدورات الموسيقية
-                    </h3>
-                    <Link to="/PianoPage" style={{ textDecoration: "none" }}>
-                      <span onClick={() => setOpenMenu(!openMenu)}>بيانو</span>
-                    </Link>
-                    <Link to="/PianoPage" style={{ textDecoration: "none" }}>
-                      <span
-                        style={{ margin: "20px 0px" }}
-                        onClick={() => setOpenMenu(!openMenu)}
-                      >
-                        عود
+                      <span className="blackBackgroundtext">
+                        {" "}
+                        الرسائل المباشره
                       </span>
-                    </Link>
-                    <Link to="/PianoPage" style={{ textDecoration: "none" }}>
-                      <span onClick={() => setOpenMenu(!openMenu)}>كمان</span>
-                    </Link>
+                    </div>
+                  </Link>
+                  <Link to="" style={{ textDecoration: "none" }}>
+                    <div onClick={() => setOpenMenu(!openMenu)}>
+                      <span
+                        className="blackBackgroundtext"
+                        style={{ color: "white" }}
+                      >
+                        الاشتراك{" "}
+                      </span>
+                    </div>
+                  </Link>
+                  <div style={{ color: "white", width: "50%" }}>
+                    <hr />
                   </div>
-                </Link>
-                <Link to="" style={{ textDecoration: "none" }}>
-                  <div onClick={() => setOpenMenu(!openMenu)}>
-                    <h3 style={{ color: "white" }}>الاشتراك </h3>
-                  </div>
-                </Link>
-                <div>
-                  {user ? (
-                    <>
-                      {user.teacher ? (
-                        <div onClick={handleLogoutTeacher}>
-                          <h3>خروج</h3>
-                        </div>
-                      ) : (
-                        <div onClick={handleLogoutStudent}>
-                          <h3>خروج</h3>
-                        </div>
-                      )}
-                    </>
-                  ) : null}
-                </div>
+                </>
+              ) : null}
+
+              <div>
+                {user ? (
+                  <>
+                    {user.teacher ? (
+                      <div onClick={handleLogoutTeacher}>
+                        <span className="blackBackgroundtext">خروج</span>
+                      </div>
+                    ) : (
+                      <div onClick={handleLogoutStudent}>
+                        <span className="blackBackgroundtext">خروج</span>
+                      </div>
+                    )}
+                  </>
+                ) : null}
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
