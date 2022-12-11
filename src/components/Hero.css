@@ -74,7 +74,7 @@
     padding: 5px 25px;
     border:none;
     cursor:pointer;
-    z-index:55
+    z-index:99
 }
 .getStarted:hover{
     background-color: rgb(237, 240, 240);

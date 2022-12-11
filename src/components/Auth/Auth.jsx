@@ -117,6 +117,13 @@ export default function Auth({ user, setUser }) {
     setShowPassword((showPassword) => !showPassword);
   };
 
+  // const handleKeyDown = (e)=>{
+  //   e.preventDefault();
+  //   if(e.key === "Enter"){
+  //     handleSubmit()
+  //   }
+  // }
+
   return (
     <div className="mainSignin">
       <div className="SigninContainer">
@@ -299,6 +306,7 @@ export default function Auth({ user, setUser }) {
                     type="password"
                     placeholder="كلمة المرور"
                     onChange={handleLoginChange}
+                    // onKeyDown={handleKeyDown}
                   ></input>
                 </div>
                 {studentOrTeacher === "student" ? (

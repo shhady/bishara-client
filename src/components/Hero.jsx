@@ -61,7 +61,7 @@ export default function Hero({ showArrows, user }) {
                   <h1>{slide.heading}</h1>
                   <p>{slide.desc}</p>
 
-                  {user ? (
+                  {/* {user ? (
                     <Link to="/Subscribe" style={{ textDecoration: "none" }}>
                       <button className="getStarted">
                         رفع مستوى الاشتراك{" "}
@@ -71,7 +71,7 @@ export default function Hero({ showArrows, user }) {
                     <Link to="/auth" style={{ textDecoration: "none" }}>
                       <button className="getStarted">تسجيل الدخول</button>
                     </Link>
-                  )}
+                  )} */}
                 </div>
               </div>
             )}
