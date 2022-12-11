@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Hero.css";
+import { Link } from "react-router-dom";
 import { sliderData } from "./Slider.jsx";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-export default function Hero({ showArrows }) {
+export default function Hero({ showArrows, user }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideLength = sliderData.length;
 
@@ -59,7 +60,18 @@ export default function Hero({ showArrows }) {
                 <div className="content">
                   <h1>{slide.heading}</h1>
                   <p>{slide.desc}</p>
-                  <button className="getStarted">Get Started</button>
+
+                  {user ? (
+                    <Link to="/Subscribe" style={{ textDecoration: "none" }}>
+                      <button className="getStarted">
+                        رفع مستوى الاشتراك{" "}
+                      </button>
+                    </Link>
+                  ) : (
+                    <Link to="/auth" style={{ textDecoration: "none" }}>
+                      <button className="getStarted">تسجيل الدخول</button>
+                    </Link>
+                  )}
                 </div>
               </div>
             )}

@@ -134,10 +134,12 @@ export default function Lessons({ user }) {
       <div className="profile">
         <div
           style={{
-            width: "150px",
-            height: "150px",
-            border: "2px solid white",
+            width: "100%",
+            // height: "150px",
             borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <img
@@ -145,40 +147,24 @@ export default function Lessons({ user }) {
             alt="profile"
             width="150px"
             height="150px"
-            style={{ borderRadius: "50%" }}
+            style={{ borderRadius: "50%", border: "2px solid white" }}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            marginTop: "10px",
-            textAlign: "center",
-            // alignItems: "flex-start",
-          }}
-        >
-          <div>
+        <div className="infoinfo">
+          <div className="partInfo">
             <h1>
               {courseInfo.firstName}
               {"  "}
               {courseInfo.lastName}
+              {"  "}
             </h1>
+            <h1 className="dashBetween">-</h1>
+            <h1>{courseInfo.title}</h1>
           </div>
-          <div>
-            <span
-              style={{ fontWeight: "bold", fontSize: "24px", color: "black" }}
-            >
-              {courseInfo.title}
-            </span>
-          </div>
+          <div>{courseInfo.description}</div>
         </div>
       </div>
-      <div className="hrMargin">{courseInfo.description}</div>
 
-      <div>
-        <hr />
-      </div>
       <div className="lessonsVideos">{drawLessons()}</div>
     </div>
   );

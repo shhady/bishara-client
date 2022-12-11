@@ -4,10 +4,15 @@ import "./TeacherData.css";
 import { Link, useHistory } from "react-router-dom";
 export default function TeacherData({ listId, teacher }) {
   const [teacherId, setTeacherId] = useState(localStorage.getItem("teacherId"));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [userId, setUserId] = useState("");
   const [teacherInfo, setTeacherInfo] = useState("");
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
 
+  useEffect(() => {
+    setUserId(user.user ? user.user._id : user.teacher._id);
+  }, [user]);
   const history = useHistory();
   window.onpopstate = () => {
     history.push("/teachers");
@@ -72,6 +77,17 @@ export default function TeacherData({ listId, teacher }) {
   const saveCourseLocal = (course) => {
     window.localStorage.setItem("courseDetails", JSON.stringify(course));
   };
+
+  const deleteCourse = (course) => {
+    console.log(course);
+    const deleteTheCourse = async () => {
+      await axios.delete(
+        process.env.REACT_APP_BACKEND_URL + `/courses/${course._id}`
+      );
+    };
+    deleteTheCourse();
+    // history.push("/");
+  };
   const drawCourses = () => {
     return filteredCourses?.map((course, i) => {
       return (
@@ -85,6 +101,7 @@ export default function TeacherData({ listId, teacher }) {
                 height="200px"
               />
             </div>
+
             <div style={{ textAlign: "center", color: "black" }}>
               <h2>{course.title}</h2>
             </div>
@@ -103,6 +120,16 @@ export default function TeacherData({ listId, teacher }) {
               {course.description}....
             </div>
           </Link>
+          <div>
+            {userId === course.owner ? (
+              <button
+                style={{ width: "100%" }}
+                onClick={() => deleteCourse(course)}
+              >
+                حذف الدورة
+              </button>
+            ) : null}
+          </div>
           <hr />
         </div>
       );
@@ -144,28 +171,31 @@ export default function TeacherData({ listId, teacher }) {
       <div className="profile">
         <div
           style={{
-            width: "150px",
-            height: "150px",
-            border: "2px solid white",
+            width: "100%",
+            // height: "150px",
             borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <img
             src={teacherInfo.avatar}
             alt="profile"
-            width="100%"
-            height="100%"
-            style={{ borderRadius: "50%" }}
+            width="150px"
+            height="150px"
+            style={{ borderRadius: "50%", border: "2px solid white" }}
           />
         </div>
         <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            marginTop: "10px",
-            // alignItems: "flex-start",
-          }}
+          className="teacherDetailsAtData"
+          // style={{
+          //   display: "flex",
+          //   flexDirection: "column",
+          //   justifyContent: "flex-start",
+          //   marginTop: "10px",
+          //   // alignItems: "flex-start",
+          // }}
         >
           <div>
             <h1>
@@ -177,8 +207,10 @@ export default function TeacherData({ listId, teacher }) {
           <div>{teacherInfo.about}</div>
         </div>
       </div>
-      <hr />
-      <div style={{ textAlign: "center" }}>
+      {/* <div style={{ width: "100%" }}>
+        <hr />
+      </div> */}
+      <div style={{ textAlign: "center", marginTop: "15px" }}>
         <h2>دورات {teacherInfo.firstName}</h2>
       </div>
       <div className="coursesDrawCss">{drawCourses()}</div>

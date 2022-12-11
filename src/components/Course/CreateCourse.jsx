@@ -8,7 +8,10 @@ const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 export default function CreateCourse() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [popUp, setPopUp] = useState(false);
-
+  const [url, setUrl] = useState(null);
+  const [image, setImage] = useState();
+  const [fileUpload, setFileUpload] = useState(null);
+  const [photoFromPlayList, setPhotoFromPlayList] = useState("");
   const [course, setCourse] = useState({
     instrument: "",
     firstName: "",
@@ -19,6 +22,7 @@ export default function CreateCourse() {
     level: "",
     playlistId: "",
     coursePhoto: "",
+    // coursePhotoManual: "",
     // videos: [],
   });
   const [final, setFinal] = useState(course);
@@ -26,6 +30,33 @@ export default function CreateCourse() {
   const firstName = useRef(user.teacher.firstName);
   const lastName = useRef(user.teacher.lastName);
   const avatar = useRef(user.teacher.avatar);
+  console.log(url);
+  console.log(course);
+  const postDetails = () => {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "bisharaHaroni");
+    // formData.append("cloud_name", "shhady");
+    axios
+      .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
+        onUploadProgress: (p) => {
+          const percentComplete = Math.round((p.loaded * 100) / p.total);
+          setFileUpload({ fileName: image.name, percentComplete });
+          console.log(`${percentComplete}% uploaded`);
+        },
+      })
+      .then((res) => setUrl(res.data.url))
+      // .then((url) => {
+      //   setCourse({ ...course, coursePhoto: url });
+      // })
+      // .then(console.log(profilePic))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    setCourse({ ...course, coursePhoto: url ? url : photoFromPlayList });
+  }, [url]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,10 +82,7 @@ export default function CreateCourse() {
         `${youtubeurl}?part=snippet&playlistId=${course.playlistId}&maxResults=50&key=${process.env.REACT_APP_YOUTUBE_KEY}`
       );
       // setVideos(result.data.items);
-      setCourse({
-        ...course,
-        coursePhoto: result.data.items[0].snippet.thumbnails.high.url,
-      });
+      setPhotoFromPlayList(result.data.items[0].snippet.thumbnails.high.url);
     };
     fetch();
   }, [course.playlistId]);
@@ -71,13 +99,6 @@ export default function CreateCourse() {
       // level: e.target.value,
     });
   }, [final]);
-
-  // const handleChangeVideos = (e) => {
-  //   const files = Array.from(e.target.files);
-  //   files.forEach((file) => {
-  //     course.videos.push(file);
-  //   });
-  // };
 
   return (
     <div style={{ marginTop: "150px" }}>
@@ -152,13 +173,26 @@ export default function CreateCourse() {
             // autoFocus
             required
           />
+          <div className="addFileCoverCourse">
+            <input
+              type="file"
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+              }}
+            />
+
+            <button onClick={postDetails} className="addFileCoverCourseButton">
+              تثبيت صورة الغلاف
+            </button>
+          </div>
+
           <textarea
             placeholder="وصف الدورة"
             name="description"
             onChange={(e) =>
               setCourse({ ...course, description: e.target.value })
             }
-            style={{ textAlign: "center", width: "60%", marginTop: "20px" }}
+            style={{ textAlign: "center", width: "60%" }}
             // onChange={handleChange}
             // autoFocus
             required

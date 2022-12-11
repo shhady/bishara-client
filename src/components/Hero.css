@@ -36,7 +36,7 @@
 
 .content{
     position: absolute;
-    top:15rem;
+    top:10rem;
     /* right:10rem; */
     width: 100%;
     padding:2rem;
@@ -73,6 +73,8 @@
     border-radius: 30px;
     padding: 5px 25px;
     border:none;
+    cursor:pointer;
+    z-index:55
 }
 .getStarted:hover{
     background-color: rgb(237, 240, 240);

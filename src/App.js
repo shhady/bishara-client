@@ -39,6 +39,8 @@ const Lessons = React.lazy(() => import("./components/Lessons"));
 const Lesson = React.lazy(() => import("./components/Lesson"));
 const Notifications = React.lazy(() => import("./components/Notifications"));
 
+const Subscribe = React.lazy(() => import("./components/Subscribe"));
+
 // const Oud = React.lazy(() => import("./components/Oud"));
 // const Piano = React.lazy(() => import("./components/PianoPage"));
 
@@ -109,6 +111,9 @@ export default function App() {
           </Route>
           <Route path="/Notifications" exact>
             <Notifications user={user} setUser={setUser} />
+          </Route>
+          <Route path="/subscribe" exact>
+            <Subscribe user={user} setUser={setUser} />
           </Route>
           <Route path="/Lesson/:id/:id" exact>
             <Lesson
