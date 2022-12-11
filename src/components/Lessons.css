@@ -3,17 +3,17 @@
 }
 
 .main {
-    display:block;
-    position:relative;
+    /* display:block; */
+    /* position:relative; */
     width: 100%;
-    margin: 0 auto;
+    margin: auto;
 }
 
 
 .cover {
-    display:block;
-    position:relative;
-    height:40vh;
+    /* display:block; */
+    /* position:relative; */
+    height:50vh;
     overflow:hidden;
     z-index:1;
     display: flex;
@@ -36,14 +36,14 @@
     z-index:1;
 }
 .profile {
-    display:block;
-    position:relative;
+    /* display:block; */
+    /* position:relative; */
     border-radius:5px;
     width:70%;
     height:200px;
     margin:-30px auto;
     /* margin:  0 10px 20px; */
-    z-index:2;
+    z-index:50;
     display: grid;
     grid-template-columns:1fr 3fr;
     gap:.5rem;

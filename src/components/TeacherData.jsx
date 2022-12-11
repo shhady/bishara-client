@@ -110,8 +110,26 @@ export default function TeacherData({ listId, teacher }) {
   };
   return (
     <div className="teacherDataAll">
-      <div className="cover">
-        <img
+      <div
+        style={{
+          backgroundImage: `url(${
+            teacherInfo.cover
+              ? teacherInfo.cover
+              : "https://images.unsplash.com/photo-1546058256-47154de4046c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHBpYW5vfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
+          })`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          height: "200px",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          alignItems: "flex-start",
+          // position: "relative",
+        }}
+      >
+        {/* <img
           src={
             teacherInfo.cover
               ? teacherInfo.cover
@@ -121,7 +139,7 @@ export default function TeacherData({ listId, teacher }) {
           height="100%"
           objectFit="fit"
           alt="cover"
-        />
+        /> */}
       </div>
       <div className="profile">
         <div

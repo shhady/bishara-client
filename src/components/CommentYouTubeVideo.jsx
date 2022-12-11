@@ -420,51 +420,57 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
               );
             })}
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "5px",
-              marginTop: "15px",
-            }}
-          >
-            {/* {} */}
-            {/* {comment._id === videoComments._id ? ( */}
-            {comment._id === commentId ? (
-              <>
-                <input
-                  type="text"
-                  placeholder="أضف رد"
-                  value={myReply}
-                  autoFocus
-                  style={{
-                    border: "none",
-                    borderBottom: "1px solid grey",
-                    width: "90%",
-                  }}
-                  onChange={(e) => handleChangeReply(e)}
-                />
-              </>
-            ) : (
+          {userId === comment.courseOwnerId ? (
+            <>
               <div
                 style={{
-                  borderBottom: "1px solid #5f697d",
-                  color: "#5f697d",
-                  width: "90%",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  setCommentId(comment._id);
-                  setMyReply("");
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "5px",
+                  marginTop: "15px",
                 }}
               >
-                أضف رد
+                {/* {} */}
+                {/* {comment._id === videoComments._id ? ( */}
+                {comment._id === commentId ? (
+                  <>
+                    <input
+                      type="text"
+                      placeholder="أضف رد"
+                      value={myReply}
+                      autoFocus
+                      style={{
+                        border: "none",
+                        borderBottom: "1px solid grey",
+                        width: "90%",
+                      }}
+                      onChange={(e) => handleChangeReply(e)}
+                    />
+                  </>
+                ) : (
+                  <div
+                    style={{
+                      borderBottom: "1px solid #5f697d",
+                      color: "#5f697d",
+                      width: "90%",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      setCommentId(comment._id);
+                      setMyReply("");
+                    }}
+                  >
+                    أضف رد
+                  </div>
+                )}
+                <button onClick={() => handleSubmitReply(comment)}>
+                  تثبيت
+                </button>
+                {/* ) : null} */}
               </div>
-            )}
-            <button onClick={() => handleSubmitReply(comment)}>تثبيت</button>
-            {/* ) : null} */}
-          </div>
+            </>
+          ) : null}
         </div>
       );
     });

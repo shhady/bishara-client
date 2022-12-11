@@ -64,9 +64,10 @@
     display:block;
     /* position:relative; */
     border-radius:5px;
-    width:100%;
+    width:90%;
+    margin:auto;
     height:200px;
-    margin: -15px 0 10px 20px;
+    margin: -15px auto;
     z-index:9;
     display: grid;
     grid-template-columns:1fr 3fr;
