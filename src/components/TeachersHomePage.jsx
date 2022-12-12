@@ -86,6 +86,7 @@ export default function TeachersPop({ setTeachersHover }) {
         flexDirection: "column",
         justifyContent: "space-around",
         alignItems: "center",
+        borderBottom: "1px solid #e1e1e1",
       }}
     >
       <div
@@ -96,7 +97,7 @@ export default function TeachersPop({ setTeachersHover }) {
           padding: "10px",
           width: "90%",
           margin: "auto",
-          borderBottom: "1px solid gray",
+          borderBottom: "1px solid #e1e1e1",
           // marginBottom: "20px",
         }}
         // onMouseOut={() => setTeachersHover(false)}
@@ -118,9 +119,9 @@ export default function TeachersPop({ setTeachersHover }) {
       >
         {drawData()}
       </div>
-      <div style={{ width: "100%" }}>
+      {/* <div style={{ width: "100%", color: "#e1e1e1" }}>
         <hr />
-      </div>
+      </div> */}
     </div>
   );
 }

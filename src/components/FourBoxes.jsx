@@ -3,7 +3,7 @@ import "./FourBoxes.css";
 import { Link } from "react-router-dom";
 export default function FourBoxes() {
   return (
-    <div>
+    <div style={{ borderBottom: "1px solid #e1e1e1" }}>
       <div className="FourBoxesTop">
         <div>
           <h2>ابدأ الان</h2>{" "}
@@ -28,7 +28,7 @@ export default function FourBoxes() {
           <div className="box4">Guitar</div>
         </Link>
       </div>
-      <hr />
+      {/* <hr /> */}
     </div>
   );
 }

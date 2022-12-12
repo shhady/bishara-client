@@ -392,7 +392,12 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                       }}
                       onClick={() => setRedLightNotification(false)}
                     >
-                      <FontAwesomeIcon icon={faBell} />
+                      <img
+                        src="https://img.icons8.com/ios/50/null/appointment-reminders--v1.png"
+                        alt="noti"
+                        width="20px"
+                      />
+                      {/* <FontAwesomeIcon icon={faBell} /> */}
                       {redLightNotification ? (
                         <div
                           className="notificationNotification"
@@ -422,7 +427,12 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                     }
                   }}
                 >
-                  <FontAwesomeIcon icon={faMessage} />
+                  {/* <FontAwesomeIcon icon={faMessage} /> */}
+                  <img
+                    src="https://img.icons8.com/ios/50/null/filled-chat.png"
+                    alt="message"
+                    width="20px"
+                  />
                   {uniques.length > 0 ? (
                     <div className="notificationMessage">{uniques.length}</div>
                   ) : null}
