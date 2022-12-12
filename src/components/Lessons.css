@@ -37,23 +37,28 @@
 }
 
 .infoinfo{
-    display:flex;
-    flex-direction: column;
-    justify-content:center;
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    /* display:flex; */
+    /* flex-direction: column; */
+    /* justify-content:center; */
     /* margin-top:10px; */
-    text-align: center;
+    /* text-align: center; */
 }
 .profile {
     /* display:block; */
     /* position:relative; */
     border-radius:5px;
     width:90%;
+    max-width: 1065px;
+    padding-right: 15px;
     height:fit-content;
     margin:-20px auto;
+    min-height: 250px;
     /* margin:  0 10px 20px; */
     z-index:50;
     display: grid;
-    grid-template-columns:1fr 3fr;
+    grid-template-columns:1fr;
     gap:.5rem;
     border-bottom: 1px solid rgb(138, 136, 136);
 
@@ -65,35 +70,83 @@
 
 .lessonsVideos{
     width: 90vw;
-    margin: 50px auto;
+    margin: 100px auto;
     display: grid;
     grid-template-columns:repeat(3,1fr);
     gap: 1rem;
 }
-
+.part2Info{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 3rem;
+}
 .partInfo{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: flex-start;
-        align-items: center
+        align-items: flex-start;
+        /* margin-right: 2rem; */
+        /* max-width: 1065px; */
 }
 
 .dashBetween{
     padding: 0px 5px
     }
+    .lessonCoverBig {
+        /* display: inline-block; */
+        vertical-align: middle;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: contain;
+        background-color: #000;
+        cursor: pointer;
+        margin: auto;
+        padding: 0;
+        /* position: absolute; */
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 499px;
+        max-width: 1065px;
+    }
 @media (max-width: 768px){
+    .part2Info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .lessonCoverBig {
+        /* display: inline-block; */
+        vertical-align: middle;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: contain;
+        background-color: #000;
+        cursor: pointer;
+        margin: auto;
+        padding: 0;
+        /* position: absolute; */
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width:100%;
+        height: 381px;
+    }
     .partInfo{
         height:140px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        /* margin-top:10px; */
+        /* margin-top:30px; */
     
 }
-.dashBetween{
-display:none;
-}
+
     .courseDataAll{
         margin-top:70px
     }  
@@ -105,10 +158,11 @@ display:none;
         flex-direction: column;
         justify-content:center;
         align-items: center;
-    width:100%;
+    max-width:100%;
     margin: auto;
     height:fit-content;
-    margin:-30px auto;
+        /* padding:0px; */
+    /* margin:-30px auto; */
 
     }
     .infoinfo{

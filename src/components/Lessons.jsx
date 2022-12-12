@@ -51,6 +51,7 @@ export default function Lessons({ user }) {
           {/* <Link to="/Lesson" style={{ textDecoration: "none" }}> */}
           <div onClick={() => handleLessonClick(lesson)}>
             <div
+              className="lessonCover"
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -102,21 +103,22 @@ export default function Lessons({ user }) {
   return (
     <div className="courseDataAll">
       <div
+        className="lessonCoverBig"
         style={{
           backgroundImage: `url(${
             courseInfo.coursePhoto
               ? courseInfo.coursePhoto
               : "https://images.unsplash.com/photo-1546058256-47154de4046c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHBpYW5vfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
           })`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          height: "200px",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          alignItems: "flex-start",
+          // backgroundPosition: "center",
+          // backgroundSize: "cover",
+          // backgroundRepeat: "no-repeat",
+          // height: "200px",
+          // width: "100%",
+          // display: "flex",
+          // flexDirection: "column",
+          // justifyContent: "flex-end",
+          // alignItems: "flex-start",
           // position: "relative",
         }}
       >
@@ -132,7 +134,7 @@ export default function Lessons({ user }) {
         /> */}
       </div>
       <div className="profile">
-        <div
+        {/* <div
           style={{
             width: "100%",
             // height: "150px",
@@ -149,19 +151,25 @@ export default function Lessons({ user }) {
             height="150px"
             style={{ borderRadius: "50%", border: "2px solid white" }}
           />
-        </div>
+        </div> */}
         <div className="infoinfo">
           <div className="partInfo">
-            <h1>
+            {/* <h1>
               {courseInfo.firstName}
               {"  "}
               {courseInfo.lastName}
               {"  "}
-            </h1>
-            <h1 className="dashBetween">-</h1>
-            <h1>{courseInfo.title}</h1>
+            </h1> */}
+            <div>
+              <h1 style={{ fontSize: "38px" }}>{courseInfo.title}</h1>
+              <h1 style={{ fontSize: "24px" }}>
+                من قبل المدرس {courseInfo.firstName}
+                {"  "}
+                {courseInfo.lastName}
+              </h1>
+            </div>
           </div>
-          <div>{courseInfo.description}</div>
+          <div className="part2Info">{courseInfo.description}</div>
         </div>
       </div>
 
