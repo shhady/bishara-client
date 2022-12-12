@@ -374,7 +374,15 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
             }}
           >
             <div onClick={() => setOpenMenu(!openMenu)}>
-              {!openMenu ? <FontAwesomeIcon icon={faBars} /> : null}{" "}
+              {!openMenu ? (
+                <>
+                  <img
+                    src="https://img.icons8.com/external-tal-revivo-filled-tal-revivo/24/null/external-mobile-application-hamburger-menu-setting-interface-basic-filled-tal-revivo.png"
+                    alt="menu"
+                    width="25px"
+                  />
+                </>
+              ) : null}{" "}
             </div>
             <div>
               {user ? (
@@ -413,7 +421,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
               {user ? (
                 <div
                   style={{
-                    padding: "2px",
+                    // padding: "2px",
                     // border: "1px solid white",
                     cursor: "pointer",
                     position: "relative",
