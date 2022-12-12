@@ -138,6 +138,7 @@ export default function TeacherData({ listId, teacher }) {
   return (
     <div className="teacherDataAll">
       <div
+        className="coverHeight"
         style={{
           backgroundImage: `url(${
             teacherInfo.cover
@@ -147,26 +148,24 @@ export default function TeacherData({ listId, teacher }) {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          height: "200px",
+          // height: "600px",
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
-          alignItems: "flex-start",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+          fontFamily: "source-code-pro, Menlo, Monaco, Consolas, 'Courier New'",
           // position: "relative",
         }}
       >
-        {/* <img
-          src={
-            teacherInfo.cover
-              ? teacherInfo.cover
-              : "https://images.unsplash.com/photo-1546058256-47154de4046c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHBpYW5vfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
-          }
-          width="100%"
-          height="100%"
-          objectFit="fit"
-          alt="cover"
-        /> */}
+        <div>
+          <h1>
+            {teacherInfo.firstName}
+            {"  "}
+            {teacherInfo.lastName}
+          </h1>
+        </div>
       </div>
       <div className="profile">
         <div
@@ -178,13 +177,13 @@ export default function TeacherData({ listId, teacher }) {
             justifyContent: "center",
             alignItems: "center",
           }}
+          // className="imageProfilediv"
         >
           <img
+            className="imageProfile"
             src={teacherInfo.avatar}
             alt="profile"
-            width="150px"
-            height="150px"
-            style={{ borderRadius: "50%", border: "2px solid white" }}
+            style={{ borderRadius: "50%", border: "8px solid white" }}
           />
         </div>
         <div
@@ -193,24 +192,17 @@ export default function TeacherData({ listId, teacher }) {
           //   display: "flex",
           //   flexDirection: "column",
           //   justifyContent: "flex-start",
-          //   marginTop: "10px",
-          //   // alignItems: "flex-start",
+          //   marginTop: "40px",
+          //   alignItems: "flex-start",
           // }}
         >
-          <div>
-            <h1>
-              {teacherInfo.firstName}
-              {"  "}
-              {teacherInfo.lastName}
-            </h1>
-          </div>
           <div>{teacherInfo.about}</div>
         </div>
       </div>
       {/* <div style={{ width: "100%" }}>
         <hr />
       </div> */}
-      <div style={{ textAlign: "center", marginTop: "15px" }}>
+      <div className="dawrat">
         <h2>دورات {teacherInfo.firstName}</h2>
       </div>
       <div className="coursesDrawCss">{drawCourses()}</div>

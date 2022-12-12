@@ -7,8 +7,12 @@
     align-items: center;
 }
 .teacherDataAll{
-    margin-top: 90px;
+    margin-top: 80px;
 }
+.coverHeight{
+    height: 600px;
+}
+
 .coursesDrawCss{
     width:90%;
     margin: auto;
@@ -17,10 +21,6 @@
     grid-template-columns:repeat(3,1fr);
     gap: 4rem;
 }
-
-
-
-
 
 .main {
     display:block;
@@ -32,7 +32,7 @@
 
 .cover {
     display:block;
-    height:40vh;
+    height:100vh;
     overflow:hidden;
     z-index:1;
     display: flex;
@@ -43,42 +43,73 @@
 .cover img {
     max-width:100%;
 }
+.imageProfile{
+    width:221px;
+            height:221px;
+            max-width:100%;
+            z-index:8;
+            margin-top: -50px;
+}
+.imageProfilediv{
+    min-width: 221px;
+}
 .profile {
-    display:block;
+    /* display:block; */
     /* position:relative; */
     border-radius:5px;
-    width:90%;
+    width:70%;
     margin:auto;
+    min-height: 250px;
     height:fit-content;
-    margin: -20px auto;
     display: grid;
     grid-template-columns:1fr 3fr;
     gap:.5rem;
-    border-bottom: 1px solid rgb(138, 136, 136);
+    padding-bottom: 50px;
+    border-bottom: 1px solid #e1e1e1;
 }
-.profile img {
+/* .profile img {
     max-width:100%;
     z-index:8;
-}
+    margin: -0px;
+
+} */
 .teacherDetailsAtData{
-    display:"flex";
+    display:flex;
     flex-direction:column;
     justify-content:flex-start;
-    margin-top: "10px"
+    margin-top: 50px;
+    padding-right: 40px;
+}
+.dawrat{
+    text-align:center;
+    margin-top: 70px;
 }
 @media (max-width: 768px) {
+    .dawrat{
+        text-align:center;
+        margin-top: 50px;
+    }
     .teacherDetailsAtData{
         display:"flex";
         flex-direction:column;
         justify-content:center;
         align-items: center;
         text-align: center;
+        padding-right: 0px;
+
+    }
+    .imageProfile{
+        width:190px;
+        height:190px;
+    }
+    .coverHeight{
+        height: 450px;
     }
     .profile{
         display:block;
     /* position:relative; */
     border-radius:5px;
-    width:90%;
+    width:97%;
     margin:auto;
     height:fit-content;
     margin: -15px auto;

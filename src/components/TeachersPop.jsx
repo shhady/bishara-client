@@ -107,7 +107,7 @@ export default function TeachersPop({ setTeachersHover }) {
             padding: "10px",
             width: "90%",
             margin: "auto",
-            borderBottom: "1px solid gray",
+            borderBottom: "1px solid #e1e1e1",
             marginBottom: "20px",
             backgroundColor: "white",
           }}

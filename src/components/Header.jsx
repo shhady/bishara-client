@@ -655,31 +655,35 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
             </div>
           ) : null}
           <div className="menu-details-computer">
-            <div
-              onMouseOver={() => setTeachersHover(false)}
-              style={{ height: "80px", color: "transparent" }}
-            >
-              1
-            </div>
             <Link to="/teachers" style={{ textDecoration: "none" }}>
               <div
                 className="headeroud"
-                onMouseOver={() => {
-                  setTeachersHover(true);
-                  setCoursesHover(false);
-                }}
                 onClick={() => setTeachersHover(false)}
               >
-                <div className="logoAndText">
-                  {/* <FontAwesomeIcon
+                <div style={{ display: "flex" }}>
+                  <div
+                    onMouseOver={() => setTeachersHover(false)}
+                    style={{ height: "80px", color: "transparent" }}
+                  >
+                    1
+                  </div>
+                  <div
+                    className="logoAndText"
+                    onMouseOver={() => {
+                      setTeachersHover(true);
+                      setCoursesHover(false);
+                    }}
+                  >
+                    {/* <FontAwesomeIcon
                     icon={faChalkboardUser}
                     className="highlight"
                   /> */}
-                  <img
-                    src="https://img.icons8.com/ios/50/null/user-group-man-man.png"
-                    width="25px"
-                  />
-                  <div style={{ fontWeight: "700" }}>مدرسين</div>
+                    <img
+                      src="https://img.icons8.com/ios/50/null/user-group-man-man.png"
+                      width="25px"
+                    />
+                    <div style={{ fontWeight: "700" }}>مدرسين</div>
+                  </div>
                 </div>
               </div>
             </Link>

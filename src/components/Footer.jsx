@@ -4,14 +4,27 @@ export default function Footer() {
   return (
     <div
       style={{
-        background: "rgba(27,26,31,255)",
+        // background: "rgba(27,26,31,255)",
         height: "30vh",
         marginTop: "30px",
-        boxShadow:
-          "3px 2px 4px 3px rgb(77, 76, 76), 0 2px 4px 3px rgba(43, 42, 42), 0 6px 6px 0 rgba(43, 42, 42)",
+        borderTop: "1.5px solid #e1e1e1",
       }}
     >
-      Footer
+      <div
+        style={{
+          width: "70%",
+          margin: "auto",
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          marginTop: "30px",
+        }}
+      >
+        <div>FAQ</div>
+        <div>Contacts Us</div>
+        <div>Join us</div>
+      </div>
+      <div style={{ textAlign: "center" }}>all rights reserved</div>
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function Home({ showArrows, user }) {
       <Hero showArrows={showArrows} user={user} />
       <FourBoxes />
       <TeachersHomePage />
-      <FreeVideos />
+      {/* <FreeVideos /> */}
       <LearnTrainCom />
       <About />
       <Footer />

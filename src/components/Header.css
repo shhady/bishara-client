@@ -97,7 +97,7 @@ button{
         display: none;
     }
 .menu-details-computer{
-    width:30%;
+    width:25%;
          display: flex;
         justify-content: space-around;
         align-items: center;
