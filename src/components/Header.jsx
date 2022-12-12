@@ -19,7 +19,14 @@ import {
 
 // import { io } from "socket.io-client";
 // import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-export default function Header({ user, setUser, socket, setShowArrows }) {
+export default function Header({
+  user,
+  setUser,
+  socket,
+  setShowArrows,
+  setUpdateComponent,
+  updateComponent,
+}) {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
   const history = useHistory();
@@ -651,7 +658,11 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
               }}
               onMouseLeave={() => setCoursesHover(false)}
             >
-              <CoursesPop setCoursesHover={setCoursesHover} />
+              <CoursesPop
+                setCoursesHover={setCoursesHover}
+                updateComponent={updateComponent}
+                setUpdateComponent={setUpdateComponent}
+              />
             </div>
           ) : null}
           <div className="menu-details-computer">

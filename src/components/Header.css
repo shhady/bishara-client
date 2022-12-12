@@ -137,8 +137,8 @@ box-shadow:  20px 20px 60px #d5d5d5,
 }
 .notificationNotification{
     position: absolute;
-    margin-top: -55%;
-    margin-left: 55%;
+    margin-top: -15%;
+    margin-left: 15%;
     width:10px;
     height: 10px;
     background-color: rgb(246, 95, 95);
@@ -193,6 +193,15 @@ box-shadow:  20px 20px 60px #d5d5d5,
         width: 100vw;
         padding-left: 11px;
         padding-right: 11px;
+    }
+    .notificationNotification{
+        position: absolute;
+        margin-top: -55%;
+        margin-left: -55%;
+        width:10px;
+        height: 10px;
+        background-color: rgb(246, 95, 95);
+        border-radius:50%
     }
     .sideMenu{
         top:60px;

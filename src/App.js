@@ -53,6 +53,7 @@ export default function App() {
   const [listId, setListId] = useState("");
   const [course, setCourse] = useState(null);
   const [teacher, setTeacher] = useState(null);
+  const [updateComponent, setUpdateComponent] = useState(null);
   useEffect(() => {
     if (!user) return;
     user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
@@ -82,6 +83,8 @@ export default function App() {
             socket={socket}
             showArrows={showArrows}
             setShowArrows={setShowArrows}
+            updateComponent={updateComponent}
+            setUpdateComponent={setUpdateComponent}
           />
           <Route path="/" exact>
             <Home user={user} setUser={setUser} showArrows={showArrows} />
@@ -107,6 +110,7 @@ export default function App() {
               setTeacher={setTeacher}
               teacher={teacher}
               listId={listId}
+              updateComponent={updateComponent}
             />
           </Route>
           <Route path="/Notifications" exact>

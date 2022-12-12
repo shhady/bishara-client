@@ -3,7 +3,11 @@ import axios from "axios";
 import "./Teachers.css";
 import { Link } from "react-router-dom";
 // import {useNav} from "react-router-dom"
-export default function TeachersPop({ setCoursesHover }) {
+export default function TeachersPop({
+  setCoursesHover,
+  setUpdateComponent,
+  updateComponent,
+}) {
   const [courses, setCourses] = useState(null);
   useEffect(() => {
     const fetch = async () => {
@@ -45,7 +49,13 @@ export default function TeachersPop({ setCoursesHover }) {
   const drawData = () => {
     return courses.slice(0, 2).map((course, i) => {
       return (
-        <div key={i} onClick={() => setCoursesHover(false)}>
+        <div
+          key={i}
+          onClick={() => {
+            setCoursesHover(false);
+            setUpdateComponent(course);
+          }}
+        >
           <Link to="/Lessons" style={{ textDecoration: "none" }}>
             <div
               style={{ cursor: "pointer", display: "flex" }}

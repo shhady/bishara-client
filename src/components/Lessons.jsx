@@ -6,19 +6,31 @@ import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from "react-router-dom";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
-export default function Lessons({ user }) {
+export default function Lessons({ user, updateComponent }) {
   const [courseInfo, setCourseInfo] = useState(
     JSON.parse(localStorage.getItem("courseDetails"))
   );
+  const [updated, setUpdated] = useState(updateComponent);
   const [listId, setListId] = useState("");
   const [lessons, setLessons] = useState([]);
   const history = useHistory();
   window.onpopstate = () => {
     history.push("/TeacherData");
   };
+
   useEffect(() => {
-    setListId(courseInfo.playlistId);
-  }, [courseInfo]);
+    setUpdated(updateComponent);
+  }, [updateComponent]);
+
+  console.log(updated);
+  useEffect(() => {
+    if (updated) {
+      setListId(updated.playlistId);
+    } else {
+      setListId(courseInfo.playlistId);
+    }
+  }, [courseInfo, updated]);
+  console.log(listId);
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(
@@ -28,7 +40,7 @@ export default function Lessons({ user }) {
       //   setData(result.data.items[0].snippet.thumbnails.default.url);
     };
     fetch();
-  }, [listId]);
+  }, [listId, updated]);
 
   const handleLessonClick = (lesson) => {
     if (user) {
@@ -43,7 +55,9 @@ export default function Lessons({ user }) {
     window.localStorage.setItem("lessonDetails", JSON.stringify(lesson));
     window.localStorage.setItem("courseOwnerId", courseInfo.owner);
     window.localStorage.setItem("playlistId", lesson.snippet.playlistId);
+    window.localStorage.setItem("teacherId", updated.owner);
   };
+  useEffect(() => {}, [lessons]);
   const drawLessons = () => {
     return lessons?.map((lesson, i) => {
       return (
@@ -106,9 +120,7 @@ export default function Lessons({ user }) {
         className="lessonCoverBig"
         style={{
           backgroundImage: `url(${
-            courseInfo.coursePhoto
-              ? courseInfo.coursePhoto
-              : "https://images.unsplash.com/photo-1546058256-47154de4046c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHBpYW5vfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
+            updated ? updated.coursePhoto : courseInfo.coursePhoto
           })`,
           // backgroundPosition: "center",
           // backgroundSize: "cover",
@@ -133,7 +145,7 @@ export default function Lessons({ user }) {
           objectFit="fit"
         /> */}
       </div>
-      <div className="profile">
+      <div className="profile1">
         {/* <div
           style={{
             width: "100%",
@@ -161,15 +173,20 @@ export default function Lessons({ user }) {
               {"  "}
             </h1> */}
             <div>
-              <h1 style={{ fontSize: "38px" }}>{courseInfo.title}</h1>
+              <h1 style={{ fontSize: "38px" }}>
+                {updated ? updated.title : courseInfo.title}
+              </h1>
               <h1 style={{ fontSize: "24px" }}>
-                من قبل المدرس {courseInfo.firstName}
+                من قبل المدرس{" "}
+                {updated ? updated.firstName : courseInfo.firstName}
                 {"  "}
-                {courseInfo.lastName}
+                {updated ? updated.lastName : courseInfo.lastName}
               </h1>
             </div>
           </div>
-          <div className="part2Info">{courseInfo.description}</div>
+          <div className="part2Info">
+            {updated ? updated.description : courseInfo.description}
+          </div>
         </div>
       </div>
 
