@@ -42,9 +42,8 @@ export default function Header({
   const [notificationNumber, setNotificationNumber] = useState([]);
   const [isHovering, setIsHovering] = useState(false);
   const [teachersHover, setTeachersHover] = useState(false);
-
+  const [userReplies, setUserReplies] = useState([]);
   const [coursesHover, setCoursesHover] = useState(false);
-
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState([]);
   const [redLightNotification, setRedLightNotification] = useState(false);
@@ -189,6 +188,26 @@ export default function Header({
     };
     filterComment();
   }, [comments, user]);
+
+  useEffect(() => {
+    console.log(comments);
+    const filterReply = () => {
+      const specificReplies = comments?.filter(
+        (reply) => reply.userid === userId
+      );
+      // setRedLightNotification(redlight);
+      setUserReplies(specificReplies);
+      // console.log(specificReplies[0].replyRead);
+      // console.log(redlight + "okkk");
+    };
+    filterReply();
+  }, [comments]);
+  useEffect(() => {
+    const redlight = userReplies?.filter((reply) => reply.replyRead !== true);
+    setRedLightNotification(redlight);
+    console.log(redlight);
+  }, [userReplies]);
+
   console.log(userComments);
 
   const uniques = notificationMessage
