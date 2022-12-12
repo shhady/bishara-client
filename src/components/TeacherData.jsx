@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeacherData.css";
 import { Link, useHistory } from "react-router-dom";
-export default function TeacherData({ listId, teacher }) {
+export default function TeacherData({ listId, teacher, setUpdateComponent }) {
   const [teacherId, setTeacherId] = useState(localStorage.getItem("teacherId"));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [userId, setUserId] = useState("");
@@ -74,8 +74,9 @@ export default function TeacherData({ listId, teacher }) {
       </div>
     );
 
-  const saveCourseLocal = (course) => {
+  const saveCourseLocal = async (course) => {
     window.localStorage.setItem("courseDetails", JSON.stringify(course));
+    setUpdateComponent(course);
   };
 
   const deleteCourse = (course) => {
