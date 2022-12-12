@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Posts/styles.css";
 import { useHistory } from "react-router-dom";
-export default function Courses({ listId, setListId, setCourse }) {
+export default function Courses({
+  listId,
+  setListId,
+  setCourse,
+  setUpdateComponent,
+}) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [posts, setposts] = useState(null);
   const [userId, setUserId] = useState("");
@@ -91,9 +96,12 @@ export default function Courses({ listId, setListId, setCourse }) {
     window.localStorage.setItem("courseId", post._id);
     window.localStorage.setItem("ownerId", post.owner);
     window.localStorage.setItem("playlistId", post.playlistId);
+    window.localStorage.setItem("teacherId", post.owner);
+
     setListId(post.playlistId);
     setCourse(post);
     window.localStorage.setItem("courseDetails", JSON.stringify(post));
+    setUpdateComponent(post);
 
     // history.push("/course");
   };

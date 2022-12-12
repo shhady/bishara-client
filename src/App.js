@@ -155,6 +155,7 @@ export default function App() {
               list={listId}
               setCourse={setCourse}
               course={course}
+              setUpdateComponent={setUpdateComponent}
             />
           </Route>
           <Route path="/course/:id" exact>
