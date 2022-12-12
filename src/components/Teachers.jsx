@@ -128,12 +128,13 @@ export default function Teachers({ user, setUser, setTeacher }) {
               <img
                 src={teacher.avatar}
                 alt={teacher.firstName}
-                height="150px"
-                width="150px"
+                className="teachersPhotos"
                 style={{ borderRadius: "50%" }}
               />
             </div>
-            <div style={{ color: "black", fontWeight: "lighter" }}>
+            <div
+              style={{ color: "black", fontWeight: "700", fontSize: "18px" }}
+            >
               {teacher.firstName} {teacher.lastName}
             </div>
             <div>
@@ -167,7 +168,7 @@ export default function Teachers({ user, setUser, setTeacher }) {
         }}
       >
         <div>
-          <h1>المدرسين</h1>
+          <h1 style={{ fontWeight: "bold" }}>المدرسين</h1>
         </div>
       </div>
       <div className="teachersCards">{drawData()}</div>

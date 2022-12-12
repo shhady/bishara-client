@@ -13,14 +13,14 @@
     height: 600px;
 }
 
-.coursesDrawCss{
+/* .coursesDrawCss{
     width:90%;
     margin: auto;
     margin-top:40px;
     display: grid;
     grid-template-columns:repeat(3,1fr);
     gap: 4rem;
-}
+} */
 
 .main {
     display:block;
@@ -53,6 +53,32 @@
 .imageProfilediv{
     min-width: 221px;
 }
+.coursesDrawCss1{
+    width:90%;
+    height:60%;
+    margin: auto;
+    margin-top:40px;
+    display: grid;
+    grid-template-columns:repeat(1,1fr);
+    gap: 4rem;
+}
+.coursesDrawCss2{
+    width:90%;
+    margin: auto;
+    margin-top:40px;
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    gap: 4rem;
+}
+.coursesDrawCss3{
+    width:90%;
+    margin: auto;
+    margin-top:40px;
+    display: grid;
+    grid-template-columns:repeat(3,1fr);
+    gap: 4rem;
+}
+
 .profile {
     /* display:block; */
     /* position:relative; */
@@ -123,6 +149,25 @@
         display: grid;
         grid-template-columns:repeat(1,1fr);
         gap: 1rem;
+    }
+    .coursesDrawCss1{
+       
+        margin-top:40px;
+        display: grid;
+        grid-template-columns:repeat(1,1fr);
+        gap: 1rem;    
+    } .coursesDrawCss2{
+       
+        margin-top:40px;
+        display: grid;
+        grid-template-columns:repeat(1,1fr);
+        gap: 1rem;    
+    } .coursesDrawCss3{
+       
+        margin-top:40px;
+        display: grid;
+        grid-template-columns:repeat(1,1fr);
+        gap: 1rem;    
     }
     .teacherDataAll{
         margin-top: 70px;

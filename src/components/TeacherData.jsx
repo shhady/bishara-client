@@ -88,6 +88,7 @@ export default function TeacherData({ listId, teacher }) {
     deleteTheCourse();
     // history.push("/");
   };
+  console.log(filteredCourses.length);
   const drawCourses = () => {
     return filteredCourses?.map((course, i) => {
       return (
@@ -98,7 +99,7 @@ export default function TeacherData({ listId, teacher }) {
                 src={course.coursePhoto}
                 alt="hi"
                 width="100%"
-                height="200px"
+                height={filteredCourses.length === 1 ? "400px" : "200px"}
               />
             </div>
 
@@ -205,7 +206,15 @@ export default function TeacherData({ listId, teacher }) {
       <div className="dawrat">
         <h2>دورات {teacherInfo.firstName}</h2>
       </div>
-      <div className="coursesDrawCss">{drawCourses()}</div>
+      {filteredCourses.length === 1 ? (
+        <div className="coursesDrawCss1">{drawCourses()}</div>
+      ) : null}
+      {filteredCourses.length === 2 ? (
+        <div className="coursesDrawCss2">{drawCourses()}</div>
+      ) : null}
+      {filteredCourses.length === 3 ? (
+        <div className="coursesDrawCss3">{drawCourses()}</div>
+      ) : null}
     </div>
   );
 }

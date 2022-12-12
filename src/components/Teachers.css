@@ -3,6 +3,8 @@
     display: grid;
     grid-template-columns: repeat(6,1fr);
     gap: 1rem;
+    width:90%;
+    margin:auto;
 }
 div{
     font-weight: 200;
@@ -42,6 +44,7 @@ div{
     flex-direction: column;
     /* justify-content: space-around; */
     align-items: center;
+    
     /* border: 1px solid black;
     border-radius: 5px; */
     /* border-radius: 10px; */
@@ -68,6 +71,10 @@ div{
     justify-content:center;
     align-items:center;
     margin-top: 200px;
+}
+.teachersPhotos{
+    height: 135px;
+    width: 135px;
 }
 
 @media (max-width: 768px) and (min-width: 500px){
