@@ -42,12 +42,14 @@ export default function Header({
   const [notificationNumber, setNotificationNumber] = useState([]);
   const [isHovering, setIsHovering] = useState(false);
   const [teachersHover, setTeachersHover] = useState(false);
-
+  const [replies, setReplies] = useState([]);
   const [coursesHover, setCoursesHover] = useState(false);
-
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState([]);
   const [redLightNotification, setRedLightNotification] = useState(false);
+  const [redLightNotificationReply, setRedLightNotificationReply] =
+    useState(false);
+
   useEffect(() => {
     setNotificationNumber(backNot.filter((number) => number.read === false));
   }, [backNot]);
@@ -174,6 +176,18 @@ export default function Header({
     };
     fetch();
   }, [user]);
+
+  useEffect(() => {
+    const filterReplies = comments.filter(
+      (comment) => comment.userid === userId
+    );
+    setReplies(filterReplies);
+  }, [comments]);
+
+  useEffect(() => {
+    const filterReplies = replies?.some((reply) => reply.replyRead === "false");
+    setRedLightNotificationReply(filterReplies);
+  }, [replies]);
 
   useEffect(() => {
     const filterComment = () => {
@@ -406,15 +420,18 @@ export default function Header({
                         cursor: "pointer",
                         position: "relative",
                       }}
-                      onClick={() => setRedLightNotification(false)}
+                      onClick={() => {
+                        setRedLightNotification(false);
+                        setRedLightNotificationReply(false);
+                      }}
                     >
                       <img
-                        src="https://img.icons8.com/ios/50/null/appointment-reminders--v1.png"
+                        src="https://img.icons8.com/material-sharp/24/null/bell.png"
                         alt="noti"
                         width="20px"
                       />
                       {/* <FontAwesomeIcon icon={faBell} /> */}
-                      {redLightNotification ? (
+                      {redLightNotification || redLightNotificationReply ? (
                         <div
                           className="notificationNotification"
                           // style={{ position: "absolute" }}
@@ -445,7 +462,7 @@ export default function Header({
                 >
                   {/* <FontAwesomeIcon icon={faMessage} /> */}
                   <img
-                    src="https://img.icons8.com/ios/50/null/filled-chat.png"
+                    src="https://img.icons8.com/fluency-systems-filled/48/null/filled-chat.png"
                     alt="message"
                     width="20px"
                   />
@@ -548,7 +565,7 @@ export default function Header({
                         onMouseOver={() => setIsHovering(false)}
                       >
                         <img
-                          src="https://img.icons8.com/ios/50/null/appointment-reminders--v1.png"
+                          src="https://img.icons8.com/material-sharp/24/null/bell.png"
                           alt="noti"
                           width="20px"
                         />
@@ -586,7 +603,7 @@ export default function Header({
                   >
                     {/* <FontAwesomeIcon icon={faMessage} /> */}
                     <img
-                      src="https://img.icons8.com/ios/50/null/filled-chat.png"
+                      src="https://img.icons8.com/fluency-systems-filled/48/null/filled-chat.png"
                       alt="message"
                       width="20px"
                     />
