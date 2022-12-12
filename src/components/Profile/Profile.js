@@ -323,15 +323,7 @@ export default function Profile() {
       {user ? (
         <div>
           {user.teacher ? (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: "90px",
-              }}
-            >
+            <div className="coverProfile">
               <div
                 style={{
                   backgroundImage: `url(${coverPicture})`,

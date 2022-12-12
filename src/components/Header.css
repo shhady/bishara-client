@@ -1,12 +1,12 @@
 .header{
-    height:80px;
+    max-height:80px;
     display:flex;
     flex-direction: column;
     justify-content:center;
     align-items: center;
     box-shadow:
                 rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px;
-    padding:3px;
+    /* padding:3px; */
     background-color: white;
     top:0;
     right:0;
@@ -59,9 +59,20 @@ button{
     cursor: pointer;
     border-bottom: 3px solid transparent;
     color:black;
+    height:80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     
     /* margin-right: 3rem; */
     
+}
+.logoAndText {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center
 }
 .highlight{
     font-family: "Font Awesome 5 Pro";

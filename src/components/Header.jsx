@@ -3,10 +3,10 @@ import "./Header.css";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import TeachersPop from "./TeachersPop";
+import CoursesPop from "./CoursesPop";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
 import {
   faUser,
   faBars,
@@ -35,6 +35,9 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
   const [notificationNumber, setNotificationNumber] = useState([]);
   const [isHovering, setIsHovering] = useState(false);
   const [teachersHover, setTeachersHover] = useState(false);
+
+  const [coursesHover, setCoursesHover] = useState(false);
+
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState([]);
   const [redLightNotification, setRedLightNotification] = useState(false);
@@ -223,7 +226,7 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                 // top: 85,
                 position: "fixed",
                 backgroundColor: "white",
-                right: 1,
+                right: 30,
                 width: "150px",
                 boxShadow:
                   "rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px",
@@ -463,10 +466,21 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                     ) : (
                       // <Link to="/profile" style={{ textDecoration: "none" }}>
                       <div
-                        style={{ marginLeft: "20px", marginRight: "20px" }}
+                        style={{
+                          marginRight: "20px",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
                         onMouseOver={() => setIsHovering(!isHovering)}
                       >
-                        <FontAwesomeIcon icon={faUser} />
+                        <img
+                          src="https://img.icons8.com/material-rounded/24/null/user.png"
+                          alt="user"
+                          width="25px"
+                        />
+                        {/* <FontAwesomeIcon icon={faUser} size="1.5em" /> */}
                       </div>
                       // </Link>
                     )}
@@ -494,14 +508,25 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                           // justifyContent: "flex-end",
                           // paddingLeft: "20px",
                           color: "black",
-                          padding: "0px 20px",
+                          padding: "0px 35px",
+                          height: "80px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          // height: "80px",
                           // border: "1px solid transparent",
                           cursor: "pointer",
                           position: "relative",
                         }}
                         onClick={() => setRedLightNotification(false)}
+                        onMouseOver={() => setIsHovering(false)}
                       >
-                        <FontAwesomeIcon icon={faBell} />
+                        <img
+                          src="https://img.icons8.com/ios/50/null/appointment-reminders--v1.png"
+                          alt="noti"
+                          width="20px"
+                        />
+                        {/* <FontAwesomeIcon icon={faBell} /> */}
                         {redLightNotification ? (
                           <div
                             className="notificationNotification"
@@ -516,7 +541,10 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                   <div
                     style={{
                       // padding: "2px",
-
+                      height: "80px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
                       // border: "1px solid white",
                       cursor: "pointer",
                       position: "relative",
@@ -530,7 +558,12 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
                       }
                     }}
                   >
-                    <FontAwesomeIcon icon={faMessage} />
+                    {/* <FontAwesomeIcon icon={faMessage} /> */}
+                    <img
+                      src="https://img.icons8.com/ios/50/null/filled-chat.png"
+                      alt="message"
+                      width="20px"
+                    />
                     {uniques.length > 0 ? (
                       <div className="notificationMessage">
                         {uniques.length}
@@ -585,6 +618,24 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
               <TeachersPop setTeachersHover={setTeachersHover} />
             </div>
           ) : null}
+          {coursesHover ? (
+            <div
+              style={{
+                zIndex: "5",
+                top: 85,
+                position: "fixed",
+                backgroundColor: "white",
+                // margin: "auto",
+                left: "25%",
+                width: "50%",
+                boxShadow:
+                  "rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px",
+              }}
+              onMouseLeave={() => setCoursesHover(false)}
+            >
+              <CoursesPop setCoursesHover={setCoursesHover} />
+            </div>
+          ) : null}
           <div className="menu-details-computer">
             <div
               onMouseOver={() => setTeachersHover(false)}
@@ -595,47 +646,74 @@ export default function Header({ user, setUser, socket, setShowArrows }) {
             <Link to="/teachers" style={{ textDecoration: "none" }}>
               <div
                 className="headeroud"
-                onMouseOver={() => setTeachersHover(true)}
+                onMouseOver={() => {
+                  setTeachersHover(true);
+                  setCoursesHover(false);
+                }}
                 onClick={() => setTeachersHover(false)}
               >
-                <div>
-                  <FontAwesomeIcon
+                <div className="logoAndText">
+                  {/* <FontAwesomeIcon
                     icon={faChalkboardUser}
                     className="highlight"
+                  /> */}
+                  <img
+                    src="https://img.icons8.com/ios/50/null/user-group-man-man.png"
+                    width="25px"
                   />
+                  <div style={{ fontWeight: "700" }}>مدرسين</div>
                 </div>
-                <div style={{ fontWeight: "80" }}>المدرسين</div>
               </div>
             </Link>
             {user ? (
-              <Link to="/courses" style={{ textDecoration: "none" }}>
-                <div
-                  className="headeroud"
-                  onMouseOver={() => setTeachersHover(false)}
-                >
-                  <div>
-                    <FontAwesomeIcon icon={faMusic} />
-                  </div>
-                  <div>الدورات الموسيقية</div>
+              // <Link to="/courses" style={{ textDecoration: "none" }}>
+              <div
+                className="headeroud"
+                onMouseOver={() => {
+                  setTeachersHover(false);
+                  setCoursesHover(true);
+                }}
+                onClick={() => setCoursesHover(true)}
+              >
+                <div className="logoAndText">
+                  {/* <FontAwesomeIcon icon={faMusic} /> */}
+                  <img
+                    src="https://img.icons8.com/ios/50/null/youtube-music.png"
+                    alt="courses"
+                    width="25px"
+                  />
+                  <div style={{ fontWeight: "700" }}>دورات</div>
                 </div>
-              </Link>
+              </div>
             ) : (
+              //</Link>
               <Link to="/auth" style={{ textDecoration: "none" }}>
                 <div className="headeroud">
-                  <div>
+                  <div className="logoAndText">
                     <FontAwesomeIcon icon={faMusic} />
+                    <div style={{ fontWeight: "700" }}>دورات</div>
                   </div>
-                  <div>الدورات الموسيقية</div>
                 </div>
               </Link>
             )}
 
             <Link to="" style={{ textDecoration: "none" }}>
-              <div className="headerpiano">
-                <div>
-                  <FontAwesomeIcon icon={faUsersRays} />
+              <div
+                className="headerpiano"
+                onMouseOver={() => {
+                  // setTeachersHover(true);
+                  setCoursesHover(false);
+                }}
+              >
+                <div className="logoAndText">
+                  {/* <FontAwesomeIcon icon={faUsersRays} /> */}
+                  <img
+                    src="https://img.icons8.com/ios/50/null/project.png"
+                    alt="subscribe"
+                    width="25px"
+                  />
+                  <div style={{ fontWeight: "700" }}>اشتراك </div>
                 </div>
-                <div>الاشتراك </div>
               </div>
             </Link>
             <div onMouseOver={() => setTeachersHover(false)}></div>

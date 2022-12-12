@@ -3,6 +3,7 @@
 }
 .teacherAvatars{
     width: 90%;
+   height:fit-content;
     margin:auto;
     display: grid;
     grid-template-columns: repeat(10,1fr);
@@ -11,9 +12,18 @@
     overflow-y: none;
 
 }
+.teacherHomeAvatars{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
 
 @media (max-width: 768px){
-
+  .teacherHomeAvatars{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
     .teacherAvatars{
         width: 90%;
         margin:auto;
@@ -49,11 +59,15 @@
   }
 
 .teachersCard{
-    height: 180px;
-    display: flex;
+  height:fit-content;
+  display: flex;
     flex-direction: column;
     justify-content:space-around;
     align-items: center;
     cursor: pointer;
+
+}
+.teacherCard{
+  height:fit-content;
 
 }

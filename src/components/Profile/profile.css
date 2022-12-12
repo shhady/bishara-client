@@ -4,6 +4,13 @@
     gap: 1rem;
     margin-top: 30px
 }
+.coverProfile{
+    display: flex;
+                flex-direction:column;
+                justify-content:center;
+                align-items:center;
+                margin-top:80px;
+}
 .profilePage{
 
         display: grid;
@@ -11,6 +18,13 @@
         margin-top: 150px
 }
 @media (max-width: 568px) {
+    .coverProfile{
+        display: flex;
+                    flex-direction:column;
+                    justify-content:center;
+                    align-items:center;
+                    margin-top:60px;
+    }
     .profileButtons{
         display: grid;
         grid-template-columns: repeat(1,1fr);

@@ -41,24 +41,35 @@ export default function TeachersPop({ setTeachersHover }) {
       return (
         <div key={i} onClick={() => setTeachersHover(false)}>
           <Link to="/TeacherData" style={{ textDecoration: "none" }}>
-            <div style={{ cursor: "pointer" }}>
+            <div
+              style={{
+                cursor: "pointer",
+                // maxHeight: "60px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <img
                 src={teacher.avatar}
                 alt={teacher.firstName}
-                height="150px"
-                width="150px"
+                height="100px"
+                width="100px"
                 style={{
                   borderRadius: "50%",
-                  width: "80px",
-                  height: "80px",
+                  width: "70px",
+                  height: "70px",
+                  marginBottom: "0px",
                 }}
                 onClick={() => addToLocal(teacher)}
                 // onClick={console.log(teacher._id)}
               />
-              <div style={{ color: "black" }}>
-                {teacher.firstName} <br />
-                {teacher.lastName}
-              </div>
+              <span
+                style={{ color: "black", fontWeight: "700", marginTop: "0px" }}
+              >
+                {teacher.firstName} {teacher.lastName}
+              </span>
             </div>
           </Link>
         </div>
@@ -79,9 +90,10 @@ export default function TeachersPop({ setTeachersHover }) {
       <div
         style={{
           backgroundColor: "white",
-          width: "50%",
+          width: "40%",
           border: "0.5px solid #dcdcdc",
           borderTop: "none",
+          height: "70vh",
           boxShadow:
             "rgb(0 0 0 / 6%) 0px 2px 4px, rgb(35 41 54 / 14%) 0px 6px 16px",
         }}

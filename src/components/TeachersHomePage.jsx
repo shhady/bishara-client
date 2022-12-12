@@ -59,13 +59,7 @@ export default function TeachersPop({ setTeachersHover }) {
             <img
               src={teacher.avatar}
               alt={teacher.firstName}
-              minHeight="120px"
-              minWidth="120px"
-              style={{
-                borderRadius: "50%",
-                width: "120px",
-                height: "120px",
-              }}
+              className="teacherHomeAvatars"
             />
             <div
               style={{
@@ -103,7 +97,7 @@ export default function TeachersPop({ setTeachersHover }) {
           width: "90%",
           margin: "auto",
           borderBottom: "1px solid gray",
-          marginBottom: "20px",
+          // marginBottom: "20px",
         }}
         // onMouseOut={() => setTeachersHover(false)}
       >
