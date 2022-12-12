@@ -138,12 +138,21 @@ box-shadow:  20px 20px 60px #d5d5d5,
 .notificationNotification{
     position: absolute;
     margin-top: -15%;
-    margin-left: 15%;
+   margin-left: 15%;
     width:10px;
     height: 10px;
     background-color: rgb(246, 95, 95);
     border-radius:50%
-}
+} 
+.notificationNotification1{
+    position: absolute;
+    margin-top: -15%;
+   margin-left: 15%;
+    width:10px;
+    height: 10px;
+    background-color: rgb(246, 95, 95);
+    border-radius:50%
+} 
 .notificationMessage{
     position: absolute;
     margin-top: -25px;
