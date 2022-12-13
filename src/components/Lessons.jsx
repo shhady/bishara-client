@@ -16,6 +16,7 @@ export default function Lessons({ user, updateComponent }) {
   const history = useHistory();
   window.onpopstate = () => {
     history.push("/TeacherData");
+    setUpdated("");
   };
 
   useEffect(() => {

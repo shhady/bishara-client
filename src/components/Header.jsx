@@ -726,6 +726,7 @@ export default function Header({
                 onMouseOver={() => {
                   setTeachersHover(false);
                   setCoursesHover(true);
+                  // setUpdateComponent("");
                 }}
                 onClick={() => setCoursesHover(true)}
               >
@@ -744,7 +745,11 @@ export default function Header({
               <Link to="/auth" style={{ textDecoration: "none" }}>
                 <div className="headeroud">
                   <div className="logoAndText">
-                    <FontAwesomeIcon icon={faMusic} />
+                    <img
+                      src="https://img.icons8.com/ios/50/null/youtube-music.png"
+                      alt="courses"
+                      width="25px"
+                    />
                     <div style={{ fontWeight: "700" }}>دورات</div>
                   </div>
                 </div>
@@ -787,6 +792,7 @@ export default function Header({
                   padding: "0px 20px",
                   fontFamily: "Noto Sans Arabic,sans-serif",
                 }}
+                onClick={() => setUpdateComponent("")}
               >
                 FUNAN<b>.AI</b>
               </div>{" "}
@@ -809,6 +815,7 @@ export default function Header({
                 onClick={() => {
                   setOpenMenu(!openMenu);
                   setShowArrows(false);
+                  setUpdateComponent("");
                 }}
               >
                 X
@@ -848,6 +855,7 @@ export default function Header({
                   onClick={() => {
                     setOpenMenu(!openMenu);
                     setShowArrows(false);
+                    setUpdateComponent("");
                   }}
                 >
                   <span
@@ -860,7 +868,10 @@ export default function Header({
               </Link>
               <Link to="/courses" style={{ textDecoration: "none" }}>
                 <div
-                  onClick={() => setOpenMenu(!openMenu)}
+                  onClick={() => {
+                    setOpenMenu(!openMenu);
+                    setUpdateComponent("");
+                  }}
                   style={{
                     display: "flex",
                     flexDirection: "column",
@@ -878,7 +889,12 @@ export default function Header({
                 </div>
               </Link>
               <Link to="/teachers" style={{ textDecoration: "none" }}>
-                <div onClick={() => setOpenMenu(!openMenu)}>
+                <div
+                  onClick={() => {
+                    setOpenMenu(!openMenu);
+                    setUpdateComponent("");
+                  }}
+                >
                   <span
                     className="blackBackgroundtext"
                     style={{ color: "white" }}
@@ -893,7 +909,12 @@ export default function Header({
               {user ? (
                 <>
                   <Link to="/profile" style={{ textDecoration: "none" }}>
-                    <div onClick={() => setOpenMenu(!openMenu)}>
+                    <div
+                      onClick={() => {
+                        setOpenMenu(!openMenu);
+                        setUpdateComponent("");
+                      }}
+                    >
                       <span
                         className="blackBackgroundtext"
                         style={{ color: "white" }}
@@ -904,7 +925,12 @@ export default function Header({
                     </div>
                   </Link>
                   <Link to="/Notifications" style={{ textDecoration: "none" }}>
-                    <div onClick={() => setOpenMenu(!openMenu)}>
+                    <div
+                      onClick={() => {
+                        setOpenMenu(!openMenu);
+                        setUpdateComponent("");
+                      }}
+                    >
                       <span
                         className="blackBackgroundtext"
                         style={{ color: "white" }}
@@ -918,7 +944,10 @@ export default function Header({
                       style={{
                         color: "white",
                       }}
-                      onClick={() => setOpenMenu(!openMenu)}
+                      onClick={() => {
+                        setOpenMenu(!openMenu);
+                        setUpdateComponent("");
+                      }}
                     >
                       <span className="blackBackgroundtext">
                         {" "}
@@ -927,7 +956,12 @@ export default function Header({
                     </div>
                   </Link>
                   <Link to="" style={{ textDecoration: "none" }}>
-                    <div onClick={() => setOpenMenu(!openMenu)}>
+                    <div
+                      onClick={() => {
+                        setOpenMenu(!openMenu);
+                        setUpdateComponent("");
+                      }}
+                    >
                       <span
                         className="blackBackgroundtext"
                         style={{ color: "white" }}
@@ -944,7 +978,7 @@ export default function Header({
 
               <div>
                 {user ? (
-                  <>
+                  <div onClick={() => setUpdateComponent("")}>
                     {user.teacher ? (
                       <div onClick={handleLogoutTeacher}>
                         <span className="blackBackgroundtext">خروج</span>
@@ -954,7 +988,7 @@ export default function Header({
                         <span className="blackBackgroundtext">خروج</span>
                       </div>
                     )}
-                  </>
+                  </div>
                 ) : null}
               </div>
             </div>
