@@ -155,6 +155,7 @@ export default function TeachersPop({
               flexDirection: "column",
               justifyContent: "flex-start",
               alignItems: "flex-start",
+              marginBottom: "10px",
             }}
           >
             <span>بيانو</span>

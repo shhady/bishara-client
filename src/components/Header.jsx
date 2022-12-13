@@ -264,7 +264,7 @@ export default function Header({
               {user ? (
                 <div
                   style={{
-                    borderBottom: "1px solid gray",
+                    borderBottom: "1px solid #e1e1e1",
                     width: "80%",
                     margin: " 20px auto",
                     paddingBottom: "15px",
@@ -355,7 +355,7 @@ export default function Header({
                 style={{
                   width: "80%",
                   margin: "20px auto",
-                  borderTop: "1px solid grey",
+                  borderTop: "1px solid #e1e1e1",
                   paddingBottom: "15px",
                   paddingTop: "15px",
                 }}

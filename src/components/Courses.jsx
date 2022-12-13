@@ -212,6 +212,10 @@ export default function Courses({
             <div>
               <div className="coursesPopUp">
                 <div className="allCourses" onClick={() => setAll(true)}>
+                  <img
+                    src="https://img.icons8.com/windows/32/null/circle.png"
+                    width="5px"
+                  />
                   جميع ألآلات
                 </div>
                 <div
@@ -263,6 +267,11 @@ export default function Courses({
           {" "}
           <div className="coursesCss">
             <div className="allCourses" onClick={() => setAll(true)}>
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
               جميع ألآلات
             </div>
             <div
@@ -272,6 +281,11 @@ export default function Courses({
                 setAll(false);
               }}
             >
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
               بيانو
             </div>
 
@@ -282,6 +296,11 @@ export default function Courses({
               }}
               className="allCourses"
             >
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
               عود
             </div>
 
@@ -292,6 +311,11 @@ export default function Courses({
               }}
               className="allCourses"
             >
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
               كمان
             </div>
 
@@ -302,6 +326,11 @@ export default function Courses({
               }}
               className="allCourses"
             >
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
               قانون
             </div>
           </div>

@@ -8,8 +8,13 @@ export default function message({ message, own, userAvatar }) {
       <div className="MessageTop">
         <img
           className="messageImg"
-          src={userAvatar ? userAvatar : "./Logo.JPG"}
+          src={
+            userAvatar
+              ? userAvatar
+              : "https://img.icons8.com/material-rounded/24/null/user.png"
+          }
           alt="img"
+          style={{ borderRadius: "50%", backgroundColor: "#e1e1e1" }}
         />
         <p className="messageText">{message.text}</p>
       </div>

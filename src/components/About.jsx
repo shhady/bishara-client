@@ -16,7 +16,7 @@ export default function about() {
       </div>
       <div className="instimage">
         <img
-          src="./instnew.jpg"
+          src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
           alt="instruments"
           width="80%"
           height="60%"

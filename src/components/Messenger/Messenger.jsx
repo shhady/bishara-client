@@ -40,9 +40,7 @@ export default function Messenger({ user, setUser, socket }) {
   }, [arrivalMessage, currentChat, userId]);
 
   useEffect(() => {
-    user.teacher
-      ? setUserAvatar(user.teacher.avatar)
-      : setUserAvatar("./Logo.JPG");
+    user.teacher ? setUserAvatar(user.teacher.avatar) : setUserAvatar("");
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
   }, [user.teacher, user.user]);
   useEffect(() => {
@@ -156,11 +154,14 @@ export default function Messenger({ user, setUser, socket }) {
               <div className="chatBoxBottom">
                 <textarea
                   className="chatMessageInput"
-                  placeholder="write something..."
+                  placeholder=""
                   onChange={(e) => {
                     setNewMessage(e.target.value);
                   }}
                   value={newMessage}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSubmit();
+                  }}
                 ></textarea>
                 <button className="chatSubmitButton" onClick={handleSubmit}>
                   ارسل

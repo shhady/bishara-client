@@ -16,7 +16,7 @@ export default function LearnTrainCom() {
         <div className="card1">
           <div>
             <img
-              src="./Learn.jpg"
+              src="https://images.unsplash.com/photo-1513883049090-d0b7439799bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fGxlYXJuJTIwcGlhbm98ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
               alt="learn"
               width="200px"
               height="200px"
@@ -29,7 +29,7 @@ export default function LearnTrainCom() {
         <div className="card2">
           <div>
             <img
-              src="./Train.JPG"
+              src="https://images.unsplash.com/photo-1512733596533-7b00ccf8ebaf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGxlYXJuJTIwcGlhbm98ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
               alt="Train"
               width="200px"
               height="200px"
@@ -44,7 +44,7 @@ export default function LearnTrainCom() {
         <div className="card3">
           <div>
             <img
-              src="./com.JPG"
+              src="https://images.unsplash.com/photo-1513171920216-2640b288471b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvbm5lY3R8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
               alt="learn"
               width="200px"
               height="200px"

@@ -34,8 +34,17 @@ export default function Conversation({ conversation, currentUser }) {
       <div className="conversation">
         <img
           className="imageConversation"
-          src={currentUser?.avatar ? currentUser.avatar : "./Logo.JPG"}
+          src={
+            currentUser?.avatar
+              ? currentUser.avatar
+              : "https://img.icons8.com/material-rounded/24/null/user.png"
+          }
           alt="Img"
+          style={{
+            borderRadius: "50%",
+            backgroundColor: "#e1e1e1",
+            padding: "1px",
+          }}
         />
 
         <span className="nameConversation" style={{ color: "black" }}>

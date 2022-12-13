@@ -1,11 +1,11 @@
 .learn-train-com-container{
     height: fit-content;
-    background: rgba(27,26,31,255);
+    /* background: rgba(27,26,31,255); */
     /* opacity: 0.4; */
-    box-shadow:3px 2px 4px 3px rgb(77, 76, 76), 0 2px 4px 3px rgba(43, 42, 42), 0 6px 6px 0 rgba(43, 42, 42);
-    color: white;
+    color: black;
     margin-top: 60px;
-    padding: 10px
+    padding: 10px;
+    border: 1px solid #e1e1e1;
 }
 
 .cards3{
