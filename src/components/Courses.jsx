@@ -14,6 +14,7 @@ export default function Courses({
   const [courseData, setCourseData] = useState(null);
   // const [course, setCourse] = useState(null);
   const [filteredPosts, setFilteredposts] = useState([]);
+  const [showPopUp, setShowPopUp] = useState(false);
   const [all, setAll] = useState(true);
   const [title, setTitle] = useState(null);
   const history = useHistory();
@@ -97,7 +98,6 @@ export default function Courses({
     window.localStorage.setItem("ownerId", post.owner);
     window.localStorage.setItem("playlistId", post.playlistId);
     window.localStorage.setItem("teacherId", post.owner);
-
     setListId(post.playlistId);
     setCourse(post);
     window.localStorage.setItem("courseDetails", JSON.stringify(post));
@@ -127,24 +127,22 @@ export default function Courses({
           style={{ cursor: "pointer", padding: "5px", borderRadius: "5px" }}
         >
           <img
-            src={post.avatar}
+            src={post.coursePhoto}
             alt={post.firstName}
-            width="150"
+            width="100%"
             height="150"
-            style={{ borderRadius: "50%", marginBottom: "10px" }}
+            style={{ marginBottom: "10px" }}
           />
-          <div>
-            المدرس:
-            {"  "} {post.firstName} {"  "}
-            {post.lastName}
-            <div>
-              الآلة:{"  "}
-              {post.instrument}
+          <div style={{ fontWeight: "700" }}>{post.title}</div>
+          <div style={{ width: "80%" }}>
+            <div className="nameInstrumentLevel">
+              {post.firstName} {"  "}
+              {post.lastName}
+              <div>
+                {post.instrument} / {post.level}
+              </div>
             </div>
-            <div>
-              المستوى:{"  "}
-              {post.level}
-            </div>
+            <div>{post.description.slice(0, 35)}...</div>
           </div>
         </div>
       );
@@ -172,25 +170,30 @@ export default function Courses({
             height="150"
             style={{ borderRadius: "50%" }}
           /> */}
-          <img
+          {/* <img
             src={post.avatar}
             alt={post.firstName}
             width="150"
             height="150"
             style={{ borderRadius: "50%", marginBottom: "10px" }}
+          /> */}
+          <img
+            src={post.coursePhoto}
+            alt={post.firstName}
+            width="100%"
+            height="150"
+            style={{ marginBottom: "10px" }}
           />
-          <div>
-            المدرس:
-            {"  "} {post.firstName} {"  "}
-            {post.lastName}
-            <div>
-              الآلة:{"  "}
-              {post.instrument}
+          <div style={{ fontWeight: "700" }}>{post.title}</div>
+          <div style={{ width: "80%" }}>
+            <div className="nameInstrumentLevel">
+              {post.firstName} {"  "}
+              {post.lastName}
+              <div>
+                {post.instrument} / {post.level}
+              </div>
             </div>
-            <div>
-              المستوى:{"  "}
-              {post.level}
-            </div>
+            <div>{post.description.slice(0, 35)}...</div>
           </div>
         </div>
       );
@@ -198,113 +201,115 @@ export default function Courses({
   };
 
   return (
-    <>
-      <div className="coursesCss">
-        <div className="allCourses" onClick={() => setAll(true)}>
-          جميع الدورات الموسيقية
-        </div>
-        {/* <Link to="/Piano"> */}
-        <div
-          className="allCourses"
-          // style={{
-          //   border: "1px solid gray",
-          //   display: "flex",
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          // }}
-          onClick={() => {
-            setTitle("بيانو");
-            setAll(false);
-          }}
-        >
-          <img
-            src="https://images.unsplash.com/photo-1579685055980-48dd748d862e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80"
-            alt="بيانو"
-            width="40px"
-            height="40px"
-            style={{ borderRadius: "50%", marginLeft: "10px" }}
-          />
-          بيانو
-        </div>
-        {/* </Link> */}
-        {/* <Link to="/Oud"> */}
-        <div
-          onClick={() => {
-            setTitle("عود");
-            setAll(false);
-          }}
-          className="allCourses"
-
-          // style={{
-          //   border: "1px solid gray",
-          //   display: "flex",
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          // }}
-        >
-          <img
-            src="https://images.unsplash.com/photo-1593550573849-1d608bb469ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80"
-            alt="piano"
-            width="40px"
-            height="40px"
-            style={{ borderRadius: "50%", marginLeft: "10px" }}
-          />
-          عود
-        </div>
-        {/* </Link> */}
-        {/* <Link to="/"> */}
-        <div
-          // style={{
-          //   border: "1px solid gray",
-          //   display: "flex",
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          // }}
-          onClick={() => {
-            setTitle("كمان");
-            setAll(false);
-          }}
-          className="allCourses"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1460036521480-ff49c08c2781?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dmlvbGlufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
-            alt="piano"
-            width="40px"
-            height="40px"
-            style={{ borderRadius: "50%", marginLeft: "10px" }}
-          />
-          كمان
-        </div>
-        {/* </Link> */}
-        {/* <Link to="/"> */}
-        {/* <div
-          // style={{
-          //   border: "1px solid gray",
-          //   display: "flex",
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          // }}
-          onClick={() => {
-            setTitle("قانون");
-            setAll(false);
-          }}
-          className="allCourses"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1579685055980-48dd748d862e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80"
-            alt="piano"
-            width="40px"
-            height="40px"
-            style={{ borderRadius: "50%", marginLeft: "10px" }}
-          />
-          قانون
-        </div>
-        {/* </Link> */}
+    <div style={{ display: "grid", gridAutoColumns: "3fr 1fr" }}>
+      <div className="TopOfPage">الدورات</div>
+      <div className="filterInstruments" onClick={() => setShowPopUp(true)}>
+        اختر آلة
       </div>
+      {showPopUp ? (
+        <div className="popUpAll" onClick={() => setShowPopUp(false)}>
+          <div className="thePopUp">
+            <div>
+              <div className="coursesPopUp">
+                <div className="allCourses" onClick={() => setAll(true)}>
+                  جميع ألآلات
+                </div>
+                <div
+                  className="allCourses"
+                  onClick={() => {
+                    setTitle("بيانو");
+                    setAll(false);
+                  }}
+                >
+                  بيانو
+                </div>
 
+                <div
+                  onClick={() => {
+                    setTitle("عود");
+                    setAll(false);
+                  }}
+                  className="allCourses"
+                >
+                  عود
+                </div>
+
+                <div
+                  onClick={() => {
+                    setTitle("كمان");
+                    setAll(false);
+                  }}
+                  className="allCourses"
+                >
+                  كمان
+                </div>
+
+                <div
+                  onClick={() => {
+                    setTitle("قانون");
+                    setAll(false);
+                  }}
+                  className="allCourses"
+                >
+                  قانون
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
       <div className="showDataStyle">
-        {all ? showData() : showFilteredData()}
+        <div>
+          {" "}
+          <div className="coursesCss">
+            <div className="allCourses" onClick={() => setAll(true)}>
+              جميع ألآلات
+            </div>
+            <div
+              className="allCourses"
+              onClick={() => {
+                setTitle("بيانو");
+                setAll(false);
+              }}
+            >
+              بيانو
+            </div>
+
+            <div
+              onClick={() => {
+                setTitle("عود");
+                setAll(false);
+              }}
+              className="allCourses"
+            >
+              عود
+            </div>
+
+            <div
+              onClick={() => {
+                setTitle("كمان");
+                setAll(false);
+              }}
+              className="allCourses"
+            >
+              كمان
+            </div>
+
+            <div
+              onClick={() => {
+                setTitle("قانون");
+                setAll(false);
+              }}
+              className="allCourses"
+            >
+              قانون
+            </div>
+          </div>
+        </div>
+        <div className="showDataThreeColumns">
+          {all ? showData() : showFilteredData()}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

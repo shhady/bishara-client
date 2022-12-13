@@ -117,29 +117,33 @@ export default function TeachersPop({
         }}
         onMouseLeave={() => setCoursesHover(false)}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "10px",
-            width: "90%",
-            margin: "auto",
-            borderBottom: "1px solid gray",
-            marginBottom: "20px",
-            backgroundColor: "white",
-          }}
-        >
-          <div>دورات موسيقية</div>
-          <Link to="/courses" style={{ textDecoration: "none" }}>
+        <Link to="/courses" style={{ textDecoration: "none" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "10px",
+              width: "90%",
+              margin: "auto",
+              borderBottom: "1px solid #e1e1e1",
+              marginBottom: "20px",
+              backgroundColor: "white",
+            }}
+          >
             <div
               onClick={() => setCoursesHover(false)}
               style={{ color: "black", cursor: "pointer" }}
             >
-              جميع الدورات موسيقية
+              دورات موسيقية
             </div>
-          </Link>
-        </div>
+            {/* <div
+              
+            >
+              جميع الدورات موسيقية
+            </div> */}
+          </div>
+        </Link>
 
         <div
           className="courseHeader"
@@ -158,7 +162,16 @@ export default function TeachersPop({
             <span>كمان</span>
             <span>قانون</span>
           </div>
-          <div> {drawData()}</div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            {" "}
+            {drawData()}
+          </div>
         </div>
       </div>
     </div>

@@ -561,7 +561,10 @@ export default function Header({
                           cursor: "pointer",
                           position: "relative",
                         }}
-                        onClick={() => setRedLightNotification(false)}
+                        onClick={() => {
+                          setRedLightNotification(false);
+                          setRedLightNotificationReply(false);
+                        }}
                         onMouseOver={() => setIsHovering(false)}
                       >
                         <img
@@ -570,7 +573,7 @@ export default function Header({
                           width="20px"
                         />
                         {/* <FontAwesomeIcon icon={faBell} /> */}
-                        {redLightNotification ? (
+                        {redLightNotification || redLightNotificationReply ? (
                           <div
                             className="notificationNotification"
                             // style={{ position: "absolute" }}

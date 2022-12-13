@@ -6,12 +6,7 @@
     align-items: center;
 }
 .courseContainer{
-    /* border: 1px solid black;
-     */
      border-radius: 50px;
-background: rgb(250, 250, 250,0.6);
-box-shadow:  5px 5px 10px #cbcbcb,
-             -5px -5px 10px #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -22,19 +17,29 @@ box-shadow:  5px 5px 10px #cbcbcb,
     transition: ease .3s;
     
 }
+.TopOfPage{
+    margin-top: 80px;
+    /* padding-top: 20px; */
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    font-size: 38px;
+}
 .allCourses{
     width: 98%;
     border-radius: 10px;
     background: #fafafa;
     box-shadow:  5px 5px 10px #cbcbcb,
              -5px -5px 10px #ffffff;
-    /* border: 3px solid gray; */
-    /* border-radius: 5px; */
-    /* border-bottom: 3px solid gray; */
-    /* border-style: outset; */
     display: flex;
-    justify-content: center;
+    font-weight: bold;
+    justify-content: flex-start;
     align-items: center;
+    padding-right: 15px;
+    margin-bottom:10px;
     cursor: pointer;
 }
 /* .allCourses:hover{ */
@@ -42,28 +47,89 @@ box-shadow:  5px 5px 10px #cbcbcb,
 /* } */
 .showDataStyle{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
     margin-top: 10px;
 }
-
-
-  .coursesCss{
-    margin-top: 150px;
+.showDataThreeColumns{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(3,1fr);
+    gap: 3rem;
+}
+.nameInstrumentLevel{
+    display: flex;
+    width:100%;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+  .coursesCss{
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 10px;
   }
-  @media (max-width: 768px) {
-    .coursesCss{
-        display: grid;
-    grid-template-columns: 1fr 1fr;
-    }
+  .filterInstruments{
+    visibility: hidden;
+  }
+
+  .popUpAll{
+   display:none;
+}
+  @media (min-width: 500px) and (max-width:768px) {
+    
     .showDataStyle{
         display: grid;
-        grid-template-columns:1fr 1fr;
-        gap: 10px;
+        grid-template-columns:1fr 3fr;
+        gap: 2rem;
         margin-top: 10px;
     }
+    .showDataThreeColumns{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 3rem;
+    }
     
+  }
+
+  @media (max-width: 500px){
+    .coursesCss{
+     display:none;
+    }
+    .filterInstruments{
+        visibility: visible;
+        margin-right: 20px;
+        border: 1px solid rgb(202, 201, 201);
+        width:fit-content;
+        padding: 3px 15px;
+        border-radius:10px;
+      }
+    .showDataStyle{
+        display: grid;
+        grid-template-columns:1fr;
+        gap: 2rem;
+        margin-top: 10px;
+    }
+    .showDataThreeColumns{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 3rem;
+    }
+    .popUpAll{
+        display:block;
+        height: 100vh;
+        width: 100vw;
+        background:rgba(255,255,255,0.4);
+        position:fixed;
+        top: 0;
+    }
+    .thePopUp{
+        height: fit-content;
+        width:90vw;
+        margin: auto;
+        background:white;
+        z-index: 3;
+    }
+    .coursesPopUp{
+        margin-top: 80px
+    }
   }
