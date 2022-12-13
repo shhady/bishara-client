@@ -87,7 +87,13 @@ export default function App() {
             setUpdateComponent={setUpdateComponent}
           />
           <Route path="/" exact>
-            <Home user={user} setUser={setUser} showArrows={showArrows} />
+            <Home
+              user={user}
+              setUser={setUser}
+              showArrows={showArrows}
+              setUpdateComponent={setUpdateComponent}
+              updateComponent={updateComponent}
+            />
           </Route>
           {/* <Route path="/Oud" exact component={Oud} />
           <Route path="/Piano" exact component={Piano} /> */}
