@@ -1,8 +1,15 @@
-.profileButtons{
+.profileAllButtons{
     display: grid;
     grid-template-columns:repeat(4,1fr);
     gap: 1rem;
-    margin-top: 30px
+}
+.profileButtons1, .profileButtons2,.profileButtons3,.profileButtons4{
+    text-align: center;
+}
+.profileButtons1:hover, .profileButtons2:hover,.profileButtons3:hover,.profileButtons4:hover{
+    border-bottom: 3px solid rgb(25, 24, 24);
+    transition: all 0.5s;
+    color:black
 }
 .coverProfile{
     display: flex;

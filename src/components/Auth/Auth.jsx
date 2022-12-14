@@ -114,7 +114,7 @@ export default function Auth({ user, setUser }) {
 
   const handleShowPassword = (e) => {
     e.preventDefault();
-    setShowPassword((showPassword) => !showPassword);
+    setShowPassword(!showPassword);
   };
 
   // const handleKeyDown = (e)=>{
@@ -136,6 +136,7 @@ export default function Auth({ user, setUser }) {
               <div>
                 <div className="forminputs">
                   <input
+                    style={{ width: "100%", height: "30px" }}
                     name="firstName"
                     onChange={handleChange}
                     autoFocus
@@ -144,6 +145,7 @@ export default function Auth({ user, setUser }) {
                   />
 
                   <input
+                    style={{ width: "100%", height: "30px" }}
                     name="lastName"
                     onChange={handleChange}
                     placeholder="العائله"
@@ -152,6 +154,7 @@ export default function Auth({ user, setUser }) {
                 </div>
                 <div className="forminputs">
                   <input
+                    style={{ width: "100%", height: "30px" }}
                     name="email"
                     type="email"
                     required
@@ -161,25 +164,52 @@ export default function Auth({ user, setUser }) {
                 </div>
                 <div
                   style={{
+                    width: "100%",
                     display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginRight: "50px",
+                    justifyContent: "space-between",
+                    alignItems: "start",
                   }}
                 >
                   <input
+                    style={{
+                      width: "93%",
+                      height: "30px",
+                      marginRight: "-5px",
+                    }}
                     name="password"
                     type={showPassword ? "password" : "text"}
                     onChange={handleChange}
                     required
                     placeholder="كلمة المرور"
                   />
-                  <button onClick={handleShowPassword}>
-                    {showPassword ? "اظهار" : "اخفاء"}
-                  </button>
+                  <div
+                    onClick={handleShowPassword}
+                    style={{
+                      color: "black",
+                      marginTop: "23px",
+                      marginRight: "10px",
+                    }}
+                  >
+                    {showPassword ? (
+                      <img
+                        src="https://img.icons8.com/ios-glyphs/30/null/uchiha-eyes.png"
+                        onClick={handleShowPassword}
+                        width="15px"
+                        height="15px"
+                      />
+                    ) : (
+                      <img
+                        src="https://img.icons8.com/ios-glyphs/30/null/uchiha-eyes.png"
+                        onClick={handleShowPassword}
+                        width="15px"
+                        height="15px"
+                      />
+                    )}
+                  </div>
                 </div>
                 <div className="forminputs">
                   <input
+                    style={{ width: "100%", height: "30px" }}
                     name="confirmPassword"
                     type={showPassword ? "password" : "text"}
                     onChange={handleChange}
@@ -196,7 +226,11 @@ export default function Auth({ user, setUser }) {
                     alignItems: "center",
                   }}
                 >
-                  <button type="submit" onClick={handleSubmit}>
+                  <button
+                    type="submit"
+                    onClick={handleSubmit}
+                    className="ButtonLogIn"
+                  >
                     دخول
                   </button>
                 </div>
@@ -207,7 +241,7 @@ export default function Auth({ user, setUser }) {
                     alignItems: "center",
                   }}
                 >
-                  <button
+                  <div
                     style={{
                       border: "none",
                       cursor: "pointer",
@@ -217,7 +251,7 @@ export default function Auth({ user, setUser }) {
                     onClick={() => setisSingUp(!isSignUp)}
                   >
                     تملك حساب؟ اضغط هنا للدخول
-                  </button>
+                  </div>
                 </div>
               </div>
             </>
@@ -298,6 +332,7 @@ export default function Auth({ user, setUser }) {
                     type="email"
                     placeholder="البريد الالكتروني"
                     onChange={handleLoginChange}
+                    style={{ width: "100%", height: "30px" }}
                   />
                 </div>
                 <div className="passwordinput">
@@ -306,6 +341,11 @@ export default function Auth({ user, setUser }) {
                     type="password"
                     placeholder="كلمة المرور"
                     onChange={handleLoginChange}
+                    style={{
+                      width: "100%",
+                      height: "30px",
+                      marginBottom: "50px",
+                    }}
                     // onKeyDown={handleKeyDown}
                   ></input>
                 </div>
@@ -315,11 +355,12 @@ export default function Auth({ user, setUser }) {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      width: "100%",
                     }}
                   >
                     <button
                       type="submit"
-                      style={{ width: "170px" }}
+                      className="ButtonLogIn"
                       onClick={handleloginStudent}
                     >
                       دخول
@@ -331,11 +372,12 @@ export default function Auth({ user, setUser }) {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      width: "100%",
                     }}
                   >
                     <button
                       type="submit"
-                      style={{ width: "170px" }}
+                      className="ButtonLogIn"
                       onClick={handleloginTeacher}
                     >
                       دخول
@@ -352,7 +394,7 @@ export default function Auth({ user, setUser }) {
                   )}
                 </div>
                 <div>
-                  <button
+                  <div
                     style={{
                       border: "none",
                       cursor: "pointer",
@@ -362,7 +404,7 @@ export default function Auth({ user, setUser }) {
                     onClick={dontHaveAnAccount}
                   >
                     لا تملك حساب ؟ اضغط هنا لفتح حساب
-                  </button>
+                  </div>
                 </div>
               </div>
             </>

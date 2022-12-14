@@ -638,9 +638,11 @@ export default function Header({
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
-                      alignItems: "center",
+                      alignItems: "start",
                       marginRight: "20px",
                       color: "black",
+                      fontWeight: "bold",
+                      minWidth: "163px",
                     }}
                   >
                     تسجيل الدخول
@@ -718,10 +720,12 @@ export default function Header({
                 <div style={{ display: "flex" }}>
                   <div
                     onMouseOver={() => setTeachersHover(false)}
-                    style={{ height: "80px", color: "transparent" }}
-                  >
-                    1
-                  </div>
+                    style={{
+                      height: "80px",
+                      width: "5%",
+                      color: "transparent",
+                    }}
+                  ></div>
                   <div
                     className="logoAndText"
                     onMouseOver={() => {
@@ -865,7 +869,9 @@ export default function Header({
                   <div onClick={() => setOpenMenu(!openMenu)}>
                     <span
                       className="blackBackgroundtext"
-                      style={{ color: "white" }}
+                      style={{
+                        color: "white",
+                      }}
                     >
                       {" "}
                       تسجيل الدخول

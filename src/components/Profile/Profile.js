@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import CreateCourse from "../Course/CreateCourse";
 import FileBase from "react-file-base64";
 import "./profile.css";
 import { Input, Button } from "@chakra-ui/react";
@@ -20,6 +21,7 @@ export default function Profile() {
   const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(false);
   const [showButtonCoverUpdate, setShowButtonCoverUpdate] = useState(false);
   const [teacherDetails, setTeacherDetails] = useState(null);
+  const [showFormCreateCourse, setShowFormCreateCourse] = useState(false);
   const [url, setUrl] = useState(null);
   const [image, setImage] = useState();
   const [fileUpload, setFileUpload] = useState(null);
@@ -361,7 +363,7 @@ export default function Profile() {
                     alt={user.teacher.firstName + "me"}
                     width="150"
                     height="150"
-                    style={{ borderRadius: "50%" }}
+                    style={{ borderRadius: "50%", border: "5px solid white" }}
                   />
                 </div>
               ) : (
@@ -424,24 +426,41 @@ export default function Profile() {
                 {"  "}
                 {user.teacher.lastName}
               </h2>
-              <div className="profileButtons">
-                <button style={{ height: "40px" }} onClick={studentsPractices}>
+              <div className="profileAllButtons">
+                <div
+                  className="profileButtons1"
+                  style={{ height: "40px" }}
+                  onClick={studentsPractices}
+                >
                   تمارين الطلاب
-                </button>
+                </div>
 
-                <button style={{ height: "40px" }} onClick={goToCreateCourse}>
+                <div
+                  className="profileButtons2"
+                  style={{ height: "40px" }}
+                  onClick={() => {
+                    // {goToCreateCourse}
+                    setShowFormCreateCourse(!showFormCreateCourse);
+                  }}
+                >
                   انشئ دورة
-                </button>
-                <button style={{ height: "40px" }} onClick={gotohomepage}>
-                  الصفحة الرئيسية
-                </button>
-                <button
+                </div>
+                <div
+                  className="profileButtons3"
+                  style={{ height: "40px" }}
+                  onClick={gotohomepage}
+                >
+                  تغيير كلمة المرور
+                </div>
+                <div
+                  className="profileButtons4"
                   style={{ height: "40px" }}
                   onClick={handleLogoutFromAllDevices}
                 >
                   خروج من جميع الاجهزة
-                </button>
+                </div>
               </div>
+              {showFormCreateCourse ? <CreateCourse /> : null}
             </div>
           ) : (
             <div className="profilePage">

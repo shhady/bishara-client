@@ -1,18 +1,39 @@
 
 .mainSignin{
-    background-color: rgba(255,255,255,0.7);
     height: 97vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 .SigninContainer{
-    background-color:  rgba(255,255,255,0.5);
-    box-shadow:12px 8px 16px 12px rgb(212, 210, 210), 0 8px 16px 12px rgb(212, 210, 210), 0 12px 24px 0 rgb(212, 210, 210);
     height: 90vh;
-    width:40vw;
+    width:80%;
+    max-width: 424px;
+   
 }
+.titleSingin{
+    font-family: Arquitecta, Helvetica, Arial, sans-serif;
+    letter-spacing: 0.07em;
+    line-height: 105%;
+    font-weight: 700;
+    text-align: center;
+    margin-top:20%;
+    font-size:32px
+}
+.ButtonLogIn{
+    width: 100%;
+    margin:auto;
+    background-color: black;
+    color: white;
+    padding: 8px 4px;
+    margin-top: 20px;
+}
+.ButtonLogIn:hover{
+    background-color: rgb(115, 114, 114);
+}
+
 @media (max-width: 768px){
     .SigninContainer{
         width:80vw;
@@ -20,8 +41,7 @@
 }
 
 .titleSingin{
-    text-align: center;
-    margin-top:20%;
+   
 }
 /* .emailinput, .passwordinput{
     display: grid;
@@ -35,8 +55,16 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    width:100%;
 }
 input, button{
     margin-top: 20px;
-    margin-left: 10px;
+    max-width: 428px;
+    /* margin-left: 10px; */
+}
+.emailinput, .passwordinput{
+    width: 100%;
+    max-width: 420px;
+    
+    padding: 8px 4px;
 }
