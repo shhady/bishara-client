@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import TeachersPop from "./TeachersPop";
 import CoursesPop from "./CoursesPop";
+import NotificationsPop from "./NotificationsPop";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -49,6 +50,7 @@ export default function Header({
   const [redLightNotification, setRedLightNotification] = useState(false);
   const [redLightNotificationReply, setRedLightNotificationReply] =
     useState(false);
+  const [showNotificationPopUp, setShowNotificationPopUp] = useState(false);
 
   useEffect(() => {
     setNotificationNumber(backNot.filter((number) => number.read === false));
@@ -541,46 +543,47 @@ export default function Header({
                 )}
                 {user ? (
                   <>
-                    <Link
+                    {/* <Link
                       to="/Notifications"
                       style={{ textDecoration: "none" }}
+                    > */}
+                    <div
+                      style={{
+                        // display: "flex",
+                        // justifyContent: "flex-end",
+                        // paddingLeft: "20px",
+                        color: "black",
+                        padding: "0px 35px",
+                        height: "80px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // height: "80px",
+                        // border: "1px solid transparent",
+                        cursor: "pointer",
+                        position: "relative",
+                      }}
+                      onClick={() => {
+                        setRedLightNotification(false);
+                        setRedLightNotificationReply(false);
+                        setShowNotificationPopUp(!showNotificationPopUp);
+                      }}
+                      onMouseOver={() => setIsHovering(false)}
                     >
-                      <div
-                        style={{
-                          // display: "flex",
-                          // justifyContent: "flex-end",
-                          // paddingLeft: "20px",
-                          color: "black",
-                          padding: "0px 35px",
-                          height: "80px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          // height: "80px",
-                          // border: "1px solid transparent",
-                          cursor: "pointer",
-                          position: "relative",
-                        }}
-                        onClick={() => {
-                          setRedLightNotification(false);
-                          setRedLightNotificationReply(false);
-                        }}
-                        onMouseOver={() => setIsHovering(false)}
-                      >
-                        <img
-                          src="https://img.icons8.com/material-sharp/24/null/bell.png"
-                          alt="noti"
-                          width="20px"
-                        />
-                        {/* <FontAwesomeIcon icon={faBell} /> */}
-                        {redLightNotification || redLightNotificationReply ? (
-                          <div
-                            className="notificationNotification"
-                            // style={{ position: "absolute" }}
-                          ></div>
-                        ) : null}
-                      </div>
-                    </Link>
+                      <img
+                        src="https://img.icons8.com/material-sharp/24/null/bell.png"
+                        alt="noti"
+                        width="20px"
+                      />
+                      {/* <FontAwesomeIcon icon={faBell} /> */}
+                      {redLightNotification || redLightNotificationReply ? (
+                        <div
+                          className="notificationNotification"
+                          // style={{ position: "absolute" }}
+                        ></div>
+                      ) : null}
+                    </div>
+                    {/* </Link> */}
                   </>
                 ) : null}
                 {user ? (
@@ -646,22 +649,42 @@ export default function Header({
               </Link>
             )}
           </div>
+          {showNotificationPopUp ? (
+            <div
+              className="notificationOut"
+              onClick={() => setShowNotificationPopUp(false)}
+            >
+              <div
+                className="NotificationPopUp"
+                onMouseLeave={() => setShowNotificationPopUp(false)}
+              >
+                <NotificationsPop
+                  setShowNotificationPopUp={setShowNotificationPopUp}
+                />
+              </div>
+            </div>
+          ) : null}
           {teachersHover ? (
             <div
-              style={{
-                zIndex: "5",
-                top: 85,
-                position: "fixed",
-                backgroundColor: "white",
-                // margin: "auto",
-                left: "25%",
-                width: "50%",
-                boxShadow:
-                  "rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px",
-              }}
-              onMouseLeave={() => setTeachersHover(false)}
+              className="notificationOut"
+              onClick={() => setTeachersHover(false)}
             >
-              <TeachersPop setTeachersHover={setTeachersHover} />
+              <div
+                style={{
+                  zIndex: "5",
+                  top: 85,
+                  position: "fixed",
+                  backgroundColor: "white",
+                  // margin: "auto",
+                  left: "25%",
+                  width: "50%",
+                  boxShadow:
+                    "rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px",
+                }}
+                onMouseLeave={() => setTeachersHover(false)}
+              >
+                <TeachersPop setTeachersHover={setTeachersHover} />
+              </div>
             </div>
           ) : null}
           {coursesHover ? (

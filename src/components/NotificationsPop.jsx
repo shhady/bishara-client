@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-export default function Notifications() {
+export default function NotificationsPop({ setShowNotificationPopUp }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState([]);
   const [userF, setUserF] = useState("");
@@ -12,6 +11,7 @@ export default function Notifications() {
   const [userAvatar, setUserAvatar] = useState("");
   const [userReplies, setUserReplies] = useState([]);
   const [repliesShow, setRepliesShow] = useState([]);
+
   const history = useHistory();
   useEffect(() => {
     user.user
@@ -69,16 +69,17 @@ export default function Notifications() {
           >
             {replies.replyRead === "true" ? (
               <div
+                onClick={() => setShowNotificationPopUp(false)}
                 style={{
-                  padding: "20px",
+                  padding: "15px",
                   backgroundColor: "white",
                 }}
               >
                 <div
                   style={{
-                    fontSize: "20px",
+                    fontSize: "15px",
                     display: "flex",
-                    justifyContent: "flex-start",
+                    justifyContent: "center",
                     alignItems: "center",
                   }}
                 >
@@ -96,22 +97,16 @@ export default function Notifications() {
               </div>
             ) : (
               <div
+                onClick={() => setShowNotificationPopUp(false)}
                 style={{
-                  padding: "20px",
+                  padding: "15px",
                   backgroundColor: "#e7f3ff",
                   display: "flex",
-                  justifyContent: "flex-start",
+                  justifyContent: "center",
                   alignItems: "center",
                 }}
               >
-                <div
-                  style={{
-                    fontSize: "20px",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "center",
-                  }}
-                >
+                <div style={{ fontSize: "15px" }}>
                   <img
                     src={reply.userAvatar}
                     alt={reply.firstName}
@@ -159,7 +154,8 @@ export default function Notifications() {
           history.push({
             pathname: `/Lesson/${replies.playlistId}/${replies.videoName}`,
           })
-        );
+        )
+        .then(window.location.reload());
     };
     setAsRead();
     // setNotificationClicked(!notificationClicked);
@@ -199,7 +195,8 @@ export default function Notifications() {
           history.push({
             pathname: `/Lesson/${comment.playlistId}/${comment.videoName}`,
           })
-        );
+        )
+        .then(window.location.reload());
       // .then(window.location.reload());
     };
     setAsRead();
@@ -219,30 +216,40 @@ export default function Notifications() {
           {comment.read === false ? (
             <div
               style={{
-                padding: "20px",
+                fontSize: "15px",
+                padding: "15px",
+                height: "fit-content",
                 backgroundColor: "#e7f3ff",
               }}
+              onClick={() => setShowNotificationPopUp(false)}
             >
               {" "}
-              <div style={{ fontSize: "20px" }}>
+              <div>
                 {comment.firstName} {comment.lastName} {"  "}
                 علق على الدرس
                 {"  "} {comment.videoTitle}
               </div>
-              <div>
+              <div style={{ textAlign: "start" }}>
                 {comment.createdAt.slice(0, 10)}
                 {"   "}
                 {comment.createdAt.slice(11, 16)}
               </div>
             </div>
           ) : (
-            <div style={{ fontSize: "20px", padding: "20px" }}>
+            <div
+              style={{
+                fontSize: "15px",
+                padding: "15px",
+                height: "fit-content",
+              }}
+              onClick={() => setShowNotificationPopUp(false)}
+            >
               <div>
                 {comment.firstName} {comment.lastName} {"  "}
                 علق على الدرس
                 {"  "} {comment.videoTitle}
               </div>
-              <div>
+              <div style={{ textAlign: "start" }}>
                 {comment.createdAt.slice(0, 10)}
                 {"   "}
                 {comment.createdAt.slice(11, 16)}
@@ -254,19 +261,8 @@ export default function Notifications() {
     });
   };
   return (
-    <div style={{ marginTop: "100px" }}>
-      <div style={{ marginTop: "30px", textAlign: "center" }}>
-        <h2>الاشعارات</h2>
-      </div>
-      <div
-        style={{
-          width: "90%",
-          margin: "auto",
-          padding: "20px",
-          boxShadow:
-            "rgb(0 0 0 / 6%) 0px 1px 2px, rgb(35 41 54 / 14%) 0px 3px 8px",
-        }}
-      >
+    <div>
+      <div className="NotificationPopUp">
         {drawReplies()}
         {drawComment()}
       </div>
