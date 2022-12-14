@@ -333,6 +333,7 @@ export default function Profile() {
                   backgroundImage: `url(${coverPicture})`,
                   backgroundPosition: "center",
                   backgroundSize: "cover",
+                  // objectFit:"cover",
                   backgroundRepeat: "no-repeat",
                   height: "200px",
                   width: "100%",

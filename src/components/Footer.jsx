@@ -24,7 +24,7 @@ export default function Footer() {
         <div>Contacts Us</div>
         <div>Join us</div>
       </div>
-      <div style={{ textAlign: "center" }}>all rights reserved</div>
+      <div style={{ textAlign: "center" }}>all rights reserved &copy;</div>
     </div>
   );
 }
