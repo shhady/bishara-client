@@ -638,7 +638,7 @@ export default function Header({
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
-                      alignItems: "start",
+                      alignItems: "center",
                       marginRight: "20px",
                       color: "black",
                       fontWeight: "bold",
@@ -668,7 +668,7 @@ export default function Header({
           ) : null}
           {teachersHover ? (
             <div
-              className="notificationOut"
+              className="teachersOut"
               onClick={() => setTeachersHover(false)}
             >
               <div
@@ -712,20 +712,22 @@ export default function Header({
             </div>
           ) : null}
           <div className="menu-details-computer">
+            <div
+              onMouseOver={() => setTeachersHover(false)}
+              style={{
+                height: "80px",
+                width: "5%",
+                color: "transparent",
+              }}
+            >
+              11
+            </div>
             <Link to="/teachers" style={{ textDecoration: "none" }}>
               <div
                 className="headeroud"
                 onClick={() => setTeachersHover(false)}
               >
                 <div style={{ display: "flex" }}>
-                  <div
-                    onMouseOver={() => setTeachersHover(false)}
-                    style={{
-                      height: "80px",
-                      width: "5%",
-                      color: "transparent",
-                    }}
-                  ></div>
                   <div
                     className="logoAndText"
                     onMouseOver={() => {
@@ -802,7 +804,17 @@ export default function Header({
                 </div>
               </div>
             </Link>
-            <div onMouseOver={() => setTeachersHover(false)}></div>
+            <div
+              onMouseOver={() => setTeachersHover(false)}
+              style={{
+                height: "80px",
+                width: "5%",
+                color: "transparent",
+              }}
+            >
+              11
+            </div>
+            {/* <div onMouseOver={() => setTeachersHover(false)}></div> */}
           </div>
           <div
             style={{

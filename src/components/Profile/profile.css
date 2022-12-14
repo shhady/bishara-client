@@ -24,6 +24,10 @@
         grid-template-columns: 1fr 4fr;
         margin-top: 150px
 }
+.profileAllButtonsMobile{
+    display:none;
+
+}
 @media (max-width: 568px) {
     .coverProfile{
         display: flex;
@@ -42,5 +46,15 @@
         display: grid;
         grid-template-columns: 1fr;
         margin-top: 150px
+}
+.profileAllButtons{
+    display:none;
+}
+.profileAllButtonsMobile{
+    display:block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 }

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import CreateCourse from "../Course/CreateCourse";
+import ChangePassword from "../ChangePassword";
 import FileBase from "react-file-base64";
 import "./profile.css";
 import { Input, Button } from "@chakra-ui/react";
@@ -22,6 +23,7 @@ export default function Profile() {
   const [showButtonCoverUpdate, setShowButtonCoverUpdate] = useState(false);
   const [teacherDetails, setTeacherDetails] = useState(null);
   const [showFormCreateCourse, setShowFormCreateCourse] = useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
   const [url, setUrl] = useState(null);
   const [image, setImage] = useState();
   const [fileUpload, setFileUpload] = useState(null);
@@ -426,6 +428,44 @@ export default function Profile() {
                 {"  "}
                 {user.teacher.lastName}
               </h2>
+              <div className="profileAllButtonsMobile">
+                <div
+                  className="profileButtons1"
+                  style={{ height: "40px" }}
+                  onClick={studentsPractices}
+                >
+                  تمارين الطلاب
+                </div>
+
+                <div
+                  className="profileButtons2"
+                  style={{ height: "40px" }}
+                  onClick={() => {
+                    // {goToCreateCourse}
+                    setShowFormCreateCourse(true);
+                    setShowChangePassword(false);
+                  }}
+                >
+                  انشئ دورة
+                </div>
+                <div
+                  className="profileButtons3"
+                  style={{ height: "40px" }}
+                  onClick={() => {
+                    setShowChangePassword(true);
+                    setShowFormCreateCourse(false);
+                  }}
+                >
+                  تغيير كلمة المرور
+                </div>
+                <div
+                  className="profileButtons4"
+                  style={{ height: "40px" }}
+                  onClick={handleLogoutFromAllDevices}
+                >
+                  خروج
+                </div>
+              </div>
               <div className="profileAllButtons">
                 <div
                   className="profileButtons1"
@@ -440,7 +480,8 @@ export default function Profile() {
                   style={{ height: "40px" }}
                   onClick={() => {
                     // {goToCreateCourse}
-                    setShowFormCreateCourse(!showFormCreateCourse);
+                    setShowFormCreateCourse(true);
+                    setShowChangePassword(false);
                   }}
                 >
                   انشئ دورة
@@ -448,7 +489,10 @@ export default function Profile() {
                 <div
                   className="profileButtons3"
                   style={{ height: "40px" }}
-                  onClick={gotohomepage}
+                  onClick={() => {
+                    setShowChangePassword(true);
+                    setShowFormCreateCourse(false);
+                  }}
                 >
                   تغيير كلمة المرور
                 </div>
@@ -457,10 +501,11 @@ export default function Profile() {
                   style={{ height: "40px" }}
                   onClick={handleLogoutFromAllDevices}
                 >
-                  خروج من جميع الاجهزة
+                  خروج
                 </div>
               </div>
               {showFormCreateCourse ? <CreateCourse /> : null}
+              {showChangePassword ? <ChangePassword /> : null}
             </div>
           ) : (
             <div className="profilePage">
@@ -487,7 +532,7 @@ export default function Profile() {
                   onClick={handleUserLogoutFromAllDevices}
                   style={{ marginTop: "10px", minWidth: "90%" }}
                 >
-                  خروج من جميع الاجهزة
+                  خروج
                 </button>
               </div>
               <div>{showData()}</div>

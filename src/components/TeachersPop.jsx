@@ -81,6 +81,7 @@ export default function TeachersPop({ setTeachersHover }) {
     <div
       style={{
         position: "fixed",
+        top: 85,
         height: "200vh",
         width: "100vw",
         background: "transparent",
