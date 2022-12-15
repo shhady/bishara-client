@@ -58,8 +58,9 @@ export default function Comment({ userId, userF, userL, courseInfo, lesson }) {
       courseName: courseInfo.title,
       courseLevel: courseInfo.level,
       video: lesson.snippet.title,
+      uniqueLink: lesson.snippet.resourceId.videoId,
     });
-  }, [user]);
+  }, [user, lesson]);
 
   const postDetails = () => {
     const formData = new FormData();
@@ -75,9 +76,9 @@ export default function Comment({ userId, userF, userL, courseInfo, lesson }) {
         },
       })
       .then((res) => setUrl(res.data.url))
-      // .then((data) => {
-      //   (data.url);
-      // })
+      .then(() => {
+        console.log(lesson);
+      })
       // .then(console.log(url))
       .catch((err) => {
         console.log(err);

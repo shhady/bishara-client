@@ -108,7 +108,7 @@ export default function Header({
 
   const handleLogoutTeacher = async () => {
     const response = await axios.post(
-      process.env.REACT_APP_BACKEND_URL + `/teachers/logout`,
+      process.env.REACT_APP_BACKEND_URL + `/teachers/logoutAll`,
       {},
       {
         headers: {
@@ -140,7 +140,7 @@ export default function Header({
 
   const handleLogoutStudent = async () => {
     const response = await axios.post(
-      process.env.REACT_APP_BACKEND_URL + `/users/logout`,
+      process.env.REACT_APP_BACKEND_URL + `/users/logoutAll`,
       {},
       {
         headers: {
@@ -639,7 +639,6 @@ export default function Header({
                       flexDirection: "column",
                       justifyContent: "center",
                       alignItems: "center",
-                      marginRight: "20px",
                       color: "black",
                       fontWeight: "bold",
                       minWidth: "163px",

@@ -12,8 +12,14 @@ export default function StudentsPractices({ user }) {
   const [doneAddingComment, setDoneAddingComment] = useState(false);
   const [nowDo, setNowDo] = useState("true");
   const [url, setUrl] = useState(null);
+  const [nameOfProblem, setNameOfProblem] = useState("");
   const [video, setVideo] = useState();
   const [fileUpload, setFileUpload] = useState(null);
+  const [teacherReplies, setTeacherReplies] = useState([]);
+  const [autoReplies, setAutoReplies] = useState([]);
+  const [onlyForTeacher, setOnlyForTeacher] = useState([]);
+  const [openButtons, setOpenButtons] = useState(false);
+  const [showButtons, setShowButtons] = useState([]);
   const postDetails = (practice) => {
     const formData = new FormData();
     formData.append("file", video);
@@ -29,11 +35,6 @@ export default function StudentsPractices({ user }) {
         },
       })
       .then((res) => setUrl(res.data.url))
-      // .then(() => setPracticeId(practice._id))
-      // .then((data) => {
-      //   (data.url);
-      // })
-      // .then(console.log(url))
       .catch((err) => {
         console.log(err);
       });
@@ -43,12 +44,15 @@ export default function StudentsPractices({ user }) {
   const addTeacherVideoReply = (practice) => {
     const addTheVideo = async () => {
       await axios
-        .patch(
-          process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`,
-          {
-            videoReply: url,
-          }
-        )
+        .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {
+          theVideoReply: url,
+          videoName: practice.video,
+          courseId: practice.courseId,
+          nameOfProblem: nameOfProblem,
+          practiceId: practice._id,
+          uniqueLink: practice.uniqueLink,
+          teacherId: practice.teacherId,
+        })
         .then(async () => {
           const res = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/practices`
@@ -57,6 +61,17 @@ export default function StudentsPractices({ user }) {
             (practice) => practice.teacherId === userId
           );
           setTeacherPractices(filterData);
+        })
+        .then(async () => {
+          await axios.post(process.env.REACT_APP_BACKEND_URL + `/replies`, {
+            theVideoReply: url,
+            videoName: practice.video,
+            courseId: practice.courseId,
+            nameOfProblem: nameOfProblem,
+            practiceId: practice._id,
+            uniqueLink: practice.uniqueLink,
+            teacherId: practice.teacherId,
+          });
         });
     };
     addTheVideo();
@@ -68,6 +83,23 @@ export default function StudentsPractices({ user }) {
     const userid = user.user ? user.user._id : user.teacher._id;
     setUserId(userid);
   }, [user]);
+
+  useEffect(() => {
+    const respo = async () => {
+      const getReplies = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/replies`
+      );
+      setAutoReplies(getReplies.data);
+    };
+    respo();
+  }, []);
+  useEffect(() => {
+    const filterByTeacher = autoReplies.filter(
+      (teacher) => teacher.teacherId === userId
+    );
+    setOnlyForTeacher(filterByTeacher);
+  }, [autoReplies]);
+  console.log(autoReplies);
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(
@@ -81,6 +113,20 @@ export default function StudentsPractices({ user }) {
     fetch();
   }, [userId]);
 
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/practices`
+      );
+      const filterData = res.data.filter(
+        (practice) => practice.teacherId === userId
+      );
+      setTeacherReplies(filterData);
+    };
+    fetch();
+  }, []);
+
+  console.log(teacherReplies.videoReply);
   // useEffect(() => {
   //   const res = allPracrices.filter();
   //   setTeacherPractices(res);
@@ -132,14 +178,57 @@ export default function StudentsPractices({ user }) {
   //   fetchNew();
   // }, [doneAddingComment]);
 
-  useEffect(() => {}, [doneAddingComment, nowDo]);
+  // useEffect(() => {
+  //   const filterPractice = teacherPractices.filter(
+  //     (prac) => prac.uniqueLink === uniqueLink
+  //   );
+  //   console.log(filterPractice);
+  // }, [teacherPractices]);
+  console.log(teacherPractices);
+  console.log(onlyForTeacher);
+  const getPracticeUnique = (practice) => {
+    const newBU = onlyForTeacher.filter(
+      (filteredPractices) =>
+        filteredPractices.uniqueLink === practice.uniqueLink
+    );
+    setOpenButtons(true);
+    setShowButtons(newBU);
+  };
 
+  const buttonDetails = (buttonD, practice) => {
+    const addTheVideo = async () => {
+      await axios
+        .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {
+          theVideoReply: buttonD.theVideoReply,
+          videoName: practice.video,
+          courseId: practice.courseId,
+          nameOfProblem: nameOfProblem,
+          practiceId: practice._id,
+          uniqueLink: practice.uniqueLink,
+          teacherId: practice.teacherId,
+        })
+        .then(async () => {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/practices`
+          );
+          const filterData = res.data.filter(
+            (practice) => practice.teacherId === userId
+          );
+          setTeacherPractices(filterData);
+        });
+    };
+    addTheVideo();
+    setUrl(null);
+    setFileUpload(null);
+    setPracticeId(null);
+  };
   const showData = () => {
     return teacherPractices?.map((practice) => {
       return (
         <div
-          style={{ borderRight: "1px solid black", padding: "10px" }}
+          style={{ borderBottom: "1px solid #e1e1e1", padding: "10px" }}
           key={practice._id}
+          onClick={() => getPracticeUnique(practice)}
         >
           <div>
             الطالب:
@@ -173,17 +262,29 @@ export default function StudentsPractices({ user }) {
                 </video>
               </div>
               <div>
+                <span style={{ color: "black" }}>رد المعلم</span>
                 {practice.videoReply ? (
-                  <>
-                    <span>رد المعلم</span>
-                    <video
-                      key={practice.videoReply}
-                      controls
-                      style={{ width: "100%", height: "250px" }}
-                    >
-                      <source src={practice.videoReply} type="video/mp4" />
-                    </video>
-                  </>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr",
+                      gap: ".5rem",
+                      height: "97%",
+                      maxHeight: "250px",
+                    }}
+                  >
+                    {practice.videoReply.map((reply, i) => {
+                      return (
+                        <video
+                          key={reply.theVideoReply}
+                          controls
+                          style={{ width: "100%", height: "121px" }}
+                        >
+                          <source src={reply.theVideoReply} type="video/mp4" />
+                        </video>
+                      );
+                    })}
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -234,7 +335,48 @@ export default function StudentsPractices({ user }) {
             </div>
             <div style={{ padding: "30px" }}>
               <>
-                <div>للتعليق على التمرين من خلال ارسال فيديو</div>
+                <div>
+                  {openButtons ? (
+                    <>
+                      {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
+                        <>
+                          {showButtons.map((buttonD) => {
+                            return (
+                              <button
+                                onClick={() => buttonDetails(buttonD, practice)}
+                                style={{
+                                  marginLeft: "20px",
+                                  borderRadius: "5px",
+                                  backgroundColor: "black",
+                                  color: "white",
+                                  minWidth: "100px",
+                                }}
+                              >
+                                {buttonD.nameOfProblem}
+                              </button>
+                            );
+                          })}
+                        </>
+                      ) : null}
+                    </>
+                  ) : null}
+                  {/* {onlyForTeacher
+                    .filter(
+                      (rep) => rep.uniqueLink === teacherPractices.uniqueLink
+                    )
+                    .map((thebutton) => {
+                      return <button>{thebutton.nameOfProblem}</button>;
+                    })} */}
+                </div>
+                <div>
+                  <div>للتعليق على التمرين من خلال ارسال فيديو</div>
+
+                  <input
+                    type="text"
+                    placeholder="عنوان الرد"
+                    onChange={(e) => setNameOfProblem(e.target.value)}
+                  />
+                </div>
                 <div className="allvideoreply">
                   <div>
                     <input

@@ -3,8 +3,10 @@
     grid-template-columns:repeat(4,1fr);
     gap: 1rem;
 }
-.profileButtons1, .profileButtons2,.profileButtons3,.profileButtons4{
+.profileButtons1, .profileButtons2,.profileButtons3, .profileButtons4{
     text-align: center;
+    cursor: pointer;
+    font-weight: bold;
 }
 .profileButtons1:hover, .profileButtons2:hover,.profileButtons3:hover,.profileButtons4:hover{
     border-bottom: 3px solid rgb(25, 24, 24);
@@ -26,7 +28,6 @@
 }
 .profileAllButtonsMobile{
     display:none;
-
 }
 @media (max-width: 568px) {
     .coverProfile{
@@ -48,7 +49,8 @@
         margin-top: 150px
 }
 .profileAllButtons{
-    display:none;
+    display:grid;
+    grid-template-columns: 1fr
 }
 .profileAllButtonsMobile{
     display:block;

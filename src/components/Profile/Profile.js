@@ -4,11 +4,13 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import CreateCourse from "../Course/CreateCourse";
 import ChangePassword from "../ChangePassword";
+import ChangePasswordForm from "../ChangePasswordForm";
 import FileBase from "react-file-base64";
 import "./profile.css";
 import { Input, Button } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import ChangePasswordUser from "../ChangePasswordUser";
 
 export default function Profile() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -32,7 +34,9 @@ export default function Profile() {
   const [urlCover, setUrlCover] = useState(null);
   //prettier-ignore
   const [coverPicture, setCoverPicture] = useState(localStorage.getItem("coverPic"));
-
+  const [showPractice, setShowPractice] = useState(true);
+  const [showChangePassUser, setShowChangePassUser] = useState(false);
+  const [showUpdateProfile, setShowUpdateProfile] = useState(false);
   console.log(profilePicture);
   console.log(localStorage.getItem("profilePic"));
   const postDetails = () => {
@@ -99,36 +103,38 @@ export default function Profile() {
     setShowButtonCoverUpdate(false);
   }, [urlCover]);
   useEffect(() => {
-    const userid = user.user ? user.user._id : user.teacher._id;
+    if (user) {
+      const userid = user.user ? user.user._id : user.teacher._id;
+      setUserId(userid);
+    }
     // const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
-    setUserId(userid);
     // console.log(userAvatar);
     // setProfilePicture(userAvatar);
   }, [user]);
-  const handleLogoutFromAllDevices = async () => {
-    const response = await axios.post(
-      process.env.REACT_APP_BACKEND_URL + `/teachers/logoutAll`,
-      {},
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: window.localStorage.getItem("token"),
-        },
-      }
-    );
+  // const handleLogoutFromAllDevices = async () => {
+  //   const response = await axios.post(
+  //     process.env.REACT_APP_BACKEND_URL + `/teachers/logoutAll`,
+  //     {},
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //         Authorization: window.localStorage.getItem("token"),
+  //       },
+  //     }
+  //   );
 
-    if (response.status === 200) {
-      // REMOVE TOKEN
-      window.localStorage.removeItem("token");
-    }
+  //   if (response.status === 200) {
+  //     // REMOVE TOKEN
+  //     window.localStorage.removeItem("token");
+  //   }
 
-    // localStorage.removeItem("profile");
-    // await axios.post(process.env.REACT_APP_BACKEND_URL+"/users/logoutAll");
-    dispatch({ type: "LOGOUT" });
-    history.push("/");
-    setUser(null);
-  };
+  //   // localStorage.removeItem("profile");
+  //   // await axios.post(process.env.REACT_APP_BACKEND_URL+"/users/logoutAll");
+  //   dispatch({ type: "LOGOUT" });
+  //   history.push("/");
+  //   setUser(null);
+  // };
 
   // useEffect(() => {
   //   const fetch = async () => {
@@ -158,30 +164,30 @@ export default function Profile() {
 
     setShowButtonAvatarUpdate(false);
   }, [url]);
-  const handleUserLogoutFromAllDevices = async () => {
-    const response = await axios.post(
-      process.env.REACT_APP_BACKEND_URL + `/users/logoutAll`,
-      {},
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: window.localStorage.getItem("token"),
-        },
-      }
-    );
+  // const handleUserLogoutFromAllDevices = async () => {
+  //   const response = await axios.post(
+  //     process.env.REACT_APP_BACKEND_URL + `/users/logoutAll`,
+  //     {},
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //         Authorization: window.localStorage.getItem("token"),
+  //       },
+  //     }
+  //   );
 
-    if (response.status === 200) {
-      // REMOVE TOKEN
-      window.localStorage.removeItem("token");
-    }
+  //   if (response.status === 200) {
+  //     // REMOVE TOKEN
+  //     window.localStorage.removeItem("token");
+  //   }
 
-    // localStorage.removeItem("profile");
-    // await axios.post(process.env.REACT_APP_BACKEND_URL+"/users/logoutAll");
-    dispatch({ type: "LOGOUT" });
-    history.push("/");
-    setUser(null);
-  };
+  //   // localStorage.removeItem("profile");
+  //   // await axios.post(process.env.REACT_APP_BACKEND_URL+"/users/logoutAll");
+  //   dispatch({ type: "LOGOUT" });
+  //   history.push("/");
+  //   setUser(null);
+  // };
 
   const goToCreateCourse = () => {
     history.push("/createCourse");
@@ -303,7 +309,7 @@ export default function Profile() {
             </div>
             <div style={{ padding: "0px 10px", width: "50%" }}>
               رد المعلم:
-              {practice.videoReply ? (
+              {/* {practice.videoReply ? (
                 <div>
                   <video
                     key={practice.videoReply}
@@ -312,6 +318,29 @@ export default function Profile() {
                   >
                     <source src={practice.videoReply} type="video/mp4" />
                   </video>
+                </div>
+              ) : null} */}
+              {practice.videoReply ? (
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: ".5rem",
+                    height: "97%",
+                    maxHeight: "250px",
+                  }}
+                >
+                  {practice.videoReply.map((reply, i) => {
+                    return (
+                      <video
+                        key={reply.theVideoReply}
+                        controls
+                        style={{ width: "100%", height: "121px" }}
+                      >
+                        <source src={reply.theVideoReply} type="video/mp4" />
+                      </video>
+                    );
+                  })}
                 </div>
               ) : null}
               {practice.reply}
@@ -429,7 +458,7 @@ export default function Profile() {
                 {"  "}
                 {user.teacher.lastName}
               </h2>
-              <div className="profileAllButtonsMobile">
+              {/* <div className="profileAllButtonsMobile">
                 <div
                   className="profileButtons1"
                   style={{ height: "40px" }}
@@ -459,14 +488,8 @@ export default function Profile() {
                 >
                   تغيير كلمة المرور
                 </div>
-                <div
-                  className="profileButtons4"
-                  style={{ height: "40px" }}
-                  onClick={handleLogoutFromAllDevices}
-                >
-                  خروج
-                </div>
-              </div>
+               
+              </div> */}
               <div className="profileAllButtons">
                 <div
                   className="profileButtons1"
@@ -488,6 +511,16 @@ export default function Profile() {
                   انشئ دورة
                 </div>
                 <div
+                  className="profileButtons4"
+                  style={{ height: "40px" }}
+                  onClick={() => {
+                    setShowPractice(false);
+                    setShowChangePassUser(true);
+                  }}
+                >
+                  تعديل الملف
+                </div>
+                <div
                   className="profileButtons3"
                   style={{ height: "40px" }}
                   onClick={() => {
@@ -497,46 +530,160 @@ export default function Profile() {
                 >
                   تغيير كلمة المرور
                 </div>
-                <div
+
+                {/* <div
                   className="profileButtons4"
                   style={{ height: "40px" }}
                   onClick={handleLogoutFromAllDevices}
                 >
                   خروج
-                </div>
+                </div> */}
               </div>
               {showFormCreateCourse ? <CreateCourse /> : null}
-              {showChangePassword ? <ChangePassword /> : null}
+              {showChangePassword ? <ChangePassword userId={userId} /> : null}
             </div>
           ) : (
-            <div className="profilePage">
+            <div>
               <div
                 style={{
                   display: "flex",
+                  marginTop: "100px",
                   flexDirection: "column",
                   justifyContent: "start",
                   alignItems: "center",
                 }}
               >
+                <div
+                  style={{
+                    width: "130px",
+                    height: "130px",
+                    borderRadius: "50%",
+                    backgroundColor: "#c3c1c1",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={
+                      user.user.avatar
+                        ? user.user.avatar
+                        : "https://img.icons8.com/material-rounded/24/null/user.png"
+                    }
+                    alt="profile"
+                    width="80px"
+                    height="80px"
+                  />
+                </div>
                 <h2>
                   {user.user.firstName}
                   {"  "}
                   {user.user.lastName}
                 </h2>
-                <button
-                  onClick={gotohomepage}
-                  style={{ marginTop: "10px", minWidth: "90%" }}
-                >
-                  الصفحة الرئيسية
-                </button>
-                <button
-                  onClick={handleUserLogoutFromAllDevices}
-                  style={{ marginTop: "10px", minWidth: "90%" }}
-                >
-                  خروج
-                </button>
+                <div className="profileAllButtons">
+                  {showPractice ? (
+                    <div
+                      onClick={() => {
+                        setShowPractice(true);
+                        setShowChangePassUser(false);
+                        setShowUpdateProfile(false);
+                      }}
+                      className="profileButtons2"
+                      style={{
+                        height: "40px",
+                        borderBottom: "3px solid black",
+                      }}
+                    >
+                      تمارين
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => {
+                        setShowPractice(true);
+                        setShowChangePassUser(false);
+                        setShowUpdateProfile(false);
+                      }}
+                      className="profileButtons2"
+                      style={{ height: "40px" }}
+                    >
+                      تمارين
+                    </div>
+                  )}
+                  {showUpdateProfile ? (
+                    <div
+                      className="profileButtons3"
+                      style={{
+                        height: "40px",
+                        borderBottom: "3px solid black",
+                      }}
+                      onClick={() => {
+                        setShowPractice(false);
+                        setShowChangePassUser(false);
+                        setShowUpdateProfile(true);
+                      }}
+                    >
+                      تعديل الملف
+                    </div>
+                  ) : (
+                    <div
+                      className="profileButtons4"
+                      style={{ height: "40px" }}
+                      onClick={() => {
+                        setShowPractice(false);
+                        setShowChangePassUser(false);
+                        setShowUpdateProfile(true);
+                      }}
+                    >
+                      تعديل الملف
+                    </div>
+                  )}
+                  {showChangePassUser ? (
+                    <div
+                      className="profileButtons3"
+                      style={{
+                        height: "40px",
+                        borderBottom: "3px solid black",
+                      }}
+                      onClick={() => {
+                        setShowPractice(false);
+                        setShowChangePassUser(true);
+                        setShowUpdateProfile(false);
+                      }}
+                    >
+                      تغيير كلمة المرور
+                    </div>
+                  ) : (
+                    <div
+                      className="profileButtons3"
+                      style={{ height: "40px" }}
+                      onClick={() => {
+                        setShowPractice(false);
+                        setShowChangePassUser(true);
+                        setShowUpdateProfile(false);
+                      }}
+                    >
+                      تغيير كلمة المرور
+                    </div>
+                  )}
+
+                  <div
+                    onClick={gotohomepage}
+                    className="profileButtons1"
+                    style={{ height: "40px" }}
+                  >
+                    الصفحة الرئيسية
+                  </div>
+                </div>
               </div>
-              <div>{showData()}</div>
+              {showPractice ? <div>{showData()}</div> : null}
+
+              {showChangePassUser ? (
+                <div>
+                  {" "}
+                  <ChangePasswordUser />
+                </div>
+              ) : null}
             </div>
           )}
         </div>

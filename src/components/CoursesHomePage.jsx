@@ -65,12 +65,12 @@ export default function CoursesHomePage({
               <img
                 src={course.coursePhoto}
                 alt={course.firstName}
-                height="199px"
+                height="150px"
                 width="250px"
                 style={{
                   marginBottom: "10px",
                   width: "250px",
-                  height: "199px",
+                  height: "150px",
                   borderRadius: "5px",
                 }}
 
@@ -111,7 +111,7 @@ export default function CoursesHomePage({
                     {course.instrument}/{course.level}
                   </div>
                 </div>
-                <div>{course.description}</div>
+                <div>{course.description.slice(0, 50)}...</div>
               </div>
             </div>
           </Link>

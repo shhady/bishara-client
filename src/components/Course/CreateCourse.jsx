@@ -110,7 +110,7 @@ export default function CreateCourse() {
             name="firstName"
             style={{
               textAlign: "start",
-              width: "60%",
+              width: "100%",
               marginBottom: "20px",
               marginTop: "20px",
             }}
@@ -121,14 +121,14 @@ export default function CreateCourse() {
             type="text"
             defaultValue={user.teacher.lastName}
             name="lastName"
-            style={{ textAlign: "start", width: "60%" }}
+            style={{ textAlign: "start", width: "100%" }}
             // onChange={handleChange}
           />
           <input
             placeholder="عنوان الدورة"
             name="title"
             onChange={(e) => setCourse({ ...course, title: e.target.value })}
-            style={{ textAlign: "start", width: "60%", marginTop: "20px" }}
+            style={{ textAlign: "start", width: "100%", marginTop: "20px" }}
             // onChange={handleChange}
             // autoFocus
             required
@@ -136,7 +136,7 @@ export default function CreateCourse() {
           <select
             style={{
               textAlign: "start",
-              width: "60%",
+              width: "100%",
               marginTop: "20px",
               marginBottom: "20px",
             }}
@@ -152,7 +152,7 @@ export default function CreateCourse() {
             <option value="قانون">قانون</option>
           </select>
           <select
-            style={{ textAlign: "start", width: "60%" }}
+            style={{ textAlign: "start", width: "100%" }}
             onChange={(e) => setCourse({ ...course, level: e.target.value })}
             required
           >
@@ -168,7 +168,7 @@ export default function CreateCourse() {
             onChange={(e) =>
               setCourse({ ...course, playlistId: e.target.value })
             }
-            style={{ textAlign: "start", width: "60%", marginTop: "20px" }}
+            style={{ textAlign: "start", width: "100%", marginTop: "20px" }}
             // onChange={handleChange}
             // autoFocus
             required
@@ -192,7 +192,7 @@ export default function CreateCourse() {
             onChange={(e) =>
               setCourse({ ...course, description: e.target.value })
             }
-            style={{ textAlign: "start", width: "60%" }}
+            style={{ textAlign: "start", width: "100%" }}
             // onChange={handleChange}
             // autoFocus
             required
@@ -210,7 +210,7 @@ export default function CreateCourse() {
             type="submit"
             style={{
               textAlign: "center",
-              width: "60%",
+              width: "100%",
               marginBottom: "20px",
               cursor: "pointer",
               marginTop: "20px",

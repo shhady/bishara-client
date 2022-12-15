@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./ChangePassword.css";
 import axios from "axios";
-export default function ChangePassword({ userId }) {
+export default function ChangePasswordUser({ userId }) {
   const [newPassword, setNewPassword] = useState("");
   const [newConfirm, setNewConfirm] = useState("");
   //   console.log(newPassword, newConfirm);
   const changePass = async () => {
     try {
       await axios.patch(
-        process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
+        process.env.REACT_APP_BACKEND_URL + `/users/${userId}`,
         {
           password: newPassword,
           confirmPassword: newConfirm,
