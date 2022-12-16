@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./StudentPractice.css";
 
-export default function ChatGPTpage({ user }) {
+export default function PracticeReplies({ user }) {
   // State variables
   const [teacherPractices, setTeacherPractices] = useState([]);
   const [userId, setUserId] = useState(null);
@@ -172,6 +172,8 @@ export default function ChatGPTpage({ user }) {
         },
       })
       .then((res) => setUrl(res.data.url))
+      .then((res) => console.log(res))
+
       .catch((err) => {
         console.log(err);
       });
@@ -198,6 +200,17 @@ export default function ChatGPTpage({ user }) {
             (practice) => practice.teacherId === userId
           );
           setTeacherPractices(filterData);
+        })
+        .then(async () => {
+          await axios.post(process.env.REACT_APP_BACKEND_URL + `/replies`, {
+            theVideoReply: url,
+            videoName: practice.video,
+            courseId: practice.courseId,
+            nameOfProblem: nameOfProblem,
+            practiceId: practice._id,
+            uniqueLink: practice.uniqueLink,
+            teacherId: practice.teacherId,
+          });
         });
     };
     addTheVideo();
@@ -212,7 +225,7 @@ export default function ChatGPTpage({ user }) {
     return replies.map((reply, i) => {
       return (
         <video
-          key={reply.theVideoReply}
+          key={`${reply.theVideoReply} + ${i}`}
           controls
           style={{ width: "100%", height: "121px" }}
         >

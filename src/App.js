@@ -38,7 +38,9 @@ const TeacherData = React.lazy(() => import("./components/TeacherData"));
 const Lessons = React.lazy(() => import("./components/Lessons"));
 const Lesson = React.lazy(() => import("./components/Lesson"));
 const Notifications = React.lazy(() => import("./components/Notifications"));
-const ChatGPTpage = React.lazy(() => import("./components/ChatGPTpage"));
+const PracticeReplies = React.lazy(() =>
+  import("./components/PracticeReplies")
+);
 
 const Subscribe = React.lazy(() => import("./components/Subscribe"));
 
@@ -101,8 +103,8 @@ export default function App() {
           <Route path="/auth" exact>
             <Auth user={user} setUser={setUser} />
           </Route>
-          <Route path="/ChatGPTpage" exact>
-            <ChatGPTpage user={user} setUser={setUser} />
+          <Route path="/PracticeReplies" exact>
+            <PracticeReplies user={user} setUser={setUser} />
           </Route>
 
           <Route path="/TestYoutube/:id" exact>
