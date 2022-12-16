@@ -197,7 +197,7 @@ export default function Profile() {
   };
 
   const studentsPractices = () => {
-    history.push("/StudentsPractices");
+    history.push("/ChatGPTpage");
   };
 
   useEffect(() => {

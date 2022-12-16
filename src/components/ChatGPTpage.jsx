@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./StudentPractice.css";
-export default function StudentsPractices({ user }) {
-  // const [allPracrices, setAllPracrices] = useState([]);
+
+export default function ChatGPTpage({ user }) {
+  // State variables
   const [teacherPractices, setTeacherPractices] = useState([]);
   const [userId, setUserId] = useState(null);
   const [reply, setReply] = useState("");
@@ -20,88 +21,36 @@ export default function StudentsPractices({ user }) {
   const [onlyForTeacher, setOnlyForTeacher] = useState([]);
   const [openButtons, setOpenButtons] = useState(false);
   const [showButtons, setShowButtons] = useState([]);
-  const postDetails = (practice) => {
-    const formData = new FormData();
-    formData.append("file", video);
-    formData.append("upload_preset", "bisharaHaroni");
-    setPracticeId(practice._id);
-    // formData.append("cloud_name", "shhady");
-    axios
-      .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
-        onUploadProgress: (p) => {
-          const percentComplete = Math.round((p.loaded * 100) / p.total);
-          setFileUpload({ fileName: video.name, percentComplete });
-          console.log(`${percentComplete}% uploaded`);
-        },
-      })
-      .then((res) => setUrl(res.data.url))
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  useEffect(() => {}, [url]);
 
-  const addTeacherVideoReply = (practice) => {
-    const addTheVideo = async () => {
-      await axios
-        .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {
-          theVideoReply: url,
-          videoName: practice.video,
-          courseId: practice.courseId,
-          nameOfProblem: nameOfProblem,
-          practiceId: practice._id,
-          uniqueLink: practice.uniqueLink,
-          teacherId: practice.teacherId,
-        })
-        .then(async () => {
-          const res = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/practices`
-          );
-          const filterData = res.data.filter(
-            (practice) => practice.teacherId === userId
-          );
-          setTeacherPractices(filterData);
-        })
-        .then(async () => {
-          await axios.post(process.env.REACT_APP_BACKEND_URL + `/replies`, {
-            theVideoReply: url,
-            videoName: practice.video,
-            courseId: practice.courseId,
-            nameOfProblem: nameOfProblem,
-            practiceId: practice._id,
-            uniqueLink: practice.uniqueLink,
-            teacherId: practice.teacherId,
-          });
-        });
-    };
-    addTheVideo();
-    setUrl(null);
-    setFileUpload(null);
-    setPracticeId(null);
-  };
+  // Set user ID when component mounts
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
     setUserId(userid);
   }, [user]);
 
+  // Fetch replies data when component mounts
   useEffect(() => {
-    const respo = async () => {
+    const fetchReplies = async () => {
       const getReplies = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/replies`
       );
       setAutoReplies(getReplies.data);
     };
-    respo();
+    fetchReplies();
   }, []);
+
+  // Filter replies data by teacher's user ID
   useEffect(() => {
     const filterByTeacher = autoReplies.filter(
       (teacher) => teacher.teacherId === userId
     );
+
     setOnlyForTeacher(filterByTeacher);
   }, [autoReplies]);
-  console.log(autoReplies);
+
+  // Fetch practices data when user ID or doneAddingComment changes
   useEffect(() => {
-    const fetch = async () => {
+    const fetchPractices = async () => {
       const res = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/practices`
       );
@@ -110,11 +59,12 @@ export default function StudentsPractices({ user }) {
       );
       setTeacherPractices(filterData);
     };
-    fetch();
-  }, [userId]);
+    fetchPractices();
+  }, [userId, doneAddingComment]);
 
+  // Fetch practices data when component mounts
   useEffect(() => {
-    const fetch = async () => {
+    const fetchReplies = async () => {
       const res = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/practices`
       );
@@ -123,22 +73,25 @@ export default function StudentsPractices({ user }) {
       );
       setTeacherReplies(filterData);
     };
-    fetch();
+    fetchReplies();
   }, []);
 
-  console.log(teacherReplies.videoReply);
-  // useEffect(() => {
-  //   const res = allPracrices.filter();
-  //   setTeacherPractices(res);
-  // }, [allPracrices]);
+  // Update nowDo state when doneAddingComment changes
+  useEffect(() => {
+    setNowDo("false");
+  }, [doneAddingComment]);
 
+  // Handle input change for reply
   const handleReply = (e) => {
     setReply(e.target.value);
   };
+
+  // Update myReply state when reply changes
   useEffect(() => {
     setMyReply(reply);
   }, [reply]);
 
+  // Add teacher reply to practice
   const addTeacherReply = (practice) => {
     const addReply = async () => {
       await axios
@@ -165,27 +118,7 @@ export default function StudentsPractices({ user }) {
     setDoneAddingComment(!doneAddingComment);
   };
 
-  useEffect(() => {
-    setNowDo("false");
-  }, [doneAddingComment]);
-  // useEffect(() => {
-  //   const fetchNew = async () => {
-  //     const res = await axios.get(
-  //       process.env.REACT_APP_BACKEND_URL + `/practices`
-  //     );
-  //     console.log(res);
-  //   };
-  //   fetchNew();
-  // }, [doneAddingComment]);
-
-  // useEffect(() => {
-  //   const filterPractice = teacherPractices.filter(
-  //     (prac) => prac.uniqueLink === uniqueLink
-  //   );
-  //   console.log(filterPractice);
-  // }, [teacherPractices]);
-  console.log(teacherPractices);
-  console.log(onlyForTeacher);
+  // Filter buttons data by unique link
   const getPracticeUnique = (practice) => {
     const newBU = onlyForTeacher.filter(
       (filteredPractices) =>
@@ -195,6 +128,7 @@ export default function StudentsPractices({ user }) {
     setShowButtons(newBU);
   };
 
+  // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
     const addTheVideo = async () => {
       await axios
@@ -222,6 +156,73 @@ export default function StudentsPractices({ user }) {
     setFileUpload(null);
     setPracticeId(null);
   };
+
+  // Upload video to Cloudinary
+  const postDetails = (practice) => {
+    const formData = new FormData();
+    formData.append("file", video);
+    formData.append("upload_preset", "bisharaHaroni");
+    setPracticeId(practice._id);
+    axios
+      .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
+        onUploadProgress: (p) => {
+          const percentComplete = Math.round((p.loaded * 100) / p.total);
+          setFileUpload({ fileName: video.name, percentComplete });
+          console.log(`${percentComplete}% uploaded`);
+        },
+      })
+      .then((res) => setUrl(res.data.url))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // Add teacher video reply to practice
+  const addTeacherVideoReply = (practice) => {
+    const addTheVideo = async () => {
+      await axios
+        .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {
+          theVideoReply: url,
+          videoName: practice.video,
+          courseId: practice.courseId,
+          nameOfProblem: nameOfProblem,
+          practiceId: practice._id,
+          uniqueLink: practice.uniqueLink,
+          teacherId: practice.teacherId,
+        })
+        .then(async () => {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/practices`
+          );
+          const filterData = res.data.filter(
+            (practice) => practice.teacherId === userId
+          );
+          setTeacherPractices(filterData);
+        });
+    };
+    addTheVideo();
+
+    setUrl(null);
+    setFileUpload(null);
+    setPracticeId(null);
+  };
+
+  // Render video replies
+  const renderVideoReplies = (replies) => {
+    return replies.map((reply, i) => {
+      return (
+        <video
+          key={reply.theVideoReply}
+          controls
+          style={{ width: "100%", height: "121px" }}
+        >
+          <source src={reply.theVideoReply} type="video/mp4" />
+        </video>
+      );
+    });
+  };
+
+  // Render showData component
   const showData = () => {
     return teacherPractices?.map((practice) => {
       return (
@@ -273,17 +274,7 @@ export default function StudentsPractices({ user }) {
                       maxHeight: "250px",
                     }}
                   >
-                    {practice.videoReply.map((reply, i) => {
-                      return (
-                        <video
-                          key={reply.theVideoReply}
-                          controls
-                          style={{ width: "100%", height: "121px" }}
-                        >
-                          <source src={reply.theVideoReply} type="video/mp4" />
-                        </video>
-                      );
-                    })}
+                    {renderVideoReplies(practice.videoReply)}
                   </div>
                 ) : null}
               </div>
@@ -308,6 +299,7 @@ export default function StudentsPractices({ user }) {
                                   minWidth: "100px",
                                 }}
                               >
+                                {" "}
                                 {buttonD.nameOfProblem}
                               </button>
                             );
@@ -316,13 +308,6 @@ export default function StudentsPractices({ user }) {
                       ) : null}
                     </>
                   ) : null}
-                  {/* {onlyForTeacher
-                    .filter(
-                      (rep) => rep.uniqueLink === teacherPractices.uniqueLink
-                    )
-                    .map((thebutton) => {
-                      return <button>{thebutton.nameOfProblem}</button>;
-                    })} */}
                 </div>
                 <div>
                   <div>للتعليق على التمرين من خلال ارسال فيديو</div>
@@ -344,97 +329,53 @@ export default function StudentsPractices({ user }) {
                   <div>
                     {url ? null : (
                       <button onClick={() => postDetails(practice)}>
-                        ارفع الفيديو
+                        رفع الفيديو
                       </button>
                     )}
                   </div>
-                  <div>
-                    {practiceId === practice._id ? (
-                      <div className="SendVideoReply">
-                        <div
-                          style={{
-                            minWidth: "70px",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "flex-end",
-                            alignItems: "center",
-                          }}
-                        >
-                          {fileUpload && (
-                            <span style={{ textAlign: "center" }}>
-                              {" "}
-                              تم رفع {fileUpload.percentComplete}%
-                            </span>
-                          )}
-                        </div>
-                        {url ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            <button
-                              onClick={() => addTeacherVideoReply(practice)}
-                              className="btnSendVideoReply"
-                            >
-                              ارسال
-                            </button>
-                          </div>
-                        ) : null}
-                      </div>
-                    ) : null}
-                  </div>
                 </div>
-              </>
-              <div style={{ marginTop: "30px" }}> تعليق المعلم:</div>
-
-              <div>
-                {showReply && practice.reply ? (
-                  <>
-                    {practice.reply}{" "}
-                    <button
-                      onClick={() => {
-                        // setShowLastReply(false);
-                        setPracticeId(practice._id);
-                      }}
-                    >
-                      تعديل
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    {/* {showReply}{" "} */}
+                <div>
+                  {fileUpload ? (
                     <div>
-                      {" "}
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <textarea
-                          name="reply"
-                          onChange={handleReply}
-                          placeholder="Reply"
-                          value={myReply}
-                          style={{
-                            height: "70%",
-                            width: "100%",
-                            marginBottom: "10px",
-                          }}
-                        />
-                        <button onClick={() => addTeacherReply(practice)}>
-                          تثبيت
-                        </button>
-                      </div>
+                      <p>{fileUpload.fileName}</p>
+                      <p>{fileUpload.percentComplete}%</p>
                     </div>
-                  </>
-                )}{" "}
-                {practiceId === practice._id && !url ? (
-                  <>
+                  ) : null}
+                </div>
+                {url ? (
+                  <button
+                    onClick={() => addTeacherVideoReply(practice)}
+                    className="btnSendVideoReply"
+                  >
+                    ارسال
+                  </button>
+                ) : //   ) : null}
+                // </div>
+                null}
+
+                {/* </div> */}
+              </>
+            </div>
+            <div style={{ marginTop: "30px" }}> تعليق المعلم:</div>
+
+            <div>
+              {showReply && practice.reply ? (
+                <>
+                  {practice.reply}{" "}
+                  <button
+                    onClick={() => {
+                      // setShowLastReply(false);
+                      setPracticeId(practice._id);
+                    }}
+                  >
+                    تعديل
+                  </button>
+                </>
+              ) : (
+                <>
+                  {/* {showReply}{" "} */}
+                  <div>
+                    {" "}
                     <div
                       style={{
                         display: "flex",
@@ -456,23 +397,45 @@ export default function StudentsPractices({ user }) {
                         تثبيت
                       </button>
                     </div>
-                  </>
-                ) : null}
-              </div>
-              {/* <div>{practice.reply}</div> */}
+                  </div>
+                </>
+              )}{" "}
+              {practiceId === practice._id && !url ? (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <textarea
+                      name="reply"
+                      onChange={handleReply}
+                      placeholder="Reply"
+                      value={myReply}
+                      style={{
+                        height: "70%",
+                        width: "100%",
+                        marginBottom: "10px",
+                      }}
+                    />
+                    <button onClick={() => addTeacherReply(practice)}>
+                      تثبيت
+                    </button>
+                  </div>
+                </>
+              ) : null}
             </div>
+            {/* <div>{practice.reply}</div> */}
           </div>
         </div>
+        // </div>
       );
     });
   };
 
   return (
-    <div
-      style={{
-        marginTop: "150px",
-      }}
-    >
+    <div style={{ marginTop: "150px" }}>
       <div>
         <h2 style={{ textAlign: "center" }}>تمارين الطلاب</h2>
       </div>
