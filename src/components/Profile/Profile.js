@@ -320,13 +320,10 @@ export default function Profile() {
                 controls
                 preload="metadata"
                 poster={poster}
+                height="250px"
                 style={{ width: "100%", height: "100%", minHeight: "250px" }}
               >
-                <source
-                  src={practice.myPractice}
-                  type="video/mp4"
-                  style={{ width: "100%", height: "100%", minHeight: "250px" }}
-                />
+                <source src={practice.myPractice} type="video/mp4" />
               </video>
             </div>
             <div style={{ padding: "0px 10px", width: "50%" }}>
