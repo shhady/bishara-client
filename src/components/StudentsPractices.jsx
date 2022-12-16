@@ -203,6 +203,12 @@ export default function StudentsPractices({ user }) {
     setFileUpload(null);
     setPracticeId(null);
   };
+
+  const cancelUpload = () => {
+    setUrl(null);
+    setFileUpload(null);
+    setPracticeId(null);
+  };
   const showData = () => {
     return teacherPractices?.map((practice) => {
       return (
@@ -355,6 +361,12 @@ export default function StudentsPractices({ user }) {
                               className="btnSendVideoReply"
                             >
                               ارسال
+                            </button>
+                            <button
+                              onClick={cancelUpload}
+                              className="btnSendVideoReply"
+                            >
+                              cancel
                             </button>
                           </div>
                         ) : null}

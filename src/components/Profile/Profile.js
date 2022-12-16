@@ -321,7 +321,7 @@ export default function Profile() {
                 preload="metadata"
                 poster={poster}
                 height="250px"
-                style={{ width: "100%", height: "100%", minHeight: "250px" }}
+                style={{ width: "100%", height: "100%", maxHeight: "250px" }}
               >
                 <source src={practice.myPractice} type="video/mp4" />
               </video>
@@ -345,7 +345,7 @@ export default function Profile() {
                     gridTemplateColumns: "1fr 1fr",
                     gap: ".5rem",
                     height: "100%",
-                    minHeight: "121px",
+                    maxHeight: "250px",
                   }}
                 >
                   {practice.videoReply.map((reply, i) => {
@@ -355,7 +355,7 @@ export default function Profile() {
                         controls
                         preload="metadata"
                         poster={poster}
-                        style={{ width: "100%", height: "121px" }}
+                        style={{ width: "100%", height: "100%" }}
                       >
                         <source src={reply.theVideoReply} type="video/mp4" />
                       </video>

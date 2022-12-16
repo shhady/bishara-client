@@ -231,6 +231,13 @@ export default function PracticeReplies({ user }) {
     setPracticeId(null);
   };
 
+  const cancelUpload = () => {
+    setUrl(null);
+    setFileUpload(null);
+    setPracticeId(null);
+    setNameOfProblem("");
+    setVideo(null);
+  };
   // Render video replies
   const renderVideoReplies = (replies) => {
     return replies.map((reply, i) => {
@@ -284,7 +291,7 @@ export default function PracticeReplies({ user }) {
                   controls
                   preload="metadata"
                   poster={poster}
-                  style={{ width: "100%", height: "100%" }}
+                  style={{ width: "100%", height: "100%", maxHeight: "250px" }}
                 >
                   <source src={practice.myPractice} type="video/mp4" />
                 </video>
@@ -369,15 +376,21 @@ export default function PracticeReplies({ user }) {
                   ) : null}
                 </div>
                 {url ? (
-                  <button
-                    onClick={() => addTeacherVideoReply(practice)}
-                    className="btnSendVideoReply"
-                  >
-                    ارسال
-                  </button>
-                ) : //   ) : null}
-                // </div>
-                null}
+                  <>
+                    <button
+                      onClick={() => addTeacherVideoReply(practice)}
+                      className="btnSendVideoReply"
+                    >
+                      ارسال
+                    </button>
+                    <button
+                      onClick={cancelUpload}
+                      className="btnSendVideoReply"
+                    >
+                      cancel
+                    </button>
+                  </>
+                ) : null}
 
                 {/* </div> */}
               </>
