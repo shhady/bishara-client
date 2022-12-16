@@ -279,7 +279,6 @@ export default function PracticeReplies({ user }) {
               }}
             >
               <div>
-                <span> التمرين:</span>
                 <video
                   key={practice.myPractice}
                   controls
@@ -291,7 +290,6 @@ export default function PracticeReplies({ user }) {
                 </video>
               </div>
               <div>
-                <span style={{ color: "black" }}>رد المعلم</span>
                 {practice.videoReply ? (
                   <div
                     style={{

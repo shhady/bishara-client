@@ -210,7 +210,7 @@ export default function Profile() {
   };
 
   const studentsPractices = () => {
-    history.push("/ChatGPTpage");
+    history.push("/PracticeReplies");
   };
 
   useEffect(() => {
@@ -309,9 +309,12 @@ export default function Profile() {
             <div
               style={{
                 width: "50%",
+                display: "flex",
+                justifyContent: "felx-start",
+                alignItems: "flex-start",
               }}
             >
-              <div>التمرين</div>
+              {/* <div>التمرين</div> */}
               <video
                 key={practice.myPractice}
                 controls
@@ -323,7 +326,6 @@ export default function Profile() {
               </video>
             </div>
             <div style={{ padding: "0px 10px", width: "50%" }}>
-              رد المعلم:
               {/* {practice.videoReply ? (
                 <div>
                   <video
