@@ -127,10 +127,6 @@ export default function StudentsPractices({ user }) {
   }, []);
 
   console.log(teacherReplies.videoReply);
-  // useEffect(() => {
-  //   const res = allPracrices.filter();
-  //   setTeacherPractices(res);
-  // }, [allPracrices]);
 
   const handleReply = (e) => {
     setReply(e.target.value);
@@ -168,24 +164,9 @@ export default function StudentsPractices({ user }) {
   useEffect(() => {
     setNowDo("false");
   }, [doneAddingComment]);
-  // useEffect(() => {
-  //   const fetchNew = async () => {
-  //     const res = await axios.get(
-  //       process.env.REACT_APP_BACKEND_URL + `/practices`
-  //     );
-  //     console.log(res);
-  //   };
-  //   fetchNew();
-  // }, [doneAddingComment]);
 
-  // useEffect(() => {
-  //   const filterPractice = teacherPractices.filter(
-  //     (prac) => prac.uniqueLink === uniqueLink
-  //   );
-  //   console.log(filterPractice);
-  // }, [teacherPractices]);
-  console.log(teacherPractices);
-  console.log(onlyForTeacher);
+  // console.log(teacherPractices);
+  // console.log(onlyForTeacher);
   const getPracticeUnique = (practice) => {
     const newBU = onlyForTeacher.filter(
       (filteredPractices) =>
@@ -316,13 +297,6 @@ export default function StudentsPractices({ user }) {
                       ) : null}
                     </>
                   ) : null}
-                  {/* {onlyForTeacher
-                    .filter(
-                      (rep) => rep.uniqueLink === teacherPractices.uniqueLink
-                    )
-                    .map((thebutton) => {
-                      return <button>{thebutton.nameOfProblem}</button>;
-                    })} */}
                 </div>
                 <div>
                   <div>للتعليق على التمرين من خلال ارسال فيديو</div>

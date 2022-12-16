@@ -21,7 +21,18 @@ export default function PracticeReplies({ user }) {
   const [onlyForTeacher, setOnlyForTeacher] = useState([]);
   const [openButtons, setOpenButtons] = useState(false);
   const [showButtons, setShowButtons] = useState([]);
-
+  const [poster, setPoster] = useState("");
+  useEffect(() => {
+    function MyVideo() {
+      if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+        // code to run if user is using Safari
+        setPoster(
+          "https://images.pexels.com/photos/6044198/pexels-photo-6044198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        );
+      }
+    }
+    MyVideo();
+  }, []);
   // Set user ID when component mounts
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
@@ -227,6 +238,8 @@ export default function PracticeReplies({ user }) {
         <video
           key={`${reply.theVideoReply} + ${i}`}
           controls
+          preload="metadata"
+          poster={poster}
           style={{ width: "100%", height: "121px" }}
         >
           <source src={reply.theVideoReply} type="video/mp4" />
@@ -270,6 +283,8 @@ export default function PracticeReplies({ user }) {
                 <video
                   key={practice.myPractice}
                   controls
+                  preload="metadata"
+                  poster={poster}
                   style={{ width: "100%", height: "250px" }}
                 >
                   <source src={practice.myPractice} type="video/mp4" />

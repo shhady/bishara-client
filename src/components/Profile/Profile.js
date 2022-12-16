@@ -43,7 +43,7 @@ export default function Profile() {
       if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
         // code to run if user is using Safari
         setPoster(
-          "https://images.pexels.com/photos/623147/pexels-photo-623147.jpeg?auto=compress&cs=tinysrgb&w=600"
+          "https://images.pexels.com/photos/6044198/pexels-photo-6044198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         );
       }
     }
@@ -350,6 +350,8 @@ export default function Profile() {
                       <video
                         key={reply.theVideoReply}
                         controls
+                        preload="metadata"
+                        poster={poster}
                         style={{ width: "100%", height: "121px" }}
                       >
                         <source src={reply.theVideoReply} type="video/mp4" />
