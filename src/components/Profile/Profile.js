@@ -303,7 +303,7 @@ export default function Profile() {
                 key={practice.myPractice}
                 controls
                 preload="metadata"
-                poster="https://images.pexels.com/photos/1053924/pexels-photo-1053924.jpeg?auto=compress&cs=tinysrgb&w=600"
+                poster={`${practice.myPractice}+#t=0.01`}
                 style={{ width: "100%", height: "250px" }}
               >
                 <source src={practice.myPractice} type="video/mp4" />
