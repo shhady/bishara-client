@@ -321,7 +321,12 @@ export default function Profile() {
                 preload="metadata"
                 poster={poster}
                 height="250px"
-                style={{ width: "100%", height: "100%", maxHeight: "250px" }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  maxHeight: "250px",
+                  minHeight: "250px",
+                }}
               >
                 <source src={practice.myPractice} type="video/mp4" />
               </video>
@@ -355,6 +360,8 @@ export default function Profile() {
                         controls
                         preload="metadata"
                         poster={poster}
+                        minHeight="122px"
+                        maxHeight="122px"
                         style={{ width: "100%", height: "100%" }}
                       >
                         <source src={reply.theVideoReply} type="video/mp4" />
