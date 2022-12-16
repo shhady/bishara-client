@@ -302,6 +302,7 @@ export default function Profile() {
               <video
                 key={practice.myPractice}
                 controls
+                preload="metadata"
                 style={{ width: "100%", height: "250px" }}
               >
                 <source src={practice.myPractice} type="video/mp4" />
