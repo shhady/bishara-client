@@ -943,8 +943,13 @@ export default function Header({
                   </span>
                 </div>
               </Link>
-              <div style={{ color: "white", width: "50%" }}>
-                <hr />
+              <div
+                style={{
+                  borderBottom: "1px solid #e1e1e1",
+                  width: "30%",
+                }}
+              >
+                {/* <hr /> */}
               </div>
               {user ? (
                 <>
@@ -1010,8 +1015,13 @@ export default function Header({
                       </span>
                     </div>
                   </Link>
-                  <div style={{ color: "white", width: "50%" }}>
-                    <hr />
+                  <div
+                    style={{
+                      borderBottom: "1px solid #e1e1e1",
+                      width: "30%",
+                    }}
+                  >
+                    {/* <hr /> */}
                   </div>
                 </>
               ) : null}
