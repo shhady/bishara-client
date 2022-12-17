@@ -43,32 +43,33 @@ export default function PracticeReplies({ user }) {
   useEffect(() => {
     const fetchReplies = async () => {
       const getReplies = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/replies`
+        process.env.REACT_APP_BACKEND_URL + `/replies/${userId}`
       );
       setAutoReplies(getReplies.data);
     };
     fetchReplies();
-  }, []);
-
+  }, [userId]);
+  console.log(autoReplies);
   // Filter replies data by teacher's user ID
-  useEffect(() => {
-    const filterByTeacher = autoReplies.filter(
-      (teacher) => teacher.teacherId === userId
-    );
+  // useEffect(() => {
+  //   const filterByTeacher = autoReplies.filter(
+  //     (teacher) => teacher.teacherId === userId
+  //   );
 
-    setOnlyForTeacher(filterByTeacher);
-  }, [autoReplies]);
+  //   setOnlyForTeacher(filterByTeacher);
+  // }, [autoReplies]);
 
   // Fetch practices data when user ID or doneAddingComment changes
   useEffect(() => {
     const fetchPractices = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/practices`
+        process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
       );
-      const filterData = res.data.filter(
-        (practice) => practice.teacherId === userId
-      );
-      setTeacherPractices(filterData);
+      console.log(res.data);
+      // const filterData = res.data.filter(
+      //   (practice) => practice.teacherId === userId
+      // );
+      setTeacherPractices(res.data);
     };
     fetchPractices();
   }, [userId, doneAddingComment]);
@@ -77,15 +78,15 @@ export default function PracticeReplies({ user }) {
   useEffect(() => {
     const fetchReplies = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/practices`
+        process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
       );
-      const filterData = res.data.filter(
-        (practice) => practice.teacherId === userId
-      );
-      setTeacherReplies(filterData);
+      // const filterData = res.data.filter(
+      //   (practice) => practice.teacherId === userId
+      // );
+      setTeacherReplies(res);
     };
     fetchReplies();
-  }, []);
+  }, [userId]);
 
   // Update nowDo state when doneAddingComment changes
   useEffect(() => {
