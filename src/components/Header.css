@@ -92,13 +92,19 @@ button{
     display: flex;
     flex-direction: column;
     justify-content:center;
-    align-items:center
+    align-items:center;
+    border-bottom: 3px solid rgb(248, 245, 245);
 }
 .highlight{
     font-family: "Font Awesome 5 Pro";
     font-style:italic
 }
-.headerpiano:hover, .headeroud:hover{
+/* .headerpiano:hover, .headeroud:hover{
+    border-bottom: 3px solid rgb(25, 24, 24);
+    transition: all 0.5s;
+    color:black
+} */
+.logoAndText:hover{
     border-bottom: 3px solid rgb(25, 24, 24);
     transition: all 0.5s;
     color:black

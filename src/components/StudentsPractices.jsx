@@ -210,7 +210,7 @@ export default function StudentsPractices({ user }) {
     setPracticeId(null);
   };
   const showData = () => {
-    return teacherPractices?.map((practice) => {
+    return teacherPractices?.reverse().map((practice) => {
       return (
         <div
           style={{ borderBottom: "1px solid #e1e1e1", padding: "10px" }}
@@ -361,12 +361,6 @@ export default function StudentsPractices({ user }) {
                               className="btnSendVideoReply"
                             >
                               ارسال
-                            </button>
-                            <button
-                              onClick={cancelUpload}
-                              className="btnSendVideoReply"
-                            >
-                              cancel
                             </button>
                           </div>
                         ) : null}

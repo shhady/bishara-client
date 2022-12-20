@@ -216,26 +216,26 @@ export default function Profile() {
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/practices`
+        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${userId}`
       );
-      setAllPractices(res.data);
+      setUserPractices(res.data);
     };
     fetch();
-  }, []);
+  }, [user, userId]);
 
-  useEffect(() => {
-    const fetch = async () => {
-      const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/practices`
-      );
-      setAllPractices(res.data);
-    };
-    fetch();
-  }, [practiceId]);
-  useEffect(() => {
-    const res = allPractices.filter((practice) => practice.ownerId === userId);
-    setUserPractices(res);
-  }, [allPractices, userId]);
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const res = await axios.get(
+  //       process.env.REACT_APP_BACKEND_URL + `/practices`
+  //     );
+  //     setAllPractices(res.data);
+  //   };
+  //   fetch();
+  // }, [practiceId]);
+  // useEffect(() => {
+  //   const res = allPractices.filter((practice) => practice.ownerId === userId);
+  //   setUserPractices(res);
+  // }, [allPractices, userId]);
   // const showData = () => {
   //   const res = allPractices.filter(
   //     (practice) => practice.ownerId === user.user._id
@@ -258,16 +258,16 @@ export default function Profile() {
         )
         .then(async () => {
           const res = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/practices`
+            process.env.REACT_APP_BACKEND_URL + `/studentpractices/${userId}`
           );
-          setAllPractices(res.data);
+          setUserPractices(res.data);
         });
     };
     deleteThePractice();
   };
 
   const showData = () => {
-    return userPractices?.map((practice) => {
+    return userPractices?.reverse().map((practice) => {
       return (
         <div
           style={{

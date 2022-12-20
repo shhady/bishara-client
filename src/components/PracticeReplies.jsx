@@ -258,7 +258,7 @@ export default function PracticeReplies({ user }) {
 
   // Render showData component
   const showData = () => {
-    return teacherPractices?.map((practice) => {
+    return teacherPractices?.reverse().map((practice) => {
       return (
         <div
           style={{ borderBottom: "1px solid #e1e1e1", padding: "10px" }}

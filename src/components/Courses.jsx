@@ -17,6 +17,7 @@ export default function Courses({
   const [showPopUp, setShowPopUp] = useState(false);
   const [all, setAll] = useState(true);
   const [title, setTitle] = useState(null);
+  const [instruments, setInstruments] = useState("الدورات");
   const history = useHistory();
   window.onpopstate = () => {
     history.push("/");
@@ -202,7 +203,7 @@ export default function Courses({
 
   return (
     <div style={{ display: "grid", gridAutoColumns: "3fr 1fr" }}>
-      <div className="TopOfPage">الدورات</div>
+      <div className="TopOfPage">{instruments}</div>
       <div className="filterInstruments" onClick={() => setShowPopUp(true)}>
         اختر آلة
       </div>
@@ -211,7 +212,13 @@ export default function Courses({
           <div className="thePopUp">
             <div>
               <div className="coursesPopUp">
-                <div className="allCourses" onClick={() => setAll(true)}>
+                <div
+                  className="allCourses"
+                  onClick={() => {
+                    setAll(true);
+                    setInstruments("الدورات");
+                  }}
+                >
                   <img
                     src="https://img.icons8.com/windows/32/null/circle.png"
                     width="5px"
@@ -223,6 +230,7 @@ export default function Courses({
                   onClick={() => {
                     setTitle("بيانو");
                     setAll(false);
+                    setInstruments("بيانو");
                   }}
                 >
                   بيانو
@@ -232,6 +240,7 @@ export default function Courses({
                   onClick={() => {
                     setTitle("عود");
                     setAll(false);
+                    setInstruments("عود");
                   }}
                   className="allCourses"
                 >
@@ -242,6 +251,7 @@ export default function Courses({
                   onClick={() => {
                     setTitle("كمان");
                     setAll(false);
+                    setInstruments("كمان");
                   }}
                   className="allCourses"
                 >
@@ -252,6 +262,7 @@ export default function Courses({
                   onClick={() => {
                     setTitle("قانون");
                     setAll(false);
+                    setInstruments("قانون");
                   }}
                   className="allCourses"
                 >
@@ -266,7 +277,13 @@ export default function Courses({
         <div>
           {" "}
           <div className="coursesCss">
-            <div className="allCourses" onClick={() => setAll(true)}>
+            <div
+              className="allCourses"
+              onClick={() => {
+                setAll(true);
+                setInstruments("الدورات");
+              }}
+            >
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
@@ -279,6 +296,7 @@ export default function Courses({
               onClick={() => {
                 setTitle("بيانو");
                 setAll(false);
+                setInstruments("بيانو");
               }}
             >
               <img
@@ -293,6 +311,7 @@ export default function Courses({
               onClick={() => {
                 setTitle("عود");
                 setAll(false);
+                setInstruments("عود");
               }}
               className="allCourses"
             >
@@ -308,6 +327,7 @@ export default function Courses({
               onClick={() => {
                 setTitle("كمان");
                 setAll(false);
+                setInstruments("كمان");
               }}
               className="allCourses"
             >
@@ -323,6 +343,7 @@ export default function Courses({
               onClick={() => {
                 setTitle("قانون");
                 setAll(false);
+                setInstruments("قانون");
               }}
               className="allCourses"
             >
