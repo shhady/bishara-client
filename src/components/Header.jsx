@@ -684,7 +684,10 @@ export default function Header({
                 }}
                 onMouseLeave={() => setTeachersHover(false)}
               >
-                <TeachersPop setTeachersHover={setTeachersHover} />
+                <TeachersPop
+                  setTeachersHover={setTeachersHover}
+                  setUpdateComponent={setUpdateComponent}
+                />
               </div>
             </div>
           ) : null}

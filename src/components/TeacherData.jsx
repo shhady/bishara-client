@@ -2,14 +2,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeacherData.css";
 import { Link, useHistory } from "react-router-dom";
-export default function TeacherData({ listId, teacher, setUpdateComponent }) {
+export default function TeacherData({
+  listId,
+  teacher,
+  setUpdateComponent,
+  updateComponent,
+}) {
   const [teacherId, setTeacherId] = useState(localStorage.getItem("teacherId"));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [userId, setUserId] = useState("");
   const [teacherInfo, setTeacherInfo] = useState("");
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
-
+  const [teacherprop, setTeacherprop] = useState(updateComponent);
   useEffect(() => {
     setUserId(user.user ? user.user._id : user.teacher._id);
   }, [user]);
@@ -17,6 +22,12 @@ export default function TeacherData({ listId, teacher, setUpdateComponent }) {
   window.onpopstate = () => {
     history.push("/teachers");
   };
+  // console.log(updateComponent._id);
+  useEffect(() => {
+    teacherprop
+      ? setTeacherId(updateComponent._id)
+      : setTeacherId(localStorage.getItem("teacherId"));
+  }, [updateComponent]);
   //   console.log(localStorage.getItem("teacherId"));
   useEffect(() => {
     const fetch = async () => {

@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Teachers.css";
 import { Link } from "react-router-dom";
 // import {useNav} from "react-router-dom"
-export default function TeachersPop({ setTeachersHover }) {
+export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
   const [teachers, setTeachers] = useState(null);
   useEffect(() => {
     const fetch = async () => {
@@ -34,6 +34,7 @@ export default function TeachersPop({ setTeachersHover }) {
 
   const addToLocal = (teacher) => {
     window.localStorage.setItem("teacherId", teacher._id);
+    setUpdateComponent(teacher);
   };
 
   const drawData = () => {

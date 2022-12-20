@@ -57,6 +57,7 @@ export default function App() {
   const [course, setCourse] = useState(null);
   const [teacher, setTeacher] = useState(null);
   const [updateComponent, setUpdateComponent] = useState(null);
+  console.log(updateComponent);
   useEffect(() => {
     if (!user) return;
     user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
@@ -150,6 +151,7 @@ export default function App() {
               teacher={teacher}
               listId={listId}
               setUpdateComponent={setUpdateComponent}
+              updateComponent={updateComponent}
             />
           </Route>
 

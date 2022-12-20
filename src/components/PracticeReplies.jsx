@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./StudentPractice.css";
+import { useHistory } from "react-router-dom";
 
 export default function PracticeReplies({ user }) {
   // State variables
@@ -22,6 +23,11 @@ export default function PracticeReplies({ user }) {
   const [openButtons, setOpenButtons] = useState(false);
   const [showButtons, setShowButtons] = useState([]);
   const [poster, setPoster] = useState("");
+  const history = useHistory();
+  window.onpopstate = () => {
+    history.push("/profile");
+  };
+
   useEffect(() => {
     function MyVideo() {
       if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
@@ -321,9 +327,10 @@ export default function PracticeReplies({ user }) {
                     <>
                       {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
                         <>
-                          {showButtons.map((buttonD) => {
+                          {showButtons.map((buttonD, i) => {
                             return (
                               <button
+                                key={i}
                                 onClick={() => buttonDetails(buttonD, practice)}
                                 style={{
                                   marginLeft: "20px",
