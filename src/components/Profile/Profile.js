@@ -267,7 +267,7 @@ export default function Profile() {
   };
 
   const showData = () => {
-    return userPractices?.reverse().map((practice) => {
+    return userPractices?.map((practice) => {
       return (
         <div
           style={{

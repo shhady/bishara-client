@@ -18,7 +18,7 @@ export default function PracticeReplies({ user }) {
   const [fileUpload, setFileUpload] = useState(null);
   const [teacherReplies, setTeacherReplies] = useState([]);
   const [autoReplies, setAutoReplies] = useState([]);
-  const [onlyForTeacher, setOnlyForTeacher] = useState([]);
+  // const [onlyForTeacher, setOnlyForTeacher] = useState([]);
   const [openButtons, setOpenButtons] = useState(false);
   const [showButtons, setShowButtons] = useState([]);
   const [poster, setPoster] = useState("");
@@ -86,7 +86,7 @@ export default function PracticeReplies({ user }) {
       setTeacherReplies(res);
     };
     fetchReplies();
-  }, [userId]);
+  }, [user, userId]);
 
   // Update nowDo state when doneAddingComment changes
   useEffect(() => {
@@ -132,7 +132,7 @@ export default function PracticeReplies({ user }) {
 
   // Filter buttons data by unique link
   const getPracticeUnique = (practice) => {
-    const newBU = onlyForTeacher.filter(
+    const newBU = autoReplies?.filter(
       (filteredPractices) =>
         filteredPractices.uniqueLink === practice.uniqueLink
     );
@@ -155,12 +155,12 @@ export default function PracticeReplies({ user }) {
         })
         .then(async () => {
           const res = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/practices`
+            process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
           );
-          const filterData = res.data.filter(
-            (practice) => practice.teacherId === userId
-          );
-          setTeacherPractices(filterData);
+          // const filterData = res.data.filter(
+          //   (practice) => practice.teacherId === userId
+          // );
+          setTeacherPractices(res.data);
         });
     };
     addTheVideo();
@@ -206,12 +206,12 @@ export default function PracticeReplies({ user }) {
         })
         .then(async () => {
           const res = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/practices`
+            process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
           );
-          const filterData = res.data.filter(
-            (practice) => practice.teacherId === userId
-          );
-          setTeacherPractices(filterData);
+          // const filterData = res.data.filter(
+          //   (practice) => practice.teacherId === userId
+          // );
+          setTeacherPractices(res.data);
         })
         .then(async () => {
           await axios.post(process.env.REACT_APP_BACKEND_URL + `/replies`, {
@@ -258,7 +258,7 @@ export default function PracticeReplies({ user }) {
 
   // Render showData component
   const showData = () => {
-    return teacherPractices?.reverse().map((practice) => {
+    return teacherPractices?.map((practice) => {
       return (
         <div
           style={{ borderBottom: "1px solid #e1e1e1", padding: "10px" }}
