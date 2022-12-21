@@ -50,7 +50,7 @@ export default function Profile() {
     MyVideo();
   }, []);
 
-  console.log(profilePicture);
+  console.log(user);
   console.log(localStorage.getItem("profilePic"));
   const postDetails = () => {
     const formData = new FormData();
@@ -221,7 +221,7 @@ export default function Profile() {
       setUserPractices(res.data);
     };
     fetch();
-  }, [user, userId]);
+  }, [userId]);
 
   // useEffect(() => {
   //   const fetch = async () => {
@@ -361,7 +361,7 @@ export default function Profile() {
                   {practice.videoReply.map((reply, i) => {
                     return (
                       <video
-                        key={reply.theVideoReply}
+                        key={reply.theVideoReply + `${i}`}
                         controls
                         preload="metadata"
                         // poster={poster}
