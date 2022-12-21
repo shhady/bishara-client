@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 // import FileBase from "react-file-base64";
 
-export default function Auth({ user, setUser }) {
+export default function Auth({ user, setUser, setUserProp }) {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [formData, setFormData] = useState({
     firstName: "",
@@ -83,7 +83,7 @@ export default function Auth({ user, setUser }) {
 
       // console.log(result.data.teacher);
       // setTeacherData(result.data);
-      setUser(result.data);
+      setUserProp(result.data);
       history.push("/profile");
     } catch (error) {
       setShowLoginFailMessage(true);
@@ -136,7 +136,7 @@ export default function Auth({ user, setUser }) {
               <div>
                 <div className="forminputs">
                   <input
-                  className="inputSignUp"
+                    className="inputSignUp"
                     style={{ width: "100%", height: "30px" }}
                     name="firstName"
                     onChange={handleChange}
@@ -146,7 +146,7 @@ export default function Auth({ user, setUser }) {
                   />
 
                   <input
-                  className="inputSignUp"
+                    className="inputSignUp"
                     style={{ width: "100%", height: "30px" }}
                     name="lastName"
                     onChange={handleChange}
@@ -156,7 +156,7 @@ export default function Auth({ user, setUser }) {
                 </div>
                 <div className="forminputs">
                   <input
-                  className="inputSignUp"
+                    className="inputSignUp"
                     style={{ width: "100%", height: "30px" }}
                     name="email"
                     type="email"
@@ -174,7 +174,7 @@ export default function Auth({ user, setUser }) {
                   }}
                 >
                   <input
-                  className="inputSignUp"
+                    className="inputSignUp"
                     style={{
                       width: "93%",
                       height: "30px",
@@ -214,7 +214,7 @@ export default function Auth({ user, setUser }) {
 
                 <div className="forminputs">
                   <input
-                  className="inputSignUp"
+                    className="inputSignUp"
                     style={{ width: "100%", height: "30px" }}
                     name="confirmPassword"
                     type={showPassword ? "password" : "text"}

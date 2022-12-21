@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import ChangePasswordUser from "../ChangePasswordUser";
 
-export default function Profile() {
+export default function Profile({ userProp }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
   const history = useHistory();
@@ -50,7 +50,7 @@ export default function Profile() {
     MyVideo();
   }, []);
 
-  console.log(user);
+  console.log({ user: userProp });
   console.log(localStorage.getItem("profilePic"));
   const postDetails = () => {
     const formData = new FormData();
@@ -118,6 +118,9 @@ export default function Profile() {
   useEffect(() => {
     if (user) {
       const userid = user.user ? user.user._id : user.teacher._id;
+      setUserId(userid);
+    } else {
+      const userid = userProp.user ? userProp.user._id : userProp.teacher._id;
       setUserId(userid);
     }
     // const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;

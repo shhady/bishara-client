@@ -57,6 +57,7 @@ export default function App() {
   const [course, setCourse] = useState(null);
   const [teacher, setTeacher] = useState(null);
   const [updateComponent, setUpdateComponent] = useState(null);
+  const [userProp, setUserProp] = useState(null);
   console.log(updateComponent);
   useEffect(() => {
     if (!user) return;
@@ -102,7 +103,7 @@ export default function App() {
           {/* <Route path="/Oud" exact component={Oud} />
           <Route path="/Piano" exact component={Piano} /> */}
           <Route path="/auth" exact>
-            <Auth user={user} setUser={setUser} />
+            <Auth user={user} setUser={setUser} setUserProp={setUserProp} />
           </Route>
           <Route path="/PracticeReplies" exact>
             <PracticeReplies user={user} setUser={setUser} />
@@ -157,7 +158,7 @@ export default function App() {
 
           <Route path="/CreateTeacher" exact component={CreateTeacher} />
           <Route path="/profile" exact>
-            <Profile user={user} setUser={setUser} />
+            <Profile user={user} setUser={setUser} userProp={userProp} />
           </Route>
           <Route path="/createcourse" exact component={CreateCourse} />
           {/* <Route path="/courses" exact component={Courses} /> */}
