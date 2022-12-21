@@ -276,7 +276,7 @@ export default function PracticeReplies({ user }) {
             <video
               controls
               preload="metadata"
-              poster={poster}
+              // poster={poster}
               style={{ width: "100%", height: "121px", zIndex: 1 }}
             >
               <source src={reply.theVideoReply} type="video/mp4" />
@@ -377,7 +377,7 @@ export default function PracticeReplies({ user }) {
                   key={practice.myPractice}
                   controls
                   preload="metadata"
-                  poster={poster}
+                  // poster={poster}
                   style={{ width: "100%", height: "100%", maxHeight: "250px" }}
                 >
                   <source src={practice.myPractice} type="video/mp4" />

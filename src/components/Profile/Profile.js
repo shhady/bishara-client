@@ -320,7 +320,7 @@ export default function Profile() {
                 key={practice.myPractice}
                 controls
                 preload="metadata"
-                poster={poster}
+                // poster={poster}
                 height="250px"
                 style={{
                   width: "100%",
