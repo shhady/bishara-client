@@ -311,6 +311,7 @@ export default function Profile() {
               style={{
                 width: "50%",
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "felx-start",
                 alignItems: "flex-start",
               }}
@@ -327,10 +328,12 @@ export default function Profile() {
                   height: "100%",
                   minHeight: "250px",
                   maxHeight: "250px",
+                  border: "1px solid black",
                 }}
               >
                 <source src={practice.myPractice} type="video/mp4" />
               </video>
+              <div>{practice.reply}</div>
             </div>
             <div style={{ padding: "0px 10px", width: "50%" }}>
               {/* {practice.videoReply ? (
@@ -362,7 +365,11 @@ export default function Profile() {
                         controls
                         preload="metadata"
                         // poster={poster}
-                        style={{ width: "100%", height: "121px" }}
+                        style={{
+                          width: "100%",
+                          height: "121px",
+                          border: "1px solid black",
+                        }}
                       >
                         <source src={reply.theVideoReply} type="video/mp4" />
                       </video>
@@ -370,7 +377,6 @@ export default function Profile() {
                   })}
                 </div>
               ) : null}
-              {practice.reply}
             </div>
           </div>
         </div>

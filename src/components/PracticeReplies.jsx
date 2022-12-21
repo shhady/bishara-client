@@ -277,7 +277,7 @@ export default function PracticeReplies({ user }) {
               controls
               preload="metadata"
               // poster={poster}
-              style={{ width: "100%", height: "121px", zIndex: 1 }}
+              style={{ width: "100%", height: "115px", zIndex: 1 }}
             >
               <source src={reply.theVideoReply} type="video/mp4" />
             </video>
