@@ -277,7 +277,12 @@ export default function PracticeReplies({ user }) {
               controls
               preload="metadata"
               // poster={poster}
-              style={{ width: "100%", height: "115px", zIndex: 1 }}
+              style={{
+                width: "100%",
+                height: "115px",
+                zIndex: 1,
+                border: "1px solid #e1e1e1",
+              }}
             >
               <source src={reply.theVideoReply} type="video/mp4" />
             </video>
@@ -378,7 +383,12 @@ export default function PracticeReplies({ user }) {
                   controls
                   preload="metadata"
                   // poster={poster}
-                  style={{ width: "100%", height: "100%", maxHeight: "250px" }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    maxHeight: "250px",
+                    border: "1px solid #e1e1e1",
+                  }}
                 >
                   <source src={practice.myPractice} type="video/mp4" />
                 </video>
@@ -392,7 +402,7 @@ export default function PracticeReplies({ user }) {
                       gap: ".5rem",
                       height: "97%",
                       maxHeight: "250px",
-                      // overflow: "hidden",
+                      overflow: "hidden",
                     }}
                   >
                     {renderVideoReplies(practice.videoReply, practice)}
