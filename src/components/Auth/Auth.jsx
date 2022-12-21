@@ -83,6 +83,7 @@ export default function Auth({ user, setUser, setUserProp }) {
 
       // console.log(result.data.teacher);
       // setTeacherData(result.data);
+      setUser(result.data);
       setUserProp(result.data);
       history.push("/profile");
     } catch (error) {

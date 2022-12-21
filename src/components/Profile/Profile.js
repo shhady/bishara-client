@@ -51,6 +51,7 @@ export default function Profile({ userProp }) {
   }, []);
 
   console.log({ user: userProp });
+  console.log({ local: user });
   console.log(localStorage.getItem("profilePic"));
   const postDetails = () => {
     const formData = new FormData();
@@ -116,17 +117,17 @@ export default function Profile({ userProp }) {
     setShowButtonCoverUpdate(false);
   }, [urlCover]);
   useEffect(() => {
-    if (user) {
-      const userid = user.user ? user.user._id : user.teacher._id;
+    if (userProp) {
+      const userid = userProp.user ? userProp.user._id : userProp.teacher._id;
       setUserId(userid);
     } else {
-      const userid = userProp.user ? userProp.user._id : userProp.teacher._id;
+      const userid = user.user ? user.user._id : user.teacher._id;
       setUserId(userid);
     }
     // const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
     // console.log(userAvatar);
     // setProfilePicture(userAvatar);
-  }, [user]);
+  }, [userProp, user]);
   // const handleLogoutFromAllDevices = async () => {
   //   const response = await axios.post(
   //     process.env.REACT_APP_BACKEND_URL + `/teachers/logoutAll`,
@@ -222,6 +223,7 @@ export default function Profile({ userProp }) {
         process.env.REACT_APP_BACKEND_URL + `/studentpractices/${userId}`
       );
       setUserPractices(res.data);
+      console.log(res.data);
     };
     fetch();
   }, [userId]);
