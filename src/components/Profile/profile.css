@@ -29,6 +29,9 @@
 .profileAllButtonsMobile{
     display:none;
 }
+.practiceAndReply{
+    height: fit-content
+}
 @media (max-width: 568px) {
     .coverProfile{
         display: flex;

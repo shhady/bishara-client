@@ -117,7 +117,10 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
           <div>المدرسين</div>
           <Link to="/teachers" style={{ textDecoration: "none" }}>
             <div
-              onClick={() => setTeachersHover(false)}
+              onClick={() => {
+                setTeachersHover(false);
+                setUpdateComponent("");
+              }}
               style={{ color: "black", cursor: "pointer" }}
             >
               جميع المدرسين

@@ -3,7 +3,13 @@ import axios from "axios";
 import "./Teachers.css";
 import { Link, useHistory } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
-export default function Teachers({ user, setUser, setTeacher }) {
+export default function Teachers({
+  user,
+  setUser,
+  setTeacher,
+  setUpdateComponent,
+  updateComponent,
+}) {
   const [teachers, setTeachers] = useState(null);
   // const [selectedTeacher, setSelectedTeacher] = useState(null);
   // const [checkChat, setCheckChat] = useState(null);
@@ -122,6 +128,7 @@ export default function Teachers({ user, setUser, setTeacher }) {
             onClick={() => {
               setTeacher(teacher._id);
               window.localStorage.setItem("teacherId", teacher._id);
+              setUpdateComponent(teacher);
             }}
           >
             <div>

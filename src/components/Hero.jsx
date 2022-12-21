@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
 import { sliderData } from "./Slider.jsx";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 export default function Hero({ showArrows, user }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideLength = sliderData.length;
@@ -35,8 +35,8 @@ export default function Hero({ showArrows, user }) {
     <div className="hero">
       {showArrows ? null : (
         <>
-          <AiOutlineArrowRight className="arrow next" onClick={prevSlide} />
-          <AiOutlineArrowLeft className="arrow prev" onClick={nextSlide} />
+          <AiOutlineRight className="arrow next" onClick={prevSlide} />
+          <AiOutlineLeft className="arrow prev" onClick={nextSlide} />
         </>
       )}
 

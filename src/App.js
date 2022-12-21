@@ -183,6 +183,8 @@ export default function App() {
               setUser={setUser}
               setTeacher={setTeacher}
               teacher={teacher}
+              setUpdateComponent={setUpdateComponent}
+              updateComponent={setUpdateComponent}
             />
           </Route>
           <Route path="/StudentsPractices" exact>

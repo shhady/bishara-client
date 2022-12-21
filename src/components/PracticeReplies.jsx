@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./StudentPractice.css";
 import { useHistory } from "react-router-dom";
-
+import { v4 as uuid } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTrashCan,
+  faEllipsisVertical,
+} from "@fortawesome/free-solid-svg-icons";
 export default function PracticeReplies({ user }) {
   // State variables
+  const [theUser, setTheUser] = useState(
+    JSON.parse(localStorage.getItem("profile"))
+  );
   const [teacherPractices, setTeacherPractices] = useState([]);
   const [userId, setUserId] = useState(null);
   const [reply, setReply] = useState("");
@@ -23,6 +31,11 @@ export default function PracticeReplies({ user }) {
   const [openButtons, setOpenButtons] = useState(false);
   const [showButtons, setShowButtons] = useState([]);
   const [poster, setPoster] = useState("");
+  const [replyId, setReplyId] = useState("");
+  const [replyIdtoDelete, setReplyIdtoDelete] = useState("");
+
+  const unique_id = uuid();
+
   const history = useHistory();
   window.onpopstate = () => {
     history.push("/profile");
@@ -41,10 +54,15 @@ export default function PracticeReplies({ user }) {
   }, []);
   // Set user ID when component mounts
   useEffect(() => {
-    const userid = user.user ? user.user._id : user.teacher._id;
-    setUserId(userid);
+    if (user) {
+      const userid = user.user ? user.user._id : user.teacher._id;
+      setUserId(userid);
+    } else {
+      const userid = theUser.user ? theUser.user._id : theUser.teacher._id;
+      setUserId(userid);
+    }
   }, [user]);
-
+  console.log(theUser);
   // Fetch replies data when component mounts
   useEffect(() => {
     const fetchReplies = async () => {
@@ -121,12 +139,12 @@ export default function PracticeReplies({ user }) {
         )
         .then(async () => {
           const res = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/practices`
+            process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
           );
-          const filter = res.data.filter(
-            (practice) => practice.teacherId === userId
-          );
-          setTeacherPractices(filter);
+          // const filter = res.data.filter(
+          //   (practice) => practice.teacherId === userId
+          // );
+          setTeacherPractices(res.data);
           setMyReply("");
         });
     };
@@ -158,6 +176,7 @@ export default function PracticeReplies({ user }) {
           practiceId: practice._id,
           uniqueLink: practice.uniqueLink,
           teacherId: practice.teacherId,
+          replyId: unique_id,
         })
         .then(async () => {
           const res = await axios.get(
@@ -209,6 +228,7 @@ export default function PracticeReplies({ user }) {
           practiceId: practice._id,
           uniqueLink: practice.uniqueLink,
           teacherId: practice.teacherId,
+          replyId: unique_id,
         })
         .then(async () => {
           const res = await axios.get(
@@ -219,6 +239,7 @@ export default function PracticeReplies({ user }) {
           // );
           setTeacherPractices(res.data);
         })
+        .then(console.log(practice))
         .then(async () => {
           await axios.post(process.env.REACT_APP_BACKEND_URL + `/replies`, {
             theVideoReply: url,
@@ -246,22 +267,81 @@ export default function PracticeReplies({ user }) {
     setVideo(null);
   };
   // Render video replies
-  const renderVideoReplies = (replies) => {
+  // console.log(replyId);
+  const renderVideoReplies = (replies, practice) => {
     return replies.map((reply, i) => {
       return (
-        <video
-          key={`${reply.theVideoReply} + ${i}`}
-          controls
-          preload="metadata"
-          poster={poster}
-          style={{ width: "100%", height: "121px" }}
-        >
-          <source src={reply.theVideoReply} type="video/mp4" />
-        </video>
+        <div key={i} style={{ position: "relative" }}>
+          <div>
+            <video
+              controls
+              preload="metadata"
+              poster={poster}
+              style={{ width: "100%", height: "121px", zIndex: 1 }}
+            >
+              <source src={reply.theVideoReply} type="video/mp4" />
+            </video>
+          </div>
+          <div
+            style={{
+              color: "#5f697d",
+              position: "absolute",
+              top: "0",
+              left: "0",
+              zIndex: 2,
+            }}
+            onClick={() => {
+              // setReplyId(reply.replyId);
+              // handleDeleteReply(practice, reply);
+            }}
+          >
+            {reply.replyId === replyId ? (
+              <div
+                style={{ marginLeft: "15px" }}
+                onClick={() => handleDeleteReply(practice, reply)}
+              >
+                <FontAwesomeIcon icon={faTrashCan} />
+              </div>
+            ) : (
+              <div
+                style={{ marginLeft: "15px" }}
+                onClick={() => {
+                  setReplyId("");
+                  setReplyId(reply.replyId);
+                }}
+              >
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </div>
+            )}
+          </div>
+        </div>
       );
     });
   };
+  console.log({ replytodelete: replyId });
 
+  const handleDeleteReply = async (practice, reply) => {
+    console.log(practice);
+    console.log(reply.replyId);
+    console.log(replyId);
+    //   .then(console.log(replyToDelete))
+    await axios
+      .put(
+        process.env.REACT_APP_BACKEND_URL +
+          `/practice/videoReply/${practice._id}`,
+        {
+          replyId,
+        }
+      )
+      .then(setTeacherPractices([]))
+      .then(async () => {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
+        );
+        setTeacherPractices(res.data);
+      });
+  };
+  console.log(teacherPractices);
   // Render showData component
   const showData = () => {
     return teacherPractices?.map((practice) => {
@@ -312,9 +392,10 @@ export default function PracticeReplies({ user }) {
                       gap: ".5rem",
                       height: "97%",
                       maxHeight: "250px",
+                      // overflow: "hidden",
                     }}
                   >
-                    {renderVideoReplies(practice.videoReply)}
+                    {renderVideoReplies(practice.videoReply, practice)}
                   </div>
                 ) : null}
               </div>

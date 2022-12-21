@@ -270,6 +270,7 @@ export default function Profile() {
     return userPractices?.map((practice) => {
       return (
         <div
+          className="practiceAndReply"
           style={{
             borderRight: "1px solid black",
             borderBottom: "1px solid black",
@@ -351,6 +352,7 @@ export default function Profile() {
                     gap: ".5rem",
                     height: "100%",
                     maxHeight: "250px",
+                    // overflow: "hidden",
                   }}
                 >
                   {practice.videoReply.map((reply, i) => {
@@ -359,7 +361,7 @@ export default function Profile() {
                         key={reply.theVideoReply}
                         controls
                         preload="metadata"
-                        poster={poster}
+                        // poster={poster}
                         style={{ width: "100%", height: "121px" }}
                       >
                         <source src={reply.theVideoReply} type="video/mp4" />

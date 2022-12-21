@@ -91,8 +91,8 @@
 
 }
 .arrow {
-    border: 2px solid white;
-    background:transparent;
+    /* border: 2px solid white;
+    background:transparent; */
     color:white;
     width:2rem;
     height:2rem;
@@ -103,7 +103,7 @@
 }
 
 .arrow:hover{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.1);
     color:black;
 }
 
