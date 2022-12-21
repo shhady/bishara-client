@@ -297,14 +297,14 @@ export default function PracticeReplies({ user }) {
           >
             {reply.replyId === replyId ? (
               <div
-                style={{ marginLeft: "15px" }}
+                style={{ marginLeft: "15px", cursor: "pointer" }}
                 onClick={() => handleDeleteReply(practice, reply)}
               >
                 <FontAwesomeIcon icon={faTrashCan} />
               </div>
             ) : (
               <div
-                style={{ marginLeft: "15px" }}
+                style={{ marginLeft: "15px", cursor: "pointer" }}
                 onClick={() => {
                   setReplyId("");
                   setReplyId(reply.replyId);

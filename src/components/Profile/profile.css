@@ -30,7 +30,8 @@
     display:none;
 }
 .practiceAndReply{
-    height: fit-content
+    height: fit-content;
+    min-height: 400px;
 }
 @media (max-width: 568px) {
     .coverProfile{
