@@ -166,6 +166,8 @@ export default function PracticeReplies({ user }) {
 
   // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
+    if (practice.videoReply.length > 3) return console.log("no more");
+
     const addTheVideo = async () => {
       await axios
         .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {
@@ -218,6 +220,7 @@ export default function PracticeReplies({ user }) {
 
   // Add teacher video reply to practice
   const addTeacherVideoReply = (practice) => {
+    if (practice.videoReply.length > 3) return console.log("no more");
     const addTheVideo = async () => {
       await axios
         .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {
@@ -239,7 +242,7 @@ export default function PracticeReplies({ user }) {
           // );
           setTeacherPractices(res.data);
         })
-        .then(console.log(practice))
+
         .then(async () => {
           await axios.post(process.env.REACT_APP_BACKEND_URL + `/replies`, {
             theVideoReply: url,
@@ -402,7 +405,7 @@ export default function PracticeReplies({ user }) {
                       gap: ".5rem",
                       height: "97%",
                       maxHeight: "250px",
-                      overflow: "hidden",
+                      // overflow: "hidden",
                     }}
                   >
                     {renderVideoReplies(practice.videoReply, practice)}

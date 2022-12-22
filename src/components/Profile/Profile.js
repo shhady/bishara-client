@@ -338,7 +338,7 @@ export default function Profile({ userProp }) {
               >
                 <source src={practice.myPractice} type="video/mp4" />
               </video>
-              <div>{practice.reply}</div>
+              <div className="theComment">{practice.reply}</div>
             </div>
             <div style={{ padding: "0px 10px", width: "50%" }}>
               {/* {practice.videoReply ? (
