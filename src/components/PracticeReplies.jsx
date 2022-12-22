@@ -54,13 +54,12 @@ export default function PracticeReplies({ user }) {
   }, []);
   // Set user ID when component mounts
   useEffect(() => {
-    if (user) {
-      const userid = user.user ? user.user._id : user.teacher._id;
-      setUserId(userid);
-    } else {
-      const userid = theUser.user ? theUser.user._id : theUser.teacher._id;
-      setUserId(userid);
-    }
+    const userid = theUser.user ? theUser.user._id : theUser.teacher._id;
+    setUserId(userid);
+  }, []);
+  useEffect(() => {
+    const userid = user.user ? user.user._id : user.teacher._id;
+    setUserId(userid);
   }, [user]);
   console.log(theUser);
   // Fetch replies data when component mounts
@@ -87,7 +86,8 @@ export default function PracticeReplies({ user }) {
   useEffect(() => {
     const fetchPractices = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
+        process.env.REACT_APP_BACKEND_URL +
+          `/mypractices/${theUser.teacher._id}`
       );
       console.log(res.data);
       // const filterData = res.data.filter(
@@ -96,7 +96,7 @@ export default function PracticeReplies({ user }) {
       setTeacherPractices(res.data);
     };
     fetchPractices();
-  }, [userId, doneAddingComment]);
+  }, [doneAddingComment]);
 
   // Fetch practices data when component mounts
   useEffect(() => {

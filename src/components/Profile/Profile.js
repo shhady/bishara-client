@@ -218,9 +218,10 @@ export default function Profile({ userProp }) {
   };
 
   useEffect(() => {
+    if (user.teacher) return;
     const fetch = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${userId}`
+        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user.user._id}`
       );
       setUserPractices(res.data);
       console.log(res.data);
