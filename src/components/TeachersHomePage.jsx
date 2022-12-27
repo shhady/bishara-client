@@ -46,7 +46,7 @@ export default function TeachersPop({ setTeachersHover }) {
   };
 
   const drawData = () => {
-    return teachers.map((teacher, i) => {
+    return teachers.slice(0, 5).map((teacher, i) => {
       return (
         <Link to="/TeacherData" style={{ textDecoration: "none" }}>
           <div
@@ -59,6 +59,7 @@ export default function TeachersPop({ setTeachersHover }) {
             <img
               src={teacher.avatar}
               alt={teacher.firstName}
+              style={{ height: "190px", width: "190px" }}
               className="teacherHomeAvatars"
             />
             <div
@@ -81,7 +82,7 @@ export default function TeachersPop({ setTeachersHover }) {
   return (
     <div
       style={{
-        height: "50vh",
+        height: "60vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
@@ -102,7 +103,7 @@ export default function TeachersPop({ setTeachersHover }) {
         }}
         // onMouseOut={() => setTeachersHover(false)}
       >
-        <div style={{ fontWeight: "bold", fontSize: "24px" }}>المدرسين</div>
+        <div style={{ fontWeight: "bold", fontSize: "34px" }}>المدرسين</div>
         <Link to="/teachers" style={{ textDecoration: "none" }}>
           <div
             onClick={() => setTeachersHover(false)}

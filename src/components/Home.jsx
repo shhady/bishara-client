@@ -18,14 +18,35 @@ export default function Home({
     <div className="HomePage">
       <Hero showArrows={showArrows} user={user} />
       <FourBoxes />
+
       <TeachersHomePage />
+      {/* <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr 1fr",
+          height: "100px",
+        }}
+      >
+        <div style={{ background: "yellow", height: "100px" }}>
+          teachers playing
+        </div>
+        <div style={{ background: "blue", height: "100px" }}>
+          teachers playing
+        </div>
+        <div style={{ background: "red", height: "100px" }}>
+          teachers playing
+        </div>
+        <div style={{ background: "green", height: "100px" }}>
+          teachers playing
+        </div>
+      </div> */}
       <CoursesHomePage
         setUpdateComponent={setUpdateComponent}
         updateComponent={updateComponent}
       />
       {/* <FreeVideos /> */}
-      <LearnTrainCom />
-      <About />
+      {/* <LearnTrainCom /> */}
+      {/* <About /> */}
       <Footer />
     </div>
   );

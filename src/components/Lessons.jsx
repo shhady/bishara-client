@@ -58,6 +58,7 @@ export default function Lessons({ user, updateComponent }) {
     window.localStorage.setItem("playlistId", lesson.snippet.playlistId);
     window.localStorage.setItem("teacherId", updated.owner);
   };
+  console.log(lessons);
   useEffect(() => {}, [lessons]);
   const drawLessons = () => {
     return lessons?.map((lesson, i) => {
@@ -73,7 +74,7 @@ export default function Lessons({ user, updateComponent }) {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
-                height: "150px",
+                height: "210px",
                 backgroundImage: `url(${lesson.snippet.thumbnails.high.url})`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",

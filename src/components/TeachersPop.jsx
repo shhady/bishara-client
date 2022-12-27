@@ -26,7 +26,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
           //   marginTop: "100px",
         }}
       >
-        <div className="loader"></div>
+        {/* <div className="loader"></div> */}
       </div>
     );
 
@@ -50,6 +50,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                marginBottom: "15px",
               }}
             >
               <img
@@ -82,9 +83,9 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
     <div
       style={{
         position: "fixed",
-        top: 85,
-        height: "200vh",
-        width: "100vw",
+        top: 80,
+        // height: "200vh",
+        width: "70vw",
         background: "transparent",
       }}
       onClick={() => setTeachersHover(false)}
@@ -92,10 +93,10 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
       <div
         style={{
           backgroundColor: "white",
-          width: "40%",
+          width: "50%",
           border: "0.5px solid #dcdcdc",
           borderTop: "none",
-          height: "70vh",
+          height: "60vh",
           boxShadow:
             "rgb(0 0 0 / 6%) 0px 2px 4px, rgb(35 41 54 / 14%) 0px 6px 16px",
         }}

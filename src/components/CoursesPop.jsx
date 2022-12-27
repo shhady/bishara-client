@@ -30,7 +30,7 @@ export default function TeachersPop({
           //   marginTop: "100px",
         }}
       >
-        <div className="loader"></div>
+        {/* <div className="loader"></div> */}
       </div>
     );
 
@@ -64,12 +64,12 @@ export default function TeachersPop({
               <img
                 src={course.coursePhoto}
                 alt={course.firstName}
-                height="120px"
-                width="120px"
+                height="100px"
+                width="100px"
                 style={{
                   marginBottom: "10px",
-                  width: "120px",
-                  height: "120px",
+                  width: "100px",
+                  height: "100px",
                   borderRadius: "5px",
                 }}
 
@@ -83,7 +83,9 @@ export default function TeachersPop({
                   textAlign: "start",
                 }}
               >
-                {course.title}
+                <span style={{ color: "black", fontWeight: "bold" }}>
+                  {course.title}
+                </span>
                 <br />
                 {course.firstName} {course.lastName}
                 <br />
@@ -100,9 +102,10 @@ export default function TeachersPop({
     <div
       style={{
         position: "fixed",
-        height: "200vh",
+        height: "150vh",
         width: "100vw",
         background: "transparent",
+        top: 80,
       }}
       onClick={() => setCoursesHover(false)}
     >
@@ -110,6 +113,7 @@ export default function TeachersPop({
         style={{
           backgroundColor: "white",
           width: "50%",
+          height: "200px",
           border: "0.5px solid #dcdcdc",
           borderTop: "none",
           boxShadow:
@@ -127,7 +131,7 @@ export default function TeachersPop({
               width: "90%",
               margin: "auto",
               borderBottom: "1px solid #e1e1e1",
-              marginBottom: "20px",
+              // marginBottom: "20px",
               backgroundColor: "white",
             }}
           >

@@ -17,7 +17,7 @@ div{
 }
 .teacherHeader{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(4,1fr);
 }
 .loader {
     border: 11px solid #f3f3f3; /* Light grey */
