@@ -190,7 +190,7 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
             JSON.stringify(comment.lesson)
           )
         )
-
+        .then(window.localStorage.setItem("playlistId", comment.playlistId))
         .then(
           history.push({
             pathname: `/Lesson/${comment.playlistId}/${comment.videoName}`,
