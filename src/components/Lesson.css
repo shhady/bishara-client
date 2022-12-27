@@ -18,6 +18,9 @@
 }
 @media (max-width: 768px) {
     .videoLesson{
-        margin-top:70px
+        width: 100%;
+        margin:auto;
+        margin-top:70px;
+        position:relative;
     }
 }
