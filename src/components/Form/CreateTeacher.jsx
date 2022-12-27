@@ -4,10 +4,16 @@ import FileBase from "react-file-base64";
 import { useHistory } from "react-router-dom";
 
 import "./styles.css";
+import { useEffect } from "react";
+import { useTab } from "@chakra-ui/react";
 export default function CreateTeacher() {
-  const [url, setUrl] = useState(null);
-  const [video, setVideo] = useState();
-  const [fileUpload, setFileUpload] = useState(null);
+  const [urlAvatar, setUrlAvatar] = useState(null);
+  const [imageAvatar, setImageAvatar] = useState();
+  const [urlCover, setUrlCover] = useState(null);
+  const [imageCover, setImageCover] = useState();
+  const [fileUploadAvatar, setFileUploadAvatar] = useState(null);
+  const [fileUploadCover, setFileUploadCover] = useState(null);
+
   // const [avatar, setAvatar] = useState("")
   const [teacher, setTeacher] = useState({
     firstName: "",
@@ -22,20 +28,21 @@ export default function CreateTeacher() {
   });
 
   const history = useHistory();
-  const postDetails = () => {
+  // const postDetailsAvatar = () => {
+  useEffect(() => {
     const formData = new FormData();
-    formData.append("file", video);
+    formData.append("file", imageAvatar);
     formData.append("upload_preset", "bisharaHaroni");
     // formData.append("cloud_name", "shhady");
     axios
       .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
         onUploadProgress: (p) => {
           const percentComplete = Math.round((p.loaded * 100) / p.total);
-          setFileUpload({ fileName: video.name, percentComplete });
+          setFileUploadAvatar({ fileName: imageAvatar.name, percentComplete });
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setUrl(res.data.url))
+      .then((res) => setUrlAvatar(res.data.url))
       // .then((data) => {
       //   (data.url);
       // })
@@ -43,11 +50,47 @@ export default function CreateTeacher() {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }, [imageAvatar]);
 
+  useEffect(() => {
+    const formData = new FormData();
+    formData.append("file", imageCover);
+    formData.append("upload_preset", "bisharaHaroni");
+    // formData.append("cloud_name", "shhady");
+    axios
+      .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
+        onUploadProgress: (p) => {
+          const percentComplete = Math.round((p.loaded * 100) / p.total);
+          setFileUploadCover({ fileName: imageAvatar.name, percentComplete });
+          console.log(`${percentComplete}% uploaded`);
+        },
+      })
+      .then((res) => setUrlCover(res.data.url))
+      // .then((data) => {
+      //   (data.url);
+      // })
+      // .then(console.log(url))
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [imageCover]);
+  // };
+  console.log(urlAvatar);
+  console.log(urlCover);
+  useEffect(() => {
+    setTeacher({ ...teacher, avatar: urlAvatar });
+  }, [urlAvatar]);
+  useEffect(() => {
+    setTeacher({ ...teacher, cover: urlCover });
+  }, [urlCover]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(process.env.REACT_APP_BACKEND_URL + `/teachers`, teacher);
+    await axios.post(
+      process.env.REACT_APP_BACKEND_URL + `/teachers`,
+      teacher
+      // avatar: urlAvatar,
+      // cover: urlCover,
+    );
     history.push("/teachers");
   };
 
@@ -55,6 +98,7 @@ export default function CreateTeacher() {
     setTeacher({ ...teacher, [e.target.name]: e.target.value });
   };
 
+  console.log(teacher);
   // const handleAvatar = (e) => {
   //   const file = e.target.files[0];
   //   transformFile(file);
@@ -139,13 +183,24 @@ export default function CreateTeacher() {
           >
             <div>صورة شخصيه</div>
             <div>
-              <FileBase
+              {/* <FileBase
                 type="file"
                 multiple={false}
                 onDone={({ base64 }) =>
                   setTeacher({ ...teacher, avatar: base64 })
                 }
+              /> */}
+              <input
+                type="file"
+                onChange={(e) => setImageAvatar(e.target.files[0])}
+                onClick={() => setUrlAvatar(null)}
               />
+              {fileUploadAvatar && (
+                <span style={{ textAlign: "center" }}>
+                  {" "}
+                  {fileUploadAvatar.percentComplete}%
+                </span>
+              )}
             </div>
           </div>
           <div
@@ -156,11 +211,22 @@ export default function CreateTeacher() {
             }}
           >
             <label>صورة غلاف</label>
-            <FileBase
+            {/* <FileBase
               type="file"
               multiple={false}
               onDone={({ base64 }) => setTeacher({ ...teacher, cover: base64 })}
+            /> */}
+            <input
+              type="file"
+              onChange={(e) => setImageCover(e.target.files[0])}
+              onClick={() => setUrlCover(null)}
             />
+            {fileUploadCover && (
+              <span style={{ textAlign: "center" }}>
+                {" "}
+                {fileUploadCover.percentComplete}%
+              </span>
+            )}
           </div>
           <input
             className="createTeacherSubmit"

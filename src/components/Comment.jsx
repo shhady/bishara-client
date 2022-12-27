@@ -37,6 +37,7 @@ export default function Comment({ userId, userF, userL, courseInfo, lesson }) {
     // courseLevel: course.level,
     // video: chooseVideo.episode,
   });
+  const [moreThan, setMoreThan] = useState(null);
   console.log(userF);
   console.log(lesson);
   console.log(courseInfo);
@@ -379,10 +380,26 @@ export default function Comment({ userId, userF, userL, courseInfo, lesson }) {
           >
             <input
               type="file"
-              onChange={(e) => setVideo(e.target.files[0])}
-              onClick={() => setUrl(null)}
+              onChange={(e) => {
+                e.target.files[0].size > 104857500
+                  ? setMoreThan("more than 100mb")
+                  : setVideo(e.target.files[0]);
+              }}
+              onClick={() => {
+                setUrl(null);
+                setVideo(null);
+                setMoreThan(null);
+              }}
             />
-            <button onClick={postDetails}>ارفع التمرين</button>
+            {moreThan && (
+              <div style={{ color: "red" }}>
+                لا يمكن رفع فيديو اكبر من 100 ميجا بايت
+              </div>
+            )}
+            {video && !moreThan ? (
+              <button onClick={postDetails}>رفع الفيديو</button>
+            ) : null}
+            {/* <button onClick={postDetails}>ارفع التمرين</button> */}
             <div style={{ minWidth: "70px" }}>
               {fileUpload && (
                 <span style={{ textAlign: "center", color: "black" }}>

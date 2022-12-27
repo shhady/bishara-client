@@ -24,6 +24,7 @@ export default function Auth({ user, setUser, setUserProp }) {
   const [showPassword, setShowPassword] = useState(true);
   const [showLoginFailMessage, setShowLoginFailMessage] = useState(false);
   const [studentOrTeacher, setStudentOrTeacher] = useState("student");
+  const [passwordsDontMatch, setPasswordsDontMatch] = useState(null);
   // const dispatch = useDispatch();
   const history = useHistory();
   // console.log(userData);
@@ -97,14 +98,18 @@ export default function Auth({ user, setUser, setUserProp }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await axios.post(
-      process.env.REACT_APP_BACKEND_URL + `/users`,
-      formData
-    );
-    window.localStorage.setItem("profile", JSON.stringify(result.data));
-    window.localStorage.setItem("token", result.data.token);
-    history.push("/profile");
-    setUser(result.data);
+    try {
+      const result = await axios.post(
+        process.env.REACT_APP_BACKEND_URL + `/users`,
+        formData
+      );
+      window.localStorage.setItem("profile", JSON.stringify(result.data));
+      window.localStorage.setItem("token", result.data.token);
+      history.push("/profile");
+      setUser(result.data);
+    } catch (error) {
+      setPasswordsDontMatch("passwords don't match");
+    }
   };
   const handleChange = (e) => {
     setFormData({
@@ -224,7 +229,11 @@ export default function Auth({ user, setUser, setUserProp }) {
                     placeholder="تأكيد كلمة المرور"
                   />
                 </div>
-
+                {passwordsDontMatch && (
+                  <div style={{ color: "red" }}>
+                    كلمة المرور وتأكيد كلمة المرور غير متطابقتين{" "}
+                  </div>
+                )}
                 <div
                   style={{
                     display: "flex",
@@ -351,10 +360,16 @@ export default function Auth({ user, setUser, setUserProp }) {
                     style={{
                       width: "100%",
                       height: "30px",
-                      marginBottom: "50px",
+                      marginBottom: "10px",
                     }}
                     // onKeyDown={handleKeyDown}
                   ></input>
+                  {!showLoginFailMessage ? null : (
+                    <div style={{ color: "red" }}>
+                      فشل في تسجيل الدخول <br />
+                      *معلم ؟ اضغط على زر معلم اعلاه
+                    </div>
+                  )}
                 </div>
                 {studentOrTeacher === "student" ? (
                   <div
@@ -393,13 +408,7 @@ export default function Auth({ user, setUser, setUserProp }) {
                 )}
 
                 {/* </form> */}
-                <div>
-                  {!showLoginFailMessage ? (
-                    <div></div>
-                  ) : (
-                    <div>Failed to log in</div>
-                  )}
-                </div>
+                <div></div>
                 <div>
                   <div
                     style={{

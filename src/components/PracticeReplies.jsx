@@ -33,7 +33,10 @@ export default function PracticeReplies({ user }) {
   const [poster, setPoster] = useState("");
   const [replyId, setReplyId] = useState("");
   const [replyIdtoDelete, setReplyIdtoDelete] = useState("");
+  const [moreThan, setMoreThan] = useState(null);
+  // const fileInput = useRef(null);
 
+  console.log(moreThan);
   const unique_id = uuid();
 
   const history = useHistory();
@@ -212,9 +215,10 @@ export default function PracticeReplies({ user }) {
       })
       .then((res) => setUrl(res.data.url))
       .then((res) => console.log(res))
-
+      .then(() => setVideo(null))
+      .then(() => setFileUpload(null))
       .catch((err) => {
-        console.log(err);
+        console.log("can't upload > 100mb");
       });
   };
 
@@ -326,7 +330,7 @@ export default function PracticeReplies({ user }) {
       );
     });
   };
-  console.log({ replytodelete: replyId });
+  console.log(video);
 
   const handleDeleteReply = async (practice, reply) => {
     console.log(practice);
@@ -445,7 +449,7 @@ export default function PracticeReplies({ user }) {
                   ) : null}
                 </div>
                 <div>
-                  <div>للتعليق على التمرين من خلال ارسال فيديو</div>
+                  <div>تعليق عن طريق فيديو</div>
 
                   <input
                     type="text"
@@ -457,47 +461,87 @@ export default function PracticeReplies({ user }) {
                   <div>
                     <input
                       type="file"
-                      onChange={(e) => setVideo(e.target.files[0])}
-                      onClick={() => setUrl(null)}
+                      // ref={fileInput}
+                      onChange={(e) => {
+                        e.target.files[0].size > 104857500
+                          ? setMoreThan("more than 100mb")
+                          : setVideo(e.target.files[0]);
+                      }}
+                      onClick={() => {
+                        setUrl(null);
+                        setVideo(null);
+                        setMoreThan(null);
+                      }}
                     />
                   </div>
+                  {moreThan && (
+                    <div style={{ color: "red" }}>
+                      لا يمكن رفع فيديو اكبر من 100 ميجا بايت
+                    </div>
+                  )}
+
                   <div>
-                    {url ? null : (
+                    {video && !moreThan ? (
                       <button onClick={() => postDetails(practice)}>
                         رفع الفيديو
                       </button>
-                    )}
+                    ) : null}
+                    {"  "}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        alignItems: "center",
+                      }}
+                    >
+                      {fileUpload && (
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-around",
+                            alignItems: "center",
+                            width: "50%",
+                            height: "fit-content",
+                          }}
+                        >
+                          {/* <p>{fileUpload.fileName}</p> */}
+                          <p>{fileUpload.percentComplete}%</p>
+                        </div>
+                      )}
+
+                      {url ? (
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-around",
+                            alignItems: "center",
+                            width: "50%",
+                            height: "100%",
+                          }}
+                        >
+                          <button
+                            onClick={() => addTeacherVideoReply(practice)}
+                            className="btnSendVideoReply"
+                          >
+                            ارسال
+                          </button>
+                          <button
+                            onClick={cancelUpload}
+                            className="btnSendVideoReply"
+                          >
+                            cancel
+                          </button>
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
-                <div>
-                  {fileUpload ? (
-                    <div>
-                      <p>{fileUpload.fileName}</p>
-                      <p>{fileUpload.percentComplete}%</p>
-                    </div>
-                  ) : null}
-                </div>
-                {url ? (
-                  <>
-                    <button
-                      onClick={() => addTeacherVideoReply(practice)}
-                      className="btnSendVideoReply"
-                    >
-                      ارسال
-                    </button>
-                    <button
-                      onClick={cancelUpload}
-                      className="btnSendVideoReply"
-                    >
-                      cancel
-                    </button>
-                  </>
-                ) : null}
+                {/* <div></div> */}
 
                 {/* </div> */}
               </>
             </div>
-            <div style={{ marginTop: "30px" }}> تعليق المعلم:</div>
+            <div> تعليق المعلم:</div>
 
             <div>
               {showReply && practice.reply ? (
