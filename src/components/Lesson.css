@@ -18,9 +18,12 @@
 }
 @media (max-width: 768px) {
     .videoLesson{
-        width: 90%;
+        width: 99%;
         margin:auto;
         margin-top:70px;
         position:relative;
+    }
+    .suggestions{
+        margin-right: 0px
     }
 }
