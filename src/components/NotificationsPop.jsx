@@ -191,6 +191,10 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
           )
         )
         .then(window.localStorage.setItem("playlistId", comment.playlistId))
+        .then(async () => {
+          await axios.get(process.env.REACT_APP_BACKEND_URL + `/comments`);
+          setComments(res.data);
+        })
         .then(
           history.push({
             pathname: `/Lesson/${comment.playlistId}/${comment.videoName}`,
