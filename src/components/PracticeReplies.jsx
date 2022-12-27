@@ -393,7 +393,7 @@ export default function PracticeReplies({ user }) {
                   style={{
                     width: "100%",
                     height: "100%",
-                    maxHeight: "250px",
+                    // maxHeight: "250px",
                     border: "1px solid #e1e1e1",
                   }}
                 >
