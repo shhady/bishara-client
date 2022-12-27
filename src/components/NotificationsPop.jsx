@@ -164,6 +164,7 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
   };
 
   const handleClickOnNotification = (comment) => {
+    console.log({ comment: comment });
     const setAsRead = async () => {
       await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/comments/${comment._id}`, {
@@ -178,6 +179,7 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
         //     result.data.filter((comment) => comment.courseOwnerId === userId)
         //   );
         // })
+
         .then(
           window.localStorage.setItem(
             "courseDetails",
@@ -196,13 +198,14 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
             process.env.REACT_APP_BACKEND_URL + `/comments`
           );
           setComments(res.data);
-        })
-        .then(
-          history.push({
-            pathname: `/Lesson/${comment.playlistId}/${comment.videoName}`,
-          })
-        )
-        .then(window.location.reload());
+          console.log(res.data);
+        });
+      // .then(
+      //   history.push({
+      //     pathname: `/Lesson/${comment.playlistId}/${comment.videoName}`,
+      //   })
+      // )
+      // .then(window.location.reload());
       // .then(window.location.reload());
     };
     setAsRead();
