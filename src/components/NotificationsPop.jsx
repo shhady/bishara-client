@@ -204,8 +204,8 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
           history.push({
             pathname: `/Lesson/${comment.playlistId}/${comment.videoName}`,
           })
-        )
-        .then(window.location.reload());
+        );
+      // .then(window.location.reload());
       // .then(window.location.reload());
     };
     setAsRead();
