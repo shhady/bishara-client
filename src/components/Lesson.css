@@ -18,7 +18,7 @@
 }
 @media (max-width: 768px) {
     .videoLesson{
-        width: 95%;
+        width: 90%;
         margin:auto;
         margin-top:70px;
         position:relative;
