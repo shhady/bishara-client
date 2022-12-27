@@ -27,6 +27,9 @@ export default function Header({
   setShowArrows,
   setUpdateComponent,
   updateComponent,
+  setCourseDetails,
+  setLessonDetails,
+  setListId,
 }) {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
@@ -661,6 +664,9 @@ export default function Header({
               >
                 <NotificationsPop
                   setShowNotificationPopUp={setShowNotificationPopUp}
+                  setCourseDetails={setCourseDetails}
+                  setLessonDetails={setLessonDetails}
+                  setListId={setListId}
                 />
               </div>
             </div>
