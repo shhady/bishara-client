@@ -384,7 +384,7 @@ export default function PracticeReplies({ user }) {
                 gap: "10px",
               }}
             >
-              <div>
+              <div style={{ height: "250px" }}>
                 <video
                   key={practice.myPractice}
                   controls
