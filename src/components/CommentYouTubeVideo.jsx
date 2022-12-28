@@ -10,7 +10,7 @@ import {
   faPenToSquare,
   faEllipsisVertical,
 } from "@fortawesome/free-solid-svg-icons";
-export default function CommentYouTubeVideo({ lesson, courseInfo }) {
+export default function CommentYouTubeVideo({ lesson, id, courseInfo }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [courseDetails, setCourseDetails] = useState(
     JSON.parse(localStorage.getItem("courseDetails"))
@@ -143,14 +143,14 @@ export default function CommentYouTubeVideo({ lesson, courseInfo }) {
   useEffect(() => {
     const filterComment = () => {
       const specificComments = courseComments?.filter(
-        (comment) => comment.videoName === lesson.snippet.resourceId.videoId
+        (comment) => comment.videoName === id
       );
       setVideoComments(specificComments);
       console.log(specificComments);
     };
     filterComment();
-  }, [courseComments, lesson]);
-
+  }, [courseComments, lesson, id]);
+  console.log(id);
   const handleDeleteComment = (comment) => {
     const deleteTheComment = async () => {
       await axios

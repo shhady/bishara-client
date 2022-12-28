@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Lesson.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import CommentYouTubeVideo from "./CommentYouTubeVideo";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -17,14 +17,20 @@ export default function Lesson() {
   const [videoChosen, setVideoChosen] = useState(
     localStorage.getItem("videoName")
   );
+  const [videoNumber, setVideoNumber] = useState(lesson.snippet.position + 1);
+  let { id } = useParams();
   const history = useHistory();
   window.onpopstate = () => {
     history.push("/lessons");
   };
+
+  console.log(id);
   useEffect(() => {
     setListId(courseInfo.playlistId);
   }, [courseInfo]);
-
+  console.log(
+    window.location.pathname.slice(43, window.location.pathname.length)
+  );
   console.log(lesson);
   console.log(courseInfo);
   console.log(lessons);
@@ -42,23 +48,27 @@ export default function Lesson() {
 
   const handleLessonClick = (lessonSuggest) => {
     setLesson(lessonSuggest);
-    history.push({
-      pathname: `/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`,
-      id: lesson.snippet.playlistId,
-    });
+    // history.push({
+    //   pathname: `/Lesson/${lesson.snippet.playlistId}/${id}`,
+    //   id: lesson.snippet.playlistId,
+    // });
     window.localStorage.setItem("lessonDetails", JSON.stringify(lessonSuggest));
     window.localStorage.setItem(
       "videoName",
       lessonSuggest.snippet.resourceId.videoId
     );
   };
+  useEffect(() => {
+    history.replace(`${lesson.snippet.resourceId.videoId}`);
+  }, [lesson]);
+  console.log(lesson.snippet.position + 1);
+
   const drawSuggestions = () => {
     return lessons?.map((lessonSuggest, i) => {
       return (
         <div key={i} onClick={() => handleLessonClick(lessonSuggest)}>
           <div>
-            {lesson.snippet.resourceId.videoId ===
-            lessonSuggest.snippet.resourceId.videoId ? (
+            {id === lessonSuggest.snippet.resourceId.videoId ? (
               <div className="VideoSuggested">
                 <div
                   style={{
@@ -127,12 +137,12 @@ export default function Lesson() {
             borderBottomLeftRadius: "50%",
           }}
         >
-          {lesson.snippet.position + 1}
+          {/* {videoNumber} */}
         </div>
         <iframe
           width="100%"
           height="400"
-          src={`https://www.youtube.com/embed/${lesson.snippet.resourceId.videoId}`}
+          src={`https://www.youtube.com/embed/${id}`}
           title="Fadi a"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -141,7 +151,7 @@ export default function Lesson() {
       </div>
       <div className="suggestions">{drawSuggestions()}</div>
       <div style={{ marginTop: "50px" }}>
-        <CommentYouTubeVideo lesson={lesson} courseInfo={courseInfo} />
+        <CommentYouTubeVideo lesson={lesson} id={id} courseInfo={courseInfo} />
       </div>
     </div>
   );
