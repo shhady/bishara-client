@@ -62,8 +62,8 @@ export default function CoursesHomePage({
               style={{
                 cursor: "pointer",
                 padding: "10px",
-                marginRight: "10px",
               }}
+              className="lessonsHomePage"
               onClick={() => addToLocal(course)}
             >
               <img

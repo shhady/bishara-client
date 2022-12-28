@@ -75,6 +75,9 @@ div{
     height: 135px;
     width: 135px;
 }
+.lessonsHomePage{
+    margin-right: 10px;
+}
 
 @media (max-width: 768px) and (min-width: 500px){
     .teachersCards{
@@ -82,12 +85,18 @@ div{
     grid-template-columns: repeat(4,1fr);
     gap: 1rem;
     }
+    .lessonsHomePage{
+        margin-right: 0px;
+    }
 }
 @media (max-width: 500px) {
     .teachersCards{
         display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 1rem;
+    }
+    .lessonsHomePage{
+        margin-right: 0px;
     }
 }
 
