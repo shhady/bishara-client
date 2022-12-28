@@ -59,18 +59,22 @@ export default function CoursesHomePage({
         >
           <Link to="/Lessons" style={{ textDecoration: "none" }}>
             <div
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                padding: "10px",
+                marginRight: "10px",
+              }}
               onClick={() => addToLocal(course)}
             >
               <img
                 src={course.coursePhoto}
                 alt={course.firstName}
-                height="150px"
-                width="250px"
+                height="190px"
+                width="190px"
                 style={{
                   marginBottom: "10px",
-                  width: "250px",
-                  height: "150px",
+                  width: "190px",
+                  height: "190px",
                   borderRadius: "5px",
                 }}
 
@@ -129,9 +133,9 @@ export default function CoursesHomePage({
             justifyContent: "flex-start",
             alignItems: "center",
             padding: "10px",
-            width: "90%",
+            width: "85%",
             margin: "auto",
-            borderBottom: "1px solid #e1e1e1",
+            // borderBottom: "1px solid #e1e1e1",
             marginBottom: "20px",
             backgroundColor: "white",
           }}
@@ -141,7 +145,7 @@ export default function CoursesHomePage({
             style={{
               color: "black",
               cursor: "pointer",
-              fontSize: "24px",
+              fontSize: "34px",
               fontWeight: "bold",
             }}
           >

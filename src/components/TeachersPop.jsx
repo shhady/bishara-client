@@ -38,7 +38,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
   };
 
   const drawData = () => {
-    return teachers.map((teacher, i) => {
+    return teachers.slice(0, 10).map((teacher, i) => {
       return (
         <div key={i} onClick={() => setTeachersHover(false)}>
           <Link to="/TeacherData" style={{ textDecoration: "none" }}>
@@ -85,7 +85,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
         position: "fixed",
         top: 80,
         // height: "200vh",
-        width: "70vw",
+        width: "65vw",
         background: "transparent",
       }}
       onClick={() => setTeachersHover(false)}
@@ -93,10 +93,10 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
       <div
         style={{
           backgroundColor: "white",
-          width: "50%",
+          width: "60%",
           border: "0.5px solid #dcdcdc",
           borderTop: "none",
-          height: "60vh",
+          // height: "fitContent",
           boxShadow:
             "rgb(0 0 0 / 6%) 0px 2px 4px, rgb(35 41 54 / 14%) 0px 6px 16px",
         }}

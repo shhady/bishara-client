@@ -18,20 +18,29 @@
     height: 150px;
 }
 
+@media (max-width: 1040px) {
+  .teacherAvatars{
+    width: 90%;
+    margin:auto;
+    display: grid;
+    /* grid-template-columns: repeat(10,1fr); */
+    gap:2rem;
+    overflow-x: scroll;
+}
+}
 @media (max-width: 768px){
   .teacherHomeAvatars{
     border-radius: 50%;
     width: 120px;
     height: 120px;
 }
-    .teacherAvatars{
+    /* .teacherAvatars{
         width: 90%;
         margin:auto;
         display: grid;
-        /* grid-template-columns: repeat(10,1fr); */
         gap:2rem;
         overflow-x: scroll;
-    }
+    } */
 
 }
 /* width */
