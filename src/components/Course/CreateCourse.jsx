@@ -184,6 +184,14 @@ export default function CreateCourse() {
             <button onClick={postDetails} className="addFileCoverCourseButton">
               تثبيت صورة الغلاف
             </button>
+            {/* <div> */}
+            {fileUpload && (
+              <span style={{ textAlign: "center" }}>
+                {" "}
+                {fileUpload.percentComplete}%
+              </span>
+            )}
+            {/* </div> */}
           </div>
 
           <textarea

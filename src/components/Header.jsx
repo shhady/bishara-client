@@ -242,7 +242,10 @@ export default function Header({
   };
 
   return (
-    <div style={{ width: "100%", margin: "auto" }}>
+    <div
+      style={{ width: "100%", margin: "auto" }}
+      // onMouseOver={window.localStorage.removeItem("title")}
+    >
       <div className="header">
         {isHovering && user ? (
           <div className="backgroundHover" onClick={() => setIsHovering(false)}>
@@ -766,7 +769,10 @@ export default function Header({
                   setCoursesHover(true);
                   // setUpdateComponent("");
                 }}
-                onClick={() => setCoursesHover(true)}
+                onClick={() => {
+                  history.push("/courses");
+                  window.location.reload();
+                }}
               >
                 <div className="logoAndText">
                   {/* <FontAwesomeIcon icon={faMusic} /> */}

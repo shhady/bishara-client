@@ -20,13 +20,17 @@
 .TopOfPage{
     margin-top: 80px;
     /* padding-top: 20px; */
-    height: 40vh;
+    height: 30vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-weight: 800;
-    font-size: 38px;
+    font-size: 48px;
+    font-family: 'Noto Nastaliq Urdu', serif;
+    background-color: rgb(226, 227, 227);
+/* font-family: 'Noto Sans Arabic', sans-serif; */
+/* font-family: 'Raleway', sans-serif; */
 }
 .allCourses{
     width: 98%;

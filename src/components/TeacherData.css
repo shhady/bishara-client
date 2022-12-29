@@ -10,7 +10,7 @@
     margin-top: 80px;
 }
 .coverHeight{
-    height: 600px;
+    height: 80vh;
 }
 
 /* .coursesDrawCss{
@@ -48,7 +48,9 @@
             height:221px;
             max-width:100%;
             z-index:8;
-            margin-top: -50px;
+            /* margin-top: -50px; */
+            position: absolute;
+              top: 80vh;
 }
 .imageProfilediv{
     min-width: 221px;
@@ -122,6 +124,7 @@
         align-items: center;
         text-align: center;
         padding-right: 0px;
+        margin-top: 80px;
 
     }
     .imageProfile{
@@ -129,7 +132,16 @@
         height:190px;
     }
     .coverHeight{
-        height: 450px;
+        height: 50vh;
+    }
+    .imageProfile{
+        width:221px;
+                height:221px;
+                max-width:100%;
+                z-index:8;
+                /* margin-top: -50px; */
+                position: absolute;
+                  top: 40vh;
     }
     .profile{
         display:block;

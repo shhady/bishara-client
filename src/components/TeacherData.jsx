@@ -56,6 +56,8 @@ export default function TeacherData({
     setFilteredCourses(filteredCourses);
   }, [courses, teacherId]);
 
+  console.log(filteredCourses);
+  console.log(courses);
   if (!teacherInfo)
     return (
       <div
@@ -130,7 +132,7 @@ export default function TeacherData({
               <div>{course.level}</div>
             </div>
             <div style={{ width: "80%", margin: "auto", color: "black" }}>
-              {course.description}....
+              {course.description.slice(0, 50)}....
             </div>
           </Link>
           <div>
@@ -196,7 +198,10 @@ export default function TeacherData({
             className="imageProfile"
             src={teacherInfo.avatar}
             alt="profile"
-            style={{ borderRadius: "50%", border: "8px solid white" }}
+            style={{
+              borderRadius: "50%",
+              border: "8px solid white",
+            }}
           />
         </div>
         <div
@@ -224,7 +229,7 @@ export default function TeacherData({
       {filteredCourses.length === 2 ? (
         <div className="coursesDrawCss2">{drawCourses()}</div>
       ) : null}
-      {filteredCourses.length === 3 ? (
+      {filteredCourses.length >= 3 ? (
         <div className="coursesDrawCss3">{drawCourses()}</div>
       ) : null}
     </div>

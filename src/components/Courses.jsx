@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Posts/styles.css";
 import { useHistory } from "react-router-dom";
+import { faWindowMinimize } from "@fortawesome/free-solid-svg-icons";
 export default function Courses({
   listId,
   setListId,
@@ -21,13 +22,23 @@ export default function Courses({
   const history = useHistory();
   window.onpopstate = () => {
     history.push("/");
+    window.localStorage.removeItem("title");
   };
   useEffect(() => {
     if (!user) return;
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
   }, []);
 
-  console.log(user);
+  useEffect(() => {
+    if (window.localStorage.getItem("title")) {
+      setAll(false);
+      setTitle(window.localStorage.getItem("title"));
+      setInstruments(window.localStorage.getItem("title"));
+    } else {
+      setTitle(null);
+    }
+  }, []);
+  console.log(title);
   useEffect(() => {
     // console.log(all);
     const fetch = async () => {
@@ -45,7 +56,7 @@ export default function Courses({
     const filtered = posts?.filter((post) => post.instrument === title);
     setFilteredposts(filtered);
     // setAll(false);
-  }, [title]);
+  }, [title, all, posts]);
 
   // };
   // useEffect(() => {
@@ -202,7 +213,10 @@ export default function Courses({
   };
 
   return (
-    <div style={{ display: "grid", gridAutoColumns: "3fr 1fr" }}>
+    <div
+      style={{ display: "grid", gridAutoColumns: "3fr 1fr" }}
+      onMouseOver={window.localStorage.removeItem("title")}
+    >
       <div className="TopOfPage">{instruments}</div>
       <div className="filterInstruments" onClick={() => setShowPopUp(true)}>
         اختر آلة

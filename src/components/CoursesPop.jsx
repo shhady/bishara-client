@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Teachers.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // import {useNav} from "react-router-dom"
 export default function TeachersPop({
   setCoursesHover,
@@ -9,6 +9,7 @@ export default function TeachersPop({
   updateComponent,
 }) {
   const [courses, setCourses] = useState(null);
+  const history = useHistory();
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(
@@ -162,10 +163,50 @@ export default function TeachersPop({
               marginBottom: "10px",
             }}
           >
-            <span>بيانو</span>
-            <span>عود</span>
-            <span>كمان</span>
-            <span>قانون</span>
+            <div
+              onClick={(e) => {
+                console.log(e.target.innerText);
+                window.localStorage.setItem("title", e.target.innerText);
+                history.push("/courses");
+                window.location.reload();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              بيانو
+            </div>
+            <span
+              onClick={(e) => {
+                console.log(e.target.innerText);
+                window.localStorage.setItem("title", e.target.innerText);
+                history.push("/courses");
+                window.location.reload();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              عود
+            </span>
+            <span
+              onClick={(e) => {
+                console.log(e.target.innerText);
+                window.localStorage.setItem("title", e.target.innerText);
+                history.push("/courses");
+                window.location.reload();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              كمان
+            </span>
+            <span
+              onClick={(e) => {
+                console.log(e.target.innerText);
+                window.localStorage.setItem("title", e.target.innerText);
+                history.push("/courses");
+                window.location.reload();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              قانون
+            </span>
           </div>
           <div
             style={{

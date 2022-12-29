@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FourBoxes.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
 export default function FourBoxes() {
+  // const [title, setTitle] = useState(null);
+  const history = useHistory();
+  function handleClick(e) {
+    window.localStorage.setItem("title", e.target.innerText);
+    // .then(history.push("/courses"));
+  }
   return (
     <div style={{ borderBottom: "1px solid #e1e1e1" }}>
       <div className="FourBoxesTop">
@@ -15,17 +22,25 @@ export default function FourBoxes() {
         </Link>
       </div>
       <div className="fourboxesMain">
-        <Link to="/PianoPage" style={{ textDecoration: "none" }}>
-          <div className="box1">piano </div>
+        <Link to="/courses" style={{ textDecoration: "none" }}>
+          <div className="box1" onClick={(e) => handleClick(e)}>
+            بيانو{" "}
+          </div>
         </Link>
-        <Link to="/OudPage" style={{ textDecoration: "none" }}>
-          <div className="box2">Oud</div>
+        <Link to="/courses" style={{ textDecoration: "none" }}>
+          <div className="box2" onClick={(e) => handleClick(e)}>
+            عود
+          </div>
         </Link>
-        <Link to="/ViolinPage" style={{ textDecoration: "none" }}>
-          <div className="box3">Violin</div>
+        <Link to="/courses" style={{ textDecoration: "none" }}>
+          <div className="box3" onClick={(e) => handleClick(e)}>
+            كمان
+          </div>
         </Link>
-        <Link to="" style={{ textDecoration: "none" }}>
-          <div className="box4">Guitar</div>
+        <Link to="/courses" style={{ textDecoration: "none" }}>
+          <div className="box4" onClick={(e) => handleClick(e)}>
+            قانون
+          </div>
         </Link>
       </div>
       {/* <hr /> */}
