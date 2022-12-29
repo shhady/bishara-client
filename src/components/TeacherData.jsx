@@ -28,6 +28,10 @@ export default function TeacherData({
       ? setTeacherId(updateComponent._id)
       : setTeacherId(localStorage.getItem("teacherId"));
   }, [updateComponent]);
+  useEffect(() => {
+    setTeacherId(localStorage.getItem("teacherId"));
+  }, []);
+
   //   console.log(localStorage.getItem("teacherId"));
   useEffect(() => {
     const fetch = async () => {

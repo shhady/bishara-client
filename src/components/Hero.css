@@ -248,6 +248,9 @@ h1{
         width: 100%;
 
     }
+    .hero{
+        margin-top: 60px;
+    }
     .cardViolin{
             height: 20vh;
             width: 100%;

@@ -179,7 +179,6 @@ export default function Lessons({ user, updateComponent }) {
                 {updated ? updated.title : courseInfo.title}
               </h1>
               <h1 style={{ fontSize: "24px" }}>
-                من قبل المدرس{" "}
                 {updated ? updated.firstName : courseInfo.firstName}
                 {"  "}
                 {updated ? updated.lastName : courseInfo.lastName}

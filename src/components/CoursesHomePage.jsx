@@ -47,7 +47,7 @@ export default function CoursesHomePage({
   console.log(courses);
 
   const drawData = () => {
-    return courses.slice(0, 4).map((course, i) => {
+    return courses.slice(0, 5).map((course, i) => {
       return (
         <div
           key={i}
@@ -55,7 +55,7 @@ export default function CoursesHomePage({
             setCoursesHover(false);
             setUpdateComponent(course);
           }}
-          style={{ marginLeft: "20px" }}
+          style={{ marginLeft: "20px", minHeight: "400px" }}
         >
           <Link to="/Lessons" style={{ textDecoration: "none" }}>
             <div
@@ -115,7 +115,7 @@ export default function CoursesHomePage({
                     {course.instrument}/{course.level}
                   </div>
                 </div>
-                <div>{course.description.slice(0, 50)}...</div>
+                <div>{course.description.slice(0, 25)}...</div>
               </div>
             </div>
           </Link>
