@@ -10,9 +10,7 @@ const GoogleAuthSignUp = ({ setUser }) => {
     console.log(response.credential);
     let userInfo = jwt_decode(response.credential);
     setUserInformation(userInfo);
-    console.log(
-      `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`
-    );
+
     try {
       const result = await axios.post(
         process.env.REACT_APP_BACKEND_URL + `/users`,
@@ -33,11 +31,9 @@ const GoogleAuthSignUp = ({ setUser }) => {
       console.log("passwords don't match");
     }
   };
-  console.log(userInformation);
   const onFailure = (error) => {
     console.log(error);
   };
-  console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
   return (
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <GoogleLogin
