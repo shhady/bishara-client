@@ -3,7 +3,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-const GoogleAuthSignIn = ({ setUser }) => {
+const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
   const [userInformation, setUserInformation] = useState(null);
   const history = useHistory();
   const onSuccess = async (response) => {
@@ -27,6 +27,7 @@ const GoogleAuthSignIn = ({ setUser }) => {
       setUser(result.data);
     } catch (error) {
       console.log("unable to log in");
+      setShowLoginFailMessage(true);
     }
   };
   console.log(userInformation);

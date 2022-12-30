@@ -137,6 +137,24 @@ export default function Auth({ user, setUser, setUserProp }) {
       <div className="SigninContainer">
         <div className="titleSingin">
           {isSignUp ? <h2>فتح حساب</h2> : <h2>تسجيل دخول</h2>}
+          <div
+            style={{
+              marginTop: "30px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginBottom: "30px",
+            }}
+          >
+            {isSignUp ? (
+              <GoogleAuthSignUp setUser={setUser} style={{ width: "100%" }} />
+            ) : (
+              <GoogleAuthSignIn
+                setUser={setUser}
+                setShowLoginFailMessage={setShowLoginFailMessage}
+              />
+            )}
+          </div>
         </div>
         <form onSubmit={handleSubmit}>
           {isSignUp ? (
@@ -266,6 +284,7 @@ export default function Auth({ user, setUser, setUserProp }) {
                       cursor: "pointer",
                       padding: "10px",
                       borderRadius: "5px",
+                      fontWeight: "bold",
                     }}
                     onClick={() => setisSingUp(!isSignUp)}
                   >
@@ -367,12 +386,6 @@ export default function Auth({ user, setUser, setUserProp }) {
                     }}
                     // onKeyDown={handleKeyDown}
                   ></input>
-                  {!showLoginFailMessage ? null : (
-                    <div style={{ color: "red" }}>
-                      فشل في تسجيل الدخول <br />
-                      *معلم ؟ اضغط على زر معلم اعلاه
-                    </div>
-                  )}
                 </div>
 
                 {studentOrTeacher === "student" ? (
@@ -412,7 +425,15 @@ export default function Auth({ user, setUser, setUserProp }) {
                 )}
 
                 {/* </form> */}
-                <div></div>
+                <div>
+                  {" "}
+                  {!showLoginFailMessage ? null : (
+                    <div style={{ color: "red" }}>
+                      فشل في تسجيل الدخول <br />
+                      *معلم ؟ اضغط على زر معلم اعلاه
+                    </div>
+                  )}
+                </div>
                 <div>
                   <div
                     style={{
@@ -420,6 +441,7 @@ export default function Auth({ user, setUser, setUserProp }) {
                       cursor: "pointer",
                       padding: "10px",
                       borderRadius: "5px",
+                      fontWeight: "bold",
                     }}
                     onClick={dontHaveAnAccount}
                   >
@@ -430,20 +452,7 @@ export default function Auth({ user, setUser, setUserProp }) {
             </>
           )}
         </form>
-        <div
-          style={{
-            marginTop: "30px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {isSignUp ? (
-            <GoogleAuthSignUp setUser={setUser} style={{ width: "100%" }} />
-          ) : (
-            <GoogleAuthSignIn setUser={setUser} />
-          )}
-        </div>
+
         {/* <div className="forminputs"> */}
       </div>
     </div>
