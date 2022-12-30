@@ -3,7 +3,9 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 const GoogleAuthSignUp = () => {
   const onSuccess = (response) => {
-    console.log(response);
+    console.log(response.email);
+    console.log(response.given_name);
+    console.log(response.family_name);
   };
 
   const onFailure = (error) => {
