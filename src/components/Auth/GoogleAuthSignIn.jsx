@@ -10,15 +10,28 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
     console.log(response.credential);
     let userInfo = jwt_decode(response.credential);
     setUserInformation(userInfo);
-    console.log(
-      `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`
-    );
+
     try {
+      //   const result = await axios.post(
+      //     process.env.REACT_APP_BACKEND_URL + `/users`,
+      //     {
+      //       email: userInfo.email,
+      //       password: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
+      //     }
+      //   );
+      //   window.localStorage.setItem("profile", JSON.stringify(result.data));
+      //   window.localStorage.setItem("token", result.data.token);
+      //   history.push("/profile");
+      //   setUser(result.data);
       const result = await axios.post(
         process.env.REACT_APP_BACKEND_URL + `/users`,
         {
+          firstName: userInfo.given_name,
+          lastName: userInfo.family_name,
           email: userInfo.email,
           password: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
+          confirmPassword: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
+          avatar: userInfo.picture,
         }
       );
       window.localStorage.setItem("profile", JSON.stringify(result.data));
@@ -44,7 +57,6 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
       setShowLoginFailMessage(true);
     }
   };
-  console.log(userInformation);
   const onFailure = (error) => {
     console.log(error);
   };
