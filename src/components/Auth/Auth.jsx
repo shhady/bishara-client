@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Auth.css";
 import { gapi } from "gapi-script";
 import { useHistory } from "react-router-dom";
+import GoogleAuthSignUp from "./GoogleAuthSignUp";
 import axios from "axios";
 // import FileBase from "react-file-base64";
 
@@ -234,6 +235,7 @@ export default function Auth({ user, setUser, setUserProp }) {
                     كلمة المرور وتأكيد كلمة المرور غير متطابقتين{" "}
                   </div>
                 )}
+
                 <div
                   style={{
                     display: "flex",
@@ -371,6 +373,7 @@ export default function Auth({ user, setUser, setUserProp }) {
                     </div>
                   )}
                 </div>
+
                 {studentOrTeacher === "student" ? (
                   <div
                     style={{
@@ -426,6 +429,9 @@ export default function Auth({ user, setUser, setUserProp }) {
             </>
           )}
         </form>
+        <div>
+          <GoogleAuthSignUp />
+        </div>
         {/* <div className="forminputs"> */}
       </div>
     </div>

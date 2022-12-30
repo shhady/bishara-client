@@ -299,7 +299,8 @@ export default function CommentYouTubeVideo({ lesson, id, courseInfo }) {
                 <p>{comment.comment}</p>
               </div>
             </div>
-            {comment.userid === userId ? (
+            {comment.userid === userId ||
+            comment.courseOwnerId === user?.teacher?._id ? (
               <div
                 style={{
                   height: "70px",

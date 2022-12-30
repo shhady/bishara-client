@@ -16,6 +16,7 @@ export default function TeacherData({
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [teacherprop, setTeacherprop] = useState(updateComponent);
   useEffect(() => {
+    if (!user) return;
     setUserId(user.user ? user.user._id : user.teacher._id);
   }, [user]);
   const history = useHistory();
@@ -154,6 +155,13 @@ export default function TeacherData({
       );
     });
   };
+
+  const deleteTeacher = async () => {
+    axios
+      .delete(process.env.REACT_APP_BACKEND_URL + `/teachers/${teacherId}`)
+      .then(history.push("/"));
+  };
+
   return (
     <div className="teacherDataAll">
       <div
@@ -218,6 +226,24 @@ export default function TeacherData({
           //   alignItems: "flex-start",
           // }}
         >
+          {user?.teacher?.role === "admin" && (
+            <div style={{ color: "red" }}>
+              only admin can see this button
+              <br />
+              <button
+                style={{
+                  background: "white",
+                  border: "2px solid black",
+                  width: "140px",
+                  borderRadius: "10px",
+                }}
+                onClick={deleteTeacher}
+              >
+                حذف الاستاذ
+              </button>
+            </div>
+          )}
+
           <div>{teacherInfo.about}</div>
         </div>
       </div>
