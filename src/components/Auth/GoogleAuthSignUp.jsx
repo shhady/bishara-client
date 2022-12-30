@@ -60,7 +60,7 @@ const GoogleAuthSignUp = () => {
   return (
     <GoogleOAuthProvider clientId="623673237970-h7oi3db0ime9917tl4gu24on8j6c5vvf.apps.googleusercontent.com">
       <GoogleLogin
-        scope="https://www.googleapis.com/auth/userinfo.email"
+        scope="https://www.googleapis.com/auth/userinfo.profile"
         redirectUri="https://bishara.netlify.app"
         onSuccess={onSuccess}
         onFailure={onFailure}
