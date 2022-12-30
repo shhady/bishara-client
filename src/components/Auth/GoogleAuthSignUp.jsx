@@ -39,6 +39,7 @@ const GoogleAuthSignUp = () => {
         {
           headers: {
             Authorization: `Bearer ${response.access_token}`,
+            Accept: application / json,
           },
         }
       );
