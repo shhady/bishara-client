@@ -15,7 +15,7 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
     );
     try {
       const result = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + `/users/login`,
+        process.env.REACT_APP_BACKEND_URL + `/users`,
         {
           email: userInfo.email,
           password: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
