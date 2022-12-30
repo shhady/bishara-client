@@ -1,6 +1,6 @@
 import React from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-
+import axios from "axios";
 const GoogleAuthSignUp = () => {
   console.log(data.email);
   console.log(data.given_name);
