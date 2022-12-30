@@ -26,7 +26,21 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
       history.push("/profile");
       setUser(result.data);
     } catch (error) {
-      console.log("unable to log in");
+      console.log("Error creating user, trying to log in instead");
+    }
+    try {
+      const result = await axios.post(
+        process.env.REACT_APP_BACKEND_URL + `/users/login`,
+        {
+          email: userInfo.email,
+          password: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
+        }
+      );
+      window.localStorage.setItem("profile", JSON.stringify(result.data));
+      window.localStorage.setItem("token", result.data.token);
+      history.push("/profile");
+      setUser(result.data);
+    } catch (error) {
       setShowLoginFailMessage(true);
     }
   };
