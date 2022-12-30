@@ -5,7 +5,7 @@ const GoogleAuthSignUp = () => {
   console.log(data.email);
   console.log(data.given_name);
   console.log(data.family_name);
-  const onSuccess = async (response) => {
+  const onSuccess = async () => {
     const response = await axios.get(
       "https://www.googleapis.com/oauth2/v2/userinfo",
       {
