@@ -145,13 +145,14 @@ export default function Courses({
             height="150"
             style={{ marginBottom: "10px" }}
           />
+
           <div style={{ fontWeight: "700" }}>{post.title}</div>
           <div style={{ width: "80%" }}>
             <div className="nameInstrumentLevel">
               {post.firstName} {"  "}
               {post.lastName}
               <div>
-                {post.instrument} / {post.level}
+                {post.instrument} ({post.level})
               </div>
             </div>
             <div>{post.description.slice(0, 35)}...</div>
@@ -274,6 +275,16 @@ export default function Courses({
 
                 <div
                   onClick={() => {
+                    setTitle("جيتار");
+                    setAll(false);
+                    setInstruments("جيتار");
+                  }}
+                  className="allCourses"
+                >
+                  جيتار
+                </div>
+                <div
+                  onClick={() => {
                     setTitle("قانون");
                     setAll(false);
                     setInstruments("قانون");
@@ -281,6 +292,46 @@ export default function Courses({
                   className="allCourses"
                 >
                   قانون
+                </div>
+                <div
+                  onClick={() => {
+                    setTitle("تشيلو");
+                    setAll(false);
+                    setInstruments("تشيلو");
+                  }}
+                  className="allCourses"
+                >
+                  تشيلو
+                </div>
+                <div
+                  onClick={() => {
+                    setTitle("ناي");
+                    setAll(false);
+                    setInstruments("ناي");
+                  }}
+                  className="allCourses"
+                >
+                  ناي
+                </div>
+                <div
+                  onClick={() => {
+                    setTitle("ايقاع");
+                    setAll(false);
+                    setInstruments("ايقاع");
+                  }}
+                  className="allCourses"
+                >
+                  ايقاع
+                </div>
+                <div
+                  onClick={() => {
+                    setTitle("بزق");
+                    setAll(false);
+                    setInstruments("بزق");
+                  }}
+                  className="allCourses"
+                >
+                  بزق
                 </div>
               </div>
             </div>
@@ -355,6 +406,22 @@ export default function Courses({
 
             <div
               onClick={() => {
+                setTitle("جيتار");
+                setAll(false);
+                setInstruments("جيتار");
+              }}
+              className="allCourses"
+            >
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
+              جيتار
+            </div>
+
+            <div
+              onClick={() => {
                 setTitle("قانون");
                 setAll(false);
                 setInstruments("قانون");
@@ -367,6 +434,70 @@ export default function Courses({
                 style={{ paddingLeft: " 5px" }}
               />
               قانون
+            </div>
+
+            <div
+              onClick={() => {
+                setTitle("تشيلو");
+                setAll(false);
+                setInstruments("تشيلو");
+              }}
+              className="allCourses"
+            >
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
+              تشيلو
+            </div>
+
+            <div
+              onClick={() => {
+                setTitle("ناي");
+                setAll(false);
+                setInstruments("ناي");
+              }}
+              className="allCourses"
+            >
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
+              ناي
+            </div>
+
+            <div
+              onClick={() => {
+                setTitle("ايقاع");
+                setAll(false);
+                setInstruments("ايقاع");
+              }}
+              className="allCourses"
+            >
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
+              ايقاع
+            </div>
+
+            <div
+              onClick={() => {
+                setTitle("بزق");
+                setAll(false);
+                setInstruments("بزق");
+              }}
+              className="allCourses"
+            >
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
+              بزق
             </div>
           </div>
         </div>

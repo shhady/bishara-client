@@ -9,7 +9,7 @@
      border-radius: 50px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
 .courseContainer:hover{
@@ -92,6 +92,14 @@
         grid-template-columns: repeat(2,1fr);
         gap: 3rem;
     }
+    .nameInstrumentLevel{
+        display: flex;
+        flex-direction: column;
+        width:100%;
+        margin: auto;
+        /* justify-content: space-between; */
+        align-items: center;
+    }
     
   }
 
@@ -142,5 +150,13 @@
     .coursesPopUp{
         margin-top: 100px;
         
+    }
+    .nameInstrumentLevel{
+        display: flex;
+        flex-direction: column;
+        width:100%;
+        margin: auto;
+        /* justify-content: space-between; */
+        align-items: center;
     }
   }

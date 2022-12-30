@@ -112,7 +112,7 @@ export default function CoursesHomePage({
                     {course.firstName} {course.lastName}
                   </div>
                   <div>
-                    {course.instrument}/{course.level}
+                    {course.instrument} ({course.level})
                   </div>
                 </div>
                 <div>{course.description.slice(0, 25)}...</div>

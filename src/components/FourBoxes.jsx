@@ -39,7 +39,7 @@ export default function FourBoxes() {
         </Link>
         <Link to="/courses" style={{ textDecoration: "none" }}>
           <div className="box4" onClick={(e) => handleClick(e)}>
-            قانون
+            جيتار
           </div>
         </Link>
       </div>

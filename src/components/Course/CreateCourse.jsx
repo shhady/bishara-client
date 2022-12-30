@@ -149,7 +149,12 @@ export default function CreateCourse() {
             <option value="بيانو">بيانو</option>
             <option value="عود">عود</option>
             <option value="كمان">كمان</option>
+            <option value="جيتار">جيتار</option>
+            <option value="تشيلو">تشيلو</option>
             <option value="قانون">قانون</option>
+            <option value="ناي">ناي</option>
+            <option value="ايقاع">ايقاع</option>
+            <option value="بزق">بزق</option>
           </select>
           <select
             style={{ textAlign: "start", width: "100%" }}
@@ -158,7 +163,9 @@ export default function CreateCourse() {
           >
             <option value="">المستوى</option>
             <option value="مبتدأ">مبتدأ</option>
+            <option value="مبتدأ/متوسط">مبتدأ/متوسط</option>
             <option value="متوسط">متوسط</option>
+            <option value="متوسط/متقدم">متوسط/متقدم</option>
             <option value="متقدم">متقدم</option>
           </select>
 
