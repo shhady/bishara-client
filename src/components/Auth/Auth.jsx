@@ -4,6 +4,7 @@ import { gapi } from "gapi-script";
 import { useHistory } from "react-router-dom";
 import GoogleAuthSignUp from "./GoogleAuthSignUp";
 import axios from "axios";
+import GoogleAuthSignIn from "./GoogleAuthSignIn";
 // import FileBase from "react-file-base64";
 
 export default function Auth({ user, setUser, setUserProp }) {
@@ -429,8 +430,19 @@ export default function Auth({ user, setUser, setUserProp }) {
             </>
           )}
         </form>
-        <div>
-          <GoogleAuthSignUp />
+        <div
+          style={{
+            marginTop: "30px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {isSignUp ? (
+            <GoogleAuthSignUp setUser={setUser} style={{ width: "100%" }} />
+          ) : (
+            <GoogleAuthSignIn setUser={setUser} />
+          )}
         </div>
         {/* <div className="forminputs"> */}
       </div>

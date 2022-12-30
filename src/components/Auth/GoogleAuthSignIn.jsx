@@ -3,7 +3,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-const GoogleAuthSignUp = ({ setUser }) => {
+const GoogleAuthSignIn = ({ setUser }) => {
   const [userInformation, setUserInformation] = useState(null);
   const history = useHistory();
   const onSuccess = async (response) => {
@@ -15,14 +15,10 @@ const GoogleAuthSignUp = ({ setUser }) => {
     );
     try {
       const result = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + `/users`,
+        process.env.REACT_APP_BACKEND_URL + `/users/login`,
         {
-          firstName: userInfo.given_name,
-          lastName: userInfo.family_name,
           email: userInfo.email,
           password: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
-          confirmPassword: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
-          avatar: userInfo.picture,
         }
       );
       window.localStorage.setItem("profile", JSON.stringify(result.data));
@@ -30,14 +26,13 @@ const GoogleAuthSignUp = ({ setUser }) => {
       history.push("/profile");
       setUser(result.data);
     } catch (error) {
-      console.log("passwords don't match");
+      console.log("unable to log in");
     }
   };
   console.log(userInformation);
   const onFailure = (error) => {
     console.log(error);
   };
-  console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
   return (
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <GoogleLogin
@@ -45,10 +40,10 @@ const GoogleAuthSignUp = ({ setUser }) => {
         onSuccess={onSuccess}
         onFailure={onFailure}
       >
-        Sign Up with Google
+        Sign in with Google
       </GoogleLogin>
     </GoogleOAuthProvider>
   );
 };
 
-export default GoogleAuthSignUp;
+export default GoogleAuthSignIn;
