@@ -54,7 +54,11 @@ export default function Header({
   const [redLightNotificationReply, setRedLightNotificationReply] =
     useState(false);
   const [showNotificationPopUp, setShowNotificationPopUp] = useState(false);
-
+  const [teacherPracticesNotifications, setTeacherPracticesNotifications] =
+    useState([]);
+  const [teacherPracticesUnReplied, setTeacherPracticesUnreplied] = useState(
+    []
+  );
   useEffect(() => {
     setNotificationNumber(backNot.filter((number) => number.read === false));
   }, [backNot]);
@@ -241,6 +245,29 @@ export default function Header({
     setIsHovering(!isHovering);
   };
 
+  useEffect(() => {
+    const fetchPractices = async () => {
+      const res = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
+      );
+      console.log(res.data);
+      // const filterData = res.data.filter(
+      //   (practice) => practice.teacherId === userId
+      // );
+      setTeacherPracticesNotifications(res.data);
+    };
+    fetchPractices();
+  }, [userId]);
+
+  console.log(teacherPracticesNotifications);
+  useEffect(() => {
+    const filteredPractices = teacherPracticesNotifications.filter(
+      (practice) => {
+        return practice.videoReply.length === 0 && !practice.reply;
+      }
+    );
+    setTeacherPracticesUnreplied(filteredPractices);
+  }, [teacherPracticesNotifications]);
   return (
     <div
       style={{ width: "100%", margin: "auto" }}
@@ -573,6 +600,7 @@ export default function Header({
                         setRedLightNotification(false);
                         setRedLightNotificationReply(false);
                         setShowNotificationPopUp(!showNotificationPopUp);
+                        setTeacherPracticesUnreplied([]);
                       }}
                       onMouseOver={() => setIsHovering(false)}
                     >
@@ -582,7 +610,9 @@ export default function Header({
                         width="20px"
                       />
                       {/* <FontAwesomeIcon icon={faBell} /> */}
-                      {redLightNotification || redLightNotificationReply ? (
+                      {redLightNotification ||
+                      redLightNotificationReply ||
+                      teacherPracticesUnReplied.length !== 0 ? (
                         <div
                           className="notificationNotification"
                           // style={{ position: "absolute" }}

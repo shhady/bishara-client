@@ -12,6 +12,11 @@ export default function Notifications() {
   const [userAvatar, setUserAvatar] = useState("");
   const [userReplies, setUserReplies] = useState([]);
   const [repliesShow, setRepliesShow] = useState([]);
+  const [teacherPracticesNotifications, setTeacherPracticesNotifications] =
+    useState([]);
+  const [teacherPracticesUnReplied, setTeacherPracticesUnreplied] = useState(
+    []
+  );
   const history = useHistory();
   useEffect(() => {
     user.user
@@ -253,6 +258,58 @@ export default function Notifications() {
       );
     });
   };
+
+  useEffect(() => {
+    const fetchPractices = async () => {
+      const res = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
+      );
+      console.log(res.data);
+      // const filterData = res.data.filter(
+      //   (practice) => practice.teacherId === userId
+      // );
+      setTeacherPracticesNotifications(res.data);
+    };
+    fetchPractices();
+  }, [userId]);
+
+  console.log(teacherPracticesNotifications);
+  useEffect(() => {
+    const filteredPractices = teacherPracticesNotifications.filter(
+      (practice) => {
+        return practice.videoReply.length === 0 && !practice.reply;
+      }
+    );
+    setTeacherPracticesUnreplied(filteredPractices);
+  }, [teacherPracticesNotifications]);
+  const drawPracticeNotifications = () => {
+    return teacherPracticesUnReplied?.map((practice) => {
+      return (
+        <div>
+          <div
+            style={{
+              padding: "15px",
+              backgroundColor: "#e7f3ff",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onClick={handleClickOnPractice}
+          >
+            <div>
+              {practice.studentFirstName} {practice.studentLastName} رفع تمرين
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
+
+  const handleClickOnPractice = () => {
+    // setShowNotificationPopUp(false);
+    history.push("/PracticeReplies");
+    // setTeacherPracticesNotifications(null);
+  };
   return (
     <div style={{ marginTop: "100px" }}>
       <div style={{ marginTop: "30px", textAlign: "center" }}>
@@ -267,8 +324,10 @@ export default function Notifications() {
             "rgb(0 0 0 / 6%) 0px 1px 2px, rgb(35 41 54 / 14%) 0px 3px 8px",
         }}
       >
-        {drawReplies()}
+        {drawPracticeNotifications()}
         {drawComment()}
+
+        {drawReplies()}
       </div>
     </div>
   );
