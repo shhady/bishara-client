@@ -458,6 +458,7 @@ export default function Header({
                       onClick={() => {
                         setRedLightNotification(false);
                         setRedLightNotificationReply(false);
+                        setTeacherPracticesUnreplied([]);
                       }}
                     >
                       <img
@@ -466,7 +467,9 @@ export default function Header({
                         width="20px"
                       />
                       {/* <FontAwesomeIcon icon={faBell} /> */}
-                      {redLightNotification || redLightNotificationReply ? (
+                      {redLightNotification ||
+                      redLightNotificationReply ||
+                      teacherPracticesUnReplied.length !== 0 ? (
                         <div
                           className="notificationNotification"
                           // style={{ position: "absolute" }}
