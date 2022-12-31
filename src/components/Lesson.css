@@ -16,6 +16,14 @@
     gap:.5rem;
     overflow-x: scroll;
 }
+
+.uploadFile{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
 @media (max-width: 768px) {
     .videoLesson{
         width: 99%;
@@ -25,5 +33,16 @@
     }
     .suggestions{
         margin-right: 0px
+    }
+}
+
+@media (max-width: 530px) {
+    .uploadFile{
+        height:100px;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
     }
 }

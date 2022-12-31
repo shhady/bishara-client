@@ -10,6 +10,7 @@ import {
   faPenToSquare,
   faEllipsisVertical,
 } from "@fortawesome/free-solid-svg-icons";
+import UploadFile from "./UploadFile";
 export default function CommentYouTubeVideo({ lesson, id, courseInfo }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [courseDetails, setCourseDetails] = useState(
@@ -479,6 +480,8 @@ export default function CommentYouTubeVideo({ lesson, id, courseInfo }) {
   return (
     <div>
       <div className="commentsSection">
+        <UploadFile courseInfo={courseInfo} lesson={lesson} id={id} />
+
         <Comment
           userId={userId}
           userF={userF}
