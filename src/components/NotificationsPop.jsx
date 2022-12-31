@@ -16,6 +16,8 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
   const [teacherPracticesUnReplied, setTeacherPracticesUnreplied] = useState(
     []
   );
+  const [userPractices, setUserPractices] = useState([]);
+  const [userPracticesNotSeen, setUserPracticesNotSeen] = useState([]);
   const history = useHistory();
   useEffect(() => {
     user.user
@@ -85,6 +87,56 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
 
   console.log(userReplies);
 
+  useEffect(() => {
+    if (user.teacher) return;
+    const fetch = async () => {
+      const res = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user.user._id}`
+      );
+      setUserPractices(res.data);
+      console.log(res.data);
+    };
+    fetch();
+  }, [userId]);
+
+  useEffect(() => {
+    const filteredSeen = userPractices.filter((practiceSeen) => {
+      return practiceSeen.replySeen === "false";
+    });
+    setUserPracticesNotSeen(filteredSeen);
+  }, [userPractices]);
+
+  const drawUnSeenReplies = () => {
+    return userPracticesNotSeen.map((unseen) => {
+      return (
+        <div
+          style={{
+            padding: "15px",
+            backgroundColor: "#e7f3ff",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer",
+          }}
+          onClick={() => goToStudentProfile(unseen)}
+        >
+          {unseen.teacherFirstName} {unseen.teacherLastName} علق على تمرينك
+        </div>
+      );
+    });
+  };
+
+  const goToStudentProfile = async (unseen) => {
+    await axios
+      .patch(
+        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${unseen._id}`,
+        {
+          replySeen: true,
+        }
+      )
+      .then(history.push("/profile"));
+  };
+
   const drawPracticeNotifications = () => {
     return teacherPracticesUnReplied?.map((practice) => {
       return (
@@ -96,6 +148,7 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              cursor: "pointer",
             }}
             onClick={handleClickOnPractice}
           >
@@ -327,6 +380,7 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
   return (
     <div>
       <div className="NotificationPopUp">
+        {drawUnSeenReplies()}
         {drawPracticeNotifications()}
         {drawComment()}
         {drawReplies()}

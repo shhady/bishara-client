@@ -17,6 +17,8 @@ export default function Notifications() {
   const [teacherPracticesUnReplied, setTeacherPracticesUnreplied] = useState(
     []
   );
+  const [userPractices, setUserPractices] = useState([]);
+  const [userPracticesNotSeen, setUserPracticesNotSeen] = useState([]);
   const history = useHistory();
   useEffect(() => {
     user.user
@@ -171,6 +173,55 @@ export default function Notifications() {
     // setCourseIdNew(notification.courseid);
     // setOpenNotifications(!openNotifications);
   };
+  useEffect(() => {
+    if (user.teacher) return;
+    const fetch = async () => {
+      const res = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user.user._id}`
+      );
+      setUserPractices(res.data);
+      console.log(res.data);
+    };
+    fetch();
+  }, [userId]);
+
+  useEffect(() => {
+    const filteredSeen = userPractices.filter((practiceSeen) => {
+      return practiceSeen.replySeen === "false";
+    });
+    setUserPracticesNotSeen(filteredSeen);
+  }, [userPractices]);
+
+  const drawUnSeenReplies = () => {
+    return userPracticesNotSeen.map((unseen) => {
+      return (
+        <div
+          style={{
+            padding: "15px",
+            backgroundColor: "#e7f3ff",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer",
+          }}
+          onClick={() => goToStudentProfile(unseen)}
+        >
+          {unseen.teacherFirstName} {unseen.teacherLastName} علق على تمرينك
+        </div>
+      );
+    });
+  };
+
+  const goToStudentProfile = async (unseen) => {
+    await axios
+      .patch(
+        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${unseen._id}`,
+        {
+          replySeen: true,
+        }
+      )
+      .then(history.push("/profile"));
+  };
 
   const handleClickOnNotification = (comment) => {
     const setAsRead = async () => {
@@ -293,6 +344,7 @@ export default function Notifications() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              cursor: "pointer",
             }}
             onClick={handleClickOnPractice}
           >
@@ -324,9 +376,9 @@ export default function Notifications() {
             "rgb(0 0 0 / 6%) 0px 1px 2px, rgb(35 41 54 / 14%) 0px 3px 8px",
         }}
       >
+        {drawUnSeenReplies()}
         {drawPracticeNotifications()}
         {drawComment()}
-
         {drawReplies()}
       </div>
     </div>

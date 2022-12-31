@@ -96,7 +96,7 @@ button{
     flex-direction: column;
     justify-content:center;
     align-items:center;
-    border-bottom: 3px solid rgb(248, 245, 245);
+    border-bottom: 3px solid transparent;
 }
 .highlight{
     font-family: "Font Awesome 5 Pro";

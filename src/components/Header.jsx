@@ -43,6 +43,8 @@ export default function Header({
     useState(false);
   const [backNot, setBackNot] = useState([]);
   const [userId, setUserId] = useState(null);
+  const [userPractices, setUserPractices] = useState([]);
+  const [userPracticesNotSeen, setUserPracticesNotSeen] = useState([]);
   const [notificationNumber, setNotificationNumber] = useState([]);
   const [isHovering, setIsHovering] = useState(false);
   const [teachersHover, setTeachersHover] = useState(false);
@@ -79,6 +81,24 @@ export default function Header({
     };
     comments();
   }, [userId]);
+  useEffect(() => {
+    if (user.teacher) return;
+    const fetch = async () => {
+      const res = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user.user._id}`
+      );
+      setUserPractices(res.data);
+      console.log(res.data);
+    };
+    fetch();
+  }, [userId]);
+
+  useEffect(() => {
+    const filteredSeen = userPractices.filter((practiceSeen) => {
+      return practiceSeen.replySeen === "false";
+    });
+    setUserPracticesNotSeen(filteredSeen);
+  }, [userPractices]);
 
   const clickOnBill = () => {
     // setOpenNotifications(!openNotifications);
@@ -459,6 +479,7 @@ export default function Header({
                         setRedLightNotification(false);
                         setRedLightNotificationReply(false);
                         setTeacherPracticesUnreplied([]);
+                        setUserPracticesNotSeen([]);
                       }}
                     >
                       <img
@@ -469,7 +490,8 @@ export default function Header({
                       {/* <FontAwesomeIcon icon={faBell} /> */}
                       {redLightNotification ||
                       redLightNotificationReply ||
-                      teacherPracticesUnReplied.length !== 0 ? (
+                      teacherPracticesUnReplied.length !== 0 ||
+                      userPracticesNotSeen.length !== 0 ? (
                         <div
                           className="notificationNotification"
                           // style={{ position: "absolute" }}
@@ -604,6 +626,7 @@ export default function Header({
                         setRedLightNotificationReply(false);
                         setShowNotificationPopUp(!showNotificationPopUp);
                         setTeacherPracticesUnreplied([]);
+                        setUserPracticesNotSeen([]);
                       }}
                       onMouseOver={() => setIsHovering(false)}
                     >
@@ -615,7 +638,8 @@ export default function Header({
                       {/* <FontAwesomeIcon icon={faBell} /> */}
                       {redLightNotification ||
                       redLightNotificationReply ||
-                      teacherPracticesUnReplied.length !== 0 ? (
+                      teacherPracticesUnReplied.length !== 0 ||
+                      userPracticesNotSeen.length !== 0 ? (
                         <div
                           className="notificationNotification"
                           // style={{ position: "absolute" }}

@@ -149,6 +149,15 @@ export default function PracticeReplies({ user }) {
           // );
           setTeacherPractices(res.data);
           setMyReply("");
+        })
+        .then(async () => {
+          await axios.patch(
+            process.env.REACT_APP_BACKEND_URL +
+              `/studentpractices/${practice._id}`,
+            {
+              replySeen: false,
+            }
+          );
         });
     };
     addReply();
@@ -191,6 +200,15 @@ export default function PracticeReplies({ user }) {
           //   (practice) => practice.teacherId === userId
           // );
           setTeacherPractices(res.data);
+        })
+        .then(async () => {
+          await axios.patch(
+            process.env.REACT_APP_BACKEND_URL +
+              `/studentpractices/${practice._id}`,
+            {
+              replySeen: false,
+            }
+          );
         });
     };
     addTheVideo();
@@ -245,6 +263,15 @@ export default function PracticeReplies({ user }) {
           //   (practice) => practice.teacherId === userId
           // );
           setTeacherPractices(res.data);
+        })
+        .then(async () => {
+          await axios.patch(
+            process.env.REACT_APP_BACKEND_URL +
+              `/studentpractices/${practice._id}`,
+            {
+              replySeen: false,
+            }
+          );
         })
 
         .then(async () => {

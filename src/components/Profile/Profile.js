@@ -272,6 +272,14 @@ export default function Profile({ userProp }) {
     deleteThePractice();
   };
 
+  const markAsSeen = async (practice) => {
+    await axios.patch(
+      process.env.REACT_APP_BACKEND_URL + `/studentpractices/${practice._id}`,
+      {
+        replySeen: true,
+      }
+    );
+  };
   const showData = () => {
     return userPractices?.map((practice) => {
       return (
@@ -283,6 +291,7 @@ export default function Profile({ userProp }) {
             padding: "10px",
           }}
           key={practice._id}
+          onClick={() => markAsSeen(practice)}
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
