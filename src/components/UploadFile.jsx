@@ -99,6 +99,20 @@ export default function UploadFile({ courseInfo, lesson, id }) {
       console.error(error);
     }
   };
+
+  const deleteTheFile = (theFile) => {
+    console.log(theFile);
+    axios
+      .delete(process.env.REACT_APP_BACKEND_URL + `/files/${theFile._id}`)
+      .then(async () => {
+        const response = await axios.get(
+          process.env.REACT_APP_BACKEND_URL +
+            `/files/${lesson.snippet.resourceId.videoId}`
+        );
+        setTheFile(response.data[0]);
+        setFileUploaded(null);
+      });
+  };
   //   const downloadFile = async (url) => {
   //     try {
   //       // Append the fl_attachment flag to the URL
@@ -163,9 +177,12 @@ export default function UploadFile({ courseInfo, lesson, id }) {
         </a> */}
             {/* <button onClick={downloadFile}>Download</button> */}
             {theFile && (
-              <button onClick={() => downloadFile(`${theFile?.fileUrl}`)}>
-                Download File
-              </button>
+              <>
+                <button onClick={() => downloadFile(`${theFile?.fileUrl}`)}>
+                  Download File
+                </button>
+                <button onClick={() => deleteTheFile(theFile)}>delete</button>
+              </>
             )}
           </div>
         </>
