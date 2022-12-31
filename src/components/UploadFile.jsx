@@ -92,34 +92,32 @@ export default function UploadFile({ courseInfo, lesson, id }) {
     console.log(theFile?.fileUrl);
   }, [theFile, id]);
 
-  //   const downloadFile = async (url) => {
-  //     try {
-  //       const response = await fetch(url);
-  //       const blob = await response.blob();
-  //       saveAs(blob, `${theFile.fileUrl}`);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  const downloadFile = async (url) => {
+  const downloadFile = async () => {
     try {
-      // Append the fl_attachment flag to the URL
-      const downloadUrl = `${theFile?.fileUrl}?fl_attachment`;
-      const response = await fetch(downloadUrl);
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.style.display = "none";
-      a.href = url;
-      // Set the file name as the download attribute
-      a.download = `${theFile?.fileUrl}`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
+      saveAs(theFile?.fileUrl);
     } catch (error) {
       console.error(error);
     }
   };
+  //   const downloadFile = async (url) => {
+  //     try {
+  //       // Append the fl_attachment flag to the URL
+  //       const downloadUrl = `${theFile?.fileUrl}?fl_attachment`;
+  //       const response = await fetch(downloadUrl);
+  //       const blob = await response.blob();
+  //       const url = window.URL.createObjectURL(blob);
+  //       const a = document.createElement("a");
+  //       a.style.display = "none";
+  //       a.href = url;
+  //       // Set the file name as the download attribute
+  //       a.download = `${theFile?.fileUrl}`;
+  //       document.body.appendChild(a);
+  //       a.click();
+  //       window.URL.revokeObjectURL(url);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
   //   const downloadFile = async (url) => {
   //     try {
@@ -147,13 +145,18 @@ export default function UploadFile({ courseInfo, lesson, id }) {
               {fileUpload.percentComplete}%
             </div>
           ) : (
-            <input
-              type="file"
-              onChange={(e) => setFile(e.target.files[0])}
-              onClick={() => setUrl(null)}
-            />
+            <>
+              {!theFile && (
+                <input
+                  type="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  onClick={() => setUrl(null)}
+                />
+              )}
+            </>
           )}
-          <button onClick={postData}>add photo</button>
+          {!theFile && <button onClick={postData}>add photo</button>}
+
           <div style={{ cursor: "pointer" }}>
             {/* <a href={theFile[0]?.fileUrl} download>
           Download
@@ -169,9 +172,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
       ) : (
         <>
           {theFile && (
-            <button onClick={() => downloadFile(`${theFile?.fileUrl}`)}>
-              Download File
-            </button>
+            <button onClick={() => downloadFile()}>Download File</button>
           )}
         </>
       )}
