@@ -176,7 +176,29 @@ export default function UploadFile({ courseInfo, lesson, id }) {
             )}
           </>
           {/* )} */}
-          {!theFile && <button onClick={postData}>add photo</button>}
+          {!theFile && (
+            <div
+              style={{
+                textDecoration: "none",
+                color: "black",
+                width: "150px",
+                height: "20px",
+                backgroundColor: "white",
+                border: "2px solid black",
+                borderRadius: "5px",
+                textAlign: "center",
+                fontWeight: "bold",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+              onClick={postData}
+            >
+              ADD PDF LINK
+            </div>
+          )}
 
           <div style={{ cursor: "pointer" }}>
             {/* <a href={theFile[0]?.fileUrl} download>
@@ -195,24 +217,49 @@ export default function UploadFile({ courseInfo, lesson, id }) {
                 {/* <button onClick={() => downloadFile(`${theFile?.fileUrl}`)}>
                   Download File
                 </button> */}
-                <button
+                {/* <Link to={theFile?.fileUrl}> */}
+                {/* <button
+                    style={{
+                      width: "100px",
+                      backgroundColor: "white",
+                      border: "2px solid black",
+                      borderRadius: "5px",
+                    }}
+                  > */}
+                <a
+                  href={theFile?.fileUrl}
+                  target="_blank"
                   style={{
+                    textDecoration: "none",
+                    color: "black",
                     width: "100px",
                     backgroundColor: "white",
                     border: "2px solid black",
                     borderRadius: "5px",
+                    textAlign: "center",
+                    fontWeight: "bold",
                   }}
                 >
-                  <a
-                    href={theFile?.fileUrl}
-                    target="_blank"
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
-                    {" "}
-                    PDF{" "}
-                  </a>
-                </button>
-                <button onClick={() => deleteTheFile(theFile)}>delete</button>
+                  {" "}
+                  PDF{" "}
+                </a>
+                {/* </button> */}
+                {/* </Link> */}
+                <div
+                  onClick={() => deleteTheFile(theFile)}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    width: "100px",
+                    backgroundColor: "white",
+                    border: "2px solid black",
+                    borderRadius: "5px",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  delete
+                </div>
               </div>
             )}
           </div>
@@ -220,23 +267,27 @@ export default function UploadFile({ courseInfo, lesson, id }) {
       ) : (
         <>
           {theFile && (
-            <button
+            // <button
+
+            // >
+            <a
+              href={theFile?.fileUrl}
+              target="_blank"
               style={{
+                textDecoration: "none",
+                color: "black",
                 width: "100px",
                 backgroundColor: "white",
                 border: "2px solid black",
                 borderRadius: "5px",
+                textAlign: "center",
+                fontWeight: "bold",
               }}
             >
-              <a
-                href={theFile?.fileUrl}
-                target="_blank"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                {" "}
-                PDF{" "}
-              </a>
-            </button>
+              {" "}
+              PDF{" "}
+            </a>
+            // </button>
             // <button onClick={() => downloadFile()}>Download File</button>
           )}
         </>
