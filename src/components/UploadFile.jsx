@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
 import "./Lesson.css";
 export default function UploadFile({ courseInfo, lesson, id }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -66,7 +66,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
     setFileUploaded(false);
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/files", {
-        fileUrl: url,
+        fileUrl: file,
         videoId: lesson.snippet.resourceId.videoId,
         teacherId: courseInfo.owner,
         playListId: courseInfo.playlistId,
@@ -92,13 +92,13 @@ export default function UploadFile({ courseInfo, lesson, id }) {
     console.log(theFile?.fileUrl);
   }, [theFile, id]);
 
-  const downloadFile = async () => {
-    try {
-      saveAs(theFile?.fileUrl);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //   const downloadFile = async () => {
+  //     try {
+  //       saveAs(theFile?.fileUrl);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
   const deleteTheFile = (theFile) => {
     console.log(theFile);
@@ -153,22 +153,29 @@ export default function UploadFile({ courseInfo, lesson, id }) {
     <div className="uploadFile">
       {user?.teacher?._id === courseInfo.owner ? (
         <>
-          {fileUpload ? (
+          {/* {fileUpload ? (
             <div style={{ textAlign: "center" }}>
               {" "}
               {fileUpload.percentComplete}%
             </div>
-          ) : (
-            <>
-              {!theFile && (
+          ) : ( */}
+          <>
+            {/* {!theFile && (
                 <input
                   type="file"
                   onChange={(e) => setFile(e.target.files[0])}
                   onClick={() => setUrl(null)}
                 />
-              )}
-            </>
-          )}
+              )} */}
+            {!theFile && (
+              <input
+                type="text"
+                onChange={(e) => setFile(e.target.value)}
+                onClick={() => setUrl(null)}
+              />
+            )}
+          </>
+          {/* )} */}
           {!theFile && <button onClick={postData}>add photo</button>}
 
           <div style={{ cursor: "pointer" }}>
@@ -177,19 +184,60 @@ export default function UploadFile({ courseInfo, lesson, id }) {
         </a> */}
             {/* <button onClick={downloadFile}>Download</button> */}
             {theFile && (
-              <>
-                <button onClick={() => downloadFile(`${theFile?.fileUrl}`)}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  width: "50vw",
+                }}
+              >
+                {/* <button onClick={() => downloadFile(`${theFile?.fileUrl}`)}>
                   Download File
+                </button> */}
+                <button
+                  style={{
+                    width: "100px",
+                    backgroundColor: "white",
+                    border: "2px solid black",
+                    borderRadius: "5px",
+                  }}
+                >
+                  <a
+                    href={theFile?.fileUrl}
+                    target="_blank"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    {" "}
+                    PDF{" "}
+                  </a>
                 </button>
                 <button onClick={() => deleteTheFile(theFile)}>delete</button>
-              </>
+              </div>
             )}
           </div>
         </>
       ) : (
         <>
           {theFile && (
-            <button onClick={() => downloadFile()}>Download File</button>
+            <button
+              style={{
+                width: "100px",
+                backgroundColor: "white",
+                border: "2px solid black",
+                borderRadius: "5px",
+              }}
+            >
+              <a
+                href={theFile?.fileUrl}
+                target="_blank"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                {" "}
+                PDF{" "}
+              </a>
+            </button>
+            // <button onClick={() => downloadFile()}>Download File</button>
           )}
         </>
       )}
