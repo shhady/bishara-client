@@ -82,10 +82,11 @@ export default function Header({
     comments();
   }, [userId]);
   useEffect(() => {
-    if (user.teacher) return;
+    if (user?.teacher) return;
     const fetch = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user.user._id}`
+        process.env.REACT_APP_BACKEND_URL +
+          `/studentpractices/${user?.user._id}`
       );
       setUserPractices(res.data);
       console.log(res.data);

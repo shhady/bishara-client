@@ -56,4 +56,3 @@ export default function Conversation({ conversation, currentUser }) {
     </>
   );
 }
-
