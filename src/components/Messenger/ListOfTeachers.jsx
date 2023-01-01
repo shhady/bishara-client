@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./messenger.css";
-export default function ListOfTeachers({ currentId, setCurrentChat }) {
+export default function ListOfTeachers({
+  currentId,
+  setCurrentChat,
+  setTopPageLastName,
+  setTopPageName,
+  setTopPageImg,
+}) {
   const [teachers, setTeachers] = useState(null);
   const [conversations, setConversations] = useState([]);
   const [teacherId, setTeacherId] = useState(null);
@@ -29,6 +35,9 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
 
   const handleClick = async (teacher) => {
     setTeacherId(teacher._id);
+    setTopPageImg(teacher.avatar);
+    setTopPageName(teacher.firstName);
+    setTopPageLastName(teacher.lastName);
     let existingConversations = conversations;
     let newConversation = [currentId, teacher._id];
     existingConversations = JSON.stringify(existingConversations);
@@ -114,7 +123,10 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
                   style={{ borderRadius: "50%", marginLeft: "5px" }}
                 />
               </div>
-              <div style={{ cursor: "pointer" }}>
+              <div
+                style={{ cursor: "pointer" }}
+                className="teacherImagesForMobile"
+              >
                 {teacher?.firstName}
                 {"  "}
                 {teacher?.lastName}
@@ -131,7 +143,10 @@ export default function ListOfTeachers({ currentId, setCurrentChat }) {
                   style={{ borderRadius: "50%", marginLeft: "5px" }}
                 />
               </div>
-              <div style={{ cursor: "pointer" }}>
+              <div
+                style={{ cursor: "pointer" }}
+                className="teacherImagesForMobile"
+              >
                 {teacher?.firstName}
                 {"  "}
                 {teacher?.lastName}

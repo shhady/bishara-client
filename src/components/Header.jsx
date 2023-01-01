@@ -82,6 +82,7 @@ export default function Header({
     comments();
   }, [userId]);
   useEffect(() => {
+    if (!user) return;
     if (user?.teacher) return;
     const fetch = async () => {
       const res = await axios.get(

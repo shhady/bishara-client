@@ -4,6 +4,10 @@ import Conversation from "../Conversations/Conversation";
 import Message from "../Message/Message";
 import axios from "axios";
 // import { io } from "socket.io-client";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import ListOfTeachers from "./ListOfTeachers";
 export default function Messenger({ user, setUser, socket }) {
   const [conversations, setConversations] = useState([]);
@@ -12,6 +16,9 @@ export default function Messenger({ user, setUser, socket }) {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [userAvatar, setUserAvatar] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [topPageImg, setTopPageImg] = useState(null);
+  const [topPageName, setTopPageName] = useState(null);
+  const [topPageLastName, setTopPageLastName] = useState(null);
   //   const [teachersList, setTeachersList] = useState([]);
   const scrollRef = useRef();
   // const socket = useRef();
@@ -38,7 +45,11 @@ export default function Messenger({ user, setUser, socket }) {
       currentChat?.members.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage, currentChat, userId]);
-
+  useEffect(() => {
+    user.teacher
+      ? setUserName(`${user.teacher.firstName} ${user.teacher.lastName}`)
+      : setUserName(`${user.user.firstName} ${user.user.lastName}`);
+  }, [user.teacher, user.user]);
   useEffect(() => {
     user.teacher ? setUserAvatar(user.teacher.avatar) : setUserAvatar("");
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
@@ -68,7 +79,7 @@ export default function Messenger({ user, setUser, socket }) {
     const getMessages = async () => {
       try {
         const res = await axios.get(
-          process.env.REACT_APP_BACKEND_URL + "/messages/" + currentChat?._id
+          process.env.REACT_APP_BACKEND_URL + "/message/" + currentChat?._id
         );
         setMessages(res.data);
       } catch (error) {
@@ -98,7 +109,7 @@ export default function Messenger({ user, setUser, socket }) {
     try {
       if (!newMessage) return;
       const res = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + "/messages/",
+        process.env.REACT_APP_BACKEND_URL + "/message/",
         message
       );
       setMessages([...messages, res.data]);
@@ -112,93 +123,125 @@ export default function Messenger({ user, setUser, socket }) {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
   return (
-    <div className="messenger">
-      <div className="chatMenu">
-        <div className="chatMenuWrapper">
-          {/* <input className="chatMenuInput" placeholder="ابحث عن معلمين" /> */}
-          {user.teacher ? (
-            <>
-              {conversations.map((c, i) => (
-                <div onClick={() => setCurrentChat(c)} key={i}>
-                  <Conversation conversation={c} currentUser={userId} />
-                </div>
-              ))}
-            </>
-          ) : (
-            <>
-              <ListOfTeachers
-                conversation={conversations}
-                //   teachersList={teachersList}
-                currentId={userId}
-                setCurrentChat={setCurrentChat}
-              />
-            </>
-          )}
-        </div>
-      </div>
-      <div className="chatBox">
-        <div className="chatBoxWrapper">
-          {currentChat ? (
-            <>
-              <div className="chatBoxTop">
-                {messages.map((m) => (
-                  <div ref={scrollRef} key={m.id}>
-                    <Message
-                      message={m}
-                      own={m.sender === userId}
-                      userAvatar={userAvatar}
-                    />
+    <div className="overMessenger">
+      <div className="messenger">
+        <div className="chatMenu">
+          <div className="chatMenuWrapper">
+            {/* <input className="chatMenuInput" placeholder="ابحث عن معلمين" /> */}
+            {user.teacher ? (
+              <>
+                {conversations.map((c, i) => (
+                  <div onClick={() => setCurrentChat(c)} key={i}>
+                    <Conversation conversation={c} currentUser={userId} />
                   </div>
                 ))}
-              </div>
-              <div className="chatBoxBottom">
-                <textarea
-                  className="chatMessageInput"
-                  placeholder=""
-                  onChange={(e) => {
-                    setNewMessage(e.target.value);
-                  }}
-                  value={newMessage}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") handleSubmit();
-                  }}
-                ></textarea>
-                <button className="chatSubmitButton" onClick={handleSubmit}>
-                  ارسل
-                </button>
-              </div>
-            </>
-          ) : (
-            <div
-              style={{
-                textAlign: "center",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                margin: "auto",
-              }}
-            >
-              <span>
-                <h1 className="clickToOpenChat">
-                  اضغط على اسم المدرس لبدأ محادثة
-                </h1>
-              </span>
-            </div>
-          )}
+              </>
+            ) : (
+              <>
+                <ListOfTeachers
+                  conversation={conversations}
+                  //   teachersList={teachersList}
+                  currentId={userId}
+                  setCurrentChat={setCurrentChat}
+                  setTopPageLastName={setTopPageLastName}
+                  setTopPageName={setTopPageName}
+                  setTopPageImg={setTopPageImg}
+                />
+              </>
+            )}
+          </div>
         </div>
-      </div>
-      {/* <div className="chatOnline"> */}
-      {/* <div className="chatOnlineWrapper"> */}
-      {/* <ListOfTeachers
+        <div className="chatBox">
+          <div className="chatBoxWrapper">
+            {currentChat ? (
+              <>
+                <div
+                  style={{
+                    borderBottom: "1px solid grey",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    marginRight: "5px",
+                    backgroundColor: "#f0f2f5",
+                  }}
+                >
+                  <img
+                    src={topPageImg}
+                    alt=""
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      marginLeft: "7px",
+                    }}
+                  />
+                  <div>
+                    <span style={{ color: "black" }}>{topPageName} </span>
+                    <span style={{ color: "black" }}>{topPageLastName}</span>
+                  </div>
+                </div>
+                <div className="chatBoxTop">
+                  {messages.map((m) => (
+                    <div ref={scrollRef} key={m.id}>
+                      <Message
+                        message={m}
+                        own={m.sender === userId}
+                        userAvatar={userAvatar}
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="chatBoxBottom">
+                  <input
+                    className="chatMessageInput"
+                    placeholder=""
+                    onChange={(e) => {
+                      setNewMessage(e.target.value);
+                    }}
+                    value={newMessage}
+                    // onKeyDown={(e) => {
+                    //   if (e.key === "Enter") handleSubmit();
+                    // }}
+                  ></input>
+                  <button className="chatSubmitButton" onClick={handleSubmit}>
+                    <FontAwesomeIcon icon={faPaperPlane} />
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div
+                style={{
+                  textAlign: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  margin: "auto",
+                }}
+              >
+                <span>
+                  <h1 className="clickToOpenChat">
+                    اضغط على اسم المدرس لبدأ محادثة
+                  </h1>
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+        {/* <div className="chatOnline"> */}
+        {/* <div className="chatOnlineWrapper"> */}
+        {/* <ListOfTeachers
             //   teachersList={teachersList}
             currentId={userId}
             setCurrentChat={setCurrentChat}
           /> */}
-      {/* </div> */}
-      {/* </div> */}
+        {/* </div> */}
+        {/* </div> */}
+      </div>
     </div>
   );
 }
+
+//-------------------------------------------------------------------
 
 // import React, { useState, useEffect, useRef } from "react";
 // import "./messenger.css";
@@ -217,7 +260,6 @@ export default function Messenger({ user, setUser, socket }) {
 //   const scrollRef = useRef();
 //   const [userId, setUserId] = useState("");
 //   const [userName, setUserName] = useState("");
-
 //   useEffect(() => {
 //     user.teacher
 //       ? setUserName(`${user.teacher.firstName} ${user.teacher.lastName}`)
@@ -372,3 +414,155 @@ export default function Messenger({ user, setUser, socket }) {
 //     </div>
 //   );
 // }
+
+//----------------------------------------------------------------------
+
+// import React, { useRef, useState } from "react";
+// // import ChatBox from "../../components/ChatBox/ChatBox";
+// import Conversation from "../Conversations/Conversation";
+// import ConversationTeacher from "../Conversations/ConversationTeacher";
+// // import LogoSearch from "../../components/LogoSearch/LogoSearch";
+// // import NavIcons from "../../components/NavIcons/NavIcons";
+// import "./messenger.css";
+// import { useEffect } from "react";
+// // import { userChats } from "../../api/ChatRequests";
+// import { useDispatch, useSelector } from "react-redux";
+// import { io } from "socket.io-client";
+// import axios from "axios";
+
+// const Messenger = ({ user, setUser }) => {
+//   const dispatch = useDispatch();
+//   const socket = useRef();
+//   // const { user } = useSelector((state) => state.authReducer.authData);
+//   const [userId, setUserId] = useState("");
+//   const [chats, setChats] = useState([]);
+//   const [onlineUsers, setOnlineUsers] = useState([]);
+//   const [currentChat, setCurrentChat] = useState(null);
+//   const [sendMessage, setSendMessage] = useState(null);
+//   const [receivedMessage, setReceivedMessage] = useState(null);
+//   // Get the chat in chat section
+
+//   useEffect(() => {
+//     if (!user) return;
+//     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
+//   }, [user]);
+//   //   useEffect(() => {
+//   //     user.teacher
+//   //       ? setUserName(`${user.teacher.firstName} ${user.teacher.lastName}`)
+//   //       : setUserName(`${user.user.firstName} ${user.user.lastName}`);
+//   //   }, [user.teacher, user.user]);
+//   useEffect(() => {
+//     const getChats = async () => {
+//       try {
+//         const res = await axios.get(
+//           process.env.REACT_APP_BACKEND_URL + `/conversations/${userId}`
+//         );
+//         if (!res) return null;
+//         setChats(res.data);
+//         console.log(res.data);
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     };
+//     getChats();
+//   }, [userId]);
+
+//   // Connect to Socket.io
+//   useEffect(() => {
+//     socket.current = io("ws://localhost:8800");
+//     socket.current.emit("new-user-add", user._id);
+//     socket.current.on("get-users", (users) => {
+//       setOnlineUsers(users);
+//     });
+//   }, [user]);
+
+//   // Send Message to socket server
+//   useEffect(() => {
+//     if (sendMessage !== null) {
+//       socket.current.emit("send-message", sendMessage);
+//     }
+//   }, [sendMessage]);
+
+//   // Get the message from socket server
+//   useEffect(() => {
+//     socket.current.on("recieve-message", (data) => {
+//       console.log(data);
+//       setReceivedMessage(data);
+//     });
+//   }, []);
+
+//   // const checkOnlineStatus = (chat) => {
+//   //   const chatMember = chat.members.find((member) => member !== user._id);
+//   //   const online = onlineUsers.find((user) => user.userId === chatMember);
+//   //   return online ? true : false;
+//   // };
+
+//   return (
+//     <div className="Chat">
+//       {/* Left Side */}
+//       <div className="Left-side-chat">
+//         {/* <LogoSearch /> */}
+//         <div className="Chat-container">
+//           <h2>Chats</h2>
+//           <div className="Chat-list">
+//             {chats.map((chat) => (
+//               <>
+//                 {user?.user ? (
+//                   <div
+//                     onClick={() => {
+//                       setCurrentChat(chat);
+//                     }}
+//                   >
+//                     <Conversation
+//                       data={chat}
+//                       currentUser={userId}
+//                       // online={checkOnlineStatus(chat)}
+//                     />
+//                   </div>
+//                 ) : // <div
+//                 //   onClick={() => {
+//                 //     setCurrentChat(chat);
+//                 //   }}
+//                 // >
+//                 //   <ConversationTeacher
+//                 //     data={chat}
+//                 //     currentUser={userId}
+//                 //     online={checkOnlineStatus(chat)}
+//                 //   />
+//                 // </div>
+//                 null}
+//               </>
+//             ))}
+//             <div
+//               onClick={() => {
+//                 setCurrentChat(chats);
+//               }}
+//             >
+//               <ConversationTeacher
+//                 data={chats}
+//                 currentUser={userId}
+//                 // online={checkOnlineStatus(chats)}
+//               />
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Right Side */}
+
+//       <div className="Right-side-chat">
+//         <div style={{ width: "20rem", alignSelf: "flex-end" }}>
+//           {/* <NavIcons /> */}
+//         </div>
+//         {/* <ChatBox
+//           chat={currentChat}
+//           currentUser={user._id}
+//           setSendMessage={setSendMessage}
+//           receivedMessage={receivedMessage}
+//         /> */}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Messenger;

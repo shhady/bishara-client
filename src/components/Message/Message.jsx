@@ -2,11 +2,11 @@ import React from "react";
 import "./message.css";
 // import { format } from "timeago.js";
 
-export default function message({ message, own, userAvatar }) {
+export default function Message({ message, own, userAvatar }) {
   return (
     <div className={own ? "message own" : "message"}>
       <div className="MessageTop">
-        <img
+        {/* <img
           className="messageImg"
           src={
             userAvatar
@@ -15,7 +15,7 @@ export default function message({ message, own, userAvatar }) {
           }
           alt="img"
           style={{ borderRadius: "50%", backgroundColor: "#e1e1e1" }}
-        />
+        /> */}
         <p className="messageText">{message.text}</p>
       </div>
       {/* <div className="MessageBottom">{message.createdAt}</div> */}

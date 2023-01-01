@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 7px;
+    align-items: flex-end;
 }
 .MessageTop{
     display: flex;
@@ -18,15 +19,17 @@
 .messageText{
     padding: 6px;
     border-radius: 20px;
-    background: #1877f2;
-    color: white;
+    background:#ffffff;
+    color: black;
     max-width: 300px;
+    
 }
 .message.own{
-    align-items: flex-end;
+    align-items: flex-start;
+    margin-right: 5px;
 }
 .message.own .messageText{
-    background: rgb(221, 220, 220);
+    background: #d9fdd3;
     color:black;
     max-width: 300px;
 }
