@@ -159,7 +159,7 @@ export default function Messenger({ user, setUser, socket }) {
                   style={{
                     borderBottom: "1px solid grey",
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "flex-start",
                     alignItems: "center",
                     marginRight: "5px",
                     backgroundColor: "#f0f2f5",
