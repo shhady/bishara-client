@@ -100,6 +100,7 @@ export default function ListOfTeachers({
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
+            marginRight: "10px",
           }}
           onClick={() => handleClick(teacher)}
         >
