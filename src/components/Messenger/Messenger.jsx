@@ -161,7 +161,6 @@ export default function Messenger({ user, setUser, socket }) {
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    marginRight: "5px",
                     backgroundColor: "#f0f2f5",
                   }}
                 >
@@ -173,6 +172,7 @@ export default function Messenger({ user, setUser, socket }) {
                       height: "40px",
                       borderRadius: "50%",
                       marginLeft: "7px",
+                      marginRight: "5px",
                     }}
                   />
                   <div>
