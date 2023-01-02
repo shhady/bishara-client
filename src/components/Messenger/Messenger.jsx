@@ -19,10 +19,31 @@ export default function Messenger({ user, setUser, socket }) {
   const [topPageImg, setTopPageImg] = useState(null);
   const [topPageName, setTopPageName] = useState(null);
   const [topPageLastName, setTopPageLastName] = useState(null);
+  const [teacherId, setTeacherId] = useState(null);
+  const [newConversation, setNewConversation] = useState(null);
+  const [existingConversations, setExistingConversations] = useState([]);
+  const [existingConversation, setExistingConversation] = useState(null);
   //   const [teachersList, setTeachersList] = useState([]);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    if (!user) return;
+    user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
+  }, [user]);
+  useEffect(() => {
+    const conversations = async () => {
+      const result = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/conversations/${userId}`
+      );
+      setExistingConversations(result.data);
+    };
+    conversations();
+  }, [userId]);
+  console.log(existingConversations);
+
   const scrollRef = useRef();
   // const socket = useRef();
-  const [userId, setUserId] = useState("");
+  // const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   useEffect(() => {
     user.teacher
@@ -91,34 +112,99 @@ export default function Messenger({ user, setUser, socket }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!newMessage) return;
-    const message = {
-      sender: userId,
-      text: newMessage,
-      conversationId: currentChat._id,
+    const checkConversations = () => {
+      const foundConv = existingConversations?.find((conversation) => {
+        return conversation.senderReceiver === `${userId}${teacherId}`;
+      });
+      setExistingConversation(foundConv);
+      // setCurrentChat(foundConv);
+      console.log("okkkkkkk");
     };
-
-    const receiverId = currentChat.members.find((m) => m !== userId);
-    socket?.emit("sendMessage", {
-      senderId: userId,
-      userName: userName,
-      receiverId,
-      text: newMessage,
-    });
-
-    try {
-      if (!newMessage) return;
-      const res = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + "/message/",
-        message
-      );
-      setMessages([...messages, res.data]);
-      setNewMessage("");
-    } catch (err) {
-      console.log(err);
+    checkConversations();
+    console.log(existingConversation);
+    if (existingConversation) {
+      setNewConversation(null);
+      console.log("there is a conversation");
+    } else {
+      setNewConversation(true);
+      console.log("there is no Conv");
+      const addConv = async () => {
+        await axios
+          .post(process.env.REACT_APP_BACKEND_URL + `/conversations/`, {
+            senderId: userId,
+            receiverId: teacherId,
+            senderReceiver: `${userId}${teacherId}`,
+            receiverSender: `${teacherId}${userId}`,
+            lastUpdated: new Date(),
+            seen: "false",
+          })
+          .then(async () => {
+            const result = await axios.get(
+              process.env.REACT_APP_BACKEND_URL + `/conversations/${userId}`
+            );
+            setExistingConversations(result.data);
+          });
+      };
+      addConv();
     }
   };
 
+  useEffect(() => {
+    console.log(existingConversation);
+    if (!existingConversation) return;
+    const sendMessage = async () => {
+      if (!newMessage) return;
+      const message = {
+        sender: userId,
+        text: newMessage,
+        conversationId: currentChat._id,
+      };
+
+      const receiverId = currentChat.members.find((m) => m !== userId);
+      socket?.emit("sendMessage", {
+        senderId: userId,
+        userName: userName,
+        receiverId,
+        text: newMessage,
+      });
+
+      try {
+        if (!newMessage) return;
+        const res = await axios.post(
+          process.env.REACT_APP_BACKEND_URL + "/message/",
+          message
+        );
+        setMessages([...messages, res.data]);
+        setNewMessage("");
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    sendMessage();
+  }, [existingConversation]);
+  // useEffect(() => {
+  //   if (!newConversation) return;
+  //   const addConv = async () => {
+  //     await axios
+  //       .post(process.env.REACT_APP_BACKEND_URL + `/conversations/`, {
+  //         senderId: userId,
+  //         receiverId: teacherId,
+  //         senderReceiver: `${userId}${teacherId}`,
+  //         receiverSender: `${teacherId}${userId}`,
+  //         lastUpdated: new Date(),
+  //         seen: "false",
+  //       })
+  //       .then(async () => {
+  //         const result = await axios.get(
+  //           process.env.REACT_APP_BACKEND_URL + `/conversations/${userId}`
+  //         );
+  //         setExistingConversations(result.data);
+  //       });
+  //   };
+  //   addConv();
+  // }, [newConversation]);
+  console.log(newConversation);
+  console.log(existingConversations);
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -142,6 +228,8 @@ export default function Messenger({ user, setUser, socket }) {
                   conversation={conversations}
                   //   teachersList={teachersList}
                   currentId={userId}
+                  teacherId={teacherId}
+                  setTeacherId={setTeacherId}
                   setCurrentChat={setCurrentChat}
                   setTopPageLastName={setTopPageLastName}
                   setTopPageName={setTopPageName}
