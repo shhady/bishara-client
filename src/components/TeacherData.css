@@ -52,6 +52,12 @@
             position: absolute;
               top: 80vh;
 }
+.buttonProfile{
+    z-index:8;
+            /* margin-top: -50px; */
+            position: absolute;
+              top: 125vh;
+}
 .imageProfilediv{
     min-width: 221px;
 }
@@ -101,6 +107,9 @@
     margin: -0px;
 
 } */
+.buttonMobile{
+    display:none;
+}
 .teacherDetailsAtData{
     display:flex;
     flex-direction:column;
@@ -161,6 +170,12 @@
         display: grid;
         grid-template-columns:repeat(1,1fr);
         gap: 1rem;
+    }
+    .buttonProfile{
+        display:none;
+    }
+    .buttonMobile{
+        display: block;
     }
     .coursesDrawCss1{
        

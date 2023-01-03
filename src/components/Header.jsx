@@ -130,6 +130,7 @@ export default function Header({
 
   useEffect(() => {
     socket?.on("getMessage", (data) => {
+      console.log(data);
       notificationMessage.includes(data.senderId);
       setNotificationMessage((prev) => [...prev, data]);
     });

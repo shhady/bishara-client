@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeacherData.css";
 import { Link, useHistory } from "react-router-dom";
+import StartChat from "./Messenger/StartChat";
 export default function TeacherData({
   listId,
   teacher,
@@ -215,7 +216,11 @@ export default function TeacherData({
               border: "8px solid white",
             }}
           />
+          <div className="buttonProfile">
+            <StartChat teacherId={teacherId} userId={userId} />
+          </div>
         </div>
+
         <div
           className="teacherDetailsAtData"
           // style={{
@@ -243,7 +248,9 @@ export default function TeacherData({
               </button>
             </div>
           )}
-
+          <div className="buttonMobile">
+            <StartChat teacherId={teacherId} userId={userId} />
+          </div>
           <div>{teacherInfo.about}</div>
         </div>
       </div>

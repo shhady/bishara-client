@@ -1,13 +1,14 @@
 
 .conversation{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding: 10px;
     cursor: pointer;
     border-radius: 15px;
     width: 79%;
     margin-top: 10px;
+    border-bottom: 1px solid rgb(179, 178, 178);
 }
 .conversation:hover{
     background-color:  rgb(232, 228, 228)
@@ -20,6 +21,15 @@
     margin-left: 10px
 
 }
-.nameConversation{
+.nameLastName{
     font-weight: 500
+}
+
+@media (max-width:900px) {
+.lastNameChat{
+    display:none
+}
+.imageConversation{
+    display:none;
+}
 }

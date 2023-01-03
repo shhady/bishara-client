@@ -43,7 +43,7 @@
     height: 80%;
     color:black;
     background-image: url("https://images.unsplash.com/photo-1668761649428-855a024f1ec6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fG91ZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60");
-    background-position: bottom;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -73,7 +73,7 @@
     height: 80%;
     color:black;
     background-image: url("https://images.unsplash.com/photo-1524650359799-842906ca1c06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTF8fGd1aXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60");
-    background-position: bottom;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 
