@@ -127,7 +127,7 @@ export default function Header({
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
       setRedLightNotification([...notificationNotification, data]);
-      setRedLightNotificationReply(true);
+      // setRedLightNotificationReply(true);
     });
   }, [socket]);
 
