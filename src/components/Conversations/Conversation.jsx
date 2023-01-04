@@ -209,7 +209,8 @@ export default function Conversation({
           }
         }}
       >
-        {conversation.seen === "false" ? (
+        {conversation.seen === "false" &&
+        conversation.lastSender !== currentUser ? (
           <div
             style={{
               width: "10px",

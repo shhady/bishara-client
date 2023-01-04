@@ -2,11 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useEffect } from "react";
 import "./startchat.css";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 export default function StartChat({ teacherId, userId }) {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   console.log(currentChat);
+  const history = useHistory();
   //   useEffect(() => {
   //     const getConversations = async () => {
   //       try {
@@ -73,7 +75,9 @@ export default function StartChat({ teacherId, userId }) {
           setCurrentChat(res.data);
         });
     }
+    history.push("/messenger");
   };
+  useEffect(() => {});
   return (
     <div className="buttonStartChat">
       <div style={{ marginLeft: "10px" }}>

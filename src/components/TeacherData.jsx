@@ -216,9 +216,11 @@ export default function TeacherData({
               border: "8px solid white",
             }}
           />
-          <div className="buttonProfile">
-            <StartChat teacherId={teacherId} userId={userId} />
-          </div>
+          {user?.user ? (
+            <div className="buttonProfile">
+              <StartChat teacherId={teacherId} userId={userId} />
+            </div>
+          ) : null}
         </div>
 
         <div
@@ -248,9 +250,12 @@ export default function TeacherData({
               </button>
             </div>
           )}
-          <div className="buttonMobile">
-            <StartChat teacherId={teacherId} userId={userId} />
-          </div>
+          {user?.user ? (
+            <div className="buttonMobile">
+              <StartChat teacherId={teacherId} userId={userId} />
+            </div>
+          ) : null}
+
           <div>{teacherInfo.about}</div>
         </div>
       </div>

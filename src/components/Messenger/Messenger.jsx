@@ -801,6 +801,7 @@ export default function Messenger({ user, setUser, socket }) {
             showAtTeacher: "true",
             lastUdated: new Date(),
             seen: "false",
+            lastSender: userId,
           }
         );
       };
@@ -813,6 +814,7 @@ export default function Messenger({ user, setUser, socket }) {
 
       setMessages([...messages, res.data]);
       setNewMessage("");
+      socket?.emit("sendMessage", message);
     } catch (err) {
       console.log(err);
     }

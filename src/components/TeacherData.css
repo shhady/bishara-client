@@ -54,9 +54,8 @@
 }
 .buttonProfile{
     z-index:8;
-            /* margin-top: -50px; */
-            position: absolute;
-              top: 125vh;
+            margin-top: 100px;
+            
 }
 .imageProfilediv{
     min-width: 221px;
@@ -176,6 +175,7 @@
     }
     .buttonMobile{
         display: block;
+        margin-top: 15px;
     }
     .coursesDrawCss1{
        

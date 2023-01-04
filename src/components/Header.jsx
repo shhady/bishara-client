@@ -55,6 +55,8 @@ export default function Header({
   const [redLightNotification, setRedLightNotification] = useState(false);
   const [redLightNotificationReply, setRedLightNotificationReply] =
     useState(false);
+  const [allConversations, setAllConversations] = useState([]);
+  const [notifyMessage, setNotifyMessage] = useState(null);
   const [showNotificationPopUp, setShowNotificationPopUp] = useState(false);
   const [teacherPracticesNotifications, setTeacherPracticesNotifications] =
     useState([]);
@@ -135,6 +137,27 @@ export default function Header({
       setNotificationMessage((prev) => [...prev, data]);
     });
   }, [socket]);
+
+  useEffect(() => {
+    const unreadMessage = async () => {
+      const response = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + `/conversations/${userId}`
+      );
+      setAllConversations(response.data);
+      console.log(response.data);
+      console.log(userId);
+    };
+    unreadMessage();
+  }, [userId]);
+
+  useEffect(() => {
+    const conversationsToNotify = allConversations.find((conversation) => {
+      return (
+        conversation.seen === "false" && conversation.lastSender !== userId
+      );
+    });
+    setNotifyMessage(conversationsToNotify);
+  }, [allConversations]);
 
   const handleLogoutTeacher = async () => {
     const response = await axios.post(
@@ -516,11 +539,11 @@ export default function Header({
                   }}
                   onMouseOver={() => setIsHovering(false)}
                   onClick={() => {
-                    if (uniques.length === 0) {
-                      history.push("/messenger");
-                    } else {
-                      setOpenNotificationsMessage(!openNotificationsMessage);
-                    }
+                    // if (uniques.length === 0) {
+                    history.push("/messenger");
+                    // } else {
+                    //   setOpenNotificationsMessage(!openNotificationsMessage);
+                    // }
                   }}
                 >
                   {/* <FontAwesomeIcon icon={faMessage} /> */}
@@ -529,8 +552,8 @@ export default function Header({
                     alt="message"
                     width="20px"
                   />
-                  {uniques.length > 0 ? (
-                    <div className="notificationMessage">{uniques.length}</div>
+                  {notifyMessage ? (
+                    <div className="notificationMessage"></div>
                   ) : null}
                 </div>
               ) : null}
@@ -666,11 +689,10 @@ export default function Header({
                     }}
                     onMouseOver={() => setIsHovering(false)}
                     onClick={() => {
-                      if (uniques.length === 0) {
-                        history.push("/messenger");
-                      } else {
-                        setOpenNotificationsMessage(!openNotificationsMessage);
-                      }
+                      history.push("/messenger");
+                      // } else {
+                      //   setOpenNotificationsMessage(!openNotificationsMessage);
+                      // }
                     }}
                   >
                     {/* <FontAwesomeIcon icon={faMessage} /> */}
@@ -679,10 +701,8 @@ export default function Header({
                       alt="message"
                       width="20px"
                     />
-                    {uniques.length > 0 ? (
-                      <div className="notificationMessage">
-                        {uniques.length}
-                      </div>
+                    {notifyMessage ? (
+                      <div className="notificationMessage"></div>
                     ) : null}
                   </div>
                 ) : null}
