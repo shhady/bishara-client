@@ -130,7 +130,7 @@ export default function Header({
 
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
-      setRedLightNotification(true);
+      setRedLightNotification(data);
       // setRedLightNotificationReply(true);
     });
   }, [socket]);
@@ -526,6 +526,7 @@ export default function Header({
                       teacherPracticesUnReplied.length !== 0 ||
                       userPracticesNotSeen.length !== 0 ? (
                         <div
+                          onClick={setRedLightNotification(false)}
                           className="notificationNotification"
                           // style={{ position: "absolute" }}
                         ></div>
@@ -675,6 +676,7 @@ export default function Header({
                       teacherPracticesUnReplied.length !== 0 ||
                       userPracticesNotSeen.length !== 0 ? (
                         <div
+                          onClick={setRedLightNotification(false)}
                           className="notificationNotification"
                           // style={{ position: "absolute" }}
                         ></div>
