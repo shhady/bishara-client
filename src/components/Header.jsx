@@ -67,6 +67,10 @@ export default function Header({
     setNotificationNumber(backNot.filter((number) => number.read === false));
   }, [backNot]);
 
+  console.log(redLightNotification);
+  console.log(redLightNotificationReply);
+  console.log(teacherPracticesNotifications);
+  console.log(teacherPracticesUnReplied);
   useEffect(() => {
     if (!user) return;
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
@@ -126,7 +130,7 @@ export default function Header({
 
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
-      setRedLightNotification([...notificationNotification, data]);
+      setRedLightNotification(true);
       // setRedLightNotificationReply(true);
     });
   }, [socket]);
