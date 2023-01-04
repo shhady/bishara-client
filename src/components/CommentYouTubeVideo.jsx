@@ -74,6 +74,9 @@ export default function CommentYouTubeVideo({ lesson, id, courseInfo }) {
 
   console.log(myReply);
   const handleSubmitReply = async (comment) => {
+    socket.emit("sendNotificationComment", {
+      comment,
+    });
     if (!myReply) return;
 
     await axios
@@ -124,6 +127,9 @@ export default function CommentYouTubeVideo({ lesson, id, courseInfo }) {
   };
   console.log(courseInfo);
   const handleSubmitComment = async () => {
+    socket.emit("sendNotificationComment", {
+      comment,
+    });
     console.log(comment);
     if (!myComment) return;
     setMyComment("");
