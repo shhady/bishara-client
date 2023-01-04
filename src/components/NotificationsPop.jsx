@@ -243,13 +243,13 @@ export default function NotificationsPop({
   console.log(repliesShow);
 
   const handleClickOnReply = (replies) => {
-    setRedLightNotification(false);
     console.log(replies.playlistId);
     const setAsRead = async () => {
       await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/comments/${replies._id}`, {
           replyRead: true,
         })
+        .then(setRedLightNotification(false))
         .then(
           window.localStorage.setItem(
             "courseDetails",
@@ -277,7 +277,6 @@ export default function NotificationsPop({
   };
 
   const handleClickOnNotification = (comment) => {
-    setRedLightNotification(false);
     console.log({ comment: comment });
     const setAsRead = async () => {
       await axios
@@ -313,6 +312,7 @@ export default function NotificationsPop({
           );
           setComments(res.data);
           console.log(res.data);
+          setRedLightNotification(false);
         })
         .then(
           history.push({
