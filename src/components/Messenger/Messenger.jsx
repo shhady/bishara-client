@@ -846,26 +846,25 @@ export default function Messenger({ user, setUser, socket }) {
     // updateConversation();
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
-  const makeItSeen = async (m) => {
-    console.log(m);
-    try {
-      await axios
-        .patch(
-          process.env.REACT_APP_BACKEND_URL +
-            `/conversations/${m?.conversationId}`,
-          { seen: "true" }
-        )
-        .then(async () => {
-          const res = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/conversations/${userId}`
-          );
-          setConversations(res.data);
-        });
-    } catch (error) {
-      console.log("something went wrong", error);
-    }
-  };
+  // const makeItSeen = async (conversation) => {
+  //   console.log(conversation);
+  //   try {
+  //     await axios
+  //       .patch(
+  //         process.env.REACT_APP_BACKEND_URL +
+  //           `/conversations/${conversation?._id}`,
+  //         { seen: "true" }
+  //       )
+  //       .then(async () => {
+  //         const res = await axios.get(
+  //           process.env.REACT_APP_BACKEND_URL + `/conversations/${currentUser}`
+  //         );
+  //         setConversations(res.data);
+  //       });
+  //   } catch (error) {
+  //     console.log("something went wrong", error);
+  //   }
+  // };
 
   return (
     <div className="overMessenger">
@@ -956,7 +955,7 @@ export default function Messenger({ user, setUser, socket }) {
                     <div
                       ref={scrollRef}
                       key={m.id}
-                      onMouseOver={() => makeItSeen(m)}
+                      //  onMouseOver={makeItSeen}
                     >
                       <Message
                         message={m}
