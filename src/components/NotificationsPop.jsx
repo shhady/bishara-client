@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-export default function NotificationsPop({ setShowNotificationPopUp }) {
+export default function NotificationsPop({
+  setShowNotificationPopUp,
+  setRedLightNotification,
+}) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState([]);
@@ -162,6 +165,7 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
   };
 
   const handleClickOnPractice = () => {
+    setRedLightNotification(false);
     setShowNotificationPopUp(false);
     history.push("/PracticeReplies");
     // setTeacherPracticesNotifications(null);
@@ -239,6 +243,7 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
   console.log(repliesShow);
 
   const handleClickOnReply = (replies) => {
+    setRedLightNotification(false);
     console.log(replies.playlistId);
     const setAsRead = async () => {
       await axios
@@ -272,6 +277,7 @@ export default function NotificationsPop({ setShowNotificationPopUp }) {
   };
 
   const handleClickOnNotification = (comment) => {
+    setRedLightNotification(false);
     console.log({ comment: comment });
     const setAsRead = async () => {
       await axios

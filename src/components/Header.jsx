@@ -762,6 +762,7 @@ export default function Header({
                   setCourseDetails={setCourseDetails}
                   setLessonDetails={setLessonDetails}
                   setListId={setListId}
+                  setRedLightNotification={setRedLightNotification}
                 />
               </div>
             </div>
