@@ -11,7 +11,12 @@ import {
   faEllipsisVertical,
 } from "@fortawesome/free-solid-svg-icons";
 import UploadFile from "./UploadFile";
-export default function CommentYouTubeVideo({ lesson, id, courseInfo }) {
+export default function CommentYouTubeVideo({
+  lesson,
+  id,
+  courseInfo,
+  socket,
+}) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [courseDetails, setCourseDetails] = useState(
     JSON.parse(localStorage.getItem("courseDetails"))

@@ -141,6 +141,7 @@ export default function App() {
               setTeacher={setTeacher}
               teacher={teacher}
               listId={listId}
+              socket={socket}
             />
           </Route>
 

@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import CommentYouTubeVideo from "./CommentYouTubeVideo";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
-export default function Lesson() {
+export default function Lesson({ socket }) {
   const [lessons, setLessons] = useState([]);
   const [lesson, setLesson] = useState(
     JSON.parse(localStorage.getItem("lessonDetails"))
@@ -151,7 +151,12 @@ export default function Lesson() {
       </div>
       <div className="suggestions">{drawSuggestions()}</div>
       <div style={{ marginTop: "50px" }}>
-        <CommentYouTubeVideo lesson={lesson} id={id} courseInfo={courseInfo} />
+        <CommentYouTubeVideo
+          lesson={lesson}
+          id={id}
+          courseInfo={courseInfo}
+          socket={socket}
+        />
       </div>
     </div>
   );
