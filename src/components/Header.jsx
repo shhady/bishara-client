@@ -527,7 +527,7 @@ export default function Header({
                       teacherPracticesUnReplied.length !== 0 ||
                       userPracticesNotSeen.length !== 0 ? (
                         <div
-                          onClick={setRedLightNotification(false)}
+                          // onClick={setRedLightNotification(false)}
                           className="notificationNotification"
                           // style={{ position: "absolute" }}
                         ></div>
@@ -677,7 +677,7 @@ export default function Header({
                       teacherPracticesUnReplied.length !== 0 ||
                       userPracticesNotSeen.length !== 0 ? (
                         <div
-                          onClick={setRedLightNotification(false)}
+                          // onClick={setRedLightNotification(false)}
                           className="notificationNotification"
                           // style={{ position: "absolute" }}
                         ></div>
