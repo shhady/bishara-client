@@ -126,7 +126,7 @@ export default function Header({
 
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
-      setNotificationNotification([...notificationNotification, data]);
+      setRedLightNotification([...notificationNotification, data]);
     });
   }, [socket]);
 
@@ -134,7 +134,7 @@ export default function Header({
     socket?.on("getMessage", (data) => {
       console.log(data);
       notificationMessage.includes(data.senderId);
-      setNotificationMessage((prev) => [...prev, data]);
+      setNotifyMessage((prev) => [...prev, data]);
     });
   }, [socket]);
 

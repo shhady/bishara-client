@@ -740,7 +740,10 @@ export default function Messenger({ user, setUser, socket }) {
           process.env.REACT_APP_BACKEND_URL + `/conversations/` + userId
         );
         if (!res) return null;
-        setConversations(res.data);
+        const sortedConversations = res.data.sort((a, b) => {
+          return new Date(b.updatedAt) - new Date(a.updatedAt);
+        });
+        setConversations(sortedConversations);
       } catch (error) {
         console.log(error);
       }
@@ -818,6 +821,14 @@ export default function Messenger({ user, setUser, socket }) {
     } catch (err) {
       console.log(err);
     }
+    const res = await axios.get(
+      process.env.REACT_APP_BACKEND_URL + `/conversations/` + userId
+    );
+    if (!res) return null;
+    const sortedConversations = res.data.sort((a, b) => {
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
+    });
+    setConversations(sortedConversations);
   };
 
   useEffect(() => {
