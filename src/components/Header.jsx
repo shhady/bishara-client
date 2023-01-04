@@ -134,7 +134,8 @@ export default function Header({
     socket?.on("getMessage", (data) => {
       console.log(data);
       notificationMessage.includes(data.senderId);
-      setNotifyMessage((prev) => [...prev, data]);
+      // setNotifyMessage((prev) => [...prev, data]);
+      setNotifyMessage(true);
     });
   }, [socket]);
 
@@ -156,6 +157,7 @@ export default function Header({
         conversation.seen === "false" && conversation.lastSender !== userId
       );
     });
+    console.log(conversationsToNotify);
     setNotifyMessage(conversationsToNotify);
   }, [allConversations]);
 
