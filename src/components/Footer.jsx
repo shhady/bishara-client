@@ -20,9 +20,9 @@ export default function Footer() {
           marginTop: "30px",
         }}
       >
-        <div>FAQ</div>
-        <div>Contacts Us</div>
-        <div>Join us</div>
+        <div>أسئلة متكرره</div>
+        <div>تواصل معنا</div>
+        <div>انضم الينا</div>
       </div>
       <div style={{ textAlign: "center" }}>all rights reserved &copy;</div>
     </div>

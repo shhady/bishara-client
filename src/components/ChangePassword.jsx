@@ -4,6 +4,7 @@ import axios from "axios";
 export default function ChangePassword({ userId }) {
   const [newPassword, setNewPassword] = useState("");
   const [newConfirm, setNewConfirm] = useState("");
+  const [message, setMessage] = useState("");
   //   console.log(newPassword, newConfirm);
   const changePass = async () => {
     try {
@@ -14,7 +15,11 @@ export default function ChangePassword({ userId }) {
           confirmPassword: newConfirm,
         }
       );
+      setMessage("تم تغيير كلمة المرور بنجاح");
     } catch (err) {
+      setMessage(
+        "لم تتم عملية التغيير,,كلمة المرور يجب ان تتكون من 6 ارقام او احرف على الاقل, حاول مرة اخرى وتأكد من تطابق كلمة المرور وتأكيد كلمة المرور"
+      );
       console.log(err + "can't");
     }
   };
@@ -30,18 +35,25 @@ export default function ChangePassword({ userId }) {
         <input
           type="password"
           name="password"
-          onChange={(e) => setNewPassword(e.target.value)}
+          onChange={(e) => {
+            setNewPassword(e.target.value);
+            setMessage("");
+          }}
           className="changePass"
           placeholder="كلمة المرور الجديدة"
         />
         <input
           type="password"
           name="confirmPassword"
-          onChange={(e) => setNewConfirm(e.target.value)}
+          onChange={(e) => {
+            setNewConfirm(e.target.value);
+            setMessage("");
+          }}
           className="changePass"
-          placeholder="كلمة المرور الجديدة"
+          placeholder=" تأكيد كلمة المرور الجديدة"
         />
-        <button onClick={changePass}>change</button>
+        <button onClick={changePass}>تثبيت</button>
+        <span style={{ color: "red", marginRight: "10px" }}>{message}</span>
       </div>
     </div>
   );
