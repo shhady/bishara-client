@@ -5,7 +5,14 @@ import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
 
-export default function Comment({ userId, userF, userL, courseInfo, lesson }) {
+export default function Comment({
+  userId,
+  userF,
+  userL,
+  courseInfo,
+  lesson,
+  socket,
+}) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   // const [ownerId, setOwnerId] = useState(localStorage.getItem("ownerId"));
   // const [comments, setComments] = useState(null);
@@ -21,7 +28,7 @@ export default function Comment({ userId, userF, userL, courseInfo, lesson }) {
   // const [videoId, setVideoId] = useState(localStorage.getItem("videoId"));
   // const [videoName, setVideoName] = useState(localStorage.getItem("videoName"));
   // const [doneAddingComment, setDoneAddingComment] = useState(false);
-  const [socket, setSocket] = useState(null);
+  // const [socket, setSocket] = useState(null);
   const [url, setUrl] = useState(null);
   const [video, setVideo] = useState();
   const [fileUpload, setFileUpload] = useState(null);
@@ -95,18 +102,27 @@ export default function Comment({ userId, userF, userL, courseInfo, lesson }) {
       });
     };
     fetch();
+    socket.emit("sendNotificationComment", {
+      senderName: userF,
+      senderFamily: userL,
+      senderId: userId,
+      receiverId: courseInfo.owner,
+      videoName: lesson.snippet.title,
+      videoId: lesson.snippet.resourceId.videoId,
+      courseid: courseInfo._id,
+    });
   }, [url]);
 
   console.log(url);
   console.log(practiceInfo);
-  useEffect(() => {
-    setSocket(
-      io(
-        // "https://dawrafun1.herokuapp.com/" ||
-        "https://bisharaserver.herokuapp.com/"
-      )
-    );
-  }, []);
+  // useEffect(() => {
+  //   setSocket(
+  //     io(
+  //       // "https://dawrafun1.herokuapp.com/" ||
+  //       "https://bisharaserver.herokuapp.com/"
+  //     )
+  //   );
+  // }, []);
   // useEffect(() => {
   //   setCourseid(course._id);
   // }, [course]);

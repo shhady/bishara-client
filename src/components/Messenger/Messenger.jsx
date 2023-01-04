@@ -681,7 +681,7 @@ import "./messenger.css";
 import Conversation from "../Conversations/Conversation";
 import Message from "../Message/Message";
 import axios from "axios";
-// import { io } from "socket.io-client";
+import { io } from "socket.io-client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

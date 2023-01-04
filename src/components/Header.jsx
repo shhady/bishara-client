@@ -127,6 +127,7 @@ export default function Header({
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
       setRedLightNotification([...notificationNotification, data]);
+      setRedLightNotificationReply(true);
     });
   }, [socket]);
 
@@ -543,6 +544,7 @@ export default function Header({
                   onClick={() => {
                     // if (uniques.length === 0) {
                     history.push("/messenger");
+                    setNotifyMessage(null);
                     // } else {
                     //   setOpenNotificationsMessage(!openNotificationsMessage);
                     // }
@@ -692,6 +694,7 @@ export default function Header({
                     onMouseOver={() => setIsHovering(false)}
                     onClick={() => {
                       history.push("/messenger");
+                      setNotifyMessage(null);
                       // } else {
                       //   setOpenNotificationsMessage(!openNotificationsMessage);
                       // }

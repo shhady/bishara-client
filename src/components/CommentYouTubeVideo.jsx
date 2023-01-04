@@ -79,11 +79,16 @@ export default function CommentYouTubeVideo({
 
   console.log(myReply);
   const handleSubmitReply = async (comment) => {
-    socket.emit("sendNotificationComment", {
-      comment,
-    });
     if (!myReply) return;
-
+    socket.emit("sendNotificationComment", {
+      senderName: userF,
+      senderFamily: userL,
+      senderId: userId,
+      receiverId: courseInfo.owner,
+      videoName: lesson.snippet.title,
+      videoId: lesson.snippet.resourceId.videoId,
+      courseid: courseInfo._id,
+    });
     await axios
       .put(process.env.REACT_APP_BACKEND_URL + `/comments/${comment._id}`, {
         ...theReply,
@@ -132,11 +137,17 @@ export default function CommentYouTubeVideo({
   };
   console.log(courseInfo);
   const handleSubmitComment = async () => {
-    socket.emit("sendNotificationComment", {
-      comment,
-    });
     console.log(comment);
     if (!myComment) return;
+    socket.emit("sendNotificationComment", {
+      senderName: userF,
+      senderFamily: userL,
+      senderId: userId,
+      receiverId: courseInfo.owner,
+      videoName: lesson.snippet.title,
+      videoId: lesson.snippet.resourceId.videoId,
+      courseid: courseInfo._id,
+    });
     setMyComment("");
     await axios
       .post(process.env.REACT_APP_BACKEND_URL + `/comments`, comment)
@@ -499,6 +510,7 @@ export default function CommentYouTubeVideo({
           userL={userL}
           courseInfo={courseInfo}
           lesson={lesson}
+          socket={socket}
         />
         <div className="CommentInput">
           {userAvatar ? (
