@@ -69,8 +69,8 @@ export default function Header({
 
   console.log(redLightNotification);
   console.log(redLightNotificationReply);
-  console.log(teacherPracticesNotifications);
   console.log(teacherPracticesUnReplied);
+  console.log(userPracticesNotSeen);
   useEffect(() => {
     if (!user) return;
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
