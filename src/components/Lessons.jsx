@@ -25,12 +25,67 @@ export default function Lessons({ user, updateComponent }) {
   );
 
   const [listId, setListId] = useState("");
+  const [url, setUrl] = useState(null);
+  const [image, setImage] = useState();
+  const [fileUpload, setFileUpload] = useState(null);
+  const [inputTitle, setInputTitle] = useState(false);
+  const [inputDescription, setInputDescription] = useState(false);
+  const [newValue, setNewValue] = useState("");
+  const [newValueDes, setNewValueDes] = useState("");
+
   const [lessons, setLessons] = useState([]);
   const history = useHistory();
   window.onpopstate = () => {
     history.push("/TeacherData");
     setUpdated("");
   };
+
+  console.log(courseInfo);
+  useEffect(() => {
+    if (!image) return;
+    const postDetails = () => {
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", "bisharaHaroni");
+      // formData.append("cloud_name", "shhady");
+      axios
+        .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
+          onUploadProgress: (p) => {
+            const percentComplete = Math.round((p.loaded * 100) / p.total);
+            setFileUpload({ fileName: image.name, percentComplete });
+            console.log(`${percentComplete}% uploaded`);
+          },
+        })
+        .then((res) => setUrl(res.data.url))
+        // .then((data) => {
+        //   (data.url);
+        // })
+        // .then(console.log(profilePic))
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    postDetails();
+  }, [image]);
+
+  useEffect(() => {
+    if (!url) return;
+    const changePhoto = async () => {
+      await axios
+        .patch(
+          process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`,
+          {
+            coursePhoto: url,
+          }
+        )
+        .then(() => {
+          window.localStorage.setItem("courseCover", url);
+          setCourseCover(url);
+        });
+    };
+    changePhoto();
+    console.log(url);
+  }, [url]);
 
   useEffect(() => {
     setUpdated(updateComponent);
@@ -129,6 +184,63 @@ export default function Lessons({ user, updateComponent }) {
     });
   };
 
+  const openInputDescription = () => {
+    setInputDescription(true);
+  };
+  const openInputTitle = () => {
+    setInputTitle(true);
+  };
+
+  const changeTitle = () => {
+    if (!newValue) setInputTitle(false);
+
+    const changeTitle = async () => {
+      await axios
+        .patch(
+          process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`,
+          {
+            title: newValue,
+          }
+        )
+        .then(() => {
+          window.localStorage.setItem("courseTitle", newValue);
+          setCourseTitle(newValue);
+          setInputTitle(false);
+        })
+        .then(async () => {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`
+          );
+          console.log(res);
+        });
+    };
+    changeTitle();
+  };
+  const changeDescription = () => {
+    if (!newValueDes) setInputDescription(false);
+    const changeDes = async () => {
+      await axios
+        .patch(
+          process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`,
+          {
+            description: newValueDes,
+          }
+        )
+        .then(() => {
+          window.localStorage.setItem("coursedes", newValueDes);
+          setCourseDes(newValueDes);
+        })
+        .then(async () => {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`
+          );
+          console.log(res);
+        });
+    };
+    changeDes();
+    setInputDescription(false);
+  };
+
   return (
     <div className="courseDataAll">
       <div
@@ -179,16 +291,19 @@ export default function Lessons({ user, updateComponent }) {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                cursor: "pointer",
               }}
             >
               <label for="inputTag">
-                <FontAwesomeIcon icon={faCamera} />
+                <FontAwesomeIcon
+                  icon={faCamera}
+                  style={{ cursor: "pointer" }}
+                />
                 <input
                   type="file"
-                  // onChange={(e) => {
-                  // setImage(e.target.files[0]);
-
-                  // }}
+                  onChange={(e) => {
+                    setImage(e.target.files[0]);
+                  }}
                   id="inputTag"
                   style={{ display: "none" }}
                   // onClick={() => setUrl(null)}
@@ -232,20 +347,33 @@ export default function Lessons({ user, updateComponent }) {
                   alignItems: "center",
                 }}
               >
-                <h1 style={{ fontSize: "38px" }}>
-                  {courseTitle ? courseTitle : courseInfo.title}
-                </h1>
-                {user?.teacher?._id === courseInfo.owner ? (
-                  <h3
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      marginRight: "15px",
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faPenToSquare} />
-                  </h3>
-                ) : null}
+                {inputTitle ? (
+                  <div style={{ marginTop: "40px" }}>
+                    <input onChange={(e) => setNewValue(e.target.value)} />
+                    <button onClick={changeTitle}>تثبيت</button>
+                  </div>
+                ) : (
+                  <>
+                    <h1 style={{ fontSize: "38px" }}>
+                      {courseTitle ? courseTitle : courseInfo.title}
+                    </h1>
+                    {user?.teacher?._id === courseInfo.owner ? (
+                      <h3
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          marginRight: "15px",
+                        }}
+                        onClick={openInputTitle}
+                      >
+                        <FontAwesomeIcon
+                          icon={faPenToSquare}
+                          style={{ cursor: "pointer" }}
+                        />
+                      </h3>
+                    ) : null}
+                  </>
+                )}
               </div>
               <h1 style={{ fontSize: "24px" }}>
                 {updated ? updated.firstName : courseInfo.firstName}
@@ -255,18 +383,35 @@ export default function Lessons({ user, updateComponent }) {
             </div>
           </div>
           <div className="part2Info">
-            {user?.teacher?._id === courseInfo.owner ? (
-              <h3
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginRight: "15px",
-                }}
-              >
-                <FontAwesomeIcon icon={faPenToSquare} />
-              </h3>
-            ) : null}
-            {courseDes ? courseDes : courseInfo.description}
+            {inputDescription ? (
+              <div style={{ marginTop: "20px" }}>
+                <textarea
+                  onChange={(e) => setNewValueDes(e.target.value)}
+                  style={{ width: "100%", height: "100%" }}
+                />
+                <button onClick={changeDescription}>تثبيت</button>
+              </div>
+            ) : (
+              <>
+                {user?.teacher?._id === courseInfo.owner ? (
+                  <h3
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginLeft: "25px",
+                    }}
+                    onClick={openInputDescription}
+                  >
+                    <FontAwesomeIcon
+                      icon={faPenToSquare}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </h3>
+                ) : null}
+
+                {courseDes ? courseDes : courseInfo.description}
+              </>
+            )}
           </div>
         </div>
       </div>
