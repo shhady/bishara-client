@@ -95,6 +95,10 @@ export default function TeacherData({
 
   const saveCourseLocal = async (course) => {
     window.localStorage.setItem("courseDetails", JSON.stringify(course));
+    window.localStorage.setItem("courseCover", course.coursePhoto);
+    window.localStorage.setItem("courseTitle", course.title);
+    window.localStorage.setItem("coursedes", course.description);
+
     setUpdateComponent(course);
   };
 

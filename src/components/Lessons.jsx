@@ -2,15 +2,28 @@ import React, { useState, useEffect } from "react";
 import "./Lessons.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCirclePlay,
+  faPenToSquare,
+  faCamera,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from "react-router-dom";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
-
 export default function Lessons({ user, updateComponent }) {
   const [courseInfo, setCourseInfo] = useState(
     JSON.parse(localStorage.getItem("courseDetails"))
   );
   const [updated, setUpdated] = useState(updateComponent);
+  const [courseCover, setCourseCover] = useState(
+    window.localStorage.getItem("courseCover")
+  );
+  const [courseTitle, setCourseTitle] = useState(
+    window.localStorage.getItem("courseTitle")
+  );
+  const [courseDes, setCourseDes] = useState(
+    window.localStorage.getItem("coursedes")
+  );
+
   const [listId, setListId] = useState("");
   const [lessons, setLessons] = useState([]);
   const history = useHistory();
@@ -122,7 +135,7 @@ export default function Lessons({ user, updateComponent }) {
         className="lessonCoverBig"
         style={{
           backgroundImage: `url(${
-            updated ? updated.coursePhoto : courseInfo.coursePhoto
+            courseCover ? courseCover : courseInfo.coursePhoto
           })`,
           // backgroundPosition: "center",
           // backgroundSize: "cover",
@@ -146,6 +159,44 @@ export default function Lessons({ user, updateComponent }) {
           height="100%"
           objectFit="fit"
         /> */}
+        <div
+          style={{
+            height: "100%",
+            width: "20px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            // alignItems: "flex-end",
+          }}
+        >
+          {user?.teacher?._id === courseInfo.owner ? (
+            <div
+              style={{
+                backgroundColor: "white",
+                borderRadius: "50%",
+                width: "40px",
+                height: "40px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <label for="inputTag">
+                <FontAwesomeIcon icon={faCamera} />
+                <input
+                  type="file"
+                  // onChange={(e) => {
+                  // setImage(e.target.files[0]);
+
+                  // }}
+                  id="inputTag"
+                  style={{ display: "none" }}
+                  // onClick={() => setUrl(null)}
+                />
+              </label>
+            </div>
+          ) : null}
+        </div>
       </div>
       <div className="profile1">
         {/* <div
@@ -175,9 +226,27 @@ export default function Lessons({ user, updateComponent }) {
               {"  "}
             </h1> */}
             <div>
-              <h1 style={{ fontSize: "38px" }}>
-                {updated ? updated.title : courseInfo.title}
-              </h1>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <h1 style={{ fontSize: "38px" }}>
+                  {courseTitle ? courseTitle : courseInfo.title}
+                </h1>
+                {user?.teacher?._id === courseInfo.owner ? (
+                  <h3
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginRight: "15px",
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  </h3>
+                ) : null}
+              </div>
               <h1 style={{ fontSize: "24px" }}>
                 {updated ? updated.firstName : courseInfo.firstName}
                 {"  "}
@@ -186,7 +255,18 @@ export default function Lessons({ user, updateComponent }) {
             </div>
           </div>
           <div className="part2Info">
-            {updated ? updated.description : courseInfo.description}
+            {user?.teacher?._id === courseInfo.owner ? (
+              <h3
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginRight: "15px",
+                }}
+              >
+                <FontAwesomeIcon icon={faPenToSquare} />
+              </h3>
+            ) : null}
+            {courseDes ? courseDes : courseInfo.description}
           </div>
         </div>
       </div>

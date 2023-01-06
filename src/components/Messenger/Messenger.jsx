@@ -698,6 +698,7 @@ export default function Messenger({ user, setUser, socket }) {
   const [topPageName, setTopPageName] = useState(null);
   const [topPageLastName, setTopPageLastName] = useState(null);
   const [conversationsToShow, setConversationsToShow] = useState([]);
+  const [conversationsForStudent, setConversationsForStudent] = useState([]);
   //   const [teachersList, setTeachersList] = useState([]);
   const scrollRef = useRef();
   // const socket = useRef();
@@ -742,6 +743,7 @@ export default function Messenger({ user, setUser, socket }) {
           process.env.REACT_APP_BACKEND_URL + `/conversations/` + userId
         );
         if (!res) return null;
+
         const sortedConversations = res.data.sort((a, b) => {
           return new Date(b.updatedAt) - new Date(a.updatedAt);
         });
@@ -757,7 +759,19 @@ export default function Messenger({ user, setUser, socket }) {
     const whatToShow = conversations.filter(
       (conversation) => conversation.showAtTeacher === "true"
     );
-    setConversationsToShow(whatToShow);
+    const filteredConversations = whatToShow.filter((myConversations) => {
+      return myConversations.receiver === userId;
+    });
+    console.log(filteredConversations);
+    setConversationsToShow(filteredConversations);
+  }, [conversations]);
+
+  useEffect(() => {
+    const whatToShowStudent = conversations.filter((myConversation) => {
+      return myConversation.senderId === userId;
+    });
+    console.log(whatToShowStudent);
+    setConversationsForStudent(whatToShowStudent);
   }, [conversations]);
   useEffect(() => {
     // socket?.emit("addUser", user.teacher ? user.teacher._id : user.user._id);
@@ -899,7 +913,7 @@ export default function Messenger({ user, setUser, socket }) {
               </>
             ) : (
               <>
-                {conversations?.map((specificConv, i) => (
+                {conversationsForStudent?.map((specificConv, i) => (
                   <div
                     onClick={() => {
                       setCurrentChat(specificConv);

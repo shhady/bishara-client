@@ -578,6 +578,7 @@ export default function Header({
                   alignItems: "center",
                   justifyContent: "center",
                 }}
+                onMouseOver={() => setTeachersHover(false)}
               >
                 {user ? (
                   <div style={{ paddingRight: "20px" }}>

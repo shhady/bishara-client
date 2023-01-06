@@ -59,7 +59,7 @@ export default function StartChat({ teacherId, userId }) {
           receiverId: teacherId,
           senderId: userId,
           senderReceiver: `${userId}${teacherId}`,
-          receiverSender: `${teacherId}${userId}`,
+          receiver: `${teacherId}`,
           lastUpdated: new Date(),
           seen: "false",
           showAtTeacher: "false",
