@@ -4,14 +4,12 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import CreateCourse from "../Course/CreateCourse";
 import ChangePassword from "../ChangePassword";
-import ChangePasswordForm from "../ChangePasswordForm";
-import FileBase from "react-file-base64";
+import "../ChangePassword.css";
 import "./profile.css";
-import { Input, Button } from "@chakra-ui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import ChangePasswordUser from "../ChangePasswordUser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 export default function Profile({ userProp }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
@@ -19,6 +17,12 @@ export default function Profile({ userProp }) {
   const [allPractices, setAllPractices] = useState([]);
   const [userPractices, setUserPractices] = useState([]);
   const [userId, setUserId] = useState(null);
+  const [firstName, setFirstName] = useState(
+    window.localStorage.getItem("firstName")
+  );
+  const [lastName, setLastName] = useState(
+    window.localStorage.getItem("lastName")
+  );
   const [practiceId, setPracticeId] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(false);
@@ -30,13 +34,18 @@ export default function Profile({ userProp }) {
   const [image, setImage] = useState();
   const [fileUpload, setFileUpload] = useState(null);
   //prettier-ignore
-  const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePic"));
+  // const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePic"));
   const [urlCover, setUrlCover] = useState(null);
   //prettier-ignore
   const [coverPicture, setCoverPicture] = useState(localStorage.getItem("coverPic"));
   const [showPractice, setShowPractice] = useState(true);
   const [showChangePassUser, setShowChangePassUser] = useState(false);
   const [showUpdateProfile, setShowUpdateProfile] = useState(false);
+  const [updateFirstName, setUpdateFirstName] = useState("");
+  const [updateLastName, setUpdateLastName] = useState("");
+  const [updateProfilePic, setUpdateProfilePic] = useState(
+    window.localStorage.getItem("profilePic")
+  );
   const [poster, setPoster] = useState("");
   useEffect(() => {
     function MyVideo() {
@@ -166,19 +175,37 @@ export default function Profile({ userProp }) {
 
   useEffect(() => {
     if (!url) return;
-    const changePhoto = async () => {
-      await axios
-        .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
-          avatar: url,
-        })
-        .then(() => {
-          window.localStorage.setItem("profilePic", url);
-          setProfilePicture(url);
-        });
-    };
-    changePhoto();
+    try {
+      const changePhoto = async () => {
+        await axios
+          .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
+            avatar: url,
+          })
+          .then(() => {
+            window.localStorage.setItem("profilePic", url);
+            setUpdateProfilePic(url);
+          });
+      };
+      changePhoto();
+    } catch (error) {
+      console.log("not a teacher");
+    }
+    try {
+      const changePhoto = async () => {
+        await axios
+          .patch(process.env.REACT_APP_BACKEND_URL + `/users/${userId}`, {
+            avatar: url,
+          })
+          .then(() => {
+            window.localStorage.setItem("profilePic", url);
+            setUpdateProfilePic(url);
+          });
+      };
+      changePhoto();
+    } catch (error) {
+      console.log("not student");
+    }
     console.log(url);
-
     setShowButtonAvatarUpdate(false);
   }, [url]);
   // const handleUserLogoutFromAllDevices = async () => {
@@ -399,6 +426,73 @@ export default function Profile({ userProp }) {
     });
   };
 
+  const changeName = async () => {
+    try {
+      await axios
+        .patch(process.env.REACT_APP_BACKEND_URL + `/users/${userId}`, {
+          firstName: updateFirstName,
+        })
+        .then(async () => {
+          const response = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
+          );
+          window.localStorage.setItem("firstName", response.data.firstName);
+          setFirstName(response.data.firstName);
+        });
+    } catch (error) {
+      console.log("not user, teacher");
+    }
+    try {
+      await axios
+        .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
+          firstName: updateFirstName,
+        })
+        .then(async () => {
+          const response = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
+          );
+          window.localStorage.setItem("firstName", response.data.firstName);
+          setFirstName(response.data.firstName);
+        });
+    } catch (error) {
+      console.log("not teacher, user");
+    }
+    setUpdateFirstName("");
+  };
+
+  const changeLastName = async () => {
+    try {
+      await axios
+        .patch(process.env.REACT_APP_BACKEND_URL + `/users/${userId}`, {
+          lastName: updateLastName,
+        })
+        .then(async () => {
+          const response = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
+          );
+          window.localStorage.setItem("lastName", response.data.lastName);
+          setLastName(response.data.lastName);
+        });
+    } catch (error) {
+      console.log("not user, teacher");
+    }
+    try {
+      await axios
+        .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
+          lastName: updateLastName,
+        })
+        .then(async () => {
+          const response = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
+          );
+          window.localStorage.setItem("lastName", response.data.lastName);
+          setLastName(response.data.lastName);
+        });
+    } catch (error) {
+      console.log("not teacher, user");
+    }
+    setUpdateLastName("");
+  };
   return (
     <div>
       {user ? (
@@ -436,10 +530,10 @@ export default function Profile({ userProp }) {
                   <button onClick={postDetailsCover}>تثبيت</button>
                 ) : null}
               </div>{" "}
-              {profilePicture ? (
+              {updateProfilePic ? (
                 <div style={{ zIndex: "10", marginTop: "-80px" }}>
                   <img
-                    src={profilePicture}
+                    src={updateProfilePic}
                     alt={user.teacher.firstName + "me"}
                     width="150"
                     height="150"
@@ -471,14 +565,19 @@ export default function Profile({ userProp }) {
                 }}
               >
                 {!showButtonAvatarUpdate ? (
-                  <input
-                    type="file"
-                    onChange={(e) => {
-                      setImage(e.target.files[0]);
-                      setShowButtonAvatarUpdate(true);
-                    }}
-                    // onClick={() => setUrl(null)}
-                  />
+                  <label for="inputTag">
+                    <FontAwesomeIcon icon={faCamera} />
+                    <input
+                      type="file"
+                      onChange={(e) => {
+                        setImage(e.target.files[0]);
+                        setShowButtonAvatarUpdate(true);
+                      }}
+                      id="inputTag"
+                      style={{ display: "none" }}
+                      // onClick={() => setUrl(null)}
+                    />
+                  </label>
                 ) : null}
                 {showButtonAvatarUpdate ? (
                   <button onClick={postDetails}>تثبيت</button>
@@ -502,9 +601,9 @@ export default function Profile({ userProp }) {
                 ) : null} */}
               </div>
               <h2>
-                {user.teacher.firstName}
+                {firstName}
                 {"  "}
-                {user.teacher.lastName}
+                {lastName}
               </h2>
               {/* <div className="profileAllButtonsMobile">
                 <div
@@ -554,6 +653,7 @@ export default function Profile({ userProp }) {
                     // {goToCreateCourse}
                     setShowFormCreateCourse(true);
                     setShowChangePassword(false);
+                    setShowUpdateProfile(false);
                   }}
                 >
                   انشئ دورة
@@ -563,7 +663,9 @@ export default function Profile({ userProp }) {
                   style={{ height: "40px" }}
                   onClick={() => {
                     setShowPractice(false);
-                    setShowChangePassUser(true);
+                    setShowChangePassword(false);
+                    setShowUpdateProfile(true);
+                    setShowFormCreateCourse(false);
                   }}
                 >
                   تعديل الملف
@@ -574,6 +676,7 @@ export default function Profile({ userProp }) {
                   onClick={() => {
                     setShowChangePassword(true);
                     setShowFormCreateCourse(false);
+                    setShowUpdateProfile(false);
                   }}
                 >
                   تغيير كلمة المرور
@@ -589,6 +692,45 @@ export default function Profile({ userProp }) {
               </div>
               {showFormCreateCourse ? <CreateCourse /> : null}
               {showChangePassword ? <ChangePassword userId={userId} /> : null}
+              {showUpdateProfile ? (
+                <div className="mainChangePass">
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                    }}
+                  >
+                    <input
+                      type="text"
+                      placeholder="الاسم"
+                      style={{ width: "70%" }}
+                      onChange={(e) => setUpdateFirstName(e.target.value)}
+                      value={updateFirstName}
+                    />
+                    <button onClick={changeName}>تثبيت</button>
+                  </div>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                      marginTop: "20px",
+                    }}
+                  >
+                    <input
+                      type="text"
+                      placeholder="العائلة"
+                      style={{ width: "70%" }}
+                      value={updateLastName}
+                      onChange={(e) => setUpdateLastName(e.target.value)}
+                    />
+                    <button onClick={changeLastName}>تثبيت</button>
+                  </div>
+                </div>
+              ) : null}
             </div>
           ) : (
             <div>
@@ -615,19 +757,40 @@ export default function Profile({ userProp }) {
                 >
                   <img
                     src={
-                      user.user.avatar
-                        ? user.user.avatar
+                      updateProfilePic
+                        ? updateProfilePic
                         : "https://img.icons8.com/material-rounded/24/null/user.png"
                     }
                     alt="profile"
-                    width="80px"
-                    height="80px"
+                    width="100%"
+                    height="100%"
+                    style={{ borderRadius: "50%" }}
                   />
                 </div>
+                <div>
+                  {!showButtonAvatarUpdate ? (
+                    <label for="inputTag">
+                      <FontAwesomeIcon icon={faCamera} />
+                      <input
+                        type="file"
+                        onChange={(e) => {
+                          setImage(e.target.files[0]);
+                          setShowButtonAvatarUpdate(true);
+                        }}
+                        id="inputTag"
+                        style={{ display: "none" }}
+                        // onClick={() => setUrl(null)}
+                      />
+                    </label>
+                  ) : null}
+                  {showButtonAvatarUpdate ? (
+                    <button onClick={postDetails}>تثبيت</button>
+                  ) : null}
+                </div>
                 <h2>
-                  {user.user.firstName}
+                  {firstName}
                   {"  "}
-                  {user.user.lastName}
+                  {lastName}
                 </h2>
                 <div className="profileAllButtons">
                   {showPractice ? (
@@ -730,6 +893,46 @@ export default function Profile({ userProp }) {
                 <div>
                   {" "}
                   <ChangePasswordUser />
+                </div>
+              ) : null}
+
+              {showUpdateProfile ? (
+                <div className="mainChangePass">
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                    }}
+                  >
+                    <input
+                      type="text"
+                      placeholder="الاسم"
+                      style={{ width: "70%" }}
+                      value={updateFirstName}
+                      onChange={(e) => setUpdateFirstName(e.target.value)}
+                    />
+                    <button onClick={changeName}>تثبيت</button>
+                  </div>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                      marginTop: "20px",
+                    }}
+                  >
+                    <input
+                      type="text"
+                      placeholder="العائلة"
+                      style={{ width: "70%" }}
+                      value={updateLastName}
+                      onChange={(e) => setUpdateLastName(e.target.value)}
+                    />
+                    <button onClick={changeLastName}>تثبيت</button>
+                  </div>
                 </div>
               ) : null}
             </div>

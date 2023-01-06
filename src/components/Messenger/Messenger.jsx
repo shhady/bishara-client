@@ -703,6 +703,8 @@ export default function Messenger({ user, setUser, socket }) {
   // const socket = useRef();
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
+
+  console.log(conversationsToShow);
   useEffect(() => {
     user.teacher
       ? setUserName(`${user.teacher.firstName} ${user.teacher.lastName}`)
