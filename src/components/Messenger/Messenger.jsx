@@ -975,6 +975,7 @@ export default function Messenger({
                     alignItems: "center",
                     backgroundColor: "#f0f2f5",
                   }}
+                  onMouseOver={setChatNotification(false)}
                 >
                   <img
                     src={topPageImg}
