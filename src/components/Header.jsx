@@ -71,7 +71,7 @@ export default function Header({
   console.log(redLightNotification);
   console.log(redLightNotificationReply);
   console.log(teacherPracticesUnReplied);
-  console.log(userPracticesNotSeen);
+  console.log(chatNotification);
   useEffect(() => {
     if (!user) return;
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
@@ -138,11 +138,12 @@ export default function Header({
   }, [socket]);
 
   useEffect(() => {
+    if (chatNotification) return;
+    console.log("not opened");
     socket?.on("getMessage", (data) => {
       console.log(data);
       notificationMessage.includes(data.senderId);
       // setNotifyMessage((prev) => [...prev, data]);
-      if (chatNotification) return;
       setNotifyMessage(true);
     });
   }, [socket]);
