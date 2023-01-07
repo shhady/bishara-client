@@ -886,25 +886,28 @@ export default function Messenger({
     // updateConversation();
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-  // const makeItSeen = async (conversation) => {
-  //   console.log(conversation);
-  //   try {
-  //     await axios
-  //       .patch(
-  //         process.env.REACT_APP_BACKEND_URL +
-  //           `/conversations/${conversation?._id}`,
-  //         { seen: "true" }
-  //       )
-  //       .then(async () => {
-  //         const res = await axios.get(
-  //           process.env.REACT_APP_BACKEND_URL + `/conversations/${currentUser}`
-  //         );
-  //         setConversations(res.data);
-  //       });
-  //   } catch (error) {
-  //     console.log("something went wrong", error);
-  //   }
-  // };
+  const makeItSeen = async (currentChat) => {
+    console.log(currentChat.lastSender);
+    console.log(userId);
+    if (currentChat.lastSender === userId)
+      return console.log("i'm the last sender");
+    try {
+      await axios
+        .patch(
+          process.env.REACT_APP_BACKEND_URL +
+            `/conversations/${currentChat?._id}`,
+          { seen: "true" }
+        )
+        .then(async () => {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/conversations/${userId}`
+          );
+          setConversations(res.data);
+        });
+    } catch (error) {
+      console.log("something went wrong", error);
+    }
+  };
 
   return (
     <div className="overMessenger">
@@ -975,7 +978,6 @@ export default function Messenger({
                     alignItems: "center",
                     backgroundColor: "#f0f2f5",
                   }}
-                  onMouseOver={() => setChatNotification(false)}
                 >
                   <img
                     src={topPageImg}
@@ -993,7 +995,13 @@ export default function Messenger({
                     <span style={{ color: "black" }}>{topPageLastName}</span>
                   </div>
                 </div>
-                <div className="chatBoxTop">
+                <div
+                  className="chatBoxTop"
+                  onMouseOver={() => {
+                    setChatNotification(false);
+                    makeItSeen(currentChat);
+                  }}
+                >
                   {messages.map((m) => (
                     <div
                       ref={scrollRef}
@@ -1008,7 +1016,10 @@ export default function Messenger({
                     </div>
                   ))}
                 </div>
-                <div className="chatBoxBottom">
+                <div
+                  className="chatBoxBottom"
+                  onMouseOver={() => setChatNotification(false)}
+                >
                   <input
                     className="chatMessageInput"
                     placeholder=""
