@@ -43,14 +43,10 @@ export default function Profile({ userProp }) {
   const [showUpdateProfile, setShowUpdateProfile] = useState(false);
   const [updateFirstName, setUpdateFirstName] = useState("");
   const [updateLastName, setUpdateLastName] = useState("");
-  const [updateProfilePic, setUpdateProfilePic] = useState();
+  const [updateProfilePic, setUpdateProfilePic] = useState(
+    window.localStorage.getItem("profilePic")
+  );
   const [poster, setPoster] = useState("");
-
-  useEffect(() => {
-    user.user
-      ? setUpdateProfilePic(user.user.avatar)
-      : setUpdateProfilePic(user.teacher.avatar);
-  }, [user]);
   useEffect(() => {
     function MyVideo() {
       if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
