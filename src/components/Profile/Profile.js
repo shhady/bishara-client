@@ -133,6 +133,15 @@ export default function Profile({ userProp }) {
       const userid = user.user ? user.user._id : user.teacher._id;
       setUserId(userid);
     }
+    if (userProp) {
+      const userAvatar = userProp.user
+        ? userProp.user.avatar
+        : userProp.teacher.avatar;
+      setUpdateProfilePic(userAvatar);
+    } else {
+      const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
+      setUpdateProfilePic(userAvatar);
+    }
     // const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
     // console.log(userAvatar);
     // setProfilePicture(userAvatar);
