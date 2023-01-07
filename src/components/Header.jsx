@@ -31,6 +31,7 @@ export default function Header({
   setLessonDetails,
   setListId,
   chatNotification,
+  setChatNotification,
 }) {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
@@ -145,6 +146,7 @@ export default function Header({
       notificationMessage.includes(data.senderId);
       // setNotifyMessage((prev) => [...prev, data]);
       setNotifyMessage(true);
+      setChatNotification("got a new message");
     });
   }, [socket]);
 
@@ -565,7 +567,7 @@ export default function Header({
                     alt="message"
                     width="20px"
                   />
-                  {notifyMessage ? (
+                  {notifyMessage && chatNotification ? (
                     <div className="notificationMessage"></div>
                   ) : null}
                 </div>
@@ -717,7 +719,7 @@ export default function Header({
                       alt="message"
                       width="20px"
                     />
-                    {notifyMessage ? (
+                    {notifyMessage && chatNotification ? (
                       <div className="notificationMessage"></div>
                     ) : null}
                   </div>

@@ -92,6 +92,7 @@ export default function App() {
             updateComponent={updateComponent}
             setUpdateComponent={setUpdateComponent}
             chatNotification={chatNotification}
+            setChatNotification={setChatNotification}
           />
           <Route path="/" exact>
             <Home

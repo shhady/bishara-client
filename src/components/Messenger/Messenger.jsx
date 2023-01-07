@@ -711,6 +711,24 @@ export default function Messenger({
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
 
+  useEffect(() => {
+    const getConversations = async () => {
+      try {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + `/conversations/` + userId
+        );
+        if (!res) return null;
+
+        const sortedConversations = res.data.sort((a, b) => {
+          return new Date(b.updatedAt) - new Date(a.updatedAt);
+        });
+        setConversations(sortedConversations);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getConversations();
+  }, [chatNotification]);
   console.log(conversationsToShow);
   useEffect(() => {
     user.teacher
@@ -900,7 +918,7 @@ export default function Messenger({
                   <div
                     onClick={() => {
                       setCurrentChat(specificConv);
-                      setChatNotification(specificConv);
+                      setChatNotification(false);
                       console.log(specificConv);
                     }}
                     key={i}
@@ -924,7 +942,7 @@ export default function Messenger({
                   <div
                     onClick={() => {
                       setCurrentChat(specificConv);
-                      setChatNotification(specificConv);
+                      setChatNotification(false);
                       console.log(specificConv);
                     }}
                     key={i}
