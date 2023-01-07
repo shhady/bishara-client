@@ -30,6 +30,7 @@ export default function Header({
   setCourseDetails,
   setLessonDetails,
   setListId,
+  chatNotification,
 }) {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
@@ -141,6 +142,7 @@ export default function Header({
       console.log(data);
       notificationMessage.includes(data.senderId);
       // setNotifyMessage((prev) => [...prev, data]);
+      if (chatNotification) return;
       setNotifyMessage(true);
     });
   }, [socket]);

@@ -51,29 +51,29 @@ export default function Auth({ user, setUser, setUserProp }) {
     setisSingUp(!isSignUp);
   };
 
-  const handleloginTeacher = async (e) => {
-    e.preventDefault();
-    try {
-      const result = await axios.post(
-        `https://bisharaserver.herokuapp.com/teachers/login`,
-        studentlogin
-      );
-      window.localStorage.setItem("profile", JSON.stringify(result.data));
-      window.localStorage.setItem("token", result.data.token);
-      window.localStorage.setItem("profilePic", result.data.teacher.avatar);
-      window.localStorage.setItem("coverPic", result.data.teacher.cover);
-      window.localStorage.setItem("firstName", result.data.teacher.firstName);
-      window.localStorage.setItem("lastName", result.data.teacher.lastName);
-      console.log(result);
-      setTeacherData(result.data);
-      console.log(result.data.teacher);
-      setUser(result.data);
+  // const handleloginTeacher = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const result = await axios.post(
+  //       `https://bisharaserver.herokuapp.com/teachers/login`,
+  //       studentlogin
+  //     );
+  //     window.localStorage.setItem("profile", JSON.stringify(result.data));
+  //     window.localStorage.setItem("token", result.data.token);
+  //     window.localStorage.setItem("profilePic", result.data.teacher.avatar);
+  //     window.localStorage.setItem("coverPic", result.data.teacher.cover);
+  //     window.localStorage.setItem("firstName", result.data.teacher.firstName);
+  //     window.localStorage.setItem("lastName", result.data.teacher.lastName);
+  //     console.log(result);
+  //     setTeacherData(result.data);
+  //     console.log(result.data.teacher);
+  //     setUser(result.data);
 
-      history.push("/profile");
-    } catch (error) {
-      setShowLoginFailMessage(true);
-    }
-  };
+  //     history.push("/profile");
+  //   } catch (error) {
+  //     setShowLoginFailMessage(true);
+  //   }
+  // };
 
   const handleloginStudent = async (e) => {
     e.preventDefault();
@@ -93,8 +93,29 @@ export default function Auth({ user, setUser, setUserProp }) {
       setUserProp(result.data);
       history.push("/profile");
     } catch (error) {
-      setShowLoginFailMessage(true);
+      console.log("can't log in");
     }
+    try {
+      const result = await axios.post(
+        `https://bisharaserver.herokuapp.com/teachers/login`,
+        studentlogin
+      );
+      window.localStorage.setItem("profile", JSON.stringify(result.data));
+      window.localStorage.setItem("token", result.data.token);
+      window.localStorage.setItem("profilePic", result.data.teacher.avatar);
+      window.localStorage.setItem("coverPic", result.data.teacher.cover);
+      window.localStorage.setItem("firstName", result.data.teacher.firstName);
+      window.localStorage.setItem("lastName", result.data.teacher.lastName);
+      console.log(result);
+      setTeacherData(result.data);
+      console.log(result.data.teacher);
+      setUser(result.data);
+
+      history.push("/profile");
+    } catch (error) {
+      console.log("can't log in");
+    }
+    setShowLoginFailMessage(true);
   };
 
   const handleLoginChange = (e) => {
@@ -254,7 +275,8 @@ export default function Auth({ user, setUser, setUserProp }) {
                 </div>
                 {passwordsDontMatch && (
                   <div style={{ color: "red" }}>
-                    كلمة المرور وتأكيد كلمة المرور غير متطابقتين{" "}
+                    جميع الحقول الزامية ويجب تطابق كلمة المرور وتأكيد كلمة
+                    المرور
                   </div>
                 )}
 
@@ -305,7 +327,7 @@ export default function Auth({ user, setUser, setUserProp }) {
                   alignItems: "center",
                 }}
               >
-                {studentOrTeacher === "student" ? (
+                {/* {studentOrTeacher === "student" ? (
                   <button
                     onClick={() => {
                       setStudentOrTeacher("student");
@@ -333,8 +355,8 @@ export default function Auth({ user, setUser, setUserProp }) {
                   >
                     طالب
                   </button>
-                )}
-                {studentOrTeacher === "teacher" ? (
+                )} */}
+                {/* {studentOrTeacher === "teacher" ? (
                   <button
                     onClick={() => {
                       setStudentOrTeacher("teacher");
@@ -362,7 +384,7 @@ export default function Auth({ user, setUser, setUserProp }) {
                   >
                     معلم
                   </button>
-                )}
+                )} */}
               </div>
               <div className="forminputs">
                 {/* <form> */}
@@ -391,41 +413,23 @@ export default function Auth({ user, setUser, setUserProp }) {
                   ></input>
                 </div>
 
-                {studentOrTeacher === "student" ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: "100%",
-                    }}
+                {/* {studentOrTeacher === "student" ? ( */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <button
+                    type="submit"
+                    className="ButtonLogIn"
+                    onClick={handleloginStudent}
                   >
-                    <button
-                      type="submit"
-                      className="ButtonLogIn"
-                      onClick={handleloginStudent}
-                    >
-                      دخول
-                    </button>
-                  </div>
-                ) : (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: "100%",
-                    }}
-                  >
-                    <button
-                      type="submit"
-                      className="ButtonLogIn"
-                      onClick={handleloginTeacher}
-                    >
-                      دخول
-                    </button>
-                  </div>
-                )}
+                    دخول
+                  </button>
+                </div>
 
                 {/* </form> */}
                 <div>
@@ -433,7 +437,6 @@ export default function Auth({ user, setUser, setUserProp }) {
                   {!showLoginFailMessage ? null : (
                     <div style={{ color: "red" }}>
                       فشل في تسجيل الدخول <br />
-                      *معلم ؟ اضغط على زر معلم اعلاه
                     </div>
                   )}
                 </div>

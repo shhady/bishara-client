@@ -58,6 +58,7 @@ export default function App() {
   const [teacher, setTeacher] = useState(null);
   const [updateComponent, setUpdateComponent] = useState(null);
   const [userProp, setUserProp] = useState(null);
+  const [chatNotification, setChatNotification] = useState(null);
   console.log(updateComponent);
   useEffect(() => {
     if (!user) return;
@@ -90,6 +91,7 @@ export default function App() {
             setShowArrows={setShowArrows}
             updateComponent={updateComponent}
             setUpdateComponent={setUpdateComponent}
+            chatNotification={chatNotification}
           />
           <Route path="/" exact>
             <Home
@@ -204,7 +206,13 @@ export default function App() {
 
           <Route path="/messenger" exact>
             {user ? (
-              <Messenger user={user} setUser={setUser} socket={socket} />
+              <Messenger
+                user={user}
+                setUser={setUser}
+                socket={socket}
+                chatNotification={chatNotification}
+                setChatNotification={setChatNotification}
+              />
             ) : (
               <Home />
             )}

@@ -687,7 +687,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import ListOfTeachers from "./ListOfTeachers";
-export default function Messenger({ user, setUser, socket }) {
+export default function Messenger({
+  user,
+  setUser,
+  socket,
+  chatNotification,
+  setChatNotification,
+}) {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -894,6 +900,7 @@ export default function Messenger({ user, setUser, socket }) {
                   <div
                     onClick={() => {
                       setCurrentChat(specificConv);
+                      setChatNotification(specificConv);
                       console.log(specificConv);
                     }}
                     key={i}
@@ -917,6 +924,7 @@ export default function Messenger({ user, setUser, socket }) {
                   <div
                     onClick={() => {
                       setCurrentChat(specificConv);
+                      setChatNotification(specificConv);
                       console.log(specificConv);
                     }}
                     key={i}
