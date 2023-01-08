@@ -44,9 +44,32 @@ export default function Profile({ userProp }) {
   const [updateFirstName, setUpdateFirstName] = useState("");
   const [updateLastName, setUpdateLastName] = useState("");
   const [updateProfilePic, setUpdateProfilePic] = useState(
-    window.localStorage.getItem("profilePic")
+    // window.localStorage.getItem("profilePic")
+    ""
   );
   const [poster, setPoster] = useState("");
+
+  useEffect(() => {
+    if (user.user) {
+      const getavatar = async () => {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
+        );
+        setUpdateProfilePic(res.data.avatar);
+        // console.log(res.data);
+      };
+      getavatar();
+    } else if (user.teacher) {
+      const getavatar = async () => {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
+        );
+        setUpdateProfilePic(res.data.avatar);
+        // console.log(res.data);
+      };
+      getavatar();
+    }
+  }, [userId]);
   useEffect(() => {
     function MyVideo() {
       if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
@@ -133,15 +156,7 @@ export default function Profile({ userProp }) {
       const userid = user.user ? user.user._id : user.teacher._id;
       setUserId(userid);
     }
-    if (userProp) {
-      const userAvatar = userProp.user
-        ? userProp.user.avatar
-        : userProp.teacher.avatar;
-      setUpdateProfilePic(userAvatar);
-    } else {
-      const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
-      setUpdateProfilePic(userAvatar);
-    }
+
     // const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
     // console.log(userAvatar);
     // setProfilePicture(userAvatar);
