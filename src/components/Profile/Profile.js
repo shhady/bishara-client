@@ -916,7 +916,7 @@ export default function Profile({ userProp }) {
               {showChangePassUser ? (
                 <div>
                   {" "}
-                  <ChangePasswordUser />
+                  <ChangePasswordUser userId={userId} />
                 </div>
               ) : null}
 
