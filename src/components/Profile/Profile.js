@@ -43,6 +43,7 @@ export default function Profile({ userProp }) {
   const [showUpdateProfile, setShowUpdateProfile] = useState(false);
   const [updateFirstName, setUpdateFirstName] = useState("");
   const [updateLastName, setUpdateLastName] = useState("");
+  // const [updateProfileFromLocal, setUpdateProfileFromLocal]=useState(window.localStorage.getItem("profilePic")) ===> do it
   const [updateProfilePic, setUpdateProfilePic] = useState(
     // window.localStorage.getItem("profilePic")
     ""

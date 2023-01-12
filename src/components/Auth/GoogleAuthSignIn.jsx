@@ -38,7 +38,7 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
       window.localStorage.setItem("token", result.data.token);
       window.localStorage.setItem("firstName", userInfo.given_name);
       window.localStorage.setItem("lastName", userInfo.family_name);
-      window.localStorage.setItem("coverPic", userInfo.picture);
+      // window.localStorage.setItem("coverPic", userInfo.picture);
 
       history.push("/profile");
       setUser(result.data);
