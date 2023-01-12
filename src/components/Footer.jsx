@@ -1,5 +1,9 @@
 import React , {useState}from "react";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPhone,
+  faEnvelope
+} from "@fortawesome/free-solid-svg-icons";
 export default function Footer() {
   const [showContactUs, setShowContactUs]=useState(false)
   function sendEmail() 
@@ -27,12 +31,12 @@ export default function Footer() {
       >
         <div>أسئلة متكرره</div>
         <div>
-        <div onClick={()=>setShowContactUs(!showContactUs)}>تواصل معنا</div> 
+        <div onClick={()=>setShowContactUs(!showContactUs)} style={{cursor:"pointer"}}>تواصل معنا</div> 
         {showContactUs ? (
-          <div onClick={()=>setShowContactUs(!showContactUs)} style={{position:"fixed",height:"100vh", width:"100vw", background:"black", top:"0", left:"0", display:"flex", justifyContent:"center",alignItems:"center"}}>
-          <div style={{position:"fixed",height:"22vh", width:"40vw",maxWidth:"300px",border: "1px solid black", backgroundColor:"white", zIndex:"15", display:"flex",flexDirection:"column", justifyContent:"space-around",alignItems:"center"}}>
-          <div><a href="tel:0505774285"  style={{textDecoration:"none", color:"black"}}>phone</a></div>
-          <div onClick={()=>sendEmail()}>E-Mail</div>
+          <div onClick={()=>setShowContactUs(!showContactUs)} style={{position:"fixed",height:"100vh", width:"100vw", background:"rgba(98, 98, 100, 0.3)", top:"0", left:"0", display:"flex", justifyContent:"center",alignItems:"center"}}>
+          <div style={{position:"fixed",height:"40vh", width:"40vw",maxWidth:"300px",border: "1px solid black", backgroundColor:"white", zIndex:"15", display:"flex",flexDirection:"column", justifyContent:"space-around",alignItems:"center"}}>
+          <div><a href="tel:0587230238"  style={{textDecoration:"none", color:"black"}}><FontAwesomeIcon icon={faPhone}/>  هاتف</a></div>
+          <div onClick={()=>sendEmail()} style={{cursor:"pointer"}}><FontAwesomeIcon icon={faEnvelope}/>  بريد الكتروني</div>
           </div> 
           </div> 
         ):(null)}
