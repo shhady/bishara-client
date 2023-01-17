@@ -129,6 +129,7 @@ export default function App() {
               teacher={teacher}
               listId={listId}
               updateComponent={updateComponent}
+              setUpdateComponent={setUpdateComponent}
             />
           </Route>
           <Route path="/Notifications" exact>

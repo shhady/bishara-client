@@ -843,7 +843,7 @@ export default function Header({
                     onMouseOver={() => {
                       setTeachersHover(true);
                       setCoursesHover(false);
-                      setUpdateComponent("");
+                      // setUpdateComponent("");
                     }}
                   >
                     {/* <FontAwesomeIcon

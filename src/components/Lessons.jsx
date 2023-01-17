@@ -9,19 +9,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from "react-router-dom";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
-export default function Lessons({ user, updateComponent }) {
+export default function Lessons({ user, updateComponent, setUpdateComponent }) {
   const [courseInfo, setCourseInfo] = useState(
     JSON.parse(localStorage.getItem("courseDetails"))
   );
   const [updated, setUpdated] = useState(updateComponent);
-  const [courseCover, setCourseCover] = useState(
-    window.localStorage.getItem("courseCover")
+  const [courseCover, setCourseCover] = useState(""
+    // window.localStorage.getItem("courseCover")
   );
-  const [courseTitle, setCourseTitle] = useState(
-    window.localStorage.getItem("courseTitle")
+  const [courseTitle, setCourseTitle] = useState(""
+    // window.localStorage.getItem("courseTitle")
   );
-  const [courseDes, setCourseDes] = useState(
-    window.localStorage.getItem("coursedes")
+  const [courseDes, setCourseDes] = useState(""
+    // window.localStorage.getItem("coursedes")
   );
 
   const [listId, setListId] = useState("");
@@ -41,6 +41,8 @@ export default function Lessons({ user, updateComponent }) {
   };
 
   console.log(courseInfo);
+  console.log(updateComponent);
+
   useEffect(() => {
     if (!image) return;
     const postDetails = () => {
@@ -79,12 +81,21 @@ export default function Lessons({ user, updateComponent }) {
           }
         )
         .then(() => {
-          window.localStorage.setItem("courseCover", url);
+          // window.localStorage.setItem("courseCover", url);
           setCourseCover(url);
+        }).then(async () => {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`
+          );
+          window.localStorage.setItem("courseDetails", JSON.stringify(res.data));
+          setCourseInfo(res.data)
+          console.log(res);
         });
     };
     changePhoto();
     console.log(url);
+    setUpdateComponent({...updateComponent, coursePhoto:url})
+
   }, [url]);
 
   useEffect(() => {
@@ -109,7 +120,7 @@ export default function Lessons({ user, updateComponent }) {
       //   setData(result.data.items[0].snippet.thumbnails.default.url);
     };
     fetch();
-  }, [listId, updated]);
+  }, [listId]);
 
   const handleLessonClick = (lesson) => {
     if (user) {
@@ -203,18 +214,22 @@ export default function Lessons({ user, updateComponent }) {
           }
         )
         .then(() => {
-          window.localStorage.setItem("courseTitle", newValue);
+          // window.localStorage.setItem("courseTitle", newValue);
           setCourseTitle(newValue);
-          setInputTitle(false);
+          setUpdateComponent({...updateComponent, title:newValue})
+         
         })
         .then(async () => {
           const res = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`
           );
+          window.localStorage.setItem("courseDetails", JSON.stringify(res.data));
+          setCourseInfo(res.data)
           console.log(res);
         });
     };
     changeTitle();
+    setInputTitle(false);
   };
   const changeDescription = () => {
     if (!newValueDes) setInputDescription(false);
@@ -227,7 +242,7 @@ export default function Lessons({ user, updateComponent }) {
           }
         )
         .then(() => {
-          window.localStorage.setItem("coursedes", newValueDes);
+          // window.localStorage.setItem("coursedes", newValueDes);
           setCourseDes(newValueDes);
         })
         .then(async () => {
@@ -235,6 +250,8 @@ export default function Lessons({ user, updateComponent }) {
             process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`
           );
           console.log(res);
+          window.localStorage.setItem("courseDetails", JSON.stringify(res.data));
+          setCourseInfo(res.data)
         });
     };
     changeDes();
@@ -247,7 +264,7 @@ export default function Lessons({ user, updateComponent }) {
         className="lessonCoverBig"
         style={{
           backgroundImage: `url(${
-            courseCover ? courseCover : courseInfo.coursePhoto
+            updated ? updated.coursePhoto : courseInfo.coursePhoto
           })`,
           // backgroundPosition: "center",
           // backgroundSize: "cover",
@@ -355,7 +372,7 @@ export default function Lessons({ user, updateComponent }) {
                 ) : (
                   <>
                     <h1 style={{ fontSize: "38px" }}>
-                      {courseTitle ? courseTitle : courseInfo.title}
+                      {updated ? updated.title : courseInfo.title}
                     </h1>
                     {user?.teacher?._id === courseInfo.owner ? (
                       <h3
@@ -409,7 +426,7 @@ export default function Lessons({ user, updateComponent }) {
                   </h3>
                 ) : null}
 
-                {courseDes ? courseDes : courseInfo.description}
+                {updated ? updated.description : courseInfo.description}
               </>
             )}
           </div>

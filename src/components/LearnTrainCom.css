@@ -1,7 +1,6 @@
-.learn-train-com-container{
+/* .learn-train-com-container{
     height: fit-content;
-    /* background: rgba(27,26,31,255); */
-    /* opacity: 0.4; */
+   
     color: black;
     margin-top: 60px;
     padding: 10px;
@@ -18,7 +17,6 @@
 }
 .card1, .card2, .card3{
     margin-top: 20% ;
-    /* border: 1px solid black; */
     margin-left: 1rem;
     display: flex;
     flex-direction: column;
@@ -34,4 +32,4 @@
         width: 100%;
         height: fit-content;
        } 
-}
+} */
