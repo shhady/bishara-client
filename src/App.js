@@ -30,9 +30,9 @@ const CreateTeacher = React.lazy(() =>
   import("./components/Form/CreateTeacher")
 );
 const Auth = React.lazy(() => import("./components/Auth/Auth"));
-const PianoPage = React.lazy(() => import("./components/PianoPage"));
-const OudPage = React.lazy(() => import("./components/OudPage"));
-const ViolinPage = React.lazy(() => import("./components/ViolinPage"));
+// const PianoPage = React.lazy(() => import("./components/PianoPage"));
+// const OudPage = React.lazy(() => import("./components/OudPage"));
+// const ViolinPage = React.lazy(() => import("./components/ViolinPage"));
 const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
 const TeacherData = React.lazy(() => import("./components/TeacherData"));
 const Lessons = React.lazy(() => import("./components/Lessons"));
@@ -196,7 +196,7 @@ export default function App() {
           <Route path="/StudentsPractices" exact>
             <StudentsPractices user={user} setUser={setUser} />
           </Route>
-          <Route path="/PianoPage" exact>
+          {/* <Route path="/PianoPage" exact>
             <PianoPage user={user} setUser={setUser} />
           </Route>
           <Route path="/OudPage" exact>
@@ -204,7 +204,7 @@ export default function App() {
           </Route>
           <Route path="/ViolinPage" exact>
             <ViolinPage user={user} setUser={setUser} />
-          </Route>
+          </Route> */}
 
           <Route path="/messenger" exact>
             {user ? (
