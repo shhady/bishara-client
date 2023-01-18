@@ -947,7 +947,7 @@ export default function Header({
                 }}
                 onClick={() => setUpdateComponent("")}
               >
-                FUNAN<b>.AI</b>
+                <b>FU</b>NAN
               </div>{" "}
             </Link>
           </div>
@@ -974,7 +974,7 @@ export default function Header({
                 X
               </h3>
               <span style={{ fontSize: "30px", color: "white" }}>
-                FUNAN<b>.AI</b>
+                <b>FU</b>NAN
               </span>
               <span style={{ color: "black" }}>X</span>
             </div>
