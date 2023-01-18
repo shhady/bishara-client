@@ -947,7 +947,7 @@ export default function Header({
                 }}
                 onClick={() => setUpdateComponent("")}
               >
-                <b>FU</b>NAN
+                <b>FUN</b>AN
               </div>{" "}
             </Link>
           </div>
@@ -974,7 +974,7 @@ export default function Header({
                 X
               </h3>
               <span style={{ fontSize: "30px", color: "white" }}>
-                <b>FU</b>NAN
+                <b>FUN</b>AN
               </span>
               <span style={{ color: "black" }}>X</span>
             </div>
