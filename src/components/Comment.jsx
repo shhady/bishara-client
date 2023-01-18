@@ -389,20 +389,22 @@ export default function Comment({
         <>
           <div
             style={{
-              // width: "100%",
-              margin: "20px 0px",
-              border: "1px solid gray",
-              padding: "5px",
+              width: "150px",
+              margin: "20px auto",
+              border: "2px solid black",
+              // alignSelf: "center"
+              // padding: "5px",
+             
             }}
           >
              <label for="inputTag">
               <div style={{
-                border: "2px solid gray",
-                paddingRight:"5px",
+                // border: "2px solid gray",
+                // paddingRight:"5px",
                 cursor:"pointer",
                 textAlign:"center",
               }}>
-                {video ? video.name : <div>                ارفع التمرين
+                {video ? video.name : <div style={{fontWeight:"bold"}}>                ارفع التمرين
 </div>}
                 </div>
             <input

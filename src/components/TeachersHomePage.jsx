@@ -87,7 +87,7 @@ export default function TeachersPop({ setTeachersHover }) {
         flexDirection: "column",
         justifyContent: "space-around",
         alignItems: "center",
-        borderBottom: "1px solid #e1e1e1",
+        // borderBottom: "1px solid #e1e1e1",
       }}
     >
       <div
@@ -103,7 +103,7 @@ export default function TeachersPop({ setTeachersHover }) {
         }}
         // onMouseOut={() => setTeachersHover(false)}
       >
-        <div style={{ fontWeight: "bold", fontSize: "34px" }}>المدرسين</div>
+        <div style={{ fontWeight: "bold", fontSize: "34px" }}>مدرسين</div>
         <Link to="/teachers" style={{ textDecoration: "none" }}>
           <div
             onClick={() => setTeachersHover(false)}

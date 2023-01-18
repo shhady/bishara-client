@@ -149,7 +149,7 @@ export default function CoursesHomePage({
               fontWeight: "bold",
             }}
           >
-            دورات موسيقية
+            دورات
           </div>
         </div>
       </Link>

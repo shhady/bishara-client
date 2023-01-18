@@ -229,6 +229,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
                 <a
                   href={theFile?.fileUrl}
                   target="_blank"
+                  rel="noreferrer"
                   style={{
                     textDecoration: "none",
                     color: "black",
@@ -268,25 +269,26 @@ export default function UploadFile({ courseInfo, lesson, id }) {
         <>
           {theFile && (
             // <button
-
-            // >
+            <div style={{display:"flex", justifyContent: "center", alignItems: "center",border: "2px solid black"}}>
+            
             <a
               href={theFile?.fileUrl}
               target="_blank"
+              rel="noreferrer"
               style={{
                 textDecoration: "none",
                 color: "black",
-                width: "100px",
+                width: "150px",
                 backgroundColor: "white",
-                border: "2px solid black",
                 borderRadius: "5px",
                 textAlign: "center",
                 fontWeight: "bold",
               }}
             >
               {" "}
-              PDF{" "}
+              ملف{" "}
             </a>
+            </div>
             // </button>
             // <button onClick={() => downloadFile()}>Download File</button>
           )}
