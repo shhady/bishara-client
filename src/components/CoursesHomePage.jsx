@@ -47,7 +47,7 @@ export default function CoursesHomePage({
   console.log(courses);
 
   const drawData = () => {
-    return courses.slice(0, 4).map((course, i) => {
+    return courses.slice(0, 5).map((course, i) => {
       return (
         <div
           key={i}
@@ -55,7 +55,7 @@ export default function CoursesHomePage({
             setCoursesHover(false);
             setUpdateComponent(course);
           }}
-          style={{ marginLeft: "20px", minHeight: "400px" }}
+          className="homepagecourses"
         >
           <Link to="/Lessons" style={{ textDecoration: "none" }}>
             <div
