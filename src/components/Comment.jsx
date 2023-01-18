@@ -85,6 +85,7 @@ export default function Comment({
       })
       .then((res) => setUrl(res.data.url))
       .then(() => {
+        setVideo(null)
         console.log(lesson);
       })
       // .then(console.log(url))
@@ -381,7 +382,7 @@ export default function Comment({
   //   };
   //   getNewArray();
   // };
-
+  console.log(video)
   return (
     <div>
       {user?.user ? (
@@ -394,38 +395,55 @@ export default function Comment({
               padding: "5px",
             }}
           >
+             <label for="inputTag">
+              <div style={{
+                border: "2px solid gray",
+                paddingRight:"5px",
+                cursor:"pointer",
+                textAlign:"center",
+              }}>
+                {video ? video.name : <div>                ارفع التمرين
+</div>}
+                </div>
             <input
               type="file"
+              id="inputTag"
               onChange={(e) => {
                 e.target.files[0].size > 104857500
                   ? setMoreThan("more than 100mb")
                   : setVideo(e.target.files[0]);
               }}
+              style={{ display: "none" }}
               onClick={() => {
                 setUrl(null);
                 setVideo(null);
                 setMoreThan(null);
               }}
             />
+            </label>
             {moreThan && (
               <div style={{ color: "red" }}>
                 لا يمكن رفع فيديو اكبر من 100 ميجا بايت
               </div>
             )}
             {video && !moreThan ? (
+              <div style={{display:"flex", justifyContent: "center", alignItems: "center"}}>
               <button onClick={postDetails}>رفع الفيديو</button>
+              </div>
             ) : null}
             {/* <button onClick={postDetails}>ارفع التمرين</button> */}
             <div style={{ minWidth: "70px" }}>
               {fileUpload && (
-                <span style={{ textAlign: "center", color: "black" }}>
+                <div style={{ textAlign: "center", color: "black" }}>
                   {" "}
                   تم رفع {fileUpload.percentComplete}%
-                </span>
+                </div>
               )}
               {url ? (
                 <Link to="/profile">
+                  <div style={{display:"flex", justifyContent: "center", alignItems: "center"}}>
                   <button style={{ textAlign: "center" }}>الملف الشخصي</button>
+                  </div>
                 </Link>
               ) : null}
             </div>
