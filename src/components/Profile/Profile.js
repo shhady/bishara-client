@@ -455,27 +455,28 @@ export default function Profile({ userProp }) {
     'Content-Type': 'application/json',
     'Authorization': "Bearer " + window.localStorage.getItem("token")
   }
-  useEffect(()=>{
-    const fetch = async()=>{
+  // useEffect(()=>{
+  //   const fetch = async()=>{
 
-      const res = await axios.get(process.env.REACT_APP_BACKEND_URL+`/users/me`,{
-        headers:headers
-      })
-      console.log(res)
-    }
-    fetch()
-  },[user])
+  //     const res = await axios.get(process.env.REACT_APP_BACKEND_URL+`/users/me`,{
+  //       headers:headers
+  //     })
+  //     console.log(res)
+  //   }
+  //   fetch()
+  // },[user])
 
   const changeName = async () => {
     try {
       await axios
-        .patch(process.env.REACT_APP_BACKEND_URL + `/users/me`, 
+        .patch(process.env.REACT_APP_BACKEND_URL + `/users/${userId}`, 
         {
           firstName: updateFirstName,
       },
-      {
-        headers: headers
-      })
+      // {
+      //   headers: headers
+      // }
+      )
         .then(async () => {
           const response = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
@@ -488,18 +489,20 @@ export default function Profile({ userProp }) {
     }
     try {
       await axios
-        .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/me`, {
+        .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
           firstName: updateFirstName,
           
-        } ,{
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Methods": "PATCH",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: "Bearer " + window.localStorage.getItem("token"),
-          },
-        })
+        } 
+        // ,{
+        //   headers: {
+        //     Accept: "application/json",
+        //     "Content-Type": "application/json;charset=UTF-8",
+        //     "Access-Control-Allow-Methods": "PATCH",
+        //     "Access-Control-Allow-Origin": "*",
+        //     Authorization: "Bearer " + window.localStorage.getItem("token"),
+        //   },
+        // }
+        )
         .then(async () => {
           const response = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`

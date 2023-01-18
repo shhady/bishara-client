@@ -44,9 +44,9 @@ export default function Home({
         setUpdateComponent={setUpdateComponent}
         updateComponent={updateComponent}
       />
-      {/* <FreeVideos /> */}
+      <FreeVideos />
       {/* <LearnTrainCom /> */}
-      {/* <About /> */}
+      <About />
       <Footer />
     </div>
   );

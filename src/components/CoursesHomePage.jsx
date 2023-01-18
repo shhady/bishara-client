@@ -47,7 +47,7 @@ export default function CoursesHomePage({
   console.log(courses);
 
   const drawData = () => {
-    return courses.slice(0, 5).map((course, i) => {
+    return courses.slice(0, 4).map((course, i) => {
       return (
         <div
           key={i}
@@ -70,10 +70,10 @@ export default function CoursesHomePage({
                 src={course.coursePhoto}
                 alt={course.firstName}
                 height="190px"
-                width="190px"
+                width="250px"
                 style={{
                   marginBottom: "10px",
-                  width: "190px",
+                  width: "250px",
                   height: "190px",
                   borderRadius: "5px",
                 }}
