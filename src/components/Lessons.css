@@ -1,10 +1,10 @@
-.courseDataAll{
-    margin-top:90px
+.courseDataAll {
+    margin-top: 90px
 }
 
 .main {
-    display:block;
-    position:relative;
+    display: block;
+    position: relative;
     width: 100%;
     margin: auto;
 }
@@ -13,18 +13,19 @@
 .cover {
     /* display:block; */
     /* position:relative; */
-    height:40vh;
-    overflow:hidden;
-    z-index:1;
+    height: 40vh;
+    overflow: hidden;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     /* background-image: url("https://images.unsplash.com/photo-1546058256-47154de4046c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHBpYW5vfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover; */
 }
+
 /* .hrMargin{
     width: 70%;
     margin:auto
@@ -32,93 +33,100 @@
 
 
 .cover img {
-    max-width:100%;
-    z-index:1;
+    max-width: 100%;
+    z-index: 1;
 }
 
-.infoinfo{
+.infoinfo {
     display: grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     /* display:flex; */
     /* flex-direction: column; */
     /* justify-content:center; */
     /* margin-top:10px; */
     /* text-align: center; */
 }
+
 .profile1 {
     /* display:block; */
     /* position:relative; */
-    border-radius:5px;
-    width:90%;
+    border-radius: 5px;
+    width: 90%;
     max-width: 1065px;
     padding-right: 15px;
-    height:fit-content;
-    margin:-20px auto;
+    height: fit-content;
+    margin: -20px auto;
     min-height: 250px;
     /* margin:  0 10px 20px; */
-    z-index:50;
+    z-index: 50;
     display: grid;
-    grid-template-columns:1fr;
-    gap:.5rem;
+    grid-template-columns: 1fr;
+    gap: .5rem;
     border-bottom: 1px solid rgb(138, 136, 136);
 
 }
+
 .profile img {
-    max-width:100%;
-    z-index:1;
+    max-width: 100%;
+    z-index: 1;
 }
 
-.lessonsVideos{
+.lessonsVideos {
     width: 90vw;
     margin: 100px auto;
     display: grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
 }
-.part2Info{
+
+.part2Info {
     display: flex;
     /* flex-direction: column; */
     justify-content: flex-start;
     align-items: flex-start;
     margin-top: 3rem;
 }
-.partInfo{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        /* margin-right: 2rem; */
-        /* max-width: 1065px; */
+
+.partInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* margin-right: 2rem; */
+    /* max-width: 1065px; */
 }
 
-.dashBetween{
+.dashBetween {
     padding: 0px 5px
-    }
-    .lessonCoverBig {
-        /* display: inline-block; */
-        vertical-align: middle;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        background-size: contain;
-        background-color: #000;
-        
-        margin: auto;
-        padding: 0;
-        /* position: absolute; */
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 499px;
-        max-width: 1065px;
-    }
-@media (max-width: 768px){
-    .part2Info{
+}
+
+.lessonCoverBig {
+    /* display: inline-block; */
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-color: #000;
+
+    margin: auto;
+    padding: 0;
+    /* position: absolute; */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 400px;
+    max-width: 1065px;
+}
+
+@media (max-width: 768px) {
+    .part2Info {
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
     }
+
     .lessonCoverBig {
         /* display: inline-block; */
         vertical-align: middle;
@@ -134,61 +142,66 @@
         right: 0;
         bottom: 0;
         left: 0;
-        width:100%;
+        width: 100%;
         height: 381px;
     }
-    .partInfo{
-        height:140px;
+
+    .partInfo {
+        height: 140px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         /* margin-top:30px; */
-    
-}
-    
-    .courseDataAll{
-        margin-top:60px
-    }  
-    .cover {
-        height:20vh;
-    }
-    .profile{
-        display: flex;
-        flex-direction: column;
-        justify-content:center;
-        align-items: center;
-    max-width:100%;
-    margin: auto;
-    height:fit-content;
-        /* padding:0px; */
-    /* margin:-30px auto; */
 
     }
-    .infoinfo{
-        display:flex;
+
+    .courseDataAll {
+        margin-top: 60px
+    }
+
+    .cover {
+        height: 20vh;
+    }
+
+    .profile {
+        display: flex;
         flex-direction: column;
-        justify-content:center;
-        margin-top:20px;
+        justify-content: center;
+        align-items: center;
+        max-width: 100%;
+        margin: auto;
+        height: fit-content;
+        /* padding:0px; */
+        /* margin:-30px auto; */
+
+    }
+
+    .infoinfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 20px;
         text-align: center;
     }
-    
+
 }
 
 @media (max-width: 768px) and (min-width:500px) {
-    .lessonsVideos{
+    .lessonsVideos {
         display: grid;
-        grid-template-columns:repeat(2,1fr)
+        grid-template-columns: repeat(2, 1fr)
     }
-   
+
 }
 
 @media (max-width:500px) {
-    .lessonsVideos{
+    .lessonsVideos {
         display: grid;
-        grid-template-columns:repeat(1,1fr)
+        grid-template-columns: repeat(1, 1fr)
     }
-    .hrMargin{
+
+    .hrMargin {
         margin-top: 100px;
     }
 }
