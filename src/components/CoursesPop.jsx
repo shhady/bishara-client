@@ -105,6 +105,7 @@ export default function TeachersPop({
         position: "fixed",
         height: "150vh",
         width: "100vw",
+        left:0,
         background: "transparent",
         top: 80,
       }}
@@ -113,8 +114,9 @@ export default function TeachersPop({
       <div
         style={{
           backgroundColor: "white",
-          width: "50%",
+          width: "70%",
           height: "200px",
+          margin:"auto",
           border: "0.5px solid #dcdcdc",
           borderTop: "none",
           boxShadow:
@@ -205,7 +207,7 @@ export default function TeachersPop({
               }}
               style={{ cursor: "pointer" }}
             >
-              قانون
+              فلوت
             </span>
           </div>
           <div
