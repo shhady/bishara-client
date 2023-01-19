@@ -156,6 +156,7 @@ export default function CreateCourse() {
             <option value="ايقاع">ايقاع</option>
             <option value="بزق">بزق</option>
             <option value="غناء">غناء</option>
+            <option value="عام">عام</option>
           </select>
           <select
             style={{ textAlign: "start", width: "100%" }}

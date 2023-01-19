@@ -216,7 +216,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
         .then(() => {
           // window.localStorage.setItem("courseTitle", newValue);
           setCourseTitle(newValue);
-          setUpdateComponent({...updateComponent, title:newValue})
+          setUpdated({...updated, title:newValue})
          
         })
         .then(async () => {
@@ -244,6 +244,8 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
         .then(() => {
           // window.localStorage.setItem("coursedes", newValueDes);
           setCourseDes(newValueDes);
+          setUpdateComponent({...updateComponent, description:newValueDes})
+
         })
         .then(async () => {
           const res = await axios.get(
