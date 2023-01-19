@@ -325,6 +325,16 @@ export default function Courses({
                 </div>
                 <div
                   onClick={() => {
+                    setTitle("غناء");
+                    setAll(false);
+                    setInstruments("غناء");
+                  }}
+                  className="allCourses"
+                >
+                  غناء
+                </div>
+                <div
+                  onClick={() => {
                     setTitle("بزق");
                     setAll(false);
                     setInstruments("بزق");
@@ -482,6 +492,21 @@ export default function Courses({
                 style={{ paddingLeft: " 5px" }}
               />
               ايقاع
+            </div>
+            <div
+              onClick={() => {
+                setTitle("غناء");
+                setAll(false);
+                setInstruments("غناء");
+              }}
+              className="allCourses"
+            >
+              <img
+                src="https://img.icons8.com/windows/32/null/circle.png"
+                width="12px"
+                style={{ paddingLeft: " 5px" }}
+              />
+              غناء
             </div>
 
             <div

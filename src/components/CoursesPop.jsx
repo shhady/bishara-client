@@ -115,7 +115,7 @@ export default function TeachersPop({
         style={{
           backgroundColor: "white",
           width: "70%",
-          height: "200px",
+          height: "fit-content",
           margin:"auto",
           border: "0.5px solid #dcdcdc",
           borderTop: "none",
@@ -158,14 +158,16 @@ export default function TeachersPop({
         >
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "flex-start",
+              display:"grid",
+              gridTemplateColumns:"1fr 1fr",
+              // display: "flex",
+              // flexDirection: "column",
+              // justifyContent: "flex-start",
+              // alignItems: "flex-start",
               marginBottom: "10px",
             }}
           >
-            <div
+            <span
               onClick={(e) => {
                 console.log(e.target.innerText);
                 window.localStorage.setItem("title", e.target.innerText);
@@ -175,7 +177,7 @@ export default function TeachersPop({
               style={{ cursor: "pointer" }}
             >
               بيانو
-            </div>
+            </span>
             <span
               onClick={(e) => {
                 console.log(e.target.innerText);
@@ -209,11 +211,66 @@ export default function TeachersPop({
             >
               فلوت
             </span>
+            <span
+              onClick={(e) => {
+                console.log(e.target.innerText);
+                window.localStorage.setItem("title", e.target.innerText);
+                history.push("/courses");
+                window.location.reload();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              غناء
+            </span>
+            <span
+              onClick={(e) => {
+                console.log(e.target.innerText);
+                window.localStorage.setItem("title", e.target.innerText);
+                history.push("/courses");
+                window.location.reload();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              جيتار
+            </span>
+            <span
+              onClick={(e) => {
+                console.log(e.target.innerText);
+                window.localStorage.setItem("title", e.target.innerText);
+                history.push("/courses");
+                window.location.reload();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              ايقاع
+            </span>
+            <span
+              onClick={(e) => {
+                console.log(e.target.innerText);
+                window.localStorage.setItem("title", e.target.innerText);
+                history.push("/courses");
+                window.location.reload();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              تشيلو
+            </span>
+            <span
+              onClick={(e) => {
+                console.log(e.target.innerText);
+                window.localStorage.setItem("title", e.target.innerText);
+                history.push("/courses");
+                window.location.reload();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              بزق
+            </span>
           </div>
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "space-around",
               alignItems: "center",
             }}
           >
