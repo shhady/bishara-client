@@ -14,7 +14,7 @@ export default function Footer() {
     <div
       style={{
         // background: "rgba(27,26,31,255)",
-        height: "30vh",
+        height: "15vh",
         marginTop: "30px",
         borderTop: "1.5px solid #e1e1e1",
       }}

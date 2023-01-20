@@ -870,7 +870,7 @@ export default function Header({
                 }}
                 onClick={() => {
                   history.push("/courses");
-                  window.location.reload();
+                  // window.location.reload();
                 }}
               >
                 <div className="logoAndText">

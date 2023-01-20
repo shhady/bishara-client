@@ -89,12 +89,13 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           );
           window.localStorage.setItem("courseDetails", JSON.stringify(res.data));
           setCourseInfo(res.data)
+          setUpdated(res.data)
           console.log(res);
         });
     };
     changePhoto();
     console.log(url);
-    setUpdateComponent({...updateComponent, coursePhoto:url})
+    // setUpdateComponent({...updateComponent, coursePhoto:url})
 
   }, [url]);
 
@@ -216,7 +217,10 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
         .then(() => {
           // window.localStorage.setItem("courseTitle", newValue);
           setCourseTitle(newValue);
-          setUpdated({...updated, title:newValue})
+          // setUpdated({...updated, title:newValue})
+  //         setUpdated(prevState => {
+  // return { ...prevState, title: newValue }
+// });
          
         })
         .then(async () => {
@@ -225,6 +229,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           );
           window.localStorage.setItem("courseDetails", JSON.stringify(res.data));
           setCourseInfo(res.data)
+          setUpdated(res.data)
           console.log(res);
         });
     };
@@ -244,7 +249,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
         .then(() => {
           // window.localStorage.setItem("coursedes", newValueDes);
           setCourseDes(newValueDes);
-          setUpdateComponent({...updateComponent, description:newValueDes})
+          // setUpdateComponent({...updateComponent, description:newValueDes})
 
         })
         .then(async () => {
@@ -254,6 +259,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           console.log(res);
           window.localStorage.setItem("courseDetails", JSON.stringify(res.data));
           setCourseInfo(res.data)
+          setUpdated(res.data)
         });
     };
     changeDes();
