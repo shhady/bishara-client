@@ -131,6 +131,9 @@ export default function Auth({ user, setUser, setUserProp }) {
       );
       window.localStorage.setItem("profile", JSON.stringify(result.data));
       window.localStorage.setItem("token", result.data.token);
+      window.localStorage.setItem("profilePic", result.data.user.avatar);
+      window.localStorage.setItem("firstName", result.data.user.firstName);
+      window.localStorage.setItem("lastName", result.data.user.lastName);
       history.push("/profile");
       setUser(result.data);
     } catch (error) {

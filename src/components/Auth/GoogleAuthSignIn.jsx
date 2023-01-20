@@ -20,9 +20,9 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
       );
       window.localStorage.setItem("profile", JSON.stringify(result.data));
       window.localStorage.setItem("token", result.data.token);
-      window.localStorage.setItem("firstName", userInfo.given_name);
-      window.localStorage.setItem("lastName", userInfo.family_name);
-      window.localStorage.setItem("coverPic", userInfo.picture);
+      window.localStorage.setItem("firstName", result.data.user.firstName);
+      window.localStorage.setItem("lastName", result.data.user.lastName);
+      window.localStorage.setItem("profilePic", result.data.user.avatar);
 
       history.push("/profile");
       setUser(result.data);
