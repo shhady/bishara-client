@@ -10,19 +10,26 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
     console.log(response.credential);
     let userInfo = jwt_decode(response.credential);
     setUserInformation(userInfo);
-
     try {
-      //   const result = await axios.post(
-      //     process.env.REACT_APP_BACKEND_URL + `/users`,
-      //     {
-      //       email: userInfo.email,
-      //       password: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
-      //     }
-      //   );
-      //   window.localStorage.setItem("profile", JSON.stringify(result.data));
-      //   window.localStorage.setItem("token", result.data.token);
-      //   history.push("/profile");
-      //   setUser(result.data);
+      const result = await axios.post(
+        process.env.REACT_APP_BACKEND_URL + `/users/login`,
+        {
+          email: userInfo.email,
+          password: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
+        }
+      );
+      window.localStorage.setItem("profile", JSON.stringify(result.data));
+      window.localStorage.setItem("token", result.data.token);
+      window.localStorage.setItem("firstName", userInfo.given_name);
+      window.localStorage.setItem("lastName", userInfo.family_name);
+      window.localStorage.setItem("coverPic", userInfo.picture);
+
+      history.push("/profile");
+      setUser(result.data);
+    } catch (error) {
+      setShowLoginFailMessage(true);
+    }
+    try {
       const result = await axios.post(
         process.env.REACT_APP_BACKEND_URL + `/users`,
         {
@@ -45,25 +52,7 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
     } catch (error) {
       console.log("Error creating user, trying to log in instead");
     }
-    try {
-      const result = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + `/users/login`,
-        {
-          email: userInfo.email,
-          password: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
-        }
-      );
-      window.localStorage.setItem("profile", JSON.stringify(result.data));
-      window.localStorage.setItem("token", result.data.token);
-      window.localStorage.setItem("firstName", userInfo.given_name);
-      window.localStorage.setItem("lastName", userInfo.family_name);
-      window.localStorage.setItem("coverPic", userInfo.picture);
-
-      history.push("/profile");
-      setUser(result.data);
-    } catch (error) {
-      setShowLoginFailMessage(true);
-    }
+    
   };
   const onFailure = (error) => {
     console.log(error);
