@@ -48,6 +48,7 @@ export default function Profile({ userProp }) {
     // window.localStorage.getItem("profilePic")
     ""
   );
+  const [updateDes,setUpdateDes] = useState('')
   const [poster, setPoster] = useState("");
 
   useEffect(() => {
@@ -516,6 +517,26 @@ export default function Profile({ userProp }) {
     setUpdateFirstName("");
   };
 
+  
+  const changeDes = async () => {
+    try {
+      await axios
+        .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
+          about: updateDes,
+        })
+        .then(async () => {
+          const response = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
+          );
+          window.localStorage.setItem("Des", response.data.Description);
+          // setLastName(response.data.lastName);
+        });
+    } catch (error) {
+      console.log("can't update");
+    }
+    setUpdateDes("");
+    history.push("/TeacherData")
+  };
   const changeLastName = async () => {
     try {
       await axios
@@ -784,6 +805,24 @@ export default function Profile({ userProp }) {
                       onChange={(e) => setUpdateLastName(e.target.value)}
                     />
                     <button onClick={changeLastName}>تثبيت</button>
+                  </div>
+                   <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                      marginTop: "20px",
+                    }}
+                  >
+                    <textarea
+                      type="text"
+                      placeholder="وصف المعلم"
+                      style={{ width: "70%" }}
+                      value={updateDes}
+                      onChange={(e) => setUpdateDes(e.target.value)}
+                    />
+                    <button onClick={changeDes}>تثبيت</button>
                   </div>
                 </div>
               ) : null}
