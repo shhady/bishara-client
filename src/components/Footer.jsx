@@ -30,7 +30,7 @@ export default function Footer() {
           // marginTop: "30px",
         }}
       >
-        <Link to="/qa" style={{textDecoration:"none"}}>
+        <Link to="/qa" style={{textDecoration:"none", color:"black"}}>
         <div>أسئلة متكرره</div>
         </Link>
         <div>
