@@ -7,7 +7,6 @@ import { faMessage } from "@fortawesome/free-solid-svg-icons";
 export default function StartChat({ teacherId, userId }) {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
-  console.log(currentChat);
   const history = useHistory();
   //   useEffect(() => {
   //     const getConversations = async () => {
@@ -18,7 +17,6 @@ export default function StartChat({ teacherId, userId }) {
   //         if (!res) return null;
   //         setConversations(res.data);
   //       } catch (error) {
-  //         console.log(error);
   //       }
   //     };
   //     getConversations();
@@ -32,7 +30,7 @@ export default function StartChat({ teacherId, userId }) {
     };
     conv();
   }, []);
-  console.log(conversations);
+
   const handleClick = async () => {
     //     setTeacherId(teacherId);
     //     setTopPageImg(teacher.avatar);

@@ -142,7 +142,7 @@ export default function Conversation({
 }) {
   const [user, setUser] = useState(null);
 
-  console.log(user);
+
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser);
 
@@ -168,12 +168,9 @@ export default function Conversation({
     };
     getUser();
   }, [conversation, currentUser]);
-  console.log(conversation);
-  console.log(currentChat);
-  console.log(currentUser);
-
+  
   const makeItSeen = async (conversation) => {
-    console.log(conversation);
+   
     try {
       await axios
         .patch(

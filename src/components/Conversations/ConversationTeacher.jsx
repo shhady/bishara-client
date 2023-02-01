@@ -20,7 +20,7 @@
 //             process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
 //           );
 //           setUserData(data);
-//           console.log(data);
+
 //           // dispatch({ type: "SAVE_USER", data: data });
 //           // const { data } = await getUser(userId);
 //           // setUserData(data);

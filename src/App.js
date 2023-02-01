@@ -60,7 +60,7 @@ export default function App() {
   const [updateComponent, setUpdateComponent] = useState(null);
   const [userProp, setUserProp] = useState(null);
   const [chatNotification, setChatNotification] = useState(null);
-  console.log(updateComponent);
+ 
   useEffect(() => {
     if (!user) return;
     user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);

@@ -26,18 +26,15 @@
 //       const { data } = await axios.get(
 //         process.env.REACT_APP_BACKEND_URL + `/courses/${this.state.courseId}`
 //       );
-//       console.log(data);
 //       this.setState(
 //         {
 //           questions: data,
 //           isSpinning: false,
 //         },
 //         () => {
-//           console.log(this.state.posterID);
 //         }
 //       );
 //     } catch (e) {
-//       console.log(e);
 //     }
 //   }
 
@@ -48,7 +45,6 @@
 //       Questions: this.state.newQuestion,
 //       name: this.props.currentUser.email.split("@")[0],
 //     };
-//     console.log(newPerson.id);
 //     try {
 //       const postedData = await axios.post(
 //         "https://629de115c6ef9335c0a8f53f.mockapi.io/questions",
@@ -62,7 +58,6 @@
 //         };
 //       });
 //     } catch (e) {
-//       console.log(e.message);
 //     }
 //   };
 
@@ -78,7 +73,6 @@
 //         return { questions: newQuestionsArr, isSpinning: false };
 //       });
 //     } catch (e) {
-//       console.log(e);
 //     }
 //   };
 
@@ -110,7 +104,6 @@
 
 //   paintAnswers = () => {
 //     this.state.newAnswers.map((answer) => {
-//       return console.log(answer);
 //     });
 //   };
 

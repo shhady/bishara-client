@@ -35,7 +35,7 @@ export default function TeachersPop({
       </div>
     );
 
-  // console.log(selectedTeacher);
+  
 
   const addToLocal = (course) => {
     window.localStorage.setItem("courseId", course._id);
@@ -45,7 +45,7 @@ export default function TeachersPop({
     window.localStorage.setItem("teacherId", course.owner);
   };
 
-  console.log(courses);
+  
 
   const drawData = () => {
     return courses.slice(0, 2).map((course, i) => {
@@ -74,7 +74,7 @@ export default function TeachersPop({
                   borderRadius: "5px",
                 }}
 
-                // onClick={console.log(course._id)}
+                
               />
               <div
                 style={{
@@ -169,7 +169,7 @@ export default function TeachersPop({
           >
             <span
               onClick={(e) => {
-                console.log(e.target.innerText);
+                
                 window.localStorage.setItem("title", e.target.innerText);
                 history.push("/courses");
                 window.location.reload();
@@ -180,7 +180,7 @@ export default function TeachersPop({
             </span>
             <span
               onClick={(e) => {
-                console.log(e.target.innerText);
+                
                 window.localStorage.setItem("title", e.target.innerText);
                 history.push("/courses");
                 window.location.reload();
@@ -191,7 +191,7 @@ export default function TeachersPop({
             </span>
             <span
               onClick={(e) => {
-                console.log(e.target.innerText);
+                
                 window.localStorage.setItem("title", e.target.innerText);
                 history.push("/courses");
                 window.location.reload();
@@ -202,7 +202,7 @@ export default function TeachersPop({
             </span>
             <span
               onClick={(e) => {
-                console.log(e.target.innerText);
+                
                 window.localStorage.setItem("title", e.target.innerText);
                 history.push("/courses");
                 window.location.reload();
@@ -213,7 +213,7 @@ export default function TeachersPop({
             </span>
             <span
               onClick={(e) => {
-                console.log(e.target.innerText);
+                
                 window.localStorage.setItem("title", e.target.innerText);
                 history.push("/courses");
                 window.location.reload();
@@ -224,7 +224,7 @@ export default function TeachersPop({
             </span>
             <span
               onClick={(e) => {
-                console.log(e.target.innerText);
+                
                 window.localStorage.setItem("title", e.target.innerText);
                 history.push("/courses");
                 window.location.reload();
@@ -235,7 +235,7 @@ export default function TeachersPop({
             </span>
             <span
               onClick={(e) => {
-                console.log(e.target.innerText);
+                
                 window.localStorage.setItem("title", e.target.innerText);
                 history.push("/courses");
                 window.location.reload();
@@ -246,7 +246,7 @@ export default function TeachersPop({
             </span>
             <span
               onClick={(e) => {
-                console.log(e.target.innerText);
+                
                 window.localStorage.setItem("title", e.target.innerText);
                 history.push("/courses");
                 window.location.reload();
@@ -257,7 +257,7 @@ export default function TeachersPop({
             </span>
             <span
               onClick={(e) => {
-                console.log(e.target.innerText);
+                
                 window.localStorage.setItem("title", e.target.innerText);
                 history.push("/courses");
                 window.location.reload();

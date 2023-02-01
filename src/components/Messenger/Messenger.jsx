@@ -729,7 +729,6 @@ export default function Messenger({
     };
     getConversations();
   }, [chatNotification]);
-  console.log(conversationsToShow);
   useEffect(() => {
     user.teacher
       ? setUserName(`${user.teacher.firstName} ${user.teacher.lastName}`)
@@ -786,7 +785,6 @@ export default function Messenger({
     const filteredConversations = whatToShow.filter((myConversations) => {
       return myConversations.receiver === userId;
     });
-    console.log(filteredConversations);
     setConversationsToShow(filteredConversations);
   }, [conversations]);
 
@@ -794,7 +792,7 @@ export default function Messenger({
     const whatToShowStudent = conversations.filter((myConversation) => {
       return myConversation.senderId === userId;
     });
-    console.log(whatToShowStudent);
+  
     setConversationsForStudent(whatToShowStudent);
   }, [conversations]);
   useEffect(() => {
@@ -887,8 +885,7 @@ export default function Messenger({
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
   const makeItSeen = async (currentChat) => {
-    console.log(currentChat.lastSender);
-    console.log(userId);
+    
     if (currentChat.lastSender === userId)
       return console.log("i'm the last sender");
     try {
@@ -922,7 +919,7 @@ export default function Messenger({
                     onClick={() => {
                       setCurrentChat(specificConv);
                       setChatNotification(false);
-                      console.log(specificConv);
+                      
                     }}
                     key={i}
                   >
@@ -946,7 +943,7 @@ export default function Messenger({
                     onClick={() => {
                       setCurrentChat(specificConv);
                       setChatNotification(false);
-                      console.log(specificConv);
+                     
                     }}
                     key={i}
                   >

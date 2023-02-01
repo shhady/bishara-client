@@ -9,6 +9,14 @@ export default function QA() {
         tell me about yourself?
     </summary>
     nice nice 
-</details></div>
+</details>
+<details>
+    <summary>
+        ask me anything...
+    </summary>
+    what ?
+</details>
+
+</div>
   )
 }

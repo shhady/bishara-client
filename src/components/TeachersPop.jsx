@@ -30,7 +30,6 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
       </div>
     );
 
-  // console.log(selectedTeacher);
 
   const addToLocal = (teacher) => {
     window.localStorage.setItem("teacherId", teacher._id);
@@ -65,7 +64,6 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
                   marginBottom: "0px",
                 }}
                 onClick={() => addToLocal(teacher)}
-                // onClick={console.log(teacher._id)}
               />
               <span
                 style={{ color: "black", fontWeight: "700", marginTop: "0px" }}

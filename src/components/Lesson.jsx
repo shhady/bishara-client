@@ -24,16 +24,14 @@ export default function Lesson({ socket }) {
     history.push("/lessons");
   };
 
-  console.log(id);
+  
   useEffect(() => {
     setListId(courseInfo.playlistId);
   }, [courseInfo]);
   console.log(
     window.location.pathname.slice(43, window.location.pathname.length)
   );
-  console.log(lesson);
-  console.log(courseInfo);
-  console.log(lessons);
+  
 
   useEffect(() => {
     const fetch = async () => {
@@ -61,7 +59,7 @@ export default function Lesson({ socket }) {
   useEffect(() => {
     history.replace(`${lesson.snippet.resourceId.videoId}`);
   }, [lesson]);
-  console.log(lesson.snippet.position + 1);
+  
 
   const drawSuggestions = () => {
     return lessons?.map((lessonSuggest, i) => {

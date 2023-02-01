@@ -32,18 +32,18 @@ export default function Course() {
     setEpisode(e.target.value);
   };
 
-  console.log(courseId);
+  
   window.onpopstate = () => {
     history.push("/courses");
   };
-  console.log(user);
+ 
   useEffect(() => {
     if (!user) return;
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
 
     // setCourseId(location.id);
   }, []);
-  console.log(course);
+
 
   useEffect(() => {
     if (!courseId) return;
@@ -51,7 +51,7 @@ export default function Course() {
       const res = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/courses/${courseId}`
       );
-      console.log(res.data);
+  
       setCourse(res.data);
     };
     fetch();

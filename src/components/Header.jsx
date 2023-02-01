@@ -69,10 +69,7 @@ export default function Header({
     setNotificationNumber(backNot.filter((number) => number.read === false));
   }, [backNot]);
 
-  console.log(redLightNotification);
-  console.log(redLightNotificationReply);
-  console.log(teacherPracticesUnReplied);
-  console.log(chatNotification);
+ 
   useEffect(() => {
     if (!user) return;
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
@@ -98,7 +95,7 @@ export default function Header({
           `/studentpractices/${user?.user._id}`
       );
       setUserPractices(res.data);
-      console.log(res.data);
+      
     };
     fetch();
   }, [userId]);
@@ -132,7 +129,7 @@ export default function Header({
 
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
-      console.log(data);
+      
       setRedLightNotification(data);
       // setRedLightNotificationReply(true);
     });
@@ -140,9 +137,9 @@ export default function Header({
 
   useEffect(() => {
     if (chatNotification) return;
-    console.log("not opened");
+   
     socket?.on("getMessage", (data) => {
-      console.log(data);
+      
       notificationMessage.includes(data.senderId);
       // setNotifyMessage((prev) => [...prev, data]);
       setNotifyMessage(true);
@@ -156,8 +153,7 @@ export default function Header({
         process.env.REACT_APP_BACKEND_URL + `/conversations/${userId}`
       );
       setAllConversations(response.data);
-      console.log(response.data);
-      console.log(userId);
+     
     };
     unreadMessage();
   }, [userId]);
@@ -168,7 +164,7 @@ export default function Header({
         conversation.seen === "false" && conversation.lastSender !== userId
       );
     });
-    console.log(conversationsToNotify);
+    
     setNotifyMessage(conversationsToNotify);
   }, [allConversations]);
 
@@ -267,12 +263,11 @@ export default function Header({
       );
       setRedLightNotification(redlight);
       setUserComments(specificComments);
-      console.log(specificComments);
+      
     };
     filterComment();
   }, [comments, user]);
 
-  console.log(userComments);
 
   const uniques = notificationMessage
     .map((obj) => {
@@ -309,7 +304,7 @@ export default function Header({
       const res = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
       );
-      console.log(res.data);
+     
       // const filterData = res.data.filter(
       //   (practice) => practice.teacherId === userId
       // );
@@ -318,7 +313,7 @@ export default function Header({
     fetchPractices();
   }, [userId]);
 
-  console.log(teacherPracticesNotifications);
+
   useEffect(() => {
     const filteredPractices = teacherPracticesNotifications.filter(
       (practice) => {

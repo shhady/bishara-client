@@ -7,7 +7,7 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
   const [userInformation, setUserInformation] = useState(null);
   const history = useHistory();
   const onSuccess = async (response) => {
-    console.log(response.credential);
+   
     let userInfo = jwt_decode(response.credential);
     setUserInformation(userInfo);
     try {

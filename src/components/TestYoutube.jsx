@@ -11,9 +11,7 @@ export default function TestYoutube({ listId, course }) {
   const [videoSRC, setVideoSRC] = useState("9GejeXh-zKE");
   const [data, setData] = useState(null);
   useEffect(() => {
-    // console.log(course);
   }, [videos]);
-  // console.log(courseId);
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(

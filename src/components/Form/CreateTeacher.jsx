@@ -66,17 +66,14 @@ export default function CreateTeacher() {
         },
       })
       .then((res) => setUrlCover(res.data.url))
-      // .then((data) => {
-      //   (data.url);
-      // })
-      // .then(console.log(url))
+  
       .catch((err) => {
         console.log(err);
       });
   }, [imageCover]);
   // };
-  console.log(urlAvatar);
-  console.log(urlCover);
+
+
   useEffect(() => {
     setTeacher({ ...teacher, avatar: urlAvatar });
   }, [urlAvatar]);
@@ -98,7 +95,6 @@ export default function CreateTeacher() {
     setTeacher({ ...teacher, [e.target.name]: e.target.value });
   };
 
-  console.log(teacher);
   // const handleAvatar = (e) => {
   //   const file = e.target.files[0];
   //   transformFile(file);

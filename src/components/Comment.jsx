@@ -45,9 +45,7 @@ export default function Comment({
     // video: chooseVideo.episode,
   });
   const [moreThan, setMoreThan] = useState(null);
-  console.log(userF);
-  console.log(lesson);
-  console.log(courseInfo);
+ 
 
   useEffect(() => {
     if (!user) return;
@@ -86,7 +84,7 @@ export default function Comment({
       .then((res) => setUrl(res.data.url))
       .then(() => {
         setVideo(null)
-        console.log(lesson);
+        // console.log(lesson);
       })
       // .then(console.log(url))
       .catch((err) => {
@@ -114,8 +112,7 @@ export default function Comment({
     });
   }, [url]);
 
-  console.log(url);
-  console.log(practiceInfo);
+  
   // useEffect(() => {
   //   setSocket(
   //     io(

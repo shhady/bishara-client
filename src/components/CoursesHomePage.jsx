@@ -34,7 +34,7 @@ export default function CoursesHomePage({
       </div>
     );
 
-  // console.log(selectedTeacher);
+ 
 
   const addToLocal = (course) => {
     window.localStorage.setItem("courseId", course._id);
@@ -44,7 +44,7 @@ export default function CoursesHomePage({
     window.localStorage.setItem("teacherId", course.owner);
   };
 
-  console.log(courses);
+
 
   const drawData = () => {
     return courses.slice(0, 5).map((course, i) => {
@@ -78,7 +78,7 @@ export default function CoursesHomePage({
                   borderRadius: "5px",
                 }}
 
-                // onClick={console.log(course._id)}
+               
               />
               <div
                 style={{

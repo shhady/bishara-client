@@ -8,7 +8,6 @@
 //   handleUpdateClick = () => {
 //     this.props.handleUpdate(this.props.id, this.state.value);
 //     this.setState({ value: "" });
-//     // console.log(this.props.answers);
 //   };
 
 //   render() {

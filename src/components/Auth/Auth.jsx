@@ -29,7 +29,7 @@ export default function Auth({ user, setUser, setUserProp }) {
   const [passwordsDontMatch, setPasswordsDontMatch] = useState(null);
   // const dispatch = useDispatch();
   const history = useHistory();
-  // console.log(userData);
+
   const clientId =
     "623673237970-p01olkhljcqajn23tb7eipt3cs6laqb3.apps.googleusercontent.com";
 
@@ -64,9 +64,7 @@ export default function Auth({ user, setUser, setUserProp }) {
   //     window.localStorage.setItem("coverPic", result.data.teacher.cover);
   //     window.localStorage.setItem("firstName", result.data.teacher.firstName);
   //     window.localStorage.setItem("lastName", result.data.teacher.lastName);
-  //     console.log(result);
   //     setTeacherData(result.data);
-  //     console.log(result.data.teacher);
   //     setUser(result.data);
 
   //     history.push("/profile");
@@ -87,7 +85,7 @@ export default function Auth({ user, setUser, setUserProp }) {
       window.localStorage.setItem("profilePic", result.data.user.avatar);
       window.localStorage.setItem("firstName", result.data.user.firstName);
       window.localStorage.setItem("lastName", result.data.user.lastName);
-      console.log(result.data.user);
+   
       // setTeacherData(result.data);
       setUser(result.data);
       setUserProp(result.data);
@@ -106,9 +104,7 @@ export default function Auth({ user, setUser, setUserProp }) {
       window.localStorage.setItem("coverPic", result.data.teacher.cover);
       window.localStorage.setItem("firstName", result.data.teacher.firstName);
       window.localStorage.setItem("lastName", result.data.teacher.lastName);
-      console.log(result);
       setTeacherData(result.data);
-      console.log(result.data.teacher);
       setUser(result.data);
 
       history.push("/profile");

@@ -84,9 +84,7 @@ export default function Profile({ userProp }) {
     MyVideo();
   }, []);
 
-  console.log({ user: userProp });
-  console.log({ local: user });
-  console.log(localStorage.getItem("profilePic"));
+
   const postDetails = () => {
     const formData = new FormData();
     formData.append("file", image);
@@ -146,7 +144,7 @@ export default function Profile({ userProp }) {
         });
     };
     changePhoto();
-    console.log(url);
+   
 
     setShowButtonCoverUpdate(false);
   }, [urlCover]);
@@ -231,7 +229,7 @@ export default function Profile({ userProp }) {
     } catch (error) {
       console.log("not student");
     }
-    console.log(url);
+    
     setShowButtonAvatarUpdate(false);
   }, [url]);
   // const handleUserLogoutFromAllDevices = async () => {
@@ -277,7 +275,7 @@ export default function Profile({ userProp }) {
         process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user.user._id}`
       );
       setUserPractices(res.data);
-      console.log(res.data);
+   
     };
     fetch();
   }, [userId]);

@@ -40,8 +40,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
     setUpdated("");
   };
 
-  console.log(courseInfo);
-  console.log(updateComponent);
+ 
 
   useEffect(() => {
     if (!image) return;
@@ -90,11 +89,11 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           window.localStorage.setItem("courseDetails", JSON.stringify(res.data));
           setCourseInfo(res.data)
           setUpdated(res.data)
-          console.log(res);
+         
         });
     };
     changePhoto();
-    console.log(url);
+    
     // setUpdateComponent({...updateComponent, coursePhoto:url})
 
   }, [url]);
@@ -103,7 +102,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
     setUpdated(updateComponent);
   }, [updateComponent]);
 
-  console.log(updated);
+
   useEffect(() => {
     if (updated) {
       setListId(updated.playlistId);
@@ -111,7 +110,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
       setListId(courseInfo.playlistId);
     }
   }, [courseInfo, updated]);
-  console.log(listId);
+  
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(
@@ -138,7 +137,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
     window.localStorage.setItem("playlistId", lesson.snippet.playlistId);
     window.localStorage.setItem("teacherId", updated.owner);
   };
-  console.log(lessons);
+  
   useEffect(() => {}, [lessons]);
   const drawLessons = () => {
     return lessons?.map((lesson, i) => {
@@ -230,7 +229,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           window.localStorage.setItem("courseDetails", JSON.stringify(res.data));
           setCourseInfo(res.data)
           setUpdated(res.data)
-          console.log(res);
+          
         });
     };
     changeTitle();
@@ -256,7 +255,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           const res = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`
           );
-          console.log(res);
+        
           window.localStorage.setItem("courseDetails", JSON.stringify(res.data));
           setCourseInfo(res.data)
           setUpdated(res.data)

@@ -99,7 +99,6 @@ export default function StudentsPractices({ user }) {
     );
     setOnlyForTeacher(filterByTeacher);
   }, [autoReplies]);
-  console.log(autoReplies);
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(
@@ -126,7 +125,6 @@ export default function StudentsPractices({ user }) {
     fetch();
   }, []);
 
-  console.log(teacherReplies.videoReply);
 
   const handleReply = (e) => {
     setReply(e.target.value);
@@ -165,8 +163,7 @@ export default function StudentsPractices({ user }) {
     setNowDo("false");
   }, [doneAddingComment]);
 
-  // console.log(teacherPractices);
-  // console.log(onlyForTeacher);
+
   const getPracticeUnique = (practice) => {
     const newBU = onlyForTeacher.filter(
       (filteredPractices) =>

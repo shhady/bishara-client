@@ -62,8 +62,6 @@ export default function TeacherData({
     setFilteredCourses(filteredCourses);
   }, [courses, teacherId]);
 
-  console.log(filteredCourses);
-  console.log(courses);
   if (!teacherInfo)
     return (
       <div
@@ -103,7 +101,6 @@ export default function TeacherData({
   };
 
   const deleteCourse = (course) => {
-    console.log(course);
     const deleteTheCourse = async () => {
       await axios.delete(
         process.env.REACT_APP_BACKEND_URL + `/courses/${course._id}`
@@ -112,7 +109,6 @@ export default function TeacherData({
     deleteTheCourse();
     // history.push("/");
   };
-  console.log(filteredCourses.length);
   const drawCourses = () => {
     return filteredCourses?.map((course, i) => {
       return (

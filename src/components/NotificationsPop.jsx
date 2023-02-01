@@ -46,7 +46,7 @@ export default function NotificationsPop({
       const res = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
       );
-      console.log(res.data);
+     
       // const filterData = res.data.filter(
       //   (practice) => practice.teacherId === userId
       // );
@@ -55,7 +55,6 @@ export default function NotificationsPop({
     fetchPractices();
   }, [userId]);
 
-  console.log(teacherPracticesNotifications);
   useEffect(() => {
     const filteredPractices = teacherPracticesNotifications.filter(
       (practice) => {
@@ -71,24 +70,20 @@ export default function NotificationsPop({
         (comment) => comment.courseOwnerId === userId
       );
       setUserComments(specificComments);
-      console.log(specificComments);
     };
     filterComment();
   }, [comments]);
 
   useEffect(() => {
-    console.log(comments);
     const filterReply = () => {
       const specificReplies = comments?.filter(
         (reply) => reply.userid === userId
       );
       setUserReplies(specificReplies);
-      console.log(specificReplies);
     };
     filterReply();
   }, [comments]);
 
-  console.log(userReplies);
 
   useEffect(() => {
     if (user.teacher) return;
@@ -97,7 +92,6 @@ export default function NotificationsPop({
         process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user.user._id}`
       );
       setUserPractices(res.data);
-      console.log(res.data);
     };
     fetch();
   }, [userId]);
@@ -240,10 +234,8 @@ export default function NotificationsPop({
     //   return <div>{reply.firstName}</div>;
     // });
   };
-  console.log(repliesShow);
 
   const handleClickOnReply = (replies) => {
-    console.log(replies.playlistId);
     const setAsRead = async () => {
       await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/comments/${replies._id}`, {
@@ -277,7 +269,6 @@ export default function NotificationsPop({
   };
 
   const handleClickOnNotification = (comment) => {
-    console.log({ comment: comment });
     const setAsRead = async () => {
       await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/comments/${comment._id}`, {
@@ -287,7 +278,6 @@ export default function NotificationsPop({
         //   const result = await axios.get(
         //     process.env.REACT_APP_BACKEND_URL + `/comments/`
         //   );
-        //   console.log(result);
         //   setBackNot(
         //     result.data.filter((comment) => comment.courseOwnerId === userId)
         //   );
@@ -311,7 +301,6 @@ export default function NotificationsPop({
             process.env.REACT_APP_BACKEND_URL + `/comments`
           );
           setComments(res.data);
-          console.log(res.data);
           setRedLightNotification(false);
         })
         .then(

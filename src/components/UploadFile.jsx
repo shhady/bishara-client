@@ -29,7 +29,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
       // .then((data) => {
       //   (data.url);
       // })
-      // .then(console.log(url))
+    
       .catch((err) => {
         console.log(err);
       });
@@ -41,8 +41,6 @@ export default function UploadFile({ courseInfo, lesson, id }) {
         process.env.REACT_APP_BACKEND_URL + `/files/${id}`
       );
       setTheFile(response.data[0]);
-      console.log(response.data);
-      console.log(id);
       setFile(null);
       setFileUpload(null);
     };
@@ -55,8 +53,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
           `/files/${lesson.snippet.resourceId.videoId}`
       );
       setTheFile(response.data[0]);
-      console.log(response.data);
-      console.log(id);
+      
       setFileUploaded(null);
     };
     fetch();
@@ -81,13 +78,8 @@ export default function UploadFile({ courseInfo, lesson, id }) {
       });
   };
 
-  //   console.log(theFile[0]?.fileUrl);
 
-  //   const downloadFile = () => {
-  //     console.log("clickkkeddd");
-  //     // saveAs(theFile[0]?.fileUrl);
-  //   };
-  //   }, [url]);
+
   useEffect(() => {
     console.log(theFile?.fileUrl);
   }, [theFile, id]);
@@ -101,7 +93,6 @@ export default function UploadFile({ courseInfo, lesson, id }) {
   //   };
 
   const deleteTheFile = (theFile) => {
-    console.log(theFile);
     axios
       .delete(process.env.REACT_APP_BACKEND_URL + `/files/${theFile._id}`)
       .then(async () => {

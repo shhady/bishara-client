@@ -41,7 +41,6 @@ export default function Teachers({
   //   getPrevent();
   // }, []);
 
-  // console.log(checkChat);
 
   // const handleClick = (teacher) => {
   //   setSelectedTeacher(teacher._id);
@@ -56,7 +55,6 @@ export default function Teachers({
   //     const exists = preventChat.find(
   //       (x) => x.senderId === userId && x.receiverId === selectedTeacher
   //     );
-  //     console.log(exists);
   //     if (exists) {
   //       return console.log("already conversation");
   //     } else {
@@ -69,11 +67,9 @@ export default function Teachers({
   //         process.env.REACT_APP_BACKEND_URL + "/conversations",
   //         checkChat
   //       );
-  //       console.log("prevent Update, conv");
   //     }
   //   };
   //   startChat();
-  //   console.log(preventChat);
   // }, [checkChat]);
 
   const history = useHistory();
@@ -90,7 +86,6 @@ export default function Teachers({
     };
     fetch();
   }, []);
-  console.log(teachers);
   if (!teachers)
     return (
       <div
@@ -115,7 +110,6 @@ export default function Teachers({
       </div>
     );
 
-  // console.log(selectedTeacher);
 
   const drawData = () => {
     return teachers.map((teacher, i) => {

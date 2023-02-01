@@ -40,7 +40,6 @@ export default function TeachersPop({ setTeachersHover }) {
       </div>
     );
 
-  // console.log(selectedTeacher);
   const moveToTeacher = (teacher) => {
     window.localStorage.setItem("teacherId", teacher._id);
   };

@@ -36,7 +36,6 @@ export default function PracticeReplies({ user }) {
   const [moreThan, setMoreThan] = useState(null);
   // const fileInput = useRef(null);
 
-  console.log(moreThan);
   const unique_id = uuid();
 
   const history = useHistory();
@@ -64,7 +63,6 @@ export default function PracticeReplies({ user }) {
     const userid = user.user ? user.user._id : user.teacher._id;
     setUserId(userid);
   }, [user]);
-  console.log(theUser);
   // Fetch replies data when component mounts
   useEffect(() => {
     const fetchReplies = async () => {
@@ -75,7 +73,6 @@ export default function PracticeReplies({ user }) {
     };
     fetchReplies();
   }, [userId]);
-  console.log(autoReplies);
   // Filter replies data by teacher's user ID
   // useEffect(() => {
   //   const filterByTeacher = autoReplies.filter(
@@ -92,7 +89,6 @@ export default function PracticeReplies({ user }) {
         process.env.REACT_APP_BACKEND_URL +
           `/mypractices/${theUser.teacher._id}`
       );
-      console.log(res.data);
       // const filterData = res.data.filter(
       //   (practice) => practice.teacherId === userId
       // );
@@ -301,7 +297,6 @@ export default function PracticeReplies({ user }) {
     setVideo(null);
   };
   // Render video replies
-  // console.log(replyId);
   const renderVideoReplies = (replies, practice) => {
     return replies.map((reply, i) => {
       return (
@@ -357,12 +352,9 @@ export default function PracticeReplies({ user }) {
       );
     });
   };
-  console.log(video);
 
   const handleDeleteReply = async (practice, reply) => {
-    console.log(practice);
-    console.log(reply.replyId);
-    console.log(replyId);
+    
     //   .then(console.log(replyToDelete))
     await axios
       .put(
@@ -380,7 +372,6 @@ export default function PracticeReplies({ user }) {
         setTeacherPractices(res.data);
       });
   };
-  console.log(teacherPractices);
   // Render showData component
   const showData = () => {
     return teacherPractices?.map((practice) => {

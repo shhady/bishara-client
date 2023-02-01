@@ -37,7 +37,7 @@ export default function CommentYouTubeVideo({
   const [commentId, setCommentId] = useState("");
   const [replyToDeleteId, setReplyToDeleteId] = useState("");
   const unique_id = uuid();
-  console.log(videoComments);
+ 
   useEffect(() => {
     user.user
       ? setUserF(user.user.firstName)
@@ -48,7 +48,7 @@ export default function CommentYouTubeVideo({
       ? setUserAvatar(user.user.avatar)
       : setUserAvatar(user.teacher.avatar);
   }, [user]);
-  console.log(userId);
+  
 
   useEffect(() => {
     const fetch = async () => {
@@ -77,7 +77,7 @@ export default function CommentYouTubeVideo({
     });
   };
 
-  console.log(myReply);
+  
   const handleSubmitReply = async (comment) => {
     if (!myReply) return;
     socket.emit("sendNotificationComment", {
@@ -135,9 +135,8 @@ export default function CommentYouTubeVideo({
       courseDetails: courseDetails,
     });
   };
-  console.log(courseInfo);
+
   const handleSubmitComment = async () => {
-    console.log(comment);
     if (!myComment) return;
     socket.emit("sendNotificationComment", {
       senderName: userF,
@@ -161,7 +160,7 @@ export default function CommentYouTubeVideo({
         fetch();
       });
   };
-  console.log(myComment);
+ 
 
   useEffect(() => {
     const filterComment = () => {
@@ -169,11 +168,11 @@ export default function CommentYouTubeVideo({
         (comment) => comment.videoName === id
       );
       setVideoComments(specificComments);
-      console.log(specificComments);
+      
     };
     filterComment();
   }, [courseComments, lesson, id]);
-  console.log(id);
+  
   const handleDeleteComment = (comment) => {
     const deleteTheComment = async () => {
       await axios
@@ -182,19 +181,19 @@ export default function CommentYouTubeVideo({
           const freshComments = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/comments`
           );
-          console.log(freshComments.data);
+          
           const resultComments = freshComments?.data.filter(
             (comment) => comment.videoName === lesson.snippet.resourceId.videoId
           );
           setVideoComments(resultComments);
-          console.log(resultComments);
+          
         });
     };
     deleteTheComment();
   };
-  console.log(replyId);
+ 
   const handleDeleteReply = async (comment) => {
-    console.log(comment._id);
+    
 
     //   .then(console.log(replyToDelete))
 
@@ -209,12 +208,12 @@ export default function CommentYouTubeVideo({
         const freshComments = await axios.get(
           process.env.REACT_APP_BACKEND_URL + `/comments`
         );
-        console.log(freshComments.data);
+      
         const resultComments = freshComments?.data.filter(
           (comment) => comment.videoName === lesson.snippet.resourceId.videoId
         );
         setVideoComments(resultComments);
-        console.log(resultComments);
+        
       });
     //     const newReplies = videoComments?.filter(
     //       (reply) => reply._id === comment._id
@@ -498,7 +497,7 @@ export default function CommentYouTubeVideo({
       );
     });
   };
-  console.log(videoComments);
+  
   return (
     <div>
       <div className="commentsSection">

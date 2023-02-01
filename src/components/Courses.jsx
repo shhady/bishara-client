@@ -38,9 +38,9 @@ export default function Courses({
       setTitle(null);
     }
   }, []);
-  console.log(title);
+  
   useEffect(() => {
-    // console.log(all);
+   
     const fetch = async () => {
       const result = await axios.get(
         process.env.REACT_APP_BACKEND_URL + "/courses"
@@ -49,31 +49,14 @@ export default function Courses({
     };
     fetch();
   }, []);
-  // console.log(posts);
-  // const filterCourses = (e) => {
-  // console.log(e.target.innerText);
+  
   useEffect(() => {
     const filtered = posts?.filter((post) => post.instrument === title);
     setFilteredposts(filtered);
     // setAll(false);
   }, [title, all, posts]);
 
-  // };
-  // useEffect(() => {
-  //   if (!courseData) return;
-  //   const fetch = async () => {
-  //     const res = await axios.get(
-  //       process.env.REACT_APP_BACKEND_URL+`/courses/${courseData}`
-  //     );
-  //     console.log(res.data);
-  //     setCourse(res.data);
-  //   };
-  //   fetch();
-  //   //   console.log(res);
-  //   //   setCourse(res.data);
-  // }, [courseData]);
-
-  // console.log(user);
+ 
   if (!posts)
     return (
       <div
@@ -99,11 +82,11 @@ export default function Courses({
     );
 
   const handleClick = (post) => {
-    console.log(post);
+   
     setAll(true);
     // setSelectedTeacher(post.owner);
     // const res = await axios.get(process.env.REACT_APP_BACKEND_URL+`/courses/${post._id}`);
-    // console.log(res);
+    
     setCourseData(post._id);
     history.push(`/Lessons`);
     window.localStorage.setItem("courseId", post._id);

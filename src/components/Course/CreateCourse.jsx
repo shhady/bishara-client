@@ -30,8 +30,7 @@ export default function CreateCourse() {
   const firstName = useRef(user.teacher.firstName);
   const lastName = useRef(user.teacher.lastName);
   const avatar = useRef(user.teacher.avatar);
-  console.log(url);
-  console.log(course);
+  
   const postDetails = (e) => {
     e.preventDefault();
     const formData = new FormData();
