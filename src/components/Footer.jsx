@@ -4,6 +4,7 @@ import {
   faPhone,
   faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom"
 export default function Footer() {
   const [showContactUs, setShowContactUs]=useState(false)
   function sendEmail() 
@@ -29,7 +30,9 @@ export default function Footer() {
           // marginTop: "30px",
         }}
       >
+        <Link to="/qa">
         <div>أسئلة متكرره</div>
+        </Link>
         <div>
         <div onClick={()=>setShowContactUs(!showContactUs)} style={{cursor:"pointer"}}>تواصل معنا</div> 
         {showContactUs ? (

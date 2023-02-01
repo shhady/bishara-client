@@ -32,7 +32,8 @@ export default function CreateCourse() {
   const avatar = useRef(user.teacher.avatar);
   console.log(url);
   console.log(course);
-  const postDetails = () => {
+  const postDetails = (e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append("file", image);
     formData.append("upload_preset", "bisharaHaroni");
