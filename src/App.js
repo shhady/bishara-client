@@ -45,6 +45,7 @@ const PracticeReplies = React.lazy(() =>
 
 const Subscribe = React.lazy(() => import("./components/Subscribe"));
 
+const Evaluation = React.lazy(() => import("./components/Evaluation"));
 // const Oud = React.lazy(() => import("./components/Oud"));
 // const Piano = React.lazy(() => import("./components/PianoPage"));
 
@@ -111,6 +112,14 @@ export default function App() {
           </Route>
           <Route path="/qa">
             <QA user={user}/>
+          </Route>
+          <Route path="/evaluation">
+            <Evaluation  user={user}
+              setUser={setUser}
+              setTeacher={setTeacher}
+              teacher={teacher}
+              listId={listId}
+              socket={socket}/>
           </Route>
           <Route path="/PracticeReplies" exact>
             <PracticeReplies user={user} setUser={setUser} />

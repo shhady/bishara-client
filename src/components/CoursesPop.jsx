@@ -15,11 +15,13 @@ export default function TeachersPop({
       const result = await axios.get(
         process.env.REACT_APP_BACKEND_URL + "/courses"
       );
-      setCourses(result.data);
+      setCourses(result.data.filter((global)=>{
+        return global.playlistId !== "PLVyh_TRAmEfFr6I1LMZ0EadFWU4tXZmyw"
+       }));
     };
     fetch();
   }, []);
-
+  console.log(courses)
   if (!courses)
     return (
       <div

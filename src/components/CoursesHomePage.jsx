@@ -4,7 +4,7 @@ import "./Teachers.css";
 import { Link } from "react-router-dom";
 // import {useNav} from "react-router-dom"
 export default function CoursesHomePage({
-  setCoursesHover,
+  // setCoursesHover,
   setUpdateComponent,
   updateComponent,
 }) {
@@ -14,7 +14,9 @@ export default function CoursesHomePage({
       const result = await axios.get(
         process.env.REACT_APP_BACKEND_URL + "/courses"
       );
-      setCourses(result.data);
+      setCourses(result.data.filter((global)=>{
+        return global.playlistId !== "PLVyh_TRAmEfFr6I1LMZ0EadFWU4tXZmyw"
+       }));
     };
     fetch();
   }, []);
@@ -52,7 +54,7 @@ export default function CoursesHomePage({
         <div
           key={i}
           onClick={() => {
-            setCoursesHover(false);
+            // setCoursesHover(false);
             setUpdateComponent(course);
           }}
           className="homepagecourses"

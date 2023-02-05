@@ -1,15 +1,17 @@
-.profile-teacher{
+.profile-teacher {
     width: 80%;
-    margin:auto;
+    margin: auto;
     display: grid;
     grid-template-columns: 1fr 4fr;
     gap: 2rem;
     align-items: center;
 }
-.teacherDataAll{
+
+.teacherDataAll {
     margin-top: 80px;
 }
-.coverHeight{
+
+.coverHeight {
     height: 80vh;
 }
 
@@ -23,189 +25,220 @@
 } */
 
 .main {
-    display:block;
-    position:relative;
+    display: block;
+    position: relative;
     width: 100%;
     margin: 0 auto;
 }
 
 
 .cover {
-    display:block;
-    height:100vh;
-    overflow:hidden;
-    z-index:1;
+    display: block;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
+
 .cover img {
-    max-width:100%;
+    max-width: 100%;
 }
-.imageProfile{
-    width:221px;
-            height:221px;
-            max-width:100%;
-            z-index:8;
-            /* margin-top: -50px; */
-            position: absolute;
-              top: 80vh;
+
+.imageProfile {
+    width: 221px;
+    height: 221px;
+    max-width: 100%;
+    z-index: 8;
+    /* margin-top: -50px; */
+    position: absolute;
+    top: 80vh;
 }
-.buttonProfile{
-    z-index:8;
-            margin-top: 100px;
-            
+
+.buttonProfile {
+    z-index: 8;
+    margin-top: 100px;
+
 }
-.imageProfilediv{
+
+.imageProfilediv {
     min-width: 221px;
 }
-.coursesDrawCss1{
-    width:90%;
-    height:60%;
+
+.coursesDrawCss1 {
+    width: 90%;
+    height: 60%;
     margin: auto;
-    margin-top:40px;
+    margin-top: 40px;
     display: grid;
-    grid-template-columns:repeat(1,1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 4rem;
 }
-.coursesDrawCss2{
-    width:90%;
+
+.coursesDrawCss2 {
+    width: 90%;
     margin: auto;
-    margin-top:40px;
+    margin-top: 40px;
     display: grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 4rem;
 }
-.coursesDrawCss3{
-    width:90%;
+
+.coursesDrawCss3 {
+    width: 90%;
     margin: auto;
-    margin-top:40px;
+    margin-top: 40px;
     display: grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 4rem;
 }
 
 .profile {
     /* display:block; */
     /* position:relative; */
-    border-radius:5px;
-    width:70%;
-    margin:auto;
+    border-radius: 5px;
+    width: 70%;
+    margin: auto;
     min-height: 250px;
-    height:fit-content;
+    height: fit-content;
     display: grid;
-    grid-template-columns:1fr 3fr;
-    gap:.5rem;
+    grid-template-columns: 1fr 3fr;
+    gap: .5rem;
     padding-bottom: 50px;
     border-bottom: 1px solid #e1e1e1;
 }
+
 /* .profile img {
     max-width:100%;
     z-index:8;
     margin: -0px;
 
 } */
-.buttonMobile{
-    display:none;
+.buttonMobile {
+    display: none;
 }
-.teacherDetailsAtData{
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
+
+.teacherDetailsAtData {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     margin-top: 50px;
     padding-right: 40px;
 }
-.dawrat{
-    text-align:center;
+
+.dawrat {
+    text-align: center;
     margin-top: 70px;
 }
+
 @media (max-width: 768px) {
-    .dawrat{
-        text-align:center;
+    .dawrat {
+        text-align: center;
         margin-top: 50px;
     }
-    .teacherDetailsAtData{
-        display:"flex";
-        flex-direction:column;
-        justify-content:center;
+
+    .teacherDetailsAtData {
+        display: "flex";
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
         text-align: center;
         padding-right: 0px;
         margin-top: 80px;
 
     }
-    .imageProfile{
-        width:190px;
-        height:190px;
+
+    .imageProfile {
+        width: 190px;
+        height: 190px;
     }
-    .coverHeight{
+
+    .coverHeight {
         height: 50vh;
     }
-    .imageProfile{
-        width:221px;
-                height:221px;
-                max-width:100%;
-                z-index:8;
-                /* margin-top: -50px; */
-                position: absolute;
-                  top: 40vh;
+
+    .imageProfile {
+        width: 221px;
+        height: 221px;
+        max-width: 100%;
+        z-index: 8;
+        /* margin-top: -50px; */
+        position: absolute;
+        top: 40vh;
     }
-    .profile{
-        display:block;
-    /* position:relative; */
-    border-radius:5px;
-    width:97%;
-    margin:auto;
-    height:fit-content;
-    margin: -15px auto;
-    /* z-index:9; */
-    display: grid;
-    grid-template-columns:1fr;
-    gap:.5rem;
-    }
-    .coursesDrawCss{
-        margin-top:40px;
+
+    .profile {
+        display: block;
+        /* position:relative; */
+        border-radius: 5px;
+        width: 97%;
+        margin: auto;
+        height: fit-content;
+        margin: -15px auto;
+        /* z-index:9; */
         display: grid;
-        grid-template-columns:repeat(1,1fr);
+        grid-template-columns: 1fr;
+        gap: .5rem;
+    }
+
+    .coursesDrawCss {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
         gap: 1rem;
     }
-    .buttonProfile{
-        display:none;
+
+    .buttonProfile {
+        display: none;
     }
-    .buttonMobile{
+
+    .buttonMobile {
         display: block;
         margin-top: 15px;
     }
-    .coursesDrawCss1{
-       
-        margin-top:40px;
+
+    .coursesDrawCss1 {
+
+        margin-top: 40px;
         display: grid;
-        grid-template-columns:repeat(1,1fr);
-        gap: 1rem;    
-    } .coursesDrawCss2{
-       
-        margin-top:40px;
-        display: grid;
-        grid-template-columns:repeat(1,1fr);
-        gap: 1rem;    
-    } .coursesDrawCss3{
-       
-        margin-top:40px;
-        display: grid;
-        grid-template-columns:repeat(1,1fr);
-        gap: 1rem;    
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
     }
-    .teacherDataAll{
+
+    .coursesDrawCss2 {
+
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+
+    .coursesDrawCss3 {
+
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+
+    .teacherDataAll {
         margin-top: 70px;
     }
 }
 
 @media (min-width: 500px)and (max-width: 768px) {
-    .coursesDrawCss{
-        margin-top:40px;
+    .coursesDrawCss {
+        margin-top: 40px;
         display: grid;
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
+}
+
+.evaluation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

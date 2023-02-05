@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeacherData.css";
+import Evaluation from "./Evaluation"
 import { Link, useHistory } from "react-router-dom";
 import StartChat from "./Messenger/StartChat";
 export default function TeacherData({
@@ -16,6 +17,7 @@ export default function TeacherData({
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [teacherprop, setTeacherprop] = useState(updateComponent);
+  const [evaluation, setEvaluation] = useState('')
   useEffect(() => {
     if (!user) return;
     setUserId(user.user ? user.user._id : user.teacher._id);
@@ -57,11 +59,18 @@ export default function TeacherData({
 
   useEffect(() => {
     const filteredCourses = courses.filter(
-      (course) => course.owner === teacherId
+      (course) => course.owner === teacherId && course.playlistId !== "PLVyh_TRAmEfFr6I1LMZ0EadFWU4tXZmyw"
     );
     setFilteredCourses(filteredCourses);
   }, [courses, teacherId]);
 
+  useEffect(()=>{
+    const filteredCourses = courses.filter(course =>{
+      return course.playlistId === "PLVyh_TRAmEfFr6I1LMZ0EadFWU4tXZmyw" && course.owner === teacherId
+    })
+    setEvaluation(filteredCourses)
+  },[filteredCourses]);
+  console.log(evaluation)
   if (!teacherInfo)
     return (
       <div
@@ -152,6 +161,56 @@ export default function TeacherData({
             ) : null}
           </div>
           <hr />
+        </div>
+      );
+    });
+  };
+  const drawEvaluation = () => {
+    return evaluation?.map((course, i) => {
+      return (
+        <div className="evaluation" onClick={() => saveCourseLocal(course)} key={i}>
+          <Link to="/Lessons" style={{ textDecoration: "none" }}>
+            <div style={{ display:"flex", justifyContent: "center" , alignItems: "center" }}>
+            <div style={{ width:"50%"}}>
+              <img
+                src={course.coursePhoto}
+                alt="evaluation"
+                width="70%"
+               
+              />
+            </div>
+          <div  style={{ width:"50%"}}>
+            <div style={{ textAlign: "center", color: "black" }}>
+              <h2>{course.title}</h2>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                color: "black",
+              }}
+            >
+              <div>{course.instrument}</div>
+            </div>
+            <div style={{ width: "80%", margin: "auto", color: "black" }}>
+              {course.description.slice(0, 50)}....
+            </div>
+            </div>
+            <hr />
+            </div>
+          </Link>
+          <div>
+            {userId === course.owner ? (
+              <button
+                style={{ width: "100%" }}
+                onClick={() => deleteCourse(course)}
+              >
+                حذف الدورة
+              </button>
+            ) : null}
+          </div>
+          
         </div>
       );
     });
@@ -263,8 +322,14 @@ export default function TeacherData({
         <hr />
       </div> */}
       <div className="dawrat">
-        <h2>دورات {teacherInfo.firstName}</h2>
+      <div>
+        {drawEvaluation()}
+        <hr />
       </div>
+        <h2>دورات {teacherInfo.firstName}</h2>
+        
+      </div>
+      
       {filteredCourses.length === 1 ? (
         <div className="coursesDrawCss1">{drawCourses()}</div>
       ) : null}

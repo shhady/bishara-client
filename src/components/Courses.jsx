@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Posts/styles.css";
 import { useHistory } from "react-router-dom";
-import { faWindowMinimize } from "@fortawesome/free-solid-svg-icons";
 export default function Courses({
   listId,
   setListId,
@@ -13,7 +12,7 @@ export default function Courses({
   const [posts, setposts] = useState(null);
   const [userId, setUserId] = useState("");
   const [courseData, setCourseData] = useState(null);
-  // const [course, setCourse] = useState(null);
+  
   const [filteredPosts, setFilteredposts] = useState([]);
   const [showPopUp, setShowPopUp] = useState(false);
   const [all, setAll] = useState(true);
@@ -40,16 +39,17 @@ export default function Courses({
   }, []);
   
   useEffect(() => {
-   
     const fetch = async () => {
       const result = await axios.get(
         process.env.REACT_APP_BACKEND_URL + "/courses"
       );
-      setposts(result.data);
+      setposts(result.data.filter((global)=>{
+       return global.playlistId !== "PLVyh_TRAmEfFr6I1LMZ0EadFWU4tXZmyw"
+      }));
     };
     fetch();
   }, []);
-  
+  console.log(posts);
   useEffect(() => {
     const filtered = posts?.filter((post) => post.instrument === title);
     setFilteredposts(filtered);
@@ -155,24 +155,7 @@ export default function Courses({
           }}
           style={{ cursor: "pointer", padding: "5px", borderRadius: "5px" }}
         >
-          {/* {post.firstName} {"  "}
-          {post.lastName}
-          <div>{post.instrument}</div>
-          <div>{post.level}</div>
-          <img
-            src={post.avatar}
-            alt={post.firstName}
-            width="150"
-            height="150"
-            style={{ borderRadius: "50%" }}
-          /> */}
-          {/* <img
-            src={post.avatar}
-            alt={post.firstName}
-            width="150"
-            height="150"
-            style={{ borderRadius: "50%", marginBottom: "10px" }}
-          /> */}
+         
           <img
             src={post.coursePhoto}
             alt={post.firstName}
