@@ -54,9 +54,13 @@ export default function Hero({ showArrows, user }) {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "flex-end",
+                  backgroundImage: `url(${slide.image})`,
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize:"cover"
                 }}
               >
-                <img src={slide.image} alt="slide" width="100%" height="100%" />
+                {/* <img src={slide.image} alt="slide" width="100%" height="100%" position="center" /> */}
                 <div className="content">
                   <h1>{slide.heading}</h1>
                   <p>{slide.desc}</p>

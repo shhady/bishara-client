@@ -138,7 +138,7 @@ export default function CoursesHomePage({
             width: "85%",
             margin: "auto",
             // borderBottom: "1px solid #e1e1e1",
-            marginBottom: "20px",
+            // marginBottom: "20px",
             backgroundColor: "white",
           }}
         >
