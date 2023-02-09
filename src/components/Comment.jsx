@@ -136,7 +136,7 @@ const history = useHistory()
                 لا يمكن رفع فيديو اكبر من 100 ميجا بايت
               </div>
             )}
-            {video && !moreThan ? (
+            {video && !moreThan && !fileUpload ? (
               <div style={{display:"flex", justifyContent: "center", alignItems: "center"}}>
               <button onClick={postDetails}>رفع الفيديو</button>
               </div>
