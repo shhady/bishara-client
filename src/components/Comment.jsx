@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 export default function Comment({
   userId,
   userF,
@@ -23,7 +23,7 @@ export default function Comment({
   });
   const [moreThan, setMoreThan] = useState(null);
  
-
+const history = useHistory()
   useEffect(() => {
     if (!user) return;
     const userF = user.user ? user.user.firstName : user.teacher.firstName;
@@ -70,23 +70,27 @@ export default function Comment({
   };
 
   useEffect(() => {
+   
     const fetch = async () => {
       if (!url) return;
       await axios.post(process.env.REACT_APP_BACKEND_URL + "/practices/", {
         ...practiceInfo,
         myPractice: url,
       });
+     await socket.emit("sendNotificationComment", {
+        senderName: userF,
+        senderFamily: userL,
+        senderId: userId,
+        receiverId: courseInfo.owner,
+        videoName: lesson.snippet.title,
+        videoId: lesson.snippet.resourceId.videoId,
+        courseid: courseInfo._id,
+      });
+      history.push('/profile')
     };
     fetch();
-    socket.emit("sendNotificationComment", {
-      senderName: userF,
-      senderFamily: userL,
-      senderId: userId,
-      receiverId: courseInfo.owner,
-      videoName: lesson.snippet.title,
-      videoId: lesson.snippet.resourceId.videoId,
-      courseid: courseInfo._id,
-    });
+   
+    
   }, [url]);
   console.log(video)
   return (
@@ -144,13 +148,13 @@ export default function Comment({
                   تم رفع {fileUpload.percentComplete}%
                 </div>
               )}
-              {url ? (
+              {/* {url ? (
                 <Link to="/profile">
                   <div style={{display:"flex", justifyContent: "center", alignItems: "center"}}>
                   <button style={{ textAlign: "center" }}>الملف الشخصي</button>
                   </div>
                 </Link>
-              ) : null}
+              ) : null} */}
             </div>
           </div>
        

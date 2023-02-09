@@ -123,6 +123,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
   }, [listId]);
 
   const handleLessonClick = (lesson) => {
+    console.log(lesson.snippet.playlistId);
     if (user) {
       history.push({
         pathname: `/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`,
@@ -137,7 +138,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
     window.localStorage.setItem("playlistId", lesson.snippet.playlistId);
     window.localStorage.setItem("teacherId", updated.owner);
   };
-  
+ 
   useEffect(() => {}, [lessons]);
   const drawLessons = () => {
     return lessons?.map((lesson, i) => {
