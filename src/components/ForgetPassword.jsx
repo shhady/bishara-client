@@ -21,15 +21,18 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div style={{marginTop:"250px"}}>
-    <form onSubmit={handleSubmit}>
+    <div style={{marginTop:"250px",display:"flex",flexDirection:"column", justifyContent:"center", alignItems: "center"}}>
+      <h1>
+      نسيت كلمة المرور ؟
+      </h1>
+    <form style={{display:"flex", flexDirection:"column"}} onSubmit={handleSubmit}>
       <input
         type="email"
-        placeholder="Enter your email"
+        placeholder="ادخل بريدك الالكتروني"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button type="submit">Submit</button>
+      <button type="submit" style={{marginTop:"30px"}}>ارسل كلمة مرور جديدة</button>
     </form>
     </div>
   );
