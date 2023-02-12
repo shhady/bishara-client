@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Auth.css";
 import { gapi } from "gapi-script";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import GoogleAuthSignUp from "./GoogleAuthSignUp";
 import axios from "axios";
 import GoogleAuthSignIn from "./GoogleAuthSignIn";
@@ -411,7 +411,11 @@ export default function Auth({ user, setUser, setUserProp }) {
                     // onKeyDown={handleKeyDown}
                   ></input>
                 </div>
-
+                <Link to="/forgetpassword" style={{textDecoration: "none"}}>
+                    <div>
+                      Forgot Password ?
+                    </div>
+                    </Link>
                 {/* {studentOrTeacher === "student" ? ( */}
                 <div
                   style={{

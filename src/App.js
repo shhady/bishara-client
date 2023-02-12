@@ -38,6 +38,7 @@ const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
 const TeacherData = React.lazy(() => import("./components/TeacherData"));
 const Lessons = React.lazy(() => import("./components/Lessons"));
 const Lesson = React.lazy(() => import("./components/Lesson"));
+const ForgetPassword = React.lazy(() => import("./components/ForgetPassword"));
 const Notifications = React.lazy(() => import("./components/Notifications"));
 const PracticeReplies = React.lazy(() =>
   import("./components/PracticeReplies")
@@ -110,6 +111,10 @@ export default function App() {
           <Route path="/auth" exact>
             <Auth user={user} setUser={setUser} setUserProp={setUserProp} />
           </Route>
+          <Route path="/forgetpassword" exact>
+            <ForgetPassword />
+          </Route>
+          
           <Route path="/qa">
             <QA user={user}/>
           </Route>
