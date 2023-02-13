@@ -90,7 +90,7 @@ export default function CoursesHomePage({
                   maxHeight: "120px",
                   width: "90%",
                   margin: "auto",
-                  textAlign: "start",
+                  textAlign: "center",
                 }}
               >
                 <span
@@ -109,7 +109,7 @@ export default function CoursesHomePage({
                   style={{
                     // width:"90%",
                     margin:"auto",
-                    textAlign:"start"
+                    textAlign:"center"
                   //   display: "flex",
                   //   justifyContent: "space-between",
                   //   alignItems: "center",
