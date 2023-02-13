@@ -413,7 +413,8 @@ export default function Auth({ user, setUser, setUserProp }) {
                 </div>
                 <Link to="/forgetpassword" style={{textDecoration: "none"}}>
                     <div>
-                      Forgot Password ?
+                    نسيت كلمة المرور ؟
+
                     </div>
                     </Link>
                 {/* {studentOrTeacher === "student" ? ( */}
