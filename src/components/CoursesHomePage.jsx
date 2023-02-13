@@ -64,6 +64,7 @@ export default function CoursesHomePage({
               style={{
                 cursor: "pointer",
                 padding: "10px",
+                paddingBottom: "20px"
               }}
               className="lessonsHomePage"
               onClick={() => addToLocal(course)}
@@ -89,7 +90,7 @@ export default function CoursesHomePage({
                   maxHeight: "120px",
                   width: "90%",
                   margin: "auto",
-                  textAlign: "center",
+                  textAlign: "start",
                 }}
               >
                 <span
@@ -104,10 +105,14 @@ export default function CoursesHomePage({
                 </span>
                 <br />
                 <div
+
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    // width:"90%",
+                    margin:"auto",
+                    textAlign:"start"
+                  //   display: "flex",
+                  //   justifyContent: "space-between",
+                  //   alignItems: "center",
                   }}
                 >
                   <div>
@@ -117,7 +122,12 @@ export default function CoursesHomePage({
                     {course.instrument} ({course.level})
                   </div>
                 </div>
-                <div>{course.description.slice(0, 25)}...</div>
+                <div style={{
+                    textAlign:"start"
+                  //   display: "flex",
+                  //   justifyContent: "space-between",
+                  //   alignItems: "center",
+                  }}>{course.description.slice(0, 25)}...</div>
               </div>
             </div>
           </Link>

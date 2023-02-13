@@ -107,7 +107,10 @@ div {
 }
 
 .lessonsHomePage {
+    width: fit-content;
+    height: fit-content;
     margin-right: 10px;
+    border: 1px solid rgb(205, 203, 203)
 }
 
 @media (max-width: 768px) and (min-width: 500px) {

@@ -4,8 +4,8 @@ export default function about() {
   return (
     <div className="aboutus">
       {/* <div className="aboutSection"> */}
-        <h2 style={{ textAlign: "center", marginTop:"50px", fontSize:"36px" }}>من نحن?</h2>
-        <p style={{ textAlign: "center", marginTop:"50px", fontSize:"20px" }}>
+        <h2 style={{ textAlign: "center", fontSize:"36px",height:"100%", }}>من نحن?</h2>
+        <p style={{ textAlign: "center", marginTop:"50px", fontSize:"22px", fontWeight:"bold" }}>
         نحن عائلة من الأصدقاء نرغب في مشاركة حبنا للموسيقى مع الجميع. مهمتنا هي جعل تعلم الموسيقى عبر الإنترنت فعالاً قدر الإمكان من خلال التعليم التفاعلي وبمساعدة الذكاء الاصطناعي. مما سيسهل هذا أيضًا على جعل الدروس الشخصية ميسورة التكلفة لعدد أكبر من الناس في جميع أنحاء العالم.
         </p>
       {/* </div> */}

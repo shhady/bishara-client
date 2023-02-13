@@ -63,10 +63,10 @@ export default function TeachersPop({ setTeachersHover }) {
             />
             <div
               style={{
-                textAlign: "center",
-                fontWeight: "100",
-                fontSize: "1em",
+                fontSize: "20px",
+                fontWeight: "bold",
                 color: "black",
+                textAlign: "center",
               }}
             >
               {" "}
