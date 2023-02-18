@@ -2,7 +2,7 @@
     margin-top: 50px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    height: 40vh;
+    height: 45vh;
     padding: 0px 30px;
     border-top-left-radius: 180%;
     background-color: #f7f1f1;

@@ -257,7 +257,7 @@ export default function TeachersPop({
             >
               تشيلو
             </span>
-            <span
+            {/* <span
               onClick={(e) => {
                 
                 window.localStorage.setItem("title", e.target.innerText);
@@ -267,7 +267,7 @@ export default function TeachersPop({
               style={{ cursor: "pointer" }}
             >
               بزق
-            </span>
+            </span> */}
           </div>
           <div
             style={{

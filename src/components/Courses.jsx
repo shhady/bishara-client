@@ -124,8 +124,8 @@ export default function Courses({
           <img
             src={post.coursePhoto}
             alt={post.firstName}
-            width="100%"
-            height="150"
+            width="80%"
+            height="200"
             style={{ marginBottom: "10px" }}
           />
 
@@ -299,7 +299,7 @@ export default function Courses({
                 >
                   غناء
                 </div>
-                <div
+                {/* <div
                   onClick={() => {
                     setTitle("بزق");
                     setAll(false);
@@ -308,7 +308,7 @@ export default function Courses({
                   className="allCourses"
                 >
                   بزق
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -475,7 +475,7 @@ export default function Courses({
               غناء
             </div>
 
-            <div
+            {/* <div
               onClick={() => {
                 setTitle("بزق");
                 setAll(false);
@@ -489,7 +489,7 @@ export default function Courses({
                 style={{ paddingLeft: " 5px" }}
               />
               بزق
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="showDataThreeColumns">
