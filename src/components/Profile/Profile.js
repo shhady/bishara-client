@@ -137,6 +137,14 @@ export default function Profile({ userProp }) {
       await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
           cover: urlCover,
+        }, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Methods": "PATCH",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: "Bearer " + window.localStorage.getItem("token"),
+          }
         })
         .then(() => {
           window.localStorage.setItem("coverPic", urlCover);
@@ -202,8 +210,17 @@ export default function Profile({ userProp }) {
     try {
       const changePhoto = async () => {
         await axios
-          .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
+          .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
+          {
             avatar: url,
+          }, {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json;charset=UTF-8",
+              "Access-Control-Allow-Methods": "PATCH",
+              "Access-Control-Allow-Origin": "*",
+              Authorization: "Bearer " + window.localStorage.getItem("token"),
+            }
           })
           .then(() => {
             window.localStorage.setItem("profilePic", url);
@@ -219,6 +236,14 @@ export default function Profile({ userProp }) {
         await axios
           .patch(process.env.REACT_APP_BACKEND_URL + `/users/${userId}`, {
             avatar: url,
+          }, {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json;charset=UTF-8",
+              "Access-Control-Allow-Methods": "PATCH",
+              "Access-Control-Allow-Origin": "*",
+              Authorization: "Bearer " + window.localStorage.getItem("token"),
+            }
           })
           .then(() => {
             window.localStorage.setItem("profilePic", url);
@@ -472,9 +497,15 @@ export default function Profile({ userProp }) {
         {
           firstName: updateFirstName,
       },
-      // {
-      //   headers: headers
-      // }
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Access-Control-Allow-Methods": "PATCH",
+          "Access-Control-Allow-Origin": "*",
+          Authorization: "Bearer " + window.localStorage.getItem("token"),
+        }
+      }
       )
         .then(async () => {
           const response = await axios.get(
@@ -491,16 +522,16 @@ export default function Profile({ userProp }) {
         .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
           firstName: updateFirstName,
           
-        } 
-        // ,{
-        //   headers: {
-        //     Accept: "application/json",
-        //     "Content-Type": "application/json;charset=UTF-8",
-        //     "Access-Control-Allow-Methods": "PATCH",
-        //     "Access-Control-Allow-Origin": "*",
-        //     Authorization: "Bearer " + window.localStorage.getItem("token"),
-        //   },
-        // }
+        } ,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Methods": "PATCH",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: "Bearer " + window.localStorage.getItem("token"),
+          }
+        }
         )
         .then(async () => {
           const response = await axios.get(
@@ -519,8 +550,18 @@ export default function Profile({ userProp }) {
   const changeDes = async () => {
     try {
       await axios
-        .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
+        .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
+        { 
           about: updateDes,
+        },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Methods": "PATCH",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: "Bearer " + window.localStorage.getItem("token"),
+          }
         })
         .then(async () => {
           const response = await axios.get(
@@ -540,6 +581,15 @@ export default function Profile({ userProp }) {
       await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/users/${userId}`, {
           lastName: updateLastName,
+        },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Methods": "PATCH",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: "Bearer " + window.localStorage.getItem("token"),
+          }
         })
         .then(async () => {
           const response = await axios.get(
@@ -555,6 +605,15 @@ export default function Profile({ userProp }) {
       await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
           lastName: updateLastName,
+        },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Methods": "PATCH",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: "Bearer " + window.localStorage.getItem("token"),
+          }
         })
         .then(async () => {
           const response = await axios.get(
