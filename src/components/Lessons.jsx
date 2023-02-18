@@ -417,7 +417,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
                 <button onClick={changeDescription}>تثبيت</button>
               </div>
             ) : (
-              <>
+              <div style={{marginBottom:"40px"}}>
                 {user?.teacher?._id === courseInfo.owner ? (
                   <h3
                     style={{
@@ -435,7 +435,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
                 ) : null}
 
                 {updated ? updated.description : courseInfo.description}
-              </>
+              </div>
             )}
           </div>
         </div>

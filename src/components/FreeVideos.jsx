@@ -109,17 +109,6 @@ export default function FreeVideos() {
               fontWeight: "bold",
             }}>عزف مدرسين</div>
             <div className='allVideos'>
-            <div className="videoFree">
-            <iframe
-      width="100%"
-      height="100%"
-      src={`https://www.youtube.com/embed/RJRhMdO8vo0`}
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-      title="Embedded youtube"
-    />
-            </div>
             <div  className="videoFree">
             <iframe
       width="100%"
@@ -131,6 +120,18 @@ export default function FreeVideos() {
       title="Embedded youtube"
     />
             </div>
+            <div className="videoFree">
+            <iframe
+      width="100%"
+      height="100%"
+      src={`https://www.youtube.com/embed/RJRhMdO8vo0`}
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      title="Embedded youtube"
+    />
+            </div>
+            
             <div  className="videoFree">
             <iframe
       width="100%"
