@@ -10,9 +10,20 @@ export default function ChangePassword({ userId }) {
     try {
       await axios.patch(
         process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
-        {
+        { 
           password: newPassword,
-          confirmPassword: newConfirm,
+          confirmPassword: newConfirm},
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Methods": "PATCH",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: "Bearer " + window.localStorage.getItem("token"),
+          },
+        // }
+        // {
+         
         }
       );
       setMessage("تم تغيير كلمة المرور بنجاح");
