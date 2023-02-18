@@ -417,7 +417,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
                 <button onClick={changeDescription}>تثبيت</button>
               </div>
             ) : (
-              <div style={{marginBottom:"40px"}}>
+              <div>           
                 {user?.teacher?._id === courseInfo.owner ? (
                   <h3
                     style={{
@@ -440,7 +440,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           </div>
         </div>
       </div>
-
+                    {/* <hr/> */}
       <div className="lessonsVideos">{drawLessons()}</div>
     </div>
   );

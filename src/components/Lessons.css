@@ -57,6 +57,7 @@
     height: fit-content;
     margin: -20px auto;
     min-height: 250px;
+    padding: 20px;
     /* margin:  0 10px 20px; */
     z-index: 50;
     display: grid;
