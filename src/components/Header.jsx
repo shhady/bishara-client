@@ -1141,11 +1141,11 @@ export default function Header({
                   <div onClick={() => setUpdateComponent("")}>
                     {user.teacher ? (
                       <div onClick={handleLogoutTeacher}>
-                        <span className="blackBackgroundtext">خروج</span>
+                        <span className="blackBackgroundtext" style={{ cursor: "pointer" }}>خروج</span>
                       </div>
                     ) : (
                       <div onClick={handleLogoutStudent}>
-                        <span className="blackBackgroundtext">خروج</span>
+                        <span className="blackBackgroundtext" style={{ cursor: "pointer" }}>خروج</span>
                       </div>
                     )}
                   </div>
