@@ -33,17 +33,26 @@ export default function Auth({ user, setUser, setUserProp }) {
   const clientId =
     "623673237970-p01olkhljcqajn23tb7eipt3cs6laqb3.apps.googleusercontent.com";
 
-    useEffect(() => {
-      const initClient = () => {
-          gapi.client.init({
-              clientId: clientId,
-              scope: "",
-          });
-      };
-      if (gapi) {
-          gapi.load("client:auth2", initClient);
+  // useEffect(() => {
+  //   const initClient = () => {
+  //     gapi.client.init({
+  //       clientId: clientId,
+  //       scope: "",
+  //     });
+  //   };
+  //   gapi.load("client:auth2", initClient);
+  // });
+  useEffect(() => {
+    const initClient = () => {
+      if (gapi.client) {
+        gapi.client.init({
+          clientId: clientId,
+          scope: "",
+        });
       }
-  }, [gapi, clientId]);
+    };
+    gapi.load("client:auth2", initClient);
+  }, [clientId, gapi]);
 
   const dontHaveAnAccount = () => {
     setStudentLogin({
