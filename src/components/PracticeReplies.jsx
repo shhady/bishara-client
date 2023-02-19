@@ -8,6 +8,7 @@ import {
   faTrashCan,
   faEllipsisVertical,
 } from "@fortawesome/free-solid-svg-icons";
+import AudioRecorder from "./AudioRecorder";
 export default function PracticeReplies({ user }) {
   // State variables
   const [theUser, setTheUser] = useState(
@@ -467,6 +468,7 @@ export default function PracticeReplies({ user }) {
                   ) : null}
                 </div>
                 <div>
+                  <AudioRecorder/>
                   <div>تعليق عن طريق فيديو</div>
 
                   <input

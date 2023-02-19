@@ -568,6 +568,8 @@ export default function Profile({ userProp }) {
             process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
           );
           window.localStorage.setItem("Des", response.data.Description);
+          localStorage.setItem("teacherId", userId);
+
           // setLastName(response.data.lastName);
         });
     } catch (error) {
@@ -874,7 +876,7 @@ export default function Profile({ userProp }) {
                   >
                     <textarea
                       type="text"
-                      placeholder="وصف المعلم"
+                      placeholder="السيرة الذاتية"
                       style={{ width: "70%" }}
                       value={updateDes}
                       onChange={(e) => setUpdateDes(e.target.value)}
