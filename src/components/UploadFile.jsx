@@ -13,6 +13,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
   const [fileUpload, setFileUpload] = useState(null);
   const [theFile, setTheFile] = useState(null);
   useEffect(() => {
+    if(!file) return;
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "bisharaHaroni");
