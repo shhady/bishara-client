@@ -86,7 +86,7 @@ export default function Lesson({ socket }) {
                   ...Playing
                 </div>
                 <img
-                  src={lessonSuggest.snippet.thumbnails.high.url}
+                  src={lessonSuggest.snippet.thumbnails.high ? lessonSuggest.snippet.thumbnails.high.url: "https://images.unsplash.com/photo-1554050857-c84a8abdb5e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2t8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"}
                   alt="suggested"
                   width="110px"
                   height="110px"
@@ -107,7 +107,7 @@ export default function Lesson({ socket }) {
                   {lessonSuggest.snippet.position + 1}
                 </div>
                 <img
-                  src={lessonSuggest.snippet.thumbnails.high.url}
+                  src={lessonSuggest.snippet.thumbnails.high ? lessonSuggest.snippet.thumbnails.high.url: "https://images.unsplash.com/photo-1554050857-c84a8abdb5e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2t8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"}
                   alt="suggested"
                   width="110px"
                   height="110px"
