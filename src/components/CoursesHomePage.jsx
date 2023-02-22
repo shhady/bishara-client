@@ -15,7 +15,7 @@ export default function CoursesHomePage({
         process.env.REACT_APP_BACKEND_URL + "/courses"
       );
       setCourses(result.data.filter((global)=>{
-        return global.playlistId !== "PLVyh_TRAmEfFr6I1LMZ0EadFWU4tXZmyw"
+        return global.playlistId !== "PLVyh_TRAmEfFr6I1LMZ0EadFWU4tXZmyw" && global.playlistId !== "PLVyh_TRAmEfFSnfgk8-SxeWSpcjn2DnSR" && global.playlistId !== "PLVyh_TRAmEfF0pi95N0lTzhnBWTUFJchf"
        }));
     };
     fetch();

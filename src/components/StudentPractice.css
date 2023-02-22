@@ -1,26 +1,35 @@
-.btnSendVideoReply{
-    background-color:#e14f3d;
+.btnSendVideoReply {
+    background-color: #e14f3d;
     color: white;
     width: 70px;
     margin-bottom: auto;
 
 }
-.SendVideoReply{
-        display: grid;
-        grid-template-columns:1fr 1fr;
-        border-bottom: 1px solid black;
+
+.SendVideoReply {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid black;
 }
-.allvideoreply{
+
+.allvideoreply {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr
 }
-@media(max-width:767px){
-    .SendVideoReply{
-        grid-template-columns:1fr 1fr;
+
+.kindsOfReply {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media(max-width:767px) {
+    .SendVideoReply {
+        grid-template-columns: 1fr 1fr;
         width: 100%;
         margin-bottom: 40px;
     }
-    .allvideoreply{
+
+    .allvideoreply {
         grid-template-columns: 1fr;
 
     }
