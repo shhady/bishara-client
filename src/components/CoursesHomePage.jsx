@@ -62,6 +62,7 @@ export default function CoursesHomePage({
           <Link to="/Lessons" style={{ textDecoration: "none" }}>
             <div
               style={{
+                height:"fit-content",
                 cursor: "pointer",
                 padding: "10px",
                 paddingBottom: "20px"
@@ -87,7 +88,8 @@ export default function CoursesHomePage({
                 style={{
                   color: "black",
                   padding: "5px",
-                  maxHeight: "120px",
+                  height: "fit-content",
+                  minHeight:"190px",
                   width: "90%",
                   margin: "auto",
                   textAlign: "center",
@@ -95,7 +97,7 @@ export default function CoursesHomePage({
               >
                 <span
                   style={{
-                    fontSize: "22px",
+                    fontSize: "20px",
                     fontWeight: "bold",
                     color: "black",
                     textAlign: "center",
