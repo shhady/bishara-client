@@ -142,17 +142,7 @@ export default function CoursesHomePage({
     <>
       <Link to="/courses" style={{ textDecoration: "none" }}>
         <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            padding: "10px",
-            width: "85%",
-            margin: "auto",
-            // borderBottom: "1px solid #e1e1e1",
-            // marginBottom: "20px",
-            backgroundColor: "white",
-          }}
+         className="coursesHomePageContainer"
         >
           <div
             //   onClick={() => setCoursesHover(false)}
@@ -161,6 +151,7 @@ export default function CoursesHomePage({
               cursor: "pointer",
               fontSize: "34px",
               fontWeight: "bold",
+              marginRight:"10px"
             }}
           >
             دورات

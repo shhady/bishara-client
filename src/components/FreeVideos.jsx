@@ -107,6 +107,7 @@ export default function FreeVideos() {
               cursor: "pointer",
               fontSize: "34px",
               fontWeight: "bold",
+              marginRight:"5px"
             }}>عزف مدرسين</div>
             <div className='allVideos'>
             <div  className="videoFree">

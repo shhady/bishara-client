@@ -80,33 +80,26 @@ export default function TeachersPop({ setTeachersHover }) {
 
   return (
     <div
-      style={{
-        // height: "45vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-around",
-        alignItems: "center",
-        // borderBottom: "1px solid #e1e1e1",
-      }}
+     className="teachersHomeContainer"
     >
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "10px",
-          width: "85%",
+          // padding: "0px 0px 7px 2px",
+          width: "100%",
           margin: "auto",
           // borderBottom: "1px solid #e1e1e1",
           // marginBottom: "20px",
         }}
         // onMouseOut={() => setTeachersHover(false)}
       >
-        <div style={{ fontWeight: "bold", fontSize: "34px" }}>مدرسين</div>
+        <div style={{ fontWeight: "bold", fontSize: "34px", marginRight:"10px" }}>مدرسين</div>
         <Link to="/teachers" style={{ textDecoration: "none" }}>
           <div
             onClick={() => setTeachersHover(false)}
-            style={{ color: "black", borderBottom: "1px solid #e1e1e1" }}
+            style={{ color: "black", borderBottom: "1px solid #e1e1e1", marginLeft:"14px" }}
           >
             جميع المدرسين
           </div>

@@ -38,6 +38,8 @@ const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
 const TeacherData = React.lazy(() => import("./components/TeacherData"));
 const Lessons = React.lazy(() => import("./components/Lessons"));
 const Lesson = React.lazy(() => import("./components/Lesson"));
+const SpecificPractice = React.lazy(() => import("./components/SpecificPractice"));
+
 const ForgetPassword = React.lazy(() => import("./components/ForgetPassword"));
 const Notifications = React.lazy(() => import("./components/Notifications"));
 const PracticeReplies = React.lazy(() =>
@@ -128,6 +130,9 @@ export default function App() {
           </Route>
           <Route path="/PracticeReplies" exact>
             <PracticeReplies user={user} setUser={setUser} />
+          </Route>
+          <Route path="/SpecificPractice/:id" exact>
+            <SpecificPractice user={user} setUser={setUser}/>
           </Route>
 
           <Route path="/TestYoutube/:id" exact>

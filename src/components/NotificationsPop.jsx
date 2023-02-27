@@ -147,7 +147,7 @@ export default function NotificationsPop({
               alignItems: "center",
               cursor: "pointer",
             }}
-            onClick={handleClickOnPractice}
+            onClick={()=>handleClickOnPractice(practice)}
           >
             <div>
               {practice.studentFirstName} {practice.studentLastName} رفع تمرين
@@ -158,10 +158,10 @@ export default function NotificationsPop({
     });
   };
 
-  const handleClickOnPractice = () => {
+  const handleClickOnPractice = (practice) => {
     setRedLightNotification(false);
     setShowNotificationPopUp(false);
-    history.push("/PracticeReplies");
+    history.push(`/SpecificPractice/${practice._id}`);
     // setTeacherPracticesNotifications(null);
   };
   const drawReplies = () => {

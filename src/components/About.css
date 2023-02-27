@@ -2,10 +2,10 @@
     margin-top: 50px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    height: 50vh;
+    height: 190px;
     padding: 0px 30px;
     border-top-left-radius: 180%;
-    background-color: #f7f1f1;
+    background-color: #fcedd5;
 }
 
 .instimage {

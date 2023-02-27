@@ -12,7 +12,6 @@ export default function Courses({
   const [posts, setposts] = useState(null);
   const [userId, setUserId] = useState("");
   const [courseData, setCourseData] = useState(null);
-  
   const [filteredPosts, setFilteredposts] = useState([]);
   const [showPopUp, setShowPopUp] = useState(false);
   const [all, setAll] = useState(true);
