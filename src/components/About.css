@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     height: 190px;
-    padding: 0px 30px;
+    /* padding: 0px 30px; */
     border-top-left-radius: 180%;
     background-color: #fcedd5;
 }
