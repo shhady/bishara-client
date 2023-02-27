@@ -357,7 +357,7 @@ export default function Profile({ userProp }) {
     );
   };
   const showData = () => {
-    return userPractices?.map((practice) => {
+    return userPractices?.map((practice,i) => {
       return (
         <div
           className="practiceAndReply"
@@ -365,6 +365,7 @@ export default function Profile({ userProp }) {
             borderRight: "1px solid black",
             borderBottom: "1px solid #e1e1e1",
             padding: "10px",
+            backgroundColor: i % 2 === 0 ? "white" : "#c7c5c5"
           }}
           key={practice._id}
           onClick={() => markAsSeen(practice)}
@@ -386,7 +387,7 @@ export default function Profile({ userProp }) {
               </div>
             </div>
             <div>
-              <button onClick={() => deletePractice(practice)}>
+              <button onClick={() => deletePractice(practice)} style={{backgroundColor:"#fee4b9", width:"80px"}}>
                 حذف التمرين
               </button>
             </div>
@@ -394,6 +395,7 @@ export default function Profile({ userProp }) {
           <div
             style={{
               display: "flex",
+              
               // justifyContent: "center",
               // alignItems: "center",
             }}
@@ -403,8 +405,9 @@ export default function Profile({ userProp }) {
                 width: "50%",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "felx-start",
-                alignItems: "flex-start",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor:"#fee4b9"
               }}
             >
               {/* <div>التمرين</div> */}
@@ -415,11 +418,12 @@ export default function Profile({ userProp }) {
                 // poster={poster}
                 height="250px"
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  minHeight: "250px",
-                  maxHeight: "250px",
+                  width: "90%",
+                  height: "90%",
+                  minHeight: "230px",
+                  maxHeight: "230px",
                   border: "1px solid #e1e1e1",
+                  marginTop:"10px"
                 }}
               >
                 <source src={practice.myPractice} type="video/mp4" />
@@ -449,7 +453,24 @@ export default function Profile({ userProp }) {
                     // overflow: "hidden",
                   }}
                 >
-                  {practice.videoReply.map((reply, i) => {
+                  {practice.videoReply.length === 0 ?(<><div style={{
+                          width: "100%",
+                          height: "121px",
+                          border: "1px solid #e1e1e1",
+                          backgroundColor: i % 2 === 0 ? "#c7c5c5" : "white"
+                        }}>1</div><div style={{
+                          width: "100%",
+                          height: "121px",
+                          border: "1px solid #e1e1e1",backgroundColor: i % 2 === 0 ? "#c7c5c5" : "white"
+                        }}>2</div><div style={{
+                          width: "100%",
+                          height: "121px",
+                          border: "1px solid #e1e1e1",backgroundColor: i % 2 === 0 ? "#c7c5c5" : "white"
+                        }}>3</div><div style={{
+                          width: "100%",
+                          height: "121px",
+                          border: "1px solid #e1e1e1",backgroundColor: i % 2 === 0 ? "#c7c5c5" : "white"
+                        }}>4</div></>):(<>{practice.videoReply.map((reply, i) => {
                     return (
                       <video
                         key={reply.theVideoReply + `${i}`}
@@ -465,7 +486,8 @@ export default function Profile({ userProp }) {
                         <source src={reply.theVideoReply} type="video/mp4" />
                       </video>
                     );
-                  })}
+                  })}</>)}
+                  
                 </div>
               ) : null}
             </div>
@@ -891,14 +913,17 @@ export default function Profile({ userProp }) {
               <div
                 style={{
                   display: "flex",
-                  marginTop: "100px",
+                  
                   flexDirection: "column",
                   justifyContent: "start",
                   alignItems: "center",
+                  
                 }}
+                className="userCoverPic"
               >
                 <div
                   style={{
+                    marginTop: "30px",
                     width: "130px",
                     height: "130px",
                     borderRadius: "50%",
@@ -907,6 +932,7 @@ export default function Profile({ userProp }) {
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
+                    
                   }}
                 >
                   <img
@@ -946,7 +972,9 @@ export default function Profile({ userProp }) {
                   {"  "}
                   {lastName}
                 </h2>
-                <div className="profileAllButtons">
+                
+              </div>
+              <div className="profileAllButtons">
                   {showPractice ? (
                     <div
                       onClick={() => {
@@ -957,7 +985,7 @@ export default function Profile({ userProp }) {
                       className="profileButtons2"
                       style={{
                         height: "40px",
-                        borderBottom: "3px solid black",
+                        backgroundColor:"#fee4b9"
                       }}
                     >
                       تمارين
@@ -980,7 +1008,7 @@ export default function Profile({ userProp }) {
                       className="profileButtons3"
                       style={{
                         height: "40px",
-                        borderBottom: "3px solid black",
+                        backgroundColor:"#fee4b9"
                       }}
                       onClick={() => {
                         setShowPractice(false);
@@ -1008,7 +1036,7 @@ export default function Profile({ userProp }) {
                       className="profileButtons3"
                       style={{
                         height: "40px",
-                        borderBottom: "3px solid black",
+                        backgroundColor:"#fee4b9"
                       }}
                       onClick={() => {
                         setShowPractice(false);
@@ -1040,7 +1068,6 @@ export default function Profile({ userProp }) {
                     الصفحة الرئيسية
                   </div>
                 </div>
-              </div>
               {showPractice ? <div>{showData()}</div> : null}
 
               {showChangePassUser ? (

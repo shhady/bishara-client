@@ -1,75 +1,120 @@
-.profileAllButtons{
+.profileAllButtons {
     display: grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
+    width: 60%;
+    margin: 15px auto;
 }
-.profileButtons1, .profileButtons2,.profileButtons3, .profileButtons4{
+
+.userCoverPic {
+    background-image: url("/public/coverProfile.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    margin-top: 80px
+}
+
+.profileButtons1,
+.profileButtons2,
+.profileButtons3,
+.profileButtons4 {
     text-align: center;
     cursor: pointer;
     font-weight: bold;
 }
-.profileButtons1:hover, .profileButtons2:hover,.profileButtons3:hover,.profileButtons4:hover{
-    border-bottom: 3px solid rgb(25, 24, 24);
-    transition: all 0.5s;
-    color:black
-}
-.coverProfile{
-    display: flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    margin-top:80px;
-}
-.profilePage{
 
-        display: grid;
-        grid-template-columns: 1fr 4fr;
-        margin-top: 150px
+.profileButtons1:hover,
+.profileButtons2:hover,
+.profileButtons3:hover,
+.profileButtons4:hover {
+    border-bottom: 1px solid rgb(25, 24, 24);
+    transition: all 0.5s;
+    color: black
 }
-.profileAllButtonsMobile{
-    display:none;
-}
-.practiceAndReply{
-    height: fit-content;
-    min-height: 400px;
-}
-.theComment{
-    width: 100%;
-    border-radius: 10px;
-    background: #fafafa;
-    box-shadow:  5px 5px 10px #cbcbcb,
-             -5px -5px 10px #ffffff;
-             padding: 5px 15px;
-             margin-top: 5px;
-}
-@media (max-width: 568px) {
-    .coverProfile{
-        display: flex;
-                    flex-direction:column;
-                    justify-content:center;
-                    align-items:center;
-                    margin-top:60px;
-    }
-    .profileButtons{
-        display: grid;
-        grid-template-columns: repeat(1,1fr);
-        gap: 1rem;
-        margin-top: 30px
-    }
-    .profilePage{
-        display: grid;
-        grid-template-columns: 1fr;
-        margin-top: 150px
-}
-.profileAllButtons{
-    display:grid;
-    grid-template-columns: 1fr
-}
-.profileAllButtonsMobile{
-    display:block;
+
+.coverProfile {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 80px;
 }
+
+.profilePage {
+
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    margin-top: 150px
+}
+
+.profileAllButtonsMobile {
+    display: none;
+}
+
+.practiceAndReply {
+    height: fit-content;
+    min-height: 400px;
+}
+
+.theComment {
+    width: 100%;
+
+    border-radius: 10px;
+    background: #fafafa;
+    box-shadow: 2px 2px 5px #cbcbcb,
+        -2px -2px 5px #ffffff;
+    padding: 5px 15px;
+    margin-top: 15px;
+}
+
+@media (max-width: 800px) and (min-width:568px) {
+    .profileAllButtons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        width: 80%;
+        margin: 15px auto;
+    }
+
+}
+
+@media (max-width: 568px) {
+    .coverProfile {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px;
+    }
+
+    .userCoverPic {
+
+        margin-top: 60px
+    }
+
+    .profileButtons {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+        margin-top: 30px
+    }
+
+    .profilePage {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-top: 150px
+    }
+
+    .profileAllButtons {
+        display: grid;
+        grid-template-columns: 1fr
+    }
+
+    .profileAllButtonsMobile {
+        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }

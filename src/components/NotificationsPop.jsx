@@ -161,7 +161,8 @@ export default function NotificationsPop({
   const handleClickOnPractice = (practice) => {
     setRedLightNotification(false);
     setShowNotificationPopUp(false);
-    history.push(`/SpecificPractice/${practice._id}`);
+    history.push(`/PracticeReplies`);
+    // history.push(`/SpecificPractice/${practice._id}`);
     // setTeacherPracticesNotifications(null);
   };
   const drawReplies = () => {
