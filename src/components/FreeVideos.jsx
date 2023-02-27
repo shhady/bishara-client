@@ -105,7 +105,7 @@ export default function FreeVideos() {
         <div style={{
               color: "black",
               cursor: "pointer",
-              fontSize: "34px",
+              fontSize: "28px",
               fontWeight: "bold",
               marginRight:"5px"
             }}>عزف مدرسين</div>

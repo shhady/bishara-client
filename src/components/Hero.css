@@ -58,7 +58,7 @@
 
 @media (max-width: 740px) {
     .content {
-        width: 90%;
+        width: 100%;
         /* top: 5rem; */
         /* align-self: center; */
     }

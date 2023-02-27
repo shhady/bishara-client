@@ -150,7 +150,7 @@ export default function CoursesHomePage({
             style={{
               color: "black",
               cursor: "pointer",
-              fontSize: "34px",
+              fontSize: "28px",
               fontWeight: "bold",
               marginRight:"10px"
             }}

@@ -95,7 +95,7 @@ export default function TeachersPop({ setTeachersHover }) {
         }}
         // onMouseOut={() => setTeachersHover(false)}
       >
-        <div style={{ fontWeight: "bold", fontSize: "34px", marginRight:"10px"}}>مدرسين</div>
+        <div style={{ fontWeight: "bold", fontSize: "28px", marginRight:"10px"}}>مدرسين</div>
         <Link to="/teachers" style={{ textDecoration: "none" }}>
           <div
             onClick={() => setTeachersHover(false)}
@@ -107,7 +107,7 @@ export default function TeachersPop({ setTeachersHover }) {
       </div>
 
       <div
-        className="teacherAvatars"
+        className="teacherAvatars1"
         // style={{ display: "grid", gridAutoColumns: "1fr 1fr 1fr 1fr 1fr" }}
       >
         {drawData()}

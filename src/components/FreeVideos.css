@@ -81,6 +81,7 @@
 .allVideos {
     display: flex;
     overflow-x: scroll;
+    margin-top: 15px;
 }
 
 .videoFree {
