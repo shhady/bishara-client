@@ -38,6 +38,7 @@
     /* grid-template-columns: repeat(10,1fr); */
     gap: 2rem;
     overflow-x: scroll;
+    overflow: hidden;
     margin-right: 20px;
   }
 }
@@ -52,7 +53,7 @@
   .teachersHomeContainer {
     margin-top: 15px;
 
-    width: 100%;
+    width: 100vw;
 
   }
 

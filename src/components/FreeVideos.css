@@ -93,7 +93,7 @@
 
 @media (max-width: 800px) {
     .mainFreeVideos {
-        width: 100%;
-
+        width: 100vw;
+        margin-top: 15px;
     }
 }
