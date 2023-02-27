@@ -12,6 +12,9 @@
     justify-content: flex-start;
     align-items: center;
     /* padding: 10px; */
+}
+
+.coursesHomePageBigContainer {
     width: 90%;
     margin: auto;
 }
@@ -140,6 +143,11 @@ div {
 
     }
 
+    .coursesHomePageBigContainer {
+        width: 100%;
+        margin: auto;
+    }
+
     .lessonsHomePage {
         margin-right: 0px;
     }
@@ -160,6 +168,10 @@ div {
 
         width: 100%;
 
+    }
+
+    .coursesHomePageBigContainer {
+        width: 100%;
     }
 }
 

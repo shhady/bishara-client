@@ -139,7 +139,8 @@ export default function CoursesHomePage({
   };
 
   return (
-    <>
+    <div className="coursesHomePageBigContainer"
+    >
       <Link to="/courses" style={{ textDecoration: "none" }}>
         <div
          className="coursesHomePageContainer"
@@ -173,6 +174,6 @@ export default function CoursesHomePage({
         {" "}
         {drawData()}
       </div>
-    </>
+    </div>
   );
 }

@@ -58,7 +58,7 @@ export default function TeachersPop({ setTeachersHover }) {
             <img
               src={teacher.avatar}
               alt={teacher.firstName}
-              style={{ height: "190px", width: "190px" }}
+              // style={{ height: "190px", width: "190px" }}
               className="teacherHomeAvatars"
             />
             <div
@@ -95,7 +95,7 @@ export default function TeachersPop({ setTeachersHover }) {
         }}
         // onMouseOut={() => setTeachersHover(false)}
       >
-        <div style={{ fontWeight: "bold", fontSize: "34px", marginRight:"10px" }}>مدرسين</div>
+        <div style={{ fontWeight: "bold", fontSize: "34px", marginRight:"10px"}}>مدرسين</div>
         <Link to="/teachers" style={{ textDecoration: "none" }}>
           <div
             onClick={() => setTeachersHover(false)}
