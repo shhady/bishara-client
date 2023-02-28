@@ -402,7 +402,7 @@ export default function Profile({ userProp }) {
           >
             <div
               style={{
-                width: "50%",
+                width: "35%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
@@ -430,7 +430,7 @@ export default function Profile({ userProp }) {
               </video>
               <div className="theComment">{practice.reply}</div>
             </div>
-            <div style={{ padding: "0px 10px", width: "50%" }}>
+            <div style={{ padding: "0px 10px", width: "65%" }}>
               {/* {practice.videoReply ? (
                 <div>
                   <video
