@@ -375,10 +375,13 @@ export default function PracticeReplies({ user }) {
   };
   // Render showData component
   const showData = () => {
-    return teacherPractices?.map((practice) => {
+    return teacherPractices?.map((practice, i) => {
       return (
         <div
-          style={{ borderBottom: "1px solid #e1e1e1", padding: "10px" }}
+          style={{ 
+            borderBottom: "1px solid #e1e1e1", padding: "10px",
+          backgroundColor: i%2===0 ? "#c7c5c5":"white"
+        }}
           key={practice._id}
           onClick={() => getPracticeUnique(practice)}
         >
@@ -399,19 +402,19 @@ export default function PracticeReplies({ user }) {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: "1fr 2fr",
                 gap: "10px",
               }}
             >
-              <div style={{ height: "250px" }}>
+              <div style={{ height: "250px", backgroundColor:"#fee4b9", display:"flex", justifyContent: "center", alignItems:"center"}}>
                 <video
                   key={practice.myPractice}
                   controls
                   preload="metadata"
                   // poster={poster}
                   style={{
-                    width: "100%",
-                    height: "100%",
+                    width: "90%",
+                    height: "90%",
                     // maxHeight: "250px",
                     border: "1px solid #e1e1e1",
                   }}
@@ -436,10 +439,7 @@ export default function PracticeReplies({ user }) {
                 ) : null}
               </div>
             </div>
-            <div></div>
-            <div style={{ padding: "30px" }}>
-              <>
-                <div>
+            <div>
                   {openButtons ? (
                     <>
                       {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
@@ -467,6 +467,10 @@ export default function PracticeReplies({ user }) {
                     </>
                   ) : null}
                 </div>
+            <div style={{display:"grid", gridTemplateColumns:"1fr 1fr"}}>
+            <div>
+              <>
+                
                 <div>
                   {/* <AudioRecorder/> */}
                   <div>تعليق عن طريق فيديو</div>
@@ -542,6 +546,7 @@ export default function PracticeReplies({ user }) {
                           <button
                             onClick={() => addTeacherVideoReply(practice)}
                             className="btnSendVideoReply"
+                            style={{ backgroundColor:"#fee4b9",color:"black"}}
                           >
                             ارسال
                           </button>
@@ -561,6 +566,7 @@ export default function PracticeReplies({ user }) {
                 {/* </div> */}
               </>
             </div>
+            <div>
             <div> تعليق المعلم:</div>
 
             <div>
@@ -568,6 +574,7 @@ export default function PracticeReplies({ user }) {
                 <>
                   {practice.reply}{" "}
                   <button
+                  style={{ backgroundColor:"#fee4b9"}}
                     onClick={() => {
                       // setShowLastReply(false);
                       setPracticeId(practice._id);
@@ -598,7 +605,7 @@ export default function PracticeReplies({ user }) {
                           marginBottom: "10px",
                         }}
                       />
-                      <button onClick={() => addTeacherReply(practice)}>
+                      <button style={{ backgroundColor:"#fee4b9"}} onClick={() => addTeacherReply(practice)}>
                         تثبيت
                       </button>
                     </div>
@@ -630,6 +637,8 @@ export default function PracticeReplies({ user }) {
                   </div>
                 </>
               ) : null}
+            </div>
+            </div>
             </div>
             {/* <div>{practice.reply}</div> */}
           </div>
