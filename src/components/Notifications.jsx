@@ -345,7 +345,7 @@ export default function Notifications() {
               alignItems: "center",
               cursor: "pointer",
             }}
-            onClick={handleClickOnPractice}
+            onClick={()=>handleClickOnPractice(practice)}
           >
             <div>
               {practice.studentFirstName} {practice.studentLastName} رفع تمرين
@@ -356,9 +356,9 @@ export default function Notifications() {
     });
   };
 
-  const handleClickOnPractice = () => {
+  const handleClickOnPractice = (practice) => {
     // setShowNotificationPopUp(false);
-    history.push("/PracticeReplies");
+    history.push(`/SpecificPractice/${practice._id}`);
     // setTeacherPracticesNotifications(null);
   };
   return (
