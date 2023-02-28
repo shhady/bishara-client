@@ -128,9 +128,11 @@ export default function App() {
               listId={listId}
               socket={socket}/>
           </Route>
+          
           <Route path="/PracticeReplies" exact>
             <PracticeReplies user={user} setUser={setUser} />
           </Route>
+          
           <Route path="/SpecificPractice/:id" exact>
             <SpecificPractice user={user} setUser={setUser}/>
           </Route>
