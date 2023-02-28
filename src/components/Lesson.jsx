@@ -13,7 +13,7 @@ export default function Lesson({ socket }) {
   const [courseInfo, setCourseInfo] = useState(
     JSON.parse(localStorage.getItem("courseDetails"))
   );
-  const [listId, setListId] = useState(localStorage.getItem("playlistId"));
+  const [listId, setListId] = useState('');
   const [videoChosen, setVideoChosen] = useState(
     localStorage.getItem("videoName")
   );
@@ -26,11 +26,8 @@ export default function Lesson({ socket }) {
 
   
   useEffect(() => {
-    setListId(courseInfo.playlistId);
-  }, [courseInfo]);
-  console.log(
-    window.location.pathname.slice(43, window.location.pathname.length)
-  );
+    setListId(window.location.pathname.slice(8,42));
+  }, [id]);
   
 
   useEffect(() => {
