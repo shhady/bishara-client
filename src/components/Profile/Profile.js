@@ -356,6 +356,20 @@ export default function Profile({ userProp }) {
       }
     );
   };
+
+  const showRec =(practice,i)=>{
+    return practice.RecordReply?.map((rec)=>{
+      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem",}}>
+        <audio 
+        style={{width:'100%'}}
+      controls
+      // poster={poster}
+    >
+      <source src={rec.RecordingReply} type="audio/webm" />
+    </audio>
+      </div>
+    })
+  }
   const showData = () => {
     return userPractices?.map((practice,i) => {
       return (
@@ -490,6 +504,9 @@ export default function Profile({ userProp }) {
                   
                 </div>
               ) : null}
+              <div  className="audioProfile">
+                      {showRec(practice,i)}
+              </div>
             </div>
           </div>
         </div>

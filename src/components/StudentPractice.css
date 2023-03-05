@@ -6,6 +6,18 @@
 
 }
 
+.audioSpecific {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.SpecificReplies {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 .SendVideoReply {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -27,6 +39,16 @@
         grid-template-columns: 1fr 1fr;
         width: 100%;
         margin-bottom: 40px;
+    }
+
+    .SpecificReplies {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .audioSpecific {
+        display: grid;
+        grid-template-columns: 1fr;
     }
 
     .allvideoreply {

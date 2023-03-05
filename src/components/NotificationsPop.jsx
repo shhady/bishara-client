@@ -58,7 +58,7 @@ export default function NotificationsPop({
   useEffect(() => {
     const filteredPractices = teacherPracticesNotifications.filter(
       (practice) => {
-        return practice.videoReply.length === 0 && !practice.reply;
+        return practice.videoReply.length === 0 && !practice.reply && practice.RecordReply.length === 0;
       }
     );
     setTeacherPracticesUnreplied(filteredPractices);

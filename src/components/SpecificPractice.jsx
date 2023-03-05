@@ -8,7 +8,7 @@ import {
   faTrashCan,
   faEllipsisVertical,
 } from "@fortawesome/free-solid-svg-icons";
-import AudioRecorder from "./AudioRecorder";
+import AudioRecord from "./AudioRecord";
 export default function PracticeReplies({ user }) {
   // State variables
   const [theUser, setTheUser] = useState(
@@ -36,6 +36,7 @@ export default function PracticeReplies({ user }) {
   const [replyId, setReplyId] = useState("");
   const [replyIdtoDelete, setReplyIdtoDelete] = useState("");
   const [moreThan, setMoreThan] = useState(null);
+  const [recordUrl, setRecordUrl] = useState('')
   // const fileInput = useRef(null);
 
   const unique_id = uuid();
@@ -76,13 +77,13 @@ export default function PracticeReplies({ user }) {
     fetchReplies();
   }, [userId]);
   // Filter replies data by teacher's user ID
-  // useEffect(() => {
-  //   const filterByTeacher = autoReplies.filter(
-  //     (teacher) => teacher.teacherId === userId
-  //   );
-
-  //   setOnlyForTeacher(filterByTeacher);
-  // }, [autoReplies]);
+  useEffect(() => {
+    const fetch = async ()=>{
+      const res = await axios.get(process.env.REACT_APP_BACKEND_URL + `/practice/${id}`)
+      setTeacherPractices([res.data]);
+    }
+    fetch()
+  }, [id]);
 
   // Fetch practices data when user ID or doneAddingComment changes
   useEffect(() => {
@@ -238,6 +239,8 @@ export default function PracticeReplies({ user }) {
       });
   };
 
+  
+  console.log(teacherPractices);
   // Add teacher video reply to practice
   const addTeacherVideoReply = (practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
@@ -298,6 +301,20 @@ export default function PracticeReplies({ user }) {
     setNameOfProblem("");
     setVideo(null);
   };
+
+  const showRec =(practice)=>{
+    return practice.RecordReply?.map((rec)=>{
+      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem",}}>
+        <audio 
+        style={{width:'100%'}}
+      controls
+      // poster={poster}
+    >
+      <source src={rec.RecordingReply} type="audio/webm" />
+    </audio>
+      </div>
+    })
+  }
   // Render video replies
   const renderVideoReplies = (replies, practice) => {
     return replies.map((reply, i) => {
@@ -355,6 +372,7 @@ export default function PracticeReplies({ user }) {
     });
   };
 
+  
   const handleDeleteReply = async (practice, reply) => {
     
     //   .then(console.log(replyToDelete))
@@ -384,7 +402,7 @@ export default function PracticeReplies({ user }) {
     return specificTeacherPractice?.map((practice) => {
       return (
         <div
-          style={{ borderBottom: "1px solid #e1e1e1", padding: "10px" }}
+          style={{ padding: "10px" }}
           key={practice._id}
           onClick={() => getPracticeUnique(practice)}
         >
@@ -401,30 +419,39 @@ export default function PracticeReplies({ user }) {
             الدرس:
             {practice.video}
           </div>
+          
           <div>
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "10px",
+                display: "flex"
               }}
             >
-              <div style={{ height: "250px" }}>
+              <div style={{ width: "35%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor:"#fee4b9"}}>
                 <video
-                  key={practice.myPractice}
-                  controls
-                  preload="metadata"
-                  // poster={poster}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    // maxHeight: "250px",
-                    border: "1px solid #e1e1e1",
-                  }}
+                 key={practice.myPractice}
+                 controls
+                 preload="metadata"
+                 // poster={poster}
+                 height="250px"
+                 style={{
+                   width: "90%",
+                   height: "90%",
+                   minHeight: "230px",
+                   maxHeight: "230px",
+                   border: "1px solid #e1e1e1",
+                   marginTop:"10px"
+                 }}
+                
                 >
                   <source src={practice.myPractice} type="video/mp4" />
                 </video>
               </div>
+              <div style={{width:"65%"}}>
               <div>
                 {practice.videoReply ? (
                   <div
@@ -438,14 +465,19 @@ export default function PracticeReplies({ user }) {
                     }}
                   >
                     {renderVideoReplies(practice.videoReply, practice)}
+                    
                   </div>
                 ) : null}
+                
               </div>
+              <div className="audioSpecific">
+                {showRec(practice)}
+                </div>
+              </div>
+              
             </div>
-            <div style={{display:"grid", gridTemplateColumns:"1fr 1fr"}}>
+            </div>
             <div>
-              <>
-                <div>
                   {openButtons ? (
                     <>
                       {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
@@ -473,6 +505,16 @@ export default function PracticeReplies({ user }) {
                     </>
                   ) : null}
                 </div>
+            <div className="SpecificReplies">
+            
+            <div   style={{
+                        display: "flex",
+                        flexDirection:"column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}>
+              <>
+                
                 <div>
                   {/* <AudioRecorder/> */}
                   <div>تعليق عن طريق فيديو</div>
@@ -483,7 +525,11 @@ export default function PracticeReplies({ user }) {
                     onChange={(e) => setNameOfProblem(e.target.value)}
                   />
                 </div>
-                <div className="allvideoreply">
+                <div className="allvideoreply" style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}>
                   <div>
                     <input
                       type="file"
@@ -547,15 +593,15 @@ export default function PracticeReplies({ user }) {
                         >
                           <button
                             onClick={() => addTeacherVideoReply(practice)}
-                            className="btnSendVideoReply"
+                            style={{ backgroundColor:"#fee4b9",color:"black" , width:"80px"}}
                           >
                             ارسال
                           </button>
                           <button
                             onClick={cancelUpload}
-                            className="btnSendVideoReply"
+                            style={{ backgroundColor:"red",color:"white", width:"80px"}}
                           >
-                            cancel
+                            الغاء
                           </button>
                         </div>
                       ) : null}
@@ -567,7 +613,22 @@ export default function PracticeReplies({ user }) {
                 {/* </div> */}
               </>
             </div>
-            <div>
+       
+            <div style={{
+                        display: "flex",
+                        flexDirection:"column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}>
+              <div>رساله صوتيه</div>
+                <AudioRecord unique_id={unique_id} userId={userId} setTeacherPractices={setTeacherPractices} setRecordUrl={setRecordUrl} practice={practice}/>
+              </div>
+              <div style={{
+                        display: "flex",
+                        flexDirection:"column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}>
             <div> تعليق المعلم:</div>
 
             <div>
@@ -641,7 +702,7 @@ export default function PracticeReplies({ user }) {
             </div>
             </div>
             {/* <div>{practice.reply}</div> */}
-          </div>
+          
         </div>
         // </div>
       );
@@ -649,7 +710,7 @@ export default function PracticeReplies({ user }) {
   };
 
   return (
-    <div style={{ marginTop: "150px" }}>
+    <div style={{ marginTop: "100px" }}>
      
       <div>{showData()}</div>
     </div>

@@ -6,6 +6,11 @@
     margin: 15px auto;
 }
 
+.audioProfile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .userCoverPic {
     background-image: url("/public/coverProfile.jpg");
     background-repeat: no-repeat;
@@ -79,6 +84,11 @@
 }
 
 @media (max-width: 568px) {
+    .audioProfile {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
     .coverProfile {
         display: flex;
         flex-direction: column;
