@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashCan,
   faEllipsisVertical,
+  faVideo
 } from "@fortawesome/free-solid-svg-icons";
 import AudioRecord from "./AudioRecord";
 export default function PracticeReplies({ user }) {
@@ -304,7 +305,8 @@ export default function PracticeReplies({ user }) {
 
   const showRec =(practice)=>{
     return practice.RecordReply?.map((rec)=>{
-      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem",}}>
+      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem", padding:"3px", border: "1px solid black"}}>
+      <div style={{margin:"10px", cursor:"pointer"}} onClick={() => handleDeleteRecording(rec,practice, reply)}> <FontAwesomeIcon icon={faTrashCan} /></div>
         <audio 
         style={{width:'100%'}}
       controls
@@ -315,6 +317,26 @@ export default function PracticeReplies({ user }) {
       </div>
     })
   }
+  const handleDeleteRecording = async (rec, practice,reply) => {
+    const replyId = rec.replyId
+    console.log(rec.replyId)
+      // .then(console.log(replyToDelete))
+    await axios
+      .put(
+        process.env.REACT_APP_BACKEND_URL +
+          `/practice/deleteRecordReply/${practice._id}`,
+        {
+          replyId:rec.replyId,
+        }
+      )
+      .then(setTeacherPractices([]))
+      .then(async () => {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
+        );
+        setTeacherPractices(res.data);
+      });
+  };
   // Render video replies
   const renderVideoReplies = (replies, practice) => {
     return replies.map((reply, i) => {
@@ -422,16 +444,15 @@ export default function PracticeReplies({ user }) {
           
           <div>
             <div
-              style={{
-                display: "flex"
-              }}
+              className="videoAndReplies"
             >
-              <div style={{ width: "35%",
+              <div className="StudentVideo" style={{ 
+                
                 display: "flex",
-                flexDirection: "column",
+                // flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor:"#fee4b9"}}>
+                backgroundColor:"#fee4b9",marginBottom:"10px"}}>
                 <video
                  key={practice.myPractice}
                  controls
@@ -444,14 +465,14 @@ export default function PracticeReplies({ user }) {
                    minHeight: "230px",
                    maxHeight: "230px",
                    border: "1px solid #e1e1e1",
-                   marginTop:"10px"
+                   marginTop:"10px",marginBottom:"10px"
                  }}
                 
                 >
                   <source src={practice.myPractice} type="video/mp4" />
                 </video>
               </div>
-              <div style={{width:"65%"}}>
+              <div className="replyForVideo">
               <div>
                 {practice.videoReply ? (
                   <div
@@ -492,7 +513,7 @@ export default function PracticeReplies({ user }) {
                                   borderRadius: "5px",
                                   backgroundColor: "black",
                                   color: "white",
-                                  minWidth: "100px",
+                                  minWidth: "80px",
                                 }}
                               >
                                 {" "}
@@ -512,26 +533,52 @@ export default function PracticeReplies({ user }) {
                         flexDirection:"column",
                         justifyContent: "center",
                         alignItems: "center",
+                        border: "1px solid black", padding:"10px"
                       }}>
               <>
                 
                 <div>
                   {/* <AudioRecorder/> */}
                   <div>تعليق عن طريق فيديو</div>
-
+                   
+                </div>
+                <div className="allvideoreply" style={{
+                        display: "flex",
+                        flexDirection:"column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}>
+                        <div style={{display: "flex"}}>
+                        <div>
                   <input
+                 
                     type="text"
                     placeholder="عنوان الرد"
                     onChange={(e) => setNameOfProblem(e.target.value)}
                   />
-                </div>
-                <div className="allvideoreply" style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}>
-                  <div>
+                  </div>
+                        
+                  <div style={{marginRight:"10px",backgroundColor:"#ebebeb", width:"40px", height:"40px", borderRadius:"50%", display:"flex", justifyContent:"center",alignItems:"center"}}>
+                  <label for="inputTag">
+                    <FontAwesomeIcon icon={faVideo} />
                     <input
+                      type="file"
+                      onChange={(e) => {
+                        e.target.files[0].size > 104857500
+                          ? setMoreThan("more than 100mb")
+                          : setVideo(e.target.files[0]);
+                      }}
+                      id="inputTag"
+                      style={{ display: "none" }}
+                      onClick={() => {
+                        setUrl(null);
+                        setVideo(null);
+                        setMoreThan(null);
+                      }}
+                      // onClick={() => setUrl(null)}
+                    />
+                  </label>
+                    {/* <input
                       type="file"
                       // ref={fileInput}
                       onChange={(e) => {
@@ -544,7 +591,8 @@ export default function PracticeReplies({ user }) {
                         setVideo(null);
                         setMoreThan(null);
                       }}
-                    />
+                    /> */}
+                  </div>
                   </div>
                   {moreThan && (
                     <div style={{ color: "red" }}>
@@ -619,6 +667,7 @@ export default function PracticeReplies({ user }) {
                         flexDirection:"column",
                         justifyContent: "center",
                         alignItems: "center",
+                        border: "1px solid black", padding:"10px"
                       }}>
               <div>رساله صوتيه</div>
                 <AudioRecord unique_id={unique_id} userId={userId} setTeacherPractices={setTeacherPractices} setRecordUrl={setRecordUrl} practice={practice}/>
@@ -628,6 +677,7 @@ export default function PracticeReplies({ user }) {
                         flexDirection:"column",
                         justifyContent: "center",
                         alignItems: "center",
+                        border: "1px solid black", padding:"10px"
                       }}>
             <div> تعليق المعلم:</div>
 

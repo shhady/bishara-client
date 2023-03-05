@@ -335,7 +335,7 @@ export default function Notifications() {
   const drawPracticeNotifications = () => {
     return teacherPracticesUnReplied?.map((practice) => {
       return (
-        <div>
+        <div key={practice._id}>
           <div
             style={{
               padding: "15px",

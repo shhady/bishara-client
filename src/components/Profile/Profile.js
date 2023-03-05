@@ -409,21 +409,17 @@ export default function Profile({ userProp }) {
             </div>
           </div>
           <div
-            style={{
-              display: "flex",
-              
-              // justifyContent: "center",
-              // alignItems: "center",
-            }}
-          >
+           className="videoAndRepliesProfile">
             <div
+            className="StudentVideoProfile"
               style={{
-                width: "35%",
+                // width: "35%",
                 display: "flex",
-                flexDirection: "column",
+                // flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor:"#fee4b9"
+                backgroundColor:"#fee4b9",
+                marginBottom:"10px"
               }}
             >
               {/* <div>التمرين</div> */}
@@ -439,25 +435,18 @@ export default function Profile({ userProp }) {
                   minHeight: "230px",
                   maxHeight: "230px",
                   border: "1px solid #e1e1e1",
-                  marginTop:"10px"
+                  marginTop:"10px",
+                  marginBottom:"10px"
                 }}
               >
                 <source src={practice.myPractice} type="video/mp4" />
               </video>
-              <div className="theComment">{practice.reply}</div>
+              
             </div>
-            <div style={{ padding: "0px 10px", width: "65%" }}>
-              {/* {practice.videoReply ? (
-                <div>
-                  <video
-                    key={practice.videoReply}
-                    controls
-                    style={{ width: "100%", height: "250px" }}
-                  >
-                    <source src={practice.videoReply} type="video/mp4" />
-                  </video>
-                </div>
-              ) : null} */}
+            
+            <div  className="replyForVideoProfile">
+              {practice.reply ? (<div className="theComment">{practice.reply}</div>):(null)}
+              
               {practice.videoReply ? (
                 <div
                   style={{
@@ -469,24 +458,7 @@ export default function Profile({ userProp }) {
                     // overflow: "hidden",
                   }}
                 >
-                  {practice.videoReply.length === 0 ?(<><div style={{
-                          width: "100%",
-                          height: "121px",
-                          border: "1px solid #e1e1e1",
-                          backgroundColor: i % 2 === 0 ? "#c7c5c5" : "white"
-                        }}>1</div><div style={{
-                          width: "100%",
-                          height: "121px",
-                          border: "1px solid #e1e1e1",backgroundColor: i % 2 === 0 ? "#c7c5c5" : "white"
-                        }}>2</div><div style={{
-                          width: "100%",
-                          height: "121px",
-                          border: "1px solid #e1e1e1",backgroundColor: i % 2 === 0 ? "#c7c5c5" : "white"
-                        }}>3</div><div style={{
-                          width: "100%",
-                          height: "121px",
-                          border: "1px solid #e1e1e1",backgroundColor: i % 2 === 0 ? "#c7c5c5" : "white"
-                        }}>4</div></>):(<>{practice.videoReply.map((reply, i) => {
+                  {practice.videoReply.length === 0 ?(<></>):(<>{practice.videoReply.map((reply, i) => {
                     return (
                       <video
                         key={reply.theVideoReply + `${i}`}

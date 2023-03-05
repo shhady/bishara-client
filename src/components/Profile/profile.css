@@ -11,6 +11,20 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.videoAndRepliesProfile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.StudentVideoProfile {
+    width: 35%;
+}
+
+.replyForVideoProfile {
+    width: 64%;
+}
+
 .userCoverPic {
     background-image: url("/public/coverProfile.jpg");
     background-repeat: no-repeat;
@@ -84,6 +98,21 @@
 }
 
 @media (max-width: 568px) {
+    .videoAndRepliesProfile {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .StudentVideoProfile {
+        width: 100%;
+    }
+
+    .replyForVideoProfile {
+        width: 100%;
+    }
+
     .audioProfile {
         display: grid;
         grid-template-columns: 1fr;

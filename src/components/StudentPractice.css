@@ -6,6 +6,12 @@
 
 }
 
+.videoAndReplies {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .audioSpecific {
     width: 100%;
     display: grid;
@@ -34,6 +40,14 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+.StudentVideo {
+    width: 35%;
+}
+
+.replyForVideo {
+    width: 64%;
+}
+
 @media(max-width:767px) {
     .SendVideoReply {
         grid-template-columns: 1fr 1fr;
@@ -41,9 +55,17 @@
         margin-bottom: 40px;
     }
 
+    .replyForVideo {
+        width: 100%;
+    }
+
     .SpecificReplies {
         display: grid;
         grid-template-columns: 1fr;
+    }
+
+    .StudentVideo {
+        width: 100%;
     }
 
     .audioSpecific {
@@ -54,5 +76,12 @@
     .allvideoreply {
         grid-template-columns: 1fr;
 
+    }
+
+    .videoAndReplies {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
