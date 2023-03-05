@@ -305,32 +305,7 @@ export default function Profile({ userProp }) {
     fetch();
   }, [userId]);
 
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const res = await axios.get(
-  //       process.env.REACT_APP_BACKEND_URL + `/practices`
-  //     );
-  //     setAllPractices(res.data);
-  //   };
-  //   fetch();
-  // }, [practiceId]);
-  // useEffect(() => {
-  //   const res = allPractices.filter((practice) => practice.ownerId === userId);
-  //   setUserPractices(res);
-  // }, [allPractices, userId]);
-  // const showData = () => {
-  //   const res = allPractices.filter(
-  //     (practice) => practice.ownerId === user.user._id
-  //   );
-  //   console.log(res);
-  //   const draw = () => {
-  //     return res.map((draw) => {
-  //       return <div>{draw.courseName}</div>;
-  //     });
-  //   };
-  //   draw();
-
-  // };
+ 
   const deletePractice = (practice) => {
     setPracticeId(practice._id);
     const deleteThePractice = async () => {
