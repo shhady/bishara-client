@@ -310,7 +310,7 @@ export default function PracticeReplies({ user }) {
       controls
       // poster={poster}
     >
-      <source src={rec.RecordingReply} type="audio/webm" />
+      <source src={rec.RecordingReply} type="audio/mp4" />
     </audio>
       </div>
     })
