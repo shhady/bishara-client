@@ -365,7 +365,7 @@ export default function Profile({ userProp }) {
       controls
       // poster={poster}
     >
-      <source src={rec.RecordingReply} type="audio/webm" />
+      <source src={rec.RecordingReply} type="audio/mp4" />
     </audio>
       </div>
     })
