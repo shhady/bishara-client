@@ -376,6 +376,8 @@ export default function Profile({ userProp }) {
         <div
           className="practiceAndReply"
           style={{
+            height:"fit-content",
+
             borderRight: "1px solid black",
             borderBottom: "1px solid #e1e1e1",
             padding: "10px",

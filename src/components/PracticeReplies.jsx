@@ -392,6 +392,7 @@ export default function PracticeReplies({ user }) {
       return (
         <div
           style={{ 
+            height:"fit-content",
             borderBottom: "1px solid #e1e1e1", padding: "10px",
           backgroundColor: i%2===0 ? "#c7c5c5":"white"
         }}
