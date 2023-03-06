@@ -292,6 +292,9 @@ export default function Profile({ userProp }) {
   const studentsPractices = () => {
     history.push("/PracticeReplies");
   };
+  const addStudent = ()=>{
+    history.push("/addStudent");
+  }
 
   useEffect(() => {
     if (user.teacher) return;
@@ -769,7 +772,11 @@ export default function Profile({ userProp }) {
                 >
                   تمارين الطلاب
                 </div>
-
+              <div className="profileButtons1"
+                  style={{ height: "40px" }}
+                  onClick={addStudent}>
+                اضافة طالب
+              </div>
                 <div
                   className="profileButtons2"
                   style={{ height: "40px" }}

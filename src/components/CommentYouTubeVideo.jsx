@@ -497,20 +497,29 @@ export default function CommentYouTubeVideo({
       );
     });
   };
-  
+  // console.log(courseInfo)
+  // console.log(user._id)
+  // console.log(user.user.pai)
   return (
     <div>
       <div className="commentsSection">
-        <UploadFile courseInfo={courseInfo} lesson={lesson} id={id} />
+      {user.user?.paid === courseInfo.owner ? (
+        <>
+ <UploadFile courseInfo={courseInfo} lesson={lesson} id={id} />
 
-        <Comment
-          userId={userId}
-          userF={userF}
-          userL={userL}
-          courseInfo={courseInfo}
-          lesson={lesson}
-          socket={socket}
-        />
+ <Comment
+   userId={userId}
+   userF={userF}
+   userL={userL}
+   courseInfo={courseInfo}
+   lesson={lesson}
+   socket={socket}
+ />
+ </>
+
+      ):(null)}
+      
+       
         <div className="CommentInput">
           {userAvatar ? (
             <>
