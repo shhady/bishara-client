@@ -305,17 +305,12 @@ export default function PracticeReplies({ user }) {
     return replies.map((reply, i) => {
       return (
         <div key={i} style={{ position: "relative" }}>
-          <div>
+          <div className="videoContainer">
             <video
               controls
               preload="metadata"
               // poster={poster}
-              style={{
-                width: "100%",
-                height: "115px",
-                zIndex: 1,
-                border: "1px solid #e1e1e1",
-              }}
+              className="videos4Practices"
             >
               <source src={reply.theVideoReply} type="video/mp4" />
             </video>
@@ -325,7 +320,7 @@ export default function PracticeReplies({ user }) {
               color: "#5f697d",
               position: "absolute",
               top: "0",
-              left: "0",
+              left: "20px",
               zIndex: 2,
             }}
             onClick={() => {
@@ -480,6 +475,7 @@ export default function PracticeReplies({ user }) {
                       gap: ".5rem",
                       height: "97%",
                       maxHeight: "250px",
+                     
                       // overflow: "hidden",
                     }}
                   >

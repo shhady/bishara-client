@@ -443,11 +443,7 @@ export default function Profile({ userProp }) {
                         controls
                         preload="metadata"
                         // poster={poster}
-                        style={{
-                          width: "100%",
-                          height: "121px",
-                          border: "1px solid #e1e1e1",
-                        }}
+                        className="videos4Profile"
                       >
                         <source src={reply.theVideoReply} type="video/mp4" />
                       </video>

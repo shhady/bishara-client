@@ -71,7 +71,8 @@ export default function CoursesHomePage({
               onClick={() => addToLocal(course)}
             >
               <img
-                src={course.coursePhoto}
+                  src={course.coursePhoto? (course.coursePhoto):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}           
+
                 alt={course.firstName}
                 height="190px"
                 width="250px"
