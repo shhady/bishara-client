@@ -337,7 +337,7 @@ export default function Profile({ userProp }) {
 
   const showRec =(practice,i)=>{
     return practice.RecordReply?.map((rec)=>{
-      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem",}}>
+      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem", borderRadius:"20px"}}>
         <audio 
         style={{width:'100%'}}
       controls

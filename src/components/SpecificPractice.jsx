@@ -305,7 +305,7 @@ export default function PracticeReplies({ user }) {
 
   const showRec =(practice)=>{
     return practice.RecordReply?.map((rec)=>{
-      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem", padding:"3px", border: "1px solid black"}}>
+      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem", padding:"3px", border: "1px solid black", borderRadius:"20px"}}>
       <div style={{margin:"10px", cursor:"pointer"}} onClick={() => handleDeleteRecording(rec,practice, reply)}> <FontAwesomeIcon icon={faTrashCan} /></div>
         <audio 
         style={{width:'100%'}}
