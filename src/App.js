@@ -1,18 +1,8 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-// import Home from "./components/Home";
-// import Piano from "./components/PianoPage";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
-// import Oud from "./components/Oud";
-// import Auth from "./components/Auth/Auth";
-// import CreateTeacher from "./components/Form/CreateTeacher";
-// import Profile from "./components/Profile/Profile";
-// import CreateCourse from "./components/Course/CreateCourse";
-// import Teachers from "./components/Teachers";
-// import Courses from "./components/Courses";
-// import Messenger from "./components/Messenger/Messenger";
-// import Course from "./components/Course";
+
 const Home = React.lazy(() => import("./components/Home"));
 const StudentsPractices = React.lazy(() =>
   import("./components/StudentsPractices")
@@ -31,9 +21,7 @@ const CreateTeacher = React.lazy(() =>
 );
 const Auth = React.lazy(() => import("./components/Auth/Auth"));
 const QA = React.lazy(() => import("./components/QA"));
-// const PianoPage = React.lazy(() => import("./components/PianoPage"));
-// const OudPage = React.lazy(() => import("./components/OudPage"));
-// const ViolinPage = React.lazy(() => import("./components/ViolinPage"));
+
 const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
 const TeacherData = React.lazy(() => import("./components/TeacherData"));
 const Lessons = React.lazy(() => import("./components/Lessons"));
@@ -46,13 +34,10 @@ const PracticeReplies = React.lazy(() =>
   import("./components/PracticeReplies")
 );
 
+const CreateCourseForTeacher = React.lazy(() => import("./components/Course/CreateCourseForTeacher"));
+
 const Subscribe = React.lazy(() => import("./components/Subscribe"));
 
-const Evaluation = React.lazy(() => import("./components/Evaluation"));
-// const Oud = React.lazy(() => import("./components/Oud"));
-// const Piano = React.lazy(() => import("./components/PianoPage"));
-
-// import Hero from "./components/Hero";
 export default function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [socket, setSocket] = useState(null);
@@ -120,14 +105,7 @@ export default function App() {
           <Route path="/qa">
             <QA user={user}/>
           </Route>
-          <Route path="/evaluation">
-            <Evaluation  user={user}
-              setUser={setUser}
-              setTeacher={setTeacher}
-              teacher={teacher}
-              listId={listId}
-              socket={socket}/>
-          </Route>
+        
           
           <Route path="/PracticeReplies" exact>
             <PracticeReplies user={user} setUser={setUser} />
@@ -211,7 +189,7 @@ export default function App() {
           <Route path="/course/:id" exact>
             <Course user={user} setUser={setUser} socket={socket} />
           </Route>
-          {/* <Route path="/teachers" exact component={Teachers} /> */}
+          <Route path="/CreateCourseForTeacher" exact component={CreateCourseForTeacher} />
           <Route path="/teachers" exact>
             <Teachers
               user={user}
@@ -225,15 +203,7 @@ export default function App() {
           <Route path="/StudentsPractices" exact>
             <StudentsPractices user={user} setUser={setUser} />
           </Route>
-          {/* <Route path="/PianoPage" exact>
-            <PianoPage user={user} setUser={setUser} />
-          </Route>
-          <Route path="/OudPage" exact>
-            <OudPage user={user} setUser={setUser} />
-          </Route>
-          <Route path="/ViolinPage" exact>
-            <ViolinPage user={user} setUser={setUser} />
-          </Route> */}
+          
 
           <Route path="/messenger" exact>
             {user ? (

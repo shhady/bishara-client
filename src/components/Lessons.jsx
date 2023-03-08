@@ -15,13 +15,13 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
   );
   const [updated, setUpdated] = useState(updateComponent);
   const [courseCover, setCourseCover] = useState(""
-    // window.localStorage.getItem("courseCover")
+   
   );
   const [courseTitle, setCourseTitle] = useState(""
-    // window.localStorage.getItem("courseTitle")
+   
   );
   const [courseDes, setCourseDes] = useState(""
-    // window.localStorage.getItem("coursedes")
+   
   );
 
   const [listId, setListId] = useState("");
@@ -48,7 +48,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
       const formData = new FormData();
       formData.append("file", image);
       formData.append("upload_preset", "bisharaHaroni");
-      // formData.append("cloud_name", "shhady");
+      
       axios
         .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
           onUploadProgress: (p) => {
@@ -58,10 +58,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           },
         })
         .then((res) => setUrl(res.data.url))
-        // .then((data) => {
-        //   (data.url);
-        // })
-        // .then(console.log(profilePic))
+     
         .catch((err) => {
           console.log(err);
         });
@@ -80,7 +77,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           }
         )
         .then(() => {
-          // window.localStorage.setItem("courseCover", url);
+         
           setCourseCover(url);
         }).then(async () => {
           const res = await axios.get(
@@ -94,7 +91,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
     };
     changePhoto();
     
-    // setUpdateComponent({...updateComponent, coursePhoto:url})
+   
 
   }, [url]);
 
@@ -117,7 +114,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
         `${youtubeurl}?part=snippet&playlistId=${listId}&maxResults=50&key=${process.env.REACT_APP_YOUTUBE_KEY}`
       );
       setLessons(result.data.items);
-      //   setData(result.data.items[0].snippet.thumbnails.default.url);
+    
     };
     fetch();
   }, [listId]);
@@ -144,7 +141,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
     return lessons?.map((lesson, i) => {
       return (
         <div key={i}>
-          {/* <Link to="/Lesson" style={{ textDecoration: "none" }}> */}
+       
           <div onClick={() => handleLessonClick(lesson)}>
             <div
               className="lessonCover"
@@ -172,25 +169,12 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
               >
                 <FontAwesomeIcon icon={faCirclePlay} size="3x" />
               </div>
-              {/* <img
-              src={lesson.snippet.thumbnails.high.url}
-              alt="photo"
-              width="100%"
-              height="150px"
-            /> */}
-              {/* <iframe
-              width="100%"
-              height="100%"
-              src="https://www.youtube.com/embed/9GejeXh-zKE"
-              title="Fadi a"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe> */}
+             
+              
             </div>
             <div style={{ textAlign: "center" }}>{lesson.snippet.title}</div>
           </div>
-          {/* </Link> */}
+          
         </div>
       );
     });
@@ -215,12 +199,9 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           }
         )
         .then(() => {
-          // window.localStorage.setItem("courseTitle", newValue);
+          
           setCourseTitle(newValue);
-          // setUpdated({...updated, title:newValue})
-  //         setUpdated(prevState => {
-  // return { ...prevState, title: newValue }
-// });
+     
          
         })
         .then(async () => {
@@ -247,9 +228,9 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           }
         )
         .then(() => {
-          // window.localStorage.setItem("coursedes", newValueDes);
+          
           setCourseDes(newValueDes);
-          // setUpdateComponent({...updateComponent, description:newValueDes})
+          
 
         })
         .then(async () => {
@@ -274,28 +255,10 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           backgroundImage: `url(${
             updated ? updated.coursePhoto : courseInfo.coursePhoto
           })`,
-          // backgroundPosition: "center",
-          // backgroundSize: "cover",
-          // backgroundRepeat: "no-repeat",
-          // height: "200px",
-          // width: "100%",
-          // display: "flex",
-          // flexDirection: "column",
-          // justifyContent: "flex-end",
-          // alignItems: "flex-start",
-          // position: "relative",
+          
         }}
       >
-        {/* <img
-          src={
-            courseInfo.coursePhoto
-              ? courseInfo.coursePhoto
-              : "https://images.unsplash.com/photo-1546058256-47154de4046c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHBpYW5vfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
-          }
-          width="100%"
-          height="100%"
-          objectFit="fit"
-        /> */}
+      
         <div
           style={{
             height: "100%",
@@ -303,7 +266,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-end",
-            // alignItems: "flex-end",
+            
           }}
         >
           {user?.teacher?._id === courseInfo.owner ? (
@@ -331,7 +294,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
                   }}
                   id="inputTag"
                   style={{ display: "none" }}
-                  // onClick={() => setUrl(null)}
+                  
                 />
               </label>
             </div>
@@ -339,32 +302,9 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
         </div>
       </div>
       <div className="profile1">
-        {/* <div
-          style={{
-            width: "100%",
-            // height: "150px",
-            borderRadius: "50%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <img
-            src={courseInfo.avatar}
-            alt="profile"
-            width="150px"
-            height="150px"
-            style={{ borderRadius: "50%", border: "2px solid white" }}
-          />
-        </div> */}
+       
         <div className="infoinfo">
           <div className="partInfo">
-            {/* <h1>
-              {courseInfo.firstName}
-              {"  "}
-              {courseInfo.lastName}
-              {"  "}
-            </h1> */}
             <div>
               <div
                 style={{
@@ -440,7 +380,6 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
           </div>
         </div>
       </div>
-                    {/* <hr/> */}
       <div className="lessonsVideos">{drawLessons()}</div>
     </div>
   );

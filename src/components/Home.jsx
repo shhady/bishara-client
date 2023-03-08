@@ -1,6 +1,5 @@
 import React from "react";
 import Hero from "./Hero";
-import LearnTrainCom from "./LearnTrainCom";
 import FreeVideos from "./FreeVideos";
 import About from "./About";
 import Footer from "./Footer";
@@ -20,32 +19,13 @@ export default function Home({
       <FourBoxes />
 
       <TeachersHomePage />
-      {/* <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr 1fr",
-          height: "100px",
-        }}
-      >
-        <div style={{ background: "yellow", height: "100px" }}>
-          teachers playing
-        </div>
-        <div style={{ background: "blue", height: "100px" }}>
-          teachers playing
-        </div>
-        <div style={{ background: "red", height: "100px" }}>
-          teachers playing
-        </div>
-        <div style={{ background: "green", height: "100px" }}>
-          teachers playing
-        </div>
-      </div> */}
+     
       <CoursesHomePage
         setUpdateComponent={setUpdateComponent}
         updateComponent={updateComponent}
       />
       <FreeVideos />
-      {/* <LearnTrainCom /> */}
+     
       <About />
       <Footer />
     </div>

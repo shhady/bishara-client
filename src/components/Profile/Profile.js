@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import CreateCourse from "../Course/CreateCourse";
@@ -773,6 +773,12 @@ export default function Profile({ userProp }) {
                   onClick={addStudent}>
                 اضافة طالب
               </div>
+              <Link to="/CreateCourseForTeacher" style={{textDecoration:"none", color:"black"}}>
+              {user.teacher.role === "admin" ? ( <div className="profileButtons1"
+                  style={{ height: "40px" }}>
+                انشئ دورة لمعلم اخر
+              </div>):(null)}
+              </Link>
                 <div
                   className="profileButtons2"
                   style={{ height: "40px" }}

@@ -14,10 +14,7 @@ export default function Lesson({ socket }) {
     JSON.parse(localStorage.getItem("courseDetails"))
   );
   const [listId, setListId] = useState('');
-  const [videoChosen, setVideoChosen] = useState(
-    localStorage.getItem("videoName")
-  );
-  const [videoNumber, setVideoNumber] = useState(lesson.snippet.position + 1);
+ 
   let { id } = useParams();
   const history = useHistory();
   window.onpopstate = () => {
@@ -36,17 +33,14 @@ export default function Lesson({ socket }) {
         `${youtubeurl}?part=snippet&playlistId=${listId}&maxResults=50&key=${process.env.REACT_APP_YOUTUBE_KEY}`
       );
       setLessons(result.data.items);
-      //   setData(result.data.items[0].snippet.thumbnails.default.url);
+     
     };
     fetch();
   }, [listId]);
 
   const handleLessonClick = (lessonSuggest) => {
     setLesson(lessonSuggest);
-    // history.push({
-    //   pathname: `/Lesson/${lesson.snippet.playlistId}/${id}`,
-    //   id: lesson.snippet.playlistId,
-    // });
+   
     window.localStorage.setItem("lessonDetails", JSON.stringify(lessonSuggest));
     window.localStorage.setItem(
       "videoName",
@@ -112,7 +106,7 @@ export default function Lesson({ socket }) {
               </div>
             )}
 
-            {/* <div>{lessonSuggest.snippet.title}</div> */}
+           
           </div>
         </div>
       );
@@ -132,7 +126,7 @@ export default function Lesson({ socket }) {
             borderBottomLeftRadius: "50%",
           }}
         >
-          {/* {videoNumber} */}
+         
         </div>
         <iframe
           width="100%"

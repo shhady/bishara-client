@@ -78,13 +78,13 @@ export default function PaidStudent({ user }) {
 
   return (
     <>
-    <div style={{ display: "flex",flexDirection:"column", justifyContent: "center", alignItems: "center", width:"60%", margin:"150px auto 30px auto", border: "1px solid black", backgroundColor:"#c7c5c5"}}>
+    <div style={{ display: "flex",flexDirection:"column", justifyContent: "center", alignItems: "center",  margin:"150px auto 30px auto", border: "1px solid black", backgroundColor:"#c7c5c5"}}>
       <div>
         <h2>اضف ايميل الطالب</h2>
       </div>
       <form onSubmit={showEmail} style={{ marginTop: "50px", display: "flex",flexDirection:"column", justifyContent: "space-around", alignItems: "center", height: "20vh"}}>
-        <input ref={email} type="email" placeholder="البريد الالكتروني" style={{width:"100%"}}/>
-        <input type="submit" style={{width:"100%", backgroundColor:"#fee4b9"}}/>
+        <input ref={email} type="email" placeholder="البريد الالكتروني"  style={{width:"100%", height:"30px"}}/>
+        <input type="submit" style={{width:"100%", backgroundColor:"#fee4b9", height:"30px"}}/>
       </form>
     {showResponse ? (<>تمت الاضافة</>):(null)}
     {showُError ? (<>فشل في اضافة الطالب</>):(null)}

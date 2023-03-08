@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeacherData.css";
-import Evaluation from "./Evaluation"
+// import Evaluation from "./Evaluation"
 import { Link, useHistory } from "react-router-dom";
 import StartChat from "./Messenger/StartChat";
 export default function TeacherData({

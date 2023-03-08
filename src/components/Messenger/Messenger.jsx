@@ -682,7 +682,7 @@ import Conversation from "../Conversations/Conversation";
 import Message from "../Message/Message";
 import axios from "axios";
 import { io } from "socket.io-client";
-
+import {Link} from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
@@ -1044,10 +1044,15 @@ export default function Messenger({
                 // }}
                 className="clickToOpenChat"
               >
+                <h2 style={{textAlign:"center"}}>
+                لبدأ محادثة 
+                <Link to="/teachers"> اضغط هنا </Link>  
+                واختر المعلم الذي تريد بدأ المحادثه معه واضغط على مراسله
                 {/* <img src="" height="100%" width="100%" /> */}
                 {/* <span>
                   <h1>اضغط على اسم المدرس لبدأ محادثة</h1>
                 </span> */}
+              </h2>
               </div>
             )}
           </div>

@@ -622,39 +622,28 @@ export default function Header({
                         />
                         {/* <FontAwesomeIcon icon={faUser} size="1.5em" /> */}
                       </div>
-                      // </Link>
+                     
                     )}
                   </div>
                 ) : (
                   <div
 
-                  // style={{
-                  //   display: "flex",
-                  //   flexDirection: "column",
-                  //   justifyContent: "center",
-                  //   alignItems: "center",
-                  // }}
+              
                   ></div>
                 )}
                 {user ? (
                   <>
-                    {/* <Link
-                      to="/Notifications"
-                      style={{ textDecoration: "none" }}
-                    > */}
+                    
                     <div
                       style={{
-                        // display: "flex",
-                        // justifyContent: "flex-end",
-                        // paddingLeft: "20px",
+                        
                         color: "black",
                         padding: "0px 35px",
                         height: "80px",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        // height: "80px",
-                        // border: "1px solid transparent",
+                       
                         cursor: "pointer",
                         position: "relative",
                       }}
@@ -672,30 +661,30 @@ export default function Header({
                         alt="noti"
                         width="20px"
                       />
-                      {/* <FontAwesomeIcon icon={faBell} /> */}
+                      
                       {redLightNotification ||
                       redLightNotificationReply ||
                       teacherPracticesUnReplied.length !== 0 ||
                       userPracticesNotSeen.length !== 0 ? (
                         <div
-                          // onClick={setRedLightNotification(false)}
+                          
                           className="notificationNotification"
-                          // style={{ position: "absolute" }}
+                          
                         ></div>
                       ) : null}
                     </div>
-                    {/* </Link> */}
+                   
                   </>
                 ) : null}
                 {user ? (
                   <div
                     style={{
-                      // padding: "2px",
+                      
                       height: "80px",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      // border: "1px solid white",
+                      
                       cursor: "pointer",
                       position: "relative",
                     }}
@@ -703,12 +692,10 @@ export default function Header({
                     onClick={() => {
                       history.push("/messenger");
                       setNotifyMessage(null);
-                      // } else {
-                      //   setOpenNotificationsMessage(!openNotificationsMessage);
-                      // }
+                    
                     }}
                   >
-                    {/* <FontAwesomeIcon icon={faMessage} /> */}
+                  
                     <img
                       src="https://img.icons8.com/fluency-systems-filled/48/null/filled-chat.png"
                       alt="message"
@@ -721,16 +708,14 @@ export default function Header({
                 ) : null}
               </div>
             ) : (
-              // <div style={{ visibility: "hidden" }}>X</div>
+             
               <Link to="/auth" style={{ textDecoration: "none" }}>
                 <div
                   style={{
-                    //   display: "flex",
-                    //   height: "30px",
-                    //   padding: "3px",
+                  
                     color: "black",
                   }}
-                  // className="registerBox"
+                  
                 >
                   <div
                     style={{
@@ -838,13 +823,10 @@ export default function Header({
                     onMouseOver={() => {
                       setTeachersHover(true);
                       setCoursesHover(false);
-                      // setUpdateComponent("");
+                     
                     }}
                   >
-                    {/* <FontAwesomeIcon
-                    icon={faChalkboardUser}
-                    className="highlight"
-                  /> */}
+                  
                     <img
                       src="https://img.icons8.com/ios/50/null/user-group-man-man.png"
                       width="25px"
@@ -855,7 +837,7 @@ export default function Header({
               </div>
             </Link>
             {user ? (
-              // <Link to="/courses" style={{ textDecoration: "none" }}>
+              
               <div
                 className="headeroud"
                 onMouseOver={() => {
