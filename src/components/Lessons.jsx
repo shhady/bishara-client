@@ -269,7 +269,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
             
           }}
         >
-          {user?.teacher?._id === courseInfo.owner ? (
+          {user?.teacher?._id === courseInfo.owner || user?.teacher?.role === "admin" ? (
             <div
               style={{
                 backgroundColor: "white",
@@ -322,7 +322,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
                     <h1 style={{ fontSize: "38px" }}>
                       {updated ? updated.title : courseInfo.title}
                     </h1>
-                    {user?.teacher?._id === courseInfo.owner ? (
+                    {user?.teacher?._id === courseInfo.owner || user?.teacher?.role === "admin" ? (
                       <h3
                         style={{
                           display: "flex",
@@ -358,7 +358,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
               </div>
             ) : (
               <div>           
-                {user?.teacher?._id === courseInfo.owner ? (
+                {user?.teacher?._id === courseInfo.owner|| user?.teacher?.role === "admin"  ? (
                   <h3
                     style={{
                       display: "flex",

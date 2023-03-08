@@ -773,12 +773,12 @@ export default function Profile({ userProp }) {
                   onClick={addStudent}>
                 اضافة طالب
               </div>
-              <Link to="/CreateCourseForTeacher" style={{textDecoration:"none", color:"black"}}>
-              {user.teacher.role === "admin" ? ( <div className="profileButtons1"
+              
+              {user.teacher.role === "admin" ? (<Link to="/CreateCourseForTeacher" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons1"
                   style={{ height: "40px" }}>
                 انشئ دورة لمعلم اخر
-              </div>):(null)}
-              </Link>
+              </div></Link>):(null)}
+              
                 <div
                   className="profileButtons2"
                   style={{ height: "40px" }}
