@@ -155,7 +155,7 @@ const history = useHistory()
       ) :  <div onClick={()=>setIfNotUser(!ifNotUserShow)}
       style={{display:"flex", justifyContent: "center", alignItems: "center", flexDirection:"column"}}
     >
-    <div style={{
+      {user?.user ? (<> <div style={{
         width: "150px",
         margin: "20px auto",
         border: "2px solid black",
@@ -167,7 +167,8 @@ const history = useHistory()
     {ifNotUserShow && (
             <>  لرفع تمرين يجب ان تكون مسجل لدى المعلم
            
-           </> )}
+           </> )}</>):(null)}
+   
       </div>}
     </div>
   );
