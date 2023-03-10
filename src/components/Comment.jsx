@@ -22,7 +22,8 @@ export default function Comment({
   
   });
   const [moreThan, setMoreThan] = useState(null);
- 
+  const [ifNotUserShow, setIfNotUser] = useState(false)
+
 const history = useHistory()
   useEffect(() => {
     if (!user) return;
@@ -95,7 +96,7 @@ const history = useHistory()
   console.log(video)
   return (
     <div>
-      {user?.user ? (
+      {user?.user?.paid === courseInfo.owner ? (
         <>
           <div
             style={{
@@ -148,21 +149,26 @@ const history = useHistory()
                   تم رفع {fileUpload.percentComplete}%
                 </div>
               )}
-              {/* {url ? (
-                <Link to="/profile">
-                  <div style={{display:"flex", justifyContent: "center", alignItems: "center"}}>
-                  <button style={{ textAlign: "center" }}>الملف الشخصي</button>
-                  </div>
-                </Link>
-              ) : null} */}
             </div>
           </div>
-       
         </>
-      ) : null}
+      ) :  <div onClick={()=>setIfNotUser(!ifNotUserShow)}
+      style={{display:"flex", justifyContent: "center", alignItems: "center", flexDirection:"column"}}
+    >
+    <div style={{
+        width: "150px",
+        margin: "20px auto",
+        border: "2px solid black",
+        textAlign:"center",
+        fontWeight:"bold",
+        cursor:"pointer"
 
-   
-     
+      }} > ارفع التمرين</div>  
+    {ifNotUserShow && (
+            <>  لرفع تمرين يجب ان تكون مسجل لدى المعلم
+           
+           </> )}
+      </div>}
     </div>
   );
 }

@@ -503,10 +503,8 @@ export default function CommentYouTubeVideo({
   return (
     <div>
       <div className="commentsSection">
-      {user.user?.paid === courseInfo.owner ? (
+      <UploadFile courseInfo={courseInfo} lesson={lesson} id={id} />
         <>
- <UploadFile courseInfo={courseInfo} lesson={lesson} id={id} />
-
  <Comment
    userId={userId}
    userF={userF}
@@ -517,7 +515,6 @@ export default function CommentYouTubeVideo({
  />
  </>
 
-      ):(null)}
       
        
         <div className="CommentInput">

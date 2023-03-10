@@ -9,7 +9,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
   const [url, setUrl] = useState(null);
   // const [video, setVideo] = useState();
   const [fileUploaded, setFileUploaded] = useState(true);
-
+const [ifNotUserShow, setIfNotUser] = useState(false)
   const [fileUpload, setFileUpload] = useState(null);
   const [theFile, setTheFile] = useState(null);
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "bisharaHaroni");
-    // formData.append("cloud_name", "shhady");
+   
     axios
       .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
         onUploadProgress: (p) => {
@@ -27,9 +27,6 @@ export default function UploadFile({ courseInfo, lesson, id }) {
         },
       })
       .then((res) => setUrl(res.data.url))
-      // .then((data) => {
-      //   (data.url);
-      // })
     
       .catch((err) => {
         console.log(err);
@@ -59,7 +56,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
     };
     fetch();
   }, []);
-  //   useEffect(() => {
+  
   const postData = async () => {
     setFileUploaded(false);
     axios
@@ -85,13 +82,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
     console.log(theFile?.fileUrl);
   }, [theFile, id]);
 
-  //   const downloadFile = async () => {
-  //     try {
-  //       saveAs(theFile?.fileUrl);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
+
 
   const deleteTheFile = (theFile) => {
     axios
@@ -105,60 +96,15 @@ export default function UploadFile({ courseInfo, lesson, id }) {
         setFileUploaded(null);
       });
   };
-  //   const downloadFile = async (url) => {
-  //     try {
-  //       // Append the fl_attachment flag to the URL
-  //       const downloadUrl = `${theFile?.fileUrl}?fl_attachment`;
-  //       const response = await fetch(downloadUrl);
-  //       const blob = await response.blob();
-  //       const url = window.URL.createObjectURL(blob);
-  //       const a = document.createElement("a");
-  //       a.style.display = "none";
-  //       a.href = url;
-  //       // Set the file name as the download attribute
-  //       a.download = `${theFile?.fileUrl}`;
-  //       document.body.appendChild(a);
-  //       a.click();
-  //       window.URL.revokeObjectURL(url);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   const downloadFile = async (url) => {
-  //     try {
-  //       const response = await fetch(theFile?.fileUrl);
-  //       const blob = await response.blob();
-  //       const url = window.URL.createObjectURL(blob);
-  //       const a = document.createElement("a");
-  //       a.style.display = "none";
-  //       a.href = url;
-  //       a.download = `${theFile?.fileUrl}`;
-  //       document.body.appendChild(a);
-  //       a.click();
-  //       window.URL.revokeObjectURL(url);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
+ 
+  console.log(courseInfo)
   return (
     <div className="uploadFile">
-      {user?.teacher?._id === courseInfo.owner ? (
+      {user?.teacher?._id === courseInfo.owner || user.teacher?.role === "admin" ? (
         <>
-          {/* {fileUpload ? (
-            <div style={{ textAlign: "center" }}>
-              {" "}
-              {fileUpload.percentComplete}%
-            </div>
-          ) : ( */}
+          
           <>
-            {/* {!theFile && (
-                <input
-                  type="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  onClick={() => setUrl(null)}
-                />
-              )} */}
+         
             {!theFile && (
               <input
                 type="text"
@@ -167,7 +113,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
               />
             )}
           </>
-          {/* )} */}
+         
           {!theFile && (
             <div
               style={{
@@ -193,10 +139,8 @@ export default function UploadFile({ courseInfo, lesson, id }) {
           )}
 
           <div style={{ cursor: "pointer" }}>
-            {/* <a href={theFile[0]?.fileUrl} download>
-          Download
-        </a> */}
-            {/* <button onClick={downloadFile}>Download</button> */}
+         
+           
             {theFile && (
               <div
                 style={{
@@ -206,18 +150,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
                   width: "50vw",
                 }}
               >
-                {/* <button onClick={() => downloadFile(`${theFile?.fileUrl}`)}>
-                  Download File
-                </button> */}
-                {/* <Link to={theFile?.fileUrl}> */}
-                {/* <button
-                    style={{
-                      width: "100px",
-                      backgroundColor: "white",
-                      border: "2px solid black",
-                      borderRadius: "5px",
-                    }}
-                  > */}
+              
                 <a
                   href={theFile?.fileUrl}
                   target="_blank"
@@ -236,8 +169,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
                   {" "}
                   PDF{" "}
                 </a>
-                {/* </button> */}
-                {/* </Link> */}
+              
                 <div
                   onClick={() => deleteTheFile(theFile)}
                   style={{
@@ -259,7 +191,7 @@ export default function UploadFile({ courseInfo, lesson, id }) {
         </>
       ) : (
         <>
-          {theFile && (
+          {theFile && user.user?.paid === courseInfo.owner ? (
             // <button
             <div style={{display:"flex", justifyContent: "center", alignItems: "center",border: "2px solid black"}}>
             
@@ -283,16 +215,34 @@ export default function UploadFile({ courseInfo, lesson, id }) {
             </div>
             // </button>
             // <button onClick={() => downloadFile()}>Download File</button>
-          )}
+          ):(  
+            <>{theFile?( <div style={{display:"flex", justifyContent: "center", alignItems: "center", flexDirection:"column"}}>
+            <div
+            onClick={()=> setIfNotUser(!ifNotUserShow)}
+              style={{
+                textDecoration: "none",
+                color: "black",
+                width: "150px",
+                backgroundColor: "white",
+                borderRadius: "5px",
+                textAlign: "center",
+                fontWeight: "bold",
+                border: "2px solid black",
+                cursor:"pointer"
+              }}
+            >
+              {" "}
+              ملف{" "}
+            </div>
+            {ifNotUserShow && (
+            <>  لتحميل الملف يجب ان تكون مسجل لدى المعلم
+           
+           </> )
+            }
+            </div>):(null)}</>
+           )}
         </>
       )}
-      {/* <>
-        {theFile && (
-          <button onClick={() => downloadFile(`${theFile?.fileUrl}`)}>
-            Download File
-          </button>
-        )}
-      </> */}
     </div>
   );
 }
