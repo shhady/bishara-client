@@ -37,7 +37,7 @@ export default function Profile({ userProp }) {
   // const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePic"));
   const [urlCover, setUrlCover] = useState(null);
   //prettier-ignore
-  const [coverPicture, setCoverPicture] = useState(localStorage.getItem("coverPic"));
+  const [coverPicture, setCoverPicture] = useState(localStorage.getItem("coverPic").replace('http://', 'https://'));
   const [showPractice, setShowPractice] = useState(true);
   const [showChangePassUser, setShowChangePassUser] = useState(false);
   const [showUpdateProfile, setShowUpdateProfile] = useState(false);

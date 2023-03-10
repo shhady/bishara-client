@@ -592,7 +592,7 @@ export default function Header({
                         onMouseOver={() => setIsHovering(!isHovering)}
                       >
                         <img
-                          src={localStorage.getItem("profilePic")}
+                          src={localStorage.getItem("profilePic").replace('http://', 'https://')}
                           alt={user.teacher.firstName}
                           style={{
                             height: "40px",
