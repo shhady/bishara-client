@@ -341,7 +341,6 @@ export default function Profile({ userProp }) {
         <audio 
         style={{width:'100%'}}
       controls
-      // poster={poster}
     >
       <source src={rec.RecordingReply.replace('http://', 'https://')} type="audio/mp4" />
     </audio>
@@ -355,7 +354,6 @@ export default function Profile({ userProp }) {
           className="practiceAndReply"
           style={{
             height:"fit-content",
-
             borderRight: "1px solid black",
             borderBottom: "1px solid #e1e1e1",
             padding: "10px",
@@ -393,21 +391,17 @@ export default function Profile({ userProp }) {
             <div
             className="StudentVideoProfile"
               style={{
-                // width: "35%",
                 display: "flex",
-                // flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor:"#fee4b9",
                 marginBottom:"10px"
               }}
             >
-              {/* <div>التمرين</div> */}
               <video
                 key={practice.myPractice}
                 controls
                 preload="metadata"
-                // poster={poster}
                 height="250px"
                 style={{
                   width: "90%",
@@ -436,7 +430,6 @@ export default function Profile({ userProp }) {
                     gap: ".5rem",
                     height: "100%",
                     maxHeight: "250px",
-                    // overflow: "hidden",
                   }}
                 >
                   {practice.videoReply.length === 0 ?(<></>):(<>{practice.videoReply.map((reply, i) => {
@@ -445,7 +438,6 @@ export default function Profile({ userProp }) {
                         key={reply.theVideoReply + `${i}`}
                         controls
                         preload="metadata"
-                        // poster={poster}
                         className="videos4Profile"
                       >
                         <source src={reply.theVideoReply.replace('http://', 'https://')} type="video/mp4" />
@@ -469,16 +461,7 @@ export default function Profile({ userProp }) {
     'Content-Type': 'application/json',
     'Authorization': "Bearer " + window.localStorage.getItem("token")
   }
-  // useEffect(()=>{
-  //   const fetch = async()=>{
-
-  //     const res = await axios.get(process.env.REACT_APP_BACKEND_URL+`/users/me`,{
-  //       headers:headers
-  //     })
-  //     console.log(res)
-  //   }
-  //   fetch()
-  // },[user])
+ 
 
   const changeName = async () => {
     try {
@@ -559,8 +542,6 @@ export default function Profile({ userProp }) {
           );
           window.localStorage.setItem("Des", response.data.Description);
           localStorage.setItem("teacherId", userId);
-
-          // setLastName(response.data.lastName);
         });
     } catch (error) {
       console.log("can't update");
@@ -630,7 +611,6 @@ export default function Profile({ userProp }) {
                   backgroundImage: `url(${coverPicture})`,
                   backgroundPosition: "center",
                   backgroundSize: "cover",
-                  // objectFit:"cover",
                   backgroundRepeat: "no-repeat",
                   height: "200px",
                   width: "100%",
@@ -649,7 +629,6 @@ export default function Profile({ userProp }) {
                       setImage(e.target.files[0]);
                       setShowButtonCoverUpdate(true);
                     }}
-                    // onClick={() => setUrl(null)}
                   />
                 ) : null}
                 {showButtonCoverUpdate ? (
@@ -731,38 +710,6 @@ export default function Profile({ userProp }) {
                 {"  "}
                 {lastName}
               </h2>
-              {/* <div className="profileAllButtonsMobile">
-                <div
-                  className="profileButtons1"
-                  style={{ height: "40px" }}
-                  onClick={studentsPractices}
-                >
-                  تمارين الطلاب
-                </div>
-
-                <div
-                  className="profileButtons2"
-                  style={{ height: "40px" }}
-                  onClick={() => {
-                    // {goToCreateCourse}
-                    setShowFormCreateCourse(true);
-                    setShowChangePassword(false);
-                  }}
-                >
-                  انشئ دورة
-                </div>
-                <div
-                  className="profileButtons3"
-                  style={{ height: "40px" }}
-                  onClick={() => {
-                    setShowChangePassword(true);
-                    setShowFormCreateCourse(false);
-                  }}
-                >
-                  تغيير كلمة المرور
-                </div>
-               
-              </div> */}
               <div className="profileAllButtons">
                 <div
                   className="profileButtons1"
@@ -818,13 +765,6 @@ export default function Profile({ userProp }) {
                   تغيير كلمة المرور
                 </div>
 
-                {/* <div
-                  className="profileButtons4"
-                  style={{ height: "40px" }}
-                  onClick={handleLogoutFromAllDevices}
-                >
-                  خروج
-                </div> */}
               </div>
               {showFormCreateCourse ? <CreateCourse /> : null}
               {showChangePassword ? <ChangePassword userId={userId} /> : null}
