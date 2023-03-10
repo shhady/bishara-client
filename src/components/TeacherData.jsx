@@ -125,7 +125,7 @@ export default function TeacherData({
           <Link to="/Lessons" style={{ textDecoration: "none" }}>
             <div>
               <img
-                src={course.coursePhoto}
+                src={course.coursePhoto.replace('http://', 'https://')}
                 alt="hi"
                 width="100%"
                 height={filteredCourses.length === 1 ? "400px" : "200px"}
@@ -173,7 +173,7 @@ export default function TeacherData({
             <div style={{ display:"flex", justifyContent: "center" , alignItems: "center" }}>
             <div style={{ width:"50%"}}>
               <img
-                src={course.coursePhoto}
+                src={course.coursePhoto.replace('http://', 'https://')}
                 alt="evaluation"
                 width="70%"
                
@@ -268,7 +268,7 @@ export default function TeacherData({
         >
           <img
             className="imageProfile"
-            src={teacherInfo.avatar}
+            src={teacherInfo.avatar.replace('http://', 'https://')}
             alt="profile"
             style={{
               borderRadius: "50%",

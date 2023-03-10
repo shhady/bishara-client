@@ -656,7 +656,7 @@ export default function Profile({ userProp }) {
               {updateProfilePic ? (
                 <div style={{ zIndex: "10", marginTop: "-80px" }}>
                   <img
-                    src={updateProfilePic}
+                    src={updateProfilePic.replace('http://', 'https://')}
                     alt={user.teacher.firstName + "me"}
                     width="150"
                     height="150"
@@ -913,7 +913,7 @@ export default function Profile({ userProp }) {
                   <img
                     src={
                       updateProfilePic
-                        ? updateProfilePic
+                        ? updateProfilePic.replace('http://', 'https://')
                         : "https://img.icons8.com/material-rounded/24/null/user.png"
                     }
                     alt="profile"

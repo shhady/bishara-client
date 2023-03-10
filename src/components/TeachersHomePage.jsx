@@ -56,7 +56,7 @@ export default function TeachersPop({ setTeachersHover }) {
             className="teachersCard"
           >
             <img
-              src={teacher.avatar}
+              src={teacher.avatar.replace('http://', 'https://')}
               alt={teacher.firstName}
               // style={{ height: "190px", width: "190px" }}
               className="teacherHomeAvatars"
