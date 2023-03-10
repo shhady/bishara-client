@@ -343,7 +343,7 @@ export default function Profile({ userProp }) {
       controls
       // poster={poster}
     >
-      <source src={rec.RecordingReply} type="audio/mp4" />
+      <source src={rec.RecordingReply.replace('http://', 'https://')} type="audio/mp4" />
     </audio>
       </div>
     })
@@ -417,7 +417,7 @@ export default function Profile({ userProp }) {
                   marginBottom:"10px"
                 }}
               >
-                <source src={practice.myPractice} type="video/mp4" />
+                <source src={practice.myPractice.replace('http://', 'https://')} type="video/mp4" />
               </video>
               
             </div>
@@ -445,7 +445,7 @@ export default function Profile({ userProp }) {
                         // poster={poster}
                         className="videos4Profile"
                       >
-                        <source src={reply.theVideoReply} type="video/mp4" />
+                        <source src={reply.theVideoReply.replace('http://', 'https://')} type="video/mp4" />
                       </video>
                     );
                   })}</>)}

@@ -191,7 +191,7 @@ export default function NotificationsPop({
                   }}
                 >
                   <img
-                    src={reply.userAvatar}
+                    src={reply.userAvatar.replace('http://', 'https://')}
                     alt={reply.firstName}
                     width="25px"
                     height="25px"
@@ -215,7 +215,7 @@ export default function NotificationsPop({
               >
                 <div style={{ fontSize: "15px" }}>
                   <img
-                    src={reply.userAvatar}
+                    src={reply.userAvatar.replace('http://', 'https://')}
                     alt={reply.firstName}
                     width="25px"
                     height="25px"

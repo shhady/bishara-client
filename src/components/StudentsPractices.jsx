@@ -242,7 +242,7 @@ export default function StudentsPractices({ user }) {
                   controls
                   style={{ width: "100%", height: "250px" }}
                 >
-                  <source src={practice.myPractice} type="video/mp4" />
+                  <source src={practice.myPractice.replace('http://', 'https://')} type="video/mp4" />
                 </video>
               </div>
               <div>
@@ -264,7 +264,7 @@ export default function StudentsPractices({ user }) {
                           controls
                           style={{ width: "100%", height: "121px" }}
                         >
-                          <source src={reply.theVideoReply} type="video/mp4" />
+                          <source src={reply.theVideoReply.replace('http://', 'https://')} type="video/mp4" />
                         </video>
                       );
                     })}

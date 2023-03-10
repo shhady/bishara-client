@@ -314,7 +314,7 @@ export default function PracticeReplies({ user }) {
               // poster={poster}
               className="videos4Practices"
             >
-              <source src={reply.theVideoReply} type="video/mp4" />
+              <source src={reply.theVideoReply.replace('http://', 'https://')} type="video/mp4" />
             </video>
           </div>
           <div
@@ -358,7 +358,7 @@ export default function PracticeReplies({ user }) {
       controls
       // poster={poster}
     >
-      <source src={rec.RecordingReply} type="audio/mp4" />
+      <source src={rec.RecordingReply.replace('http://', 'https://')} type="audio/mp4" />
     </audio>
       </div>
     })
@@ -459,7 +459,7 @@ export default function PracticeReplies({ user }) {
                  }}
                 
                 >
-                  <source src={practice.myPractice} type="video/mp4" />
+                  <source src={practice.myPractice.replace('http://', 'https://')} type="video/mp4" />
                 </video>
               </div>
               <div
