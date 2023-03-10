@@ -423,7 +423,8 @@ export default function Profile({ userProp }) {
             </div>
             
             <div  className="replyForVideoProfile">
-              {practice.reply ? (<div className="theComment">{practice.reply}</div>):(null)}
+              {practice.reply ? (
+              <div className="theComment">{practice.reply}</div>):(null)}
               
               {practice.videoReply ? (
                 <div
