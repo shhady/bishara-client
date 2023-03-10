@@ -127,7 +127,7 @@ export default function Teachers({
           >
             <div>
               <img
-                src={teacher.avatar}
+                src={teacher.avatar.replace('http://', 'https://')}
                 alt={teacher.firstName}
                 className="teachersPhotos"
                 style={{ borderRadius: "50%" }}

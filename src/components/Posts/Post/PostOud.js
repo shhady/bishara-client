@@ -29,7 +29,7 @@ export default function Post() {
           {result.lastName}
           <div>{result.instrument}</div>
           <img
-            src={result.avatar}
+            src={result.avatar.replace('http://', 'https://')}
             alt={result.firstName}
             width="150"
             height="150"

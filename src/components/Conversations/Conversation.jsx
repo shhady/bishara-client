@@ -225,7 +225,7 @@ export default function Conversation({
           className="imageConversation"
           src={
             user?.avatar
-              ? user.avatar
+              ? user.avatar.replace('http://', 'https://')
               : "https://img.icons8.com/material-rounded/24/null/user.png"
           }
           alt="Img"

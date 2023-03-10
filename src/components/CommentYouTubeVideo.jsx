@@ -280,7 +280,7 @@ export default function CommentYouTubeVideo({
               <div>
                 {comment.userAvatar ? (
                   <img
-                    src={comment.userAvatar}
+                    src={comment.userAvatar.replace('http://', 'https://')}
                     alt="profile"
                     style={{
                       width: "40px",
@@ -367,7 +367,7 @@ export default function CommentYouTubeVideo({
                   {" "}
                   {reply.userAvatar ? (
                     <img
-                      src={reply.userAvatar}
+                      src={reply.userAvatar.replace('http://', 'https://')}
                       alt="profile"
                       style={{
                         width: "30px",
@@ -520,7 +520,7 @@ export default function CommentYouTubeVideo({
         <div className="CommentInput">
           {userAvatar ? (
             <>
-              <img src={userAvatar} alt="pofile" className="imgComment" />
+              <img src={userAvatar.replace('http://', 'https://')} alt="pofile" className="imgComment" />
             </>
           ) : (
             <FontAwesomeIcon icon={faUser} />

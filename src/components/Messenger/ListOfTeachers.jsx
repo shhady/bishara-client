@@ -276,7 +276,7 @@ export default function ListOfTeachers({
             >
               <div>
                 <img
-                  src={teacher?.avatar}
+                  src={teacher?.avatar.replace('http://', 'https://')}
                   alt={teacher?.name}
                   width="40px"
                   height="40px"
@@ -296,7 +296,7 @@ export default function ListOfTeachers({
             <>
               <div style={{ cursor: "pointer" }}>
                 <img
-                  src={teacher?.avatar}
+                  src={teacher?.avatar.replace('http://', 'https://')}
                   alt={teacher?.name}
                   width="40px"
                   height="40px"

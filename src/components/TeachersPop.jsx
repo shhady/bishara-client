@@ -53,7 +53,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
               }}
             >
               <img
-                src={teacher.avatar}
+                src={teacher.avatar.replace('http://', 'https://')}
                 alt={teacher.firstName}
                 height="100px"
                 width="100px"

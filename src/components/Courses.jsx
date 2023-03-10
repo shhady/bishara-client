@@ -122,7 +122,7 @@ export default function Courses({
           style={{ cursor: "pointer", padding: "5px", borderRadius: "5px" }}
         >
           <img
-            src={post.coursePhoto? (post.coursePhoto):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}
+            src={post.coursePhoto? (post.coursePhoto.replace('http://', 'https://')):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}
             alt={post.firstName}
             width="80%"
             height="200"
@@ -157,7 +157,7 @@ export default function Courses({
         >
          
           <img
-  src={post.coursePhoto? (post.coursePhoto):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}            alt={post.firstName}
+  src={post.coursePhoto? (post.coursePhoto.replace('http://', 'https://')):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}            alt={post.firstName}
             width="100%"
             height="150"
             style={{ marginBottom: "10px" }}

@@ -72,7 +72,7 @@ export default function TestYoutube({ listId, course }) {
       <div className="profile-teacher">
         <div style={{ width: "150px", height: "150px" }}>
           <img
-            src={course.avatar}
+            src={course.avatar.replace('http://', 'https://')}
             alt="profile"
             width="100%"
             height="100%"
