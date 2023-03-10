@@ -359,7 +359,7 @@ export default function Profile({ userProp }) {
             borderRight: "1px solid black",
             borderBottom: "1px solid #e1e1e1",
             padding: "10px",
-            backgroundColor: i % 2 === 0 ? "white" : "#c7c5c5"
+            backgroundColor: i % 2 === 0 ? "#c7c5c5" : "white"
           }}
           key={practice._id}
           onClick={() => markAsSeen(practice)}
