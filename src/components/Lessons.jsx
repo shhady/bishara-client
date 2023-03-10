@@ -152,7 +152,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
                 alignItems: "center",
                 width: "100%",
                 height: "210px",
-                backgroundImage: lesson.snippet.thumbnails.high ? `url(${lesson.snippet.thumbnails.high.url})`: `url('https://images.unsplash.com/photo-1554050857-c84a8abdb5e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2t8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60')`,
+                backgroundImage: lesson.snippet.thumbnails.high ? `url(${lesson.snippet.thumbnails.high.url.replace('http://', 'https://')})`: `url('https://images.unsplash.com/photo-1554050857-c84a8abdb5e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2t8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60')`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
@@ -253,7 +253,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
         className="lessonCoverBig"
         style={{
           backgroundImage: `url(${
-            updated ? updated.coursePhoto : courseInfo.coursePhoto
+            updated ? updated.coursePhoto.replace('http://', 'https://') : courseInfo.coursePhoto.replace('http://', 'https://')
           })`,
           
         }}
