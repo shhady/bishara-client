@@ -74,7 +74,7 @@ export default function CreateCourseForTeacher() {
     playlistId: "",
     coursePhoto: "",
   });
-  console.log(course)
+
   const [final, setFinal] = useState(course);
   const history = useHistory();
  

@@ -36,7 +36,7 @@ export default function TeacherData({
     setTeacherId(localStorage.getItem("teacherId"));
   }, []);
 
-  //   console.log(localStorage.getItem("teacherId"));
+
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(
@@ -70,7 +70,7 @@ export default function TeacherData({
     })
     setEvaluation(filteredCourses)
   },[filteredCourses]);
-  console.log(evaluation)
+
   if (!teacherInfo)
     return (
       <div

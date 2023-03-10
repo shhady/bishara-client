@@ -877,7 +877,6 @@ export default function Profile({ userProp }) {
                         }}
                         id="inputTag"
                         style={{ display: "none" }}
-                        // onClick={() => setUrl(null)}
                       />
                     </label>
                   ) : null}

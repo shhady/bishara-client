@@ -96,8 +96,7 @@ const [ifNotUserShow, setIfNotUser] = useState(false)
         setFileUploaded(null);
       });
   };
- 
-  console.log(courseInfo)
+
   return (
     <div className="uploadFile">
       {user?.teacher?._id === courseInfo.owner || user.teacher?.role === "admin" ? (

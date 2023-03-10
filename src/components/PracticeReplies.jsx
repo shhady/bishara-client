@@ -174,7 +174,6 @@ export default function PracticeReplies({ user }) {
 
   // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
-    console.log(buttonD)
     if (practice.videoReply.length > 3) return console.log("no more");
 
     const addTheVideo = async () => {
@@ -238,7 +237,7 @@ export default function PracticeReplies({ user }) {
   };
 
   const deleteButton = async(buttonD)=>{
-    console.log(buttonD._id)
+    
     await axios.delete(process.env.REACT_APP_BACKEND_URL + `/replies/${buttonD._id}`)
     const removeBtn = showButtons.filter((b)=>b._id !== buttonD._id)
       setShowButtons(removeBtn)
@@ -384,7 +383,6 @@ export default function PracticeReplies({ user }) {
   };
   const handleDeleteRecording = async (rec, practice,reply) => {
     const replyId = rec.replyId
-    console.log(rec.replyId)
       // .then(console.log(replyToDelete))
     await axios
       .put(
@@ -402,7 +400,6 @@ export default function PracticeReplies({ user }) {
         setTeacherPractices(res.data);
       });
   };
-  console.log(showButtons)
   // Render showData component
   const showData = () => {
     return teacherPractices?.map((practice, i) => {

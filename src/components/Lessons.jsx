@@ -120,7 +120,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
   }, [listId]);
 
   const handleLessonClick = (lesson) => {
-    console.log(lesson.snippet.playlistId);
+   
     if (user) {
       history.push({
         pathname: `/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`,

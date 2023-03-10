@@ -20,7 +20,7 @@ export default function PaidStudent({ user }) {
         }
       );
       email.current.value="";
-      console.log(user.teacher._id)
+      
       setShowResponse(true)
       setShowError(false)
     }catch(err){
