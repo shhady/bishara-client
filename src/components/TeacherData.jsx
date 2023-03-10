@@ -151,7 +151,7 @@ export default function TeacherData({
             </div>
           </Link>
           <div>
-            {userId === course.owner ? (
+            {userId === course.owner || user.teacher?.role === "admin"  ? (
               <button
                 style={{ width: "100%" }}
                 onClick={() => deleteCourse(course)}
