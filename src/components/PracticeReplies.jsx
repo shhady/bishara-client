@@ -29,7 +29,6 @@ export default function PracticeReplies({ user }) {
   const [fileUpload, setFileUpload] = useState(null);
   const [teacherReplies, setTeacherReplies] = useState([]);
   const [autoReplies, setAutoReplies] = useState([]);
-  // const [onlyForTeacher, setOnlyForTeacher] = useState([]);
   const [openButtons, setOpenButtons] = useState(false);
   const [showButtons, setShowButtons] = useState([]);
   const [poster, setPoster] = useState("");
@@ -107,9 +106,6 @@ export default function PracticeReplies({ user }) {
       const res = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
       );
-      // const filterData = res.data.filter(
-      //   (practice) => practice.teacherId === userId
-      // );
       setTeacherReplies(res);
     };
     fetchReplies();
@@ -178,6 +174,7 @@ export default function PracticeReplies({ user }) {
 
   // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
+    console.log(buttonD)
     if (practice.videoReply.length > 3) return console.log("no more");
 
     const addTheVideo = async () => {
@@ -240,6 +237,14 @@ export default function PracticeReplies({ user }) {
       });
   };
 
+  const deleteButton = async(buttonD)=>{
+    console.log(buttonD._id)
+    await axios.delete(process.env.REACT_APP_BACKEND_URL + `/replies/${buttonD._id}`)
+    const removeBtn = showButtons.filter((b)=>b._id !== buttonD._id)
+      setShowButtons(removeBtn)
+    
+  }
+
   // Add teacher video reply to practice
   const addTeacherVideoReply = (practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
@@ -259,9 +264,6 @@ export default function PracticeReplies({ user }) {
           const res = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
           );
-          // const filterData = res.data.filter(
-          //   (practice) => practice.teacherId === userId
-          // );
           setTeacherPractices(res.data);
         })
         .then(async () => {
@@ -322,10 +324,6 @@ export default function PracticeReplies({ user }) {
               top: "0",
               left: "20px",
               zIndex: 2,
-            }}
-            onClick={() => {
-              // setReplyId(reply.replyId);
-              // handleDeleteReply(practice, reply);
             }}
           >
             {reply.replyId === replyId ? (
@@ -404,6 +402,7 @@ export default function PracticeReplies({ user }) {
         setTeacherPractices(res.data);
       });
   };
+  console.log(showButtons)
   // Render showData component
   const showData = () => {
     return teacherPractices?.map((practice, i) => {
@@ -496,26 +495,36 @@ export default function PracticeReplies({ user }) {
                   {openButtons ? (
                     <>
                       {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
-                        <>
+                        <div style={{display:"flex", width:"fit-content", marginBottom:"10px"}}>
                           {showButtons.map((buttonD, i) => {
                             return (
-                              <button
+                              <div
                                 key={i}
-                                onClick={() => buttonDetails(buttonD, practice)}
                                 style={{
+                                  width:"fit-content",
+                                  display:"flex",
+                                  justifyContent:"center",
+                                  alignItems:"center",
                                   marginLeft: "20px",
-                                  borderRadius: "5px",
-                                  backgroundColor: "black",
-                                  color: "white",
-                                  minWidth: "80px",
+                                 
+                                  
                                 }}
                               >
                                 {" "}
-                                {buttonD.nameOfProblem}
-                              </button>
+                              <div onClick={() => buttonDetails(buttonD, practice)}
+                                style={{
+                                  borderBottomRightRadius:"5px",
+                                  borderTopRightRadius:"5px",
+                                  backgroundColor: "black",
+                                  color: "white",
+                                  minWidth: "80px",
+                                  width:"fit-content"}}>{buttonD.nameOfProblem}</div>  
+                              <div onClick={() => deleteButton(buttonD, practice)} style={{backgroundColor:"red", width:"20px", textAlign:"center", borderBottomLeftRadius:"5px",
+                                  borderTopLeftRadius:"5px",}}>x</div>
+                              </div>
                             );
                           })}
-                        </>
+                        </div>
                       ) : null}
                     </>
                   ) : null}
@@ -532,7 +541,7 @@ export default function PracticeReplies({ user }) {
               <>
               <div style={{}}>
                 <div>
-                  {/* <AudioRecorder/> */}
+                  
                   <div>تعليق عن طريق فيديو</div>
                       
                   
@@ -570,23 +579,9 @@ export default function PracticeReplies({ user }) {
                         setVideo(null);
                         setMoreThan(null);
                       }}
-                      // onClick={() => setUrl(null)}
                     />
                   </label>
-                    {/* <input
-                      type="file"
-                      // ref={fileInput}
-                      onChange={(e) => {
-                        e.target.files[0].size > 104857500
-                          ? setMoreThan("more than 100mb")
-                          : setVideo(e.target.files[0]);
-                      }}
-                      onClick={() => {
-                        setUrl(null);
-                        setVideo(null);
-                        setMoreThan(null);
-                      }}
-                    /> */}
+                 
                   </div>
                   </div>
                   {moreThan && (
@@ -619,7 +614,7 @@ export default function PracticeReplies({ user }) {
                             height: "fit-content",
                           }}
                         >
-                          {/* <p>{fileUpload.fileName}</p> */}
+                       
                           <p>{fileUpload.percentComplete}%</p>
                         </div>
                       )}
@@ -651,9 +646,6 @@ export default function PracticeReplies({ user }) {
                     </div>
                   </div>
                 </div>
-                {/* <div></div> */}
-
-                {/* </div> */}
                 </div>
               </>
             </div>
@@ -683,7 +675,7 @@ export default function PracticeReplies({ user }) {
                   {practice.reply}{" "}
                   <button
                     onClick={() => {
-                      // setShowLastReply(false);
+                      
                       setPracticeId(practice._id);
                     }}
                   >
@@ -692,13 +684,13 @@ export default function PracticeReplies({ user }) {
                 </>
               ) : (
                 <>
-                  {/* {showReply}{" "} */}
+                  
                   <div>
                     {" "}
                     <div
                       style={{
                         display: "flex",
-                        // flexDirection: "column",
+                        
                       }}
                     >
                       <textarea
@@ -728,7 +720,7 @@ export default function PracticeReplies({ user }) {
                   <div
                     style={{
                       display: "flex",
-                      // flexDirection: "column",
+                     
                     }}
                   >
                     <textarea
@@ -751,10 +743,9 @@ export default function PracticeReplies({ user }) {
             </div>
             </div>
             </div>
-            {/* <div>{practice.reply}</div> */}
+           
           </div>
-        // </div>
-        // </div>
+        
       );
     });
   };

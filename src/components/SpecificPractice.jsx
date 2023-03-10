@@ -176,6 +176,14 @@ export default function PracticeReplies({ user }) {
     setShowButtons(newBU);
   };
 
+  const deleteButton = async(buttonD, practice)=>{
+    console.log(buttonD._id)
+    await axios.delete(process.env.REACT_APP_BACKEND_URL + `/replies/${buttonD._id}`)
+    const removeBtn = showButtons.filter((b)=>b._id !== buttonD._id)
+      setShowButtons(removeBtn)
+   
+  }
+ 
   // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
@@ -498,24 +506,38 @@ export default function PracticeReplies({ user }) {
                     <>
                       {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
                         <>
+                          {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
+                        <div style={{display:"flex", width:"fit-content", marginBottom:"10px"}}>
                           {showButtons.map((buttonD, i) => {
                             return (
-                              <button
+                              <div
                                 key={i}
-                                onClick={() => buttonDetails(buttonD, practice)}
                                 style={{
+                                  width:"fit-content",
+                                  display:"flex",
+                                  justifyContent:"center",
+                                  alignItems:"center",
                                   marginLeft: "20px",
-                                  borderRadius: "5px",
-                                  backgroundColor: "black",
-                                  color: "white",
-                                  minWidth: "80px",
+                                 
+                                  
                                 }}
                               >
                                 {" "}
-                                {buttonD.nameOfProblem}
-                              </button>
+                              <div onClick={() => buttonDetails(buttonD, practice)}
+                                style={{
+                                  borderBottomRightRadius:"5px",
+                                  borderTopRightRadius:"5px",
+                                  backgroundColor: "black",
+                                  color: "white",
+                                  minWidth: "80px",
+                                  width:"fit-content"}}>{buttonD.nameOfProblem}</div>  
+                              <div onClick={() => deleteButton(buttonD, practice)} style={{backgroundColor:"red", width:"20px", textAlign:"center", borderBottomLeftRadius:"5px",
+                                  borderTopLeftRadius:"5px",}}>x</div>
+                              </div>
                             );
                           })}
+                        </div>
+                      ) : null}
                         </>
                       ) : null}
                     </>
