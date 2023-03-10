@@ -37,7 +37,7 @@ export default function Profile({ userProp }) {
   // const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePic"));
   const [urlCover, setUrlCover] = useState(null);
   //prettier-ignore
-  const [coverPicture, setCoverPicture] = useState(localStorage.getItem("coverPic").replace('http://', 'https://'));
+  const [coverPicture, setCoverPicture] = useState(localStorage.getItem("coverPic")?.replace('http://', 'https://'));
   const [showPractice, setShowPractice] = useState(true);
   const [showChangePassUser, setShowChangePassUser] = useState(false);
   const [showUpdateProfile, setShowUpdateProfile] = useState(false);
@@ -343,7 +343,7 @@ export default function Profile({ userProp }) {
       controls
       // poster={poster}
     >
-      <source src={rec.RecordingReply.replace('http://', 'https://')} type="audio/mp4" />
+      <source src={rec.RecordingReply?.replace('http://', 'https://')} type="audio/mp4" />
     </audio>
       </div>
     })
@@ -417,7 +417,7 @@ export default function Profile({ userProp }) {
                   marginBottom:"10px"
                 }}
               >
-                <source src={practice.myPractice.replace('http://', 'https://')} type="video/mp4" />
+                <source src={practice.myPractice?.replace('http://', 'https://')} type="video/mp4" />
               </video>
               
             </div>
@@ -445,7 +445,7 @@ export default function Profile({ userProp }) {
                         // poster={poster}
                         className="videos4Profile"
                       >
-                        <source src={reply.theVideoReply.replace('http://', 'https://')} type="video/mp4" />
+                        <source src={reply.theVideoReply?.replace('http://', 'https://')} type="video/mp4" />
                       </video>
                     );
                   })}</>)}
@@ -656,7 +656,7 @@ export default function Profile({ userProp }) {
               {updateProfilePic ? (
                 <div style={{ zIndex: "10", marginTop: "-80px" }}>
                   <img
-                    src={updateProfilePic.replace('http://', 'https://')}
+                    src={updateProfilePic?.replace('http://', 'https://')}
                     alt={user.teacher.firstName + "me"}
                     width="150"
                     height="150"
@@ -913,7 +913,7 @@ export default function Profile({ userProp }) {
                   <img
                     src={
                       updateProfilePic
-                        ? updateProfilePic.replace('http://', 'https://')
+                        ? updateProfilePic?.replace('http://', 'https://')
                         : "https://img.icons8.com/material-rounded/24/null/user.png"
                     }
                     alt="profile"
