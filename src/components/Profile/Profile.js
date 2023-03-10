@@ -367,16 +367,18 @@ export default function Profile({ userProp }) {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
               <div>
-                الاستاذ: 
+              {" "}
+                الاستاذ: {" "}
                 {practice.teacherFirstName} {practice.teacherLastName}
               </div>
               <div>
                 {" "}
-                الدورة: 
+                الدورة: {" "}
                 {practice.courseName}
               </div>
               <div>
-                الدرس: 
+              {" "}
+                الدرس: {" "}
                 {practice.video}
               </div>
             </div>
