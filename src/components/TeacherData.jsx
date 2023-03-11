@@ -36,7 +36,7 @@ export default function TeacherData({
     setTeacherId(localStorage.getItem("teacherId"));
   }, []);
 
-
+  //   console.log(localStorage.getItem("teacherId"));
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(
@@ -70,7 +70,7 @@ export default function TeacherData({
     })
     setEvaluation(filteredCourses)
   },[filteredCourses]);
-
+  console.log(evaluation)
   if (!teacherInfo)
     return (
       <div
@@ -125,7 +125,7 @@ export default function TeacherData({
           <Link to="/Lessons" style={{ textDecoration: "none" }}>
             <div>
               <img
-                src={course.coursePhoto.replace('http://', 'https://')}
+                src={course.coursePhoto}
                 alt="hi"
                 width="100%"
                 height={filteredCourses.length === 1 ? "400px" : "200px"}
@@ -173,7 +173,7 @@ export default function TeacherData({
             <div style={{ display:"flex", justifyContent: "center" , alignItems: "center" }}>
             <div style={{ width:"50%"}}>
               <img
-                src={course.coursePhoto.replace('http://', 'https://')}
+                src={course.coursePhoto}
                 alt="evaluation"
                 width="70%"
                
@@ -268,7 +268,7 @@ export default function TeacherData({
         >
           <img
             className="imageProfile"
-            src={teacherInfo.avatar.replace('http://', 'https://')}
+            src={teacherInfo.avatar}
             alt="profile"
             style={{
               borderRadius: "50%",
