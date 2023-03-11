@@ -10,7 +10,7 @@ export default function FourBoxes() {
     // .then(history.push("/courses"));
   }
   return (
-    <div style={{ borderBottom: "1px solid #e1e1e1" }}>
+    <div>
       <div className="FourBoxesTop">
         <div>
           <h2>ابدأ الان</h2>{" "}
