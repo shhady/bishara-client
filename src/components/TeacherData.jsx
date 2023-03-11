@@ -125,7 +125,7 @@ export default function TeacherData({
           <Link to="/Lessons" style={{ textDecoration: "none" }}>
             <div>
               <img
-                src={course.coursePhoto}
+                src={course.coursePhoto.replace("http://","https://")}
                 alt="hi"
                 width="100%"
                 height={filteredCourses.length === 1 ? "400px" : "200px"}
