@@ -137,7 +137,8 @@ export default function CommentYouTubeVideo({
     });
   };
 
-  const handleSubmitComment = async () => {
+  const handleSubmitComment = async (e) => {
+    e.preventDefault()
     if (!myComment) return;
     socket.emit("sendNotificationComment", {
       senderName: userF,
@@ -519,7 +520,7 @@ export default function CommentYouTubeVideo({
 
       
        
-        <div className="CommentInput">
+        <form className="CommentInput" onSubmit={handleSubmitComment}>
           {userAvatar ? (
             <>
               <img src={userAvatar.replace('http://', 'https://')} alt="pofile" className="imgComment" />
@@ -532,15 +533,15 @@ export default function CommentYouTubeVideo({
             placeholder="أضف تعليق"
             value={myComment}
             style={{
-              border: "none",
+              // border: "none",
               width: "70%",
               borderBottom: "1px solid black",
-              margin: "0 0 5px 5px",
+              // margin: "0 0 5px 5px",
             }}
             onChange={(e) => handleChangeComment(e)}
           />
-          <button onClick={handleSubmitComment}>تثبيت</button>
-        </div>
+          <button type="submit">تثبيت</button>
+        </form>
 
         <div>
           <p style={{ fontSize: "24px", textAlign: "center" }}>التعليقات</p>

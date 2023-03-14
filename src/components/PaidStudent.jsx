@@ -12,7 +12,7 @@ export default function PaidStudent({ user }) {
   const showEmail = async (e) => {
     e.preventDefault()
     try{
-      const res = await axios.put(
+      await axios.put(
         process.env.REACT_APP_BACKEND_URL + `/paid`,
         {
           email: email.current?.value, // fix here
@@ -23,6 +23,11 @@ export default function PaidStudent({ user }) {
       
       setShowResponse(true)
       setShowError(false)
+      const fetch = async()=>{
+        const res = await axios.get(process.env.REACT_APP_BACKEND_URL + `/myUsers/${userId}`)
+        setStudents(res.data)
+      }
+      fetch()
     }catch(err){
       setShowError(true)
       setShowResponse(false)
@@ -36,17 +41,20 @@ export default function PaidStudent({ user }) {
       setStudents(res.data)
     }
     fetch()
-  },[])
+  },[userId])
 
   const cancelSubscription = async(student)=>{
     try{
-      const res = await axios.put(
+      await axios.put(
         process.env.REACT_APP_BACKEND_URL + `/paid`,
         {
           email: student.email, // fix here
           userId:''
         }
       );
+      console.log(student)
+      const filtered = students.filter((theStudent)=> theStudent._id !== student._id)
+      setStudents(filtered)
     }catch(err){
       console.log(err)
     }
@@ -74,6 +82,7 @@ export default function PaidStudent({ user }) {
       </div>
     )
   }
+  console.log(students)
 
 
   return (

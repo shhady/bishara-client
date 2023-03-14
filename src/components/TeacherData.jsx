@@ -121,7 +121,7 @@ export default function TeacherData({
   const drawCourses = () => {
     return filteredCourses?.map((course, i) => {
       return (
-        <div onClick={() => saveCourseLocal(course)} key={i}>
+        <div onClick={() => saveCourseLocal(course)} key={i} className="teacherDataCourses">
           <Link to="/Lessons" style={{ textDecoration: "none" }}>
             <div>
               <img
@@ -160,7 +160,7 @@ export default function TeacherData({
               </button>
             ) : null}
           </div>
-          <hr />
+       
         </div>
       );
     });
@@ -170,16 +170,17 @@ export default function TeacherData({
       return (
         <div className="evaluation" onClick={() => saveCourseLocal(course)} key={i}>
           <Link to="/Lessons" style={{ textDecoration: "none" }}>
-            <div style={{ display:"flex", justifyContent: "center" , alignItems: "center" }}>
-            <div style={{ width:"50%"}}>
+            <div style={{ display:"flex", justifyContent: "center" ,flexDirection:"column", alignItems: "center" }}>
+            <div style={{ width:"100%"}}>
               <img
                 src={course.coursePhoto.replace("http://","https://")}
                 alt="evaluation"
                 width="70%"
+                height="70px"
                
               />
             </div>
-          <div  style={{ width:"50%"}}>
+          <div  style={{ width:"100%"}}>
             <div style={{ textAlign: "center", color: "black" }}>
               <h2>{course.title}</h2>
             </div>
@@ -191,19 +192,19 @@ export default function TeacherData({
                 color: "black",
               }}
             >
-              <div>{course.instrument}</div>
+              {/* <div>{course.instrument}</div> */}
             </div>
-            <div style={{ width: "80%", margin: "auto", color: "black" }}>
-              {course.description.slice(0, 50)}....
+            <div style={{ width: "90%", margin: "auto", color: "black" }}>
+              {course.description.slice(0, 130)}....
             </div>
             </div>
             <hr />
             </div>
           </Link>
-          <div>
+          <div  style={{ width: "80%" }}>
             {userId === course.owner ? (
               <button
-                style={{ width: "100%" }}
+                style={{ width: "90%" }}
                 onClick={() => deleteCourse(course)}
               >
                 حذف الدورة
