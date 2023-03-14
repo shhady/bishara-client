@@ -200,7 +200,6 @@ export default function TeacherData({
               {course.description.slice(0, 130)}....
             </div>
             </div>
-            <hr />
             </div>
         
           
