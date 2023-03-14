@@ -96,7 +96,8 @@ export default function Auth({ user, setUser, setUserProp }) {
       window.localStorage.setItem("profilePic", result.data.user.avatar);
       window.localStorage.setItem("firstName", result.data.user.firstName);
       window.localStorage.setItem("lastName", result.data.user.lastName);
-   
+      window.localStorage.setItem("paid",result.data.user.paid)
+      console.log(result.data)
       // setTeacherData(result.data);
       setUser(result.data);
       setUserProp(result.data);

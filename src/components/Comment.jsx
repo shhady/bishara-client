@@ -14,7 +14,7 @@ export default function Comment({
   socket,
 }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  
+  const paid = useState(window.localStorage.getItem("paid"))
   const [url, setUrl] = useState(null);
   const [video, setVideo] = useState();
   const [fileUpload, setFileUpload] = useState(null);
@@ -93,10 +93,10 @@ const history = useHistory()
    
     
   }, [url]);
-  console.log(video)
+  console.log(paid[0])
   return (
     <div>
-      {user?.user?.paid === courseInfo.owner ? (
+      {paid[0] === courseInfo.owner ? (
         <>
           <div
             style={{

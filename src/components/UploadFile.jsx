@@ -4,6 +4,7 @@ import axios from "axios";
 import "./Lesson.css";
 export default function UploadFile({ courseInfo, lesson, id }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const paid = useState(window.localStorage.getItem("paid"))
 
   const [file, setFile] = useState();
   const [url, setUrl] = useState(null);
@@ -190,7 +191,7 @@ const [ifNotUserShow, setIfNotUser] = useState(false)
         </>
       ) : (
         <>
-          {theFile && user.user?.paid === courseInfo.owner ? (
+          {theFile && paid[0] === courseInfo.owner ? (
             // <button
             <div style={{display:"flex", justifyContent: "center", alignItems: "center",border: "2px solid black"}}>
             

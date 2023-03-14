@@ -6,6 +6,7 @@ import CommentYouTubeVideo from "./CommentYouTubeVideo";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
 export default function Lesson({ socket }) {
+  
   const [lessons, setLessons] = useState([]);
   const [lesson, setLesson] = useState(
     JSON.parse(localStorage.getItem("lessonDetails"))
@@ -20,7 +21,23 @@ export default function Lesson({ socket }) {
   window.onpopstate = () => {
     history.push("/lessons");
   };
-
+  useEffect(()=>{
+    const getUserDetailsAgain = async()=>{
+      const res= await axios.get(process.env.REACT_APP_BACKEND_URL + `/users/me`, 
+       {
+         headers: {
+           Accept: "application/json",
+           "Content-Type": "application/json;charset=UTF-8",
+           "Access-Control-Allow-Methods": "GET",
+           "Access-Control-Allow-Origin": "*",
+           Authorization: "Bearer " + window.localStorage.getItem("token"),
+         }
+       })
+       window.localStorage.setItem("paid",res.data.paid)
+     }
+     getUserDetailsAgain()
+  },[])
+  
   
   useEffect(() => {
     setListId(window.location.pathname.slice(8,42));

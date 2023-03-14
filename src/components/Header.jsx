@@ -299,6 +299,20 @@ export default function Header({
     setIsHovering(!isHovering);
   };
 
+  const getUserDetailsAgain = async()=>{
+   const res= await axios.get(process.env.REACT_APP_BACKEND_URL + `/users/me`, 
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      }
+    })
+    window.localStorage.setItem("paid",res.data.paid)
+  }
+
   useEffect(() => {
     const fetchPractices = async () => {
       const res = await axios.get(
@@ -883,6 +897,7 @@ export default function Header({
                   // setTeachersHover(true);
                   setCoursesHover(false);
                 }}
+                onClick={getUserDetailsAgain}
               >
                 <div className="logoAndText">
                   {/* <FontAwesomeIcon icon={faUsersRays} /> */}
@@ -1097,6 +1112,7 @@ export default function Header({
                       onClick={() => {
                         setOpenMenu(!openMenu);
                         setUpdateComponent("");
+                        getUserDetailsAgain()
                       }}
                     >
                       <span
