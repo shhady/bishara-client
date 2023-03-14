@@ -168,15 +168,17 @@ export default function TeacherData({
   const drawEvaluation = () => {
     return evaluation?.map((course, i) => {
       return (
+        <div>
+            <Link to="/Lessons" style={{ textDecoration: "none" }}>
         <div className="evaluation" onClick={() => saveCourseLocal(course)} key={i}>
-          <Link to="/Lessons" style={{ textDecoration: "none" }}>
-            <div style={{ display:"flex", justifyContent: "center" ,flexDirection:"column", alignItems: "center" }}>
-            <div style={{ width:"100%"}}>
+        
+            <div style={{ display:"flex", justifyContent: "center" ,flexDirection:"column", alignItems: "center",width:"100%" }}>
+            <div style={{ width:"70%"}}>
               <img
                 src={course.coursePhoto.replace("http://","https://")}
                 alt="evaluation"
                 width="70%"
-                height="70px"
+                height="120px"
                
               />
             </div>
@@ -200,8 +202,12 @@ export default function TeacherData({
             </div>
             <hr />
             </div>
-          </Link>
-          <div  style={{ width: "80%" }}>
+        
+          
+          
+        </div>
+        </Link>
+        <div  style={{ width: "80%", margin:"auto"}}>
             {userId === course.owner ? (
               <button
                 style={{ width: "90%" }}
@@ -211,7 +217,6 @@ export default function TeacherData({
               </button>
             ) : null}
           </div>
-          
         </div>
       );
     });
