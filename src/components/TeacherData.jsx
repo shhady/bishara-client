@@ -201,9 +201,6 @@ export default function TeacherData({
             </div>
             </div>
             </div>
-        
-          
-          
         </div>
         </Link>
         <div  style={{ width: "80%", margin:"auto"}}>
