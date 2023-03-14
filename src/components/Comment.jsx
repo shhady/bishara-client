@@ -12,6 +12,7 @@ export default function Comment({
   courseInfo,
   lesson,
   socket,
+  paidUpdate
 }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const paid = useState(window.localStorage.getItem("paid"))
@@ -93,10 +94,11 @@ const history = useHistory()
    
     
   }, [url]);
-  console.log(paid[0])
+  console.log(paidUpdate)
+
   return (
     <div>
-      {paid[0] === courseInfo.owner ? (
+      {paid[0] === courseInfo.owner || paidUpdate===courseInfo.owner ? (
         <>
           <div
             style={{

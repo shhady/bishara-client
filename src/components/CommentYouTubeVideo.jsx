@@ -16,6 +16,7 @@ export default function CommentYouTubeVideo({
   id,
   courseInfo,
   socket,
+  paidUpdate
 }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [courseDetails, setCourseDetails] = useState(
@@ -503,7 +504,7 @@ export default function CommentYouTubeVideo({
   return (
     <div>
       <div className="commentsSection">
-      <UploadFile courseInfo={courseInfo} lesson={lesson} id={id} />
+      <UploadFile courseInfo={courseInfo} lesson={lesson} id={id} paidUpdate={paidUpdate}/>
         <>
  <Comment
    userId={userId}
@@ -512,6 +513,7 @@ export default function CommentYouTubeVideo({
    courseInfo={courseInfo}
    lesson={lesson}
    socket={socket}
+   paidUpdate={paidUpdate}
  />
  </>
 

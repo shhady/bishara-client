@@ -6,7 +6,7 @@ import CommentYouTubeVideo from "./CommentYouTubeVideo";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
 export default function Lesson({ socket }) {
-  
+  const [paidUpdate, setPaidUpdate]= useState()
   const [lessons, setLessons] = useState([]);
   const [lesson, setLesson] = useState(
     JSON.parse(localStorage.getItem("lessonDetails"))
@@ -34,6 +34,7 @@ export default function Lesson({ socket }) {
          }
        })
        window.localStorage.setItem("paid",res.data.paid)
+       setPaidUpdate(res.data.paid)
      }
      getUserDetailsAgain()
   },[])
@@ -162,6 +163,7 @@ export default function Lesson({ socket }) {
           id={id}
           courseInfo={courseInfo}
           socket={socket}
+          paidUpdate={paidUpdate}
         />
       </div>
     </div>
