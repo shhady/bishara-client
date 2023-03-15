@@ -8,19 +8,7 @@ export default function StartChat({ teacherId, userId }) {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const history = useHistory();
-  //   useEffect(() => {
-  //     const getConversations = async () => {
-  //       try {
-  //         const res = await axios.get(
-  //           process.env.REACT_APP_BACKEND_URL + `/conversations/` + userId
-  //         );
-  //         if (!res) return null;
-  //         setConversations(res.data);
-  //       } catch (error) {
-  //       }
-  //     };
-  //     getConversations();
-  //   }, [userId]);
+ 
   useEffect(() => {
     const conv = async () => {
       const result = await axios.get(
@@ -32,10 +20,6 @@ export default function StartChat({ teacherId, userId }) {
   }, []);
 
   const handleClick = async () => {
-    //     setTeacherId(teacherId);
-    //     setTopPageImg(teacher.avatar);
-    //     setTopPageName(teacher.firstName);
-    //     setTopPageLastName(teacher.lastName);
     let existingConversations = conversations;
     let newConversation = [userId, teacherId];
     existingConversations = JSON.stringify(existingConversations);

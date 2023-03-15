@@ -295,6 +295,12 @@ export default function Header({
     });
   };
 
+  console.log(redLightNotification)
+   console.log( redLightNotificationReply) 
+   console.log(teacherPracticesUnReplied)
+    console.log(userPracticesNotSeen.length) 
+                    
+                      
   const handleMouseOver = () => {
     setIsHovering(!isHovering);
   };
@@ -331,7 +337,7 @@ export default function Header({
   useEffect(() => {
     const filteredPractices = teacherPracticesNotifications.filter(
       (practice) => {
-        return practice.videoReply.length === 0 && !practice.reply;
+        return practice.videoReply.length === 0 && !practice.reply && practice.RecordReply.length === 0;
       }
     );
     setTeacherPracticesUnreplied(filteredPractices);
