@@ -104,9 +104,11 @@ export default function Header({
     const filteredSeen = userPractices.filter((practiceSeen) => {
       return practiceSeen.replySeen === "false";
     });
+    console.log(filteredSeen)
     setUserPracticesNotSeen(filteredSeen);
   }, [userPractices]);
 
+ 
   const clickOnBill = () => {
     // setOpenNotifications(!openNotifications);
     // setNotificationNotification([]);

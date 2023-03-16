@@ -35,7 +35,7 @@ const PracticeReplies = React.lazy(() =>
 );
 
 const CreateCourseForTeacher = React.lazy(() => import("./components/Course/CreateCourseForTeacher"));
-
+const StudentMyPractice = React.lazy(() => import("./pages/StudentMyPractice"));
 const Subscribe = React.lazy(() => import("./components/Subscribe"));
 
 export default function App() {
@@ -114,6 +114,10 @@ export default function App() {
           <Route path="/SpecificPractice/:id" exact>
             <SpecificPractice user={user} setUser={setUser}/>
           </Route>
+          <Route path="/StudentMyPractice/:id" exact>
+            <StudentMyPractice user={user} setUser={setUser}/>
+          </Route>
+          
           <Route path="/addStudent" exact>
             <PaidStudent user={user} setUser={setUser}/>
           </Route>

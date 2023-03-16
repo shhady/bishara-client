@@ -131,7 +131,7 @@ export default function NotificationsPop({
           replySeen: true,
         }
       )
-      .then(history.push("/profile"));
+      .then(history.push(`/StudentMyPractice/${unseen._id}`));
   };
 
   const drawPracticeNotifications = () => {

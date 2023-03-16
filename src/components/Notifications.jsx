@@ -220,7 +220,7 @@ export default function Notifications() {
           replySeen: true,
         }
       )
-      .then(history.push("/profile"));
+      .then(history.push(`/StudentMyPractice/${unseen._id}`));
   };
 
   const handleClickOnNotification = (comment) => {
