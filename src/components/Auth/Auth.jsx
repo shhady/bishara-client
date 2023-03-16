@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Auth.css";
 import { gapi } from "gapi-script";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import GoogleAuthSignUp from "./GoogleAuthSignUp";
 import axios from "axios";
 import GoogleAuthSignIn from "./GoogleAuthSignIn";
@@ -28,7 +28,7 @@ export default function Auth({ user, setUser, setUserProp }) {
   const [studentOrTeacher, setStudentOrTeacher] = useState("student");
   const [passwordsDontMatch, setPasswordsDontMatch] = useState(null);
   // const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const clientId =
     "623673237970-p01olkhljcqajn23tb7eipt3cs6laqb3.apps.googleusercontent.com";
@@ -78,7 +78,7 @@ export default function Auth({ user, setUser, setUserProp }) {
   //     setTeacherData(result.data);
   //     setUser(result.data);
 
-  //     history.push("/profile");
+  //     navigate("/profile");
   //   } catch (error) {
   //     setShowLoginFailMessage(true);
   //   }
@@ -101,7 +101,7 @@ export default function Auth({ user, setUser, setUserProp }) {
       // setTeacherData(result.data);
       setUser(result.data);
       setUserProp(result.data);
-      history.push("/profile");
+      navigate("/profile");
     } catch (error) {
       console.log("can't log in");
     }
@@ -119,7 +119,7 @@ export default function Auth({ user, setUser, setUserProp }) {
       setTeacherData(result.data);
       setUser(result.data);
 
-      history.push("/profile");
+      navigate("/profile");
     } catch (error) {
       console.log("can't log in");
     }
@@ -142,7 +142,7 @@ export default function Auth({ user, setUser, setUserProp }) {
       window.localStorage.setItem("profilePic", result.data.user.avatar);
       window.localStorage.setItem("firstName", result.data.user.firstName);
       window.localStorage.setItem("lastName", result.data.user.lastName);
-      history.push("/profile");
+      navigate("/profile");
       setUser(result.data);
     } catch (error) {
       setPasswordsDontMatch("passwords don't match");

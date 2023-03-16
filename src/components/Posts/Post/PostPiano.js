@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./styles.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function Post() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [posts, setposts] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(
@@ -23,7 +23,7 @@ export default function Post() {
   });
 
   const goToCourse = (result) => {
-    history.push({ pathname: "/course", id: result._id });
+    navigate({ pathname: "/course", id: result._id });
   };
   const showData = () => {
     return results.map((result) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Teachers.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 export default function Teachers({
   user,
@@ -12,10 +12,10 @@ export default function Teachers({
 }) {
   const [teachers, setTeachers] = useState(null);
 
-  const history = useHistory();
-  window.onpopstate = () => {
-    history.push("/");
-  };
+  // const navigate = useNavigate();
+  // window.onpopstate = () => {
+  //   navigate("/");
+  // };
 
   useEffect(() => {
     const fetch = async () => {

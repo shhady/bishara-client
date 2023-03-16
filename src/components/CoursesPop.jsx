@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Teachers.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import {useNav} from "react-router-dom"
 export default function TeachersPop({
   setCoursesHover,
@@ -9,7 +9,7 @@ export default function TeachersPop({
   updateComponent,
 }) {
   const [courses, setCourses] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(
@@ -173,7 +173,7 @@ export default function TeachersPop({
               onClick={(e) => {
                 
                 window.localStorage.setItem("title", e.target.innerText);
-                history.push("/courses");
+                navigate("/courses");
                 window.location.reload();
               }}
               style={{ cursor: "pointer" }}
@@ -184,7 +184,7 @@ export default function TeachersPop({
               onClick={(e) => {
                 
                 window.localStorage.setItem("title", e.target.innerText);
-                history.push("/courses");
+                navigate("/courses");
                 window.location.reload();
               }}
               style={{ cursor: "pointer" }}
@@ -195,7 +195,7 @@ export default function TeachersPop({
               onClick={(e) => {
                 
                 window.localStorage.setItem("title", e.target.innerText);
-                history.push("/courses");
+                navigate("/courses");
                 window.location.reload();
               }}
               style={{ cursor: "pointer" }}
@@ -206,7 +206,7 @@ export default function TeachersPop({
               onClick={(e) => {
                 
                 window.localStorage.setItem("title", e.target.innerText);
-                history.push("/courses");
+                navigate("/courses");
                 window.location.reload();
               }}
               style={{ cursor: "pointer" }}
@@ -217,7 +217,7 @@ export default function TeachersPop({
               onClick={(e) => {
                 
                 window.localStorage.setItem("title", e.target.innerText);
-                history.push("/courses");
+                navigate("/courses");
                 window.location.reload();
               }}
               style={{ cursor: "pointer" }}
@@ -228,7 +228,7 @@ export default function TeachersPop({
               onClick={(e) => {
                 
                 window.localStorage.setItem("title", e.target.innerText);
-                history.push("/courses");
+                navigate("/courses");
                 window.location.reload();
               }}
               style={{ cursor: "pointer" }}
@@ -239,7 +239,7 @@ export default function TeachersPop({
               onClick={(e) => {
                 
                 window.localStorage.setItem("title", e.target.innerText);
-                history.push("/courses");
+                navigate("/courses");
                 window.location.reload();
               }}
               style={{ cursor: "pointer" }}
@@ -250,7 +250,7 @@ export default function TeachersPop({
               onClick={(e) => {
                 
                 window.localStorage.setItem("title", e.target.innerText);
-                history.push("/courses");
+                navigate("/courses");
                 window.location.reload();
               }}
               style={{ cursor: "pointer" }}
@@ -261,7 +261,7 @@ export default function TeachersPop({
               onClick={(e) => {
                 
                 window.localStorage.setItem("title", e.target.innerText);
-                history.push("/courses");
+                navigate("/courses");
                 window.location.reload();
               }}
               style={{ cursor: "pointer" }}

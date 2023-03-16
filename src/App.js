@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route , Routes} from "react-router-dom";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
 
@@ -71,7 +71,7 @@ export default function App() {
   }, [socket, userId]);
   return (
     <div>
-      <Suspense>
+      <Suspense fallback={<>loading...</>}>
         <BrowserRouter>
           <Header
             user={user}
@@ -84,56 +84,53 @@ export default function App() {
             chatNotification={chatNotification}
             setChatNotification={setChatNotification}
           />
-          <Route path="/" exact>
-            <Home
+          <Routes>
+          <Route path="/" exact element={<Home
               user={user}
               setUser={setUser}
               showArrows={showArrows}
               setUpdateComponent={setUpdateComponent}
               updateComponent={updateComponent}
-            />
-          </Route>
+            />}/>
+            
+         
           {/* <Route path="/Oud" exact component={Oud} />
           <Route path="/Piano" exact component={Piano} /> */}
-          <Route path="/auth" exact>
-            <Auth user={user} setUser={setUser} setUserProp={setUserProp} />
-          </Route>
-          <Route path="/forgetpassword" exact>
-            <ForgetPassword />
-          </Route>
-          
-          <Route path="/qa">
-            <QA user={user}/>
-          </Route>
+          <Route path="/auth" exact element={ <Auth user={user} setUser={setUser} setUserProp={setUserProp} />}/>
+
+          <Route path="/forgetpassword" exact element={ <ForgetPassword />}/>
+           
         
           
-          <Route path="/PracticeReplies" exact>
-            <PracticeReplies user={user} setUser={setUser} />
-          </Route>
+          <Route path="/qa" element={ <QA user={user}/>}/>
+           
+         
+        
           
-          <Route path="/SpecificPractice/:id" exact>
-            <SpecificPractice user={user} setUser={setUser}/>
-          </Route>
-          <Route path="/StudentMyPractice/:id" exact>
-            <StudentMyPractice user={user} setUser={setUser}/>
-          </Route>
+          <Route path="/PracticeReplies" exact element={<PracticeReplies user={user} setUser={setUser} />}/>
+            
+        
           
-          <Route path="/addStudent" exact>
-            <PaidStudent user={user} setUser={setUser}/>
-          </Route>
+          <Route path="/SpecificPractice/:id" exact element={ <SpecificPractice user={user} setUser={setUser}/>}/>
+         
+          <Route path="/StudentMyPractice/:id" exact element={<StudentMyPractice user={user} setUser={setUser}/>}/>
+          
+          
+          <Route path="/addStudent" exact element={<PaidStudent user={user} setUser={setUser}/>}/>
+            
+      
           
 
-          <Route path="/TestYoutube/:id" exact>
-            <TestYoutube
+          <Route path="/TestYoutube/:id" exact element={  <TestYoutube
               user={user}
               setUser={setUser}
               listId={listId}
               course={course}
-            />
-          </Route>
+            />}/>
+          
+          
 
-          <Route path="/Lessons" exact>
-            <Lessons
+          <Route path="/Lessons" exact element={<Lessons
               user={user}
               setUser={setUser}
               setTeacher={setTeacher}
@@ -141,27 +138,27 @@ export default function App() {
               listId={listId}
               updateComponent={updateComponent}
               setUpdateComponent={setUpdateComponent}
-            />
-          </Route>
-          <Route path="/Notifications" exact>
-            <Notifications user={user} setUser={setUser} />
-          </Route>
-          <Route path="/subscribe" exact>
-            <Subscribe user={user} setUser={setUser} />
-          </Route>
-          <Route path="/Lesson/:id/:id" exact>
-            <Lesson
+            />}/>
+            
+          
+          <Route path="/Notifications" exact element={<Notifications user={user} setUser={setUser} />}/>
+            
+          
+          <Route path="/subscribe" exact element={<Subscribe user={user} setUser={setUser} />}/>
+            
+          
+          <Route path="/Lesson/:id/:id" exact element={  <Lesson
               user={user}
               setUser={setUser}
               setTeacher={setTeacher}
               teacher={teacher}
               listId={listId}
               socket={socket}
-            />
-          </Route>
+            />}/>
+          
+          
 
-          <Route path="/TeacherData" exact>
-            <TeacherData
+          <Route path="/TeacherData" exact element={ <TeacherData
               user={user}
               setUser={setUser}
               setTeacher={setTeacher}
@@ -169,17 +166,17 @@ export default function App() {
               listId={listId}
               setUpdateComponent={setUpdateComponent}
               updateComponent={updateComponent}
-            />
-          </Route>
+            />}/>
+           
+          
 
-          <Route path="/CreateTeacher" exact component={CreateTeacher} />
-          <Route path="/profile" exact>
-            <Profile user={user} setUser={setUser} userProp={userProp} />
-          </Route>
-          <Route path="/createcourse" exact component={CreateCourse} />
-          {/* <Route path="/courses" exact component={Courses} /> */}
-          <Route path="/courses" exact>
-            <Courses
+          <Route path="/CreateTeacher" exact element={<CreateTeacher/>} />
+          <Route path="/profile" exact element={ <Profile user={user} setUser={setUser} userProp={userProp} />}/>
+           
+          
+          <Route path="/createcourse" exact element={<CreateCourse/>} />
+          {/* <Route path="/courses" exact element={}/ component={Courses} /> */}
+          <Route path="/courses" exact element={<Courses
               user={user}
               setUser={setUser}
               socket={socket}
@@ -188,29 +185,29 @@ export default function App() {
               setCourse={setCourse}
               course={course}
               setUpdateComponent={setUpdateComponent}
-            />
-          </Route>
-          <Route path="/course/:id" exact>
-            <Course user={user} setUser={setUser} socket={socket} />
-          </Route>
-          <Route path="/CreateCourseForTeacher" exact component={CreateCourseForTeacher} />
-          <Route path="/teachers" exact>
-            <Teachers
+            />}/>
+            
+          
+          <Route path="/course/:id" exact element={<Course user={user} setUser={setUser} socket={socket} />}/>
+            
+          
+          <Route path="/CreateCourseForTeacher" element={<CreateCourseForTeacher/>} />
+          <Route path="/teachers" exact element={ <Teachers
               user={user}
               setUser={setUser}
               setTeacher={setTeacher}
               teacher={teacher}
               setUpdateComponent={setUpdateComponent}
               updateComponent={setUpdateComponent}
-            />
-          </Route>
-          <Route path="/StudentsPractices" exact>
-            <StudentsPractices user={user} setUser={setUser} />
-          </Route>
+            />}/>
+           
+          
+          <Route path="/StudentsPractices" exact element={<StudentsPractices user={user} setUser={setUser} />}/>
+            
+          
           
 
-          <Route path="/messenger" exact>
-            {user ? (
+          <Route path="/messenger" exact element={ user ? (
               <Messenger
                 user={user}
                 setUser={setUser}
@@ -220,8 +217,10 @@ export default function App() {
               />
             ) : (
               <Home />
-            )}
-          </Route>
+            )}/>
+           
+          
+          </Routes>
         </BrowserRouter>
       </Suspense>
     </div>

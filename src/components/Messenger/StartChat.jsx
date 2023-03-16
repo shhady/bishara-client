@@ -2,12 +2,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useEffect } from "react";
 import "./startchat.css";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 export default function StartChat({ teacherId, userId }) {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
  
   useEffect(() => {
     const conv = async () => {
@@ -57,7 +57,7 @@ export default function StartChat({ teacherId, userId }) {
           setCurrentChat(res.data);
         });
     }
-    history.push("/messenger");
+    navigate("/messenger");
   };
   useEffect(() => {});
   return (

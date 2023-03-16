@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import CreateCourse from "../Course/CreateCourse";
@@ -13,7 +13,7 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 export default function Profile({ userProp }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [allPractices, setAllPractices] = useState([]);
   const [userPractices, setUserPractices] = useState([]);
   const [userId, setUserId] = useState(null);
@@ -190,7 +190,7 @@ export default function Profile({ userProp }) {
   //   // localStorage.removeItem("profile");
   //   // await axios.post(process.env.REACT_APP_BACKEND_URL+"/users/logoutAll");
   //   dispatch({ type: "LOGOUT" });
-  //   history.push("/");
+  //   navigate("/");
   //   setUser(null);
   // };
 
@@ -278,22 +278,22 @@ export default function Profile({ userProp }) {
   //   // localStorage.removeItem("profile");
   //   // await axios.post(process.env.REACT_APP_BACKEND_URL+"/users/logoutAll");
   //   dispatch({ type: "LOGOUT" });
-  //   history.push("/");
+  //   navigate("/");
   //   setUser(null);
   // };
 
   const goToCreateCourse = () => {
-    history.push("/createCourse");
+    navigate("/createCourse");
   };
   const gotohomepage = () => {
-    history.push("/");
+    navigate("/");
   };
 
   const studentsPractices = () => {
-    history.push("/PracticeReplies");
+    navigate("/PracticeReplies");
   };
   const addStudent = ()=>{
-    history.push("/addStudent");
+    navigate("/addStudent");
   }
 
   useEffect(() => {
@@ -547,7 +547,7 @@ export default function Profile({ userProp }) {
       console.log("can't update");
     }
     setUpdateDes("");
-    history.push("/TeacherData")
+    navigate("/TeacherData")
   };
   const changeLastName = async () => {
     try {

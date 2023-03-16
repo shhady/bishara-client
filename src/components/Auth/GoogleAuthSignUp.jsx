@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const GoogleAuthSignUp = ({ setUser }) => {
   const [userInformation, setUserInformation] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   const onSuccess = async (response) => {
   
     let userInfo = jwt_decode(response.credential);
@@ -25,7 +25,7 @@ const GoogleAuthSignUp = ({ setUser }) => {
       );
       window.localStorage.setItem("profile", JSON.stringify(result.data));
       window.localStorage.setItem("token", result.data.token);
-      history.push("/profile");
+      navigate("/profile");
       setUser(result.data);
     } catch (error) {
       console.log("passwords don't match");

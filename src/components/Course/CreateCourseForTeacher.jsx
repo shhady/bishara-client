@@ -48,7 +48,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./createCourse.css";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -76,7 +76,7 @@ export default function CreateCourseForTeacher() {
   });
 
   const [final, setFinal] = useState(course);
-  const history = useHistory();
+  const navigate = useNavigate();
  
   const getMeTeacher = async(e)=>{
                 e.preventDefault();
@@ -130,7 +130,7 @@ export default function CreateCourseForTeacher() {
     setPopUp(true);
     await axios.post(process.env.REACT_APP_BACKEND_URL + `/addCourses`, course
     );
-    // history.push("/courses/");
+    // navigate("/courses/");
   };
 
   useEffect(() => {
@@ -318,7 +318,7 @@ export default function CreateCourseForTeacher() {
             <br />
             <button
               style={{ width: "60%" }}
-              onClick={() => history.push("/courses")}
+              onClick={() => navigate("/courses")}
             >
               صفحة الدورات الموسيقية
             </button>

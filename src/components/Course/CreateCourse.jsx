@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./createCourse.css";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -26,7 +26,7 @@ export default function CreateCourse() {
     // videos: [],
   });
   const [final, setFinal] = useState(course);
-  const history = useHistory();
+  const navigate = useNavigate();
   const firstName = useRef(user.teacher.firstName);
   const lastName = useRef(user.teacher.lastName);
   const avatar = useRef(user.teacher.avatar);
@@ -73,7 +73,7 @@ export default function CreateCourse() {
         Authorization: window.localStorage.getItem("token"),
       },
     });
-    // history.push("/courses/");
+    // navigate("/courses/");
   };
 
   useEffect(() => {
@@ -262,7 +262,7 @@ export default function CreateCourse() {
             <br />
             <button
               style={{ width: "60%" }}
-              onClick={() => history.push("/courses")}
+              onClick={() => navigate("/courses")}
             >
               صفحة الدورات الموسيقية
             </button>

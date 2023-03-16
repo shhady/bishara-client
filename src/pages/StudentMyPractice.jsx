@@ -2,9 +2,11 @@ import React,{useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import "./StudentPractice.css"
+import { useNavigate } from 'react-router-dom'
 export default function StudentMyPractice() {
   const [practice, setPractice] = useState({})
   const { id } = useParams()
+  const navigate = useNavigate()
   console.log(id)
 
   useEffect(() => {
@@ -44,9 +46,9 @@ export default function StudentMyPractice() {
     const deleteThePractice = async () => {
       await axios
         .delete(
-          process.env.REACT_APP_BACKEND_URL + `/practice/${id}`
+          process.env.REACT_APP_BACKEND_URL + `/practices/${id}`
         )
-        
+        navigate("/profile")
     };
     deleteThePractice();
   };

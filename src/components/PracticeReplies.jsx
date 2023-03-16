@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./StudentPractice.css";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -41,10 +41,10 @@ export default function PracticeReplies({ user }) {
 
   const unique_id = uuid();
 
-  const history = useHistory();
-  window.onpopstate = () => {
-    history.push("/profile");
-  };
+  // const navigate = useNavigate();
+  // window.onpopstate = () => {
+  //   navigate("/profile");
+  // };
 
   useEffect(() => {
     function MyVideo() {

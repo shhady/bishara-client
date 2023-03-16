@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function NotificationsPop({
   setShowNotificationPopUp,
   setRedLightNotification,
@@ -21,7 +21,7 @@ export default function NotificationsPop({
   );
   const [userPractices, setUserPractices] = useState([]);
   const [userPracticesNotSeen, setUserPracticesNotSeen] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
   useEffect(() => {
     user.user
       ? setUserF(user.user.firstName)
@@ -131,7 +131,7 @@ export default function NotificationsPop({
           replySeen: true,
         }
       )
-      .then(history.push(`/StudentMyPractice/${unseen._id}`));
+      .then(navigate(`/StudentMyPractice/${unseen._id}`));
   };
 
   const drawPracticeNotifications = () => {
@@ -161,8 +161,8 @@ export default function NotificationsPop({
   const handleClickOnPractice = (practice) => {
     setRedLightNotification(false);
     setShowNotificationPopUp(false);
-    history.push(`/SpecificPractice/${practice._id}`);
-    // history.push(`/SpecificPractice/${practice._id}`);
+    navigate(`/SpecificPractice/${practice._id}`);
+    // navigate(`/SpecificPractice/${practice._id}`);
     // setTeacherPracticesNotifications(null);
   };
   const drawReplies = () => {
@@ -257,7 +257,7 @@ export default function NotificationsPop({
         )
 
         .then(
-          history.push({
+          navigate({
             pathname: `/Lesson/${replies.playlistId}/${replies.videoName}`,
           })
         )
@@ -305,7 +305,7 @@ export default function NotificationsPop({
           setRedLightNotification(false);
         })
         .then(
-          history.push({
+          navigate({
             pathname: `/Lesson/${comment.playlistId}/${comment.videoName}`,
           })
         );

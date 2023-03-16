@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import TeachersPop from "./TeachersPop";
 import CoursesPop from "./CoursesPop";
@@ -35,7 +35,7 @@ export default function Header({
 }) {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
   // const [socket, setSocket] = useState(null);
   const [notificationMessage, setNotificationMessage] = useState([]);
@@ -193,7 +193,7 @@ export default function Header({
     // localStorage.removeItem("profile");
     // await axios.post(process.env.REACT_APP_BACKEND_URL+"/teachers/logoutAll");
     dispatch({ type: "LOGOUT" });
-    history.push("/");
+    navigate("/");
     setUser(null);
     setNotificationNotification([]);
     setNotificationMessage([]);
@@ -225,7 +225,7 @@ export default function Header({
     // localStorage.removeItem("profile");
     // await axios.post(process.env.REACT_APP_BACKEND_URL+"/teachers/logoutAll");
     dispatch({ type: "LOGOUT" });
-    history.push("/");
+    navigate("/");
     setUser(null);
     setOpenMenu(false);
     setNotificationNotification([]);
@@ -286,7 +286,7 @@ export default function Header({
           <div
             style={{ border: "1px solid gray", padding: "5px" }}
             onClick={() => {
-              history.push("/messenger");
+              navigate("/messenger");
               setOpenNotificationsMessage(!openNotificationsMessage);
             }}
           >
@@ -571,7 +571,7 @@ export default function Header({
                   onMouseOver={() => setIsHovering(false)}
                   onClick={() => {
                     // if (uniques.length === 0) {
-                    history.push("/messenger");
+                    navigate("/messenger");
                     setNotifyMessage(null);
                     // } else {
                     //   setOpenNotificationsMessage(!openNotificationsMessage);
@@ -712,7 +712,7 @@ export default function Header({
                     }}
                     onMouseOver={() => setIsHovering(false)}
                     onClick={() => {
-                      history.push("/messenger");
+                      navigate("/messenger");
                       setNotifyMessage(null);
                     
                     }}
@@ -868,7 +868,7 @@ export default function Header({
                   // setUpdateComponent("");
                 }}
                 onClick={() => {
-                  history.push("/courses");
+                  navigate("/courses");
                   // window.location.reload();
                 }}
               >

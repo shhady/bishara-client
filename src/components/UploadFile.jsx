@@ -3,7 +3,7 @@ import axios from "axios";
 // import { saveAs } from "file-saver";
 import "./Lesson.css";
 export default function UploadFile({ courseInfo, lesson, id , paidUpdate}) {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const user=JSON.parse(localStorage.getItem("profile"));
   const paid = useState(window.localStorage.getItem("paid"))
 
   const [file, setFile] = useState();
@@ -56,7 +56,7 @@ const [ifNotUserShow, setIfNotUser] = useState(false)
       setFileUploaded(null);
     };
     fetch();
-  }, []);
+  }, [lesson.snippet.resourceId.videoId]);
   
   const postData = async () => {
     setFileUploaded(false);
@@ -191,7 +191,7 @@ const [ifNotUserShow, setIfNotUser] = useState(false)
         </>
       ) : (
         <>
-          {theFile && paid[0] === courseInfo.owner || paidUpdate===courseInfo.owner ? (
+          {(theFile && paid[0] === courseInfo.owner) || (paidUpdate===courseInfo.owner) ? (
             // <button
             <div style={{display:"flex", justifyContent: "center", alignItems: "center",border: "2px solid black"}}>
             

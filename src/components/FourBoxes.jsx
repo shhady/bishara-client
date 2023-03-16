@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./FourBoxes.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 export default function FourBoxes() {
   // const [title, setTitle] = useState(null);
-  const history = useHistory();
+  // const history = useHistory();
   function handleClick(e) {
     window.localStorage.setItem("title", e.target.innerText);
     // .then(history.push("/courses"));

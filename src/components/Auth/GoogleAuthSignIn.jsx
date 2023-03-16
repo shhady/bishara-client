@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
   const [userInformation, setUserInformation] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   const onSuccess = async (response) => {
    
     let userInfo = jwt_decode(response.credential);
@@ -24,7 +24,7 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
       window.localStorage.setItem("lastName", result.data.user.lastName);
       window.localStorage.setItem("profilePic", result.data.user.avatar);
 
-      history.push("/profile");
+      navigate("/profile");
       setUser(result.data);
     } catch (error) {
       setShowLoginFailMessage(true);
@@ -47,7 +47,7 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
       window.localStorage.setItem("lastName", userInfo.family_name);
       // window.localStorage.setItem("coverPic", userInfo.picture);
 
-      history.push("/profile");
+      navigate("/profile");
       setUser(result.data);
     } catch (error) {
       console.log("Error creating user, trying to log in instead");

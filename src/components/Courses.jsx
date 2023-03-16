@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Posts/styles.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function Courses({
   listId,
   setListId,
@@ -17,9 +17,9 @@ export default function Courses({
   const [all, setAll] = useState(true);
   const [title, setTitle] = useState(null);
   const [instruments, setInstruments] = useState("الدورات");
-  const history = useHistory();
+  const navigate = useNavigate();
   window.onpopstate = () => {
-    history.push("/");
+    navigate("/");
     window.localStorage.removeItem("title");
   };
   useEffect(() => {
@@ -87,7 +87,7 @@ export default function Courses({
     // const res = await axios.get(process.env.REACT_APP_BACKEND_URL+`/courses/${post._id}`);
     
     setCourseData(post._id);
-    history.push(`/Lessons`);
+    navigate(`/Lessons`);
     window.localStorage.setItem("courseId", post._id);
     window.localStorage.setItem("ownerId", post.owner);
     window.localStorage.setItem("playlistId", post.playlistId);
@@ -97,7 +97,7 @@ export default function Courses({
     window.localStorage.setItem("courseDetails", JSON.stringify(post));
     setUpdateComponent(post);
 
-    // history.push("/course");
+    // navigate("/course");
   };
 
   // const handlechat = async (post) => {

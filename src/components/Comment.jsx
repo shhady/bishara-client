@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function Comment({
   userId,
   userF,
@@ -25,7 +25,7 @@ export default function Comment({
   const [moreThan, setMoreThan] = useState(null);
   const [ifNotUserShow, setIfNotUser] = useState(false)
 
-const history = useHistory()
+const navigate = useNavigate()
   useEffect(() => {
     if (!user) return;
     const userF = user.user ? user.user.firstName : user.teacher.firstName;
@@ -88,7 +88,7 @@ const history = useHistory()
         videoId: lesson.snippet.resourceId.videoId,
         courseid: courseInfo._id,
       });
-      history.push('/profile')
+      navigate('/profile')
     };
     fetch();
    

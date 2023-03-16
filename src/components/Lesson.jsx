@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Lesson.css";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CommentYouTubeVideo from "./CommentYouTubeVideo";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
 export default function Lesson({ socket }) {
+  const [suggestedVideoId, setSuggestedVideoId] = useState("");
   const [paidUpdate, setPaidUpdate]= useState()
   const [lessons, setLessons] = useState([]);
   const [lesson, setLesson] = useState(
@@ -17,10 +18,10 @@ export default function Lesson({ socket }) {
   const [listId, setListId] = useState('');
  
   let { id } = useParams();
-  const history = useHistory();
-  window.onpopstate = () => {
-    history.push("/lessons");
-  };
+  const navigate = useNavigate();
+  // window.onpopstate = () => {
+  //   navigate("/lessons");
+  // };
   useEffect(()=>{
     const getUserDetailsAgain = async()=>{
       const res= await axios.get(process.env.REACT_APP_BACKEND_URL + `/users/me`, 
@@ -58,16 +59,19 @@ export default function Lesson({ socket }) {
 
   const handleLessonClick = (lessonSuggest) => {
     setLesson(lessonSuggest);
-   
+   setSuggestedVideoId(lessonSuggest.snippet.resourceId.videoId);
     window.localStorage.setItem("lessonDetails", JSON.stringify(lessonSuggest));
     window.localStorage.setItem(
       "videoName",
       lessonSuggest.snippet.resourceId.videoId
     );
   };
+  // useEffect(() => {
+  //   history.replace(`${lesson.snippet.resourceId.videoId}`);
+  // }, [lesson]);
   useEffect(() => {
-    history.replace(`${lesson.snippet.resourceId.videoId}`);
-  }, [lesson]);
+    navigate(`/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`, { replace: true });
+  }, [suggestedVideoId, navigate]);
   
 
   const drawSuggestions = () => {

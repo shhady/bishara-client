@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import FileBase from "react-file-base64";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
 import { useEffect } from "react";
@@ -27,7 +27,7 @@ export default function CreateTeacher() {
     about: "",
   });
 
-  const history = useHistory();
+  const navigate = useNavigate();
   // const postDetailsAvatar = () => {
   useEffect(() => {
     const formData = new FormData();
@@ -88,7 +88,7 @@ export default function CreateTeacher() {
       // avatar: urlAvatar,
       // cover: urlCover,
     );
-    history.push("/teachers");
+    navigate("/teachers");
   };
 
   const handleChange = (e) => {

@@ -7,7 +7,7 @@ import {
   faPenToSquare,
   faCamera,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 export default function Lessons({ user, updateComponent, setUpdateComponent }) {
   const [courseInfo, setCourseInfo] = useState(
@@ -34,11 +34,11 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
   const [newValueDes, setNewValueDes] = useState("");
 
   const [lessons, setLessons] = useState([]);
-  const history = useHistory();
-  window.onpopstate = () => {
-    history.push("/TeacherData");
-    setUpdated("");
-  };
+  const navigate = useNavigate();
+  // window.onpopstate = () => {
+  //   navigate("/TeacherData");
+  //   setUpdated("");
+  // };
 
  
 
@@ -122,12 +122,9 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
   const handleLessonClick = (lesson) => {
    
     if (user) {
-      history.push({
-        pathname: `/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`,
-        id: lesson.snippet.playlistId,
-      });
+      navigate(`/Lesson/${lesson.snippet.playlistId}/${lesson.snippet.resourceId.videoId}`, { state: { id: lesson.snippet.playlistId } });
     } else {
-      history.push("/auth");
+      navigate("/auth");
     }
 
     window.localStorage.setItem("lessonDetails", JSON.stringify(lesson));

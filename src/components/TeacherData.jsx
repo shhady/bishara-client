@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeacherData.css";
 // import Evaluation from "./Evaluation"
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import StartChat from "./Messenger/StartChat";
 export default function TeacherData({
   listId,
@@ -22,10 +22,10 @@ export default function TeacherData({
     if (!user) return;
     setUserId(user.user ? user.user._id : user.teacher._id);
   }, [user]);
-  const history = useHistory();
-  window.onpopstate = () => {
-    history.push("/teachers");
-  };
+  const navigate = useNavigate();
+  // window.onpopstate = () => {
+  //   navigate("/teachers");
+  // };
   // console.log(updateComponent._id);
   useEffect(() => {
     teacherprop
@@ -116,7 +116,7 @@ export default function TeacherData({
       );
     };
     deleteTheCourse();
-    // history.push("/");
+    // navigate("/");
   };
   const drawCourses = () => {
     return filteredCourses?.map((course, i) => {
@@ -221,7 +221,7 @@ export default function TeacherData({
   const deleteTeacher = async () => {
     axios
       .delete(process.env.REACT_APP_BACKEND_URL + `/teachers/${teacherId}`)
-      .then(history.push("/"));
+      .then(navigate("/"));
   };
 
   return (
