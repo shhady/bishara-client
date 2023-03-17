@@ -4,11 +4,23 @@ import axios from 'axios'
 import "./StudentPractice.css"
 import { useNavigate } from 'react-router-dom'
 export default function StudentMyPractice() {
-  const [practice, setPractice] = useState({})
+  const [practice, setPractice] = useState({});
+  const [poster, setPoster] = useState("");
   const { id } = useParams()
   const navigate = useNavigate()
   console.log(id)
 
+  useEffect(() => {
+    function MyVideo() {
+      if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+        // code to run if user is using Safari
+        setPoster(
+          "https://images.pexels.com/photos/6044198/pexels-photo-6044198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        );
+      }
+    }
+    MyVideo();
+  }, []);
   useEffect(() => {
     const fetch= async()=>{
       const res = await axios.get(process.env.REACT_APP_BACKEND_URL +`/practice/${id}`)
@@ -61,7 +73,7 @@ export default function StudentMyPractice() {
             height:"fit-content",
             borderRight: "1px solid black",
             borderBottom: "1px solid #e1e1e1",
-            // padding: "10px",
+            paddingBottom: "20px",
             marginTop: "100px",
           }}
           key={practice._id}
@@ -104,6 +116,7 @@ export default function StudentMyPractice() {
               }}
             >
               <video
+              poster={poster}
                 key={practice.myPractice}
                 controls
                 preload="metadata"
@@ -136,6 +149,7 @@ export default function StudentMyPractice() {
                         controls
                         preload="metadata"
                         className="videos4ProfilePractice"
+                        poster={poster}
                       >
                         <source src={reply.theVideoReply.replace('http://', 'https://')} type="video/mp4" />
                       </video>

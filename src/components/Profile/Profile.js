@@ -439,6 +439,7 @@ export default function Profile({ userProp }) {
                         controls
                         preload="metadata"
                         className="videos4Profile"
+                        poster={poster}
                       >
                         <source src={reply.theVideoReply.replace('http://', 'https://')} type="video/mp4" />
                       </video>

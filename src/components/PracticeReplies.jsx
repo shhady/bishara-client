@@ -310,7 +310,7 @@ export default function PracticeReplies({ user }) {
             <video
               controls
               preload="metadata"
-              // poster={poster}
+              poster={poster}
               className="videos4Practices"
             >
               <source src={reply.theVideoReply.replace('http://', 'https://')} type="video/mp4" />
@@ -355,7 +355,7 @@ export default function PracticeReplies({ user }) {
         <audio 
         style={{width:'100%'}}
       controls
-      // poster={poster}
+      poster={poster}
     >
       <source src={rec.RecordingReply.replace('http://', 'https://')} type="audio/mp4" />
     </audio>
@@ -443,7 +443,7 @@ export default function PracticeReplies({ user }) {
                  key={practice.myPractice}
                  controls
                  preload="metadata"
-                 // poster={poster}
+                 poster={poster}
                  height="250px"
                  style={{
                    width: "90%",
