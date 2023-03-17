@@ -92,13 +92,13 @@ export default function StudentMyPractice() {
             </div>
           </div>
           <div
-           className="videoAndRepliesProfile">
+           className="videoAndRepliesPractice">
             <div
-            className="StudentVideoProfile"
+            className="StudentVideoPractice"
               style={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center",
+                alignItems: "flex-start",
                 backgroundColor:"#fee4b9",
                 marginBottom:"10px"
               }}
@@ -123,7 +123,7 @@ export default function StudentMyPractice() {
               
             </div>
             
-            <div  className="replyForVideoProfile">
+            <div  className="replyForVideoPractice">
               {practice.reply ? (
               <div className="theCommentStudentPractice">{practice.reply}</div>):(null)}
               
