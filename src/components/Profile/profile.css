@@ -98,6 +98,7 @@
         -2px -2px 5px #ffffff;
     padding: 5px 15px;
     margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 @media (max-width: 800px) and (min-width:568px) {
