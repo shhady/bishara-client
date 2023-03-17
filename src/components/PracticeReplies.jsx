@@ -193,10 +193,11 @@ export default function PracticeReplies({ user, socket }) {
   // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
+    console.log(practice)
     socket.emit("sendNotificationComment", {
-      senderName: userF,
-      senderFamily: userL,
-      senderId: userId,
+      senderName: practice.teacherFirstName,
+      senderFamily: practice.teacherLastName,
+      senderId: practice.teacherId,
       receiverId: practice.ownerId,
       videoName: practice.video,
       videoId: practice.uniqueLink,
