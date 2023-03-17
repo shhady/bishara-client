@@ -131,6 +131,7 @@ export default function Header({
 
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
+      console.log('listening for getNotificationComment event...');
       console.log(data);
       setRedLightNotification(data);
       // setRedLightNotificationReply(true);
