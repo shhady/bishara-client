@@ -140,13 +140,7 @@ export default function CommentYouTubeVideo({
   const handleSubmitComment = async (e) => {
     e.preventDefault()
     if (!myComment) return;
-    console.log(userF)
-    console.log(userL)
-    console.log(userId)
-    console.log(courseInfo.owner)
-    console.log(lesson.snippet.title)
-    console.log(lesson.snippet.resourceId.videoId)
-    console.log(courseInfo._id)
+   
     socket.emit("sendNotificationComment", {
       senderName: userF,
       senderFamily: userL,

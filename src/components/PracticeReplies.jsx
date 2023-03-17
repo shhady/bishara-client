@@ -535,13 +535,12 @@ export default function PracticeReplies({ user, socket }) {
                               <div
                                 key={i}
                                 style={{
-                                  width:"fit-content",
+                                  width:"100%",
                                   display:"flex",
                                   justifyContent:"center",
                                   alignItems:"center",
                                   marginLeft: "20px",
-                                 
-                                  
+                                 flexWrap: "wrap",
                                 }}
                               >
                                 {" "}
