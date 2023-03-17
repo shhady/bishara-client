@@ -10,7 +10,7 @@ import {
   faVideo
 } from "@fortawesome/free-solid-svg-icons";
 import AudioRecord from "./AudioRecord";
-export default function PracticeReplies({ user }) {
+export default function PracticeReplies({ user, socket }) {
   // State variables
   const [theUser, setTheUser] = useState(
     JSON.parse(localStorage.getItem("profile"))
@@ -40,12 +40,15 @@ export default function PracticeReplies({ user }) {
   // const fileInput = useRef(null);
 
   const unique_id = uuid();
-
+  const userF = user.user ? user.user.firstName : user.teacher.firstName;
+  const userL = user.user ? user.user.lastName : user.teacher.lastName;
   // const navigate = useNavigate();
   // window.onpopstate = () => {
   //   navigate("/profile");
   // };
-
+    console.log({"user": userF})
+    console.log({ "userL": userL})
+    
   useEffect(() => {
     function MyVideo() {
       if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
@@ -128,6 +131,21 @@ export default function PracticeReplies({ user }) {
 
   // Add teacher reply to practice
   const addTeacherReply = (practice) => {
+    console.log(practice);
+    console.log(practice.ownerId);
+    console.log(practice.video);
+    console.log(practice.uniqueLink);
+    console.log(practice.courseId);
+   
+    socket.emit("sendNotificationComment", {
+      senderName: userF,
+      senderFamily: userL,
+      senderId: userId,
+      receiverId: practice.ownerId,
+      videoName: practice.video,
+      videoId: practice.uniqueLink,
+      courseid: practice.courseId,
+    });
     const addReply = async () => {
       await axios
         .patch(
@@ -247,6 +265,7 @@ export default function PracticeReplies({ user }) {
   // Add teacher video reply to practice
   const addTeacherVideoReply = (practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
+    
     const addTheVideo = async () => {
       await axios
         .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {

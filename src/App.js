@@ -117,11 +117,11 @@ export default function App() {
          
         
           
-          <Route path="/PracticeReplies" exact element={<PracticeReplies user={user} setUser={setUser} />}/>
+          <Route path="/PracticeReplies" exact element={<PracticeReplies user={user} setUser={setUser} socket={socket}/>}/>
             
         
           
-          <Route path="/SpecificPractice/:id" exact element={ <SpecificPractice user={user} setUser={setUser}/>}/>
+          <Route path="/SpecificPractice/:id" exact element={ <SpecificPractice user={user} setUser={setUser} socket={socket}/>}/>
          
           <Route path="/StudentMyPractice/:id" exact element={<StudentMyPractice user={user} setUser={setUser}/>}/>
           
