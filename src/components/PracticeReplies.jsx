@@ -529,18 +529,19 @@ export default function PracticeReplies({ user, socket }) {
                   {openButtons ? (
                     <>
                       {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
-                        <div style={{display:"flex", width:"fit-content", marginBottom:"10px"}}>
+                        <div style={{display:"flex", width:"fit-content", marginBottom:"10px", flexWrap:"wrap", maxWidth:"98%"}}>
                           {showButtons.map((buttonD, i) => {
                             return (
                               <div
                                 key={i}
                                 style={{
-                                  width:"100%",
+                                  width:"fit-content",
                                   display:"flex",
                                   justifyContent:"center",
                                   alignItems:"center",
                                   marginLeft: "20px",
-                                 flexWrap: "wrap",
+                                  marginBottom:"10px"
+                                  
                                 }}
                               >
                                 {" "}
