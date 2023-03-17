@@ -94,7 +94,7 @@ import React, { useState } from 'react';
 import { AudioRecorder } from 'react-audio-voice-recorder';
 import axios from 'axios';
 
-function AudioRecord({ setTeacherPractices, practice, unique_id, userId }) {
+function AudioRecord({ setTeacherPractices, practice, unique_id, userId, userF, userL, socket }) {
   const [audioBlob, setAudioBlob] = useState(null);
   const [resetRecorder, setResetRecorder] = useState(true);
 
@@ -152,7 +152,15 @@ function AudioRecord({ setTeacherPractices, practice, unique_id, userId }) {
           );
           setTeacherPractices(res.data);
         });
-
+        socket.emit("sendNotificationComment", {
+          senderName: userF,
+          senderFamily: userL,
+          senderId: userId,
+          receiverId: practice.ownerId,
+          videoName: practice.video,
+          videoId: practice.uniqueLink,
+          courseid: practice.courseId,
+        });
       setAudioBlob(null);
       setResetRecorder(false);
     } catch (error) {

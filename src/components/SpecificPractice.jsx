@@ -198,7 +198,15 @@ export default function PracticeReplies({ user, socket,  }) {
   // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
-
+    socket.emit("sendNotificationComment", {
+      senderName: userF,
+      senderFamily: userL,
+      senderId: userId,
+      receiverId: practice.ownerId,
+      videoName: practice.video,
+      videoId: practice.uniqueLink,
+      courseid: practice.courseId,
+    });
     const addTheVideo = async () => {
       await axios
         .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {

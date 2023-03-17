@@ -193,7 +193,15 @@ export default function PracticeReplies({ user, socket }) {
   // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
-
+    socket.emit("sendNotificationComment", {
+      senderName: userF,
+      senderFamily: userL,
+      senderId: userId,
+      receiverId: practice.ownerId,
+      videoName: practice.video,
+      videoId: practice.uniqueLink,
+      courseid: practice.courseId,
+    });
     const addTheVideo = async () => {
       await axios
         .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {
@@ -265,7 +273,15 @@ export default function PracticeReplies({ user, socket }) {
   // Add teacher video reply to practice
   const addTeacherVideoReply = (practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
-    
+    socket.emit("sendNotificationComment", {
+      senderName: userF,
+      senderFamily: userL,
+      senderId: userId,
+      receiverId: practice.ownerId,
+      videoName: practice.video,
+      videoId: practice.uniqueLink,
+      courseid: practice.courseId,
+    });
     const addTheVideo = async () => {
       await axios
         .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {
@@ -674,7 +690,7 @@ export default function PracticeReplies({ user, socket }) {
                         border: "1px solid black", padding:"10px"
                       }}>
               <div>رساله صوتيه</div>
-                <AudioRecord unique_id={unique_id} userId={userId} setTeacherPractices={setTeacherPractices} setRecordUrl={setRecordUrl} practice={practice}/>
+                <AudioRecord unique_id={unique_id} userId={userId} userF={userF} userL={userL} socket={socket} setTeacherPractices={setTeacherPractices} setRecordUrl={setRecordUrl} practice={practice}/>
               </div>
               <div style={{
                         display: "flex",
