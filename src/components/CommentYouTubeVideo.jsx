@@ -138,8 +138,7 @@ export default function CommentYouTubeVideo({
   const handleSubmitComment = async (e) => {
     e.preventDefault()
     if (!myComment) return;
-    console.log("entered");
-    console.log(courseInfo);
+    console
     if (!socket.connected) {
       // Handle socket not connected
       return console.log("Socket not connected");;
@@ -152,15 +151,18 @@ export default function CommentYouTubeVideo({
       videoName: lesson.snippet.title,
       videoId: lesson.snippet.resourceId.videoId,
       courseid: courseInfo._id,
-    } ,(response) => {
-      console.log(response)
+    }).then((response) => {
+      console.log(response);
       if (response === 'success') {
         console.log('Message sent successfully.');
       } else {
         console.log('Failed to send message.');
       }
-    });
-    console.log("after sending");
+    })
+    .catch((error) => {
+      console.log(error);
+    });;
+    
     setMyComment("");
     await axios
       .post(process.env.REACT_APP_BACKEND_URL + `/comments`, comment)
