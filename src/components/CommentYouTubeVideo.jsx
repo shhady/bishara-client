@@ -90,6 +90,7 @@ export default function CommentYouTubeVideo({
       videoId: lesson.snippet.resourceId.videoId,
       courseid: courseInfo._id,
     });
+    console.log("Sent")
     await axios
       .put(process.env.REACT_APP_BACKEND_URL + `/comments/${comment._id}`, {
         ...theReply,
@@ -140,7 +141,7 @@ export default function CommentYouTubeVideo({
   const handleSubmitComment = async (e) => {
     e.preventDefault()
     if (!myComment) return;
-   
+    
     socket.emit("sendNotificationComment", {
       senderName: userF,
       senderFamily: userL,
