@@ -139,6 +139,7 @@ export default function CommentYouTubeVideo({
     e.preventDefault()
     if (!myComment) return;
     console.log("entered");
+    console.log(courseInfo);
     if (!socket.connected) {
       // Handle socket not connected
       return console.log("Socket not connected");;
