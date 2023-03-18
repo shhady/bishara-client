@@ -18,10 +18,8 @@ export default function CommentYouTubeVideo({
   socket,
   paidUpdate
 }) {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const [courseDetails, setCourseDetails] = useState(
-    JSON.parse(localStorage.getItem("courseDetails"))
-  );
+  const user= JSON.parse(localStorage.getItem("profile"));
+  const courseDetails = JSON.parse(localStorage.getItem("courseDetails"))
   const [userF, setUserF] = useState("");
   const [userL, setUserL] = useState("");
   const [userId, setUserId] = useState("");
@@ -34,7 +32,6 @@ export default function CommentYouTubeVideo({
   const [theReply, setTheReply] = useState("");
   const [replyId, setReplyId] = useState("");
   const [openDelete, setOpenDelete] = useState(false);
-  const [openReply, setOpenReply] = useState(false);
   const [commentId, setCommentId] = useState("");
   const [replyToDeleteId, setReplyToDeleteId] = useState("");
   const unique_id = uuid();
@@ -141,6 +138,7 @@ export default function CommentYouTubeVideo({
   const handleSubmitComment = async (e) => {
     e.preventDefault()
     if (!myComment) return;
+    console.log("entered");
     if (!socket.connected) {
       // Handle socket not connected
       return console.log("Socket not connected");;
@@ -160,7 +158,7 @@ export default function CommentYouTubeVideo({
         console.log('Failed to send message.');
       }
     });
-    
+    console.log("after sending");
     setMyComment("");
     await axios
       .post(process.env.REACT_APP_BACKEND_URL + `/comments`, comment)
