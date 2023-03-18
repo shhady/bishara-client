@@ -151,6 +151,7 @@ export default function CommentYouTubeVideo({
       videoId: lesson.snippet.resourceId.videoId,
       courseid: courseInfo._id,
     });
+    console.log(courseInfo.owner)
     setMyComment("");
     await axios
       .post(process.env.REACT_APP_BACKEND_URL + `/comments`, comment)
