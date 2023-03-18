@@ -255,7 +255,7 @@ export default function Header({
   useEffect(() => {
     const filterReplies = replies?.some((reply) => reply.replyRead === "false");
     setRedLightNotificationReply(filterReplies);
-  }, [replies]);
+  }, [replies, user]);
 
   useEffect(() => {
     const filterComment = () => {
@@ -335,7 +335,7 @@ export default function Header({
       setTeacherPracticesNotifications(res.data);
     };
     fetchPractices();
-  }, [userId]);
+  }, [userId, user]);
 
 
   useEffect(() => {
