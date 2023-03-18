@@ -250,7 +250,7 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
         className="lessonCoverBig"
         style={{
           backgroundImage: `url(${
-            updated ? updated.coursePhoto.replace('http://', 'https://') : courseInfo.coursePhoto.replace('http://', 'https://')
+            updated ? updated.coursePhoto?.replace('http://', 'https://') : courseInfo.coursePhoto?.replace('http://', 'https://')
           })`,
           
         }}
