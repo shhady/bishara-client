@@ -609,7 +609,7 @@ export default function Profile({ userProp }) {
             <div className="coverProfile">
               <div
                 style={{
-                  backgroundImage: `url(${coverPicture})`,
+                  backgroundImage: `url(${coverPicture?.replace('http://', 'https://')})`,
                   backgroundPosition: "center",
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
