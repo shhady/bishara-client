@@ -138,55 +138,16 @@ export default function CommentYouTubeVideo({
   const handleSubmitComment = async (e) => {
     e.preventDefault()
     if (!myComment) return;
-    if (!socket.connected) {
-      // Handle socket not connected
-      return console.log("Socket not connected");;
-    }
-      // socket.emit("sendNotificationComment", {
-      //   senderName: userF,
-      //   senderFamily: userL,
-      //   senderId: userId,
-      //   receiverId: courseInfo.owner,
-      //   videoName: lesson.snippet.title,
-      //   videoId: lesson.snippet.resourceId.videoId,
-      //   courseid: courseInfo._id,
-      // }).then((response) => {
-      //   console.log(response);
-      //   if (response === 'success') {
-      //     console.log('Message sent successfully.');
-      //   } else {
-      //     console.log('Failed to send message.');
-      //   }
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      // });;
-      new Promise((resolve, reject) => {
-        socket.emit("sendNotificationComment", {
-          senderName: userF,
-          senderFamily: userL,
-          senderId: userId,
-          receiverId: courseInfo.owner,
-          videoName: lesson.snippet.title,
-          videoId: lesson.snippet.resourceId.videoId,
-          courseid: courseInfo._id,
-        }, (response) => {
-          if (response === 'success') {
-            resolve(response);
-          } else {
-            reject(response);
-          }
-        });
-      })
-      .then((response) => {
-        console.log(response);
-        console.log('Message sent successfully.');
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log('Failed to send message.');
-      });
-      
+    
+    socket.emit("sendNotificationComment", {
+      senderName: userF,
+      senderFamily: userL,
+      senderId: userId,
+      receiverId: courseInfo.userid,
+      videoName: lesson.snippet.title,
+      videoId: lesson.snippet.resourceId.videoId,
+      courseid: courseInfo._id,
+    });
     setMyComment("");
     await axios
       .post(process.env.REACT_APP_BACKEND_URL + `/comments`, comment)
