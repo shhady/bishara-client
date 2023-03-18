@@ -78,7 +78,7 @@ export default function CommentYouTubeVideo({
   
   const handleSubmitReply = async (comment) => {
     if (!myReply) return;
-    socket.emit("sendNotificationComment", {
+    await socket.emit("sendNotificationComment", {
       senderName: userF,
       senderFamily: userL,
       senderId: userId,
@@ -146,7 +146,7 @@ export default function CommentYouTubeVideo({
     console.log(lesson.snippet.resourceId.videoId)
     console.log(courseInfo._id)
 
-    socket.emit("sendNotificationComment", {
+   await socket.emit("sendNotificationComment", {
       senderName: userF,
       senderFamily: userL,
       senderId: userId,
