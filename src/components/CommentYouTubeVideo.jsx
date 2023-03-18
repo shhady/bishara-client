@@ -152,6 +152,7 @@ export default function CommentYouTubeVideo({
       videoId: lesson.snippet.resourceId.videoId,
       courseid: courseInfo._id,
     } ,(response) => {
+      console.log(response)
       if (response === 'success') {
         console.log('Message sent successfully.');
       } else {
