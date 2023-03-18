@@ -71,17 +71,7 @@ export default function App() {
   }, [socket, userId]);
   return (
     <div>
-      <Suspense fallback={<div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          //   marginTop: "100px",
-        }}
-      >
-        <div className="loader"></div>
-      </div>}>
+      <Suspense>
         <BrowserRouter>
           <Header
             user={user}
