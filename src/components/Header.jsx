@@ -385,17 +385,22 @@ export default function Header({
                   }}
                 >
                   {user.teacher ? (
+                    <Link to="/profile"  style={{textDecoration:"none"}}>
                     <div>
                       {user.teacher.firstName}
                       {"  "}
                       {user.teacher.lastName}
+                      
                     </div>
+                    </Link>
                   ) : (
+                    <Link to="/profile" style={{textDecoration:"none"}}>
                     <div>
                       {user.user.firstName}
                       {"  "}
                       {user.user.lastName}
                     </div>
+                    </Link>
                   )}
                 </div>
               ) : null}
