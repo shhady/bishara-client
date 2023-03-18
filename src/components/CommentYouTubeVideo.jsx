@@ -143,7 +143,7 @@ export default function CommentYouTubeVideo({
       senderName: userF,
       senderFamily: userL,
       senderId: userId,
-      receiverId: courseInfo.userid,
+      receiverId: courseInfo.owner,
       videoName: lesson.snippet.title,
       videoId: lesson.snippet.resourceId.videoId,
       courseid: courseInfo._id,
