@@ -147,7 +147,7 @@ export default function Header({
       // setNotifyMessage((prev) => [...prev, data]);
       setNotifyMessage(true);
       setChatNotification("got a new message");
-      alert(data.userName)
+      alert(`${data.userName}:  ${data.text}`)
     });
   }, [socket]);
 
