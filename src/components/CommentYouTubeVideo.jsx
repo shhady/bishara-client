@@ -85,12 +85,12 @@ export default function CommentYouTubeVideo({
       senderName: userF,
       senderFamily: userL,
       senderId: userId,
-      receiverId: courseInfo.owner,
+      receiverId: comment.userid,
       videoName: lesson.snippet.title,
       videoId: lesson.snippet.resourceId.videoId,
       courseid: courseInfo._id,
     });
-    console.log("Sent")
+    console.log(comment);
     await axios
       .put(process.env.REACT_APP_BACKEND_URL + `/comments/${comment._id}`, {
         ...theReply,
