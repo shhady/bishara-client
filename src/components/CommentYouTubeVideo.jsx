@@ -141,7 +141,10 @@ export default function CommentYouTubeVideo({
   const handleSubmitComment = async (e) => {
     e.preventDefault()
     if (!myComment) return;
-    
+    if (!socket.connected) {
+      // Handle socket not connected
+      return console.log("Socket not connected");;
+    }
     socket.emit("sendNotificationComment", {
       senderName: userF,
       senderFamily: userL,
