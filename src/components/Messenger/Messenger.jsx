@@ -977,7 +977,7 @@ export default function Messenger({
                   }}
                 >
                   <img
-                    src={topPageImg}
+                    src={topPageImg.replace("http://", "https://")}
                     alt=""
                     style={{
                       width: "40px",
