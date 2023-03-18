@@ -231,7 +231,7 @@ export default function TeacherData({
         style={{
           backgroundImage: `url(${
             teacherInfo.cover
-              ? teacherInfo.cover
+              ? teacherInfo.cover.replace('http://', 'https://')
               : "https://images.unsplash.com/photo-1546058256-47154de4046c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHBpYW5vfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
           })`,
           backgroundPosition: "center",
