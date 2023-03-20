@@ -93,20 +93,20 @@ export default function PaidStudent({ user }) {
 
   return (
     <>
-    <div style={{ display: "flex",flexDirection:"column", justifyContent: "center", alignItems: "center",  margin:"150px auto 30px auto", border: "1px solid black", backgroundColor:"#c7c5c5"}}>
+    <div style={{ display: "flex",flexDirection:"column", justifyContent: "center", alignItems: "center",  margin:"100px auto 30px auto", border: "1px solid black", backgroundColor:"#c7c5c5"}}>
       <div>
         <h2>اضف ايميل الطالب</h2>
       </div>
-      <form onSubmit={showEmail} style={{ marginTop: "50px", display: "flex",flexDirection:"column", justifyContent: "space-around", alignItems: "center", height: "20vh"}}>
-        <label>البريد الالكتروني
-        <input ref={email} type="email" placeholder=" "  style={{width:"100%", height:"30px"}}/></label>
+      <form onSubmit={showEmail} style={{ marginTop: "20px", display: "flex",flexDirection:"column", justifyContent: "space-around", alignItems: "center", height: "22vh"}}>
+        البريد الالكتروني
+        <input ref={email} type="email" placeholder="example@email.com"  style={{width:"100%", height:"30px"}}/>
         {/* <input type='date' style={{width:"100%", height:"30px"}} /> */}
-        <label>مدة الاشتراك
-        <input type="number" placeholder='اشهر' onChange={(e)=> setpaidPeriod(e.target.value)} style={{width:"100%", height:"30px"}}/>
-         </label>
+        مدة الاشتراك 
+          <input type="number" placeholder='اشهر' onChange={(e)=> setpaidPeriod(e.target.value)} style={{width:"100%", height:"30px"}}/>
+         {/* </label> */}
        
         
-        <input type="submit" style={{width:"100%", backgroundColor:"#fee4b9", height:"30px"}}/>
+        <input type="submit" style={{width:"100%", backgroundColor:"#fee4b9", height:"30px", marginTop: "20px"}}/>
       </form>
     {showResponse ? (<>تمت الاضافة</>):(null)}
     {showُError ? (<>فشل في اضافة الطالب</>):(null)}
