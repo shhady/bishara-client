@@ -558,7 +558,7 @@ console.log(generalButtons)
                                   alignItems:"center",
                                   marginLeft: "20px",
                                   marginBottom:"10px"
-                                  
+                                  , cursor:"pointer"
                                 }}
                               >
                                 {" "}
@@ -571,7 +571,7 @@ console.log(generalButtons)
                                   minWidth: "80px",
                                   width:"fit-content"}}>{buttonD.nameOfProblem}</div>  
                               <div onClick={() => deleteButton(buttonD, practice)} style={{backgroundColor:"#fee4b9", width:"20px", textAlign:"center", borderBottomLeftRadius:"5px",
-                                  borderTopLeftRadius:"5px",}}>x</div>
+                                  borderTopLeftRadius:"5px", cursor:"pointer"}}>x</div>
                               </div>
                             );
                           })}
@@ -592,7 +592,7 @@ console.log(generalButtons)
                                   alignItems:"center",
                                   marginLeft: "20px",
                                   marginBottom:"10px"
-                                  
+                                  , cursor:"pointer"
                                 }}
                               >
                                 {" "}
@@ -605,7 +605,7 @@ console.log(generalButtons)
                                   minWidth: "80px",
                                   width:"fit-content"}}>{buttonD.nameOfProblem}</div>  
                               <div onClick={() => deleteButtonG(buttonD, practice)} style={{backgroundColor:"#373f4c", width:"20px", textAlign:"center", borderBottomLeftRadius:"5px",
-                                  borderTopLeftRadius:"5px", color:"white"}}>x</div>
+                                  borderTopLeftRadius:"5px", color:"white" , cursor:"pointer"}}>x</div>
                               </div>
                             );
                           })}

@@ -729,7 +729,7 @@ export default function Profile({ userProp }) {
                   style={{ height: "40px" }}>
                 انشئ دورة لمعلم اخر
               </div></Link>):(null)}
-              {user.teacher.role === "admin" || user.teacher.role === "admin" ? (<Link to="/GeneralButton" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons5"
+              {user.teacher.role === "admin" || user.teacher.role === "teacher" ? (<Link to="/GeneralButton" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons5"
                   style={{ height: "40px" }}>
 
 اضافة فيديو عام              </div></Link>):(null)}
