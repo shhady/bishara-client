@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import {Link} from "react-router-dom";
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
-
+  const [passwordChanged, setPasswordChanged] = useState(false);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.put(process.env.REACT_APP_BACKEND_URL +"/resetPassword", { email });
       console.log(response.data);
+      setPasswordChanged('changed')
     } catch (error) {
       console.error(error);
     }
     try {
       const response = await axios.put(process.env.REACT_APP_BACKEND_URL +"/teachers/resetPassword", { email });
       console.log(response.data);
+      setPasswordChanged('changed')
     } catch (error) {
       console.error(error);
     }
@@ -34,6 +37,11 @@ const ForgetPassword = () => {
       />
       <button type="submit" style={{marginTop:"30px"}}>ارسل كلمة مرور جديدة</button>
     </form>
+    <div>
+      
+      {passwordChanged === 'changed' ? <div style={{textAlign:"center"}}>تم ارسال كلمة مرور جديدة الى بريدك الالكتروني<br/><Link to="/auth" style={{color:"black", textDecoration:"none"}}><div style={{ width:"fit-content",margin:"auto",borderBottom:"1px solid black", textAlign:"center"}}>صفحة تسجيل الدخول</div></Link></div>: <></>}
+    
+    </div>
     </div>
   );
 };
