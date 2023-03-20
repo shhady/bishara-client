@@ -31,7 +31,7 @@ export default function PracticeReplies({ user, socket,  }) {
   const [teacherReplies, setTeacherReplies] = useState([]);
   const [autoReplies, setAutoReplies] = useState([]);
   // const [onlyForTeacher, setOnlyForTeacher] = useState([]);
-  const [openButtons, setOpenButtons] = useState(false);
+  const [openButtons, setOpenButtons] = useState(true);
   const [showButtons, setShowButtons] = useState([]);
   const [poster, setPoster] = useState("");
   const [replyId, setReplyId] = useState("");
@@ -39,7 +39,7 @@ export default function PracticeReplies({ user, socket,  }) {
   const [moreThan, setMoreThan] = useState(null);
   const [recordUrl, setRecordUrl] = useState('')
   // const fileInput = useRef(null);
-
+  const [generalButtons, setGeneralButtons] = useState([])
   const unique_id = uuid();
     const {id} = useParams()
   // const navigate = useHistory();
@@ -178,15 +178,25 @@ export default function PracticeReplies({ user, socket,  }) {
   };
 
   // Filter buttons data by unique link
-  const getPracticeUnique = (practice) => {
+  useEffect(() => {
     const newBU = autoReplies?.filter(
       (filteredPractices) =>
-        filteredPractices.uniqueLink === practice.uniqueLink
+        filteredPractices.uniqueLink === specificTeacherPractice[0]?.uniqueLink
     );
     setOpenButtons(true);
     setShowButtons(newBU);
-  };
-
+    // console.log(specificTeacherPractice[0].uniqueLink)
+  },[autoReplies]);
+  useEffect(() => {
+    const generalBU = autoReplies?.filter(
+      (filteredPractices) =>
+        filteredPractices.uniqueLink === "general"
+    );
+    setOpenButtons(true);
+    setGeneralButtons(generalBU);
+  },[autoReplies]);
+   
+  
   const deleteButton = async(buttonD, practice)=>{
 
     await axios.delete(process.env.REACT_APP_BACKEND_URL + `/replies/${buttonD._id}`)
@@ -194,7 +204,13 @@ export default function PracticeReplies({ user, socket,  }) {
       setShowButtons(removeBtn)
    
   }
- 
+  const deleteButtonG = async(buttonD)=>{
+    
+    await axios.delete(process.env.REACT_APP_BACKEND_URL + `/replies/${buttonD._id}`)
+    const removeBtnG = generalButtons.filter((b)=>b._id !== buttonD._id)
+      setShowButtons(removeBtnG)
+    
+  }
   // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
@@ -453,7 +469,8 @@ export default function PracticeReplies({ user, socket,  }) {
         <div
           style={{ padding: "10px" }}
           key={practice._id}
-          onClick={() => getPracticeUnique(practice)}
+          // onClick={getPracticeUnique}
+            // getGeneralButtons(practice)}}
         >
           <div>
             الطالب:
@@ -526,9 +543,9 @@ export default function PracticeReplies({ user, socket,  }) {
             </div>
             </div>
             <div>
-                  {openButtons ? (
+                  {/* {openButtons ? ( */}
                     <>
-                      {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
+                  
                         <>
                           {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
                         <div style={{display:"flex", width:"fit-content", marginBottom:"10px"}}>
@@ -551,11 +568,11 @@ export default function PracticeReplies({ user, socket,  }) {
                                 style={{
                                   borderBottomRightRadius:"5px",
                                   borderTopRightRadius:"5px",
-                                  backgroundColor: "black",
+                                  backgroundColor: "#373f4c",
                                   color: "white",
                                   minWidth: "80px",
                                   width:"fit-content"}}>{buttonD.nameOfProblem}</div>  
-                              <div onClick={() => deleteButton(buttonD, practice)} style={{backgroundColor:"red", width:"20px", textAlign:"center", borderBottomLeftRadius:"5px",
+                              <div onClick={() => deleteButton(buttonD, practice)} style={{backgroundColor:"#fee4b9", width:"20px", textAlign:"center", borderBottomLeftRadius:"5px",
                                   borderTopLeftRadius:"5px",}}>x</div>
                               </div>
                             );
@@ -563,9 +580,39 @@ export default function PracticeReplies({ user, socket,  }) {
                         </div>
                       ) : null}
                         </>
-                      ) : null}
+                      
+                      <div style={{display:"flex", width:"fit-content", marginBottom:"10px", flexWrap:"wrap", maxWidth:"98%"}}>
+                          {generalButtons.map((buttonD, i) => {
+                            return (
+                              <div
+                                key={i}
+                                style={{
+                                  width:"fit-content",
+                                  display:"flex",
+                                  justifyContent:"center",
+                                  alignItems:"center",
+                                  marginLeft: "20px",
+                                  marginBottom:"10px"
+                                  
+                                }}
+                              >
+                                {" "}
+                              <div onClick={() => buttonDetails(buttonD, practice)}
+                                style={{
+                                  borderBottomRightRadius:"5px",
+                                  borderTopRightRadius:"5px",
+                                  backgroundColor: "#fee4b9",
+                                  color: "black",
+                                  minWidth: "80px",
+                                  width:"fit-content"}}>{buttonD.nameOfProblem}</div>  
+                              <div onClick={() => deleteButtonG(buttonD, practice)} style={{backgroundColor:"#373f4c", width:"20px", textAlign:"center", borderBottomLeftRadius:"5px",
+                                  borderTopLeftRadius:"5px", color:"white"}}>x</div>
+                              </div>
+                            );
+                          })}
+                        </div>
                     </>
-                  ) : null}
+                  {/* ) : null} */}
                 </div>
             <div className="SpecificReplies">
             

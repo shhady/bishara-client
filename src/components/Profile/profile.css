@@ -1,6 +1,6 @@
 .profileAllButtons {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     width: 60%;
     margin: 15px auto;
@@ -37,7 +37,8 @@
 .profileButtons1,
 .profileButtons2,
 .profileButtons3,
-.profileButtons4 {
+.profileButtons4,
+.profileButtons5 {
     text-align: center;
     cursor: pointer;
     font-weight: bold;
@@ -46,7 +47,8 @@
 .profileButtons1:hover,
 .profileButtons2:hover,
 .profileButtons3:hover,
-.profileButtons4:hover {
+.profileButtons4:hover,
+.profileButtons5:hover {
     border-bottom: 1px solid rgb(25, 24, 24);
     transition: all 0.5s;
     color: black

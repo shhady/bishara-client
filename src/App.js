@@ -36,6 +36,7 @@ const PracticeReplies = React.lazy(() =>
 
 const CreateCourseForTeacher = React.lazy(() => import("./components/Course/CreateCourseForTeacher"));
 const StudentMyPractice = React.lazy(() => import("./pages/StudentMyPractice"));
+const GeneralButton = React.lazy(() => import("./pages/GeneralButton"));
 const Subscribe = React.lazy(() => import("./components/Subscribe"));
 
 export default function App() {
@@ -100,7 +101,7 @@ export default function App() {
 
           <Route path="/forgetpassword" exact element={ <ForgetPassword />}/>
            
-        
+          <Route path="/GeneralButton" exact element={ <GeneralButton user={user} />}/>
           
           <Route path="/qa" element={ <QA user={user}/>}/>
            
