@@ -10,6 +10,7 @@ import {
   faVideo
 } from "@fortawesome/free-solid-svg-icons";
 import AudioRecord from "./AudioRecord";
+import CommentOnVideo from "./CommentOnVideo";
 export default function PracticeReplies({ user, socket }) {
   // State variables
   const [theUser, setTheUser] = useState(
@@ -752,8 +753,8 @@ console.log(generalButtons)
                         border: "1px solid black"
                       }}>
             <div> تعليق المعلم:</div>
-
-            <div>
+            <CommentOnVideo practice={practice} socket={socket}/>
+            {/* <div>
               {showReply && practice.reply ? (
                 <>
                   {practice.reply}{" "}
@@ -824,7 +825,7 @@ console.log(generalButtons)
                   </div>
                 </>
               ) : null}
-            </div>
+            </div> */}
             </div>
             </div>
            

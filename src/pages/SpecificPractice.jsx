@@ -7,14 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashCan,
   faEllipsisVertical,
-  faVideo
+  faVideo,
+  faPen
 } from "@fortawesome/free-solid-svg-icons";
-import AudioRecord from "./AudioRecord";
+import AudioRecord from "../components/AudioRecord";
+import CommentOnVideo from "../components/CommentOnVideo";
 export default function PracticeReplies({ user, socket,  }) {
   // State variables
-  const [theUser, setTheUser] = useState(
-    JSON.parse(localStorage.getItem("profile"))
-  );
+  const theUser = JSON.parse(localStorage.getItem("profile"))
   const [teacherPractices, setTeacherPractices] = useState([]);
   const [specificTeacherPractice, setSpecificTeacherPractice] = useState([])
   const [userId, setUserId] = useState(null);
@@ -40,6 +40,7 @@ export default function PracticeReplies({ user, socket,  }) {
   const [recordUrl, setRecordUrl] = useState('')
   // const fileInput = useRef(null);
   const [generalButtons, setGeneralButtons] = useState([])
+  const [showInputToReply, setShowInputToReply] = useState(false);
   const unique_id = uuid();
     const {id} = useParams()
   // const navigate = useHistory();
@@ -175,6 +176,7 @@ export default function PracticeReplies({ user, socket,  }) {
     setShowReply(myReply);
     setPracticeId(null);
     setDoneAddingComment(!doneAddingComment);
+    setShowInputToReply(!showInputToReply);
   };
 
   // Filter buttons data by unique link
@@ -543,12 +545,10 @@ export default function PracticeReplies({ user, socket,  }) {
             </div>
             </div>
             <div>
-                  {/* {openButtons ? ( */}
                     <>
-                  
                         <>
                           {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
-                        <div style={{display:"flex", width:"fit-content", marginBottom:"10px"}}>
+                        <div style={{display:"flex", width:"fit-content", marginBottom:"10px", flexWrap:"wrap"}}>
                           {showButtons.map((buttonD, i) => {
                             return (
                               <div
@@ -559,7 +559,7 @@ export default function PracticeReplies({ user, socket,  }) {
                                   justifyContent:"center",
                                   alignItems:"center",
                                   marginLeft: "20px",
-                                 
+                                  marginBottom:"10px"
                                   
                                 }}
                               >
@@ -626,7 +626,7 @@ export default function PracticeReplies({ user, socket,  }) {
               <>
                 
                 <div>
-                  {/* <AudioRecorder/> */}
+                  
                   <div>تعليق عن طريق فيديو</div>
                    
                 </div>
@@ -663,23 +663,10 @@ export default function PracticeReplies({ user, socket,  }) {
                         setVideo(null);
                         setMoreThan(null);
                       }}
-                      // onClick={() => setUrl(null)}
+                    
                     />
                   </label>
-                    {/* <input
-                      type="file"
-                      // ref={fileInput}
-                      onChange={(e) => {
-                        e.target.files[0].size > 104857500
-                          ? setMoreThan("more than 100mb")
-                          : setVideo(e.target.files[0]);
-                      }}
-                      onClick={() => {
-                        setUrl(null);
-                        setVideo(null);
-                        setMoreThan(null);
-                      }}
-                    /> */}
+                   
                   </div>
                   </div>
                   {moreThan && (
@@ -768,15 +755,17 @@ export default function PracticeReplies({ user, socket,  }) {
                         border: "1px solid black", padding:"10px"
                       }}>
             <div> تعليق المعلم:</div>
-
-            <div>
+                      <CommentOnVideo practice={practice} setPracticeId={setPracticeId}  socket={socket}/>
+            {/* <div>
               {showReply && practice.reply ? (
                 <>
                   {practice.reply}{" "}
                   <button
                     onClick={() => {
-                      // setShowLastReply(false);
+                      setShowReply(false);
                       setPracticeId(practice._id);
+                      setShowInputToReply(true)
+                      console.log("clicked")
                     }}
                   >
                     تعديل
@@ -784,10 +773,8 @@ export default function PracticeReplies({ user, socket,  }) {
                 </>
               ) : (
                 <>
-                  {/* {showReply}{" "} */}
-                  <div>
-                    {" "}
-                    <div
+                {showInputToReply ?  <>
+                  <div
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -808,41 +795,19 @@ export default function PracticeReplies({ user, socket,  }) {
                         تثبيت
                       </button>
                     </div>
-                  </div>
+                </> : <>
+                <div style={{marginRight:"10px",backgroundColor:"#ebebeb", width:"40px", height:"40px", borderRadius:"50%", display:"flex", justifyContent:"center",alignItems:"center"}} onClick={()=> {setShowInputToReply(!showInputToReply)
+                setPracticeId(practice._id)}}>
+                <FontAwesomeIcon icon={faPen} />
+                </div>
+                </>}
                 </>
               )}{" "}
-              {practiceId === practice._id && !url ? (
-                <>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <textarea
-                      name="reply"
-                      onChange={handleReply}
-                      placeholder="Reply"
-                      value={myReply}
-                      style={{
-                        height: "70%",
-                        width: "100%",
-                        marginBottom: "10px",
-                      }}
-                    />
-                    <button onClick={() => addTeacherReply(practice)}>
-                      تثبيت
-                    </button>
-                  </div>
-                </>
-              ) : null}
+             
+            </div> */}
             </div>
             </div>
-            </div>
-            {/* <div>{practice.reply}</div> */}
-          
         </div>
-        // </div>
       );
     });
   };

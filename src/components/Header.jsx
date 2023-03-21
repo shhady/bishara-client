@@ -905,7 +905,7 @@ export default function Header({
               </Link>
             )}
 
-            <Link to="" style={{ textDecoration: "none" }}>
+            <Link to="/" style={{ textDecoration: "none" }}>
               <div
                 className="headerpiano"
                 onMouseOver={() => {

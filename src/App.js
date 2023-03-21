@@ -26,7 +26,7 @@ const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
 const TeacherData = React.lazy(() => import("./components/TeacherData"));
 const Lessons = React.lazy(() => import("./components/Lessons"));
 const Lesson = React.lazy(() => import("./components/Lesson"));
-const SpecificPractice = React.lazy(() => import("./components/SpecificPractice"));
+const SpecificPractice = React.lazy(() => import("./pages/SpecificPractice"));
 const PaidStudent = React.lazy(() => import("./components/PaidStudent"));
 const ForgetPassword = React.lazy(() => import("./components/ForgetPassword"));
 const Notifications = React.lazy(() => import("./components/Notifications"));
@@ -37,7 +37,7 @@ const PracticeReplies = React.lazy(() =>
 const CreateCourseForTeacher = React.lazy(() => import("./components/Course/CreateCourseForTeacher"));
 const StudentMyPractice = React.lazy(() => import("./pages/StudentMyPractice"));
 const GeneralButton = React.lazy(() => import("./pages/GeneralButton"));
-const Subscribe = React.lazy(() => import("./components/Subscribe"));
+const Subscribe = React.lazy(() => import("./pages/Subscribe"));
 
 export default function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
