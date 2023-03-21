@@ -117,6 +117,14 @@
         width: 80%;
         margin: 15px auto;
     }
+    .profileAllButtonsUser {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        width: 80%;
+        margin: 15px auto;
+    }
+
 
 }
 
@@ -176,6 +184,10 @@
     }
 
     .profileAllButtons {
+        display: grid;
+        grid-template-columns: 1fr
+    }
+    .profileAllButtonsUser {
         display: grid;
         grid-template-columns: 1fr
     }
