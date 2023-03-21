@@ -895,7 +895,7 @@ export default function Profile({ userProp }) {
                 </h2>
                 
               </div>
-              <div className="profileAllButtons">
+              <div className="profileAllButtonsUser">
                   {showPractice ? (
                     <div
                       onClick={() => {

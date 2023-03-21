@@ -5,7 +5,13 @@
     width: 60%;
     margin: 15px auto;
 }
-
+.profileAllButtonsUser {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 60%;
+    margin: 15px auto;
+}
 .audioProfile {
     display: grid;
     grid-template-columns: 1fr 1fr;
