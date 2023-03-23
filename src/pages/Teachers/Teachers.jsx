@@ -47,7 +47,7 @@ export default function Teachers({
     return teachers.map((teacher, i) => {
       return (
        
-        <Link to="/TeacherData" style={{ textDecoration: "none" }} key={i}>
+        <Link to="/Teacher" style={{ textDecoration: "none" }} key={i}>
           <div
             className="teacher"
             key={i}

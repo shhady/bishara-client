@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Teachers.css";
+import "../pages/Teachers/Teachers.css";
 
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 export default function TestYoutube({ listId, course }) {

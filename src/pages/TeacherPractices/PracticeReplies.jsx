@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./StudentPractice.css";
-import {  useParams} from "react-router-dom";
+import "../../components/StudentPractice.css";
+// import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashCan,
   faEllipsisVertical,
-  faVideo,
-  faPen
+  faVideo
 } from "@fortawesome/free-solid-svg-icons";
-import AudioRecord from "../components/AudioRecord";
-import CommentOnVideo from "../components/CommentOnVideo";
-export default function PracticeReplies({ user, socket,  }) {
+import AudioRecord from "../../components/AudioRecord";
+import CommentOnVideo from "../../components/CommentOnVideo";
+export default function PracticeReplies({ user, socket }) {
   // State variables
-  const theUser = JSON.parse(localStorage.getItem("profile"))
+  const theUser=JSON.parse(localStorage.getItem("profile"))
   const [teacherPractices, setTeacherPractices] = useState([]);
-  const [specificTeacherPractice, setSpecificTeacherPractice] = useState([])
   const [userId, setUserId] = useState(null);
   const [reply, setReply] = useState("");
   const [myReply, setMyReply] = useState("");
@@ -30,24 +28,19 @@ export default function PracticeReplies({ user, socket,  }) {
   const [fileUpload, setFileUpload] = useState(null);
   const [teacherReplies, setTeacherReplies] = useState([]);
   const [autoReplies, setAutoReplies] = useState([]);
-  // const [onlyForTeacher, setOnlyForTeacher] = useState([]);
-  const [openButtons, setOpenButtons] = useState(true);
+  const [openButtons, setOpenButtons] = useState(false);
   const [showButtons, setShowButtons] = useState([]);
   const [poster, setPoster] = useState("");
   const [replyId, setReplyId] = useState("");
-  const [replyIdtoDelete, setReplyIdtoDelete] = useState("");
   const [moreThan, setMoreThan] = useState(null);
-  const [recordUrl, setRecordUrl] = useState('')
-  // const fileInput = useRef(null);
-  const [generalButtons, setGeneralButtons] = useState([])
-  const [showInputToReply, setShowInputToReply] = useState(false);
+  const [recordUrl, setRecordUrl] = useState('');
+  const [generalButtons, setGeneralButtons] = useState(false)
+  
+console.log(generalButtons)
   const unique_id = uuid();
-    const {id} = useParams()
-  // const navigate = useHistory();
-  // window.onpopstate = () => {
-  //   navigate("/profile");
-  // };
-
+  const userF = user.user ? user.user.firstName : user.teacher.firstName;
+  const userL = user.user ? user.user.lastName : user.teacher.lastName;
+    
   useEffect(() => {
     function MyVideo() {
       if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
@@ -64,8 +57,6 @@ export default function PracticeReplies({ user, socket,  }) {
     const userid = theUser.user ? theUser.user._id : theUser.teacher._id;
     setUserId(userid);
   }, []);
-  const userF = user.user ? user.user.firstName : user.teacher.firstName;
-  const userL = user.user ? user.user.lastName : user.teacher.lastName;
   useEffect(() => {
     const userid = user.user ? user.user._id : user.teacher._id;
     setUserId(userid);
@@ -81,13 +72,13 @@ export default function PracticeReplies({ user, socket,  }) {
     fetchReplies();
   }, [userId]);
   // Filter replies data by teacher's user ID
-  useEffect(() => {
-    const fetch = async ()=>{
-      const res = await axios.get(process.env.REACT_APP_BACKEND_URL + `/practice/${id}`)
-      setTeacherPractices([res.data]);
-    }
-    fetch()
-  }, [id]);
+  // useEffect(() => {
+  //   const filterByTeacher = autoReplies.filter(
+  //     (teacher) => teacher.teacherId === userId
+  //   );
+
+  //   setOnlyForTeacher(filterByTeacher);
+  // }, [autoReplies]);
 
   // Fetch practices data when user ID or doneAddingComment changes
   useEffect(() => {
@@ -110,9 +101,6 @@ export default function PracticeReplies({ user, socket,  }) {
       const res = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
       );
-      // const filterData = res.data.filter(
-      //   (practice) => practice.teacherId === userId
-      // );
       setTeacherReplies(res);
     };
     fetchReplies();
@@ -135,6 +123,12 @@ export default function PracticeReplies({ user, socket,  }) {
 
   // Add teacher reply to practice
   const addTeacherReply = (practice) => {
+    console.log(practice);
+    console.log(practice.ownerId);
+    console.log(practice.video);
+    console.log(practice.uniqueLink);
+    console.log(practice.courseId);
+   
     socket.emit("sendNotificationComment", {
       senderName: userF,
       senderFamily: userL,
@@ -176,50 +170,34 @@ export default function PracticeReplies({ user, socket,  }) {
     setShowReply(myReply);
     setPracticeId(null);
     setDoneAddingComment(!doneAddingComment);
-    setShowInputToReply(!showInputToReply);
   };
 
   // Filter buttons data by unique link
-  useEffect(() => {
+  const getPracticeUnique = (practice) => {
     const newBU = autoReplies?.filter(
       (filteredPractices) =>
-        filteredPractices.uniqueLink === specificTeacherPractice[0]?.uniqueLink
+        filteredPractices.uniqueLink === practice.uniqueLink
     );
     setOpenButtons(true);
     setShowButtons(newBU);
-    // console.log(specificTeacherPractice[0].uniqueLink)
-  },[autoReplies]);
-  useEffect(() => {
+  };
+
+  const getGeneralButtons = (practice) => {
     const generalBU = autoReplies?.filter(
       (filteredPractices) =>
         filteredPractices.uniqueLink === "general"
     );
     setOpenButtons(true);
     setGeneralButtons(generalBU);
-  },[autoReplies]);
-   
-  
-  const deleteButton = async(buttonD, practice)=>{
-
-    await axios.delete(process.env.REACT_APP_BACKEND_URL + `/replies/${buttonD._id}`)
-    const removeBtn = showButtons.filter((b)=>b._id !== buttonD._id)
-      setShowButtons(removeBtn)
-   
-  }
-  const deleteButtonG = async(buttonD)=>{
-    
-    await axios.delete(process.env.REACT_APP_BACKEND_URL + `/replies/${buttonD._id}`)
-    const removeBtnG = generalButtons.filter((b)=>b._id !== buttonD._id)
-      setShowButtons(removeBtnG)
-    
-  }
+  };
   // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
+    console.log(practice)
     socket.emit("sendNotificationComment", {
-      senderName: userF,
-      senderFamily: userL,
-      senderId: userId,
+      senderName: practice.teacherFirstName,
+      senderFamily: practice.teacherLastName,
+      senderId: practice.teacherId,
       receiverId: practice.ownerId,
       videoName: practice.video,
       videoId: practice.uniqueLink,
@@ -285,14 +263,28 @@ export default function PracticeReplies({ user, socket,  }) {
       });
   };
 
+  const deleteButton = async(buttonD)=>{
+    
+    await axios.delete(process.env.REACT_APP_BACKEND_URL + `/replies/${buttonD._id}`)
+    const removeBtn = showButtons.filter((b)=>b._id !== buttonD._id)
+      setShowButtons(removeBtn)
+    
+  }
+  const deleteButtonG = async(buttonD)=>{
+    
+    await axios.delete(process.env.REACT_APP_BACKEND_URL + `/replies/${buttonD._id}`)
+    const removeBtnG = generalButtons.filter((b)=>b._id !== buttonD._id)
+      setShowButtons(removeBtnG)
+    
+  }
   // Add teacher video reply to practice
   const addTeacherVideoReply = (practice) => {
-    console.log(practice)
     if (practice.videoReply.length > 3) return console.log("no more");
+    console.log(practice)
     socket.emit("sendNotificationComment", {
-      senderName: userF,
-      senderFamily: userL,
-      senderId: userId,
+      senderName: practice.teacherFirstName,
+      senderFamily: practice.teacherLastName,
+      senderId: practice.teacherId,
       receiverId: practice.ownerId,
       videoName: practice.video,
       videoId: practice.uniqueLink,
@@ -314,9 +306,6 @@ export default function PracticeReplies({ user, socket,  }) {
           const res = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
           );
-          // const filterData = res.data.filter(
-          //   (practice) => practice.teacherId === userId
-          // );
           setTeacherPractices(res.data);
         })
         .then(async () => {
@@ -355,39 +344,6 @@ export default function PracticeReplies({ user, socket,  }) {
     setNameOfProblem("");
     setVideo(null);
   };
-
-  const showRec =(practice)=>{
-    return practice.RecordReply?.map((rec)=>{
-      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem", padding:"3px", border: "1px solid black", borderRadius:"20px"}}>
-      <div style={{margin:"10px", cursor:"pointer"}} onClick={() => handleDeleteRecording(rec,practice, reply)}> <FontAwesomeIcon icon={faTrashCan} /></div>
-        <audio 
-        style={{width:'100%'}}
-      controls
-      poster={poster}
-    >
-      <source src={rec.RecordingReply.replace('http://', 'https://')} type="audio/mp4" />
-    </audio>
-      </div>
-    })
-  }
-  const handleDeleteRecording = async (rec, practice,reply) => {
-    const replyId = rec.replyId
-    await axios
-      .put(
-        process.env.REACT_APP_BACKEND_URL +
-          `/practice/deleteRecordReply/${practice._id}`,
-        {
-          replyId:rec.replyId,
-        }
-      )
-      .then(setTeacherPractices([]))
-      .then(async () => {
-        const res = await axios.get(
-          process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
-        );
-        setTeacherPractices(res.data);
-      });
-  };
   // Render video replies
   const renderVideoReplies = (replies, practice) => {
     return replies.map((reply, i) => {
@@ -410,10 +366,6 @@ export default function PracticeReplies({ user, socket,  }) {
               top: "0",
               left: "20px",
               zIndex: 2,
-            }}
-            onClick={() => {
-              // setReplyId(reply.replyId);
-              // handleDeleteReply(practice, reply);
             }}
           >
             {reply.replyId === replyId ? (
@@ -439,8 +391,20 @@ export default function PracticeReplies({ user, socket,  }) {
       );
     });
   };
-
-  
+  const showRec =(practice)=>{
+    return practice.RecordReply?.map((rec)=>{
+      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem", padding:"3px", border: "1px solid black", borderRadius:"20px"}}>
+      <div style={{margin:"10px", cursor:"pointer"}} onClick={() => handleDeleteRecording(rec,practice, reply)}> <FontAwesomeIcon icon={faTrashCan} /></div>
+        <audio 
+        style={{width:'100%'}}
+      controls
+      poster={poster}
+    >
+      <source src={rec.RecordingReply.replace('http://', 'https://')} type="audio/mp4" />
+    </audio>
+      </div>
+    })
+  }
   const handleDeleteReply = async (practice, reply) => {
     
     //   .then(console.log(replyToDelete))
@@ -460,21 +424,40 @@ export default function PracticeReplies({ user, socket,  }) {
         setTeacherPractices(res.data);
       });
   };
-  useEffect(()=>{
-    const res = teacherPractices.filter((practice)=> practice._id ===id ) 
-   setSpecificTeacherPractice(res)
-  },[teacherPractices])
+  const handleDeleteRecording = async (rec, practice,reply) => {
+    const replyId = rec.replyId
+      // .then(console.log(replyToDelete))
+    await axios
+      .put(
+        process.env.REACT_APP_BACKEND_URL +
+          `/practice/deleteRecordReply/${practice._id}`,
+        {
+          replyId:rec.replyId,
+        }
+      )
+      .then(setTeacherPractices([]))
+      .then(async () => {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
+        );
+        setTeacherPractices(res.data);
+      });
+  };
   // Render showData component
   const showData = () => {
-    return specificTeacherPractice?.map((practice) => {
+    return teacherPractices?.map((practice, i) => {
       return (
         <div
-          style={{ padding: "10px" }}
+          style={{ 
+            height:"fit-content",
+            borderBottom: "1px solid #e1e1e1", padding: "10px",
+          backgroundColor: i%2===0 ? "#c7c5c5":"white"
+        }}
           key={practice._id}
-          // onClick={getPracticeUnique}
-            // getGeneralButtons(practice)}}
+          onClick={() => {getPracticeUnique(practice);
+            getGeneralButtons(practice)}}
         >
-          <div>
+         <div>
             الطالب:
             {practice.studentFirstName} {practice.studentLastName}
           </div>
@@ -488,17 +471,18 @@ export default function PracticeReplies({ user, socket,  }) {
             {practice.video}
           </div>
           
-          <div>
-            <div
-              className="videoAndReplies"
-            >
-              <div className="StudentVideo" style={{ 
-                
+          <div style={{
+               marginBottom:"10px" 
+              }}>
+            <div className="videoAndReplies">
+              <div className="StudentVideo" style={{
+                height:"100%",
                 display: "flex",
                 // flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor:"#fee4b9",marginBottom:"10px"}}>
+                backgroundColor:"#fee4b9",
+                marginBottom:"10px"}}>
                 <video
                  key={practice.myPractice}
                  controls
@@ -511,14 +495,17 @@ export default function PracticeReplies({ user, socket,  }) {
                    minHeight: "230px",
                    maxHeight: "230px",
                    border: "1px solid #e1e1e1",
-                   marginTop:"10px",marginBottom:"10px"
+                   marginTop:"10px",
+                   marginBottom:"10px"
                  }}
                 
                 >
                   <source src={practice.myPractice.replace('http://', 'https://')} type="video/mp4" />
                 </video>
               </div>
-              <div className="replyForVideo">
+              <div
+               className="replyForVideo"
+               >
               <div>
                 {practice.videoReply ? (
                   <div
@@ -528,6 +515,7 @@ export default function PracticeReplies({ user, socket,  }) {
                       gap: ".5rem",
                       height: "97%",
                       maxHeight: "250px",
+                     
                       // overflow: "hidden",
                     }}
                   >
@@ -545,10 +533,12 @@ export default function PracticeReplies({ user, socket,  }) {
             </div>
             </div>
             <div>
+                  {openButtons ? (
                     <>
+                      {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
                         <>
-                          {showButtons[0]?.uniqueLink === practice.uniqueLink ? (
-                        <div style={{display:"flex", width:"fit-content", marginBottom:"10px", flexWrap:"wrap"}}>
+                       
+                        <div style={{display:"flex", width:"fit-content", marginBottom:"10px", flexWrap:"wrap", maxWidth:"98%"}}>
                           {showButtons.map((buttonD, i) => {
                             return (
                               <div
@@ -560,7 +550,7 @@ export default function PracticeReplies({ user, socket,  }) {
                                   alignItems:"center",
                                   marginLeft: "20px",
                                   marginBottom:"10px"
-                                  
+                                  , cursor:"pointer"
                                 }}
                               >
                                 {" "}
@@ -573,15 +563,16 @@ export default function PracticeReplies({ user, socket,  }) {
                                   minWidth: "80px",
                                   width:"fit-content"}}>{buttonD.nameOfProblem}</div>  
                               <div onClick={() => deleteButton(buttonD, practice)} style={{backgroundColor:"#fee4b9", width:"20px", textAlign:"center", borderBottomLeftRadius:"5px",
-                                  borderTopLeftRadius:"5px",}}>x</div>
+                                  borderTopLeftRadius:"5px", cursor:"pointer"}}>x</div>
                               </div>
                             );
                           })}
                         </div>
-                      ) : null}
+                       
                         </>
-                      
-                      <div style={{display:"flex", width:"fit-content", marginBottom:"10px", flexWrap:"wrap", maxWidth:"98%"}}>
+                      ) : null}
+                    
+                        <div style={{display:"flex", width:"fit-content", marginBottom:"10px", flexWrap:"wrap", maxWidth:"98%"}}>
                           {generalButtons.map((buttonD, i) => {
                             return (
                               <div
@@ -593,7 +584,7 @@ export default function PracticeReplies({ user, socket,  }) {
                                   alignItems:"center",
                                   marginLeft: "20px",
                                   marginBottom:"10px"
-                                  
+                                  , cursor:"pointer"
                                 }}
                               >
                                 {" "}
@@ -606,13 +597,13 @@ export default function PracticeReplies({ user, socket,  }) {
                                   minWidth: "80px",
                                   width:"fit-content"}}>{buttonD.nameOfProblem}</div>  
                               <div onClick={() => deleteButtonG(buttonD, practice)} style={{backgroundColor:"#373f4c", width:"20px", textAlign:"center", borderBottomLeftRadius:"5px",
-                                  borderTopLeftRadius:"5px", color:"white"}}>x</div>
+                                  borderTopLeftRadius:"5px", color:"white" , cursor:"pointer"}}>x</div>
                               </div>
                             );
                           })}
                         </div>
                     </>
-                  {/* ) : null} */}
+                  ) : null}
                 </div>
             <div className="SpecificReplies">
             
@@ -624,28 +615,29 @@ export default function PracticeReplies({ user, socket,  }) {
                         border: "1px solid black", padding:"10px"
                       }}>
               <>
-                
+              <div style={{}}>
                 <div>
                   
                   <div>تعليق عن طريق فيديو</div>
-                   
+                      
+                  
                 </div>
+                
                 <div className="allvideoreply" style={{
                         display: "flex",
                         flexDirection:"column",
                         justifyContent: "center",
                         alignItems: "center",
                       }}>
-                        <div style={{display: "flex"}}>
-                        <div>
-                  <input
-                 
+                        <div style={{display: "flex", justifyContent:"center",alignItems:"center"}}>
+                        <input
+                        style={{height: "100%"}}
                     type="text"
                     placeholder="عنوان الرد"
                     onChange={(e) => setNameOfProblem(e.target.value)}
+                    required
                   />
-                  </div>
-                        
+                       
                   <div style={{marginRight:"10px",backgroundColor:"#ebebeb", width:"40px", height:"40px", borderRadius:"50%", display:"flex", justifyContent:"center",alignItems:"center"}}>
                   <label for="inputTag">
                     <FontAwesomeIcon icon={faVideo} />
@@ -663,10 +655,9 @@ export default function PracticeReplies({ user, socket,  }) {
                         setVideo(null);
                         setMoreThan(null);
                       }}
-                    
                     />
                   </label>
-                   
+                 
                   </div>
                   </div>
                   {moreThan && (
@@ -699,7 +690,7 @@ export default function PracticeReplies({ user, socket,  }) {
                             height: "fit-content",
                           }}
                         >
-                          {/* <p>{fileUpload.fileName}</p> */}
+                       
                           <p>{fileUpload.percentComplete}%</p>
                         </div>
                       )}
@@ -731,9 +722,7 @@ export default function PracticeReplies({ user, socket,  }) {
                     </div>
                   </div>
                 </div>
-                {/* <div></div> */}
-
-                {/* </div> */}
+                </div>
               </>
             </div>
        
@@ -745,76 +734,32 @@ export default function PracticeReplies({ user, socket,  }) {
                         border: "1px solid black", padding:"10px"
                       }}>
               <div>رساله صوتيه</div>
-                <AudioRecord unique_id={unique_id} userId={userId} setTeacherPractices={setTeacherPractices} setRecordUrl={setRecordUrl} practice={practice}/>
+                <AudioRecord unique_id={unique_id} userId={userId} userF={userF} userL={userL} socket={socket} setTeacherPractices={setTeacherPractices} setRecordUrl={setRecordUrl} practice={practice}/>
               </div>
               <div style={{
                         display: "flex",
                         flexDirection:"column",
                         justifyContent: "center",
                         alignItems: "center",
-                        border: "1px solid black", padding:"10px"
+                        border: "1px solid black"
                       }}>
             <div> تعليق المعلم:</div>
-                      <CommentOnVideo practice={practice} setPracticeId={setPracticeId}  socket={socket}/>
-            {/* <div>
-              {showReply && practice.reply ? (
-                <>
-                  {practice.reply}{" "}
-                  <button
-                    onClick={() => {
-                      setShowReply(false);
-                      setPracticeId(practice._id);
-                      setShowInputToReply(true)
-                      console.log("clicked")
-                    }}
-                  >
-                    تعديل
-                  </button>
-                </>
-              ) : (
-                <>
-                {showInputToReply ?  <>
-                  <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <textarea
-                        name="reply"
-                        onChange={handleReply}
-                        placeholder="Reply"
-                        value={myReply}
-                        style={{
-                          height: "70%",
-                          width: "100%",
-                          marginBottom: "10px",
-                        }}
-                      />
-                      <button onClick={() => addTeacherReply(practice)}>
-                        تثبيت
-                      </button>
-                    </div>
-                </> : <>
-                <div style={{marginRight:"10px",backgroundColor:"#ebebeb", width:"40px", height:"40px", borderRadius:"50%", display:"flex", justifyContent:"center",alignItems:"center"}} onClick={()=> {setShowInputToReply(!showInputToReply)
-                setPracticeId(practice._id)}}>
-                <FontAwesomeIcon icon={faPen} />
-                </div>
-                </>}
-                </>
-              )}{" "}
-             
-            </div> */}
+            <CommentOnVideo practice={practice} socket={socket}/>
+           
             </div>
             </div>
-        </div>
+           
+          </div>
+        
       );
     });
   };
 
   return (
-    <div style={{ marginTop: "100px" }}>
-     
+    <div style={{ marginTop: "150px" }}>
+      <div>
+        <h2 style={{ textAlign: "center" }}>تمارين الطلاب</h2>
+      </div>
       <div>{showData()}</div>
     </div>
   );

@@ -1,11 +1,11 @@
 import React from "react";
-import Hero from "./Hero";
-import FreeVideos from "./FreeVideos";
-import About from "./About";
-import Footer from "./Footer";
-import FourBoxes from "./FourBoxes";
-import TeachersHomePage from "./TeachersHomePage";
-import CoursesHomePage from "./CoursesHomePage";
+import Hero from "../../components/Hero";
+import FreeVideos from "../../components/FreeVideos";
+import About from "../../components/About/About";
+import Footer from "../../components/Footer";
+import FourBoxes from "../../components/FourBoxes";
+import TeachersHomePage from "../../components/TeachersHomePage";
+import CoursesHomePage from "../../components/CoursesHomePage";
 
 export default function Home({
   showArrows,

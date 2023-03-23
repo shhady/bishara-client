@@ -14,15 +14,15 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
     JSON.parse(localStorage.getItem("courseDetails"))
   );
   const [updated, setUpdated] = useState(updateComponent);
-  const [courseCover, setCourseCover] = useState(""
+  // const [courseCover, setCourseCover] = useState(""
    
-  );
-  const [courseTitle, setCourseTitle] = useState(""
+  // );
+  // const [courseTitle, setCourseTitle] = useState(""
    
-  );
-  const [courseDes, setCourseDes] = useState(""
+  // );
+  // const [courseDes, setCourseDes] = useState(""
    
-  );
+  // );
 
   const [listId, setListId] = useState("");
   const [url, setUrl] = useState(null);
@@ -76,10 +76,11 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
             coursePhoto: url,
           }
         )
-        .then(() => {
+        // .then(() => {
          
-          setCourseCover(url);
-        }).then(async () => {
+        //   setCourseCover(url);
+        // })
+        .then(async () => {
           const res = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`
           );
@@ -195,12 +196,9 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
             title: newValue,
           }
         )
-        .then(() => {
-          
-          setCourseTitle(newValue);
-     
-         
-        })
+        // .then(() => {
+        //   setCourseTitle(newValue);
+        // })
         .then(async () => {
           const res = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`
@@ -224,12 +222,12 @@ export default function Lessons({ user, updateComponent, setUpdateComponent }) {
             description: newValueDes,
           }
         )
-        .then(() => {
+        // .then(() => {
           
-          setCourseDes(newValueDes);
+        //   setCourseDes(newValueDes);
           
 
-        })
+        // })
         .then(async () => {
           const res = await axios.get(
             process.env.REACT_APP_BACKEND_URL + `/courses/${courseInfo._id}`

@@ -3,30 +3,24 @@ import axios from "axios";
 import "./TeacherData.css";
 // import Evaluation from "./Evaluation"
 import { Link, useNavigate } from "react-router-dom";
-import StartChat from "./Messenger/StartChat";
-export default function TeacherData({
-  listId,
-  teacher,
+import StartChat from "../../components/Messenger/StartChat";
+export default function Teacher({
   setUpdateComponent,
   updateComponent,
 }) {
   const [teacherId, setTeacherId] = useState(localStorage.getItem("teacherId"));
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const user = JSON.parse(localStorage.getItem("profile"));
   const [userId, setUserId] = useState("");
   const [teacherInfo, setTeacherInfo] = useState("");
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const [teacherprop, setTeacherprop] = useState(updateComponent);
+  const teacherprop=updateComponent;
   const [evaluation, setEvaluation] = useState('')
   useEffect(() => {
     if (!user) return;
     setUserId(user.user ? user.user._id : user.teacher._id);
   }, [user]);
   const navigate = useNavigate();
-  // window.onpopstate = () => {
-  //   navigate("/teachers");
-  // };
-  // console.log(updateComponent._id);
   useEffect(() => {
     teacherprop
       ? setTeacherId(updateComponent._id)
@@ -36,7 +30,6 @@ export default function TeacherData({
     setTeacherId(localStorage.getItem("teacherId"));
   }, []);
 
-  //   console.log(localStorage.getItem("teacherId"));
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(

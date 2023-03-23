@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Lesson.css";
 import { useNavigate, useParams } from "react-router-dom";
-import CommentYouTubeVideo from "./CommentYouTubeVideo";
+import CommentYouTubeVideo from "../../components/CommentYouTubeVideo";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 
 export default function Lesson({ socket }) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Teachers.css";
+import "../pages/Teachers/Teachers.css";
 import { Link } from "react-router-dom";
 // import {useNav} from "react-router-dom"
 export default function CoursesHomePage({

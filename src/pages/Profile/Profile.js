@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import CreateCourse from "../Course/CreateCourse";
-import ChangePassword from "../ChangePassword";
-import "../ChangePassword.css";
+import CreateCourse from "../../components/Course/CreateCourse";
+import ChangePassword from "../../components/ChangePassword/ChangePassword";
+import "../../components/ChangePassword/ChangePassword.css";
 import "./profile.css";
-import ChangePasswordUser from "../ChangePasswordUser";
+import ChangePasswordUser from "../../components/ChangePassword/ChangePasswordUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 export default function Profile({ userProp }) {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
+ 
   const navigate = useNavigate();
-  const [allPractices, setAllPractices] = useState([]);
+  
   const [userPractices, setUserPractices] = useState([]);
   const [userId, setUserId] = useState(null);
   const [firstName, setFirstName] = useState(
@@ -34,7 +34,6 @@ export default function Profile({ userProp }) {
   const [image, setImage] = useState();
   const [fileUpload, setFileUpload] = useState(null);
   //prettier-ignore
-  // const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePic"));
   const [urlCover, setUrlCover] = useState(null);
   //prettier-ignore
   const [coverPicture, setCoverPicture] = useState(localStorage.getItem("coverPic"));
@@ -43,9 +42,8 @@ export default function Profile({ userProp }) {
   const [showUpdateProfile, setShowUpdateProfile] = useState(false);
   const [updateFirstName, setUpdateFirstName] = useState("");
   const [updateLastName, setUpdateLastName] = useState("");
-  // const [updateProfileFromLocal, setUpdateProfileFromLocal]=useState(window.localStorage.getItem("profilePic")) ===> do it
+  
   const [updateProfilePic, setUpdateProfilePic] = useState(
-    // window.localStorage.getItem("profilePic")
     ""
   );
   const [updateDes,setUpdateDes] = useState('')
@@ -548,7 +546,7 @@ export default function Profile({ userProp }) {
       console.log("can't update");
     }
     setUpdateDes("");
-    navigate("/TeacherData")
+    navigate("/Teacher")
   };
   const changeLastName = async () => {
     try {

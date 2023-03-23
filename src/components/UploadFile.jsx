@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import { saveAs } from "file-saver";
-import "./Lesson.css";
+import "../pages/Lesson/Lesson.css";
 export default function UploadFile({ courseInfo, lesson, id , paidUpdate}) {
   const user=JSON.parse(localStorage.getItem("profile"));
   const paid = useState(window.localStorage.getItem("paid"))

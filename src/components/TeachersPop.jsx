@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Teachers.css";
+import "../pages/Teachers/Teachers.css";
 import { Link } from "react-router-dom";
 // import {useNav} from "react-router-dom"
 export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
@@ -40,7 +40,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
     return teachers.slice(0, 10).map((teacher, i) => {
       return (
         <div key={i} onClick={() => setTeachersHover(false)}>
-          <Link to="/TeacherData" style={{ textDecoration: "none" }}>
+          <Link to="/Teacher" style={{ textDecoration: "none" }}>
             <div
               style={{
                 cursor: "pointer",

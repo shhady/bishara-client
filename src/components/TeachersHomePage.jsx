@@ -47,7 +47,7 @@ export default function TeachersPop({ setTeachersHover }) {
   const drawData = () => {
     return teachers.slice(0, 5).map((teacher, i) => {
       return (
-        <Link to="/TeacherData" style={{ textDecoration: "none" }}>
+        <Link to="/Teacher" style={{ textDecoration: "none" }}>
           <div
             key={i}
             onClick={() => {

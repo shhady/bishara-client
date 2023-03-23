@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import "./StudentPractice.css"
+import "../TeacherPractices/StudentPractice.css"
 import { useNavigate } from 'react-router-dom'
 export default function StudentMyPractice() {
   const [practice, setPractice] = useState({});
