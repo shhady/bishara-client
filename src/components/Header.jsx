@@ -192,7 +192,7 @@ export default function Header({
       window.localStorage.removeItem("token");
     }
 
-    // localStorage.removeItem("profile");
+    window.localStorage.removeItem("profile");
     // await axios.post(process.env.REACT_APP_BACKEND_URL+"/teachers/logoutAll");
     dispatch({ type: "LOGOUT" });
     navigate("/");
@@ -224,7 +224,7 @@ export default function Header({
       window.localStorage.removeItem("token");
     }
 
-    // localStorage.removeItem("profile");
+    window.localStorage.removeItem("profile");
     // await axios.post(process.env.REACT_APP_BACKEND_URL+"/teachers/logoutAll");
     dispatch({ type: "LOGOUT" });
     navigate("/");
@@ -1154,11 +1154,11 @@ export default function Header({
                   <div onClick={() => setUpdateComponent("")}>
                     {user.teacher ? (
                       <div onClick={handleLogoutTeacher}>
-                        <span className="blackBackgroundtext" style={{ cursor: "pointer" }}>خروج</span>
+                        <div className="blackBackgroundtext" style={{ cursor: "pointer", color:"white" }}>خروج</div>
                       </div>
                     ) : (
                       <div onClick={handleLogoutStudent}>
-                        <span className="blackBackgroundtext" style={{ cursor: "pointer" }}>خروج</span>
+                        <div className="blackBackgroundtext" style={{ cursor: "pointer", color:"white" }}>خروج</div>
                       </div>
                     )}
                   </div>
