@@ -70,7 +70,7 @@ export default function App() {
   }, [socket, userId]);
   return (
     <div>
-      <Suspense>
+      <Suspense fallback={<></>}>
         <BrowserRouter>
           <Header
             user={user}
