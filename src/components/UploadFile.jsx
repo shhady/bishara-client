@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import { saveAs } from "file-saver";
 import "../pages/Lesson/Lesson.css";
-export default function UploadFile({ courseInfo, lesson, id , paidUpdate}) {
+export default function UploadFile({ courseInfo, lesson, id , paidUpdate, ifNotUserShow
+ , setIfNotUser}) {
   const user=JSON.parse(localStorage.getItem("profile"));
   const paid = useState(window.localStorage.getItem("paid"))
 
@@ -10,7 +11,6 @@ export default function UploadFile({ courseInfo, lesson, id , paidUpdate}) {
   const [url, setUrl] = useState(null);
   // const [video, setVideo] = useState();
   const [fileUploaded, setFileUploaded] = useState(true);
-const [ifNotUserShow, setIfNotUser] = useState(false)
   const [fileUpload, setFileUpload] = useState(null);
   const [theFile, setTheFile] = useState(null);
   useEffect(() => {
@@ -158,7 +158,8 @@ const [ifNotUserShow, setIfNotUser] = useState(false)
                   style={{
                     textDecoration: "none",
                     color: "black",
-                    width: "100px",
+                    width:"40vw",
+                    maxWidth: "100px",
                     backgroundColor: "white",
                     border: "2px solid black",
                     borderRadius: "5px",
@@ -175,12 +176,14 @@ const [ifNotUserShow, setIfNotUser] = useState(false)
                   style={{
                     textDecoration: "none",
                     color: "black",
-                    width: "100px",
+                    width:"40vw",
+                    maxWidth: "100px",
                     backgroundColor: "white",
                     border: "2px solid black",
                     borderRadius: "5px",
                     textAlign: "center",
                     fontWeight: "bold",
+                    marginRight: "10px",
                   }}
                 >
                   delete
@@ -202,11 +205,12 @@ const [ifNotUserShow, setIfNotUser] = useState(false)
               style={{
                 textDecoration: "none",
                 color: "black",
-                width: "150px",
+                width: "40vw",
                 backgroundColor: "white",
-                borderRadius: "5px",
+                // borderRadius: "5px",
                 textAlign: "center",
                 fontWeight: "bold",
+                maxWidth: "150px",
               }}
             >
               {" "}
@@ -222,23 +226,24 @@ const [ifNotUserShow, setIfNotUser] = useState(false)
               style={{
                 textDecoration: "none",
                 color: "black",
-                width: "150px",
+                width: "40vw",
                 backgroundColor: "white",
-                borderRadius: "5px",
+                // borderRadius: "5px",
                 textAlign: "center",
                 fontWeight: "bold",
                 border: "2px solid black",
-                cursor:"pointer"
+                cursor:"pointer",
+                maxWidth: "150px",
               }}
             >
               {" "}
               ملف{" "}
             </div>
-            {ifNotUserShow && (
-            <>  لتحميل الملف يجب ان تكون مسجل لدى المعلم
+            {/* {ifNotUserShow && (
+            <>يجب ان تكون مسجل لدى المعلم
            
            </> )
-            }
+            } */}
             </div>):(null)}</>
            )}
         </>

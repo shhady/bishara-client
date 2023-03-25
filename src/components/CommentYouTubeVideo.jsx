@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CommentYouTube.css";
-import Comment from "./Comment";
+import UploadPractice from "./UploadPractice";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -34,6 +34,7 @@ export default function CommentYouTubeVideo({
   const [openDelete, setOpenDelete] = useState(false);
   const [commentId, setCommentId] = useState("");
   const [replyToDeleteId, setReplyToDeleteId] = useState("");
+  const [ifNotUserShow, setIfNotUser] = useState(false)
   const unique_id = uuid();
  
   useEffect(() => {
@@ -511,9 +512,11 @@ export default function CommentYouTubeVideo({
   return (
     <div>
       <div className="commentsSection">
-      <UploadFile courseInfo={courseInfo} lesson={lesson} id={id} paidUpdate={paidUpdate}/>
+        <div style={{display: "flex", justifyContent:"center", alignItems:"center", marginBottom:"15px"}}>
+      <UploadFile courseInfo={courseInfo} lesson={lesson} id={id} paidUpdate={paidUpdate}  ifNotUserShow={ifNotUserShow}
+   setIfNotUser={setIfNotUser}/>
         <>
- <Comment
+ <UploadPractice
    userId={userId}
    userF={userF}
    userL={userL}
@@ -521,11 +524,24 @@ export default function CommentYouTubeVideo({
    lesson={lesson}
    socket={socket}
    paidUpdate={paidUpdate}
+   ifNotUserShow={ifNotUserShow}
+   setIfNotUser={setIfNotUser}
  />
  </>
-
-      
-       
+ 
+ </div>
+ {ifNotUserShow && (
+            <div style={{
+             display:"flex",
+              justifyContent:"center",
+              alignItems:"center",
+              marginBottom:"15px",
+              color:"red",
+              }}>  يجب ان تكون مسجل لدى المعلم
+           </div> )}
+ <div>
+          <p style={{ fontSize: "24px", textAlign: "center" }}>التعليقات</p>
+        </div>
         <form className="CommentInput" onSubmit={handleSubmitComment}>
           {userAvatar ? (
             <>
@@ -549,9 +565,7 @@ export default function CommentYouTubeVideo({
           <button type="submit">تثبيت</button>
         </form>
 
-        <div>
-          <p style={{ fontSize: "24px", textAlign: "center" }}>التعليقات</p>
-        </div>
+        
       </div>
       <div className="showcomments">{showComments()}</div>
     </div>

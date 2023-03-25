@@ -161,7 +161,7 @@ export default function Lesson({ socket }) {
         ></iframe>
       </div>
       <div className="suggestions">{drawSuggestions()}</div>
-      <div style={{ marginTop: "50px" }}>
+      <div style={{ marginTop: "20px" }}>
         <CommentYouTubeVideo
           lesson={lesson}
           id={id}

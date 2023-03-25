@@ -5,14 +5,16 @@ import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-export default function Comment({
+export default function UploadPractice({
   userId,
   userF,
   userL,
   courseInfo,
   lesson,
   socket,
-  paidUpdate
+  paidUpdate,
+  ifNotUserShow,
+   setIfNotUser
 }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const paid = useState(window.localStorage.getItem("paid"))
@@ -23,7 +25,7 @@ export default function Comment({
   
   });
   const [moreThan, setMoreThan] = useState(null);
-  const [ifNotUserShow, setIfNotUser] = useState(false)
+
 
 const navigate = useNavigate()
   useEffect(() => {
@@ -102,8 +104,9 @@ const navigate = useNavigate()
         <>
           <div
             style={{
-              width: "150px",
-              margin: "20px auto",
+              width:"40vw",
+              maxWidth: "150px",
+              marginRight: "5px",
               border: "2px solid black",
           
              
@@ -157,19 +160,22 @@ const navigate = useNavigate()
       ) :  <div onClick={()=>setIfNotUser(!ifNotUserShow)}
       style={{display:"flex", justifyContent: "center", alignItems: "center", flexDirection:"column"}}
     >
-      {user?.user ? (<> <div style={{
-        width: "150px",
-        margin: "20px auto",
+      {user?.user ? (<> 
+      <div style={{
+        width:"40vw",
+        maxWidth: "150px",
+        marginRight: "5px",
         border: "2px solid black",
         textAlign:"center",
         fontWeight:"bold",
-        cursor:"pointer"
-
+        cursor:"pointer",
       }} > ارفع التمرين</div>  
-    {ifNotUserShow && (
-            <>  لرفع تمرين يجب ان تكون مسجل لدى المعلم
-           
-           </> )}</>):(null)}
+    {/* {ifNotUserShow && (
+            <div style={{
+              width:"40vw",
+              }}>  يجب ان تكون مسجل لدى المعلم
+           </div> )} */}
+           </>):(null)}
    
       </div>}
     </div>
