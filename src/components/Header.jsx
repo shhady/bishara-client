@@ -187,11 +187,12 @@ export default function Header({
       }
     );
 
-    if (response.status === 200) {
-      // REMOVE TOKEN
-      window.localStorage.removeItem("token");
-    }
-
+    // if (response.status === 200) {
+    //   // REMOVE TOKEN
+    //   console.log(response);
+    //   window.localStorage.removeItem("token");
+    // }
+    window.localStorage.removeItem("token");
     window.localStorage.removeItem("profile");
     // await axios.post(process.env.REACT_APP_BACKEND_URL+"/teachers/logoutAll");
     dispatch({ type: "LOGOUT" });
@@ -219,11 +220,12 @@ export default function Header({
       }
     );
 
-    if (response.status === 200) {
-      // REMOVE TOKEN
-      window.localStorage.removeItem("token");
-    }
+    // if (response.status === 200) {
+    //   // REMOVE TOKEN
+    //   window.localStorage.removeItem("token");
+    // }
 
+    window.localStorage.removeItem("token");
     window.localStorage.removeItem("profile");
     // await axios.post(process.env.REACT_APP_BACKEND_URL+"/teachers/logoutAll");
     dispatch({ type: "LOGOUT" });
