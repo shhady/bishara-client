@@ -2,13 +2,13 @@ import React from 'react';
 
 export default function QA() {
   return (
-    <div style={{ textAlign:"center", width:"80%", margin:"auto"}}>
+    <div style={{ textAlign:"center", width:"80%", margin:"auto", marginBottom:"40px"}}>
       <h1 style={{marginTop:"100px"}}>أسئلة متكرره</h1> 
       <details style={{border: "1px solid black"}}>
     <summary style={{fontWeight:"bold", fontSize:"18px", cursor:"pointer"}}> 
     ما هي الآلات الموسيقية العربية التي يمكن تعلمها في هذا الموقع؟
     </summary>
-    يمكن تعلم العزف على العود والقانون والناي والكمان والطبلة والدربكة والبيانو وغيرها من الآلات الموسيقية العربية.
+    يمكن تعلم العزف على العود والقانون والفلوت والكمان والطبلة والدربكة والبيانو وغيرها من الآلات الموسيقية العربية.
  
 </details>
 <details  style={{border: "1px solid black"}}>

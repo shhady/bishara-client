@@ -152,7 +152,7 @@ export default function CreateCourse() {
             <option value="جيتار">جيتار</option>
             <option value="تشيلو">تشيلو</option>
             <option value="قانون">قانون</option>
-            <option value="ناي">ناي</option>
+            <option value="فلوت">فلوت</option>
             <option value="ايقاع">ايقاع</option>
             <option value="بزق">بزق</option>
             <option value="غناء">غناء</option>

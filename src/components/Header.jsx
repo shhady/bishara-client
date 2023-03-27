@@ -467,7 +467,7 @@ export default function Header({
                 style={{ width: "80%", margin: "auto" }}
                 onClick={() => setIsHovering(false)}
               >
-                <Link to="" style={{ textDecoration: "none", color: "black" }}>
+                <Link to="/QA" style={{ textDecoration: "none", color: "black" }}>
                   الاسئلة المتكررة
                 </Link>
               </div>

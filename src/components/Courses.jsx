@@ -202,6 +202,7 @@ export default function Courses({
                   <img
                     src="https://img.icons8.com/windows/32/null/circle.png"
                     width="5px"
+                    alt="icon"
                   />
                   جميع ألآلات
                 </div>
@@ -270,13 +271,13 @@ export default function Courses({
                 </div>
                 <div
                   onClick={() => {
-                    setTitle("ناي");
+                    setTitle("فلوت");
                     setAll(false);
-                    setInstruments("ناي");
+                    setInstruments("فلوت");
                   }}
                   className="allCourses"
                 >
-                  ناي
+                  فلوت
                 </div>
                 <div
                   onClick={() => {
@@ -327,6 +328,7 @@ export default function Courses({
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
+                alt="icon"
                 style={{ paddingLeft: " 5px" }}
               />
               جميع ألآلات
@@ -342,6 +344,7 @@ export default function Courses({
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
+                alt="icon"
                 style={{ paddingLeft: " 5px" }}
               />
               بيانو
@@ -358,6 +361,7 @@ export default function Courses({
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
+                alt="icon"
                 style={{ paddingLeft: " 5px" }}
               />
               عود
@@ -374,6 +378,7 @@ export default function Courses({
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
+                alt="icon"
                 style={{ paddingLeft: " 5px" }}
               />
               كمان
@@ -390,6 +395,7 @@ export default function Courses({
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
+                alt="icon"
                 style={{ paddingLeft: " 5px" }}
               />
               جيتار
@@ -406,6 +412,7 @@ export default function Courses({
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
+                alt="icon"
                 style={{ paddingLeft: " 5px" }}
               />
               قانون
@@ -422,6 +429,7 @@ export default function Courses({
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
+                alt="icon"
                 style={{ paddingLeft: " 5px" }}
               />
               تشيلو
@@ -429,18 +437,19 @@ export default function Courses({
 
             <div
               onClick={() => {
-                setTitle("ناي");
+                setTitle("فلوت");
                 setAll(false);
-                setInstruments("ناي");
+                setInstruments("فلوت");
               }}
               className="allCourses"
             >
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
+                alt="icon"
                 style={{ paddingLeft: " 5px" }}
               />
-              ناي
+              فلوت
             </div>
 
             <div
@@ -454,6 +463,7 @@ export default function Courses({
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
+                alt="icon"
                 style={{ paddingLeft: " 5px" }}
               />
               ايقاع
@@ -469,6 +479,7 @@ export default function Courses({
               <img
                 src="https://img.icons8.com/windows/32/null/circle.png"
                 width="12px"
+                alt="icon"
                 style={{ paddingLeft: " 5px" }}
               />
               غناء
