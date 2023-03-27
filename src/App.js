@@ -4,23 +4,15 @@ import Header from "./components/Header";
 import { io } from "socket.io-client";
 
 const Home = React.lazy(() => import("./pages/HomePage/Home"));
-const StudentsPractices = React.lazy(() =>
-  import("./components/StudentsPractices")
-);
-
+const StudentsPractices = React.lazy(() => import("./components/StudentsPractices"));
 const Messenger = React.lazy(() => import("./components/Messenger/Messenger"));
 const Courses = React.lazy(() => import("./components/Courses"));
 const Teachers = React.lazy(() => import("./pages/Teachers/Teachers"));
-const CreateCourse = React.lazy(() =>
-  import("./components/Course/CreateCourse")
-);
+const CreateCourse = React.lazy(() => import("./components/Course/CreateCourse"));
 const Profile = React.lazy(() => import("./pages/Profile/Profile"));
-const CreateTeacher = React.lazy(() =>
-  import("./components/Form/CreateTeacher")
-);
+const CreateTeacher = React.lazy(() => import("./components/Form/CreateTeacher"));
 const Auth = React.lazy(() => import("./components/Auth/Auth"));
 const QA = React.lazy(() => import("./pages/QA/QA"));
-
 const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
 const Teacher = React.lazy(() => import("./pages/Teacher/Teacher"));
 const Lessons = React.lazy(() => import("./pages/Lessons/Lessons"));
@@ -29,10 +21,7 @@ const SpecificPractice = React.lazy(() => import("./pages/TeacherPractices/Speci
 const PaidStudent = React.lazy(() => import("./pages/addingStudent/PaidStudent"));
 const ForgetPassword = React.lazy(() => import("./components/ForgetPassword"));
 const Notifications = React.lazy(() => import("./components/Notifications"));
-const PracticeReplies = React.lazy(() =>
-  import("./pages/TeacherPractices/PracticeReplies")
-);
-
+const PracticeReplies = React.lazy(() =>import("./pages/TeacherPractices/PracticeReplies"));
 const CreateCourseForTeacher = React.lazy(() => import("./components/Course/CreateCourseForTeacher"));
 const StudentMyPractice = React.lazy(() => import("./pages/StudentPractice/StudentMyPractice"));
 const GeneralButton = React.lazy(() => import("./pages/GeneralButton"));

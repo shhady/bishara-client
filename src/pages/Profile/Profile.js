@@ -8,7 +8,7 @@ import "../../components/ChangePassword/ChangePassword.css";
 import "./profile.css";
 import ChangePasswordUser from "../../components/ChangePassword/ChangePasswordUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import AboutUserPop from "../../components/AboutUser/AboutUserPop";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 export default function Profile({ userProp }) {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -831,16 +831,13 @@ export default function Profile({ userProp }) {
           ) : (
             <div>
               <div
-                style={{
-                  display: "flex",
-                  
-                  flexDirection: "column",
-                  justifyContent: "start",
-                  alignItems: "center",
-                  
-                }}
+                
                 className="userCoverPic"
               >
+                <div className="CoverTheCover">
+                  <div style={{position:"fixed", right:"5px", top:"250px"}}>
+                  <AboutUserPop />
+                  </div>
                 <div
                   style={{
                     marginTop: "30px",
@@ -891,7 +888,8 @@ export default function Profile({ userProp }) {
                   {"  "}
                   {lastName}
                 </h2>
-                
+                {/* <h2>{user?.user?.email}</h2> */}
+                </div>
               </div>
               <div className="profileAllButtonsUser">
                   {showPractice ? (
