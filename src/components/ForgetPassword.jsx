@@ -9,14 +9,12 @@ const ForgetPassword = () => {
     e.preventDefault();
     try {
       const response = await axios.put(process.env.REACT_APP_BACKEND_URL +"/resetPassword", { email });
-      console.log(response.data);
       setPasswordChanged('changed')
     } catch (error) {
       console.error(error);
     }
     try {
       const response = await axios.put(process.env.REACT_APP_BACKEND_URL +"/teachers/resetPassword", { email });
-      console.log(response.data);
       setPasswordChanged('changed')
     } catch (error) {
       console.error(error);

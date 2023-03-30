@@ -96,7 +96,6 @@ const navigate = useNavigate()
    
     
   }, [url]);
-  console.log(paidUpdate)
 
   return (
     <div>

@@ -50,7 +50,7 @@ export default function App() {
         "https://bisharaserver.herokuapp.com/"
       )
     );
-    console.log(socket);
+    // console.log(socket);
   }, [userId]);
 
   useEffect(() => {

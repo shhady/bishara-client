@@ -104,7 +104,6 @@ export default function Header({
     const filteredSeen = userPractices.filter((practiceSeen) => {
       return practiceSeen.replySeen === "false";
     });
-    console.log(filteredSeen)
     setUserPracticesNotSeen(filteredSeen);
   }, [userPractices]);
 
@@ -132,7 +131,7 @@ export default function Header({
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
       console.log('listening for getNotificationComment event...');
-      console.log(data);
+      
       setRedLightNotification(data);
       // setRedLightNotificationReply(true);
     });
@@ -147,7 +146,7 @@ export default function Header({
       // setNotifyMessage((prev) => [...prev, data]);
       setNotifyMessage(true);
       setChatNotification("got a new message");
-      console.log(data);
+      
     });
   }, [socket]);
 
@@ -301,12 +300,7 @@ export default function Header({
     });
   };
 
-  console.log(redLightNotification)
-   console.log( redLightNotificationReply) 
-   console.log(teacherPracticesUnReplied)
-    console.log(userPracticesNotSeen.length) 
-                    
-                      
+  
   const handleMouseOver = () => {
     setIsHovering(!isHovering);
   };

@@ -48,7 +48,6 @@ export default function Courses({
     };
     fetch();
   }, []);
-  console.log(posts);
   useEffect(() => {
     const filtered = posts?.filter((post) => post.instrument === title);
     setFilteredposts(filtered);
@@ -109,7 +108,7 @@ export default function Courses({
   // const showAll = () => {
   //   setAll(true);
   // };
-  console.log(posts)
+  
   const showData = () => {
     return posts?.map((post) => {
       return (

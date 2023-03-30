@@ -36,7 +36,7 @@ export default function PracticeReplies({ user, socket }) {
   const [recordUrl, setRecordUrl] = useState('');
   const [generalButtons, setGeneralButtons] = useState(false)
   
-console.log(generalButtons)
+
   const unique_id = uuid();
   const userF = user.user ? user.user.firstName : user.teacher.firstName;
   const userL = user.user ? user.user.lastName : user.teacher.lastName;
@@ -123,11 +123,7 @@ console.log(generalButtons)
 
   // Add teacher reply to practice
   const addTeacherReply = (practice) => {
-    console.log(practice);
-    console.log(practice.ownerId);
-    console.log(practice.video);
-    console.log(practice.uniqueLink);
-    console.log(practice.courseId);
+  
    
     socket.emit("sendNotificationComment", {
       senderName: userF,
@@ -193,7 +189,6 @@ console.log(generalButtons)
   // Add teacher video reply to practice
   const buttonDetails = (buttonD, practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
-    console.log(practice)
     socket.emit("sendNotificationComment", {
       senderName: practice.teacherFirstName,
       senderFamily: practice.teacherLastName,
@@ -280,7 +275,7 @@ console.log(generalButtons)
   // Add teacher video reply to practice
   const addTeacherVideoReply = (practice) => {
     if (practice.videoReply.length > 3) return console.log("no more");
-    console.log(practice)
+    
     socket.emit("sendNotificationComment", {
       senderName: practice.teacherFirstName,
       senderFamily: practice.teacherLastName,

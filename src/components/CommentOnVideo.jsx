@@ -11,7 +11,7 @@ export default function CommentOnVideo({practice, socket}) {
     const [practiceId, setPracticeId] = useState("");
     const [reply, setReply] = useState("");
   const [myReply, setMyReply] = useState("");
-  console.log(myReply)
+  
     const handleReply = (e) => {
         setReply(e.target.value);
       };

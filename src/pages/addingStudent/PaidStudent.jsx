@@ -10,7 +10,6 @@ export default function PaidStudent({ user }) {
   const email = useRef()
   const [paidPeriod, setpaidPeriod] = useState('')
 
-  console.log(paidPeriod)
   const showEmail = async (e) => {
     e.preventDefault()
     try{
@@ -56,7 +55,7 @@ export default function PaidStudent({ user }) {
           userId:''
         }
       );
-      console.log(student)
+      
       const filtered = students.filter((theStudent)=> theStudent._id !== student._id)
       setStudents(filtered)
     }catch(err){
@@ -88,7 +87,7 @@ export default function PaidStudent({ user }) {
       </div>
     )
   }
-  console.log(students)
+
 
 
   return (

@@ -11,7 +11,7 @@ export default function GeneralButton({user}) {
     const [video, setVideo] = useState();
     const [fileUpload, setFileUpload] = useState(null);
     const [moreThan, setMoreThan] = useState(null);
-    console.log(user)
+    
     const postDetails = () => {
         const formData = new FormData();
         formData.append("file", video);
@@ -33,7 +33,6 @@ export default function GeneralButton({user}) {
           });
       };
 
-console.log(url)
       const cancelUpload = () => {
         setUrl(null);
         setFileUpload(null);

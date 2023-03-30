@@ -8,7 +8,7 @@ export default function StudentMyPractice() {
   const [poster, setPoster] = useState("");
   const { id } = useParams()
   const navigate = useNavigate()
-  console.log(id)
+ 
 
   useEffect(() => {
     function MyVideo() {

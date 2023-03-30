@@ -31,7 +31,7 @@ export default function ChangePassword({ userId }) {
       setMessage(
         "لم تتم عملية التغيير,,كلمة المرور يجب ان تتكون من 6 ارقام او احرف على الاقل, حاول مرة اخرى وتأكد من تطابق كلمة المرور وتأكيد كلمة المرور"
       );
-      console.log(err + "can't");
+      console.log(err);
     }
   };
   return (
