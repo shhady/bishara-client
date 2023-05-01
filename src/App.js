@@ -38,10 +38,12 @@ export default function App() {
   const [updateComponent, setUpdateComponent] = useState(null);
   const [userProp, setUserProp] = useState(null);
   const [chatNotification, setChatNotification] = useState(null);
+
   useEffect(() => {
     if (!user) return;
     user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
   }, [user]);
+  
   useEffect(() => {
     if (!userId) return;
     setSocket(

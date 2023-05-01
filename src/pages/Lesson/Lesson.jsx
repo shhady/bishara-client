@@ -151,14 +151,14 @@ export default function Lesson({ socket }) {
          
         </div>
         <iframe
-          width="100%"
-          height="400"
-          src={`https://www.youtube.com/embed/${id}`}
-          title="Fadi a"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+  width="100%"
+  height="400"
+  src={`https://www.youtube.com/embed/${id}?modestbranding=1&autoplay=1&rel=0&showinfo=0&fs=1`}
+  title="Fadi a"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
       </div>
       <div className="suggestions">{drawSuggestions()}</div>
       <div style={{ marginTop: "20px" }}>
