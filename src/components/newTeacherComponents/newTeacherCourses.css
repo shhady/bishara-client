@@ -1,0 +1,13 @@
+.newCoursesContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 90%;
+    margin: auto;
+}
+.courseCard{
+    width: 400px;
+   
+}

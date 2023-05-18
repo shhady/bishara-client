@@ -59,8 +59,7 @@ export default function CoursesHomePage({
           }}
           className="homepagecourses"
         >
-          <Link to="/Lessons" style={{ textDecoration: "none" }}>
-            <div
+ <Link to={`/newCourse/${course._id}`} style={{ textDecoration: "none" }}>            <div
               style={{
                 height:"fit-content",
                 cursor: "pointer",

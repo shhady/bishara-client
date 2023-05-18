@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../components/StudentPractice.css";
-// import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,6 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import AudioRecord from "../../components/AudioRecord";
 import CommentOnVideo from "../../components/CommentOnVideo";
+import { useNavigate } from "react-router-dom";
+// import YoutubeForPractice from "../../components/youtubeForPractice/YoutubeForPractice";
 export default function PracticeReplies({ user, socket }) {
   // State variables
   const theUser=JSON.parse(localStorage.getItem("profile"))
@@ -35,8 +37,7 @@ export default function PracticeReplies({ user, socket }) {
   const [moreThan, setMoreThan] = useState(null);
   const [recordUrl, setRecordUrl] = useState('');
   const [generalButtons, setGeneralButtons] = useState(false)
-  
-
+  const navigate = useNavigate();
   const unique_id = uuid();
   const userF = user.user ? user.user.firstName : user.teacher.firstName;
   const userL = user.user ? user.user.lastName : user.teacher.lastName;
@@ -438,10 +439,17 @@ export default function PracticeReplies({ user, socket }) {
         setTeacherPractices(res.data);
       });
   };
+  const openLesson = (practice)=>{
+    window.localStorage.setItem("lessonReview", practice.uniqueLink);
+    navigate('/lessonReview');
+  }
+
+  console.log(teacherPractices)
   // Render showData component
   const showData = () => {
     return teacherPractices?.map((practice, i) => {
       return (
+        
         <div
           style={{ 
             height:"fit-content",
@@ -461,11 +469,25 @@ export default function PracticeReplies({ user, socket }) {
             الدورة:
             {practice.courseName}, {practice.courseLevel}
           </div>
-          <div>
-            الدرس:
+          <Link to={`/NewLesson/course?name=${practice.uniqueLink}&playlist=${practice.courseId
+}`} style={{textDecoration:"none"}}>
+          <div style={{  marginBottom:"10px"}}>
+         
             {practice.video}
           </div>
-          
+          </Link>
+          {/* {showLesson ? (
+           <div  className="LessonVideoPractice">
+           <iframe
+             width="100%"
+             height="95%"
+             src={`https://www.youtube.com/embed/${theLessonToShowId}?modestbranding=1&autoplay=1&rel=0&showinfo=0&fs=1`}
+             title="Fadi a"
+             frameBorder="0"
+             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+             allowFullScreen
+           ></iframe>
+         </div>):(null)} */}
           <div style={{
                marginBottom:"10px" 
               }}>

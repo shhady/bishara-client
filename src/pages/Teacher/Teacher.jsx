@@ -4,6 +4,8 @@ import "./TeacherData.css";
 // import Evaluation from "./Evaluation"
 import { Link, useNavigate } from "react-router-dom";
 import StartChat from "../../components/Messenger/StartChat";
+
+import BoxesTeacher from "../../components/boxesTeacher/BoxesTeacher";
 export default function Teacher({
   setUpdateComponent,
   updateComponent,
@@ -158,58 +160,58 @@ export default function Teacher({
       );
     });
   };
-  const drawEvaluation = () => {
-    return evaluation?.map((course, i) => {
-      return (
-        <div>
-            <Link to="/Lessons" style={{ textDecoration: "none" }}>
-        <div className="evaluation" onClick={() => saveCourseLocal(course)} key={i}>
+  // const drawEvaluation = () => {
+  //   return evaluation?.map((course, i) => {
+  //     return (
+  //       <div>
+  //           <Link to="/Lessons" style={{ textDecoration: "none" }}>
+  //       <div className="evaluation" onClick={() => saveCourseLocal(course)} key={i}>
         
-            <div style={{ display:"flex", justifyContent: "center" ,flexDirection:"column", alignItems: "center",width:"100%" }}>
-            <div style={{ width:"70%"}}>
-              <img
-                src={course.coursePhoto.replace("http://","https://")}
-                alt="evaluation"
-                width="70%"
-                height="120px"
+  //           <div style={{ display:"flex", justifyContent: "center" ,flexDirection:"column", alignItems: "center",width:"100%" }}>
+  //           <div style={{ width:"70%"}}>
+  //             <img
+  //               src={course.coursePhoto.replace("http://","https://")}
+  //               alt="evaluation"
+  //               width="70%"
+  //               height="120px"
                
-              />
-            </div>
-          <div  style={{ width:"100%"}}>
-            <div style={{ textAlign: "center", color: "black" }}>
-              <h2>{course.title}</h2>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                color: "black",
-              }}
-            >
-              {/* <div>{course.instrument}</div> */}
-            </div>
-            <div style={{ width: "90%", margin: "auto", color: "black" }}>
-              {course.description.slice(0, 130)}....
-            </div>
-            </div>
-            </div>
-        </div>
-        </Link>
-        <div  style={{ width: "80%", margin:"auto"}}>
-            {userId === course.owner ? (
-              <button
-                style={{ width: "90%" }}
-                onClick={() => deleteCourse(course)}
-              >
-                حذف الدورة
-              </button>
-            ) : null}
-          </div>
-        </div>
-      );
-    });
-  };
+  //             />
+  //           </div>
+  //         <div  style={{ width:"100%"}}>
+  //           <div style={{ textAlign: "center", color: "black" }}>
+  //             <h2>{course.title}</h2>
+  //           </div>
+  //           <div
+  //             style={{
+  //               display: "flex",
+  //               justifyContent: "space-around",
+  //               alignItems: "center",
+  //               color: "black",
+  //             }}
+  //           >
+  //             {/* <div>{course.instrument}</div> */}
+  //           </div>
+  //           <div style={{ width: "90%", margin: "auto", color: "black" }}>
+  //             {course.description.slice(0, 130)}....
+  //           </div>
+  //           </div>
+  //           </div>
+  //       </div>
+  //       </Link>
+  //       <div  style={{ width: "80%", margin:"auto"}}>
+  //           {userId === course.owner ? (
+  //             <button
+  //               style={{ width: "90%" }}
+  //               onClick={() => deleteCourse(course)}
+  //             >
+  //               حذف الدورة
+  //             </button>
+  //           ) : null}
+  //         </div>
+  //       </div>
+  //     );
+  //   });
+  // };
 
   const deleteTeacher = async () => {
     axios
@@ -317,10 +319,11 @@ export default function Teacher({
         <hr />
       </div> */}
       <div className="dawrat">
-      <div>
+      {/* <div>
         {drawEvaluation()}
         <hr />
-      </div>
+      </div> */}
+      <BoxesTeacher/>
         <h2>دورات {teacherInfo.firstName}</h2>
         
       </div>

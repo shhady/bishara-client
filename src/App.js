@@ -2,7 +2,9 @@ import React, { useState, useEffect, Suspense } from "react";
 import { BrowserRouter, Route , Routes} from "react-router-dom";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
-
+import Zoom from "./pages/zoom/Zoom";
+import YoutubeForPractice from "./pages/youtubeForPractice/YoutubeForPractice";
+import NewMessenger from "./pages/NewMessenger/NewMessenger"
 const Home = React.lazy(() => import("./pages/HomePage/Home"));
 const StudentsPractices = React.lazy(() => import("./components/StudentsPractices"));
 const Messenger = React.lazy(() => import("./components/Messenger/Messenger"));
@@ -26,6 +28,11 @@ const CreateCourseForTeacher = React.lazy(() => import("./components/Course/Crea
 const StudentMyPractice = React.lazy(() => import("./pages/StudentPractice/StudentMyPractice"));
 const GeneralButton = React.lazy(() => import("./pages/GeneralButton"));
 const Subscribe = React.lazy(() => import("./pages/Subscribe"));
+// const NewMessenger = React.lazy(() => import("./pages/NewMessenger/NewMessenger"));
+const NewTeacher = React.lazy(() => import("./pages/newTeacher/NewTeacher"));
+const NewCourse = React.lazy(() => import("./pages/newCourse/NewCourse"));
+const NewLesson = React.lazy(() => import("./pages/newLesson/NewLesson"));
+
 
 export default function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -75,6 +82,7 @@ export default function App() {
             setChatNotification={setChatNotification}
           />
           <Routes>
+
           <Route path="/" exact element={<Home
               user={user}
               setUser={setUser}
@@ -84,11 +92,17 @@ export default function App() {
             />}/>
           <Route path="/auth" exact element={ <Auth user={user} setUser={setUser} setUserProp={setUserProp} />}/>
           <Route path="/forgetpassword" exact element={ <ForgetPassword />}/>
+          <Route path="/lessonReview" exact element={ <YoutubeForPractice />}/>
+          <Route path="/NewTeacher/:id" exact element={ <NewTeacher />}/>
+          <Route path="/NewCourse/:id" exact element={ <NewCourse />}/>
           <Route path="/GeneralButton" exact element={ <GeneralButton user={user} />}/>
           <Route path="/qa" element={ <QA user={user}/>}/>
           <Route path="/PracticeReplies" exact element={<PracticeReplies user={user} setUser={setUser} socket={socket}/>}/>
           <Route path="/SpecificPractice/:id" exact element={ <SpecificPractice user={user} setUser={setUser} socket={socket}/>}/>
           <Route path="/StudentMyPractice/:id" exact element={<StudentMyPractice user={user} setUser={setUser}/>}/>
+          <Route path="/NewLesson/:id" exact element={<NewLesson />}/>
+
+          
           <Route path="/addStudent" exact element={<PaidStudent user={user} setUser={setUser}/>}/>
           <Route path="/TestYoutube/:id" exact element={  <TestYoutube
               user={user}
@@ -146,6 +160,7 @@ export default function App() {
               setUpdateComponent={setUpdateComponent}
               updateComponent={setUpdateComponent}
             />}/>
+            <Route path="/zoom" exact element={ <Zoom/>}/>
           <Route path="/StudentsPractices" exact element={<StudentsPractices user={user} setUser={setUser} />}/>
           <Route path="/messenger" exact element={ user ? (
               <Messenger
@@ -154,6 +169,14 @@ export default function App() {
                 socket={socket}
                 chatNotification={chatNotification}
                 setChatNotification={setChatNotification}
+              />
+            ) : (
+              <Home />
+            )}/>
+             <Route path="/newmessenger" exact element={ user ? (
+              <NewMessenger
+                user={user}
+                setUser={setUser}
               />
             ) : (
               <Home />

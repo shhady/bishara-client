@@ -755,7 +755,7 @@ export default function Profile({ userProp }) {
                 >
                   تعديل الملف
                 </div>
-                <div
+                {/* <div
                   className="profileButtons3"
                   style={{ height: "40px" }}
                   onClick={() => {
@@ -765,7 +765,7 @@ export default function Profile({ userProp }) {
                   }}
                 >
                   تغيير كلمة المرور
-                </div>
+                </div> */}
 
               </div>
               {showFormCreateCourse ? <CreateCourse /> : null}
@@ -835,7 +835,7 @@ export default function Profile({ userProp }) {
                 className="userCoverPic"
               >
                 <div className="CoverTheCover">
-                  <div style={{position:"fixed", right:"5px", top:"250px"}}>
+                  <div style={{position:"absolute", right:"5px", top:"250px"}}>
                   <AboutUserPop />
                   </div>
                 <div

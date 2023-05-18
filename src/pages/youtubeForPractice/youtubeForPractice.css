@@ -1,0 +1,22 @@
+.LessonVideoPractice{
+    height: 60vh;
+     width:100vw;
+      background:black;
+       position:fixed;
+       top:80px;
+    right:0; 
+       /* z-index:20 */
+}
+
+
+@media(max-width:767px) {
+    .LessonVideoPractice{
+        height:60vh;
+         width:100vw;
+          background:black;
+           position:fixed;
+           top:60px;
+            right:0; 
+           /* z-index:20 */
+    }
+}

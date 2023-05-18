@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Lesson.css";
+import UploadPracticeNew from "../../components/uploadPracticeNew";
+
 import { useNavigate, useParams } from "react-router-dom";
 import CommentYouTubeVideo from "../../components/CommentYouTubeVideo";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
-
 export default function Lesson({ socket }) {
   const [suggestedVideoId, setSuggestedVideoId] = useState("");
   const [paidUpdate, setPaidUpdate]= useState()
@@ -151,14 +152,14 @@ export default function Lesson({ socket }) {
          
         </div>
         <iframe
-  width="100%"
-  height="400"
-  src={`https://www.youtube.com/embed/${id}?modestbranding=1&autoplay=1&rel=0&showinfo=0&fs=1`}
-  title="Fadi a"
-  frameBorder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowFullScreen
-></iframe>
+          width="100%"
+          height="95%"
+          src={`https://www.youtube.com/embed/${id}?modestbranding=1&autoplay=1&rel=0&showinfo=0&fs=1`}
+          title="Fadi a"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
       </div>
       <div className="suggestions">{drawSuggestions()}</div>
       <div style={{ marginTop: "20px" }}>
@@ -170,6 +171,8 @@ export default function Lesson({ socket }) {
           paidUpdate={paidUpdate}
         />
       </div>
+
+      {/* <UploadPracticeNew/> */}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import FourBoxes from "../../components/FourBoxes";
 import TeachersHomePage from "../../components/TeachersHomePage";
 import CoursesHomePage from "../../components/CoursesHomePage";
+import NewHero from "../../components/newHero/NewHero";
 
 export default function Home({
   showArrows,
@@ -15,6 +16,7 @@ export default function Home({
 }) {
   return (
     <div className="HomePage">
+      {/* <NewHero/> */}
       <Hero showArrows={showArrows} user={user} />
       <FourBoxes />
 

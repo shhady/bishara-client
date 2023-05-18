@@ -532,10 +532,10 @@ export default function CommentYouTubeVideo({
               color:"red",
               }}>  يجب ان تكون مسجل لدى المعلم
            </div> )}
- <div>
+ {/* <div>
           <p style={{ fontSize: "24px", textAlign: "center" }}>التعليقات</p>
-        </div>
-        <form className="CommentInput" onSubmit={handleSubmitComment}>
+        </div> */}
+        {/* <form className="CommentInput" onSubmit={handleSubmitComment}>
           {userAvatar ? (
             <>
               <img src={userAvatar.replace('http://', 'https://')} alt="pofile" className="imgComment" />
@@ -556,11 +556,11 @@ export default function CommentYouTubeVideo({
             onChange={(e) => handleChangeComment(e)}
           />
           <button type="submit">تثبيت</button>
-        </form>
+        </form> */}
 
         
       </div>
-      <div className="showcomments">{showComments()}</div>
+      {/* <div className="showcomments">{showComments()}</div> */}
     </div>
   );
 }

@@ -47,15 +47,15 @@ export default function Teachers({
     return teachers.map((teacher, i) => {
       return (
        
-        <Link to="/Teacher" style={{ textDecoration: "none" }} key={i}>
+        <Link to={`/newTeacher/${teacher._id}`} style={{ textDecoration: "none" }} key={i}>
           <div
             className="teacher"
             key={i}
-            onClick={() => {
-              setTeacher(teacher._id);
-              window.localStorage.setItem("teacherId", teacher._id);
-              setUpdateComponent(teacher);
-            }}
+            // onClick={() => {
+            //   setTeacher(teacher._id);
+            //   window.localStorage.setItem("teacherId", teacher._id);
+            //   setUpdateComponent(teacher);
+            // }}
           >
             <div>
               <img
@@ -84,7 +84,7 @@ export default function Teachers({
         style={{
           width: "100%",
           marginTop: "90px",
-          height: "30vh",
+          height: "15vh",
           background: "#fafafa",
           display: "flex",
           flexDirection: "column",

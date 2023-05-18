@@ -59,7 +59,7 @@ export default function TeachersPop({
             setUpdateComponent(course);
           }}
         >
-          <Link to="/Lessons" style={{ textDecoration: "none" }}>
+          <Link to={`/newCourse/${course._id}`} style={{ textDecoration: "none" }}>
             <div
               style={{ cursor: "pointer", display: "flex" }}
               onClick={() => addToLocal(course)}

@@ -20,7 +20,7 @@
 .TopOfPage{
     margin-top: 80px;
     /* padding-top: 20px; */
-    height: 30vh;
+    height: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -50,10 +50,12 @@
     /* border-style: inset; */
 /* } */
 .showDataStyle{
+    width: 95%;
+    margin: 10px auto;
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 6fr;
     gap: 3rem;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 .showDataThreeColumns{
     display: grid;
@@ -80,7 +82,9 @@
    display:none;
 }
   @media (min-width: 500px) and (max-width:768px) {
-    
+    .TopOfPage{
+        margin-top: 60px;
+    }
     .showDataStyle{
         display: grid;
         grid-template-columns:1fr 3fr;
@@ -104,6 +108,9 @@
   }
 
   @media (max-width: 500px){
+    .TopOfPage{
+        margin-top: 60px;
+    }
     .coursesCss{
      display:none;
     }

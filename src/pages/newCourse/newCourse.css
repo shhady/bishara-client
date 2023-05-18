@@ -1,0 +1,56 @@
+.courseCover{
+    margin-top: 80px;
+    height: 50vh;
+    width: 80%;
+    margin: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.instAndLevel{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 90%;
+    margin: auto;
+}
+.descP{
+    width: 90%;
+    margin: auto;
+}
+.lessonOfLessons{
+    width: 400px;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.lessons{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.lessonsAndDescB{
+    width: 60%;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:40px;
+ 
+}
+@media (max-width: 768px) {
+    .courseCover{
+        margin-top: 60px;
+        height: 50vh;
+        width: 100%;
+        margin: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}

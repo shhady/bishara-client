@@ -1,6 +1,7 @@
 .videoLesson{
     
-    width: 55vw;
+    width: 57vw;
+    height: 60vh;
     margin:auto;
     margin-top:100px;
     position:relative;
@@ -10,7 +11,9 @@
     cursor: pointer;
 }
 .suggestions{
-    margin-right: 50px;
+    width: 95vw;
+    margin: 20px auto;
+    /* margin-right: 50px; */
     display: grid;
     grid-template-columns: repeat(50,1fr);
     gap:.5rem;
@@ -26,13 +29,15 @@
 
 @media (max-width: 768px) {
     .videoLesson{
+        height: 50vh;
         width: 99%;
         margin:auto;
         margin-top:70px;
         position:relative;
     }
     .suggestions{
-        margin-right: 0px
+        width: 95vw;
+        margin: 20px auto;
     }
 }
 

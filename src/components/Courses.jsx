@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Posts/styles.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 export default function Courses({
   listId,
   setListId,
@@ -113,12 +113,13 @@ export default function Courses({
   const showData = () => {
     return posts?.map((post) => {
       return (
+        <Link to={`/newCourse/${post._id}`} style={{textDecoration:"none"}}>
         <div
           key={post._id}
           className="courseContainer"
-          onClick={() => {
-            handleClick(post);
-          }}
+          // onClick={() => {
+          //   handleClick(post);
+          // }}
           style={{ cursor: "pointer", padding: "5px", borderRadius: "5px" }}
         >
           <img
@@ -140,19 +141,20 @@ export default function Courses({
             </div>
             <div>{post.description.slice(0, 35)}...</div>
           </div>
-        </div>
+        </div></Link>
       );
     });
   };
   const showFilteredData = () => {
     return filteredPosts?.map((post) => {
       return (
+        <Link to={`/newCourse/${post._id}`} style={{textDecoration:"none"}}>
         <div
           key={post._id}
           className="courseContainer"
-          onClick={() => {
-            handleClick(post);
-          }}
+          // onClick={() => {
+          //   handleClick(post);
+          // }}
           style={{ cursor: "pointer", padding: "5px", borderRadius: "5px" }}
         >
          
@@ -174,6 +176,7 @@ export default function Courses({
             <div>{post.description.slice(0, 35)}...</div>
           </div>
         </div>
+        </Link>
       );
     });
   };

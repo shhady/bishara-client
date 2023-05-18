@@ -40,7 +40,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
     return teachers.slice(0, 10).map((teacher, i) => {
       return (
         <div key={i} onClick={() => setTeachersHover(false)}>
-          <Link to="/Teacher" style={{ textDecoration: "none" }}>
+          <Link to={`/NewTeacher/${teacher._id}`} style={{ textDecoration: "none" }}>
             <div
               style={{
                 cursor: "pointer",
@@ -91,7 +91,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
       <div
         style={{
           backgroundColor: "white",
-          width: "60%",
+          width: "fit-content",
           border: "0.5px solid #dcdcdc",
           borderTop: "none",
           // height: "fitContent",

@@ -1,0 +1,52 @@
+.cover{
+    background-color: black;
+    height: 50vh;
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 80px;
+    
+}
+.imageProfileNew{
+        width: 221px;
+        height: 221px;
+        border-radius: 50%;
+        border: 3px solid white;
+}
+.onTopOfCover{
+    height: 100%;
+    width: 100%;
+    background: rgba(26, 25, 25, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.newTeacherTitles{
+    width: 80%;
+    margin:20px auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+   
+}
+@media (max-width: 768px) {
+    .cover{
+        margin-top: 60px;
+        height: 40vh;
+
+    }
+    .newTeacherTitles{
+        margin:20px auto;
+        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+        align-items: center;
+       
+    }
+}

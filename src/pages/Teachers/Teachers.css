@@ -1,10 +1,14 @@
 .teachersCards {
     /* margin-top: 150px; */
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    /* display: grid;
+    grid-template-columns: repeat(6, 1fr); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
-    width: 90%;
-    margin: auto;
+    width: 80%;
+    margin: 15px auto;
 }
 
 .coursesHomePageContainer {
@@ -132,9 +136,7 @@ div {
 
 @media (max-width: 800px) and (min-width: 500px) {
     .teachersCards {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+        width: 90%;
     }
 
     .coursesHomePageContainer {
@@ -154,12 +156,14 @@ div {
 }
 
 @media (max-width: 500px) {
-    .teachersCards {
+    /* .teachersCards {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
+    } */
+    .teachersCards {
+        width: 90%;
     }
-
     .lessonsHomePage {
         margin-right: 0px;
     }
