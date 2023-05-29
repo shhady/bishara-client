@@ -47,11 +47,15 @@ useEffect(() => {
   const handleReceivedMessage = (data) => {
     const urlParams = new URLSearchParams(window.location.search);
     const conversationId = urlParams.get('currentChat');
+    const from = urlParams.get('from');
+    const to = urlParams.get('to');
     console.log(conversationId);
     console.log(data.userName);
     console.log(conversationId !== data.userName ? 'no match' : 'match');
-
-    if (conversationId !== data.userName) {
+    if (data.userName === from || data.userName === to) {
+      setChats([])
+    }
+    else if (conversationId !== data.userName) {
       setChats((prevChats) => [...prevChats, { message: 'got a new message', data }]);
       console.log('got the message');
     } else {
@@ -67,7 +71,7 @@ useEffect(() => {
         process.env.REACT_APP_BACKEND_URL + `/conversations/${conversationId}`,
         { seen: true }
       );
-      setChats([])
+      
     } catch (error) {
       console.log('Something went wrong:', error);
     }
