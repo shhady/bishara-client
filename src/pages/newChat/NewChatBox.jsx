@@ -104,7 +104,7 @@ const handleSubmit = async (e) => {
 
   socket?.emit("sendMessage", {
     senderId: myId,
-    userName: "sender",
+    userName: conversationId,
     receiverId:secondId,
     text: newMessage,
   });
