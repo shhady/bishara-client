@@ -8,6 +8,7 @@ export default function MessengerIcon({socket}) {
   const [chats, setChats] = useState([])
   const urlParams = new URLSearchParams(window.location.search);
   const conversationId = urlParams.get('currentChat');
+  console.log(conversationId)
   const navigate = useNavigate()
   useEffect(()=>{
     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
