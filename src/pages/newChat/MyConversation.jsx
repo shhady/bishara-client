@@ -35,10 +35,11 @@ export default function MyConversation({currentUser, conversation, socket}) {
       useEffect(() => {
         // socket.current = io("ws://localhost:8900");
         socket?.on("getMessage", (data) => {
+            console.log(data)
             console.log("arrived")
             setArrived("arrived")
         });
-      }, [from, socket]);
+      }, [socket]);
   return (<>
   {currentUser.role === "admin" || currentUser.role === "teacher"  ? (<> 
   {conversation.showAtTeacher === "true" ? <>
