@@ -5,7 +5,7 @@ import "./newMessenger.css"
 import axios from 'axios';
 import MyConversation from './MyConversation';
 import { useParams } from 'react-router-dom';
-export default function NewMessenger() {
+export default function NewMessenger({socket}) {
     const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("profile")));
     const [user, setUser] = useState('');
     const [chats, setChats] = useState([]) 
@@ -49,7 +49,7 @@ export default function NewMessenger() {
       <h2>المحادثات</h2> 
       {chats.map((chat) =>(
         <div onClick={()=>setCurrentChat(chat)}>
-      <MyConversation currentUser={user} conversation={chat}/>
+      <MyConversation currentUser={user} conversation={chat} socket={socket}/>
       </div>
       ))}
       </div>
@@ -62,7 +62,7 @@ export default function NewMessenger() {
       <h2>المحادثات</h2> 
       {chats.map((chat) =>(
          <div>
-      <MyConversation currentUser={user} conversation={chat}/></div>
+      <MyConversation currentUser={user} conversation={chat} socket={socket}/></div>
       ))}
       </div>
       <div>

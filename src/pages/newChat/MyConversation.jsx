@@ -3,7 +3,7 @@ import axios from 'axios';
 import "./newMessenger.css"
 import { Link } from 'react-router-dom';
 import { color } from '@chakra-ui/react';
-export default function MyConversation({currentUser, conversation}) {
+export default function MyConversation({currentUser, conversation, socket}) {
     const [user, setUser] = useState(null);
     const [arrived, setArrived] = useState(null);
    console.log(conversation)
