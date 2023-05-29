@@ -33,7 +33,9 @@
     color:black;
     max-width: 300px;
 }
-
+.MessageBottom{
+    font-size: 12px;
+}
 @media(max-width: 845px){
     .messageText{
         max-width: 150px;

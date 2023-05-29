@@ -13,11 +13,11 @@ import AudioRecord from "../../components/AudioRecord";
 import CommentOnVideo from "../../components/CommentOnVideo";
 import { useNavigate } from "react-router-dom";
 // import YoutubeForPractice from "../../components/youtubeForPractice/YoutubeForPractice";
-export default function PracticeReplies({ user, socket }) {
+export default function PracticeReplies({ user, socket, practices }) {
   // State variables
   const theUser=JSON.parse(localStorage.getItem("profile"))
   const [teacherPractices, setTeacherPractices] = useState([]);
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState(user._id);
   const [reply, setReply] = useState("");
   const [myReply, setMyReply] = useState("");
   const [showReply, setShowReply] = useState(true);
@@ -39,9 +39,10 @@ export default function PracticeReplies({ user, socket }) {
   const [generalButtons, setGeneralButtons] = useState(false)
   const navigate = useNavigate();
   const unique_id = uuid();
-  const userF = user.user ? user.user.firstName : user.teacher.firstName;
-  const userL = user.user ? user.user.lastName : user.teacher.lastName;
-    
+  // const userF = user.user ? user.user.firstName : user.teacher.firstName;
+  // const userL = user.user ? user.user.lastName : user.teacher.lastName;
+  const userF = user.firstName
+  const userL = user.lastName
   useEffect(() => {
     function MyVideo() {
       if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
@@ -53,15 +54,17 @@ export default function PracticeReplies({ user, socket }) {
     }
     MyVideo();
   }, []);
+
+  console.log(practices)
   // Set user ID when component mounts
-  useEffect(() => {
-    const userid = theUser.user ? theUser.user._id : theUser.teacher._id;
-    setUserId(userid);
-  }, []);
-  useEffect(() => {
-    const userid = user.user ? user.user._id : user.teacher._id;
-    setUserId(userid);
-  }, [user]);
+  // useEffect(() => {
+  //   const userid = theUser.user ? theUser.user._id : theUser.teacher._id;
+  //   setUserId(userid);
+  // }, []);
+  // useEffect(() => {
+  //   const userid = user.user ? user.user._id : user.teacher._id;
+  //   setUserId(userid);
+  // }, [user]);
   // Fetch replies data when component mounts
   useEffect(() => {
     const fetchReplies = async () => {
@@ -82,19 +85,19 @@ export default function PracticeReplies({ user, socket }) {
   // }, [autoReplies]);
 
   // Fetch practices data when user ID or doneAddingComment changes
-  useEffect(() => {
-    const fetchPractices = async () => {
-      const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL +
-          `/mypractices/${theUser.teacher._id}`
-      );
-      // const filterData = res.data.filter(
-      //   (practice) => practice.teacherId === userId
-      // );
-      setTeacherPractices(res.data);
-    };
-    fetchPractices();
-  }, [doneAddingComment]);
+  // useEffect(() => {
+  //   const fetchPractices = async () => {
+  //     const res = await axios.get(
+  //       process.env.REACT_APP_BACKEND_URL +
+  //         `/mypractices/${theUser.teacher._id}`
+  //     );
+  //     // const filterData = res.data.filter(
+  //     //   (practice) => practice.teacherId === userId
+  //     // );
+  //     setTeacherPractices(res.data);
+  //   };
+  //   fetchPractices();
+  // }, [doneAddingComment]);
 
   // Fetch practices data when component mounts
   useEffect(() => {
@@ -447,7 +450,7 @@ export default function PracticeReplies({ user, socket }) {
   console.log(teacherPractices)
   // Render showData component
   const showData = () => {
-    return teacherPractices?.map((practice, i) => {
+    return practices?.map((practice, i) => {
       return (
         
         <div
@@ -461,13 +464,14 @@ export default function PracticeReplies({ user, socket }) {
             getGeneralButtons(practice)}}
         >
          <div>
-            الطالب:
+            {/* الطالب: */}
             {practice.studentFirstName} {practice.studentLastName}
           </div>
           <div>
             {" "}
-            الدورة:
-            {practice.courseName}, {practice.courseLevel}
+           
+            {practice.courseName} <br/>
+            {practice.courseLevel}
           </div>
           <Link to={`/NewLesson/course?name=${practice.uniqueLink}&playlist=${practice.courseId
 }`} style={{textDecoration:"none"}}>
@@ -476,18 +480,6 @@ export default function PracticeReplies({ user, socket }) {
             {practice.video}
           </div>
           </Link>
-          {/* {showLesson ? (
-           <div  className="LessonVideoPractice">
-           <iframe
-             width="100%"
-             height="95%"
-             src={`https://www.youtube.com/embed/${theLessonToShowId}?modestbranding=1&autoplay=1&rel=0&showinfo=0&fs=1`}
-             title="Fadi a"
-             frameBorder="0"
-             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-             allowFullScreen
-           ></iframe>
-         </div>):(null)} */}
           <div style={{
                marginBottom:"10px" 
               }}>
@@ -775,7 +767,6 @@ export default function PracticeReplies({ user, socket }) {
   return (
     <div style={{ marginTop: "150px" }}>
       <div>
-        <h2 style={{ textAlign: "center" }}>تمارين الطلاب</h2>
       </div>
       <div>{showData()}</div>
     </div>

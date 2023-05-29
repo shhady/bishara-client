@@ -1,0 +1,11 @@
+.titlesPracticesTeacher{
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.titlesPracticesTeacher > div:hover{
+    border-bottom: 1px solid black;
+    transition: all 1s ease-in-out;
+}

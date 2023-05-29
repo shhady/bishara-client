@@ -17,6 +17,7 @@ import {
   faMusic,
   faUsersRays,
 } from "@fortawesome/free-solid-svg-icons";
+import MessengerIcon from "./Messenger/messengerIcon/MessengerIcon";
 
 // import { io } from "socket.io-client";
 // import { faCoffee } from '@fortawesome/free-solid-svg-icons'
@@ -49,6 +50,8 @@ export default function Header({
   const [userPracticesNotSeen, setUserPracticesNotSeen] = useState([]);
   const [notificationNumber, setNotificationNumber] = useState([]);
   const [isHovering, setIsHovering] = useState(false);
+  const [notifyMessage, setNotifyMessage] = useState(null);
+
   const [teachersHover, setTeachersHover] = useState(false);
   const [replies, setReplies] = useState([]);
   const [coursesHover, setCoursesHover] = useState(false);
@@ -58,7 +61,6 @@ export default function Header({
   const [redLightNotificationReply, setRedLightNotificationReply] =
     useState(false);
   const [allConversations, setAllConversations] = useState([]);
-  const [notifyMessage, setNotifyMessage] = useState(null);
   const [showNotificationPopUp, setShowNotificationPopUp] = useState(false);
   const [teacherPracticesNotifications, setTeacherPracticesNotifications] =
     useState([]);
@@ -451,7 +453,7 @@ export default function Header({
               >
                 {" "}
                 <Link
-                  to="/messenger"
+                  to={`/newmessenger/${userId}`}
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   الرسائل المباشره
@@ -564,33 +566,36 @@ export default function Header({
             </div>
             <div>
               {user ? (
-                <div
-                  style={{
-                    // padding: "2px",
-                    // border: "1px solid white",
-                    cursor: "pointer",
-                    position: "relative",
-                  }}
-                  onMouseOver={() => setIsHovering(false)}
-                  onClick={() => {
-                    // if (uniques.length === 0) {
-                    navigate("/messenger");
-                    setNotifyMessage(null);
-                    // } else {
-                    //   setOpenNotificationsMessage(!openNotificationsMessage);
-                    // }
-                  }}
-                >
-                  {/* <FontAwesomeIcon icon={faMessage} /> */}
-                  <img
-                    src="https://img.icons8.com/fluency-systems-filled/48/null/filled-chat.png"
-                    alt="message"
-                    width="20px"
-                  />
-                  {notifyMessage && chatNotification ? (
-                    <div className="notificationMessage"></div>
-                  ) : null}
-                </div>
+                 <div>
+                 <MessengerIcon socket={socket}/>
+                 </div>
+                // <div
+                //   style={{
+                //     // padding: "2px",
+                //     // border: "1px solid white",
+                //     cursor: "pointer",
+                //     position: "relative",
+                //   }}
+                //   onMouseOver={() => setIsHovering(false)}
+                //   onClick={() => {
+                //     // if (uniques.length === 0) {
+                //     navigate(`/newmessenger/${userId}`);
+                //     setNotifyMessage(null);
+                //     // } else {
+                //     //   setOpenNotificationsMessage(!openNotificationsMessage);
+                //     // }
+                //   }}
+                // >
+                //   {/* <FontAwesomeIcon icon={faMessage} /> */}
+                //   <img
+                //     src="https://img.icons8.com/fluency-systems-filled/48/null/filled-chat.png"
+                //     alt="message"
+                //     width="20px"
+                //   />
+                //   {notifyMessage && chatNotification ? (
+                //     <div className="notificationMessage"></div>
+                //   ) : null}
+                // </div>
               ) : null}
             </div>
           </div>
@@ -702,33 +707,8 @@ export default function Header({
                   </>
                 ) : null}
                 {user ? (
-                  <div
-                    style={{
-                      
-                      height: "80px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      
-                      cursor: "pointer",
-                      position: "relative",
-                    }}
-                    onMouseOver={() => setIsHovering(false)}
-                    onClick={() => {
-                      navigate("/messenger");
-                      setNotifyMessage(null);
-                    
-                    }}
-                  >
-                  
-                    <img
-                      src="https://img.icons8.com/fluency-systems-filled/48/null/filled-chat.png"
-                      alt="message"
-                      width="20px"
-                    />
-                    {notifyMessage && chatNotification ? (
-                      <div className="notificationMessage"></div>
-                    ) : null}
+                 <div>
+                  <MessengerIcon socket={socket}/>
                   </div>
                 ) : null}
               </div>
@@ -1102,7 +1082,7 @@ export default function Header({
                       </span>
                     </div>
                   </Link>
-                  <Link to="/messenger" style={{ textDecoration: "none" }}>
+                  <Link to={`/newmessenger/${userId}`} style={{ textDecoration: "none" }}>
                     <div
                       style={{
                         color: "white",

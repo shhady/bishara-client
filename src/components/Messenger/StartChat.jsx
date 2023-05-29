@@ -59,7 +59,7 @@ export default function StartChat({ teacherId, userId }) {
     }
     navigate("/messenger");
   };
-  useEffect(() => {});
+
   return (
     <div className="buttonStartChat">
       <div style={{ marginLeft: "10px" }}>

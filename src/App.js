@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import { io } from "socket.io-client";
 import Zoom from "./pages/zoom/Zoom";
 import YoutubeForPractice from "./pages/youtubeForPractice/YoutubeForPractice";
-import NewMessenger from "./pages/NewMessenger/NewMessenger"
+// import NewMessenger from "./pages/NewMessenger/NewMessenger"
 const Home = React.lazy(() => import("./pages/HomePage/Home"));
 const StudentsPractices = React.lazy(() => import("./components/StudentsPractices"));
 const Messenger = React.lazy(() => import("./components/Messenger/Messenger"));
@@ -28,10 +28,12 @@ const CreateCourseForTeacher = React.lazy(() => import("./components/Course/Crea
 const StudentMyPractice = React.lazy(() => import("./pages/StudentPractice/StudentMyPractice"));
 const GeneralButton = React.lazy(() => import("./pages/GeneralButton"));
 const Subscribe = React.lazy(() => import("./pages/Subscribe"));
-// const NewMessenger = React.lazy(() => import("./pages/NewMessenger/NewMessenger"));
+const NewMessenger = React.lazy(() => import("./pages/newChat/NewMessenger"));
 const NewTeacher = React.lazy(() => import("./pages/newTeacher/NewTeacher"));
 const NewCourse = React.lazy(() => import("./pages/newCourse/NewCourse"));
 const NewLesson = React.lazy(() => import("./pages/newLesson/NewLesson"));
+const NewReview = React.lazy(() => import("./pages/newReviewteacher/NewReview"));
+const NewChatBox = React.lazy(() => import("./pages/newChat/NewChatBox"));
 
 
 export default function App() {
@@ -101,8 +103,13 @@ export default function App() {
           <Route path="/SpecificPractice/:id" exact element={ <SpecificPractice user={user} setUser={setUser} socket={socket}/>}/>
           <Route path="/StudentMyPractice/:id" exact element={<StudentMyPractice user={user} setUser={setUser}/>}/>
           <Route path="/NewLesson/:id" exact element={<NewLesson />}/>
+          <Route path="/NewLesson/:id" exact element={<NewLesson />}/>
+          <Route path="/NewMessenger/:id" exact element={<NewMessenger socket={socket}/>}/>
+          <Route path="/chatting" exact element={<NewChatBox socket={socket}/>}/>
 
           
+          
+          <Route path="/NewReview" exact element={<NewReview socket={socket}/>}/>
           <Route path="/addStudent" exact element={<PaidStudent user={user} setUser={setUser}/>}/>
           <Route path="/TestYoutube/:id" exact element={  <TestYoutube
               user={user}

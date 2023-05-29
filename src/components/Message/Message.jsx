@@ -1,10 +1,10 @@
 import React from "react";
 import "./message.css";
-// import { format } from "timeago.js";
+import { format } from "timeago.js";
 
 export default function Message({ message, own, userAvatar }) {
   return (
-    <div className={own ? "message own" : "message"}>
+    <div className={own ? "message own" : "message"} style={{ padding: "0px 20px"}}>
       <div className="MessageTop">
         {/* <img
           className="messageImg"
@@ -18,7 +18,7 @@ export default function Message({ message, own, userAvatar }) {
         /> */}
         <p className="messageText">{message.text}</p>
       </div>
-      {/* <div className="MessageBottom">{message.createdAt}</div> */}
+      <div dir="ltr" className="MessageBottom">{format(message.createdAt)}</div>
     </div>
   );
 }

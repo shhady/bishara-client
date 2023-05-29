@@ -1,0 +1,9 @@
+.notificationMessage{
+    position: absolute;
+    margin-top: -45%;
+    margin-left: 45%;
+    width:10px;
+    height: 10px;
+    background-color: rgb(246, 95, 95);
+    border-radius:50%
+}

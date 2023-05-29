@@ -73,10 +73,14 @@ function handleOpenWidget(e) {
     }
   }
   return (
+    <div className='containerEvaluation'>
+    <div className='evaDesc'>
+    تحميل فيديو لنفسك وأنت تعزف الموسيقى للحصول على تعليقات من معلمك يُعد أداة تعلم قيمة ومريحة. من خلال تسجيل أدائك على الفيديو، تمنح معلمك نظرة شاملة على قدراتك الموسيقية، مما يتيح تقييمًا أكثر دقة وفهمًا أعمق لبناء منهاج خاص بك. 
+    </div>
     <div>
         {/* {maxSize ? ('max 100mb'):(null)} */}
         <form onSubmit={uploadFile} className='formEvaluation'>
-          <div style={{width:"100%", textAlign:'center'}}>
+          <div style={{width:"100%", textAlign:'center', fontWeight:"bold"}}>
           خبرتك في العزف 
           <select
            className='inputFormEva'
@@ -100,6 +104,7 @@ function handleOpenWidget(e) {
           <button onClick={handleOpenWidget} className='uploadEvaluation'>ارسل عزفك</button>
           <button type="submit" className='submitFormEva'>ارسال</button>  
           </form>
+    </div>
     </div>
   )
 }

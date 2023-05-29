@@ -288,7 +288,7 @@ export default function Profile({ userProp }) {
   };
 
   const studentsPractices = () => {
-    navigate("/PracticeReplies");
+    navigate("/newReview");
   };
   const addStudent = ()=>{
     navigate("/addStudent");
@@ -369,12 +369,12 @@ export default function Profile({ userProp }) {
               </div>
               <div>
                 {" "}
-                الدورة: {" "}
+                 {" "}
                 {practice.courseName}
               </div>
               <div>
               {" "}
-                الدرس: {" "}
+                 {" "}
                 {practice.video}
               </div>
             </div>
