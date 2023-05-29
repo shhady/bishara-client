@@ -14,7 +14,6 @@ export default function MessengerIcon({socket}) {
 },[theUser])
 
 
-console.log(conversationId)
 useEffect(() => {
 
   socket?.on("getMessage", (data) => {
