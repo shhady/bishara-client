@@ -14,35 +14,71 @@ export default function MessengerIcon({socket}) {
 },[theUser])
 
 
-useEffect(() => {
+// useEffect(() => {
 
-  socket?.on("getMessage", (data) => {
+//   socket?.on("getMessage", (data) => {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const conversationId = urlParams.get('currentChat');
+//     console.log(conversationId)
+//     console.log(data.userName)
+//     console.log(conversationId !== data.userName ? ('no match'):('match'))
+//     if(conversationId !== data.userName) {
+//       setChats(["got a new message",data]);
+//       console.log("got the message")
+//     }else{
+//       const makeItSeen = async () => {
+//         try {
+//           await axios
+//             .patch(
+//               process.env.REACT_APP_BACKEND_URL +
+//                 `/conversations/${conversationId}`,
+//               { seen: "true" }
+//             )
+//         } catch (error) {
+//           console.log("something went wrong", error);
+//         }
+//       };
+//       makeItSeen()
+//     }
+    
+//   });
+// }, [socket]);
+useEffect(() => {
+  const handleReceivedMessage = (data) => {
     const urlParams = new URLSearchParams(window.location.search);
     const conversationId = urlParams.get('currentChat');
-    console.log(conversationId)
-    console.log(data.userName)
-    console.log(conversationId !== data.userName ? ('no match'):('match'))
-    if(conversationId !== data.userName) {
-      setChats(["got a new message",data]);
-      console.log("got the message")
-    }else{
-      const makeItSeen = async () => {
-        try {
-          await axios
-            .patch(
-              process.env.REACT_APP_BACKEND_URL +
-                `/conversations/${conversationId}`,
-              { seen: "true" }
-            )
-        } catch (error) {
-          console.log("something went wrong", error);
-        }
-      };
-      makeItSeen()
+    console.log(conversationId);
+    console.log(data.userName);
+    console.log(conversationId !== data.userName ? 'no match' : 'match');
+
+    if (conversationId !== data.userName) {
+      setChats((prevChats) => [...prevChats, { message: 'got a new message', data }]);
+      console.log('got the message');
+    } else {
+      makeConversationSeen();
     }
-    
-  });
+  };
+
+  const makeConversationSeen = async () => {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const conversationId = urlParams.get('currentChat');
+      await axios.patch(
+        process.env.REACT_APP_BACKEND_URL + `/conversations/${conversationId}`,
+        { seen: true }
+      );
+    } catch (error) {
+      console.log('Something went wrong:', error);
+    }
+  };
+
+  socket?.on('getMessage', handleReceivedMessage);
+
+  return () => {
+    socket?.off('getMessage', handleReceivedMessage);
+  };
 }, [socket]);
+
 useEffect(()=>{
   const getConversations = async () => {
       try {
