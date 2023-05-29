@@ -11,7 +11,7 @@ export default function MessengerIcon({socket}) {
 },[theUser])
 useEffect(() => {
   socket?.on("getMessage", (data) => {
-    setChats(["got a new message"]);
+    setChats(["got a new message",data]);
     console.log("got the message")
   });
 }, [socket]);
