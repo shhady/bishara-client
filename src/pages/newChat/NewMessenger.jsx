@@ -34,7 +34,7 @@ export default function NewMessenger({socket}) {
             }
           };
           getConversations();
-    },[id, arrived])
+    },[id])
    console.log(chats)
 
    useEffect(()=>{
@@ -44,6 +44,22 @@ export default function NewMessenger({socket}) {
       useEffect(() => {
         // socket.current = io("ws://localhost:8900");
         socket?.on("getMessage", (data) => {
+            const getConversations = async () => {
+                try {
+                  const res = await axios.get(
+                    process.env.REACT_APP_BACKEND_URL + `/conversations/` + id
+                  );
+                  if (!res) return null;
+          
+                  const sortedConversations = res.data.sort((a, b) => {
+                    return new Date(b.lastUpdated) - new Date(a.lastUpdated);
+                  });
+                  setChats(sortedConversations);
+                } catch (error) {
+                  console.log(error);
+                }
+              };
+              getConversations();
             console.log(data)
             console.log("arrived")
             setArrived("arrived")
