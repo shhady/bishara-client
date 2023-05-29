@@ -43,19 +43,20 @@ export default function MessengerIcon({socket}) {
     
 //   });
 // }, [socket]);
+useEffect(()=>{
+  if (user?._id === from || user?._id === to) {
+    setChats([])
+  }
+},[])
 useEffect(() => {
   const handleReceivedMessage = (data) => {
     const urlParams = new URLSearchParams(window.location.search);
     const conversationId = urlParams.get('currentChat');
-    const from = urlParams.get('from');
-    const to = urlParams.get('to');
     console.log(conversationId);
     console.log(data.userName);
     console.log(conversationId !== data.userName ? 'no match' : 'match');
-    if (data.userName === from || data.userName === to) {
-      setChats([])
-    }
-    else if (conversationId !== data.userName) {
+
+    if (conversationId !== data.userName) {
       setChats((prevChats) => [...prevChats, { message: 'got a new message', data }]);
       console.log('got the message');
     } else {
