@@ -44,7 +44,12 @@ export default function MessengerIcon({socket}) {
 //   });
 // }, [socket]);
 useEffect(()=>{
+  const urlParams = new URLSearchParams(window.location.search);
+    const from = urlParams.get('from');
+    const to = urlParams.get('to');
+
   if (user?._id === from || user?._id === to) {
+    console.log("match or not", user)
     setChats([])
   }
 },[])
