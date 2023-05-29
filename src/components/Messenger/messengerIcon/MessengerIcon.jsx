@@ -25,6 +25,20 @@ useEffect(() => {
     if(conversationId !== data.userName) {
       setChats(["got a new message",data]);
       console.log("got the message")
+    }else{
+      const makeItSeen = async () => {
+        try {
+          await axios
+            .patch(
+              process.env.REACT_APP_BACKEND_URL +
+                `/conversations/${conversationId}`,
+              { seen: "true" }
+            )
+        } catch (error) {
+          console.log("something went wrong", error);
+        }
+      };
+      makeItSeen()
     }
     
   });
