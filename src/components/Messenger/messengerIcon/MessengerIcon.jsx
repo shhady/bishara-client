@@ -55,14 +55,14 @@ useEffect(() => {
       setChats((prevChats) => [...prevChats, { message: 'got a new message', data }]);
       console.log('got the message');
     } else {
-      makeConversationSeen();
+      if (data.senderId !== user._id) {
+        makeConversationSeen(conversationId);
+      }
     }
   };
 
-  const makeConversationSeen = async () => {
+  const makeConversationSeen = async (conversationId) => {
     try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const conversationId = urlParams.get('currentChat');
       await axios.patch(
         process.env.REACT_APP_BACKEND_URL + `/conversations/${conversationId}`,
         { seen: true }
@@ -77,7 +77,8 @@ useEffect(() => {
   return () => {
     socket?.off('getMessage', handleReceivedMessage);
   };
-}, [socket]);
+}, [socket,user]);
+
 
 useEffect(()=>{
   const getConversations = async () => {
