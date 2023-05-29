@@ -59,6 +59,7 @@
 .messageContainer{
     height:70vh;
     overflow-y: scroll;
+    margin-top: 135px;
 }
 .inputMessages{
     position: absolute;
@@ -99,6 +100,8 @@
     .messageContainer{
         height:73vh;
         overflow-y: scroll;
+        margin-top: 115px;
+
     }
     .conversationsList{
         display: flex; 
@@ -127,5 +130,17 @@
          /* grid-template-columns: 1fr 1fr; */
          margin: 60px auto;
          background-color: antiquewhite;
+    }
+    .secondUserInfo{
+        padding: 10px 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: 1px solid black;
+        position: fixed;
+        top:60px;
+        right:0;
+        width: 100%;
+        background-color: antiquewhite;
     }
 }
