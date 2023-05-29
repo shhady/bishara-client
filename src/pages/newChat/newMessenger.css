@@ -79,6 +79,8 @@
     justify-content: flex-start;
     align-items: center;
     border-bottom: 1px solid black;
+    position: absolute;
+    top:0
 }
 @media (max-width: 768px) {
     .rightSideChat{
