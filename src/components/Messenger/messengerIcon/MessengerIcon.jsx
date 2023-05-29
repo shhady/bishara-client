@@ -14,6 +14,7 @@ export default function MessengerIcon({socket}) {
 },[theUser])
 useEffect(() => {
   socket?.on("getMessage", (data) => {
+    if(conversationId === data.userName) return;
     setChats(["got a new message",data]);
     console.log("got the message")
   });
