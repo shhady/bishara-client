@@ -52,17 +52,20 @@
 .ChatPage{
     margin-top: 80px;
     background-color: antiquewhite;
-    min-height: calc(100vh - 80px);
-    position: relative;
-   
+    max-height: calc(100vh - 130px);   
 }
 .messageContainer{
-    height:70vh;
+    height: calc(100vh - 195px );
     overflow-y: scroll;
-    margin-top: 135px;
+    position: fixed;
+    top:142px;
+    bottom: 100px;
+    right: 0;
+    width: 100vw;
+    background-color: antiquewhite;
 }
 .inputMessages{
-    position: absolute;
+    position: fixed;
     bottom: 2px;
     width: 100%;
 }
@@ -98,10 +101,14 @@
         align-items: center; */
     }
     .messageContainer{
-        height:73vh;
+        height: calc(100vh - 185px );
         overflow-y: scroll;
-        margin-top: 115px;
-
+        position: fixed;
+        top:125px;
+        bottom: 100px;
+        right: 0;
+        width: 100vw;
+        background-color: antiquewhite;
     }
     .conversationsList{
         display: flex; 
