@@ -52,7 +52,7 @@ useEffect(()=>{
     console.log("match or not", user)
     setChats([])
   }
-},[])
+},[user])
 useEffect(() => {
   const handleReceivedMessage = (data) => {
     const urlParams = new URLSearchParams(window.location.search);
