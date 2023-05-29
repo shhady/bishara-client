@@ -6,11 +6,15 @@ export default function MessengerIcon({socket}) {
   const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [user, setUser] = useState('') 
   const [chats, setChats] = useState([])
+  const urlParams = new URLSearchParams(window.location.search);
+  const conversationId = urlParams.get('currentChat');
+  const navigate = useNavigate()
   useEffect(()=>{
     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
 },[theUser])
 useEffect(() => {
   socket?.on("getMessage", (data) => {
+    if(conversationId === data.userName) return;
     setChats(["got a new message",data]);
     console.log("got the message")
   });
@@ -30,7 +34,7 @@ useEffect(()=>{
     getConversations();
 },[user])
 
-  const navigate = useNavigate()
+ 
   return (
     <>
     {chats.length > 0 ? (<div style={{position:"relative"}}
