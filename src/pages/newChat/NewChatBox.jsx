@@ -146,7 +146,6 @@ const handleSubmit = async (e) => {
 };
 useEffect(()=>{
   const makeItSeen = async (conversation) => {
-   
     try {
       await axios
         .patch(
@@ -160,6 +159,21 @@ useEffect(()=>{
   };
   makeItSeen()
 },[])
+useEffect(()=>{
+  const makeItSeen = async (conversation) => {
+    try {
+      await axios
+        .patch(
+          process.env.REACT_APP_BACKEND_URL +
+            `/conversations/${conversationId}`,
+          { seen: "true" }
+        )
+    } catch (error) {
+      console.log("something went wrong", error);
+    }
+  };
+  makeItSeen()
+},[messages])
 useEffect(() => {
   scrollRef.current?.scrollIntoView({ behavior: "smooth" });
 }, [messages]);
