@@ -6,17 +6,20 @@ export default function MessengerIcon({socket}) {
   const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [user, setUser] = useState('') 
   const [chats, setChats] = useState([])
-  const urlParams = new URLSearchParams(window.location.search);
-  const conversationId = urlParams.get('currentChat');
+ 
+  const [chatId, setChatId] = useState(null)
   const navigate = useNavigate()
   useEffect(()=>{
     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
 },[theUser])
 
+
 console.log(conversationId)
 useEffect(() => {
 
   socket?.on("getMessage", (data) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const conversationId = urlParams.get('currentChat');
     console.log(conversationId)
     console.log(data.userName)
     console.log(conversationId !== data.userName ? ('no match'):('match'))
