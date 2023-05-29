@@ -13,10 +13,14 @@ export default function MessengerIcon({socket}) {
     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
 },[theUser])
 useEffect(() => {
+
   socket?.on("getMessage", (data) => {
-    if(conversationId === data.userName) return;
-    setChats(["got a new message",data]);
-    console.log("got the message")
+    console.log(conversationId !== data.userName ? ('no match'):('match'))
+    if(conversationId !== data.userName) {
+      setChats(["got a new message",data]);
+      console.log("got the message")
+    }
+    
   });
 }, [socket]);
 useEffect(()=>{
