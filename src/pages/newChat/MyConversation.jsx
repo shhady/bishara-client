@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { color } from '@chakra-ui/react';
 export default function MyConversation({currentUser, conversation, socket}) {
     const [user, setUser] = useState(null);
-    const [arrived, setArrived] = useState(null);
    console.log(conversation)
    
     useEffect(() => {
@@ -31,15 +30,8 @@ export default function MyConversation({currentUser, conversation, socket}) {
           }
         };
         getUser();
-      }, [conversation, currentUser, arrived]);
-      useEffect(() => {
-        // socket.current = io("ws://localhost:8900");
-        socket?.on("getMessage", (data) => {
-            console.log(data)
-            console.log("arrived")
-            setArrived("arrived")
-        });
-      }, [socket]);
+      }, [conversation, currentUser]);
+    
   return (<>
   {currentUser.role === "admin" || currentUser.role === "teacher"  ? (<> 
   {conversation.showAtTeacher === "true" ? <>

@@ -9,6 +9,7 @@ export default function NewMessenger({socket}) {
     const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("profile")));
     const [user, setUser] = useState('');
     const [chats, setChats] = useState([]) 
+    const [arrived, setArrived] = useState(null);
     const [currentChat, setCurrentChat] = useState(null)
     const [messages, setMessages] = useState(null)
     const {id} = useParams()
@@ -33,14 +34,21 @@ export default function NewMessenger({socket}) {
             }
           };
           getConversations();
-    },[id])
+    },[id, arrived])
    console.log(chats)
 
    useEffect(()=>{
        console.log(chats.filter((c)=>c.showAtTeacher !== "false"))
       },[chats])
 
-      console.log(currentChat)
+      useEffect(() => {
+        // socket.current = io("ws://localhost:8900");
+        socket?.on("getMessage", (data) => {
+            console.log(data)
+            console.log("arrived")
+            setArrived("arrived")
+        });
+      }, [socket]);
   return (
     <>
      {user.role === "admin" || user.role === "teacher" ? (<div className='messengerPageTeacher'>
