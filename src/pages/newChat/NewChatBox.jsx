@@ -29,8 +29,7 @@ useEffect(()=>{
 }
 getConv()
 },[user])
-console.log(myId)
-console.log(secondId)
+
 useEffect(()=>{
   theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
 },[theUser])
@@ -106,7 +105,7 @@ const handleSubmit = async (e) => {
   socket?.emit("sendMessage", {
     senderId: myId,
     userName: "sender",
-    secondId,
+    receiverId:secondId,
     text: newMessage,
   });
 
