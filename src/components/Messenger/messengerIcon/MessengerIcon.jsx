@@ -1,6 +1,6 @@
 import React ,{useState, useEffect} from 'react'
 import "./messengerIcon.css"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , useLocation} from 'react-router-dom';
 import axios from 'axios';
 export default function MessengerIcon({socket}) {
   const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -8,7 +8,8 @@ export default function MessengerIcon({socket}) {
   const [chats, setChats] = useState([])
  
   const [chatId, setChatId] = useState(null)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
   useEffect(()=>{
     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
 },[theUser])
@@ -43,16 +44,19 @@ export default function MessengerIcon({socket}) {
     
 //   });
 // }, [socket]);
+// const urlParams = new URLSearchParams(window.location.search);
+// setChatId(urlParams.get('currentChat'))
+
 useEffect(()=>{
   const urlParams = new URLSearchParams(window.location.search);
     const from = urlParams.get('from');
     const to = urlParams.get('to');
-
+    console.log("match or not", user)
   if (user?._id === from || user?._id === to) {
     console.log("match or not", user)
     setChats([])
   }
-},[user])
+},[location])
 useEffect(() => {
   const handleReceivedMessage = (data) => {
     const urlParams = new URLSearchParams(window.location.search);
