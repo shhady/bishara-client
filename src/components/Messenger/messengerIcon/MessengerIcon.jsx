@@ -67,6 +67,7 @@ useEffect(() => {
         process.env.REACT_APP_BACKEND_URL + `/conversations/${conversationId}`,
         { seen: true }
       );
+      setChats([])
     } catch (error) {
       console.log('Something went wrong:', error);
     }
@@ -97,8 +98,13 @@ useEffect(()=>{
 
  
   return (
-    <>
-    {chats.length > 0 ? (<div style={{position:"relative"}}
+    <div style={{
+    height: "60px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",}}>
+    {chats.length > 0 ? (<div style={{position:"relative",maxHeight:"20px"}}
     onClick={() => {
       setChats([])
       navigate(`/newmessenger/${user._id}`);
@@ -110,7 +116,7 @@ useEffect(()=>{
       width="20px"
     />
     <div style={{position:"absolute", width:"10px", height:"10px", background:"red", top:'0', right:"0", borderRadius:"50%"}}></div>
-  </div>):(<div
+  </div>):(<div  style={{maxHeight:"20px"}}
     onClick={() => {
       setChats([])
       navigate(`/newmessenger/${user._id}`);
@@ -124,5 +130,5 @@ useEffect(()=>{
   </div>)}
     
     
-  </> )
+  </div> )
 }

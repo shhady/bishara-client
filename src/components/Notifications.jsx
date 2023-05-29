@@ -377,8 +377,8 @@ export default function Notifications() {
       >
         {drawUnSeenReplies()}
         {drawPracticeNotifications()}
-        {drawComment()}
-        {drawReplies()}
+        {/* {drawComment()}
+        {drawReplies()} */}
       </div>
     </div>
   );

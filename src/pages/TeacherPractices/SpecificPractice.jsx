@@ -10,6 +10,7 @@ import {
   faVideo,
   faPen
 } from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 import AudioRecord from "../../components/AudioRecord";
 import CommentOnVideo from "../../components/CommentOnVideo";
 export default function PracticeReplies({ user, socket,  }) {
@@ -485,7 +486,10 @@ export default function PracticeReplies({ user, socket,  }) {
           </div>
           <div>
             الدرس:
+            <Link to={`/NewLesson/course?name=${practice.uniqueLink}&playlist=${practice.courseId
+}`} style={{textDecoration:"none"}}>
             {practice.video}
+            </Link>
           </div>
           
           <div>

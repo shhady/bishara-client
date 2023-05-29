@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
-export default function PDF({course,name}) {
-    const user=JSON.parse(localStorage.getItem("profile"));
+export default function PDF({course,name,user}) {
+    // const user=JSON.parse(localStorage.getItem("profile"));
     const [fileUrl, setFileUrl] = useState('')
     const [uploadFile, setUploadFile] = useState('')
     const [fileId, setFileId] = useState('')
-    console.log(user.teacher?._id)
+    // console.log(user.teacher?._id)
     useEffect(() => {
         const fetch = async () => {
           const response = await axios.get(
@@ -45,11 +45,11 @@ export default function PDF({course,name}) {
     rel="noreferrer"   style={{
         textDecoration: "none",
         color: "black"}}>الملف</a></button>
-        {user.teacher?._id === course?.owner || user.teacher?.role === "admin" ? (<button className='uploadPracticeBtn' onClick={deleteTheFile} style={{ background:"red"}}>delete</button>):(null)}
+        {user?._id === course?.owner || user.role === "admin" ? (<button className='uploadPracticeBtn' onClick={deleteTheFile} style={{ background:"red"}}>delete</button>):(null)}
         </>
         ):(
             <>
-             {user.teacher?._id === course?.owner || user.teacher?.role === "admin" ? (<form onSubmit={addLink} style={{display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+             {user?._id === course?.owner || user?.role === "admin" ? (<form onSubmit={addLink} style={{display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
             <input type='text' placeholder='اضف الرابط' onChange={(e)=>setUploadFile(e.target.value)} style={{height:"40px", width:"150px", marginTop:"20px"}}/>
             <input type="submit" className='uploadPracticeBtn' style={{height:"40px", width:"150px"}}/>
             </form>):(<button className='uploadPracticeBtn'>لا يوجد ملف</button>)}

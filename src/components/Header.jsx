@@ -511,7 +511,7 @@ export default function Header({
               setShowArrows(true);
             }}
           >
-            <div onClick={() => setOpenMenu(!openMenu)}>
+            <div onClick={() => setOpenMenu(!openMenu)}  style={{height:"60px", display:"flex", justifyContent:"center", alignItems:"center"}}>
               {!openMenu ? (
                 <>
                   <img
@@ -522,7 +522,7 @@ export default function Header({
                 </>
               ) : null}{" "}
             </div>
-            <div>
+            
               {user ? (
                 <>
                   <Link to="/Notifications" style={{ textDecoration: "none" }}>
@@ -530,6 +530,7 @@ export default function Header({
                       style={{
                         // display: "flex",
                         // justifyContent: "flex-end",
+                        height:"60px", display:"flex", justifyContent:"center", alignItems:"center",
                         padding: "0px 20px",
                         color: "black",
                         // border: "1px solid transparent",
@@ -563,10 +564,10 @@ export default function Header({
                   </Link>
                 </>
               ) : null}
-            </div>
-            <div>
+            
+            
               {user ? (
-                 <div>
+                 <div  style={{height:"60px", display:"flex", justifyContent:"center", alignItems:"center"}}>
                  <MessengerIcon socket={socket}/>
                  </div>
                 // <div
@@ -597,7 +598,7 @@ export default function Header({
                 //   ) : null}
                 // </div>
               ) : null}
-            </div>
+           
           </div>
 
           <div className="dontShowOnMobile">
@@ -666,14 +667,12 @@ export default function Header({
                     
                     <div
                       style={{
-                        
                         color: "black",
                         padding: "0px 35px",
                         height: "80px",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                       
                         cursor: "pointer",
                         position: "relative",
                       }}
@@ -707,7 +706,11 @@ export default function Header({
                   </>
                 ) : null}
                 {user ? (
-                 <div>
+                 <div style={{
+                 display: "flex",
+                 justifyContent: "center",
+                 alignItems: "center",
+                 cursor: "pointer"}}>
                   <MessengerIcon socket={socket}/>
                   </div>
                 ) : null}

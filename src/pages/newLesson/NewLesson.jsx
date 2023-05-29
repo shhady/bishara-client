@@ -82,7 +82,7 @@ export default function NewLesson() {
         </div>
         <div className='UploadPDownloadF'>
             {user?._id === course?.owner || user?.role === "admin" ? (<PDF course={course} name={name}/>
-            ):( <><PDF course={course} name={name}/><NewUploadPractice course={course} uniqueLink={name} videoName={videoName}/></>)}
+            ):( <><PDF course={course} name={name} user={user}/><NewUploadPractice course={course} uniqueLink={name} videoName={videoName}/></>)}
        
         </div>
     </div>

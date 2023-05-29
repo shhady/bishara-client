@@ -463,7 +463,7 @@ export default function PracticeReplies({ user, socket, practices }) {
           onClick={() => {getPracticeUnique(practice);
             getGeneralButtons(practice)}}
         >
-         <div>
+         <div onClick={()=> console.log(practice)}> 
             {/* الطالب: */}
             {practice.studentFirstName} {practice.studentLastName}
           </div>

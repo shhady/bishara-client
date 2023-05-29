@@ -301,7 +301,7 @@ export default function Profile({ userProp }) {
         process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user.user._id}`
       );
       setUserPractices(res.data);
-   
+      console.log(res.data)
     };
     fetch();
   }, [userId]);
@@ -375,7 +375,10 @@ export default function Profile({ userProp }) {
               <div>
               {" "}
                  {" "}
+                 <Link to={`/NewLesson/course?name=${practice.uniqueLink}&playlist=${practice.courseId
+}`} style={{textDecoration:"none"}}>
                 {practice.video}
+                </Link>
               </div>
             </div>
             <div>

@@ -378,8 +378,8 @@ export default function NotificationsPop({
       <div className="NotificationPopUp">
         {drawUnSeenReplies()}
         {drawPracticeNotifications()}
-        {drawComment()}
-        {drawReplies()}
+        {/* {drawComment()} */}
+        {/* {drawReplies()} */}
       </div>
     </div>
   );
