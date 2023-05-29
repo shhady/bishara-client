@@ -12,6 +12,8 @@ export default function MessengerIcon({socket}) {
   useEffect(()=>{
     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
 },[theUser])
+
+console.log(conversationId)
 useEffect(() => {
 
   socket?.on("getMessage", (data) => {
