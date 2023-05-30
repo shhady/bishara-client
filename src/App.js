@@ -68,14 +68,18 @@ export default function App() {
   //   if (!userId) return;
   //   socket?.emit("addUser", userId);
   // }, [socket, userId]);
+  let socketInstances = [];
+
   useEffect(() => {
-    let socketInstance = io("https://bisharaserver.herokuapp.com/");
+    const socketInstance = io("https://bisharaserver.herokuapp.com/");
+    socketInstances.push(socketInstance);
   
     setSocket(socketInstance);
     console.log(socketInstance);
   
     return () => {
       socketInstance.disconnect();
+      socketInstances = socketInstances.filter((socket) => socket !== socketInstance);
     };
   }, []);
   
@@ -88,7 +92,7 @@ export default function App() {
       socket.off("addUser");
     };
   }, [userId, socket]);
-
+  
   console.log(socket);
   return (
     <div>
