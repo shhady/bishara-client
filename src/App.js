@@ -53,21 +53,43 @@ export default function App() {
     user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
   }, [user]);
   
+  // useEffect(() => {
+  //   if (!userId) return;
+  //   setSocket(
+  //     io(
+  //       // "https://dawrafun1.herokuapp.com/" ||
+  //       "https://bisharaserver.herokuapp.com/"
+  //     )
+  //   );
+  //   console.log(socket);
+  // }, [userId]);
+  // console.log(socket);
+  // useEffect(() => {
+  //   if (!userId) return;
+  //   socket?.emit("addUser", userId);
+  // }, [socket, userId]);
   useEffect(() => {
-    if (!userId) return;
-    setSocket(
-      io(
-        // "https://dawrafun1.herokuapp.com/" ||
-        "https://bisharaserver.herokuapp.com/"
-      )
-    );
-    console.log(socket);
-  }, [userId]);
+    let socketInstance = io("https://bisharaserver.herokuapp.com/");
+  
+    setSocket(socketInstance);
+    console.log(socketInstance);
+  
+    return () => {
+      socketInstance.disconnect();
+    };
+  }, []);
+  
+  useEffect(() => {
+    if (!userId || !socket) return;
+  
+    socket.emit("addUser", userId);
+  
+    return () => {
+      socket.off("addUser");
+    };
+  }, [userId, socket]);
+
   console.log(socket);
-  useEffect(() => {
-    if (!userId) return;
-    socket?.emit("addUser", userId);
-  }, [socket, userId]);
   return (
     <div>
       <Suspense fallback={<></>}>
