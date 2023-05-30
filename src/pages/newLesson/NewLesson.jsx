@@ -28,7 +28,7 @@ export default function NewLesson() {
     },[id])
     
     useEffect(()=>{
-      if(!user) return ;
+      if(!theUser) return ;
         theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
     },[theUser])
     
@@ -60,7 +60,7 @@ export default function NewLesson() {
             </>
             })
       }
-
+      console.log(theUser);
   return (
     <div>
     <div className='youtubeFrame'>
@@ -80,7 +80,9 @@ export default function NewLesson() {
         </div>
         <div className='UploadPDownloadF'>
             {user?._id === course?.owner || user?.role === "admin" ? (<PDF course={course} name={name}/>
-            ):( <><PDF course={course} name={name} user={user}/><NewUploadPractice course={course} uniqueLink={name} videoName={videoName}/></>)}
+            ):( <>{theUser ? (<><PDF course={course} name={name} user={theUser}/><NewUploadPractice course={course} uniqueLink={name} videoName={videoName}/></>):
+            (<div style={{color:"red"}}>يجب تسجيل الدخول لتحميل الملفات ورفع التمارين للحصول على تقييم العزف <Link to="/auth">لتسجيل الدخول اضغط هنا</Link></div>)
+            }</>)}
        
         </div>
     </div>

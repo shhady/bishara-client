@@ -95,7 +95,7 @@ export default function NewTeachersList({user,chats}) {
   console.log(currentChat)
     const drawTeachers = () => {
         return teachers.map((teacher) =>{
-            return <div key={teacher._id} className="teacherInRightSide" >
+            return <div key={teacher._id} className="teacherInRightSide" style={{cursor:"pointer"}}>
                <div className='nameAndImg' onClick={()=>handleClick(teacher)}> <img src={teacher.avatar} alt={teacher.firstName} height="50px" width='50px' style={{borderRadius:"50%", margin:"10px"}}/>
                 {teacher.firstName} {teacher.lastName}</div>
                 {/* <StartChat teacherId={teacher._id} userId={user._id} /> */}

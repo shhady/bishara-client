@@ -10,7 +10,7 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
       const [user, setUser] = useState('') 
         // const [maxSize, setMaxSize] = useState('')
     useEffect(()=>{
-      if (!user) return;
+      if (!theUser) return;
         theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
     },[theUser])
     const [formData, setFormData] = useState({})
@@ -53,19 +53,20 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
       }
   
     console.log(course)
-    console.log(videoUrl)
+    console.log(theUser)
     useEffect(() => {
    
         const fetch = async () => {
           if (!videoUrl) return;
           await axios.post(process.env.REACT_APP_BACKEND_URL + "/practices/", {
             ownerId:user?._id,
+            playlistId:course.playlistId,            
             studentFirstName:user?.firstName,
             studentLastName:user?.lastName,
             teacherId:course.owner,
             teacherFirstName:course.firstName,
             teacherLastName:course.lastName,
-            courseId:course.playlistId,
+            courseId:course._id,
             courseName:course.title,
             courseLevel:course.level,
             video:videoName,
@@ -88,8 +89,9 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
   
   return (
     <div className='divOfUploadBtn'>
-        <button onClick={handleOpenWidget} className='uploadPracticeBtn'>ارفع تمرين</button>  {" "}
-        الحجم الاقصى"100MB"
+       {user?.paid === course?.owner ? (<div  className='divOfUploadBtn'><button onClick={handleOpenWidget} className='uploadPracticeBtn'>ارفع تمرين</button>  
+        الحجم الاقصى"100MB"</div>):(<div style={{textAlign:"center", color:"red", border:"1px solid black", padding:"4px"}}>لرفع تمارين يجب الاشتراك</div>)}
+        
     </div>
   )
 }

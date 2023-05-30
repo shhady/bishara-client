@@ -84,10 +84,11 @@ export default function NewMessenger({socket}) {
       
       <div>
       <h2>المحادثات</h2> 
-      {chats.map((chat) =>(
+     {chats.length > 0 ? (<> {chats.map((chat) =>(
          <div>
       <MyConversation currentUser={user} conversation={chat} socket={socket}/></div>
-      ))}
+      ))}</>):(<h3 style={{textAlign:"center", borderBottom:"1px solid black"}}>اختر المعلم الذي تريد محادثته</h3>)}
+     
       </div>
       <div>
       <h2 style={{textAlign:"center"}}>المعلمين</h2>

@@ -362,7 +362,7 @@ export default function Profile({ userProp }) {
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
-              <div>
+              <div onClick={()=>console.log(practice)}>
               {" "}
                 الاستاذ: {" "}
                 {practice.teacherFirstName} {practice.teacherLastName}
@@ -374,8 +374,8 @@ export default function Profile({ userProp }) {
               </div>
               <div>
               {" "}
-                 {" "}
-                 <Link to={`/NewLesson/course?name=${practice.uniqueLink}&playlist=${practice.courseId
+                 {/* {" "}<Link to={`/NewLesson/${course._id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course.playlistId}`}></Link> */}
+                 <Link to={`/NewLesson/${practice.courseId}?name=${practice.uniqueLink}&playlist=${practice.playlistId
 }`} style={{textDecoration:"none"}}>
                 {practice.video}
                 </Link>
