@@ -18,10 +18,7 @@ export default function Courses({
   const [title, setTitle] = useState(null);
   const [instruments, setInstruments] = useState("الدورات");
   const navigate = useNavigate();
-  window.onpopstate = () => {
-    navigate("/");
-    window.localStorage.removeItem("title");
-  };
+ 
   useEffect(() => {
     if (!user) return;
     user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);

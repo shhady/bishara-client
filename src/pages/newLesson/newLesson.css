@@ -39,11 +39,12 @@
     background-color: #fee4b9;
     width: 100px;
     height: 50px;
+    margin-left: 10px;
 }
 .UploadPDownloadF{
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     max-width: 90%;
     margin: auto;
 }
@@ -54,5 +55,11 @@
         margin: auto;
         margin-top: 65px;
 
+    }
+    .divOfUploadBtn{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }

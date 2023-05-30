@@ -28,12 +28,10 @@ export default function NewLesson() {
     },[id])
     
     useEffect(()=>{
+      if(!user) return ;
         theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
     },[theUser])
     
-    console.log(user)
-    console.log(lessons); // Output: intw32jmN9s
-    console.log(course); 
     useEffect(()=>{
         const theVideo = lessons.filter((v)=>v.snippet.resourceId.videoId === name)
         setVideoName(theVideo[0]?.snippet.title)

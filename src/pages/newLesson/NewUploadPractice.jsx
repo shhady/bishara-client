@@ -10,6 +10,7 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
       const [user, setUser] = useState('') 
         // const [maxSize, setMaxSize] = useState('')
     useEffect(()=>{
+      if (!user) return;
         theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
     },[theUser])
     const [formData, setFormData] = useState({})
@@ -87,8 +88,8 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
   
   return (
     <div className='divOfUploadBtn'>
-        <button onClick={handleOpenWidget} className='uploadPracticeBtn'>ارفع تمرين</button>
-        {/* {maxSize ? ('max 100mb'):(null)} */}
+        <button onClick={handleOpenWidget} className='uploadPracticeBtn'>ارفع تمرين</button>  {" "}
+        الحجم الاقصى"100MB"
     </div>
   )
 }
