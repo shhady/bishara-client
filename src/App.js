@@ -61,9 +61,9 @@ export default function App() {
         "https://bisharaserver.herokuapp.com/"
       )
     );
-    // console.log(socket);
+    console.log(socket);
   }, [userId]);
-
+  console.log(socket);
   useEffect(() => {
     if (!userId) return;
     socket?.emit("addUser", userId);
