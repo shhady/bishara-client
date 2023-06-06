@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import "./evaluation.css"
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 export default function Evaluation({teacher}) {
   const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [socket, setSocket] = useState(null);
@@ -20,7 +21,7 @@ export default function Evaluation({teacher}) {
     //     myPractice:videoUrl,
     //     uniqueLink:name
   })
-
+  const navigate = useNavigate()
   console.log(data)
 useEffect(()=>{
     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
@@ -68,6 +69,7 @@ function handleOpenWidget(e) {
       courseName:'',
       myPractice:''
     });
+    navigate('/profile')
     }catch(e){
       console.log(e)
     }
