@@ -98,7 +98,7 @@ function handleOpenWidget(e) {
   <option value="1-2 سنوات">1-2 سنوات</option>
   <option value="2-3 سنوات">2-3 سنوات</option>
   <option value="3-4 سنوات">3-4 سنوات</option>
-  <option value=">اكثر من 5 سنوات">اكثر من 5 سنوات</option>
+  <option value="اكثر من 5 سنوات">اكثر من 5 سنوات</option>
 </select>
 </div>
           <input className='inputFormEva' type="text" value={data.whereStudied} onChange={(e)=> setData({...data, whereStudied:e.target.value})} placeholder="اين تعلمت" required/>
