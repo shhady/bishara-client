@@ -60,7 +60,7 @@ function handleOpenWidget(e) {
     try{
       await axios.post(process.env.REACT_APP_BACKEND_URL + "/practices/", 
       {...data,
-        courseName:`${courseNameNumber}`}
+        expTime:`${courseNameNumber}`}
     );
     setData({
       courseLevel: '',
@@ -99,8 +99,8 @@ function handleOpenWidget(e) {
   <option value=">اكثر من 5 سنوات">اكثر من 5 سنوات</option>
 </select>
 </div>
-          <input className='inputFormEva' type="text" value={data.courseLevel} onChange={(e)=> setData({...data, courseLevel:e.target.value})} placeholder="اين تعلمت" required/>
-          <input className='inputFormEva' type="text" value={data.video} onChange={(e)=> setData({...data, video:e.target.value})} placeholder="هدفك من التعليم" required/>
+          <input className='inputFormEva' type="text" value={data.whereStudied} onChange={(e)=> setData({...data, whereStudied:e.target.value})} placeholder="اين تعلمت" required/>
+          <input className='inputFormEva' type="text" value={data.goal} onChange={(e)=> setData({...data, goal:e.target.value})} placeholder="هدفك من التعليم" required/>
           <button onClick={handleOpenWidget} className='uploadEvaluation'>ارسل عزفك</button>
           <button type="submit" className='submitFormEva'>ارسال</button>  
           </form>

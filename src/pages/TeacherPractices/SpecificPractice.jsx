@@ -475,7 +475,7 @@ export default function PracticeReplies({ user, socket,  }) {
           // onClick={getPracticeUnique}
             // getGeneralButtons(practice)}}
         >
-          <div>
+          {/* <div>
             الطالب:
             {practice.studentFirstName} {practice.studentLastName}
           </div>
@@ -490,7 +490,27 @@ export default function PracticeReplies({ user, socket,  }) {
 }`} style={{textDecoration:"none"}}>
             {practice.video}
             </Link>
+          </div> */}
+           <div onClick={()=> console.log(practice)}> 
+            الطالب: {" "}
+            {practice.studentFirstName} {practice.studentLastName}
           </div>
+          <div>
+            {" "}
+           {/* الدوره: {" "}
+            {practice.courseName} / {" "}
+            {practice.courseLevel} */}
+            {practice.courseName ? <>الدوره: {practice.courseName} / {practice.courseLevel}</> : <>الهدف: {practice.goal}</>}
+          </div>
+          {/* <Link to={`/NewLesson/course?name=${practice.uniqueLink}&playlist=${practice.courseId
+}`} style={{textDecoration:"none"}}>
+          <div style={{  marginBottom:"10px"}}>
+         
+            {practice.video}
+          </div>
+          </Link> */}
+           {practice.courseName ? <Link to={`/NewLesson/${practice.courseId}?name=${practice.uniqueLink}&playlist=${practice.playlistId
+}`} style={{textDecoration:"none"}}><>الدرس: {practice.video}</></Link> : <>اين تعلمت: {practice.whereStudied}</>}
           
           <div>
             <div

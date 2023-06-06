@@ -22,7 +22,7 @@
     background:#ffffff;
     color: black;
     max-width: 300px;
-    
+    overflow-wrap: break-word;
 }
 .message.own{
     align-items: flex-start;

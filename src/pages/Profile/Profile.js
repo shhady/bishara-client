@@ -370,15 +370,16 @@ export default function Profile({ userProp }) {
               <div>
                 {" "}
                  {" "}
-                {practice.courseName}
+                {practice.courseName ? <>الدوره: {practice.courseName}</> : <>الهدف: {practice.goal}</>}
               </div>
               <div>
               {" "}
                  {/* {" "}<Link to={`/NewLesson/${course._id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course.playlistId}`}></Link> */}
-                 <Link to={`/NewLesson/${practice.courseId}?name=${practice.uniqueLink}&playlist=${practice.playlistId
-}`} style={{textDecoration:"none"}}>
-                {practice.video}
-                </Link>
+                 
+  {practice.courseName ? <Link to={`/NewLesson/${practice.courseId}?name=${practice.uniqueLink}&playlist=${practice.playlistId
+}`} style={{textDecoration:"none"}}><>الدرس: {practice.video}</></Link> : <>اين تعلمت: {practice.whereStudied}</>}
+                
+                
               </div>
             </div>
             <div>
