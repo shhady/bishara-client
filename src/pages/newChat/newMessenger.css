@@ -31,7 +31,7 @@
     align-items: center;
     margin-top: 1px;
     border: 1px solid black;
-    margin-top: 80px;
+    /* margin-top: 80px; */
 }
 .UnSeenMessage{
     width: 10px;
@@ -102,7 +102,7 @@
         align-items: center;
         margin-top: 1px;
         border: 1px solid black;
-        margin-top: 60px;
+        /* margin-top: 60px; */
 
     }
     .ChatPage{

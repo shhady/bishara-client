@@ -81,9 +81,8 @@ export default function NewMessenger({socket}) {
       </div>
       {/* <NewChatBox user={user}/> */}
   </div>):(<div className='messengerPage'>
-      
-      <div>
-      <h2>المحادثات</h2> 
+  <h2>المحادثات</h2> 
+      <div className='testest'>
      {chats.length > 0 ? (<> {chats.map((chat) =>(
          <div>
       <MyConversation currentUser={user} conversation={chat} socket={socket}/></div>
