@@ -26,6 +26,7 @@
 .suggestion{
     min-width: 150px;
     height: 150px;
+    margin-left: 10px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

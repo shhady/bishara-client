@@ -44,7 +44,7 @@ export default function PDF({course,name}) {
   return (
     <div className='divOfUploadBtn'>
         {fileUrl ? (<>
-        {user.paid === course?.owner ? ( <button className='uploadPracticeBtn'>
+        {user.paid === course?.owner || user._id ===  course?.owner? ( <button className='uploadPracticeBtn'>
         <a
     href={fileUrl}
     target="_blank"
