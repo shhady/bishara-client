@@ -16,6 +16,7 @@
     height: 150px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    border: 1px solid black;
 }
 .recordings{
     display: grid;
@@ -43,6 +44,7 @@
 .videoOfPractice{
     width: 100%;
     height: 100%;
+    border: 1px solid black;
 }
 .videoContainer{
     padding: 10px;
