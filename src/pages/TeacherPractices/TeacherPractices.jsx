@@ -50,9 +50,14 @@ export default function TeacherPractices({ practices }) {
   const drawPractices = () => {
     return updatedPractices.map((practice, i) => (
       <div key={i} className="practicesNew" style={{ backgroundColor: i % 2 === 0 ? '#c7c5c5' : 'white' }}>
-       <div>{practice.studentFirstName} {practice.studentLastName}</div>
-        <div>{practice.courseName} / {practice.courseLevel}</div>
-        <div>{practice.video}</div>
+       <div>الاسم: {practice.studentFirstName} {practice.studentLastName}</div>
+       {practice.courseId === "evaluation" ? (<>
+        <div>الخبره: {practice.expTime}</div>
+        <div>اين تعلم: {practice.whereStudied}</div>
+        <div>الهدف: {practice.goal}</div>
+       </>):(<> <div>الدوره: {practice.courseName} / {practice.courseLevel}</div>
+        <div>{practice.video}</div></>)}
+       
         <div className="videoAndRepliesContainer">
           <div className="videoContainer">
             <video
