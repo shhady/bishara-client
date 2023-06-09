@@ -93,11 +93,11 @@
 import React, { useState } from 'react';
 import { AudioRecorder } from 'react-audio-voice-recorder';
 import axios from 'axios';
-
-function AudioRecord({ setTeacherPractices, practice, unique_id, userId, userF, userL, socket }) {
+import { v4 as uuid } from "uuid";
+function AudioRecord({ setOpenInput, practice, userId, userF, userL, socket, onRecordAdd }) {
   const [audioBlob, setAudioBlob] = useState(null);
   const [resetRecorder, setResetRecorder] = useState(true);
-
+  const unique_id = uuid();
   const addAudioElement = async (blob) => {
     const mimeType = "video/mp4";
     const url = URL.createObjectURL(blob);
@@ -126,7 +126,21 @@ function AudioRecord({ setTeacherPractices, practice, unique_id, userId, userF, 
         'https://api.cloudinary.com/v1_1/djvbchw2x/upload', // replace with your own cloud name
         formData
       );
-
+    //   if(practice.RecordReply.length > 1){
+    //     return console.log("can't submit");
+    //  };
+     const updatedPractice = {
+         ...practice,
+         RecordReply: [
+           ...practice.RecordReply,
+           {
+            RecordingReply: response.data.url.replace('webm', 'mp4').replace('http://', 'https://'),
+             replyId: unique_id
+           }
+         ]
+     }
+     onRecordAdd(updatedPractice);
+     setOpenInput(null)
       await axios
         .put(process.env.REACT_APP_BACKEND_URL + `/practiceRec/${practice._id}`, {
           RecordingReply: response.data.url.replace('webm', 'mp4').replace('http://', 'https://'),
@@ -146,12 +160,12 @@ function AudioRecord({ setTeacherPractices, practice, unique_id, userId, userF, 
             }
           );
         })
-        .then(async () => {
-          const res = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
-          );
-          setTeacherPractices(res.data);
-        });
+        // .then(async () => {
+        //   const res = await axios.get(
+        //     process.env.REACT_APP_BACKEND_URL + `/mypractices/${userId}`
+        //   );
+        //   setTeacherPractices(res.data);
+        // });
         socket.emit("sendNotificationComment", {
           senderName: userF,
           senderFamily: userL,
@@ -163,8 +177,9 @@ function AudioRecord({ setTeacherPractices, practice, unique_id, userId, userF, 
         });
       setAudioBlob(null);
       setResetRecorder(false);
+      
     } catch (error) {
-      console.error(error);
+      console.error(error); 
     }
   };
 

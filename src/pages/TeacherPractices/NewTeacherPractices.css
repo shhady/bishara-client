@@ -1,0 +1,60 @@
+.practicesNew{
+    padding: 10px 0px;
+}
+.videoAndRepliesContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.RepliesVideos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+}
+.RepliesVideo{
+    width: 100%;
+    height: 150px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.recordings{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.commentOnPractice{
+    width: 90%;
+    margin: 10px auto;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 2px 2px 5px #cbcbcb,
+        -2px -2px 5px #ffffff;
+    background-color: #f5f4f4;
+}
+.replyIcons{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.iconReply{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.videoOfPractice{
+    width: 100%;
+    height: 100%;
+}
+.videoContainer{
+    padding: 10px;
+}
+@media (max-width:678px) {
+    .videoAndRepliesContainer{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .recordings{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
