@@ -5,7 +5,19 @@ import AddReply from './AddReply';
 import "./NewTeacherPractices.css";
 export default function TeacherPractices({ practices }) {
   const [updatedPractices, setUpdatedPractices] = useState(practices);
+  const [poster, setPoster] = useState("");
 
+  useEffect(() => {
+    function MyVideo() {
+      if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+        // code to run if user is using Safari
+        setPoster(
+          "https://images.pexels.com/photos/6044198/pexels-photo-6044198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        );
+      }
+    }
+    MyVideo();
+  }, []);
   const handleCommentAdd = (updatedPractice) => {
     const updatedPracticesArray = updatedPractices.map((practice) => {
       if (practice._id === updatedPractice._id) {
@@ -47,6 +59,7 @@ export default function TeacherPractices({ practices }) {
               controls
               preload="metadata"
               className="videoOfPractice"
+              poster={poster}
             >
               <source src={practice.myPractice.replace('http://', 'https://')} type="video/mp4" />
             </video>
@@ -59,6 +72,7 @@ export default function TeacherPractices({ practices }) {
                   controls
                   preload="metadata"
                   className="RepliesVideo"
+                  poster={poster}
                 >
                   <source src={reply.theVideoReply.replace('http://', 'https://')} type="video/mp4" />
                 </video>
