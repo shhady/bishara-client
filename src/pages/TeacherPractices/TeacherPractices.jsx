@@ -69,7 +69,7 @@ export default function TeacherPractices({ practices }) {
               <source src={practice.myPractice.replace('http://', 'https://')} type="video/mp4" />
             </video>
           </div>
-          <div>
+          <div style={{padding:"10px"}}>
             <div className="RepliesVideos">
               {practice.videoReply.map((reply, index) => (
                 <video
@@ -94,9 +94,10 @@ export default function TeacherPractices({ practices }) {
                 </audio>
               ))}
             </div>
+            {practice.reply ? <div className="commentOnPractice">{practice.reply}</div> : null}
             </div>
             </div>
-        {practice.reply ? <div className="commentOnPractice">{practice.reply}</div> : null}
+       
         <div style={{ padding: '15px', border: '1px solid black', marginTop: '10px' }}>
           <AddReply practice={practice} onCommentAdd={handleCommentAdd} onVideoAdd={handleVideoAdd} onRecordAdd={handleRecordAdd}/>
         </div>

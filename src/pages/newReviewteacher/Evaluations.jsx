@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import axios from 'axios';
 import './stylingPractices.css'
-import PracticeReplies from "../TeacherPractices/PracticeReplies"
+import TeacherPractices from "../TeacherPractices/TeacherPractices"
 export default function Evaluations({user,practices,socket}) {
     // const [practices, setPractices] = useState([])
     // useEffect(() => {
@@ -23,7 +23,7 @@ export default function Evaluations({user,practices,socket}) {
      const filteredEvaluation = filterPracticesEvaluation()
   return (
     <div>
-        <PracticeReplies socket={socket} practices={filteredEvaluation} user={user}/>
+        <TeacherPractices socket={socket} practices={filteredEvaluation} user={user}/>
     </div>
   )
 }

@@ -25,7 +25,9 @@ export default function Practices({user,practices, socket}) {
      console.log(filteredPractices)
   return (
     <div>
-        {filteredPractices.length === 0 ?(<>لا يوجد</>):(<> <PracticeReplies socket={socket} practices={filteredPractices} user={user}/></>)}
+        {filteredPractices.length === 0 ?(<div style={{height:"80vh", display:"flex", justifyContent:"center", alignItems:"center"}}><h1>
+          لا يوجد تمارين جديده
+          </h1></div>):(<> <TeacherPractices socket={socket} practices={filteredPractices} user={user}/></>)}
     </div>
   )
 }
