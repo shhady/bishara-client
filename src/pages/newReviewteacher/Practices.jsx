@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import axios from 'axios';
 import './stylingPractices.css'
-import PracticeReplies from "../TeacherPractices/PracticeReplies"
+import TeacherPractices from "../TeacherPractices/TeacherPractices"
 
 export default function Practices({user,practices, socket}) {
     // const [practices, setPractices] = useState([])

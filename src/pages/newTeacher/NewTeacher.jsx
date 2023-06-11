@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './NewTeacher.css'
 import NewTeacherCourses from '../../components/newTeacherComponents/NewTeacherCourses';
@@ -28,6 +28,7 @@ export default function NewTeacher() {
         fetch();
       }, [id]);
     
+      
   return (
     <div>
         <div className='cover' style={{ backgroundImage: `url(${teacher?.cover})` }}>
@@ -37,30 +38,32 @@ export default function NewTeacher() {
                     height: '100%',
                     width: '100%',
               borderRadius: "50%",
-              border: "8px solid white",
+              border: "5px solid white",
             }}/>
                 </div>
                 <div>
-                     <h1 style={{color:"white", textAlign:"center", fontSize:"48px"}}>
+                     <div className='teacherNameFamily'>
                       {teacher?.firstName}
                        {"  "}
                           {teacher?.lastName}
-                     </h1>
+                     </div>
                 </div>
             </div>
         </div>
         <div className='newTeacherTitles'>
-        {open === "NewTeacherCourses" ?(            <h2 onClick={()=>setOpen("NewTeacherCourses")} style={{backgroundColor:"#fee4b9", cursor:"pointer"}}>الدورات</h2>
-):(<h2 onClick={()=>setOpen("NewTeacherCourses")} style={{cursor:"pointer"}}>الدورات</h2>)}
-{open === "NewTeacherDisc" ?(            <h2  onClick={()=>setOpen("NewTeacherDisc")} style={{backgroundColor:"#fee4b9", cursor:"pointer"}}>السيرة الذاتية</h2>
-):(<h2 onClick={()=>setOpen("NewTeacherDisc")}  style={{cursor:"pointer"}}>السيرة الذاتية</h2>)}
-            <h2>مراسلة</h2>
-            {open === "Evaluation" ?(            <h2  onClick={()=>setOpen("Evaluation")} style={{backgroundColor:"#fee4b9", cursor:"pointer"}}>منهاج خاص بك</h2>
-):(<h2 onClick={()=>setOpen("Evaluation")} style={{cursor:"pointer"}} >منهاج خاص بك</h2>)}
-            <h2>
-              
-              </h2>
-          
+        {open === "NewTeacherCourses" ?(  
+        <h3 onClick={()=>setOpen("NewTeacherCourses")} style={{backgroundColor:"#fee4b9", cursor:"pointer"}}>الدورات</h3>
+    ):(
+        <h3 onClick={()=>setOpen("NewTeacherCourses")} style={{cursor:"pointer", borderBottom:"1px solid #dddcdc"}}>الدورات</h3>)}
+        {open === "NewTeacherDisc" ?(
+        <h3  onClick={()=>setOpen("NewTeacherDisc")} style={{backgroundColor:"#fee4b9", cursor:"pointer"}}>السيرة الذاتية</h3>
+    ):(
+        <h3 onClick={()=>setOpen("NewTeacherDisc")}  style={{cursor:"pointer", borderBottom:"1px solid #dddcdc"}}>السيرة الذاتية</h3>)}
+           <Link to={`/newmessenger/${userId}`}  style={{textDecoration:"none", color:"black", borderBottom:"1px solid #dddcdc"}}> <h3>مراسلة</h3></Link>
+            {open === "Evaluation" ?(
+            <h3  onClick={()=>setOpen("Evaluation")} style={{backgroundColor:"#fee4b9", cursor:"pointer"}}>منهاج خاص بك</h3>
+    ):(
+            <h3 onClick={()=>setOpen("Evaluation")} style={{cursor:"pointer", borderBottom:"2px solid #dddcdc"}} >منهاج خاص بك</h3>)}
         </div>
             {open === "NewTeacherCourses" && <NewTeacherCourses id={id}/>}
             {open === "NewTeacherDisc" && <NewTeacherDisc id={id}/>}

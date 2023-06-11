@@ -9,5 +9,9 @@
 }
 .courseCard{
     width: 400px;
-   
+}
+@media (max-width: 420px) {
+    .courseCard{
+        width: 100%;
+    }
 }

@@ -17,7 +17,7 @@ export default function NewTeacherCourses({id}) {
 
   const drawCourses = ()=>{
    return courses.map(course => {
-      return <Link to={`/newCourse/${course._id}`} style={{textDecoration:"none"}}>
+      return <Link to={`/newCourse/${course._id}`} style={{textDecoration:"none", color:"black"}}>
       <div className='courseCard'>
         <img src={course.coursePhoto} width="100%"/>
         <div style={{textAlign:"center"}}>{course.title}</div>

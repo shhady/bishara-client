@@ -12,7 +12,7 @@
         width: 221px;
         height: 221px;
         border-radius: 50%;
-        border: 3px solid white;
+        border: 2px solid rgb(221, 220, 220);
 }
 .onTopOfCover{
     height: 100%;
@@ -30,9 +30,15 @@
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap:20px;
     justify-content: center;
     align-items: center;
    
+}
+.teacherNameFamily{
+    color:white;
+    text-align: center;
+    font-size: 45px;
 }
 @media (max-width: 768px) {
     .cover{
@@ -49,5 +55,15 @@
         align-items: center;
        font-size: smaller;
     }
-    
+    .teacherNameFamily{
+        color:white;
+        text-align: center;
+        font-size: 34px;
+    }
+    .imageProfileNew{
+        width: 171px;
+        height: 171px;
+        border-radius: 50%;
+        border: 2px solid white;
+}
 }

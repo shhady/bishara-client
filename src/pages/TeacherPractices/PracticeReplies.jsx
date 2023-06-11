@@ -482,7 +482,7 @@ export default function PracticeReplies({ user, socket, practices }) {
           </div>
           </Link> */}
            {practice.courseName ? <Link to={`/NewLesson/${practice.courseId}?name=${practice.uniqueLink}&playlist=${practice.playlistId
-}`} style={{textDecoration:"none"}}><>الدرس: {practice.video}</></Link> : <>اين تعلمت: {practice.whereStudied}</>}
+}`} style={{textDecoration:"none", color:"black"}}><>الدرس: {practice.video}</></Link> : <>اين تعلمت: {practice.whereStudied}</>}
           <div style={{
                marginBottom:"10px" 
               }}>

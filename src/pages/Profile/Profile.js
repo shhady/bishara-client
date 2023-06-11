@@ -377,7 +377,7 @@ export default function Profile({ userProp }) {
                  {/* {" "}<Link to={`/NewLesson/${course._id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course.playlistId}`}></Link> */}
                  
   {practice.courseName ? <Link to={`/NewLesson/${practice.courseId}?name=${practice.uniqueLink}&playlist=${practice.playlistId
-}`} style={{textDecoration:"none"}}><>الدرس: {practice.video}</></Link> : <>اين تعلمت: {practice.whereStudied}</>}
+}`} style={{textDecoration:"none", color:"black"}}><>الدرس: {practice.video}</></Link> : <>اين تعلمت: {practice.whereStudied}</>}
                 
                 
               </div>

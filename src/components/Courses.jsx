@@ -110,7 +110,7 @@ export default function Courses({
   const showData = () => {
     return posts?.map((post) => {
       return (
-        <Link to={`/newCourse/${post._id}`} style={{textDecoration:"none"}}>
+        <Link to={`/newCourse/${post._id}`} style={{textDecoration:"none", color:"black"}}>
         <div
           key={post._id}
           className="courseContainer"
@@ -145,7 +145,7 @@ export default function Courses({
   const showFilteredData = () => {
     return filteredPosts?.map((post) => {
       return (
-        <Link to={`/newCourse/${post._id}`} style={{textDecoration:"none"}}>
+        <Link to={`/newCourse/${post._id}`} style={{textDecoration:"none", color:"black"}}>
         <div
           key={post._id}
           className="courseContainer"

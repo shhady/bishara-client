@@ -383,7 +383,7 @@ export default function Header({
                   }}
                 >
                   {user.teacher ? (
-                    <Link to="/profile"  style={{textDecoration:"none"}}>
+                    <Link to="/profile"  style={{textDecoration:"none", color:"black"}}>
                     <div>
                       {user.teacher.firstName}
                       {"  "}
@@ -392,7 +392,7 @@ export default function Header({
                     </div>
                     </Link>
                   ) : (
-                    <Link to="/profile" style={{textDecoration:"none"}}>
+                    <Link to="/profile" style={{textDecoration:"none", color:"black"}}>
                     <div>
                       {user.user.firstName}
                       {"  "}
