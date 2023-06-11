@@ -63,7 +63,7 @@ export default function NewTeacher() {
             {open === "Evaluation" ?(
             <h3  onClick={()=>setOpen("Evaluation")} style={{backgroundColor:"#fee4b9", cursor:"pointer"}}>منهاج خاص بك</h3>
     ):(
-            <h3 onClick={()=>setOpen("Evaluation")} style={{cursor:"pointer", borderBottom:"2px solid #dddcdc"}} >منهاج خاص بك</h3>)}
+            <h3 onClick={()=>setOpen("Evaluation")} style={{cursor:"pointer", borderBottom:"1px solid #dddcdc"}} >منهاج خاص بك</h3>)}
         </div>
             {open === "NewTeacherCourses" && <NewTeacherCourses id={id}/>}
             {open === "NewTeacherDisc" && <NewTeacherDisc id={id}/>}
