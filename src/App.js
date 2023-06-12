@@ -135,7 +135,7 @@ export default function App() {
           <Route path="/chatting" exact element={<NewChatBox socket={socket}/>}/>
           <Route path="/OnePractice/:id" exact element={<OnePractice socket={socket}/>}/>
   
-  
+
           <Route path="/NewReview" exact element={<NewReview socket={socket}/>}/>
           <Route path="/addStudent" exact element={<PaidStudent user={user} setUser={setUser}/>}/>
           <Route path="/TestYoutube/:id" exact element={  <TestYoutube
@@ -213,7 +213,7 @@ export default function App() {
                 setUser={setUser}
               />
             ) : (
-              <Home />
+              <Auth />
             )}/>
           </Routes>
         </BrowserRouter>
