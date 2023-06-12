@@ -70,7 +70,7 @@ export default function TeacherPractices({ practices }) {
             </video>
           </div>
           <div style={{padding:"10px"}}>
-            <div className="RepliesVideos">
+            <div className="RepliesVideos" style={{marginBottom:"10px"}}>
               {practice.videoReply.map((reply, index) => (
                 <video
                   key={index}
