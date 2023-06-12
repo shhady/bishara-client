@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVideo, faPen, faMicrophone } from '@fortawesome/free-solid-svg-icons';
 import AddComment from './AddComment';
 import AddVideo from './AddVideo';
 import AudioRecord from '../../components/AudioRecord';
-
+import { io } from "socket.io-client";
 
 export default function AddReply({ practice, onCommentAdd, onVideoAdd, onRecordAdd }) {
   const [openInput, setOpenInput] = useState(null);
+  const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [socket, setSocket] = useState(null);
+  const [user, setUser] = useState('') 
+    // const [maxSize, setMaxSize] = useState('')
+useEffect(()=>{
+  if (!theUser) return;
+    theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
+},[theUser])
+useEffect(() => {
+    if (!user) return;
+    setSocket(
+      io(
+        // "https://dawrafun1.herokuapp.com/" ||
+        "https://bisharaserver.herokuapp.com/"
+      )
+    );
+  }, [user]);
 
+  useEffect(() => {
+    if (!user) return;
+    socket?.emit("addUser", user._id);
+  }, [socket, user]);
   const handleIconClick = (inputType) => {
     setOpenInput((prevInput) => (prevInput === inputType ? null : inputType));
   };
@@ -25,13 +46,13 @@ export default function AddReply({ practice, onCommentAdd, onVideoAdd, onRecordA
         <FontAwesomeIcon icon={faMicrophone} onClick={() => handleIconClick('record')} /></div>
       </div>
       <div>
-        {openInput === 'video' && <AddVideo practice={practice} onVideoAdd={onVideoAdd} />}
+        {openInput === 'video' && <AddVideo practice={practice} onVideoAdd={onVideoAdd} socket={socket}/>}
       </div>
       <div>
-        {openInput === 'comment' && <AddComment practice={practice} onCommentAdd={onCommentAdd} />}
+        {openInput === 'comment' && <AddComment practice={practice} onCommentAdd={onCommentAdd} socket={socket}/>}
       </div>
       <div>
-        {openInput === 'record' &&<div style={{textAlign:"center", marginTop:"20px"}}> اضغط على المايكريفون ادناه وابدأ التسجيل<div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}><AudioRecord practice={practice} onRecordAdd={onRecordAdd} setOpenInput={setOpenInput}/></div></div>}
+        {openInput === 'record' &&<div style={{textAlign:"center", marginTop:"20px"}}> اضغط على المايكريفون ادناه وابدأ التسجيل<div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}><AudioRecord practice={practice} onRecordAdd={onRecordAdd} setOpenInput={setOpenInput} socket={socket}/></div></div>}
       </div>
     </div>
   );

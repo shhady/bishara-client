@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function AddComment({ practice, onCommentAdd }) {
+export default function AddComment({ practice, onCommentAdd,socket }) {
   const [commentText, setCommentText] = useState('');
   const [doneAddingComment, setDoneAddingComment] = useState(false);
+  const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState('') 
 
+  useEffect(()=>{
+    theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
+},[theUser])
   const handleSubmit = async(event) => {
     event.preventDefault();
     const updatedPractice = { ...practice, reply: commentText };
@@ -22,6 +27,15 @@ export default function AddComment({ practice, onCommentAdd }) {
             replySeen: false,
           }
         );
+        socket.emit("sendNotificationComment", {
+            senderName: user.firstName,
+            senderFamily: user.lastName,
+            senderId: user._id,
+            receiverId: practice.ownerId,
+            videoName: practice.video,
+            videoId: practice.uniqueLink,
+            courseid: practice.courseId,
+          });
       } catch (error) {
         console.log(error, "errroorrr");
       }
@@ -33,17 +47,9 @@ export default function AddComment({ practice, onCommentAdd }) {
   // When finishing the others to do this
 
 
-//   useEffect(()=>{
-//     socket.emit("sendNotificationComment", {
-//         senderName: user.teacher.firstName,
-//         senderFamily: user.teacher.lastName,
-//         senderId: user.teacher._id,
-//         receiverId: practice.ownerId,
-//         videoName: practice.video,
-//         videoId: practice.uniqueLink,
-//         courseid: practice.courseId,
-//       });
-//   },[doneAddingComment])
+  useEffect(()=>{
+   
+  },[doneAddingComment])
 
 
   const handleInputChange = (event) => {

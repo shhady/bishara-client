@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import { v4 as uuid } from "uuid";
 import axios from 'axios';
-export default function AddVideo({practice, onVideoAdd}) {
+export default function AddVideo({practice, onVideoAdd, socket}) {
     const [commentText, setCommentText] = useState('');
     const [formData, setFormData] = useState({})
     const [video, setVideo] = useState('')
@@ -40,20 +40,33 @@ export default function AddVideo({practice, onVideoAdd}) {
                 ]
             }
             onVideoAdd(updatedPractice);
-            
+         try   {
             await axios
-              .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {
-                theVideoReply: video,
-                videoName: practice.video ? practice.video : "فيديو تقييم",
-                courseId: practice.courseId,
-                nameOfProblem: commentText,
-                practiceId: practice._id,
-                uniqueLink: practice.uniqueLink ? practice.uniqueLink : null,
-                teacherId: practice.teacherId,
-                replyId: unique_id,
-              })
-              setCommentText('')
-              setVideo('')
+            .put(process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`, {
+              theVideoReply: video,
+              videoName: practice.video ? practice.video : "فيديو تقييم",
+              courseId: practice.courseId,
+              nameOfProblem: commentText,
+              practiceId: practice._id,
+              uniqueLink: practice.uniqueLink ? practice.uniqueLink : null,
+              teacherId: practice.teacherId,
+              replyId: unique_id,
+            })
+            setCommentText('')
+            setVideo('')
+            socket.emit("sendNotificationComment", {
+                senderName: user.firstName,
+                senderFamily: user.lastName,
+                senderId: user._id,
+                receiverId: practice.ownerId,
+                videoName: practice.video,
+                videoId: practice.uniqueLink,
+                courseid: practice.courseId,
+              });
+         }catch(e) {
+            console.log(e);
+         }
+           
     }
    
 
