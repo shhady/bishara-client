@@ -1,10 +1,11 @@
 import React,{useEffect, useState} from 'react'
 import { v4 as uuid } from "uuid";
 import axios from 'axios';
-export default function AddVideo({practice, onVideoAdd, socket}) {
+export default function AddVideo({practice, onVideoAdd, socket, user}) {
     const [commentText, setCommentText] = useState('');
     const [formData, setFormData] = useState({})
     const [video, setVideo] = useState('')
+    
     const unique_id = uuid();
     function handleOpenWidget (){
       let myWidget = window.cloudinary.createUploadWidget({

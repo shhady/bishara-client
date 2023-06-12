@@ -46,10 +46,10 @@ useEffect(() => {
         <FontAwesomeIcon icon={faMicrophone} onClick={() => handleIconClick('record')} /></div>
       </div>
       <div>
-        {openInput === 'video' && <AddVideo practice={practice} onVideoAdd={onVideoAdd} socket={socket}/>}
+        {openInput === 'video' && <AddVideo practice={practice} onVideoAdd={onVideoAdd} socket={socket} user={user}/>}
       </div>
       <div>
-        {openInput === 'comment' && <AddComment practice={practice} onCommentAdd={onCommentAdd} socket={socket}/>}
+        {openInput === 'comment' && <AddComment practice={practice} onCommentAdd={onCommentAdd} socket={socket} user={user}/>}
       </div>
       <div>
         {openInput === 'record' &&<div style={{textAlign:"center", marginTop:"20px"}}> اضغط على المايكريفون ادناه وابدأ التسجيل<div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}><AudioRecord practice={practice} onRecordAdd={onRecordAdd} setOpenInput={setOpenInput} socket={socket}/></div></div>}

@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function AddComment({ practice, onCommentAdd,socket }) {
+export default function AddComment({ practice, onCommentAdd,socket,user }) {
   const [commentText, setCommentText] = useState('');
   const [doneAddingComment, setDoneAddingComment] = useState(false);
-  const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const [user, setUser] = useState('') 
-
-  useEffect(()=>{
-    theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
-},[theUser])
+ 
   const handleSubmit = async(event) => {
     event.preventDefault();
     const updatedPractice = { ...practice, reply: commentText };
@@ -43,13 +38,6 @@ export default function AddComment({ practice, onCommentAdd,socket }) {
       setCommentText('');
       setDoneAddingComment("done")
   };
-
-  // When finishing the others to do this
-
-
-  useEffect(()=>{
-   
-  },[doneAddingComment])
 
 
   const handleInputChange = (event) => {
