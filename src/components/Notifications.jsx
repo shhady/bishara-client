@@ -358,7 +358,7 @@ export default function Notifications() {
 
   const handleClickOnPractice = (practice) => {
     // setShowNotificationPopUp(false);
-    navigate(`/SpecificPractice/${practice._id}`);
+    navigate(`/onePractice/${practice._id}`);
     // setTeacherPracticesNotifications(null);
   };
   return (
