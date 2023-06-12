@@ -21,9 +21,9 @@ const normalDate = new Date(isoDateString).toLocaleDateString('en-GB', options);
       {isMenuOpen && (
         <div className="menu">
           <header>
-            <img src={user.user.avatar ?user.user.avatar : "https://img.icons8.com/material-rounded/24/null/user.png" } alt="avatar" />
-            <div>
-              <h2>{user?.user?.firstName} {user?.user?.lastName}</h2>
+           
+            <div style={{width:"fit-content"}}>
+            <img src={user.user.avatar ?user.user.avatar : "https://img.icons8.com/material-rounded/24/null/user.png" } alt="avatar" /><h2>{user?.user?.firstName} {user?.user?.lastName}</h2>
               <h3>{user?.user?.email}</h3>
               <h3>تاريخ الانشاء: {normalDate}</h3>
             </div>
