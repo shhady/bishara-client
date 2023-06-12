@@ -59,7 +59,8 @@ export default function NewTeacher() {
         <h3  onClick={()=>setOpen("NewTeacherDisc")} style={{backgroundColor:"#fee4b9", cursor:"pointer"}}>السيرة الذاتية</h3>
     ):(
         <h3 onClick={()=>setOpen("NewTeacherDisc")}  style={{cursor:"pointer", borderBottom:"1px solid #dddcdc"}}>السيرة الذاتية</h3>)}
-           <Link to={`/newmessenger/${userId}`}  style={{textDecoration:"none", color:"black", borderBottom:"1px solid #dddcdc"}}> <h3>مراسلة</h3></Link>
+        {userId ? (<Link to={`/newmessenger/${userId}`}  style={{textDecoration:"none", color:"black", borderBottom:"1px solid #dddcdc"}}> <h3>مراسلة</h3></Link>):(<Link to={`/auth`}  style={{textDecoration:"none", color:"black", borderBottom:"1px solid #dddcdc"}}> <h3>مراسلة</h3></Link>)}
+           
             {open === "Evaluation" ?(
             <h3  onClick={()=>setOpen("Evaluation")} style={{backgroundColor:"#fee4b9", cursor:"pointer"}}>منهاج خاص بك</h3>
     ):(
