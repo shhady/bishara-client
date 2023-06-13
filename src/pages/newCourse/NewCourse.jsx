@@ -39,7 +39,8 @@ export default function NewCourse() {
 
       const drawLessons = ()=>{
         return lessons.map((lesson)=>{
-            return <Link to={`/NewLesson/${course._id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course.playlistId}`}>
+            return <Link to={`/NewLesson/${course._id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course.playlistId}`} style={{textDecoration:"none", color:"black"}}>
+              <div>
             <div className='lessonOfLessons' style={{backgroundImage: `url(${lesson.snippet.thumbnails.high.url})`}}>
                   <div
                 style={{
@@ -55,7 +56,9 @@ export default function NewCourse() {
               >
                 <FontAwesomeIcon icon={faCirclePlay} size="3x" />
               </div>
-               
+              </div>
+              <div>
+              {lesson.snippet.title}</div>
                 </div>
                 </Link>
         })

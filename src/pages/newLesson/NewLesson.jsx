@@ -47,15 +47,17 @@ export default function NewLesson() {
       }, []);
       
       const drawSuggestions = ()=>{
-        return lessons?.map((lesson)=>{
+        return lessons?.map((lesson,i)=>{
             return <>
             {name === lesson.snippet.resourceId.videoId ? (
               <div className='suggestion' style={{backgroundImage: `url(${lesson?.snippet.thumbnails.high.url})`}} >
              <div className='playingVideo'>playing</div>
+             <div style={{background:"white", position:"absolute", top:"0", right:"0", width:"20px", height:"30px", display:"flex", justifyContent:"center", alignItems:"center", borderBottomLeftRadius:"10px"}}>{i+1}</div>
             </div>
             ):(
                 <Link to={`/NewLesson/${id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course?.playlistId}`}>
                 <div className='suggestion' style={{backgroundImage: `url(${lesson?.snippet.thumbnails.high.url})`}} >
+                <div style={{background:"white", position:"absolute", top:"0", right:"0", width:"20px", height:"30px", display:"flex", justifyContent:"center", alignItems:"center", borderBottomLeftRadius:"10px"}}>{i+1}</div>
             </div></Link>)}
             </>
             })
