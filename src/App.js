@@ -15,9 +15,9 @@ const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 const CreateTeacher = React.lazy(() => import("./components/Form/CreateTeacher"));
 const Auth = React.lazy(() => import("./components/Auth/Auth"));
 const QA = React.lazy(() => import("./pages/QA/QA"));
-const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
-const Teacher = React.lazy(() => import("./pages/Teacher/Teacher"));
-const Lessons = React.lazy(() => import("./pages/Lessons/Lessons"));
+// const TestYoutube = React.lazy(() => import("./components/TestYoutube"));
+// const Teacher = React.lazy(() => import("./pages/Teacher/Teacher"));
+// const Lessons = React.lazy(() => import("./pages/Lessons/Lessons"));
 const Lesson = React.lazy(() => import("./pages/Lesson/Lesson"));
 const SpecificPractice = React.lazy(() => import("./pages/TeacherPractices/SpecificPractice"));
 const PaidStudent = React.lazy(() => import("./pages/addingStudent/PaidStudent"));
@@ -35,6 +35,7 @@ const NewLesson = React.lazy(() => import("./pages/newLesson/NewLesson"));
 const NewReview = React.lazy(() => import("./pages/newReviewteacher/NewReview"));
 const NewChatBox = React.lazy(() => import("./pages/newChat/NewChatBox"));
 const OnePractice = React.lazy(() => import("./pages/TeacherPractices/OnePractice"));
+const Subscription = React.lazy(() => import("./pages/subscription/Subscription"));
 
 
 export default function App() {
@@ -134,17 +135,19 @@ export default function App() {
           <Route path="/NewMessenger/:id" exact element={<NewMessenger socket={socket}/>}/>
           <Route path="/chatting" exact element={<NewChatBox socket={socket}/>}/>
           <Route path="/OnePractice/:id" exact element={<OnePractice socket={socket}/>}/>
-  
+          <Route path="/subscription" exact element={<Subscription user={user}/>}/>
+
+          
 
           <Route path="/NewReview" exact element={<NewReview socket={socket}/>}/>
           <Route path="/addStudent" exact element={<PaidStudent user={user} setUser={setUser}/>}/>
-          <Route path="/TestYoutube/:id" exact element={  <TestYoutube
+          {/* <Route path="/TestYoutube/:id" exact element={  <TestYoutube
               user={user}
               setUser={setUser}
               listId={listId}
               course={course}
-            />}/>
-          <Route path="/Lessons" exact element={<Lessons
+            />}/> */}
+          {/* <Route path="/Lessons" exact element={<Lessons
               user={user}
               setUser={setUser}
               setTeacher={setTeacher}
@@ -152,7 +155,7 @@ export default function App() {
               listId={listId}
               updateComponent={updateComponent}
               setUpdateComponent={setUpdateComponent}
-            />}/>
+            />}/> */}
           <Route path="/Notifications" exact element={<Notifications user={user} setUser={setUser} />}/>
           <Route path="/subscribe" exact element={<Subscribe user={user} setUser={setUser} />}/>
           <Route path="/Lesson/:id/:id" exact element={  <Lesson
@@ -163,7 +166,7 @@ export default function App() {
               listId={listId}
               socket={socket}
             />}/>
-          <Route path="/Teacher" exact element={ <Teacher
+          {/* <Route path="/Teacher" exact element={ <Teacher
               user={user}
               setUser={setUser}
               setTeacher={setTeacher}
@@ -171,7 +174,7 @@ export default function App() {
               listId={listId}
               setUpdateComponent={setUpdateComponent}
               updateComponent={updateComponent}
-            />}/>
+            />}/> */}
           <Route path="/CreateTeacher" exact element={<CreateTeacher/>} />
           <Route path="/profile" exact element={ <Profile user={user} setUser={setUser} userProp={userProp} />}/>
           <Route path="/createcourse" exact element={<CreateCourse/>} />

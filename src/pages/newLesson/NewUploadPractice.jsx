@@ -87,10 +87,14 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
         fetch();
       }, [videoUrl]);
   
+      const openAlert = ()=>{
+        alert("لرفع تمارين يجب الاشتراك");
+        navigate("/subscription"); 
+      }
   return (
     <div className='divOfUploadBtn'>
        {user?.paid === course?.owner ? (<div  className='divOfUploadBtn'><button onClick={handleOpenWidget} className='uploadPracticeBtn'>ارفع تمرين</button>  
-        الحجم الاقصى"100MB"</div>):(<div style={{textAlign:"center", color:"red", border:"1px solid black", padding:"4px"}}>لرفع تمارين يجب الاشتراك</div>)}
+        الحجم الاقصى"100MB"</div>):(<div><button onClick={openAlert} className='uploadPracticeBtn'>ارفع تمرين</button> </div>)}
         
     </div>
   )

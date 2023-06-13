@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 export default function PDF({course,name}) {
   const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [user, setUser] = useState('') 
     const [fileUrl, setFileUrl] = useState('')
     const [uploadFile, setUploadFile] = useState('')
     const [fileId, setFileId] = useState('')
+    const navigate = useNavigate()
     // console.log(user.teacher?._id)
     useEffect(()=>{
       theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
@@ -41,6 +43,12 @@ export default function PDF({course,name}) {
             setFileUrl(null)
           };
       console.log(user);
+
+      const openAlert =()=>{
+        alert("لتحميل الملفات يجب الاشتراك");
+        navigate("/subscription"); // Replace with the URL of the desired page
+
+      }
   return (
     <div className='divOfUploadBtn'>
         {fileUrl ? (<>
@@ -50,7 +58,7 @@ export default function PDF({course,name}) {
     target="_blank"
     rel="noreferrer"   style={{
         textDecoration: "none",
-        color: "black"}}>الملف</a></button>):(<div style={{textAlign:"center", color:"red", border:"1px solid black", padding:"4px"}}>لتحميل ملفات النوته يجب الاشتراك</div>)}
+        color: "black"}}>الملف</a></button>):(<div>  <button className='uploadPracticeBtn' onClick={openAlert}>الملف</button> </div>)}
         
         {user?._id === course?.owner || user.role === "admin" ? (<button className='uploadPracticeBtn' onClick={deleteTheFile} style={{ background:"red"}}>delete</button>):(null)}
         </>
@@ -59,7 +67,7 @@ export default function PDF({course,name}) {
              {user?._id === course?.owner || user?.role === "admin" ? (<form onSubmit={addLink} style={{display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
             <input type='text' placeholder='اضف الرابط' onChange={(e)=>setUploadFile(e.target.value)} style={{height:"40px", width:"150px", marginTop:"20px"}}/>
             <input type="submit" className='uploadPracticeBtn' style={{height:"40px", width:"150px"}}/>
-            </form>):(<> {user?.paid === course?.owner ? (<button className='uploadPracticeBtn'>لا يوجد ملف</button>):(<div style={{textAlign:"center", color:"red", border:"1px solid black", padding:"4px"}}>لتحميل ملفات النوته يجب الاشتراك</div>)}</>)}
+            </form>):(<> {user?.paid === course?.owner ? (<button className='uploadPracticeBtn'>لا يوجد ملف</button>):(<div><button className='uploadPracticeBtn' onClick={openAlert}>الملف</button></div>)}</>)}
         </>
         )}
        </div>
