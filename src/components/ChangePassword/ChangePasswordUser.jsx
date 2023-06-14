@@ -35,7 +35,7 @@ export default function ChangePasswordUser({ userId }) {
     }
   };
   return (
-    <div className="mainChangePass">
+    <div className="mainChangePass1">
       {/* <div>تغيير كلمة المرور</div> */}
       <div>
         {/* <input

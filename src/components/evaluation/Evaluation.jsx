@@ -104,6 +104,7 @@ function handleOpenWidget(e) {
           <input className='inputFormEva' type="text" value={data.whereStudied} onChange={(e)=> setData({...data, whereStudied:e.target.value})} placeholder="اين تعلمت" required/>
           <input className='inputFormEva' type="text" value={data.goal} onChange={(e)=> setData({...data, goal:e.target.value})} placeholder="هدفك من التعليم" required/>
           <button onClick={handleOpenWidget} className='uploadEvaluation'>ارسل عزفك</button>
+          <div style={{textAlign:"center", fontSize:"13px"}}>الحد األقصى لحجم الملف 100 ميغا بايت</div>
           <button type="submit" className='submitFormEva'>ارسال</button>  
           </form>
     </div>

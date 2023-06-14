@@ -145,7 +145,7 @@ export default function Auth({ user, setUser, setUserProp }) {
       navigate("/profile");
       setUser(result.data);
     } catch (error) {
-      setPasswordsDontMatch("passwords don't match");
+      setPasswordsDontMatch(error.response.data.message);
     }
   };
   const handleChange = (e) => {
@@ -286,8 +286,7 @@ export default function Auth({ user, setUser, setUserProp }) {
                 </div>
                 {passwordsDontMatch && (
                   <div style={{ color: "red" }}>
-                    جميع الحقول الزامية ويجب تطابق كلمة المرور وتأكيد كلمة
-                    المرور
+                    {passwordsDontMatch}
                   </div>
                 )}
 

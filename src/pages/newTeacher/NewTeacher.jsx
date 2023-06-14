@@ -68,7 +68,7 @@ export default function NewTeacher() {
         </div>
             {open === "NewTeacherCourses" && <NewTeacherCourses id={id}/>}
             {open === "NewTeacherDisc" && <NewTeacherDisc id={id}/>}
-            {open === "Evaluation" && <Evaluation id={id} teacher={teacher}/>}
+           {userId ? (<>{open === "Evaluation" && <Evaluation id={id} teacher={teacher}/>}</>):(<div style={{textAlign:"center", marginTop:"42px"}}>للحصول على تقييم لعزفك يجب الاشتراك<br/><Link to="/subscription" style={{textDecoration:"none"}}><div style={{border:"2px solid black",fontWeight:"bold", width:"fit-content", padding:"5px", margin:"auto", borderRadius:"10px"}}> للاشتراك اضغط هنا </div></Link></div>)} 
     </div>
   )
 }

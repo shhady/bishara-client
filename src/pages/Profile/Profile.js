@@ -995,7 +995,7 @@ export default function Profile({ userProp }) {
                     <input
                       type="text"
                       placeholder="الاسم"
-                      style={{ width: "70%" }}
+                      style={{ width: "80%" }}
                       value={updateFirstName}
                       onChange={(e) => setUpdateFirstName(e.target.value)}
                     />
@@ -1013,7 +1013,7 @@ export default function Profile({ userProp }) {
                     <input
                       type="text"
                       placeholder="العائلة"
-                      style={{ width: "70%" }}
+                      style={{ width: "80%" }}
                       value={updateLastName}
                       onChange={(e) => setUpdateLastName(e.target.value)}
                     />

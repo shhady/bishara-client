@@ -7,7 +7,7 @@
 
 .formEvaluation{
     width: 60%;
-    height: 30vh;
+    height: 40vh;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@
 .inputFormEva{
     width: 100%;
     height: 30px;
-    background-color: #c3c1c1;
+    background-color: #f1f1f1;
     padding: 5px;
 }
 
