@@ -23,7 +23,8 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div style={{ marginTop: "250px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+    <div style={{ marginTop: "250px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",borderTopLeftRadius: '180%' ,padding:'20px',backgroundColor: '#fcedd5'}}>;
+    
       <h1>نسيت كلمة المرور؟</h1>
       <form style={{ display: "flex", flexDirection: "column" }} onSubmit={handleSubmit}>
         <input
@@ -31,8 +32,9 @@ const ForgetPassword = () => {
           placeholder="ادخل بريدك الالكتروني"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          style={{height:"40px", width:"200px", padding:"10px"}}
         />
-        <button type="submit" style={{ marginTop: "30px" }}>
+        <button type="submit" style={{height:"40px", width:"200px", padding:"10px", marginTop:"30px"}}>
           ارسل كلمة مرور جديدة
         </button>
       </form>
