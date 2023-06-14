@@ -1015,7 +1015,7 @@ export default function Profile({ userProp }) {
                       value={updateFirstName}
                       onChange={(e) => setUpdateFirstName(e.target.value)}
                     />
-                    <button onClick={changeName}>تثبيت</button>
+                    <button onClick={changeName} style={{width:"50px", background:"#fcedd5"}}>تثبيت</button>
                   </div>
                   <div
                     style={{
@@ -1033,7 +1033,7 @@ export default function Profile({ userProp }) {
                       value={updateLastName}
                       onChange={(e) => setUpdateLastName(e.target.value)}
                     />
-                    <button onClick={changeLastName}>تثبيت</button>
+                    <button onClick={changeLastName}  style={{width:"50px", background:"#fcedd5"}}>تثبيت</button>
                   </div>
                 </div>
               ) : null}

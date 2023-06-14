@@ -63,7 +63,7 @@ export default function ChangePasswordUser({ userId }) {
           className="changePass"
           placeholder="تأكيد كلمة المرور الجديدة"
         />
-        <button onClick={changePass}>تثبيت</button>
+        <button onClick={changePass} style={{width:"100%", background:"#fcedd5", height:"30px", marginTop:"25px"}}>تثبيت</button>
         <span style={{ color: "red", marginRight: "10px" }}>{message}</span>
       </div>
     </div>

@@ -7,7 +7,6 @@ export default function NewHero({user}) {
       <div className='containerHero'>
         <div className='smallContainer'>
         <h1 className='title1'>منصة فنان التعليميه</h1>
-       
         <h2 className='title2'>جميع الدروس والدورات مجانية</h2>
         {user ? (null):(<Link to="/auth"><button className='button1'>سجل الآن مجاناً</button></Link>)}
         </div>
