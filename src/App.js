@@ -53,8 +53,9 @@ export default function App() {
   const [theUser, setTheUser] = useState(null);
 
   useEffect(()=>{
+    if (!user) return;
     user.teacher ? setTheUser(user.teacher) : setTheUser(user.user)
-  },[])
+  },[user])
 
   console.log(theUser);
   useEffect(() => {

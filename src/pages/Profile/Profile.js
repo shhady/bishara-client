@@ -952,34 +952,17 @@ export default function Profile({ userProp }) {
                       تعديل الملف
                     </div>
                   )}
-                  {showChangePassUser ? (
+                    <Link to={`/newMessenger/${userId}`} style={{textDecoration:"none", color:"black"}}>
                     <div
                       className="profileButtons3"
                       style={{
                         height: "40px",
-                        backgroundColor:"#fee4b9"
-                      }}
-                      onClick={() => {
-                        setShowPractice(false);
-                        setShowChangePassUser(true);
-                        setShowUpdateProfile(false);
                       }}
                     >
-                      تغيير كلمة المرور
+                      مراسلة
                     </div>
-                  ) : (
-                    <div
-                      className="profileButtons3"
-                      style={{ height: "40px" }}
-                      onClick={() => {
-                        setShowPractice(false);
-                        setShowChangePassUser(true);
-                        setShowUpdateProfile(false);
-                      }}
-                    >
-                      تغيير كلمة المرور
-                    </div>
-                  )}
+                    </Link>
+                
 
                   <div
                     onClick={gotohomepage}
@@ -1000,6 +983,7 @@ export default function Profile({ userProp }) {
 
               {showUpdateProfile ? (
                 <div className="mainChangePass">
+                  تعديل الملف: 
                   <div
                     style={{
                       width: "100%",
@@ -1034,6 +1018,11 @@ export default function Profile({ userProp }) {
                       onChange={(e) => setUpdateLastName(e.target.value)}
                     />
                     <button onClick={changeLastName}  style={{width:"50px", background:"#fcedd5"}}>تثبيت</button>
+                  </div>
+                    <div style={{marginTop:"25px"}}>
+                    تغيير كلمة المرور:
+
+                  <ChangePasswordUser userId={userId} />
                   </div>
                 </div>
               ) : null}
