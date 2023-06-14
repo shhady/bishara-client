@@ -16,8 +16,8 @@ export default function Home({
 }) {
   return (
     <div className="HomePage">
-      {/* <NewHero/> */}
-      <Hero showArrows={showArrows} user={user} />
+      <NewHero user={user}/>
+      {/* <Hero showArrows={showArrows} user={user} /> */}
       <FourBoxes />
 
       <TeachersHomePage />

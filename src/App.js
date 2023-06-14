@@ -36,6 +36,7 @@ const NewReview = React.lazy(() => import("./pages/newReviewteacher/NewReview"))
 const NewChatBox = React.lazy(() => import("./pages/newChat/NewChatBox"));
 const OnePractice = React.lazy(() => import("./pages/TeacherPractices/OnePractice"));
 const Subscription = React.lazy(() => import("./pages/subscription/Subscription"));
+const NewProfile = React.lazy(() => import("./pages/Profile/NewProfile"));
 
 
 export default function App() {
@@ -49,7 +50,13 @@ export default function App() {
   const [updateComponent, setUpdateComponent] = useState(null);
   const [userProp, setUserProp] = useState(null);
   const [chatNotification, setChatNotification] = useState(null);
+  const [theUser, setTheUser] = useState(null);
 
+  useEffect(()=>{
+    user.teacher ? setTheUser(user.teacher) : setTheUser(user.user)
+  },[])
+
+  console.log(theUser);
   useEffect(() => {
     if (!user) return;
     user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
@@ -136,7 +143,9 @@ export default function App() {
           <Route path="/chatting" exact element={<NewChatBox socket={socket}/>}/>
           <Route path="/OnePractice/:id" exact element={<OnePractice socket={socket}/>}/>
           <Route path="/subscription" exact element={<Subscription user={user}/>}/>
+          <Route path="/NewProfile" exact element={<NewProfile user={theUser} setTheUser={setTheUser}/>}/>
 
+          
           
 
           <Route path="/NewReview" exact element={<NewReview socket={socket}/>}/>

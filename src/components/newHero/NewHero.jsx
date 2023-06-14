@@ -1,33 +1,23 @@
 import React from 'react'
 import './NewHero.css'
-import { Link} from "react-router-dom";
-
-export default function NewHero() {
+import { Link } from 'react-router-dom'
+export default function NewHero({user}) {
   return (
     <div className='newHero'>
-        <div className='circlesWrapper'>
-        <Link to="/courses" style={{textDecoration:"none", color:"black"}}>
-        <div className='circlesHero'>
-        دورات  
-        <br/>
-        مجانية
+      <div className='containerHero'>
+        <div className='smallContainer'>
+        <h1 className='title1'>منصة فنان التعليميه</h1>
+       
+        <h2 className='title2'>جميع الدروس والدورات مجانية</h2>
+        {user ? (null):(<Link to="/auth"><button className='button1'>سجل الآن مجاناً</button></Link>)}
         </div>
-        </Link>
-        <Link to="/messenger" style={{textDecoration:"none", color:"black"}}>
-        <div className='circlesHero1'>
-        مراسلة <br/>الاستاذ 
-                </div>
-                </Link>
-        <div className='circlesHero'>
-        دروس <br/>خصوصية        </div>
-        <Link to="/zoom" style={{textDecoration:"none", color:"black"}}>
-        <div className='circlesHero1'>
-        نشرات <br/>مباشرة         </div>
-        </Link>
-        <div className='circlesHero'> 
-        تعليق <br/>على عزفك
-         </div>
-         </div>
+          <div  className='smallContainer'>
+          <button className='button2'>ابدأ تجربتك المجانية لمدة 7 ايام</button>
+      <div className='bottomText'>
+        دروس خصوصية غير محدودة بسعر 125 شيكل شهرياً - فترة تجريبية مجانية لمدة 7 أيام
+      </div>
+      </div>
+        </div>
     </div>
   )
 }

@@ -1,7 +1,14 @@
 import React from 'react'
-
+import "./subscription.css"
 export default function Subscription() {
   return (
-    <div style={{marginTop:"100px"}}>Subscription</div>
+    <div className='container'>
+      <div className='containers'>
+      <h2>سنه</h2>
+      </div>
+      <div  className='containers'>
+      <h2>6 اشهر</h2>
+      </div>
+    </div>
   )
 }
