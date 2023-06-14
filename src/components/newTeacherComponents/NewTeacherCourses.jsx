@@ -19,7 +19,7 @@ export default function NewTeacherCourses({id}) {
    return courses.map(course => {
       return <Link to={`/newCourse/${course._id}`} style={{textDecoration:"none", color:"black"}}>
       <div className='courseCard'>
-        <img src={course.coursePhoto} width="100%"/>
+        <img src={course.coursePhoto} width="100%" style={{borderRadius:"10px"}}/>
         <div style={{textAlign:"center"}}>{course.title}</div>
         </div>
         </Link>
