@@ -117,14 +117,14 @@ export default function Courses({
           // onClick={() => {
           //   handleClick(post);
           // }}
-          style={{ cursor: "pointer", padding: "5px", borderRadius: "5px" }}
+          style={{ cursor: "pointer", padding: "5px", borderRadius: "25px" }}
         >
           <img
             src={post.coursePhoto? (post.coursePhoto.replace('http://', 'https://')):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}
             alt={post.firstName}
             width="80%"
             height="200"
-            style={{ marginBottom: "10px" }}
+            style={{ marginBottom: "10px", borderRadius: "25px" }}
           />
 
           <div style={{ fontWeight: "700" }}>{post.title}</div>
@@ -152,14 +152,14 @@ export default function Courses({
           // onClick={() => {
           //   handleClick(post);
           // }}
-          style={{ cursor: "pointer", padding: "5px", borderRadius: "5px" }}
+          style={{ cursor: "pointer", padding: "5px", borderRadius: "5px", borderRadius: "25px"  }}
         >
          
           <img
   src={post.coursePhoto? (post.coursePhoto.replace('http://', 'https://')):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}            alt={post.firstName}
-            width="100%"
-            height="150"
-            style={{ marginBottom: "10px" }}
+            width="80%"
+            height="200"
+            style={{ marginBottom: "10px", borderRadius: "25px"  }}
           />
           <div style={{ fontWeight: "700" }}>{post.title}</div>
           <div style={{ width: "80%" }}>

@@ -43,7 +43,7 @@ export default function ChangePasswordUser({ userId }) {
           className="changePass"
           placeholder="كلمة المرور الحالية"
         /> */}
-        <input
+      {message === "تم تغيير كلمة المرور بنجاح" ? ( <span style={{ color: "red", marginRight: "10px" }}>{message}</span>):(<><input
           type="password"
           name="password"
           onChange={(e) => {
@@ -63,8 +63,8 @@ export default function ChangePasswordUser({ userId }) {
           className="changePass"
           placeholder="تأكيد كلمة المرور الجديدة"
         />
-        <button onClick={changePass} style={{width:"100%", background:"#fcedd5", height:"30px", marginTop:"25px"}}>تثبيت</button>
-        <span style={{ color: "red", marginRight: "10px" }}>{message}</span>
+        <button onClick={changePass} style={{width:"100%", background:"#fcedd5", height:"30px", marginTop:"25px"}}>تثبيت</button></>)}  
+          {message === "تم تغيير كلمة المرور بنجاح" ? (null):(<>{message}</>)}
       </div>
     </div>
   );
