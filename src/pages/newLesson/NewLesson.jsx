@@ -8,15 +8,18 @@ import PDF from './PDF';
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 export default function NewLesson() {
     const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    const [user, setUser] = useState('') 
     const [lessons,setLessons]  = useState([])
     const [videoName, setVideoName] = useState()
     const [course, setCourse] = useState()
-    const [user, setUser] = useState('') 
+
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const name = searchParams.get('name');
     const playlistId = searchParams.get('playlist');
     const {id} = useParams()
+
+    
     useEffect(()=>{
         const fetchData = async ()=>{
             const res = await axios.get(

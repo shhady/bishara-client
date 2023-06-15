@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import CourseDetails from './CourseDetails'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,12 +10,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 export default function NewCourse() {
+  const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState('') 
     const [course, setCourse] = useState('')
     const [lessons,setLessons]  = useState([])
     const [open, setOpen] = useState("")
     const {id} = useParams()
+    const navigate = useNavigate()
     console.log(id)
-
+    useEffect(()=>{
+      if(!theUser) return ;
+        theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
+    },[theUser])
     useEffect(()=>{
         const fetchData = async ()=>{
             const res = await axios.get(
@@ -37,10 +43,18 @@ export default function NewCourse() {
         fetch();
       }, [course]);
 
+      const handleLessonClick = (lesson) => {
+        if(user){
+
+          navigate(`/NewLesson/${course._id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course.playlistId}`);
+        } else{
+          alert("لرؤية الدروس يجب فتح حساب");
+          navigate('/auth')
+        }
+      };
       const drawLessons = ()=>{
         return lessons.map((lesson)=>{
-            return <Link to={`/NewLesson/${course._id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course.playlistId}`} style={{textDecoration:"none", color:"black"}}>
-              <div>
+            return <div onClick={()=>handleLessonClick(lesson)}>
             <div className='lessonOfLessons' style={{backgroundImage: `url(${lesson.snippet.thumbnails.high.url})`}}>
                   <div
                 style={{
@@ -60,7 +74,7 @@ export default function NewCourse() {
               <div>
               {lesson.snippet.title}</div>
                 </div>
-                </Link>
+                
         })
       }
   return (
