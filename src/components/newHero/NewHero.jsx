@@ -1,6 +1,7 @@
 import React from 'react'
 import './NewHero.css'
 import { Link } from 'react-router-dom'
+import ScrollAnimation from '../scroll/ScrollAnimation'
 export default function NewHero({user}) {
   return (
     <div className='newHero'>
@@ -15,8 +16,10 @@ export default function NewHero({user}) {
       <div className='bottomText'>
         دروس خصوصية غير محدودة بسعر 125 شيكل شهرياً - فترة تجريبية مجانية لمدة 7 أيام
       </div>
+      <ScrollAnimation/>
       </div>
         </div>
+        
     </div>
   )
 }
