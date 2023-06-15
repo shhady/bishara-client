@@ -12,7 +12,9 @@ export default function NewHero({user}) {
         {user ? (null):(<Link to="/auth"><button className='button1'>سجل الآن مجاناً</button></Link>)}
         </div>
           <div  className='smallContainer'>
-          <button className='button2'>ابدأ تجربتك المجانية لمدة 7 ايام</button>
+          <Link to="/subscription" style={{ textDecoration: "none" }}>
+
+          <button className='button2'>ابدأ تجربتك المجانية لمدة 7 ايام</button></Link>
       <div className='bottomText'>
         دروس خصوصية غير محدودة بسعر 125 شيكل شهرياً - فترة تجريبية مجانية لمدة 7 أيام
       </div>
