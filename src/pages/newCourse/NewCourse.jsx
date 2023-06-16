@@ -53,8 +53,8 @@ export default function NewCourse() {
         }
       };
       const drawLessons = ()=>{
-        return lessons.map((lesson)=>{
-            return <div onClick={()=>handleLessonClick(lesson)}>
+        return lessons.map((lesson,i)=>{
+            return <div onClick={()=>handleLessonClick(lesson)} key={i} style={{cursor:"pointer"}}>
             <div className='lessonOfLessons' style={{backgroundImage: `url(${lesson.snippet.thumbnails.high.url})`}}>
                   <div
                 style={{
@@ -83,11 +83,11 @@ export default function NewCourse() {
       
         <CourseDetails course={course}/>
         <div className='lessonsAndDescB'>
-          {open !== 'description' ? (          <div  onClick={()=> setOpen('lessons')} style={{background:"#fee4b9",textAlign:'center', borderBottom:"1px solid black", fontWeight:"bold"}}>الدروس</div>
-):(          <div  onClick={()=> setOpen('lessons')} style={{textAlign:'center', borderBottom:"1px solid black", fontWeight:"bold"}}>الدروس</div>
+          {open !== 'description' ? (          <div  onClick={()=> setOpen('lessons')} style={{background:"#fee4b9",textAlign:'center', borderBottom:"1px solid black", fontWeight:"bold",cursor:"pointer"}}>الدروس</div>
+):(          <div  onClick={()=> setOpen('lessons')} style={{textAlign:'center', borderBottom:"1px solid black", fontWeight:"bold", cursor:"pointer"}}>الدروس</div>
 )}
-          {open === "description" ? (          <div onClick={()=> setOpen('description')} style={{background:"#fee4b9",textAlign:'center', borderBottom:"1px solid black", fontWeight:"bold"}}>وصف الدورة</div>
-):(          <div onClick={()=> setOpen('description')} style={{textAlign:'center', borderBottom:"1px solid black", fontWeight:"bold"}}>وصف الدورة</div>
+          {open === "description" ? (          <div onClick={()=> setOpen('description')} style={{background:"#fee4b9",textAlign:'center', borderBottom:"1px solid black", fontWeight:"bold",cursor:"pointer"}}>وصف الدورة</div>
+):(          <div onClick={()=> setOpen('description')} style={{textAlign:'center', borderBottom:"1px solid black", fontWeight:"bold", cursor:"pointer"}}>وصف الدورة</div>
 )}
         </div>
         {open === "description" ? (<div style={{width:"80%", margin:"auto"}}>
