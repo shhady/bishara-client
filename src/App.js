@@ -37,6 +37,9 @@ const NewChatBox = React.lazy(() => import("./pages/newChat/NewChatBox"));
 const OnePractice = React.lazy(() => import("./pages/TeacherPractices/OnePractice"));
 const Subscription = React.lazy(() => import("./pages/subscription/Subscription"));
 const NewProfile = React.lazy(() => import("./pages/Profile/NewProfile"));
+const ChooseTeacher = React.lazy(() => import("./pages/subscription/ChooseTeacher"));
+const ChosenTeacher = React.lazy(() => import("./pages/subscription/ChosenTeacher"));
+const MyStudents = React.lazy(() => import("./pages/myStudents/MyStudents"));
 
 
 export default function App() {
@@ -143,12 +146,13 @@ export default function App() {
           <Route path="/NewMessenger/:id" exact element={<NewMessenger socket={socket}/>}/>
           <Route path="/chatting" exact element={<NewChatBox socket={socket}/>}/>
           <Route path="/OnePractice/:id" exact element={<OnePractice socket={socket}/>}/>
-          <Route path="/subscription" exact element={<Subscription user={user}/>}/>
+          <Route path="/subscription" exact element={<Subscription user={theUser}/>}/>
           <Route path="/NewProfile" exact element={<NewProfile user={theUser} setTheUser={setTheUser}/>}/>
+          <Route path="/chooseTeacher" exact element={<ChooseTeacher user={theUser}/>}/>
+          <Route path="/chooseTeacher/:id" exact element={<ChosenTeacher user={theUser} setTheUser={setTheUser}/>}/>
+          <Route path="/myStudents/:id" exact element={<MyStudents user={theUser}/>}/>
 
           
-          
-
           <Route path="/NewReview" exact element={<NewReview socket={socket}/>}/>
           <Route path="/addStudent" exact element={<PaidStudent user={user} setUser={setUser}/>}/>
           {/* <Route path="/TestYoutube/:id" exact element={  <TestYoutube

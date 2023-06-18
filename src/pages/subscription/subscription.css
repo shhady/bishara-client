@@ -72,6 +72,18 @@
     border: none;
 }
 
+.chooseTeacherPop{
+    margin-top:100px;
+    padding:0px 15px
+}
+.teachersListSub {
+    width: 50%;
+    margin: auto;
+}
+.aboutTeacher{
+    width: 50%;
+    margin: auto;
+}
 @media (max-width:600px) {
     .plan{
         width: 100%;
@@ -95,5 +107,16 @@
       #secondPlan {
         order: -1;
       }
-    
+      .chooseTeacherPop{
+        margin-top:80px;
+        padding:0px 15px
+     }
+     .teachersListSub{
+        width: 90%;
+        margin: auto;
+    }
+    .aboutTeacher{
+        width: 90%;
+        margin: auto;
+    }
 }

@@ -93,7 +93,7 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
       }
   return (
     <div className='divOfUploadBtn'>
-       {user?.paid === course?.owner ? (<div  className='divOfUploadBtn'><button onClick={handleOpenWidget} className='uploadPracticeBtn'>ارفع تمرين</button>  
+       {user?.trialTeacher === course?.owner ? (<div  className='divOfUploadBtn'><button onClick={handleOpenWidget} className='uploadPracticeBtn'>ارفع تمرين</button>  
         الحجم الاقصى"100MB"</div>):(<div><button onClick={openAlert} className='uploadPracticeBtn'>ارفع تمرين</button> </div>)}
         
     </div>

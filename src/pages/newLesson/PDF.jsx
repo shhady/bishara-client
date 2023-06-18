@@ -52,7 +52,7 @@ export default function PDF({course,name}) {
   return (
     <div className='divOfUploadBtn'>
         {fileUrl ? (<>
-        {user.paid === course?.owner || user._id ===  course?.owner? ( <button className='uploadPracticeBtn'>
+        {user.trialTeacher === course?.owner || user._id ===  course?.owner? ( <button className='uploadPracticeBtn'>
         <a
     href={fileUrl}
     target="_blank"
@@ -67,7 +67,7 @@ export default function PDF({course,name}) {
              {user?._id === course?.owner || user?.role === "admin" ? (<form onSubmit={addLink} style={{display:'flex', flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
             <input type='text' placeholder='اضف الرابط' onChange={(e)=>setUploadFile(e.target.value)} style={{height:"40px", width:"150px", marginTop:"20px"}}/>
             <input type="submit" className='uploadPracticeBtn' style={{height:"40px", width:"150px"}}/>
-            </form>):(<> {user?.paid === course?.owner ? (<button className='uploadPracticeBtn'>لا يوجد ملف</button>):(<div><button className='uploadPracticeBtn' onClick={openAlert}>ملف النوته</button></div>)}</>)}
+            </form>):(<> {user?.trialTeacher === course?.owner ? (<button className='uploadPracticeBtn'>لا يوجد ملف</button>):(<div><button className='uploadPracticeBtn' onClick={openAlert}>ملف النوته</button></div>)}</>)}
         </>
         )}
        </div>

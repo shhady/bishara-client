@@ -1,6 +1,20 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import "./subscription.css"
-export default function Subscription() {
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+export default function Subscription({user}) {
+  const navigate = useNavigate()
+  const [theUser, setTheUser] = useState()
+  console.log(theUser);
+
+  useEffect(()=>{
+    const getData = async ()=>{
+      const result = await axios.get(process.env.REACT_APP_BACKEND_URL + `/users/${user?._id}`)
+      setTheUser(result.data);
+    }
+    getData()
+  },[user])
+
   return (
     <div className='container'>
      <h1 className='titleSubscription'>استمتع بفترة تجريبية مجانية لمدة 7 أيام</h1>
@@ -36,8 +50,12 @@ export default function Subscription() {
       شهري/ <strong>0₪</strong> <span style={{color:"red", margin:"10px"}}><s><strong>65₪</strong></s></span>
       <div className='invoiceLine'>لا يوجد فاتورة</div>
       <div style={{fontWeight:"bold",padding:"10px 30px"}}  className='invoiceLine'>الدروس والدورات <br/>مراسلة الاستاذ<br/>فيديوهات عزف الفنانين<br/>نشرات شهريه</div>
-      <button className='Months6Btn'>سجل مجاناً</button>
-
+      {theUser?.status === 'trial' ? (<div style={{fontWeight:"bold", color:"red", padding:"10px"}}> باقي {theUser?.daysLeft} ايام للاشتراك المجاني  </div>):(null)}
+      {theUser?.status === 'trialEnd' ? (<div  style={{fontWeight:"bold", color:"red", padding:"10px"}}>انتهى الاشتراك المجاني</div>):(null)}
+      {theUser?.status == "noTrial"  ? (<button className='Months6Btn' onClick={()=>navigate('/chooseTeacher')}>سجل مجاناً</button>):(null )}
+     
+      
+     {/* add days left here  */}
       </div>
      </div>
     </div>
