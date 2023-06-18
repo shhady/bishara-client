@@ -18,7 +18,7 @@ export default function NewHero({user}) {
         <button className='button2'>ابدأ تجربتك المجانية لمدة 7 ايام</button></Link>} 
         {user?.user?.status === "trial" && <button className='button2'> باقي {user?.user?.daysLeft} ايام للاشتراك المجاني</button>}
         {user?.user?.status === "trialEnd" && <button className='button2'>اشترك الآن</button>}
-        {user?.teacher && <Link to={`/mystudents/${user?.teacher?._id}`}><button className='button2'>المشتركين</button></Link>}
+        {user?.teacher?._id && <Link to={`/mystudents/${user?.teacher?._id}`}><button className='button2'>المشتركين</button></Link>}
 
       <div className='bottomText'>
         دروس خصوصية غير محدودة بسعر 125 شيكل شهرياً - فترة تجريبية مجانية لمدة 7 أيام
