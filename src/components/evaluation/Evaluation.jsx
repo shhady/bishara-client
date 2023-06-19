@@ -90,7 +90,11 @@ function handleOpenWidget(e) {
       console.log(e)
     }
   }
-
+const handleNotSub = ()=>{
+  alert("لرفع تمارين يجب الاشتراك");
+        navigate("/subscription"); 
+}
+  console.log(user);
 
   return (
     <div className='containerEvaluation'>
@@ -111,8 +115,10 @@ function handleOpenWidget(e) {
          </div>
          <form onSubmit={uploadFile} className='formEvaluationWithData' style={{marginTop:"15px"}}>
         {videoUrl ? ( <><div> تم رفع {videoName} <button onClick={()=>setVideoUrl(null)} style={{background:"red", color:"white"}}>X</button></div>
-        <button type="submit" className='submitFormEva'>ارسال</button></>):(<><button onClick={handleOpenWidget} className='uploadEvaluation'>ارسل عزفك</button>
-          <div style={{textAlign:"center", fontSize:"13px"}}>الحد الأقصى لحجم الملف 100 ميغا بايت</div></>)}
+        <button type="submit" className='submitFormEva'>ارسال</button></>):(<>
+        {user?.trialTeacher === teacher?._id ? (<><button onClick={handleOpenWidget} className='uploadEvaluation'>ارسل عزفك</button>
+          <div style={{textAlign:"center", fontSize:"13px"}}>الحد الأقصى لحجم الملف 100 ميغا بايت</div></>):(<button className='uploadEvaluation' onClick={handleNotSub}>ارسل عزفك</button>)}
+          </>)}
         </form>
         </div>):( <form onSubmit={uploadFile} className='formEvaluation'>
         <div style={{width:"100%", textAlign:'center', fontWeight:"bold"}}>
@@ -141,8 +147,11 @@ function handleOpenWidget(e) {
           <input className='inputFormEva' type="text" value={ whereStudied} onChange={(e)=> setWhereStudied(e.target.value)} placeholder="اين تعلمت" required/>
           <input className='inputFormEva' type="text" value={ goal} onChange={(e)=> setGoal(e.target.value)} placeholder="هدفك من التعليم" required/>
         {videoUrl ? ( <><div> تم رفع {videoName} <button onClick={()=>setVideoUrl(null)} style={{background:"red", color:"white"}}>X</button></div>
-        <button type="submit" className='submitFormEva'>ارسال</button></>):(<><button onClick={handleOpenWidget} className='uploadEvaluation'>ارسل عزفك</button>
-          <div style={{textAlign:"center", fontSize:"13px"}}>الحد الأقصى لحجم الملف 100 ميغا بايت</div></>)}  
+        <button type="submit" className='submitFormEva'>ارسال</button></>):(<>
+        {user?.trialTeacher === teacher?._id ? (<><button onClick={handleOpenWidget} className='uploadEvaluation'>ارسل عزفك</button>
+          <div style={{textAlign:"center", fontSize:"13px"}}>الحد الأقصى لحجم الملف 100 ميغا بايت</div></>):(<button className='uploadEvaluation' onClick={handleNotSub}>ارسل عزفك</button>)}
+        
+          </>)}  
            
           </form>)}
         
