@@ -1,31 +1,80 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 export default function MyStudents() {
-    const [students, setStudents] = useState()
-    const {id} = useParams()
-    useEffect(()=>{
-        const fetch = async()=>{
-            const res = await axios.get(process.env.REACT_APP_BACKEND_URL + `/myUsers/${id}`)
-            setStudents(res.data)
-          }
-          fetch()
-    },[id])
-    console.log(id);
-    console.log(students);
-    const drawStudents =  ()=>{
-        return students?.map((student,i)=>{
-            return <div key={i}  style={{display:'flex', minWidth:"300px",width:"fit-content",margin:"auto", border:"1px solid black", padding:"10px"}}>
-                 <img src={student.avatar ? student.avatar : "https://img.icons8.com/material-rounded/24/null/user.png" } alt={student.firstName} width={50} height={50} style={{borderRadius:"50%", margin:"10px"}}/>
-                 <div key={i}>
-              <div> الاسم: {student.firstName} {student.lastName}</div> 
-                <div> {student.email}</div>
-                <div>باقي ايام: {student.daysLeft}</div>
-                </div>
-                </div>  
-        })
-    }
-  return (
-    <div style={{marginTop:"100px",display:"flex", flexWrap:"wrap", gap:"10px"}}> {drawStudents()}</div>
-  )
+  const [students, setStudents] = useState([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/myUsers/${id}`);
+        setStudents(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchStudents();
+  }, [id]);
+
+  const drawStudents = () => {
+    return students.map((student, i) => (
+      <div key={i} style={styles.studentContainer}>
+        <img
+          src={student.avatar ? student.avatar : 'https://img.icons8.com/material-rounded/24/null/user.png'}
+          alt={student.firstName}
+          style={styles.avatar}
+        />
+        <div style={styles.infoContainer}>
+          <div style={styles.name}>{`${student.firstName} ${student.lastName}`}</div>
+          <div style={styles.email}>{student.email}</div>
+          <div style={styles.daysLeft}>باقي ايام:  {student.daysLeft}</div>
+        </div>
+      </div>
+    ));
+  };
+
+  return <div style={styles.container}>{drawStudents()}</div>;
 }
+
+const styles = {
+  container: {
+    marginTop: '100px',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '10px',
+  },
+  studentContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+    border: '1px solid #ddd',
+    padding: '20px',
+    borderRadius: '5px',
+  },
+  avatar: {
+    borderRadius: '50%',
+    width: '80px',
+    height: '80px',
+    marginBottom: '10px',
+  },
+  infoContainer: {
+    textAlign: 'center',
+  },
+  name: {
+    fontWeight: 'bold',
+    fontSize: '1.2rem',
+    marginBottom: '5px',
+  },
+  email: {
+    color: 'gray',
+    marginBottom: '5px',
+  },
+  daysLeft: {
+    fontSize: '0.9rem',
+  },
+};
