@@ -52,13 +52,13 @@ export default function PDF({course,name}) {
   return (
     <div className='divOfUploadBtn'>
         {fileUrl ? (<>
-        {user.trialTeacher === course?.owner || user._id ===  course?.owner? ( <button className='uploadPracticeBtn'>
+        {user.trialTeacher === course?.owner || user._id ===  course?.owner? ( <div className='uploadPracticeBtnDiv'>
         <a
     href={fileUrl}
     target="_blank"
     rel="noreferrer"   style={{
         textDecoration: "none",
-        color: "black"}}>ملف النوته</a></button>):(<div>  <button className='uploadPracticeBtn' onClick={openAlert}>ملف النوته</button> </div>)}
+        color: "black"}}>ملف النوته</a></div>):(<div>  <button className='uploadPracticeBtn' onClick={openAlert}>ملف النوته</button> </div>)}
         
         {user?._id === course?.owner || user.role === "admin" ? (<button className='uploadPracticeBtn' onClick={deleteTheFile} style={{ background:"red"}}>delete</button>):(null)}
         </>

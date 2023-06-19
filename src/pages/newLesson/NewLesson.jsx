@@ -58,7 +58,7 @@ export default function NewLesson() {
              <div style={{background:"white", position:"absolute", top:"0", right:"0", width:"20px", height:"30px", display:"flex", justifyContent:"center", alignItems:"center", borderBottomLeftRadius:"10px"}}>{i+1}</div>
             </div>
             ):(
-                <Link to={`/NewLesson/${id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course?.playlistId}`}>
+                <Link to={`/NewLesson/${id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course?.playlistId}`} onClick={()=>setVideoName(lesson.snippet.title)}>
                 <div className='suggestion' style={{backgroundImage: `url(${lesson?.snippet.thumbnails.high.url})`}} >
                 <div style={{background:"white", position:"absolute", top:"0", right:"0", width:"20px", height:"30px", display:"flex", justifyContent:"center", alignItems:"center", borderBottomLeftRadius:"10px"}}>{i+1}</div>
             </div></Link>)}

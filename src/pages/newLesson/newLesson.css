@@ -1,6 +1,6 @@
 .youtubeFrame{
     width: 57vw;
-    height: 60vh;
+    height: 50vh;
     margin: auto;
     margin-top: 80px;
 }
@@ -42,6 +42,17 @@
     width: 100px;
     height: 50px;
     margin-left: 10px;
+}
+.uploadPracticeBtnDiv{
+    background-color: #fee4b9;
+    width: 100px;
+    height: 50px;
+    margin-left: 10px;
+    border:1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
 }
 .UploadPDownloadF{
     display: flex;
