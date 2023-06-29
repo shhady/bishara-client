@@ -14,6 +14,7 @@
     justify-content: center;
     align-items: center;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 .titleSubscription{
     text-align: center;
@@ -34,20 +35,29 @@
     gap:10px
 }
 
-.plan{
-    width: 30%;
+.plan2{
+    width: 100%;
     border: 1px solid black;
     text-align: center;
+    margin-top: 50px;
+    margin: 50px auto;
+}
+.plan1{
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+    margin: 0px auto;
 }
 .colorful{
     background: linear-gradient(to right, #ff79d5, #787FFF);
     color: white;
     font-weight: bold;
     text-align: center;
-    width: 30%;
-    padding: 3px 20px;
-    margin: 50px auto 0px auto;
+    width: 100%;
+    padding: 10px 20px;
+    height: 50px;
 }
+
 .invoiceLine{
     padding: 10px;
     width: 80%;
@@ -90,7 +100,7 @@
         border: 1px solid black;
         text-align: center;
     }
-    .colorful{
+    /* .colorful{
         background: linear-gradient(to right, #ff79d5, #787FFF);
         color: white;
         font-weight: bold;
@@ -98,7 +108,7 @@
         width: 100%;
         padding: 3px 20px;
         margin: 50px auto 0px auto;
-    }
+    } */
     .plans {
         flex-direction: column;
         align-items: flex-start;
@@ -118,5 +128,33 @@
     .aboutTeacher{
         width: 90%;
         margin: auto;
+    }
+}
+
+.plansContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:50px;
+    padding: 0px 50px;
+}
+@media (max-width:600px) {
+    .plansContainer{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap:50px;
+        padding: 0px 20px;
+    }
+    .plan2{
+        width: 100%;
+        border: 1px solid black;
+        text-align: center;
+        margin-top: 50px;
+        margin: 50px auto;
+    }
+    .plan1{
+        width: 100%;
+        border: 1px solid black;
+        text-align: center;
+        margin: 0px auto;
     }
 }

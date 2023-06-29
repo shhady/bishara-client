@@ -5,19 +5,14 @@ import './NewTeacher.css'
 import NewTeacherCourses from '../../components/newTeacherComponents/NewTeacherCourses';
 import NewTeacherDisc from '../../components/newTeacherComponents/NewTeacherDisc';
 import Evaluation from '../../components/evaluation/Evaluation'
-export default function NewTeacher() {
-    const user = JSON.parse(localStorage.getItem("profile"));
+export default function NewTeacher({user}) {
     const [teacher, setTeacher ] = useState(null)
-    const [userId, setUserId] = useState("");
+    const userId= user?._id
     const [open, setOpen] = useState('NewTeacherCourses')
     const {id} = useParams()
-    console.log(id)
+    console.log(user)
     console.log(teacher)
-    useEffect(() => {
-        if (!user) return;
-        setUserId(user.user ? user.user._id : user.teacher._id);
-      }, [user]);
-
+ 
       useEffect(() => {
         const fetch = async () => {
           const result = await axios.get(
@@ -68,7 +63,7 @@ export default function NewTeacher() {
         </div>
             {open === "NewTeacherCourses" && <NewTeacherCourses id={id}/>}
             {open === "NewTeacherDisc" && <NewTeacherDisc id={id}/>}
-           {userId ? (<>{open === "Evaluation" && <Evaluation id={id} teacher={teacher}/>}</>):(<div style={{textAlign:"center", marginTop:"42px"}}>للحصول على تقييم لعزفك يجب الاشتراك<br/><Link to="/subscription" style={{textDecoration:"none"}}><div style={{border:"2px solid black",fontWeight:"bold", width:"fit-content", padding:"5px", margin:"auto", borderRadius:"10px"}}> للاشتراك اضغط هنا </div></Link></div>)} 
+           {open === "Evaluation" && <Evaluation id={id} teacher={teacher} user={user}/>}
     </div>
   )
 }

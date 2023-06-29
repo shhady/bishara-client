@@ -15,7 +15,7 @@ export default function NewReview({socket}) {
     useEffect(()=>{
       theUser.user ? setUser(theUser.user) : setUser(theUser.teacher)
     },[])
-
+    console.log(practices);
     console.log(user)
     useEffect(() => {
       const fetchPractices = async () => {
@@ -23,6 +23,7 @@ export default function NewReview({socket}) {
           process.env.REACT_APP_BACKEND_URL + `/mypractices/${user._id}`
         );
         setPractices(res.data);
+        console.log(res.data);
       };
       fetchPractices();
     }, [user]);

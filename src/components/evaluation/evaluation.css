@@ -52,3 +52,26 @@
         grid-template-columns: 1fr;
     }
 }
+
+.notSub{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.uploadEvaBtn{
+    border: 2px solid black;
+    font-weight: bold;
+    padding: 5px 10px;
+    background-color: #fcedd5;
+}
+.cancelVideo{
+    background-color: red;
+    width: 30px;
+}
+
+.nameAndCancel{
+    display: flex;
+    gap:10px
+}

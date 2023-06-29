@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 export default function PDF({course,name}) {
   const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const plan  =   JSON.parse(localStorage.getItem("plan"))
   const [user, setUser] = useState('') 
     const [fileUrl, setFileUrl] = useState('')
     const [uploadFile, setUploadFile] = useState('')
@@ -52,7 +53,7 @@ export default function PDF({course,name}) {
   return (
     <div className='divOfUploadBtn'>
         {fileUrl ? (<>
-        {user.trialTeacher === course?.owner || user._id ===  course?.owner? ( <div className='uploadPracticeBtnDiv'>
+        {plan.teacherId === course?.owner && plan.status === 'active'  || user._id ===  course?.owner? ( <div className='uploadPracticeBtnDiv'>
         <a
     href={fileUrl}
     target="_blank"

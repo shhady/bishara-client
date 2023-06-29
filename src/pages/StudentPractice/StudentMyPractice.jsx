@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import "../TeacherPractices/StudentPractice.css"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 export default function StudentMyPractice() {
   const [practice, setPractice] = useState({});
   const [poster, setPoster] = useState("");
@@ -87,15 +87,21 @@ export default function StudentMyPractice() {
                 {practice.teacherFirstName} {practice.teacherLastName}
               </div>
               <div>
-                {" "}
-                الدورة: {" "}
-                {practice.courseName}
-              </div>
-              <div>
-              {" "}
-                الدرس: {" "}
-                {practice.video}
-              </div>
+            {" "}
+           {/* الدوره: {" "}
+            {practice.courseName} / {" "}
+            {practice.courseLevel} */}
+            {practice.courseName ? <>الدوره: {practice.courseName} / {practice.courseLevel}</> : <>الهدف: {practice.goal}</>}
+          </div>
+          {/* <Link to={`/NewLesson/course?name=${practice.uniqueLink}&playlist=${practice.courseId
+}`} style={{textDecoration:"none"}}>
+          <div style={{  marginBottom:"10px"}}>
+         
+            {practice.video}
+          </div>
+          </Link> */}
+           {practice.courseName ? <Link to={`/NewLesson/${practice.courseId}?name=${practice.uniqueLink}&playlist=${practice.playlistId
+}`} style={{textDecoration:"none", color:"black"}}><>الدرس: {practice.video}</></Link> : <>اين تعلمت: {practice.whereStudied}</>}
             </div>
             <div>
               <button onClick={() => deletePractice(practice)} style={{backgroundColor:"#fee4b9", width:"80px"}}>

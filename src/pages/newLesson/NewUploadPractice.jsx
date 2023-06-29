@@ -11,14 +11,16 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
       const [moreThan, setMoreThan] = useState(null);
       const [url, setUrl] = useState(null);
       const [video, setVideo] = useState();
+      const [videoUrl, setVideoUrl] = useState('')
       const [fileUpload, setFileUpload] = useState(null);
+      const plan  =   JSON.parse(localStorage.getItem("plan"))
         // const [maxSize, setMaxSize] = useState('')
     useEffect(()=>{
       if (!theUser) return;
         theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
     },[theUser])
     const [formData, setFormData] = useState({})
-    const [videoUrl, setVideoUrl] = useState('')
+    
     const navigate = useNavigate();
     console.log(user)
     useEffect(() => {
@@ -118,7 +120,7 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
     <div className='divOfUploadBtn'>
        {/* {user?.trialTeacher === course?.owner ? (<div  className='divOfUploadBtn'><button onClick={postDetails} className='uploadPracticeBtn'>ارفع تمرين</button>  
         الحجم الاقصى"100MB"</div>):(<div><button onClick={openAlert} className='uploadPracticeBtn'>ارفع تمرين</button> </div>)} */}
-        {user?.trialTeacher === course?.owner ? 
+        {plan.teacherId === course?.owner && plan.status === 'active' ?
         <>
          {video ? (<button className='uploadPracticeBtn' onClick={postDetails}>ارسال</button>):(null)}
          {video ? <> {fileUpload?.percentComplete ? (<>{fileUpload?.percentComplete}%</>): (<div style={{display:'flex', justifyContent:'center', alignItems:'center'}}> {video.name}  <button onClick={()=> {setVideo(null); setVideoUrl(null)}} style={{background:"red", marginRight:"10px"}}>X</button></div>)}</>:  <><label for="inputTag">

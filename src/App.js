@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import { io } from "socket.io-client";
 import Zoom from "./pages/zoom/Zoom";
 import YoutubeForPractice from "./pages/youtubeForPractice/YoutubeForPractice";
+import EditReplies from "./pages/TeacherPractices/EditReplies";
 // import NewMessenger from "./pages/NewMessenger/NewMessenger"
 const Home = React.lazy(() => import("./pages/HomePage/Home"));
 const StudentsPractices = React.lazy(() => import("./components/StudentsPractices"));
@@ -134,7 +135,7 @@ export default function App() {
           <Route path="/auth" exact element={ <Auth user={user} setUser={setUser} setUserProp={setUserProp} />}/>
           <Route path="/forgetpassword" exact element={ <ForgetPassword />}/>
           <Route path="/lessonReview" exact element={ <YoutubeForPractice />}/>
-          <Route path="/NewTeacher/:id" exact element={ <NewTeacher />}/>
+          <Route path="/NewTeacher/:id" exact element={ <NewTeacher user={theUser}/>}/>
           <Route path="/NewCourse/:id" exact element={ <NewCourse />}/>
           <Route path="/GeneralButton" exact element={ <GeneralButton user={user} />}/>
           <Route path="/qa" element={ <QA user={user}/>}/>
@@ -151,6 +152,7 @@ export default function App() {
           <Route path="/chooseTeacher" exact element={<ChooseTeacher user={theUser}/>}/>
           <Route path="/chooseTeacher/:id" exact element={<ChosenTeacher user={theUser} setTheUser={setTheUser}/>}/>
           <Route path="/myStudents/:id" exact element={<MyStudents user={theUser}/>}/>
+          <Route path="/editReplies/:id" exact element={<EditReplies user={theUser}/>}/>
 
           
           <Route path="/NewReview" exact element={<NewReview socket={socket}/>}/>

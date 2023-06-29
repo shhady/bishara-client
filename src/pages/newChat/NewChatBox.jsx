@@ -173,7 +173,7 @@ useEffect(() => {
       </div>
       <div className="messageContainer">
     {messages.map((m, index) => (
-      <Message key={index} message={m} own={m.sender === myId} />
+      <Message key={index} message={m} own={m.sender === user._id} />
     ))}
     <div ref={scrollRef} />
   </div>
