@@ -70,7 +70,18 @@ export default function Header({
   useEffect(() => {
     setNotificationNumber(backNot.filter((number) => number.read === false));
   }, [backNot]);
-
+  useEffect(() => {
+    if (!user) return;
+    if(user.user){
+      // setUser(user.user);
+      localStorage.setItem("profile", JSON.stringify({}));
+      window.location.href = window.location.href;
+        } else if(user.teacher){
+      // setUser(user.teacher);
+      localStorage.setItem("profile", JSON.stringify({}));
+      window.location.href = window.location.href;
+      }
+  }, [user]);
  
   useEffect(() => {
     if (!user) return;
