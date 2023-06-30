@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from "react";
-import { BrowserRouter, Route , Routes} from "react-router-dom";
+import { BrowserRouter, Navigate, Route , Routes} from "react-router-dom";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
 import Zoom from "./pages/zoom/Zoom";
@@ -60,13 +60,17 @@ export default function App() {
     if (!user) return;
     if(user.user){
       setUser(user.user);
-      window.localStorage.setItem("profile", JSON.stringify(user.user))
-    } else if(user.teacher){
+      localStorage.removeItem("profile");
+        } else if(user.teacher){
       setUser(user.teacher);
-      window.localStorage.setItem("profile", JSON.stringify(user.teacer))
-    }
+      localStorage.removeItem("profile");  
+      }
     setUserId(user?._id)
   }, [user]);
+
+  useEffect(() => {
+    
+  }, []);
   
   // useEffect(() => {
   //   if (!userId) return;
