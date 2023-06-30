@@ -10,18 +10,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
 export default function NewCourse() {
-  const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const [user, setUser] = useState('') 
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  // const [user, setUser] = useState('') 
     const [course, setCourse] = useState('')
     const [lessons,setLessons]  = useState([])
     const [open, setOpen] = useState("")
     const {id} = useParams()
     const navigate = useNavigate()
     console.log(id)
-    useEffect(()=>{
-      if(!theUser) return ;
-        theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
-    },[theUser])
+    // useEffect(()=>{
+    //   if(!theUser) return ;
+    //     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
+    // },[theUser])
     useEffect(()=>{
         const fetchData = async ()=>{
             const res = await axios.get(

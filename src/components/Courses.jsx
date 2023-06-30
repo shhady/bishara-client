@@ -21,7 +21,7 @@ export default function Courses({
  
   useEffect(() => {
     if (!user) return;
-    user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
+   setUserId(user._id) 
   }, []);
 
   useEffect(() => {
@@ -64,49 +64,12 @@ export default function Courses({
           marginTop: "100px",
         }}
       >
-        {/* <div className="spinner"> */}
-        <div className="loader">
-          {/* <div className="balls_container">
-              <div className="ball"></div>
-              <div className="ball"></div>
-              <div className="ball"></div>
-            </div>
-            <span>جاري تحميل البيانات</span> */}
+        <div className="loader">  
         </div>
-        {/* </div> */}
       </div>
     );
 
-  const handleClick = (post) => {
-   
-    setAll(true);
-    // setSelectedTeacher(post.owner);
-    // const res = await axios.get(process.env.REACT_APP_BACKEND_URL+`/courses/${post._id}`);
-    
-    setCourseData(post._id);
-    navigate(`/Lessons`);
-    window.localStorage.setItem("courseId", post._id);
-    window.localStorage.setItem("ownerId", post.owner);
-    window.localStorage.setItem("playlistId", post.playlistId);
-    window.localStorage.setItem("teacherId", post.owner);
-    setListId(post.playlistId);
-    setCourse(post);
-    window.localStorage.setItem("courseDetails", JSON.stringify(post));
-    setUpdateComponent(post);
 
-    // navigate("/course");
-  };
-
-  // const handlechat = async (post) => {
-  //   await axios.post(process.env.REACT_APP_BACKEND_URL+`/conversations/`, {
-  //     senderId: userId,
-  //     receiverId: post.owner,
-  //   });
-  // };
-  // const showAll = () => {
-  //   setAll(true);
-  // };
-  
   const showData = () => {
     return posts?.map((post) => {
       return (
@@ -114,9 +77,6 @@ export default function Courses({
         <div
           key={post._id}
           className="courseContainer"
-          // onClick={() => {
-          //   handleClick(post);
-          // }}
           style={{ cursor: "pointer", padding: "5px", borderRadius: "25px" }}
         >
           <img

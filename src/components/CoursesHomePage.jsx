@@ -3,11 +3,7 @@ import axios from "axios";
 import "../pages/Teachers/Teachers.css";
 import { Link } from "react-router-dom";
 // import {useNav} from "react-router-dom"
-export default function CoursesHomePage({
-  // setCoursesHover,
-  setUpdateComponent,
-  updateComponent,
-}) {
+export default function CoursesHomePage() {
   const [courses, setCourses] = useState(null);
   useEffect(() => {
     const fetch = async () => {
@@ -53,10 +49,6 @@ export default function CoursesHomePage({
       return (
         <div
           key={i}
-          onClick={() => {
-            // setCoursesHover(false);
-            setUpdateComponent(course);
-          }}
           className="homepagecourses"
         >
  <Link to={`/newCourse/${course._id}`} style={{ textDecoration: "none" }}>            <div

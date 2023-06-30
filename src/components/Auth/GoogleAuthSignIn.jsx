@@ -18,7 +18,7 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
           password: `${userInfo.sub}${process.env.REACT_APP_GOOGLE_ADD_TO_PASSWORD}`,
         }
       );
-      window.localStorage.setItem("profile", JSON.stringify(result.data));
+      window.localStorage.setItem("profile", JSON.stringify(result.data.user));
       window.localStorage.setItem("token", result.data.token);
       window.localStorage.setItem("firstName", result.data.user.firstName);
       window.localStorage.setItem("lastName", result.data.user.lastName);
@@ -41,7 +41,7 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
           avatar: userInfo.picture,
         }
       );
-      window.localStorage.setItem("profile", JSON.stringify(result.data));
+      window.localStorage.setItem("profile", JSON.stringify(result.data.user));
       window.localStorage.setItem("token", result.data.token);
       window.localStorage.setItem("firstName", userInfo.given_name);
       window.localStorage.setItem("lastName", userInfo.family_name);

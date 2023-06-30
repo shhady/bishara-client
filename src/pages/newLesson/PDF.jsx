@@ -2,17 +2,17 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 export default function PDF({course,name}) {
-  const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  // const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const plan  =   JSON.parse(localStorage.getItem("plan"))
-  const [user, setUser] = useState('') 
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const [fileUrl, setFileUrl] = useState('')
     const [uploadFile, setUploadFile] = useState('')
     const [fileId, setFileId] = useState('')
     const navigate = useNavigate()
     // console.log(user.teacher?._id)
-    useEffect(()=>{
-      theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
-  },[theUser])
+  //   useEffect(()=>{
+  //     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
+  // },[theUser])
   console.log(course);
     useEffect(() => {
         const fetch = async () => {
@@ -53,7 +53,7 @@ export default function PDF({course,name}) {
   return (
     <div className='divOfUploadBtn'>
         {fileUrl ? (<>
-        {plan.teacherId === course?.owner && plan.status === 'active'  || user._id ===  course?.owner? ( <div className='uploadPracticeBtnDiv'>
+        {plan?.teacherId === course?.owner && plan?.status === 'active'  || user._id ===  course?.owner? ( <div className='uploadPracticeBtnDiv'>
         <a
     href={fileUrl}
     target="_blank"

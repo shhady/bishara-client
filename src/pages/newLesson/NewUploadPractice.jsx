@@ -5,9 +5,9 @@ import './newLesson.css';
 import { io } from "socket.io-client";
 import { useNavigate } from 'react-router-dom';
 export default function NewUploadPractice({course, videoName, uniqueLink}) {
-      const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
+      // const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
       const [socket, setSocket] = useState(null);
-      const [user, setUser] = useState('') 
+      const [user, setUser] =  useState(JSON.parse(localStorage.getItem("profile")));
       const [moreThan, setMoreThan] = useState(null);
       const [url, setUrl] = useState(null);
       const [video, setVideo] = useState();
@@ -15,10 +15,10 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
       const [fileUpload, setFileUpload] = useState(null);
       const plan  =   JSON.parse(localStorage.getItem("plan"))
         // const [maxSize, setMaxSize] = useState('')
-    useEffect(()=>{
-      if (!theUser) return;
-        theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
-    },[theUser])
+    // useEffect(()=>{
+    //   if (!theUser) return;
+    //     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
+    // },[theUser])
     const [formData, setFormData] = useState({})
     
     const navigate = useNavigate();
@@ -120,7 +120,7 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
     <div className='divOfUploadBtn'>
        {/* {user?.trialTeacher === course?.owner ? (<div  className='divOfUploadBtn'><button onClick={postDetails} className='uploadPracticeBtn'>ارفع تمرين</button>  
         الحجم الاقصى"100MB"</div>):(<div><button onClick={openAlert} className='uploadPracticeBtn'>ارفع تمرين</button> </div>)} */}
-        {plan.teacherId === course?.owner && plan.status === 'active' ?
+        {plan?.teacherId === course?.owner && plan?.status === 'active' ?
         <>
          {video ? (<button className='uploadPracticeBtn' onClick={postDetails}>ارسال</button>):(null)}
          {video ? <> {fileUpload?.percentComplete ? (<>{fileUpload?.percentComplete}%</>): (<div style={{display:'flex', justifyContent:'center', alignItems:'center'}}> {video.name}  <button onClick={()=> {setVideo(null); setVideoUrl(null)}} style={{background:"red", marginRight:"10px"}}>X</button></div>)}</>:  <><label for="inputTag">

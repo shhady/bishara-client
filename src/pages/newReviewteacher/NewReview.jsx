@@ -6,15 +6,15 @@ import Evaluations from './Evaluations'
 import Practices from './Practices'
 import './stylingPractices.css'
 export default function NewReview({socket}) {
-  const theUser=JSON.parse(localStorage.getItem("profile"))
-  const [user, setUser] = useState('')
+  const user=JSON.parse(localStorage.getItem("profile"))
+  // const [user, setUser] = useState('')
   const [filter, setFilter] = useState('Practices')
   const [practices, setPractices] = useState([])
   const [numOfPractices, setNumOfPractices] = useState('')
   const [numOfEvaluations, setNumOfEvaluations] = useState('')
-    useEffect(()=>{
-      theUser.user ? setUser(theUser.user) : setUser(theUser.teacher)
-    },[])
+    // useEffect(()=>{
+    //   theUser.user ? setUser(theUser.user) : setUser(theUser.teacher)
+    // },[])
     console.log(practices);
     console.log(user)
     useEffect(() => {

@@ -6,16 +6,16 @@ import axios from 'axios';
 import MyConversation from './MyConversation';
 import { useParams } from 'react-router-dom';
 export default function NewMessenger({socket}) {
-    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("profile")));
-    const [user, setUser] = useState('');
+    // const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("profile")));
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const [chats, setChats] = useState([]) 
     const [arrived, setArrived] = useState(null);
     const [currentChat, setCurrentChat] = useState(null)
     const [messages, setMessages] = useState(null)
     const {id} = useParams()
-    useEffect(()=>{
-        userData?.user ? setUser(userData.user):(setUser(userData.teacher)) 
-    },[userData])
+    // useEffect(()=>{
+    //     userData?.user ? setUser(userData.user):(setUser(userData.teacher)) 
+    // },[userData])
 
     useEffect(()=>{
         const getConversations = async () => {
@@ -67,7 +67,7 @@ export default function NewMessenger({socket}) {
       }, [socket]);
   return (
     <>
-     {user.role === "admin" || user.role === "teacher" ? (<div className='messengerPageTeacher'>
+     {user?.role === "admin" || user?.role === "teacher" ? (<div className='messengerPageTeacher'>
       
       <div>
       <h2>المحادثات</h2> 

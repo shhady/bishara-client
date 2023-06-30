@@ -80,8 +80,8 @@ export default function StudentsPractices({ user }) {
     setPracticeId(null);
   };
   useEffect(() => {
-    const userid = user.user ? user.user._id : user.teacher._id;
-    setUserId(userid);
+    // const userid = user.user ? user.user._id : user.teacher._id;
+    setUserId(user._id);
   }, [user]);
 
   useEffect(() => {

@@ -50,7 +50,7 @@ export default function Profile({ userProp }) {
   const [poster, setPoster] = useState("");
 
   useEffect(() => {
-    if (user.user) {
+    try{
       const getavatar = async () => {
         const res = await axios.get(
           process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
@@ -59,7 +59,10 @@ export default function Profile({ userProp }) {
         // console.log(res.data);
       };
       getavatar();
-    } else if (user.teacher) {
+    }catch(e){
+      console.log("no photo");
+    }
+    try{
       const getavatar = async () => {
         const res = await axios.get(
           process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
@@ -68,7 +71,7 @@ export default function Profile({ userProp }) {
         // console.log(res.data);
       };
       getavatar();
-    }
+    } catch(e){console.log("no photo");}
   }, [userId]);
   useEffect(() => {
     function MyVideo() {
@@ -156,11 +159,11 @@ export default function Profile({ userProp }) {
   }, [urlCover]);
   useEffect(() => {
     if (userProp) {
-      const userid = userProp.user ? userProp.user._id : userProp.teacher._id;
-      setUserId(userid);
+      // const userid = userProp.user ? userProp.user._id : userProp.teacher._id;
+      setUserId(user._id);
     } else {
-      const userid = user.user ? user.user._id : user.teacher._id;
-      setUserId(userid);
+      // const userid = user.user ? user.user._id : user.teacher._id;
+      setUserId(user._id);
     }
 
     // const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
@@ -295,10 +298,10 @@ export default function Profile({ userProp }) {
   }
 
   useEffect(() => {
-    if (user.teacher) return;
+    if (user.role === "teacher" || user.role === 'admin') return;
     const fetch = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user.user._id}`
+        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user._id}`
       );
       setUserPractices(res.data);
       console.log(res.data)
@@ -607,7 +610,7 @@ export default function Profile({ userProp }) {
     <div>
       {user ? (
         <div>
-          {user.teacher ? (
+          {user.role === 'teacher' || user.role === 'admin' ? (
             <div className="coverProfile">
               <div
                 style={{
@@ -642,7 +645,7 @@ export default function Profile({ userProp }) {
                 <div style={{ zIndex: "10", marginTop: "-80px" }}>
                   <img
                     src={updateProfilePic.replace('http://', 'https://')}
-                    alt={user.teacher.firstName + "me"}
+                    alt={user.firstName + "me"}
                     width="150"
                     height="150"
                     style={{ borderRadius: "50%", border: "5px solid white" }}
@@ -727,11 +730,11 @@ export default function Profile({ userProp }) {
                 اضافة طالب
               </div>
               
-              {user.teacher.role === "admin" ? (<Link to="/CreateCourseForTeacher" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons1"
+              {user.role === "admin" ? (<Link to="/CreateCourseForTeacher" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons1"
                   style={{ height: "40px" }}>
                 انشئ دورة لمعلم اخر
               </div></Link>):(null)}
-              {user.teacher.role === "admin" || user.teacher.role === "teacher" ? (<Link to="/GeneralButton" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons5"
+              {user.role === "admin" || user.role === "teacher" ? (<Link to="/GeneralButton" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons5"
                   style={{ height: "40px" }}>
 
 اضافة فيديو عام              </div></Link>):(null)}

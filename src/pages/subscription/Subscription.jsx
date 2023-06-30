@@ -55,16 +55,19 @@ const Subscription = ({ user }) => {
             },
           }
         );
-        const result = await axios.put(
-          process.env.REACT_APP_BACKEND_URL + `/trial`,
+        const result = await axios.patch(
+          `${process.env.REACT_APP_BACKEND_URL}/users/${user._id}`,
           {
-            email: user.email, // fix here
-            teacherId: selectedTeacher.value,
-            trialDateStart: new Date(),
-            status: "active"
+            subscriptionPlan: response.data._id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
         window.localStorage.setItem("profile" ,JSON.stringify(result.data));
+        console.log('Subscription plan:', result.data);
         console.log('Subscription plan created:', response.data);
         window.localStorage.setItem('plan', JSON.stringify(response.data));
         // Reset selected values

@@ -23,7 +23,7 @@ const GoogleAuthSignUp = ({ setUser }) => {
           avatar: userInfo.picture,
         }
       );
-      window.localStorage.setItem("profile", JSON.stringify(result.data));
+      window.localStorage.setItem("profile", JSON.stringify(result.data.user));
       window.localStorage.setItem("token", result.data.token);
       navigate("/profile");
       setUser(result.data);

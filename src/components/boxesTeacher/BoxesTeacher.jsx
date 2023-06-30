@@ -8,7 +8,7 @@ export default function BoxesTeacher() {
 
     useEffect(() => {
         if (!user) return;
-        setUserId(user.user ? user.user._id : user.teacher._id);
+        setUserId(user._id)
       }, [user]);
   return (
     <div style={{marginBottom:"20px"}}>

@@ -166,6 +166,7 @@ import { faPen, faForward } from '@fortawesome/free-solid-svg-icons';
 import React, {useState,useEffect} from 'react'
 import axios from 'axios';
 import "./evaluation.css"
+import { useNavigate } from 'react-router-dom';
 export default function Evaluation({teacher, user}) {
   console.log({t:teacher , u:user});
   const [expTime,setExpTime]= useState(user.experience)
@@ -176,7 +177,7 @@ export default function Evaluation({teacher, user}) {
   const [videoUrl, setVideoUrl] = useState('')
   const [fileUpload, setFileUpload] = useState('')
   const plan  =   JSON.parse(localStorage.getItem("plan"))
-
+  const navigate = useNavigate()
   console.log(plan);
   const postDetails = (e) => {
     e.preventDefault()
@@ -226,7 +227,8 @@ export default function Evaluation({teacher, user}) {
                  }
                )
                console.log(response.data.user);
-               window.localStorage.setItem('profile', JSON.stringify(response.data))
+               window.localStorage.setItem('profile', JSON.stringify(response.data.user))
+               navigate('/profile');
         console.log(res);
       } catch (e) {
         console.log(e);
@@ -241,8 +243,8 @@ export default function Evaluation({teacher, user}) {
     <div className='evaDesc'> تحميل فيديو لنفسك وأنت تعزف الموسيقى للحصول على تعليقات من معلمك يُعد أداة تعلم قيمة ومريحة. من خلال تسجيل أدائك على الفيديو، تمنح معلمك نظرة شاملة على قدراتك الموسيقية، مما يتيح تقييمًا أكثر دقة وفهمًا أعمق لبناء منهاج خاص بك. 
     </div>
     {!user &&  <div className='notSub'><div>الرجاء تسجيل الدخول</div><div> <button className='evaBTN'>تسجيل الدخول</button></div></div>}
-    {user.trialTeacher !== teacher._id && <div className='notSub'><div>يجب الاشتراك للحصول على تقييم لعزفك </div><div> <button className='evaBTN'>للاشتراك</button></div></div>}
-    {plan.teacherId === teacher._id && plan.status === 'active' && <div className='notSub'>
+    {plan?.teacherId !== teacher._id && <div className='notSub'><div>يجب الاشتراك للحصول على تقييم لعزفك </div><div> <button className='evaBTN'>للاشتراك</button></div></div>}
+    {plan?.teacherId === teacher._id && plan?.status === 'active' && <div className='notSub'>
       <form className='formEvaluation' onSubmit={postDetails}>
       <div style={{width:"100%", textAlign:'center', fontWeight:"bold"}}>
            خبرتك في العزف </div>      

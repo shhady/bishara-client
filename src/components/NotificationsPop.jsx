@@ -23,14 +23,18 @@ export default function NotificationsPop({
   const [userPracticesNotSeen, setUserPracticesNotSeen] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    user.user
-      ? setUserF(user.user.firstName)
-      : setUserF(user.teacher.firstName);
-    user.user ? setUserL(user.user.lastName) : setUserL(user.teacher.lastName);
-    user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
-    user.user
-      ? setUserAvatar(user.user.avatar)
-      : setUserAvatar(user.teacher.avatar);
+    setUserF(user.firstName)
+    setUserL(user.lastName)
+    setUserId(user._id)
+    setUserAvatar(user.avatar)
+    // user.user
+    //   ? setUserF(user.user.firstName)
+    //   : setUserF(user.teacher.firstName);
+    // user.user ? setUserL(user.user.lastName) : setUserL(user.teacher.lastName);
+    // user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
+    // user.user
+    //   ? setUserAvatar(user.user.avatar)
+    //   : setUserAvatar(user.teacher.avatar);
   }, [user]);
   useEffect(() => {
     const fetch = async () => {
@@ -89,7 +93,7 @@ export default function NotificationsPop({
     if (user.teacher) return;
     const fetch = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user.user._id}`
+        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user._id}`
       );
       setUserPractices(res.data);
     };

@@ -1,5 +1,4 @@
 import React from "react";
-import Hero from "../../components/Hero";
 import FreeVideos from "../../components/FreeVideos";
 import About from "../../components/About/About";
 import Footer from "../../components/Footer";
@@ -9,25 +8,15 @@ import CoursesHomePage from "../../components/CoursesHomePage";
 import NewHero from "../../components/newHero/NewHero";
 
 export default function Home({
-  showArrows,
-  user,
-  setUpdateComponent,
-  updateComponent,
+  user
 }) {
   return (
     <div className="HomePage">
       <NewHero user={user}/>
-      {/* <Hero showArrows={showArrows} user={user} /> */}
       <FourBoxes />
-
       <TeachersHomePage />
-     
-      <CoursesHomePage
-        setUpdateComponent={setUpdateComponent}
-        updateComponent={updateComponent}
-      />
+      <CoursesHomePage/>
       <FreeVideos />
-     
       <About />
       <Footer />
     </div>

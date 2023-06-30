@@ -12,19 +12,19 @@ function Component() {
   const handlePopoverLeave = () => {
     setIsMenuOpen(false);
   };
-  const isoDateString = user?.user?.createdAt;
+  const isoDateString = user?.createdAt;
   const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
 const normalDate = new Date(isoDateString).toLocaleDateString('en-GB', options);
   return (
     <div className="popover" onMouseEnter={handlePopoverHover} onMouseLeave={handlePopoverLeave}>
-      <img src={user.user.avatar ?user.user.avatar : "https://img.icons8.com/material-rounded/24/null/user.png" } alt="avatar" />
+      <img src={user.avatar ? user.avatar : "https://img.icons8.com/material-rounded/24/null/user.png" } alt="avatar" />
       {isMenuOpen && (
         <div className="menu">
           <header>
            
             <div style={{width:"fit-content"}}>
-            <img src={user.user.avatar ?user.user.avatar : "https://img.icons8.com/material-rounded/24/null/user.png" } alt="avatar" /><h2>{user?.user?.firstName} {user?.user?.lastName}</h2>
-              <h3>{user?.user?.email}</h3>
+            <img src={user.avatar ?user.avatar : "https://img.icons8.com/material-rounded/24/null/user.png" } alt="avatar" width={50} height={50}/><h2>{user?.firstName} {user?.lastName}</h2>
+              <h3>{user?.email}</h3>
               <h3>تاريخ الانشاء: {normalDate}</h3>
             </div>
           </header>
@@ -35,7 +35,7 @@ const normalDate = new Date(isoDateString).toLocaleDateString('en-GB', options);
 }
 
 export default Component;
-<div class="popover">
+{/* <div class="popover">
   <img src="avatar.webp" alt="avatar" />
   <div class="menu">
     <header>
@@ -52,4 +52,4 @@ export default Component;
       <li>Interests: Cooking, Hiking, Photography</li>
     </ul>
   </div>
-</div>
+</div> */}

@@ -47,24 +47,25 @@ export default function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [socket, setSocket] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [showArrows, setShowArrows] = useState(null);
   const [listId, setListId] = useState("");
   const [course, setCourse] = useState(null);
   const [teacher, setTeacher] = useState(null);
   const [updateComponent, setUpdateComponent] = useState(null);
   const [userProp, setUserProp] = useState(null);
   const [chatNotification, setChatNotification] = useState(null);
-  const [theUser, setTheUser] = useState(null);
 
-  useEffect(()=>{
-    if (!user) return;
-    user.teacher ? setTheUser(user.teacher) : setTheUser(user.user)
-  },[user])
 
-  console.log(theUser);
+  console.log(user);
   useEffect(() => {
     if (!user) return;
-    user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
+    if(user.user){
+      setUser(user.user);
+      window.localStorage.setItem('profile', user.user);
+    } else if(user.teacher){
+      setUser(user.teacher);
+      window.localStorage.setItem('profile', user.teacer);
+    }
+    setUserId(user?._id)
   }, [user]);
   
   // useEffect(() => {
@@ -116,8 +117,6 @@ export default function App() {
             user={user}
             setUser={setUser}
             socket={socket}
-            showArrows={showArrows}
-            setShowArrows={setShowArrows}
             updateComponent={updateComponent}
             setUpdateComponent={setUpdateComponent}
             chatNotification={chatNotification}
@@ -128,14 +127,11 @@ export default function App() {
           <Route path="/" exact element={<Home
               user={user}
               setUser={setUser}
-              showArrows={showArrows}
-              setUpdateComponent={setUpdateComponent}
-              updateComponent={updateComponent}
             />}/>
           <Route path="/auth" exact element={ <Auth user={user} setUser={setUser} setUserProp={setUserProp} />}/>
           <Route path="/forgetpassword" exact element={ <ForgetPassword />}/>
           <Route path="/lessonReview" exact element={ <YoutubeForPractice />}/>
-          <Route path="/NewTeacher/:id" exact element={ <NewTeacher user={theUser}/>}/>
+          <Route path="/NewTeacher/:id" exact element={ <NewTeacher user={user}/>}/>
           <Route path="/NewCourse/:id" exact element={ <NewCourse />}/>
           <Route path="/GeneralButton" exact element={ <GeneralButton user={user} />}/>
           <Route path="/qa" element={ <QA user={user}/>}/>
@@ -147,31 +143,16 @@ export default function App() {
           <Route path="/NewMessenger/:id" exact element={<NewMessenger socket={socket}/>}/>
           <Route path="/chatting" exact element={<NewChatBox socket={socket}/>}/>
           <Route path="/OnePractice/:id" exact element={<OnePractice socket={socket}/>}/>
-          <Route path="/subscription" exact element={<Subscription user={theUser}/>}/>
-          <Route path="/NewProfile" exact element={<NewProfile user={theUser} setTheUser={setTheUser}/>}/>
-          <Route path="/chooseTeacher" exact element={<ChooseTeacher user={theUser}/>}/>
-          <Route path="/chooseTeacher/:id" exact element={<ChosenTeacher user={theUser} setTheUser={setTheUser}/>}/>
-          <Route path="/myStudents/:id" exact element={<MyStudents user={theUser}/>}/>
-          <Route path="/editReplies/:id" exact element={<EditReplies user={theUser}/>}/>
+          <Route path="/subscription" exact element={<Subscription user={user}/>}/>
+          <Route path="/NewProfile" exact element={<NewProfile user={user} seUser={setUser}/>}/>
+          <Route path="/chooseTeacher" exact element={<ChooseTeacher user={user}/>}/>
+          <Route path="/chooseTeacher/:id" exact element={<ChosenTeacher user={user} setUser={setUser}/>}/>
+          <Route path="/myStudents/:id" exact element={<MyStudents user={user}/>}/>
+          <Route path="/editReplies/:id" exact element={<EditReplies user={user}/>}/>
 
           
           <Route path="/NewReview" exact element={<NewReview socket={socket}/>}/>
           <Route path="/addStudent" exact element={<PaidStudent user={user} setUser={setUser}/>}/>
-          {/* <Route path="/TestYoutube/:id" exact element={  <TestYoutube
-              user={user}
-              setUser={setUser}
-              listId={listId}
-              course={course}
-            />}/> */}
-          {/* <Route path="/Lessons" exact element={<Lessons
-              user={user}
-              setUser={setUser}
-              setTeacher={setTeacher}
-              teacher={teacher}
-              listId={listId}
-              updateComponent={updateComponent}
-              setUpdateComponent={setUpdateComponent}
-            />}/> */}
           <Route path="/Notifications" exact element={<Notifications user={user} setUser={setUser} />}/>
           <Route path="/subscribe" exact element={<Subscribe user={user} setUser={setUser} />}/>
           <Route path="/Lesson/:id/:id" exact element={  <Lesson
@@ -182,15 +163,7 @@ export default function App() {
               listId={listId}
               socket={socket}
             />}/>
-          {/* <Route path="/Teacher" exact element={ <Teacher
-              user={user}
-              setUser={setUser}
-              setTeacher={setTeacher}
-              teacher={teacher}
-              listId={listId}
-              setUpdateComponent={setUpdateComponent}
-              updateComponent={updateComponent}
-            />}/> */}
+
           <Route path="/CreateTeacher" exact element={<CreateTeacher/>} />
           <Route path="/profile" exact element={ <Profile user={user} setUser={setUser} userProp={userProp} />}/>
           <Route path="/createcourse" exact element={<CreateCourse/>} />

@@ -3,16 +3,16 @@ import "./messengerIcon.css"
 import { useNavigate , useLocation} from 'react-router-dom';
 import axios from 'axios';
 export default function MessengerIcon({socket}) {
-  const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const [user, setUser] = useState('') 
+  // const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [chats, setChats] = useState([])
  
   const [chatId, setChatId] = useState(null)
   const navigate = useNavigate();
   const location = useLocation();
-  useEffect(()=>{
-    theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
-},[theUser])
+//   useEffect(()=>{
+//     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
+// },[theUser])
 
 
 // useEffect(() => {

@@ -91,16 +91,22 @@ export default function Auth({ user, setUser, setUserProp }) {
         process.env.REACT_APP_BACKEND_URL + `/users/login`,
         studentlogin
       );
-      window.localStorage.setItem("profile", JSON.stringify(result.data));
+      window.localStorage.setItem("profile", JSON.stringify(result.data.user));
       window.localStorage.setItem("token", result.data.token);
       window.localStorage.setItem("profilePic", result.data.user.avatar);
       window.localStorage.setItem("firstName", result.data.user.firstName);
       window.localStorage.setItem("lastName", result.data.user.lastName);
-      window.localStorage.setItem("paid",result.data.user.paid)
+      
       
       // setTeacherData(result.data);
-      setUser(result.data);
-      setUserProp(result.data);
+      setUser(result.data.user);
+      setUserProp(result.data.user);
+      const plan = await axios.get( process.env.REACT_APP_BACKEND_URL + `/subscription-plans/${result.data.user.subscriptionPlan}`,{
+        headers: {
+          Authorization: `Bearer ${result.data.token}`,
+        },
+      })
+      window.localStorage.setItem("plan",JSON.stringify(plan.data))
       navigate("/profile");
     } catch (error) {
       console.log("can't log in");
@@ -110,14 +116,15 @@ export default function Auth({ user, setUser, setUserProp }) {
         `https://bisharaserver.herokuapp.com/teachers/login`,
         studentlogin
       );
-      window.localStorage.setItem("profile", JSON.stringify(result.data));
+      console.log(result.data.teacher);
+      window.localStorage.setItem("profile", JSON.stringify(result.data.teacher));
       window.localStorage.setItem("token", result.data.token);
       window.localStorage.setItem("profilePic", result.data.teacher.avatar);
       window.localStorage.setItem("coverPic", result.data.teacher.cover);
       window.localStorage.setItem("firstName", result.data.teacher.firstName);
       window.localStorage.setItem("lastName", result.data.teacher.lastName);
-      setTeacherData(result.data);
-      setUser(result.data);
+      setTeacherData(result.data.teacher);
+      setUser(result.data.teacher);
 
       navigate("/profile");
     } catch (error) {
@@ -137,7 +144,7 @@ export default function Auth({ user, setUser, setUserProp }) {
         process.env.REACT_APP_BACKEND_URL + `/users`,
         formData
       );
-      window.localStorage.setItem("profile", JSON.stringify(result.data));
+      window.localStorage.setItem("profile", JSON.stringify(result.data.user));
       window.localStorage.setItem("token", result.data.token);
       window.localStorage.setItem("profilePic", result.data.user.avatar);
       window.localStorage.setItem("firstName", result.data.user.firstName);

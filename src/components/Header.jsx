@@ -74,7 +74,8 @@ export default function Header({
  
   useEffect(() => {
     if (!user) return;
-    user.teacher ? setUserId(user.teacher._id) : setUserId(user.user._id);
+    setUserId(user._id)
+    // user.teacher ? setUserId(user?.teacher?._id) : setUserId(user?.user?._id);
   }, []);
   // const location = useLocation();
   useEffect(() => {
@@ -90,11 +91,11 @@ export default function Header({
   }, [userId]);
   useEffect(() => {
     if (!user) return;
-    if (user?.teacher) return;
+    // if (user?.teacher) return;
     const fetch = async () => {
       const res = await axios.get(
         process.env.REACT_APP_BACKEND_URL +
-          `/studentpractices/${user?.user._id}`
+          `/studentpractices/${user._id}`
       );
       setUserPractices(res.data);
       
@@ -382,7 +383,7 @@ export default function Header({
                     paddingTop: "15px",
                   }}
                 >
-                  {user.teacher ? (
+                  {/* {user.teacher ? (
                     <Link to="/profile"  style={{textDecoration:"none", color:"black"}}>
                     <div>
                       {user.teacher.firstName}
@@ -391,15 +392,15 @@ export default function Header({
                       
                     </div>
                     </Link>
-                  ) : (
+                  ) : ( */}
                     <Link to="/profile" style={{textDecoration:"none", color:"black"}}>
                     <div>
-                      {user.user.firstName}
+                      {user.firstName}
                       {"  "}
-                      {user.user.lastName}
+                      {user.lastName}
                     </div>
                     </Link>
-                  )}
+                  {/* )} */}
                 </div>
               ) : null}
               <div
@@ -479,7 +480,7 @@ export default function Header({
               >
                 {user ? (
                   <>
-                    {user.teacher ? (
+                    {user.role === 'teacher' || user.role === "admin" ? (
                       <div
                         onClick={handleLogoutTeacher}
                         style={{ cursor: "pointer" }}
@@ -613,7 +614,7 @@ export default function Header({
               >
                 {user ? (
                   <div style={{ paddingRight: "20px" }}>
-                    {user.teacher ? (
+                    {user.role === 'teacher' || user.role === 'admin' ? (
                       <div
                         style={{
                           display: "flex",
@@ -623,8 +624,8 @@ export default function Header({
                         onMouseOver={() => setIsHovering(!isHovering)}
                       >
                         <img
-                          src={localStorage.getItem("profilePic").replace('http://', 'https://')}
-                          alt={user.teacher.firstName}
+                          src={user.avatar ? user.avatar.replace('http://', 'https://'): "https://img.icons8.com/material-rounded/24/null/user.png"}
+                          alt={user.firstName}
                           style={{
                             height: "40px",
                             width: "40px",
@@ -1131,7 +1132,7 @@ export default function Header({
               <div>
                 {user ? (
                   <div onClick={() => setUpdateComponent("")}>
-                    {user.teacher ? (
+                    {user.role === 'teacher' || user.role === 'admin' ? (
                       <div onClick={handleLogoutTeacher}>
                         <div className="blackBackgroundtext" style={{ cursor: "pointer", color:"white" }}>خروج</div>
                       </div>

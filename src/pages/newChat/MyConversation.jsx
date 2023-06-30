@@ -33,7 +33,7 @@ export default function MyConversation({currentUser, conversation, socket}) {
       }, [conversation, currentUser]);
     
   return (<>
-  {currentUser.role === "admin" || currentUser.role === "teacher"  ? (<> 
+  {currentUser?.role === "admin" || currentUser?.role === "teacher"  ? (<> 
   {conversation.showAtTeacher === "true" ? <>
   {conversation.seen === 'true' || conversation.lastSender === currentUser._id  ? (
   <Link to={`/chatting?currentChat=${conversation._id}&to=${user?._id}&from=${currentUser._id}`} style={{textDecoration:"none" ,color:"black"}}>

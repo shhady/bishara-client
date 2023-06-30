@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 export default function NewChatBox({socket}) {
-  const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const [user, setUser] = useState('') 
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  // const [user, setUser] = useState('') 
   const urlParams = new URLSearchParams(window.location.search);
 const conversationId = urlParams.get('currentChat');
 const friendId = urlParams.get('to');
@@ -30,9 +30,9 @@ useEffect(()=>{
 getConv()
 },[user])
 
-useEffect(()=>{
-  theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
-},[theUser])
+// useEffect(()=>{
+//   theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
+// },[theUser])
 const scrollRef = useRef()
 useEffect(()=>{
   const getMessages = async()=>{

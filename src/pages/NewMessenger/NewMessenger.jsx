@@ -24,9 +24,9 @@ export default function NewMessenger({ user }) {
         await axios.put(
           'https://api.chatengine.io/users',
           {
-            username: user.user.email,
-            secret: user.user._id,
-            first_name: `${user.user.firstName} ${user.user.lastName}`,
+            username: user.email,
+            secret: user._id,
+            first_name: `${user.firstName} ${user.lastName}`,
           },
           { headers: { 'private-key': 'b87de751-f21a-4a78-abbc-586ed9cfe444' } }
         );
@@ -44,8 +44,8 @@ export default function NewMessenger({ user }) {
     <div style={{ marginTop: '80px', height: '90vh' }}>
       <PrettyChatWindow
         projectId="ff483a3e-585e-460f-808e-2f689c79e215"
-        username={user.user.email}
-        secret={user.user._id}
+        username={user.email}
+        secret={user._id}
         allowedUsers={allowedUsers}
         style={{ height: '100vh' }}
       />
