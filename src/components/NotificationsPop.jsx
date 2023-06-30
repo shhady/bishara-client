@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 export default function NotificationsPop({
   setShowNotificationPopUp,
   setRedLightNotification,
+  user
 }) {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState([]);
   const [userF, setUserF] = useState("");

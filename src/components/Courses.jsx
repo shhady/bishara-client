@@ -7,8 +7,9 @@ export default function Courses({
   setListId,
   setCourse,
   setUpdateComponent,
+  user
 }) {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [posts, setposts] = useState(null);
   const [userId, setUserId] = useState("");
   const [courseData, setCourseData] = useState(null);

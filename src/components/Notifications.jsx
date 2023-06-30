@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export default function Notifications() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+export default function Notifications({user}) {
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState([]);

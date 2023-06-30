@@ -70,19 +70,7 @@ export default function Header({
   useEffect(() => {
     setNotificationNumber(backNot.filter((number) => number.read === false));
   }, [backNot]);
-  useEffect(() => {
-    if (!user) return;
-    if(user.user){
-      // setUser(user.user);
-      localStorage.setItem("profile", JSON.stringify({}));
-      window.location.href = window.location.href;
-        } else if(user.teacher){
-      // setUser(user.teacher);
-      localStorage.setItem("profile", JSON.stringify({}));
-      window.location.href = window.location.href;
-      }
-  }, [user]);
- 
+
   useEffect(() => {
     if (!user) return;
     setUserId(user._id)
@@ -122,11 +110,6 @@ export default function Header({
   }, [userPractices]);
 
  
-  const clickOnBill = () => {
-    // setOpenNotifications(!openNotifications);
-    // setNotificationNotification([]);
-    // console.log("bill clicked");
-  };
 
   useEffect(() => {
     const comments = async () => {
@@ -764,6 +747,7 @@ export default function Header({
                 onMouseLeave={() => setShowNotificationPopUp(false)}
               >
                 <NotificationsPop
+                user={user}
                   setShowNotificationPopUp={setShowNotificationPopUp}
                   setCourseDetails={setCourseDetails}
                   setLessonDetails={setLessonDetails}
