@@ -60,10 +60,10 @@ export default function App() {
     if (!user) return;
     if(user.user){
       setUser(user.user);
-      window.localStorage.setItem('profile', user.user);
+      window.localStorage.setItem("profile", JSON.stringify(user.user))
     } else if(user.teacher){
       setUser(user.teacher);
-      window.localStorage.setItem('profile', user.teacer);
+      window.localStorage.setItem("profile", JSON.stringify(user.teacer))
     }
     setUserId(user?._id)
   }, [user]);
