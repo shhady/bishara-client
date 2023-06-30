@@ -27,7 +27,7 @@ const [teacher, setTeacher] = useState()
                 email: user.email, // fix here
                 teacherId: teacher._id,
                 trialDateStart: new Date(),
-                status: "trial"
+                status: "active"
               }
             );
             window.localStorage.setItem("profile" ,JSON.stringify(result.data));
