@@ -48,7 +48,7 @@ export default function NewCourse() {
 
           navigate(`/NewLesson/${course._id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course.playlistId}`);
         } else{
-          alert("لرؤية الدروس يجب فتح حساب");
+          alert("لرؤية الدروس يجب تسجيل الدخول ");
           navigate('/auth')
         }
       };
