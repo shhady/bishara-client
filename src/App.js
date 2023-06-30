@@ -3,8 +3,6 @@ import { BrowserRouter, Navigate, Route , Routes} from "react-router-dom";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
 import Zoom from "./pages/zoom/Zoom";
-
-
 import YoutubeForPractice from "./pages/youtubeForPractice/YoutubeForPractice";
 import EditReplies from "./pages/TeacherPractices/EditReplies";
 // import NewMessenger from "./pages/NewMessenger/NewMessenger"
@@ -46,7 +44,6 @@ const MyStudents = React.lazy(() => import("./pages/myStudents/MyStudents"));
 
 
 export default function App() {
-
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [socket, setSocket] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -57,13 +54,28 @@ export default function App() {
   const [userProp, setUserProp] = useState(null);
   const [chatNotification, setChatNotification] = useState(null);
 
-  console.log(user);
 
+  console.log(user);
   useEffect(() => {
     if (!user) return;
+    if(user.user){
+      // setUser(user.user);
+      localStorage.removeItem("profile");
+      localStorage.removeItem("token");
+    window.location.reload();
+        } else if(user.teacher){
+      // setUser(user.teacher);
+      localStorage.removeItem("profile");
+      localStorage.removeItem("token");
+      window.location.reload();
+      }
     setUserId(user?._id)
   }, [user]);
 
+  useEffect(() => {
+    
+  }, []);
+  
   // useEffect(() => {
   //   if (!userId) return;
   //   setSocket(
