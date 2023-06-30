@@ -40,13 +40,13 @@ export default function TeachersPop({
 
   
 
-  // const addToLocal = (course) => {
-  //   window.localStorage.setItem("courseId", course._id);
-  //   window.localStorage.setItem("ownerId", course.owner);
-  //   window.localStorage.setItem("playlistId", course.playlistId);
-  //   window.localStorage.setItem("courseDetails", JSON.stringify(course));
-  //   window.localStorage.setItem("teacherId", course.owner);
-  // };
+  const addToLocal = (course) => {
+    window.localStorage.setItem("courseId", course._id);
+    window.localStorage.setItem("ownerId", course.owner);
+    window.localStorage.setItem("playlistId", course.playlistId);
+    window.localStorage.setItem("courseDetails", JSON.stringify(course));
+    window.localStorage.setItem("teacherId", course.owner);
+  };
 
   
 
