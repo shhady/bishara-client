@@ -25,7 +25,7 @@ export default function Header({
   user,
   setUser,
   socket,
-  setShowArrows,
+  // setShowArrows,
   setUpdateComponent,
   updateComponent,
   setCourseDetails,
@@ -502,9 +502,9 @@ export default function Header({
         >
           <div
             className="menuMobile"
-            onClick={() => {
-              setShowArrows(true);
-            }}
+            // onClick={() => {
+            //   setShowArrows(true);
+            // }}
           >
             <div onClick={() => setOpenMenu(!openMenu)}  style={{height:"60px", display:"flex", justifyContent:"center", alignItems:"center"}}>
               {!openMenu ? (
@@ -949,7 +949,7 @@ export default function Header({
                 style={{ color: "white", cursor: "pointer" }}
                 onClick={() => {
                   setOpenMenu(!openMenu);
-                  setShowArrows(false);
+                  // setShowArrows(false);
                   setUpdateComponent("");
                 }}
               >
@@ -991,7 +991,7 @@ export default function Header({
                 <div
                   onClick={() => {
                     setOpenMenu(!openMenu);
-                    setShowArrows(false);
+                    // setShowArrows(false);
                     setUpdateComponent("");
                   }}
                 >
