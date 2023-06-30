@@ -59,11 +59,11 @@ export default function App() {
   useEffect(() => {
     if (!user) return;
     if(user.user){
-      setUser(user.user);
-      localStorage.removeItem("profile");
+      // setUser(user.user);
+      localStorage.clear();
         } else if(user.teacher){
-      setUser(user.teacher);
-      localStorage.removeItem("profile");  
+      // setUser(user.teacher);
+      localStorage.clear(); 
       }
     setUserId(user?._id)
   }, [user]);
