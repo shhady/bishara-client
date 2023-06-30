@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route , Routes} from "react-router-dom";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
 import Zoom from "./pages/zoom/Zoom";
+import { useDispatch } from "react-redux";
 import YoutubeForPractice from "./pages/youtubeForPractice/YoutubeForPractice";
 import EditReplies from "./pages/TeacherPractices/EditReplies";
 // import NewMessenger from "./pages/NewMessenger/NewMessenger"
@@ -44,6 +45,7 @@ const MyStudents = React.lazy(() => import("./pages/myStudents/MyStudents"));
 
 
 export default function App() {
+  const dispatch = useDispatch();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [socket, setSocket] = useState(null);
   const [userId, setUserId] = useState(null);
