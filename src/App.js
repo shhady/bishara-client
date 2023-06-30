@@ -3,8 +3,8 @@ import { BrowserRouter, Navigate, Route , Routes} from "react-router-dom";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
 import Zoom from "./pages/zoom/Zoom";
-import { useDispatch } from "react-redux";
-import axios from "axios";
+
+
 import YoutubeForPractice from "./pages/youtubeForPractice/YoutubeForPractice";
 import EditReplies from "./pages/TeacherPractices/EditReplies";
 // import NewMessenger from "./pages/NewMessenger/NewMessenger"
@@ -46,7 +46,7 @@ const MyStudents = React.lazy(() => import("./pages/myStudents/MyStudents"));
 
 
 export default function App() {
-  const dispatch = useDispatch();
+
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [socket, setSocket] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -58,62 +58,12 @@ export default function App() {
   const [chatNotification, setChatNotification] = useState(null);
 
   console.log(user);
+
   useEffect(() => {
     if (!user) return;
-    if(user.user){
-      const handleLogoutStudent = async () => {
-        const response = await axios.post(
-          process.env.REACT_APP_BACKEND_URL + `/users/logout`,
-          {},
-          {
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json;charset=UTF-8",
-              "Access-Control-Allow-Methods": "POST",
-              "Access-Control-Allow-Origin": "*",
-              Authorization: "Bearer " + window.localStorage.getItem("token"),
-            },
-          }
-        );
-    
-        window.localStorage.removeItem("token");
-        window.localStorage.removeItem("profile");
-        dispatch({ type: "LOGOUT" });
-        window.location.reload();
-      }
-      handleLogoutStudent()
-      setUser(null)
-        } else if(user.teacher){
-          const handleLogoutTeacher = async () => {
-            const response = await axios.post(
-              process.env.REACT_APP_BACKEND_URL + `/teachers/logout`,
-              {},
-              {
-                headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json;charset=UTF-8",
-                  "Access-Control-Allow-Methods": "POST",
-                  "Access-Control-Allow-Origin": "*",
-                  Authorization: "Bearer " + window.localStorage.getItem("token"),
-                },
-              }
-            );
-            window.localStorage.removeItem("token");
-            window.localStorage.removeItem("profile");
-            dispatch({ type: "LOGOUT" });
-            window.location.reload();
-            }
-            handleLogoutTeacher()
-
-      setUser(null)
-      }
     setUserId(user?._id)
   }, [user]);
 
-  useEffect(() => {
-    
-  }, []);
-  
   // useEffect(() => {
   //   if (!userId) return;
   //   setSocket(
