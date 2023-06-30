@@ -61,9 +61,11 @@ export default function App() {
     if(user.user){
       // setUser(user.user);
       localStorage.clear();
+    window.location.reload();
         } else if(user.teacher){
       // setUser(user.teacher);
-      localStorage.clear(); 
+      localStorage.clear();
+      window.location.reload();
       }
     setUserId(user?._id)
   }, [user]);
