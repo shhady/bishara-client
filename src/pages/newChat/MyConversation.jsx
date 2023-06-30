@@ -55,7 +55,7 @@ export default function MyConversation({currentUser, conversation, socket}) {
 
         </div>
         </div></Link>)}</>:(null)}</>):(<>
-            {conversation.seen === 'true' || conversation.lastSender == currentUser._id  ? (<Link to={`/chatting?currentChat=${conversation._id}&to=${user?._id}&from=${currentUser._id}`} style={{textDecoration:"none" ,color:"black"}}>
+            {conversation.seen === 'true' || conversation.lastSender == currentUser?._id  ? (<Link to={`/chatting?currentChat=${conversation?._id}&to=${user?._id}&from=${currentUser?._id}`} style={{textDecoration:"none" ,color:"black"}}>
               <div className='conversationsList'>
             <div className='conversation1'>
         <img  onClick={()=>console.log(user)} src={user?.avatar ? user.avatar : "https://img.icons8.com/material-rounded/24/null/user.png"} alt={user?.firstName} width="50px" height="50px" style={{borderRadius:"50%", margin:"10px"}}/>
