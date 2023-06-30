@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from "react";
-import { BrowserRouter, useNavigate, Route , Routes} from "react-router-dom";
+import { BrowserRouter, Navigate, Route , Routes} from "react-router-dom";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
 import Zoom from "./pages/zoom/Zoom";
@@ -53,7 +53,6 @@ export default function App() {
   const [updateComponent, setUpdateComponent] = useState(null);
   const [userProp, setUserProp] = useState(null);
   const [chatNotification, setChatNotification] = useState(null);
-  const navigate = useNavigate();
 
   console.log(user);
   useEffect(() => {
@@ -77,7 +76,7 @@ export default function App() {
         window.localStorage.removeItem("token");
         window.localStorage.removeItem("profile");
         dispatch({ type: "LOGOUT" });
-        navigate("/auth");
+        window.location.reload();
       }
       handleLogoutStudent()
       setUser(null)
@@ -99,7 +98,7 @@ export default function App() {
             window.localStorage.removeItem("token");
             window.localStorage.removeItem("profile");
             dispatch({ type: "LOGOUT" });
-            navigate("/auth");
+            window.location.reload();
             }
             handleLogoutTeacher()
 
