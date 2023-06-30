@@ -60,12 +60,12 @@ export default function App() {
     if (!user) return;
     if(user.user){
       // setUser(user.user);
-      localStorage.clear();
-    window.location.reload();
+      localStorage.setItem("profile", JSON.stringify({}));
+      window.location.href = window.location.href;
         } else if(user.teacher){
       // setUser(user.teacher);
-      localStorage.clear();
-      window.location.reload();
+      localStorage.setItem("profile", JSON.stringify({}));
+      window.location.href = window.location.href;
       }
     setUserId(user?._id)
   }, [user]);
