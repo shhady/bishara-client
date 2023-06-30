@@ -62,10 +62,12 @@ export default function App() {
       // setUser(user.user);
       localStorage.setItem("profile", JSON.stringify({}));
       window.location.href = window.location.href;
+      setUser(null)
         } else if(user.teacher){
       // setUser(user.teacher);
       localStorage.setItem("profile", JSON.stringify({}));
       window.location.href = window.location.href;
+      setUser(null)
       }
     setUserId(user?._id)
   }, [user]);
