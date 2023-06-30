@@ -25,7 +25,7 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
       window.localStorage.setItem("profilePic", result.data.user.avatar);
 
       navigate("/profile");
-      setUser(result.data);
+      setUser(result.data.user);
     } catch (error) {
       setShowLoginFailMessage(true);
     }
@@ -48,7 +48,7 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
       // window.localStorage.setItem("coverPic", userInfo.picture);
 
       navigate("/profile");
-      setUser(result.data);
+      setUser(result.data.user);
     } catch (error) {
       console.log("Error creating user, trying to log in instead");
     }
