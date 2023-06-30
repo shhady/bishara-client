@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from "react";
-import { BrowserRouter, Navigate, Route , Routes} from "react-router-dom";
+import { BrowserRouter, useNavigate, Route , Routes} from "react-router-dom";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
 import Zoom from "./pages/zoom/Zoom";
@@ -53,21 +53,55 @@ export default function App() {
   const [updateComponent, setUpdateComponent] = useState(null);
   const [userProp, setUserProp] = useState(null);
   const [chatNotification, setChatNotification] = useState(null);
-
+  const navigate = useNavigate();
 
   console.log(user);
   useEffect(() => {
     if (!user) return;
     if(user.user){
-      // setUser(user.user);
-      localStorage.setItem("profile", JSON.stringify({}));
-      window.location.href = window.location.href + "?reload=" + new Date().getTime();
-
+      const handleLogoutStudent = async () => {
+        const response = await axios.post(
+          process.env.REACT_APP_BACKEND_URL + `/users/logout`,
+          {},
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json;charset=UTF-8",
+              "Access-Control-Allow-Methods": "POST",
+              "Access-Control-Allow-Origin": "*",
+              Authorization: "Bearer " + window.localStorage.getItem("token"),
+            },
+          }
+        );
+    
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("profile");
+        dispatch({ type: "LOGOUT" });
+        navigate("/auth");
+      }
+      handleLogoutStudent()
       setUser(null)
         } else if(user.teacher){
-      // setUser(user.teacher);
-      localStorage.setItem("profile", JSON.stringify({}));
-      window.location.href = window.location.href + "?reload=" + new Date().getTime();
+          const handleLogoutTeacher = async () => {
+            const response = await axios.post(
+              process.env.REACT_APP_BACKEND_URL + `/teachers/logout`,
+              {},
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json;charset=UTF-8",
+                  "Access-Control-Allow-Methods": "POST",
+                  "Access-Control-Allow-Origin": "*",
+                  Authorization: "Bearer " + window.localStorage.getItem("token"),
+                },
+              }
+            );
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("profile");
+            dispatch({ type: "LOGOUT" });
+            navigate("/auth");
+            }
+            handleLogoutTeacher()
 
       setUser(null)
       }
