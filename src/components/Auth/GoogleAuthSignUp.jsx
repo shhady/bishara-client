@@ -26,7 +26,7 @@ const GoogleAuthSignUp = ({ setUser }) => {
       window.localStorage.setItem("profile", JSON.stringify(result.data.user));
       window.localStorage.setItem("token", result.data.token);
       navigate("/profile");
-      setUser(result.data);
+      setUser(result.data.user);
     } catch (error) {
       console.log("passwords don't match");
     }
