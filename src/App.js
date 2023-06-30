@@ -61,12 +61,14 @@ export default function App() {
     if(user.user){
       // setUser(user.user);
       localStorage.setItem("profile", JSON.stringify({}));
-      window.location.href = window.location.href;
+      window.location.href = window.location.href + "?reload=" + new Date().getTime();
+
       setUser(null)
         } else if(user.teacher){
       // setUser(user.teacher);
       localStorage.setItem("profile", JSON.stringify({}));
-      window.location.href = window.location.href;
+      window.location.href = window.location.href + "?reload=" + new Date().getTime();
+
       setUser(null)
       }
     setUserId(user?._id)
