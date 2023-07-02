@@ -51,8 +51,10 @@ export default function TeacherPractices({ practices }) {
   const currentPractices = updatedPractices.slice(indexOfFirstItem, indexOfLastItem);
 
   // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  };
   const renderPractices = () => {
     return currentPractices.map((practice, index) => (
       <div
