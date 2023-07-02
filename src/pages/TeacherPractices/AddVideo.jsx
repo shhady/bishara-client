@@ -93,16 +93,18 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
             replyId: unique_id,
           });
     
-          await axios.post(`${process.env.REACT_APP_BACKEND_URL}/replies`, {
-            theVideoReply: videoUrl,
-            videoName: practice.video ? practice.video : 'فيديو تقييم',
-            courseId: practice.courseId,
-            nameOfProblem: commentText,
-            practiceId: practice._id,
-            uniqueLink: practice.uniqueLink || null,
-            teacherId: practice.teacherId,
-            replyId: unique_id,
-          });
+          if (commentText) {
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/replies`, {
+              theVideoReply: videoUrl,
+              videoName: practice.video ? practice.video : 'فيديو تقييم',
+              courseId: practice.courseId,
+              nameOfProblem: commentText,
+              practiceId: practice._id,
+              uniqueLink: practice.uniqueLink || null,
+              teacherId: practice.teacherId,
+              replyId: unique_id,
+            });
+          }
     
           setCommentText('');
           setVideo('');
@@ -123,7 +125,6 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
     
       submitVideoReply();
     }, [videoUrl]);
-    
     
 
   const handleSubmitSelect = async (selectedVideo, selectedUniqueId) => {
