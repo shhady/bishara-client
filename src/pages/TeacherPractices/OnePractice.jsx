@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AddReply from './AddReply';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import "./NewTeacherPractices.css";
 import axios from 'axios';
 
@@ -47,7 +47,12 @@ export default function TeacherPractices({ practices }) {
   return (
     <div>
       {practice && (
-        <div className="practicesNew" style={{ marginTop: "80px" }}>
+        <div className="practicesNew" style={{ marginTop: "80px", position:'relative' }}>
+           <div style={{ position: "absolute", left: "10px", top: '10px' }}>
+          <Link to={`/EditReplies/${practice._id}`}>
+            <button>تعديل الرد</button>
+          </Link>
+        </div>
           <div>الاسم: {practice?.studentFirstName} {practice?.studentLastName}</div>
           {practice?.courseId === "evaluation" ? (
             <>

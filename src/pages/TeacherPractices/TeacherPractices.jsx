@@ -52,65 +52,6 @@ export default function TeacherPractices({ practices }) {
     setUpdatedPractices(updatedPracticesArray);
   };
 
-  // const handleDeleteVideoReply = async (practiceId, replyId, replyIndex) => {
-  //   try {
-  //     // Send a PUT request to delete the video reply
-  //     await axios.put(
-  //       `${process.env.REACT_APP_BACKEND_URL}/practice/videoReply/${practiceId}`,
-  //       {
-  //         replyId,
-  //       }
-  //     );
-
-  //     // Create a copy of the updatedPractices array
-  //     const updatedPracticesArray = [...updatedPractices];
-
-  //     // Find the practice by practiceId
-  //     const practice = updatedPracticesArray.find((practice) => practice._id === practiceId);
-
-  //     // Check if the practice exists and the replyIndex is valid
-  //     if (practice && replyIndex >= 0 && replyIndex < practice.videoReply.length) {
-  //       // Remove the video reply at the specified index
-  //       practice.videoReply.splice(replyIndex, 1);
-
-  //       // Update the state with the modified array
-  //       setUpdatedPractices(updatedPracticesArray);
-  //     }
-  //   } catch (error) {
-  //     console.error('Failed to delete video reply:', error);
-  //   }
-  // };
-
-  // const handleDeleteRecordReply = async (practiceId, replyId, index) => {
-  //   try {
-  //     // Send a PUT request to delete the record reply
-  //     await axios.put(
-  //       `${process.env.REACT_APP_BACKEND_URL}/practice/deleteRecordReply/${practiceId}`,
-  //       { replyId }
-  //     );
-
-  //     // Create a copy of the updatedPractices array
-  //     const updatedPracticesArray = [...updatedPractices];
-
-  //     // Find the practice by practiceId
-  //     const practice = updatedPracticesArray.find(
-  //       (practice) => practice._id === practiceId
-  //     );
-
-  //     // Check if the practice exists and the index is valid
-  //     if (practice && index >= 0 && index < practice.RecordReply.length) {
-  //       // Remove the record reply with matching replyId
-  //       practice.RecordReply = practice.RecordReply.filter(
-  //         (rec) => rec.replyId !== replyId
-  //       );
-
-  //       // Update the state with the modified array
-  //       setUpdatedPractices(updatedPracticesArray);
-  //     }
-  //   } catch (error) {
-  //     console.error('Failed to delete record reply:', error);
-  //   }
-  // };
 
   const drawPractices = () => {
     return updatedPractices.map((practice, i) => (
@@ -171,12 +112,6 @@ export default function TeacherPractices({ practices }) {
                       type="video/mp4"
                     />
                   </video>
-                  {/* <button
-                    className="deleteButton"
-                    onClick={() => handleDeleteVideoReply(practice._id, reply.replyId, index)}
-                  >
-                    Delete
-                  </button> */}
                 </div>
               ))}
             </div>
@@ -192,12 +127,6 @@ export default function TeacherPractices({ practices }) {
                       type="audio/mp4"
                     />
                   </audio>
-                  {/* <button
-                    className="deleteButton"
-                    onClick={() => handleDeleteRecordReply(practice._id, rec.replyId, index)}
-                  >
-                    Delete
-                  </button> */}
                 </div>
               ))}
             </div>

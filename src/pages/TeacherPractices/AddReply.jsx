@@ -8,14 +8,10 @@ import { io } from "socket.io-client";
 
 export default function AddReply({ practice, onCommentAdd, onVideoAdd, onRecordAdd }) {
   const [openInput, setOpenInput] = useState(null);
-  const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [socket, setSocket] = useState(null);
-  const [user, setUser] = useState('') 
     // const [maxSize, setMaxSize] = useState('')
-useEffect(()=>{
-  if (!theUser) return;
-    theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
-},[theUser])
+
 useEffect(() => {
     if (!user) return;
     setSocket(
