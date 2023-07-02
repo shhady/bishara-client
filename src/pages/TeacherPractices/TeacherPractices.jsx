@@ -7,20 +7,13 @@ import './NewTeacherPractices.css';
 import { Link } from 'react-router-dom';
 
 export default function TeacherPractices({ practices }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
   const [updatedPractices, setUpdatedPractices] = useState(practices);
-  const [poster, setPoster] = useState('');
 
-  useEffect(() => {
-    function MyVideo() {
-      if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-        // code to run if user is using Safari
-        setPoster(
-          'https://images.pexels.com/photos/6044198/pexels-photo-6044198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-        );
-      }
-    }
-    MyVideo();
-  }, []);
+  // useEffect(() => {
+  //   setUpdatedPractices(practices);
+  // }, [practices]);
 
   const handleCommentAdd = (updatedPractice) => {
     const updatedPracticesArray = updatedPractices.map((practice) => {
@@ -52,47 +45,54 @@ export default function TeacherPractices({ practices }) {
     setUpdatedPractices(updatedPracticesArray);
   };
 
+  // Get current practices based on pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentPractices = updatedPractices.slice(indexOfFirstItem, indexOfLastItem);
 
-  const drawPractices = () => {
-    return updatedPractices.map((practice, i) => (
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const renderPractices = () => {
+    return currentPractices.map((practice, index) => (
       <div
-        key={i}
+        key={index}
         className="practicesNew"
-        style={{ backgroundColor: i % 2 === 0 ? '#c7c5c5' : 'white', position: 'relative' }}
+        style={{ backgroundColor: index % 2 === 0 ? '#c7c5c5' : 'white', position: 'relative' }}
       >
-        <div style={{ position: "absolute", left: "10px", top: '10px' }}>
-          <Link to={`/EditReplies/${practice._id}`}>
-            <button>تعديل الرد</button>
-          </Link>
-        </div>
+        {/* Practice details */}
         <div>
-          الاسم: {practice.studentFirstName} {practice.studentLastName}
+          <div>
+            الاسم: {practice.studentFirstName} {practice.studentLastName}
+          </div>
+          {practice.courseId === 'evaluation' ? (
+            <>
+              <div>الخبره: {practice.expTime}</div>
+              <div>اين تعلم: {practice.whereStudied}</div>
+              <div>الهدف: {practice.goal}</div>
+            </>
+          ) : (
+            <>
+              <div>
+                الدوره: {practice.courseName} / {practice.courseLevel}
+              </div>
+              <div>{practice.video}</div>
+            </>
+          )}
         </div>
-        {practice.courseId === 'evaluation' ? (
-          <>
-            <div>الخبره: {practice.expTime}</div>
-            <div>اين تعلم: {practice.whereStudied}</div>
-            <div>الهدف: {practice.goal}</div>
-          </>
-        ) : (
-          <>
-            <div>
-              الدوره: {practice.courseName} / {practice.courseLevel}
-            </div>
-            <div>{practice.video}</div>
-          </>
-        )}
 
+        {/* Video and replies */}
         <div className="videoAndRepliesContainer">
           <div className="videoContainer">
             <video
+              key={practice.myPractice}
               controls
               preload="metadata"
               className="videoOfPractice"
-              poster={poster}
+              poster={getVideoPoster(practice.myPractice)}
             >
               <source
-                src={practice.myPractice.replace('http://', 'https://')}
+                src={replaceProtocol(practice.myPractice)}
                 type="video/mp4"
               />
             </video>
@@ -102,13 +102,14 @@ export default function TeacherPractices({ practices }) {
               {practice.videoReply.map((reply, index) => (
                 <div key={index}>
                   <video
+                    key={reply.theVideoReply}
                     controls
                     preload="metadata"
                     className="RepliesVideo"
-                    poster={poster}
+                    poster={getVideoPoster(reply.theVideoReply)}
                   >
                     <source
-                      src={reply.theVideoReply.replace('http://', 'https://')}
+                      src={replaceProtocol(reply.theVideoReply)}
                       type="video/mp4"
                     />
                   </video>
@@ -119,11 +120,12 @@ export default function TeacherPractices({ practices }) {
               {practice.RecordReply.map((rec, index) => (
                 <div key={index}>
                   <audio
+                    key={rec.RecordingReply}
                     style={{ width: '100%' }}
                     controls
                   >
                     <source
-                      src={rec.RecordingReply.replace('http://', 'https://')}
+                      src={replaceProtocol(rec.RecordingReply)}
                       type="audio/mp4"
                     />
                   </audio>
@@ -134,6 +136,15 @@ export default function TeacherPractices({ practices }) {
           </div>
         </div>
 
+        {/* Edit reply button */}
+        {practice.RecordReply.length > 0 || practice.videoReply.length > 0 && 
+        <div style={{ position: 'absolute', left: '10px', top: '10px' }}>
+          <Link to={`/EditReplies/${practice._id}`}>
+            <button>تعديل الرد</button>
+          </Link>
+        </div>
+          }
+        {/* Add reply section */}
         <div
           style={{ padding: '15px', border: '1px solid black', marginTop: '10px' }}
         >
@@ -148,5 +159,43 @@ export default function TeacherPractices({ practices }) {
     ));
   };
 
-  return <div>{drawPractices()}</div>;
+  // Utility function to replace HTTP with HTTPS in video URLs
+  const replaceProtocol = (url) => url.replace('http://', 'https://');
+
+  // Utility function to get video poster based on browser compatibility
+  const getVideoPoster = (videoUrl) => {
+    if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+      // code to run if the user is using Safari
+      return 'https://images.pexels.com/photos/6044198/pexels-photo-6044198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+    } else {
+      return '';
+    }
+  };
+
+  // Render pagination
+  const renderPagination = () => {
+    const pageNumbers = Math.ceil(updatedPractices.length / itemsPerPage);
+
+    return (
+      <nav style={{ width: "100%" }}>
+      <ul className="pagination" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px", listStyleType: "none" }}>
+        {pageNumbers > 1 &&
+          Array.from({ length: pageNumbers }, (_, index) => (
+            <li key={index} className="page-item">
+              <button className="page-link" onClick={() => paginate(index + 1)}>
+                {index + 1}
+              </button>
+            </li>
+          ))}
+      </ul>
+    </nav>
+    );
+  };
+
+  return (
+    <div>
+      {renderPractices()}
+      {renderPagination()}
+    </div>
+  );
 }
