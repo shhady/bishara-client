@@ -180,11 +180,11 @@ export default function TeacherPractices({ practices }) {
 
     return (
       <nav style={{ width: "100%" }}>
-      <ul className="pagination" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px", listStyleType: "none" }}>
+      <ul className="pagination" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px", listStyleType: "none", margin:"30px" }}>
         {pageNumbers > 1 &&
           Array.from({ length: pageNumbers }, (_, index) => (
             <li key={index} className="page-item">
-              <button className="page-link" onClick={() => paginate(index + 1)}>
+              <button  className="page-link" onClick={() => paginate(index + 1)}>
                 {index + 1}
               </button>
             </li>
@@ -196,6 +196,7 @@ export default function TeacherPractices({ practices }) {
 
   return (
     <div>
+      
       {renderPractices()}
       {renderPagination()}
     </div>

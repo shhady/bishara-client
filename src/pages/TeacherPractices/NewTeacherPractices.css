@@ -53,7 +53,18 @@
     justify-content: center;
     align-items: center;
 }
-
+.page-link {
+    width: 25px;
+    background-color: white;
+  }
+  
+  .page-link:hover {
+    /* Add your hover styles here */
+    /* Example styles */
+    background-color: #242323;
+    color: white;
+    cursor: pointer;
+  }
 
 @media (max-width:678px) {
     .videoAndRepliesContainer{
