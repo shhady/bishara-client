@@ -193,10 +193,34 @@ export default function TeacherPractices({ practices }) {
     </nav>
     );
   };
-
+  const renderPaginationSelect = () => {
+    const pageNumbers = Math.ceil(updatedPractices.length / itemsPerPage);
+  
+    return (
+      <nav style={{ width: "100%" }}>
+        <ul className="pagination" style={{display:'flex', justifyContent:"flex-end", alignItems:"center", marginLeft:"5%", listStyleType: "none"}}>
+          {pageNumbers > 1 &&
+            <li className="page-item">
+              <select className="page-select-link" onChange={(e) => setCurrentPage(parseInt(e.target.value))} >
+              <option value="" disabled selected>
+                الصفحات
+              </option>
+                {Array.from({ length: pageNumbers }, (_, index) => (
+                  
+                  <option key={index} value={index + 1}>{index + 1}</option>
+                ))}
+              </select>
+            </li>
+          }
+        </ul>
+      </nav>
+    );
+  };
   return (
     <div>
-      
+      <div style={{ display:'flex', justifyContent:"flex-end", alignItems:"flex-end"}}>
+      {renderPaginationSelect()}
+      </div>
       {renderPractices()}
       {renderPagination()}
     </div>
