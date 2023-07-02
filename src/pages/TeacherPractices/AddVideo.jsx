@@ -8,7 +8,9 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
   const [video, setVideo] = useState('');
   const [autoReplies, setAutoReplies] = useState([]);
   const unique_id = uuid();
-
+  const [videoUrl, setVideoUrl] = useState('')
+  const [fileUpload, setFileUpload] = useState(null);
+  const [moreThan, setMoreThan] = useState(null);
   useEffect(() => {
     const fetchReplies = async () => {
       try {
@@ -22,81 +24,107 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
     fetchReplies();
   }, []);
 
-  const handleOpenWidget = () => {
-    let myWidget = window.cloudinary.createUploadWidget(
-      {
-        cloudName: 'djvbchw2x',
-        uploadPreset: 'bisharaHaroni',
-      },
-      (error, result) => {
-        if (!error && result && result.event === 'success') {
-          setFormData({ ...formData, image: result.info.secure_url });
-          setVideo(result.info.secure_url);
-        }
-      }
-    );
-    myWidget.open();
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (practice.videoReply && practice.videoReply.length > 3) {
-      return console.log("Can't submit");
-    }
-    if (!video) return;
-
-    const updatedPractice = {
-      ...practice,
-      videoReply: [
-        ...(practice.videoReply || []),
-        {
-          theVideoReply: video,
-          replyId: unique_id,
+  // const handleOpenWidget = () => {
+  //   let myWidget = window.cloudinary.createUploadWidget(
+  //     {
+  //       cloudName: 'djvbchw2x',
+  //       uploadPreset: 'bisharaHaroni',
+  //     },
+  //     (error, result) => {
+  //       if (!error && result && result.event === 'success') {
+  //         setFormData({ ...formData, image: result.info.secure_url });
+  //         setVideo(result.info.secure_url);
+  //       }
+  //     }
+  //   );
+  //   myWidget.open();
+  // };
+  const postDetails = () => {
+    const formData = new FormData();
+    formData.append("file", video);
+    formData.append("upload_preset", "bisharaHaroni");
+    // formData.append("cloud_name", "shhady");
+    axios
+      .post("https://api.cloudinary.com/v1_1/djvbchw2x/upload", formData, {
+        onUploadProgress: (p) => {
+          const percentComplete = Math.round((p.loaded * 100) / p.total);
+          setFileUpload({ fileName: video.name, percentComplete });
+          console.log(`${percentComplete}% uploaded`);
         },
-      ],
-    };
-
-    onVideoAdd(updatedPractice);
-
-    try {
-      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/practices/${practice._id}`, {
-        theVideoReply: video,
-        videoName: practice.video ? practice.video : 'فيديو تقييم',
-        courseId: practice.courseId,
-        nameOfProblem: commentText,
-        practiceId: practice._id,
-        uniqueLink: practice.uniqueLink || null,
-        teacherId: practice.teacherId,
-        replyId: unique_id,
+      })
+      .then((res) => setVideoUrl(res.data.url))
+      .catch((err) => {
+        console.log(err);
       });
-
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/replies`, {
-        theVideoReply: video,
-        videoName: practice.video ? practice.video : 'فيديو تقييم',
-        courseId: practice.courseId,
-        nameOfProblem: commentText,
-        practiceId: practice._id,
-        uniqueLink: practice.uniqueLink || null,
-        teacherId: practice.teacherId,
-        replyId: unique_id,
-      });
-
-      setCommentText('');
-      setVideo('');
-
-      socket.emit('sendNotificationComment', {
-        senderName: user.firstName,
-        senderFamily: user.lastName,
-        senderId: user._id,
-        receiverId: practice.ownerId,
-        videoName: practice.video,
-        videoId: practice.uniqueLink,
-        courseid: practice.courseId,
-      });
-    } catch (error) {
-      console.log(error);
-    }
   };
+
+
+  // const handleSubmit = async (e) => {
+    // e.preventDefault();
+    useEffect(() => {
+      const submitVideoReply = async () => {
+        if (practice.videoReply && practice.videoReply.length > 3) {
+          return console.log("Can't submit");
+        }
+        if (!videoUrl) return;
+    
+        const updatedPractice = {
+          ...practice,
+          videoReply: [
+            ...(practice.videoReply || []),
+            {
+              theVideoReply: videoUrl,
+              replyId: unique_id,
+            },
+          ],
+        };
+    
+        onVideoAdd(updatedPractice);
+    
+        try {
+          await axios.put(`${process.env.REACT_APP_BACKEND_URL}/practices/${practice._id}`, {
+            theVideoReply: videoUrl,
+            videoName: practice.video ? practice.video : 'فيديو تقييم',
+            courseId: practice.courseId,
+            nameOfProblem: commentText,
+            practiceId: practice._id,
+            uniqueLink: practice.uniqueLink || null,
+            teacherId: practice.teacherId,
+            replyId: unique_id,
+          });
+    
+          await axios.post(`${process.env.REACT_APP_BACKEND_URL}/replies`, {
+            theVideoReply: videoUrl,
+            videoName: practice.video ? practice.video : 'فيديو تقييم',
+            courseId: practice.courseId,
+            nameOfProblem: commentText,
+            practiceId: practice._id,
+            uniqueLink: practice.uniqueLink || null,
+            teacherId: practice.teacherId,
+            replyId: unique_id,
+          });
+    
+          setCommentText('');
+          setVideo('');
+    
+          socket.emit('sendNotificationComment', {
+            senderName: user.firstName,
+            senderFamily: user.lastName,
+            senderId: user._id,
+            receiverId: practice.ownerId,
+            videoName: practice.video,
+            videoId: practice.uniqueLink,
+            courseid: practice.courseId,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    
+      submitVideoReply();
+    }, [videoUrl]);
+    
+    
 
   const handleSubmitSelect = async (selectedVideo, selectedUniqueId) => {
     if (practice.videoReply && practice.videoReply.length > 3) {
@@ -163,10 +191,11 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
         ))}
       </select>
       </div>
-      <form onSubmit={handleSubmit} style={{ width: '80%', margin: '20px auto' }}>
+      {/* <form onSubmit={handleSubmit} style={{ width: '80%', margin: '20px auto' }}> */}
         <textarea
           style={{
-            width: '100%',
+            width: '80%',
+            margin:'auto',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -177,14 +206,54 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
           value={commentText}
           onChange={handleInputChange}
         />
-        <button onClick={handleOpenWidget} style={{ width: '100%' }}>
-          اضغط هنا لرفع الرد عن طريق فيديو
-        </button>
-        {video && <span>تم الرفع تأكد من اضافة عنوان لاستخدام الفيديو مرة اخرى</span>}
-        <button type="submit" style={{ width: '100%', background: '#fee4b9' }}>
-          اضف
-        </button>
-      </form>
+        {video ? (<button style={{
+                cursor:"pointer",
+                textAlign:"center",
+                background: '#fcedd5',
+                padding:"5px 25px",
+                margin:'10px auto'}} onClick={postDetails}>ارسال</button>):(null)}
+         {video ? <> {fileUpload?.percentComplete ? (<>{fileUpload?.percentComplete}%</>): (<div style={{display:'flex', justifyContent:'center', alignItems:'center'}}> {video.name}  <button onClick={()=> {setVideo(null); setVideoUrl(null)}} style={{background:"red", marginRight:"10px"}}>X</button></div>)}</>:  <><label for="inputTag">
+              <div style={{
+                cursor:"pointer",
+                textAlign:"center",
+                background: '#fcedd5',
+                width:"fit-content",
+                padding:"5px 25px",
+                margin:'10px auto'
+                
+              }}
+              >
+              ارفع تمرين  </div>
+              <input
+  type="file"
+  id="inputTag"
+  accept="audio/*, video/*"
+  onChange={(e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.type.includes("image")) {
+        // Handle the case when a photo is selected
+        alert("Photo is not accepted");
+        e.target.value = null; // Clear the file input
+      } else if (file.size > 104857500) {
+        setMoreThan("more than 100mb");
+      } else {
+        setVideo(file);
+      }
+    }
+  }}
+  style={{ display: "none" }}
+  onClick={() => {
+    setVideoUrl(null);
+    setVideo(null);
+    setMoreThan(null);
+  }}
+/>
+
+            </label>
+             <div style={{textAlign:"center"}}>الحجم الاقصى"100" ميجا بايت</div></>
+            }
+      {/* </form> */}
     </div>
   );
 };

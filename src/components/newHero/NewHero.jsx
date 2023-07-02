@@ -13,12 +13,12 @@ export default function NewHero({user}) {
         {/* {user ? (null):(<Link to="/auth"><button className='button1'>سجل الآن مجاناً</button></Link>)} */}
         </div>
           <div  className='smallContainer'>
-            {!user ? (<Link to="/auth"><button className='button2'>سجل الآن مجاناً</button></Link>):(<>{user?.teacher?.role === "teacher" || user?.teacher?.role === 'admin' ? null : <Link to="/subscription"><button className='button2'> تجربة مجانية لمدة 7 ايام</button></Link> }</>)}
+            {!user ? (<Link to="/auth"><button className='button2'>سجل الآن مجاناً</button></Link>):(<>{user?.role === "teacher" || user?.role === 'admin' ? <Link to={`/mystudents/${user?._id}`}><button className='button2'>المشتركين</button></Link> : <Link to="/subscription"><button className='button2'> تجربة مجانية لمدة 7 ايام</button></Link> }</>)}
          {/* {user?.user?.status === "noTrial" && <Link to="/subscription" style={{ textDecoration: "none" }}>
         <button className='button2'>ابدأ تجربتك المجانية لمدة 7 ايام</button></Link>} 
         {user?.user?.status === "trial" && <button className='button2'> باقي {user?.user?.daysLeft} ايام للاشتراك المجاني</button>}
         {user?.user?.status === "trialEnd" && <button className='button2'>اشترك الآن</button>} */}
-        {user?.teacher?._id && <Link to={`/mystudents/${user?.teacher?._id}`}><button className='button2'>المشتركين</button></Link>}
+        {/* {user?.teacher?._id && <Link to={`/mystudents/${user?._id}`}><button className='button2'>المشتركين</button></Link>} */}
 
       <div className='bottomText'>
         دروس خصوصية غير محدودة بسعر 125 شيكل شهرياً - فترة تجريبية مجانية لمدة 7 أيام

@@ -162,8 +162,13 @@ export default function TeacherPractices({ practices }) {
   };
 
   // Utility function to replace HTTP with HTTPS in video URLs
-  const replaceProtocol = (url) => url.replace('http://', 'https://');
-
+  const replaceProtocol = (url) => {
+    if (url === null) {
+      return null; // Return null if the URL is null
+    }
+  
+    return url.replace(/^http:\/\//i, 'https://');
+  };
   // Utility function to get video poster based on browser compatibility
   const getVideoPoster = (videoUrl) => {
     if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {

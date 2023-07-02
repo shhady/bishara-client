@@ -14,16 +14,19 @@ export default function MyStudents() {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/myUsers/${id}`);
+        const token = localStorage.getItem('token');
+  
+        const res = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/subscription-plans/teacher/${id}`);
+  
         setStudents(res.data);
       } catch (error) {
         console.log(error);
       }
     };
-
+  
     fetchStudents();
   }, [id]);
-
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     setCurrentPage(1);
@@ -34,7 +37,7 @@ export default function MyStudents() {
   };
 
   const filteredStudents = students.filter((student) =>
-    student.firstName.toLowerCase().includes(searchQuery.toLowerCase())
+    student.teacherId === id && student.userName?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const sortedStudents = [...filteredStudents].sort((a, b) => {
@@ -55,19 +58,28 @@ export default function MyStudents() {
   const drawStudents = () => {
     return currentStudents.map((student, i) => (
       <div key={i} style={styles.studentContainer}>
-        <img
+        {/* <img
           src={student.avatar ? student.avatar : 'https://img.icons8.com/material-rounded/24/null/user.png'}
           alt={student.firstName}
           width={50}
           height={50}
           style={styles.avatar}
-        />
+        /> */}
         <div style={styles.infoContainer}>
           <div style={styles.name}>
-            الاسم: {student.firstName} {student.lastName}
+            الاسم: {student.userName}
           </div>
-          <div style={styles.email}>{student.email}</div>
-          <div style={styles.daysLeft}>باقي ايام: {student.daysLeft}</div>
+          <div style={styles.name}>
+  تاريخ الاشتراك: {new Date(student.dateStarted).toLocaleDateString()}
+</div>
+          <div style={styles.name}>
+            الفترة: {student.period === "year" &&'سنه'} {student.period === "6 months" && '6 اشهر'}
+          </div>
+          <div style={styles.name}>
+           الحاله: {student.status === 'active' ? 'فعال':"غير فعال"}
+          </div>
+          {/* <div style={styles.email}>{student.email}</div>
+          <div style={styles.daysLeft}>باقي ايام: {student.daysLeft}</div> */}
         </div>
       </div>
     ));
@@ -142,13 +154,13 @@ const styles = {
     margin: '10px',
     borderRadius: '4px',
     border: '1px solid #ccc',
-    width:"50%"
+    width: '50%',
   },
   sortSelect: {
     padding: '8px',
     borderRadius: '4px',
     margin: '10px',
-    width:"50%"
+    width: '50%',
   },
   studentsContainer: {
     display: 'flex',
@@ -169,7 +181,10 @@ const styles = {
   },
   infoContainer: {
     display: 'flex',
-    flexDirection: 'column',
+    width: '90vw',
+    justifyContent: "space-around",
+    alignItems: "center",
+    // flexDirection: 'column',
   },
   name: {
     fontSize: '1rem',
