@@ -14,13 +14,21 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
       const [videoUrl, setVideoUrl] = useState('')
       const [fileUpload, setFileUpload] = useState(null);
       const plan  =   JSON.parse(localStorage.getItem("plan"))
-        // const [maxSize, setMaxSize] = useState('')
-    // useEffect(()=>{
-    //   if (!theUser) return;
-    //     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
-    // },[theUser])
+ 
     const [formData, setFormData] = useState({})
-    
+    const [showNotification, setShowNotification] = useState(false);
+
+const openNotification = () => {
+  setShowNotification(!showNotification);
+};
+
+const closeNotification = () => {
+  setShowNotification(!showNotification);
+};
+
+const redirectToSubscription = () => {
+  navigate("/subscription");
+};
     const navigate = useNavigate();
     console.log(user)
     useEffect(() => {
@@ -37,26 +45,7 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
         if (!user) return;
         socket?.emit("addUser", user._id);
       }, [socket, user]);
-      // function handleOpenWidget() {
-      //   let myWidget = window.cloudinary.createUploadWidget(
-      //     {
-      //       cloudName: 'djvbchw2x',
-      //       uploadPreset: 'bisharaHaroni',
-      //       maxFileSize: 100 * 1024 * 1024, // 100MB in bytes
-      //     },
-      //     (error, result) => {
-      //       if (!error && result && result.event === 'success') {
-      //         console.log('Done! Here is the image info:', result.info);
-      //         setFormData({ ...formData, image: result.info.secure_url });
-      //         setVideoUrl(result.info.secure_url);
-      //       }
-      //       else{
-      //           // setMaxSize('max 100mb')
-      //       }
-      //     }
-      //   );
-      //   myWidget.open();
-      // }
+    
       const postDetails = () => {
         const formData = new FormData();
         formData.append("file", video);
@@ -111,11 +100,10 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
       }, [videoUrl]);
   
       const openAlert = ()=>{
-        alert("لرفع تمارين يجب الاشتراك");
-        navigate("/subscription"); 
+        // alert("لرفع تمارين يجب الاشتراك");
+        // navigate("/subscription"); 
       }
-      console.log(user?.trialTeacher);
-      console.log(course?.owner);
+    
   return (
     <div className='divOfUploadBtn'>
        {/* {user?.trialTeacher === course?.owner ? (<div  className='divOfUploadBtn'><button onClick={postDetails} className='uploadPracticeBtn'>ارفع تمرين</button>  
@@ -161,10 +149,19 @@ export default function NewUploadPractice({course, videoName, uniqueLink}) {
             }
            
         </>
-        : <button className='uploadPracticeBtn' onClick={openAlert}>ارفع التمرين</button> }
+        : <button className='uploadPracticeBtn' onClick={openNotification}>ارفع التمرين</button> }
         {/* <div>  {fileUpload? (<>{fileUpload?.percentComplete}%</>):(null)} </div>  */}
            {moreThan === "more than 100mb" ? <div>الفيديو اكبر من 100 ميجا بايت</div> : null}
-            
+           {showNotification && (
+          <div className="notification">
+            <p>اهلاً, {user?.firstName} {user?.lastName} <br/> لرفع تمارين يجب الاشتراك</p>
+            <span className="notification_progress"></span>
+            <div style={{padding:"3px 10px", display:"flex", justifyContent:"space-between", alignItems:'center'}}>
+            <button  style={{padding:"10px 15px"}} onClick={redirectToSubscription}>اشتراك</button>
+            <button style={{padding:"10px 15px"}} onClick={closeNotification}>اغلاق</button>
+            </div>
+          </div>
+        )}
     </div>
   )
 }
