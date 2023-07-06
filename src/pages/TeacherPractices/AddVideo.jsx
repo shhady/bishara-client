@@ -15,7 +15,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
     const fetchReplies = async () => {
       try {
         const getReplies = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/replies/${user._id}`);
-        setAutoReplies(getReplies.data.filter(replies => replies.uniqueLink === practice.uniqueLink));
+        setAutoReplies(getReplies.data.filter(replies => replies.uniqueLink === practice.uniqueLink && replies.nameOfProblem ));
         console.log(getReplies.data.filter(replies => replies.uniqueLink === practice.uniqueLink));
       } catch (error) {
         console.log(error);

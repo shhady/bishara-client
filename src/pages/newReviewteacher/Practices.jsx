@@ -5,6 +5,7 @@ import TeacherPractices from '../TeacherPractices/TeacherPractices';
 
 export default function Practices({ user, socket }) {
   const [filteredPractices, setFilteredPractices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPractices = async () => {
@@ -26,6 +27,7 @@ export default function Practices({ user, socket }) {
 
       const filtered = filterPracticesUnReplied();
       setFilteredPractices(filtered);
+      setLoading(false);
     };
 
     fetchPractices();
@@ -37,7 +39,22 @@ export default function Practices({ user, socket }) {
 
   return (
     <div>
-      {filteredPractices.length === 0 ? (
+      {loading ? (
+        <div style={{ height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          marginTop: "100px",
+        }}
+      >
+        <div className="loader">  
+        </div>
+      </div>
+        </div>
+      ) : filteredPractices.length === 0 ? (
         <div style={{ height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <h1>لا يوجد تمارين جديدة</h1>
         </div>
