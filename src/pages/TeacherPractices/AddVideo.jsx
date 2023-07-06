@@ -224,7 +224,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
                 
               }}
               >
-              ارفع تمرين  </div>
+              ارفع فيديو  </div>
               <input
   type="file"
   id="inputTag"
