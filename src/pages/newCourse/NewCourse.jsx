@@ -18,6 +18,8 @@ export default function NewCourse() {
     const {id} = useParams()
     const navigate = useNavigate()
     console.log(id)
+  const [courseDisc, setCourseDisc] = useState()
+    const [editingDiscMode,setEditingDiscMode] =useState(true)
     // useEffect(()=>{
     //   if(!theUser) return ;
     //     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
@@ -28,10 +30,37 @@ export default function NewCourse() {
                 process.env.REACT_APP_BACKEND_URL + `/courses/${id}`
               );
               setCourse(res.data)
+              console.log(res.data);
+              setCourseDisc(res.data.description)
         }
         fetchData()
     },[id])
-    console.log(course)
+    const handleInputChange = (e) => {
+      setCourseDisc(e.target.value);
+    };
+    const onSubmitSave = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          // Handle case where token is missing
+          return;
+        }
+    
+        // Make the patch request to update the course description
+        await axios.patch(
+          process.env.REACT_APP_BACKEND_URL + `/courses/${course._id}`,
+          { description: courseDisc }
+        );
+    
+        // Update the course state with the new description
+        setCourse({ ...course, description: courseDisc });
+    
+        // Exit the editing mode
+        setEditingDiscMode(true);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     useEffect(() => {
         const fetch = async () => {
           const result = await axios.get(
@@ -81,7 +110,7 @@ export default function NewCourse() {
     <div>
 
       
-        <CourseDetails course={course}/>
+        <CourseDetails course={course} setCourse={setCourse} user={user}/>
         <div className='lessonsAndDescB'>
           {open !== 'description' ? (          <div  onClick={()=> setOpen('lessons')} style={{background:"#fee4b9",textAlign:'center', borderBottom:"1px solid black", fontWeight:"bold",cursor:"pointer"}}>الدروس</div>
 ):(          <div  onClick={()=> setOpen('lessons')} style={{textAlign:'center', borderBottom:"1px solid black", fontWeight:"bold", cursor:"pointer"}}>الدروس</div>
@@ -91,7 +120,19 @@ export default function NewCourse() {
 )}
         </div>
         {open === "description" ? (<div style={{width:"80%", margin:"auto"}}>
-          {course.description}
+          {editingDiscMode ? (
+            <div style={{display:"flex", flexDirection:"column", gap:"20px", alignItems:"center", justifyContent:'center'}} >
+              {user._id === course.owner ? ( <button style={{width:"20vw", display:"flex", alignSelf:"flex-start", alignItems:"center", justifyContent:'center'}} onClick={()=>setEditingDiscMode(false)}>تعديل</button>):(null)}
+           
+          <div className='courseDiscCss'>{course.description} </div>  
+          </div>
+              ):(
+                <div  style={{display:"flex", flexDirection:"column", gap:"20px", alignItems:"center", justifyContent:'center'}}>
+            <textarea style={{width:"50vw", height:"15vh"}} value={courseDisc} onChange={handleInputChange}/>
+            <button  style={{width:"30vw"}} onClick={onSubmitSave}>حفظ</button>
+            </div>
+              )}
+          
         </div>):(<div className='lessons'>
             {drawLessons()}
         </div>)}

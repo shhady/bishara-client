@@ -45,7 +45,7 @@ export default function CreateCourse() {
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setUrl(res.data.url))
+      .then((res) => setUrl(res.data.secure_url))
       // .then((url) => {
       //   setCourse({ ...course, coursePhoto: url });
       // })

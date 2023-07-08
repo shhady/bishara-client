@@ -62,7 +62,7 @@ export default function NewTeacher({user}) {
             <h3 onClick={()=>setOpen("Evaluation")} style={{cursor:"pointer", borderBottom:"1px solid #dddcdc"}} >منهاج خاص بك</h3>)}
         </div>
             {open === "NewTeacherCourses" && <NewTeacherCourses id={id}/>}
-            {open === "NewTeacherDisc" && <NewTeacherDisc id={id}/>}
+            {open === "NewTeacherDisc" && <NewTeacherDisc id={id} user={user}/>}
            {open === "Evaluation" && <Evaluation id={id} teacher={teacher} user={user}/>}
     </div>
   )

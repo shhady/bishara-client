@@ -52,7 +52,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setVideoUrl(res.data.url))
+      .then((res) => setVideoUrl(res.data.secure_url))
       .catch((err) => {
         console.log(err);
       });

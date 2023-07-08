@@ -66,7 +66,7 @@ export default function TeachersPop({
               onClick={() => addToLocal(course)}
             >
               <img
-                src={course.coursePhoto.replace('http://', 'https://')}
+                src={course.coursePhoto}
                 alt={course.firstName}
                 height="100px"
                 width="100px"

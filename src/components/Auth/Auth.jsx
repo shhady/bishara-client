@@ -101,12 +101,15 @@ export default function Auth({ user, setUser, setUserProp }) {
       // setTeacherData(result.data);
       setUser(result.data.user);
       setUserProp(result.data.user);
-      const plan = await axios.get( process.env.REACT_APP_BACKEND_URL + `/subscription-plans/${result.data.user.subscriptionPlan}`,{
-        headers: {
-          Authorization: `Bearer ${result.data.token}`,
-        },
-      })
-      window.localStorage.setItem("plan",JSON.stringify(plan.data))
+      if(result.data.user.subscriptionPlan){
+        const plan = await axios.get( process.env.REACT_APP_BACKEND_URL + `/subscription-plans/${result.data.user.subscriptionPlan}`,{
+          headers: {
+            Authorization: `Bearer ${result.data.token}`,
+          },
+        })
+        window.localStorage.setItem("plan",JSON.stringify(plan.data))
+      }
+     
       navigate("/profile");
     } catch (error) {
       console.log("can't log in");

@@ -253,7 +253,7 @@ export default function PracticeReplies({ user, socket, practices }) {
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setUrl(res.data.url))
+      .then((res) => setUrl(res.data.secure_url))
       .then((res) => console.log(res))
       .then(() => setVideo(null))
       .then(() => setFileUpload(null))

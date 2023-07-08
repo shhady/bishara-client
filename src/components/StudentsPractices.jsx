@@ -34,7 +34,7 @@ export default function StudentsPractices({ user }) {
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setUrl(res.data.url))
+      .then((res) => setUrl(res.data.secure_url))
       .catch((err) => {
         console.log(err);
       });

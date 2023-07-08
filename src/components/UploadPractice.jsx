@@ -62,7 +62,7 @@ const navigate = useNavigate()
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setUrl(res.data.url))
+      .then((res) => setUrl(res.data.secure_url))
       .then(() => {
         setVideo(null)
         // console.log(lesson);

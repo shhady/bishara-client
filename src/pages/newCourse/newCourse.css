@@ -56,6 +56,25 @@
    
 }
 
+.courseDiscCss{
+    border-top-left-radius: 180%;
+    background-color: #fcedd5;
+    text-align:center;
+     display:flex;
+     justify-content:center;
+     align-items:center;
+     padding:20px;
+}
+
+.editIcon{
+    padding: 5px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.editIcon:hover{
+color: white;
+background-color: black;
+}
 @media (max-width: 500px) {
     .lessons{
         display: grid;

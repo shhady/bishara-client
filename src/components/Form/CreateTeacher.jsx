@@ -283,7 +283,7 @@ export default function CreateTeacher() {
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setUrlAvatar(res.data.url))
+      .then((res) => setUrlAvatar(res.data.secure_url))
       .catch((err) => {
         console.log(err);
       });

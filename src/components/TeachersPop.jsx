@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../pages/Teachers/Teachers.css";
 import { Link } from "react-router-dom";
-// import {useNav} from "react-router-dom"
+
 export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
   const [teachers, setTeachers] = useState(null);
+  
   useEffect(() => {
     const fetch = async () => {
       const result = await axios.get(
@@ -15,7 +16,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
     fetch();
   }, []);
 
-  if (!teachers)
+  if (!teachers) {
     return (
       <div
         style={{
@@ -23,13 +24,12 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          //   marginTop: "100px",
         }}
       >
         {/* <div className="loader"></div> */}
       </div>
     );
-
+  }
 
   const addToLocal = (teacher) => {
     window.localStorage.setItem("teacherId", teacher._id);
@@ -37,14 +37,17 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
   };
 
   const drawData = () => {
-    return teachers.slice(0, 10).map((teacher, i) => {
+    return teachers.slice(0, 10).map((teacher) => {
       return (
-        <div key={i} onClick={() => setTeachersHover(false)}>
-          <Link to={`/NewTeacher/${teacher._id}`} style={{ textDecoration: "none" }}>
+        <div key={teacher._id} onClick={() => setTeachersHover(false)}>
+          <Link
+            key={teacher._id} // Assign key prop to the Link component
+            to={`/NewTeacher/${teacher._id}`}
+            style={{ textDecoration: "none" }}
+          >
             <div
               style={{
                 cursor: "pointer",
-                // maxHeight: "60px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
@@ -53,7 +56,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
               }}
             >
               <img
-                src={teacher.avatar.replace('http://', 'https://')}
+                src={teacher.avatar}
                 alt={teacher.firstName}
                 height="100px"
                 width="100px"
@@ -76,13 +79,12 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
       );
     });
   };
-
+  
   return (
     <div
       style={{
         position: "fixed",
         top: 80,
-        // height: "200vh",
         width: "65vw",
         background: "transparent",
       }}
@@ -94,9 +96,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
           width: "fit-content",
           border: "0.5px solid #dcdcdc",
           borderTop: "none",
-          // height: "fitContent",
-          boxShadow:
-            "rgb(0 0 0 / 6%) 0px 2px 4px, rgb(35 41 54 / 14%) 0px 6px 16px",
+          boxShadow: "rgb(0 0 0 / 6%) 0px 2px 4px, rgb(35 41 54 / 14%) 0px 6px 16px",
         }}
         onMouseLeave={() => setTeachersHover(false)}
       >
@@ -127,12 +127,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
           </Link>
         </div>
 
-        <div
-          className="teacherHeader"
-          // style={{ display: "grid", gridAutoColumns: "1fr 1fr 1fr 1fr 1fr" }}
-        >
-          {drawData()}
-        </div>
+        <div className="teacherHeader">{drawData()}</div>
       </div>
     </div>
   );

@@ -99,7 +99,7 @@ export default function Profile({ userProp }) {
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setUrl(res.data.url))
+      .then((res) => setUrl(res.data.secure_url))
       // .then((data) => {
       //   (data.url);
       // })
@@ -122,7 +122,7 @@ export default function Profile({ userProp }) {
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setUrlCover(res.data.url))
+      .then((res) => setUrlCover(res.data.secure_url))
       // .then((data) => {
       //   (data.url);
       // })

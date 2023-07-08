@@ -355,15 +355,15 @@ export default function Header({
                 position: "fixed",
                 backgroundColor: "white",
                 right: 30,
-                width: "150px",
+                width: "200px",
                 boxShadow:
                   "rgb(0 0 0 / 6%) 0px 4px 8px, rgb(35 41 54 / 14%) 0px 12px 32px",
                 textAlign: "center",
-                height: "400px",
+                height: "fit-content",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-around",
-                textAlign: "center",
+                gap:"15px"
               }}
               onMouseLeave={() => setIsHovering(false)}
             >
@@ -409,7 +409,7 @@ export default function Header({
                   الملف الشخصي
                 </Link>
               </div>
-              {user?.teacher?.role === "admin" ? (
+              {user?.role === "admin" ? (
                 <Link
                   to="/CreateTeacher"
                   style={{ textDecoration: "none", color: "black" }}
@@ -418,7 +418,7 @@ export default function Header({
                     style={{
                       width: "80%",
                       margin: "auto",
-                      marginTop: "20px",
+                      // marginTop: "20px",
                       color: "black",
                     }}
                   >
@@ -426,6 +426,21 @@ export default function Header({
                   </div>
                 </Link>
               ) : null}
+            {user.role === "admin" || user.role === "teacher" ? (<Link
+                  to="/NewReview"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <div
+                    style={{
+                      width: "80%",
+                      margin: "auto",
+                      // marginTop: "20px",
+                      color: "black",
+                    }}
+                  >
+                     تمارين الطلاب
+                  </div>
+                </Link>):(null)}   
               <div
                 style={{ width: "80%", margin: "auto" }}
                 onClick={() => setIsHovering(false)}
@@ -642,7 +657,7 @@ export default function Header({
                         onMouseOver={() => setIsHovering(!isHovering)}
                       >
                         <img
-                          src="https://img.icons8.com/material-rounded/24/null/user.png"
+                          src={user.avatar ? user.avatar.replace('http://', 'https://'): "https://img.icons8.com/material-rounded/24/null/user.png"}
                           alt="user"
                           width="25px"
                         />
@@ -1066,6 +1081,23 @@ export default function Header({
                       </span>
                     </div>
                   </Link>
+                  {user.role === "admin" || user.role === "teacher" ? (<Link to="/newReview" style={{ textDecoration: "none" }}>
+                    <div
+                      onClick={() => {
+                        setOpenMenu(!openMenu);
+                        setUpdateComponent("");
+                      }}
+                    >
+                      <span
+                        className="blackBackgroundtext"
+                        style={{ color: "white" }}
+                      >
+                        {" "}
+                        تمارين الطلاب 
+                      </span>
+                    </div>
+                  </Link>):(null)}
+                  
                   <Link to="/Notifications" style={{ textDecoration: "none" }}>
                     <div
                       onClick={() => {

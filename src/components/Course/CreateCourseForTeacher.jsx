@@ -115,7 +115,7 @@ export default function CreateCourseForTeacher() {
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setUrl(res.data.url))
+      .then((res) => setUrl(res.data.secure_url))
       
       .catch((err) => {
         console.log(err);

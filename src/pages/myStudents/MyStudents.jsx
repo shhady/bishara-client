@@ -15,18 +15,20 @@ export default function MyStudents() {
     const fetchStudents = async () => {
       try {
         const token = localStorage.getItem('token');
-  
+
         const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/subscription-plans/teacher/${id}`);
-  
+          `${process.env.REACT_APP_BACKEND_URL}/subscription-plans/teacher/${id}`
+        );
+
         setStudents(res.data);
       } catch (error) {
         console.log(error);
       }
     };
-  
+
     fetchStudents();
   }, [id]);
+
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     setCurrentPage(1);
@@ -37,15 +39,14 @@ export default function MyStudents() {
   };
 
   const filteredStudents = students.filter((student) =>
-    student.teacherId === id && student.userName?.toLowerCase().includes(searchQuery.toLowerCase())
+    student.teacherId === id &&
+    student.userName?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const sortedStudents = [...filteredStudents].sort((a, b) => {
-    if (sortOption === 'asc') {
-      return a.daysLeft - b.daysLeft;
-    } else {
-      return b.daysLeft - a.daysLeft;
-    }
+    const dateA = new Date(a.dateStarted);
+    const dateB = new Date(b.dateStarted);
+    return sortOption === 'asc' ? dateA - dateB : dateB - dateA;
   });
 
   // Pagination
@@ -58,28 +59,16 @@ export default function MyStudents() {
   const drawStudents = () => {
     return currentStudents.map((student, i) => (
       <div key={i} style={styles.studentContainer}>
-        {/* <img
-          src={student.avatar ? student.avatar : 'https://img.icons8.com/material-rounded/24/null/user.png'}
-          alt={student.firstName}
-          width={50}
-          height={50}
-          style={styles.avatar}
-        /> */}
         <div style={styles.infoContainer}>
+          <div style={styles.name}>الاسم: {student.userName}</div>
           <div style={styles.name}>
-            الاسم: {student.userName}
+            تاريخ الاشتراك: {new Date(student.dateStarted).toLocaleDateString()}
           </div>
           <div style={styles.name}>
-  تاريخ الاشتراك: {new Date(student.dateStarted).toLocaleDateString()}
-</div>
-          <div style={styles.name}>
-            الفترة: {student.period === "year" &&'سنه'} {student.period === "6 months" && '6 اشهر'}
+            الفترة: {student.period === 'year' && 'سنة'}{' '}
+            {student.period === '6 months' && '6 أشهر'}
           </div>
-          <div style={styles.name}>
-           الحاله: {student.status === 'active' ? 'فعال':"غير فعال"}
-          </div>
-          {/* <div style={styles.email}>{student.email}</div>
-          <div style={styles.daysLeft}>باقي ايام: {student.daysLeft}</div> */}
+          <div style={styles.name}>الحالة: {student.status === 'active' ? 'فعال' : 'غير فعال'}</div>
         </div>
       </div>
     ));
@@ -164,8 +153,11 @@ const styles = {
   },
   studentsContainer: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap', // Added flex-wrap property
+    justifyContent: 'center', // Added justifyContent property
     gap: '10px',
+    maxWidth: '1200px', // Added maxWidth property
+    margin: '0 auto', // Added margin property for center alignment
   },
   studentContainer: {
     display: 'flex',
@@ -175,26 +167,15 @@ const styles = {
     border: '1px solid black',
     padding: '10px',
   },
-  avatar: {
-    borderRadius: '50%',
-    margin: '10px',
-  },
   infoContainer: {
     display: 'flex',
-    width: '90vw',
-    justifyContent: "space-around",
-    alignItems: "center",
-    // flexDirection: 'column',
+    flexDirection: 'column',
+    gap: '5px',
+    flex: '1',
   },
   name: {
-    fontSize: '1rem',
+    fontSize: '0.9rem',
     fontWeight: 'bold',
-    marginBottom: '5px',
-  },
-  email: {
-    marginBottom: '5px',
-  },
-  daysLeft: {
     marginBottom: '5px',
   },
   pagination: {
@@ -219,3 +200,14 @@ const styles = {
     color: '#fff',
   },
 };
+
+const breakpoints = {
+  desktop: '1024px',
+};
+
+// Apply flex-wrap on desktop screens
+styles.studentsContainer['@media (min-width: ' + breakpoints.desktop + ')'] = {
+  flexWrap: 'wrap',
+  justifyContent: 'flex-start',
+};
+

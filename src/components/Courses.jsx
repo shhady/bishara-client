@@ -74,14 +74,14 @@ export default function Courses({
   const showData = () => {
     return posts?.map((post) => {
       return (
-        <Link to={`/newCourse/${post._id}`} style={{textDecoration:"none", color:"black"}}>
+        <Link to={`/newCourse/${post._id}`} style={{textDecoration:"none", color:"black"}} key={post._id}>
         <div
           key={post._id}
           className="courseContainer"
           style={{ cursor: "pointer", padding: "5px", borderRadius: "25px" }}
         >
           <img
-            src={post.coursePhoto? (post.coursePhoto.replace('http://', 'https://')):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}
+            src={post.coursePhoto? (post.coursePhoto):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}
             alt={post.firstName}
             width="80%"
             height="200"
@@ -117,7 +117,7 @@ export default function Courses({
         >
          
           <img
-  src={post.coursePhoto? (post.coursePhoto.replace('http://', 'https://')):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}            alt={post.firstName}
+  src={post.coursePhoto? (post.coursePhoto):('https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&w=600')}            alt={post.firstName}
             width="80%"
             height="200"
             style={{ marginBottom: "10px", borderRadius: "25px"  }}
