@@ -188,12 +188,14 @@ export default function Header({
     //   console.log(response);
     //   window.localStorage.removeItem("token");
     // }
+    
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("profile");
+    setUser(null);
     // await axios.post(process.env.REACT_APP_BACKEND_URL+"/teachers/logoutAll");
     dispatch({ type: "LOGOUT" });
     navigate("/");
-    setUser(null);
+    
     setNotificationNotification([]);
     setNotificationMessage([]);
     setOpenMenu(false);
@@ -220,13 +222,12 @@ export default function Header({
     //   // REMOVE TOKEN
     //   window.localStorage.removeItem("token");
     // }
-
+    setUser(null);
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("profile");
     // await axios.post(process.env.REACT_APP_BACKEND_URL+"/teachers/logoutAll");
     dispatch({ type: "LOGOUT" });
     navigate("/");
-    setUser(null);
     setOpenMenu(false);
     setNotificationNotification([]);
     setNotificationMessage([]);
