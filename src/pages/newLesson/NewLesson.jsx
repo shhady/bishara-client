@@ -6,9 +6,9 @@ import axios from 'axios';
 import NewUploadPractice from './NewUploadPractice';
 import PDF from './PDF';
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
-export default function NewLesson() {
-    const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
-    const [user, setUser] = useState('') 
+export default function NewLesson({user, setUser}) {
+    // const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    // const [user, setUser] = useState('') 
     const [lessons,setLessons]  = useState([])
     const [videoName, setVideoName] = useState()
     const [course, setCourse] = useState()
@@ -30,10 +30,10 @@ export default function NewLesson() {
         fetchData()
     },[id])
     
-    useEffect(()=>{
-      if(!theUser) return ;
-        theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
-    },[theUser])
+    // useEffect(()=>{
+    //   if(!theUser) return ;
+    //     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
+    // },[theUser])
     
     useEffect(()=>{
         const theVideo = lessons.filter((v)=>v.snippet.resourceId.videoId === name)
@@ -65,7 +65,7 @@ export default function NewLesson() {
             </>
             })
       }
-      console.log(theUser);
+      // console.log(theUser);
   return (
     <div>
     <div className='youtubeFrame'>
@@ -85,7 +85,7 @@ export default function NewLesson() {
         </div>
         <div className='UploadPDownloadF'>
             {user?._id === course?.owner || user?.role === "admin" ? (<PDF course={course} name={name}/>
-            ):( <>{theUser ? (<><PDF course={course} name={name} user={theUser}/><NewUploadPractice course={course} uniqueLink={name} videoName={videoName}/></>):
+            ):( <>{user ? (<><PDF course={course} name={name} user={user}/><NewUploadPractice course={course} uniqueLink={name} videoName={videoName} user={user} setUser={setUser}/></>):
             (<div style={{color:"red"}}>يجب تسجيل الدخول لتحميل الملفات ورفع التمارين للحصول على تقييم العزف <Link to="/auth">لتسجيل الدخول اضغط هنا</Link></div>)
             }</>)}
        

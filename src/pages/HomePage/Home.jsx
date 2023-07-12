@@ -6,7 +6,7 @@ import FourBoxes from "../../components/FourBoxes";
 import TeachersHomePage from "../../components/TeachersHomePage";
 import CoursesHomePage from "../../components/CoursesHomePage";
 import NewHero from "../../components/newHero/NewHero";
-
+import ContactUs from "../../components/ContactUs";
 export default function Home({
   user
 }) {
@@ -18,6 +18,7 @@ export default function Home({
       <CoursesHomePage/>
       <FreeVideos />
       <About />
+      <ContactUs user={user}/>
       <Footer />
     </div>
   );

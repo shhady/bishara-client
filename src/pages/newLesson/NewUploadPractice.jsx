@@ -4,18 +4,18 @@ import axios from 'axios';
 import './newLesson.css';
 import { io } from "socket.io-client";
 import { useNavigate } from 'react-router-dom';
-export default function NewUploadPractice({course, videoName, uniqueLink}) {
+export default function NewUploadPractice({course, videoName, uniqueLink, user, setUser}) {
       // const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
       const [socket, setSocket] = useState(null);
-      const [user, setUser] =  useState(JSON.parse(localStorage.getItem("profile")));
+      // const [user, setUser] =  useState(JSON.parse(localStorage.getItem("profile")));
       const [moreThan, setMoreThan] = useState(null);
-      const [url, setUrl] = useState(null);
+      // const [url, setUrl] = useState(null);
       const [video, setVideo] = useState();
       const [videoUrl, setVideoUrl] = useState('')
       const [fileUpload, setFileUpload] = useState(null);
       const plan  =   JSON.parse(localStorage.getItem("plan"))
  
-    const [formData, setFormData] = useState({})
+    // const [formData, setFormData] = useState({})
     const [showNotification, setShowNotification] = useState(false);
 
 const openNotification = () => {
@@ -85,6 +85,17 @@ const redirectToSubscription = () => {
             myPractice:videoUrl,
             uniqueLink:uniqueLink
           });
+          const response = await axios.put(
+            process.env.REACT_APP_BACKEND_URL + `/evaluation`,
+            {
+              email: user.email, // fix here
+              status: user.status === "canTry" ? "triedOnce": user.status
+            }
+          )
+          
+          console.log(response.data);
+          window.localStorage.setItem('profile', JSON.stringify(response.data.user));
+          setUser(response.data.user);
          await socket.emit("sendNotificationComment", {
             senderName: user?.firstName,
             senderFamily: user?.lastName,
@@ -99,16 +110,10 @@ const redirectToSubscription = () => {
         fetch();
       }, [videoUrl]);
   
-      const openAlert = ()=>{
-        // alert("لرفع تمارين يجب الاشتراك");
-        // navigate("/subscription"); 
-      }
-    
+  
   return (
     <div className='divOfUploadBtn'>
-       {/* {user?.trialTeacher === course?.owner ? (<div  className='divOfUploadBtn'><button onClick={postDetails} className='uploadPracticeBtn'>ارفع تمرين</button>  
-        الحجم الاقصى"100MB"</div>):(<div><button onClick={openAlert} className='uploadPracticeBtn'>ارفع تمرين</button> </div>)} */}
-        {plan?.teacherId === course?.owner && plan?.status === 'active' ?
+        {plan?.teacherId === course?.owner && plan?.status === 'active' || user.status === "canTry" ?
         <>
          {video ? (<button className='uploadPracticeBtn' onClick={postDetails}>ارسال</button>):(null)}
          {video ? <> {fileUpload?.percentComplete ? (<>{fileUpload?.percentComplete}%</>): (<div style={{display:'flex', justifyContent:'center', alignItems:'center'}}> {video.name}  <button onClick={()=> {setVideo(null); setVideoUrl(null)}} style={{background:"red", marginRight:"10px"}}>X</button></div>)}</>:  <><label for="inputTag">

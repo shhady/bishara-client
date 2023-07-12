@@ -167,11 +167,12 @@ import React, {useState,useEffect} from 'react'
 import axios from 'axios';
 import "./evaluation.css"
 import { useNavigate } from 'react-router-dom';
-export default function Evaluation({teacher, user}) {
+export default function Evaluation({teacher, user, setUser}) {
   console.log({t:teacher , u:user});
-  const [expTime,setExpTime]= useState(user.experience)
+  const [expTime,setExpTime]= useState(user?.experience)
   const [goal, setGoal] = useState(user?.goal)
-  const [whereStudied,setWhereStudied] = useState(user?.whereStudied)
+  const [whereStudied,setWhereStudied] = useState(user?.whereStudied);
+  const [status, setStatus] = useState(user?.status)
   const [video, setVideo] = useState('')
   const [moreThan, setMoreThan] = useState('')
   const [videoUrl, setVideoUrl] = useState('')
@@ -199,6 +200,7 @@ export default function Evaluation({teacher, user}) {
       });
   };
 
+  console.log(status);
   useEffect(() => {
     if (!videoUrl) return;
     
@@ -223,11 +225,14 @@ export default function Evaluation({teacher, user}) {
                    email: user.email, // fix here
                    whereStudied:whereStudied ? whereStudied : user.whereStudied,
                    goal: goal ? goal : user.goal,
-                   experience:expTime ?   expTime:user.experience
+                   experience:expTime ?   expTime:user.experience,
+                   status: status === "canTry" ? "triedOnce": status
                  }
                )
-               console.log(response.data.user);
-               window.localStorage.setItem('profile', JSON.stringify(response.data.user))
+               
+               console.log(response.data);
+               window.localStorage.setItem('profile', JSON.stringify(response.data.user));
+               setUser(response.data.user);
                navigate('/profile');
         console.log(res);
       } catch (e) {
@@ -242,9 +247,9 @@ export default function Evaluation({teacher, user}) {
     <div className='containerEvaluation'>
     <div className='evaDesc'> تحميل فيديو لنفسك وأنت تعزف الموسيقى للحصول على تعليقات من معلمك يُعد أداة تعلم قيمة ومريحة. من خلال تسجيل أدائك على الفيديو، تمنح معلمك نظرة شاملة على قدراتك الموسيقية، مما يتيح تقييمًا أكثر دقة وفهمًا أعمق لبناء منهاج خاص بك. 
     </div>
-    {!user &&  <div className='notSub'><div>الرجاء تسجيل الدخول</div><div> <button className='evaBTN'>تسجيل الدخول</button></div></div>}
-    {plan?.teacherId !== teacher._id && <div className='notSub'><div>يجب الاشتراك للحصول على تقييم لعزفك </div><div> <button className='evaBTN'>للاشتراك</button></div></div>}
-    {plan?.teacherId === teacher._id && plan?.status === 'active' && <div className='notSub'>
+    {!user &&  <div className='notSub'><div>الرجاء تسجيل الدخول</div><div> <button onClick={()=> navigate("/auth")} className='uploadEvaBtn'>تسجيل الدخول</button></div></div>}
+    {user?.status === "triedOnce" && plan?.status !== 'active' && <div className='notSub'><div>يجب الاشتراك للحصول على تقييم لعزفك مرة اخرى</div><div> <button onClick={()=> navigate("/subscription")} className='uploadEvaBtn'>للاشتراك</button></div></div>}
+    {(plan?.teacherId === teacher._id && plan?.status === 'active'|| user?.status === "canTry")  && <div className='notSub'>
       <form className='formEvaluation' onSubmit={postDetails}>
       <div style={{width:"100%", textAlign:'center', fontWeight:"bold"}}>
            خبرتك في العزف </div>      

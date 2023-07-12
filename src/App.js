@@ -139,19 +139,19 @@ export default function App() {
           <Route path="/auth" exact element={ <Auth user={user} setUser={setUser} setUserProp={setUserProp} />}/>
           <Route path="/forgetpassword" exact element={ <ForgetPassword />}/>
           <Route path="/lessonReview" exact element={ <YoutubeForPractice />}/>
-          <Route path="/NewTeacher/:id" exact element={ <NewTeacher user={user}/>}/>
+          <Route path="/NewTeacher/:id" exact element={ <NewTeacher user={user} setUser={setUser}/>}/>
           <Route path="/NewCourse/:id" exact element={ <NewCourse />}/>
           <Route path="/GeneralButton" exact element={ <GeneralButton user={user} />}/>
           <Route path="/qa" element={ <QA user={user}/>}/>
           <Route path="/PracticeReplies" exact element={<PracticeReplies user={user} setUser={setUser} socket={socket}/>}/>
           <Route path="/SpecificPractice/:id" exact element={ <SpecificPractice user={user} setUser={setUser} socket={socket}/>}/>
           <Route path="/StudentMyPractice/:id" exact element={<StudentMyPractice user={user} setUser={setUser}/>}/>
-          <Route path="/NewLesson/:id" exact element={<NewLesson />}/>
-          <Route path="/NewLesson/:id" exact element={<NewLesson />}/>
+          <Route path="/NewLesson/:id" exact element={<NewLesson user={user} setUser={setUser} />}/>
+          {/* <Route path="/NewLesson/:id" exact element={<NewLesson user={user} setUser={setUser}/>}/> */}
           <Route path="/NewMessenger/:id" exact element={<NewMessenger socket={socket}/>}/>
           <Route path="/chatting" exact element={<NewChatBox socket={socket}/>}/>
           <Route path="/OnePractice/:id" exact element={<OnePractice socket={socket}/>}/>
-          <Route path="/subscription" exact element={<Subscription user={user}/>}/>
+          <Route path="/subscription" exact element={<Subscription user={user} setUser={setUser}/>}/>
           <Route path="/NewProfile" exact element={<NewProfile user={user} seUser={setUser}/>}/>
           <Route path="/chooseTeacher" exact element={<ChooseTeacher user={user}/>}/>
           <Route path="/chooseTeacher/:id" exact element={<ChosenTeacher user={user} setUser={setUser}/>}/>

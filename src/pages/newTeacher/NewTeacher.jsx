@@ -5,7 +5,7 @@ import './NewTeacher.css'
 import NewTeacherCourses from '../../components/newTeacherComponents/NewTeacherCourses';
 import NewTeacherDisc from '../../components/newTeacherComponents/NewTeacherDisc';
 import Evaluation from '../../components/evaluation/Evaluation'
-export default function NewTeacher({user}) {
+export default function NewTeacher({user, setUser}) {
     const [teacher, setTeacher ] = useState(null)
     const userId= user?._id
     const [open, setOpen] = useState('NewTeacherCourses')
@@ -63,7 +63,7 @@ export default function NewTeacher({user}) {
         </div>
             {open === "NewTeacherCourses" && <NewTeacherCourses id={id}/>}
             {open === "NewTeacherDisc" && <NewTeacherDisc id={id} user={user}/>}
-           {open === "Evaluation" && <Evaluation id={id} teacher={teacher} user={user}/>}
+           {open === "Evaluation" && <Evaluation id={id} teacher={teacher} user={user} setUser={setUser}/>}
     </div>
   )
 }

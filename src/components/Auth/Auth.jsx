@@ -153,7 +153,7 @@ export default function Auth({ user, setUser, setUserProp }) {
       window.localStorage.setItem("firstName", result.data.user.firstName);
       window.localStorage.setItem("lastName", result.data.user.lastName);
       navigate("/profile");
-      setUser(result.data);
+      setUser(result.data.user);
     } catch (error) {
       setPasswordsDontMatch(error.response.data.message);
     }

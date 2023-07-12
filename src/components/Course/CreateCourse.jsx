@@ -27,9 +27,9 @@ export default function CreateCourse() {
   });
   const [final, setFinal] = useState(course);
   const navigate = useNavigate();
-  const firstName = useRef(user.teacher.firstName);
-  const lastName = useRef(user.teacher.lastName);
-  const avatar = useRef(user.teacher.avatar);
+  const firstName = useRef(user.firstName);
+  const lastName = useRef(user.lastName);
+  const avatar = useRef(user.avatar);
   
   const postDetails = (e) => {
     e.preventDefault();
@@ -119,7 +119,7 @@ export default function CreateCourse() {
           />
           <input
             type="text"
-            defaultValue={user.teacher.lastName}
+            defaultValue={user.lastName}
             name="lastName"
             style={{ textAlign: "start", width: "100%" }}
             // onChange={handleChange}

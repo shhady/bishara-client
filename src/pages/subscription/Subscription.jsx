@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import "./subscription.css"
-const Subscription = ({ user }) => {
+const Subscription = ({ user ,setUser}) => {
   const [selectedTeacherYear, setSelectedTeacherYear] = useState(null);
   const [selectedTeacher6Months, setSelectedTeacher6Months] = useState(null);
   const [teachers, setTeachers] = useState([]);
@@ -70,6 +70,7 @@ const Subscription = ({ user }) => {
         console.log('Subscription plan:', result.data);
         console.log('Subscription plan created:', response.data);
         window.localStorage.setItem('plan', JSON.stringify(response.data));
+        setUser(result.data)
         // Reset selected values
         setSelectedTeacherYear(null);
         setSelectedTeacher6Months(null);
