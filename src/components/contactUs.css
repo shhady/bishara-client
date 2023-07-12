@@ -109,11 +109,12 @@ textarea {
     .contact-button {
         position: fixed;
         bottom: 0px;
-        right:5px;
+        right:0px;
         background: rgb(46, 45, 45);
         color: white;
         font-size: 14px;
-        padding: 10px 20px;
+        font-weight: lighter;
+        padding: 5px 20px;
         border-radius: 5px;
         cursor: pointer;
         z-index: 999;
