@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
+import moment from 'moment';
 import "./subscription.css"
-const Subscription = ({ user ,setUser}) => {
+import { Link } from "react-router-dom"
+const Subscription = ({ user, setUser }) => {
   const [selectedTeacherYear, setSelectedTeacherYear] = useState(null);
   const [selectedTeacher6Months, setSelectedTeacher6Months] = useState(null);
   const [teachers, setTeachers] = useState([]);
+  const plan = JSON.parse(localStorage.getItem("plan"));
+  // const plan = null
+  const endDate = moment(plan?.endDate);
+  // const endDate = moment().subtract(5, 'days');
+  const remainingMonths = endDate.diff(moment(), 'months');
+  const remainingDays = endDate.diff(moment().add(remainingMonths, 'months'), 'days');
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -28,15 +36,51 @@ const Subscription = ({ user ,setUser}) => {
     setSelectedTeacher6Months(teacher);
   };
 
-  const handleSubscriptionSubmit = async (period) => {
+  const handleSubscriptionUpdate = async (period) => {
     let selectedTeacher = null;
-  
+
     if (period === 'year') {
       selectedTeacher = selectedTeacherYear;
     } else if (period === '6 months') {
       selectedTeacher = selectedTeacher6Months;
     }
-  
+
+    if (selectedTeacher) {
+      console.log(period);
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.put(
+          `${process.env.REACT_APP_BACKEND_URL}/subscription-plans/${plan?._id}`,
+          {
+            period: period,
+            teacherName: selectedTeacher.name,
+            teacherId: selectedTeacher.value,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response);
+        window.localStorage.setItem('plan', JSON.stringify(response.data));
+        setSelectedTeacherYear(null);
+        setSelectedTeacher6Months(null);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
+  const handleSubscriptionSubmit = async (period) => {
+    let selectedTeacher = null;
+
+    if (period === 'year') {
+      selectedTeacher = selectedTeacherYear;
+    } else if (period === '6 months') {
+      selectedTeacher = selectedTeacher6Months;
+    }
+
     if (selectedTeacher) {
       try {
         const token = localStorage.getItem('token');
@@ -66,11 +110,11 @@ const Subscription = ({ user ,setUser}) => {
             },
           }
         );
-        window.localStorage.setItem("profile" ,JSON.stringify(result.data));
+        window.localStorage.setItem("profile", JSON.stringify(result.data));
         console.log('Subscription plan:', result.data);
         console.log('Subscription plan created:', response.data);
         window.localStorage.setItem('plan', JSON.stringify(response.data));
-        setUser(result.data)
+        setUser(result.data);
         // Reset selected values
         setSelectedTeacherYear(null);
         setSelectedTeacher6Months(null);
@@ -83,15 +127,14 @@ const Subscription = ({ user ,setUser}) => {
       }
     }
   };
-  
 
   const teacherOptions = teachers.map((teacher) => ({
     value: teacher._id,
     name: teacher.firstName + ' ' + teacher.lastName,
     label: (
-      <div style={{display:"flex", justifyContent:'flex-start', alignItems:"center"}} >
-        <img src={teacher.avatar} alt={teacher.firstName} width={50} height={50} style={{borderRadius:"50%"}}/>
-        <span style={{color:'black'}}>{`${teacher.firstName} ${teacher.lastName} - ${teacher.instrument}`}</span>
+      <div style={{ display: "flex", justifyContent: 'flex-start', alignItems: "center" }}>
+        <img src={teacher.avatar} alt={teacher.firstName} width={50} height={50} style={{ borderRadius: "50%" }} />
+        <span style={{ color: 'black' }}>{`${teacher.firstName} ${teacher.lastName} - ${teacher.instrument}`}</span>
       </div>
     ),
   }));
@@ -99,47 +142,109 @@ const Subscription = ({ user ,setUser}) => {
   return (
     <div style={{ marginTop: '100px' }}>
       <h1 className='titleSubscription'>استمتع بفترة تجريبية مجانية لمدة 7 أيام</h1>
-     <div className='textSubscriptionContainer'>
-     <div className='textSubscription'>دروس خصوصية غير محدودة مع مدرس خاص</div>
-     <div className='textSubscription'>*منهاج خاص بك</div>
-     <div className='textSubscription'>الحصول على أكثر من 500 درس ودورات</div>
-     <div className='textSubscription'>ملفات للتمارين والنوتة</div>
-     <div className='textSubscription'>دروس زوم (zoom)جماعية</div>
-     </div>
+      <div className='textSubscriptionContainer'>
+        <div className='textSubscription'>دروس خصوصية غير محدودة مع مدرس خاص</div>
+        <div className='textSubscription'>*منهاج خاص بك</div>
+        <div className='textSubscription'>الحصول على أكثر من 500 درس ودورات</div>
+        <div className='textSubscription'>ملفات للتمارين والنوتة</div>
+        <div className='textSubscription'>دروس زوم (zoom)جماعية</div>
+      </div>
       <div className='plansContainer'>
-      
-     
-
         <div className='plan1'>
-        <div className='colorful'>
-      استفد من أفضل قيمة ممكنة
-     </div>
-     <h2 className='titleSubscription'>سنوي</h2>
-      شهري/ <strong>125₪</strong> <span style={{color:"red", margin:"10px"}}><s><strong>209₪</strong></s></span>
-      <div  className='invoiceLine'>فاتورة سنوية 1500 شيكل</div>
-      <div style={{fontWeight:"bold" ,padding:"10px 30px"}}> اجعل الموسيقى من اولوياتك لمدة 365 يوماً القادمة</div>
-      <div style={{fontWeight:"bold",padding:"10px 30px"}}>وفر الكثير مع الرزمة الاكثر شيوعاً</div>
-      <div style={{fontWeight:"bold",padding:"10px 30px"}}  className='invoiceLine'>ستندهش مما يمكن ان يفعله عام باستخدام منصة فنان</div>
-          <Select
+          <div className='colorful'>
+            استفد من أفضل قيمة ممكنة
+          </div>
+          <h2 className='titleSubscription'>سنوي</h2>
+          شهري/ <strong>125₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>209₪</strong></s></span>
+          <div className='invoiceLine'>فاتورة سنوية 1500 شيكل</div>
+          <div style={{ fontWeight: "bold", padding: "10px 30px" }}> اجعل الموسيقى من أولوياتك لمدة 365 يوماً القادمة</div>
+          <div style={{ fontWeight: "bold", padding: "10px 30px" }}>وفر الكثير مع الرزمة الأكثر شيوعًا</div>
+          <div style={{ fontWeight: "bold", padding: "10px 30px" }} className='invoiceLine'>ستندهش مما يمكن أن يفعله عام باستخدام منصة فنان</div>
+         {user ? (<> {endDate.isAfter(moment()) ? (<>
+          {remainingMonths > 0 && (
+            <h3>
+              باقي
+              {' '}
+              {remainingMonths} {remainingMonths === 1 ? 'شهر' : 'اشهر'}
+              {' و'}
+              {remainingDays} {remainingDays === 1 ? 'يوم' : 'ايام'}  للاشتراك
+            </h3>
+          )}
+          </>
+          ) : (
+            <>
+              {!plan ? (<> <Select
             options={teacherOptions}
             value={selectedTeacherYear}
             onChange={handleTeacherSelectYear}
             placeholder='Select a teacher'
           />
-          <button className='Months12Btn' onClick={() => handleSubscriptionSubmit('year')}>اختر سنوي</button>
+                <button className='Months12Btn' onClick={() => handleSubscriptionSubmit('year')}>
+                  اختر سنوي
+                </button>
+                </>
+              ) : (
+                <> <Select
+            options={teacherOptions}
+            value={selectedTeacherYear}
+            onChange={handleTeacherSelectYear}
+            placeholder='Select a teacher'
+          />
+                <button className='Months12Btn' onClick={() => handleSubscriptionUpdate('year')}>
+                  تجديد لمدة سنة
+                </button>
+                </>
+              )}
+            </>
+          )}</>):(<>للاشتراك يجب تسجيل الدخول<br/><Link to="/auth"> <button style={{padding:"5px 15px", margin:"10px", color:"black", background:"#fcedd5"}}>تسجيل الدخول</button></Link></>)}
+         
         </div>
         <div className='plan2'>
-          <h2 className='titleSubscription' >ستة أشهر</h2>
-      شهري/ <strong>199₪</strong> <span style={{color:"red", margin:"10px"}}><s><strong>299₪</strong></s></span>
-      <div className='invoiceLine'>فاتورة 6 أشهر 1194 شيكل</div>
-      <div className='textSubscription6'>* لتحقيق النتائج المرغوبة, يجب على الفرد ان يلتزم بالدراسة لمدة لا تقل عن 6 اشهر</div>
-          <Select
+          <h2 className='titleSubscription'>ستة أشهر</h2>
+          شهري/ <strong>199₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>299₪</strong></s></span>
+          <div className='invoiceLine'>فاتورة 6 أشهر 1194 شيكل</div>
+          <div className='textSubscription6'>* لتحقيق النتائج المرغوبة، يجب على الفرد أن يلتزم بالدراسة لمدة لا تقل عن 6 أشهر</div>
+         {user ? (<>{endDate.isAfter(moment()) ? (
+            <>
+            {remainingMonths > 0 && (
+              <h3>
+                باقي
+                {' '}
+                {remainingMonths} {remainingMonths === 1 ? 'شهر' : 'اشهر'}
+                {' و'}
+                {remainingDays} {remainingDays === 1 ? 'يوم' : 'ايام'}  للاشتراك
+              </h3>
+            )}
+            </>
+          ) : (
+            <>
+              {!plan ? (
+                <>
+                <Select
             options={teacherOptions}
             value={selectedTeacher6Months}
             onChange={handleTeacherSelect6Months}
             placeholder='Select a teacher'
           />
-          <button className='Months6Btn' onClick={() => handleSubscriptionSubmit('6 months')}>ستة أشهر</button>
+                <button className='Months6Btn' onClick={() => handleSubscriptionSubmit('6 months')}>
+                  ستة أشهر
+                </button>
+                </>
+              ) : (<>
+                <Select
+            options={teacherOptions}
+            value={selectedTeacher6Months}
+            onChange={handleTeacherSelect6Months}
+            placeholder='Select a teacher'
+          />
+                <button className='Months6Btn' onClick={() => handleSubscriptionUpdate('6 months')}>
+                  تجديد ستة أشهر
+                </button>
+                </>
+              )}
+            </>
+          )}</>):(<>للاشتراك يجب تسجيل الدخول<br/><Link to="/auth"> <button style={{padding:"5px 15px", margin:"10px", color:"black", background:"#fcedd5"}}>تسجيل الدخول</button></Link></>)}
+          
         </div>
       </div>
     </div>
