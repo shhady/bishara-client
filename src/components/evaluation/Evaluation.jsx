@@ -109,9 +109,10 @@ export default function Evaluation({teacher, user, setUser}) {
   <option value="اكثر من 5 سنوات">اكثر من 5 سنوات</option>
 </select>
 </div>
-
+    <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", gap:"15px", width:"60%"}}>
           <input className='inputFormEva' type="text" value={ whereStudied} onChange={(e)=> setWhereStudied(e.target.value)} placeholder="اين تعلمت" required/>
           <input className='inputFormEva' type="text" value={ goal} onChange={(e)=> setGoal(e.target.value)} placeholder="هدفك من التعليم" required/>
+          </div>
          {video? (<div>{fileUpload ? (<>{fileUpload.percentComplete}%</>):(<><div  className='nameAndCancel'>{video.name} <button className='cancelVideo' onClick={()=>{setVideo(null); setMoreThan(null);}}>X</button></div> <button type='submit' className='uploadEvaBtn' style={{width:'100%',marginTop:'10px', padding:"10px 0px"}}>ارسال</button></>)} </div>):(<><label for="inputTag">
               <div style={{
                 cursor:"pointer",
