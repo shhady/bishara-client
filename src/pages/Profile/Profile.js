@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AboutUserPop from "../../components/AboutUser/AboutUserPop";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import UserPracticesForProfile from "../../components/proPractices/UserPracticesForProfile";
-export default function Profile({ user }) {
+export default function Profile({ user,setUser }) {
   // const user = JSON.parse(localStorage.getItem("profile"));
  
   const navigate = useNavigate();
@@ -37,38 +37,34 @@ export default function Profile({ user }) {
   const [showPractice, setShowPractice] = useState(true);
   const [showChangePassUser, setShowChangePassUser] = useState(false);
   const [showUpdateProfile, setShowUpdateProfile] = useState(false);
-  const [updateFirstName, setUpdateFirstName] = useState("");
-  const [updateLastName, setUpdateLastName] = useState("");
-  
-  const [updateProfilePic, setUpdateProfilePic] = useState(
-    ""
-  );
-  const [updateDes,setUpdateDes] = useState('')
+  const [updateFirstName, setUpdateFirstName] = useState(user?.firstName);
+  const [updateLastName, setUpdateLastName] = useState(user?.lastName);
+  const [updateDes,setUpdateDes] = useState(user?.about)
 
-  useEffect(() => {
-    try{
-      const getavatar = async () => {
-        const res = await axios.get(
-          process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
-        );
-        setUpdateProfilePic(res.data.avatar);
-        // console.log(res.data);
-      };
-      getavatar();
-    }catch(e){
-      console.log("no photo");
-    }
-    try{
-      const getavatar = async () => {
-        const res = await axios.get(
-          process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
-        );
-        setUpdateProfilePic(res.data.avatar);
-        // console.log(res.data);
-      };
-      getavatar();
-    } catch(e){console.log("no photo");}
-  }, [userId]);
+  // useEffect(() => {
+  //   try{
+  //     const getavatar = async () => {
+  //       const res = await axios.get(
+  //         process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
+  //       );
+  //       setUpdateProfilePic(res.data.avatar);
+  //       // console.log(res.data);
+  //     };
+  //     getavatar();
+  //   }catch(e){
+  //     console.log("no photo");
+  //   }
+  //   try{
+  //     const getavatar = async () => {
+  //       const res = await axios.get(
+  //         process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
+  //       );
+  //       setUpdateProfilePic(res.data.avatar);
+  //       // console.log(res.data);
+  //     };
+  //     getavatar();
+  //   } catch(e){console.log("no photo");}
+  // }, [userId]);
 
 
 
@@ -85,7 +81,7 @@ export default function Profile({ user }) {
           console.log(`${percentComplete}% uploaded`);
         },
       })
-      .then((res) => setUrl(res.data.secure_url))
+      .then((res) => {setUrl(res.data.secure_url);})
       // .then((data) => {
       //   (data.url);
       // })
@@ -94,7 +90,7 @@ export default function Profile({ user }) {
         console.log(err);
       });
   };
-
+  console.log(url);
   const postDetailsCover = () => {
     const formData = new FormData();
     formData.append("file", image);
@@ -191,23 +187,21 @@ export default function Profile({ user }) {
     if (!url) return;
     try {
       const changePhoto = async () => {
-        await axios
+        const token = localStorage.getItem('token');
+
+       const response = await axios
           .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
           {
             avatar: url,
-          }, {
+          },
+          {
             headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json;charset=UTF-8",
-              "Access-Control-Allow-Methods": "PATCH",
-              "Access-Control-Allow-Origin": "*",
-              Authorization: "Bearer " + window.localStorage.getItem("token"),
-            }
+              Authorization: `Bearer ${token}`,
+            },
           })
-          .then(() => {
-            window.localStorage.setItem("profilePic", url);
-            setUpdateProfilePic(url);
-          });
+          setUser(response.data);
+         window.localStorage.setItem("profile", JSON.stringify(response.data))
+
       };
       changePhoto();
     } catch (error) {
@@ -215,22 +209,19 @@ export default function Profile({ user }) {
     }
     try {
       const changePhoto = async () => {
-        await axios
+        const token = localStorage.getItem('token');
+
+       const response = await axios
           .patch(process.env.REACT_APP_BACKEND_URL + `/users/${userId}`, {
             avatar: url,
-          }, {
+          },
+          {
             headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json;charset=UTF-8",
-              "Access-Control-Allow-Methods": "PATCH",
-              "Access-Control-Allow-Origin": "*",
-              Authorization: "Bearer " + window.localStorage.getItem("token"),
-            }
+              Authorization: `Bearer ${token}`,
+            },
           })
-          .then(() => {
-            window.localStorage.setItem("profilePic", url);
-            setUpdateProfilePic(url);
-          });
+         setUser(response.data);
+         window.localStorage.setItem("profile", JSON.stringify(response.data))
       };
       changePhoto();
     } catch (error) {
@@ -276,54 +267,41 @@ export default function Profile({ user }) {
 
   const changeName = async () => {
     try {
-      await axios
+      const token = localStorage.getItem('token');
+
+     const response = await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/users/${userId}`, 
         {
           firstName: updateFirstName,
       },
       {
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-          "Access-Control-Allow-Methods": "PATCH",
-          "Access-Control-Allow-Origin": "*",
-          Authorization: "Bearer " + window.localStorage.getItem("token"),
-        }
-      }
-      )
-        .then(async () => {
-          const response = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
-          );
-          window.localStorage.setItem("firstName", response.data.firstName);
-          setFirstName(response.data.firstName);
-        });
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      
+      setUser(response.data);
+      window.localStorage.setItem("profile", JSON.stringify(response.data))
+
     } catch (error) {
       console.log("not user, teacher");
     }
     try {
-      await axios
+      const token = localStorage.getItem('token');
+
+    const response =  await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
           firstName: updateFirstName,
           
-        } ,
+        },
         {
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Methods": "PATCH",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: "Bearer " + window.localStorage.getItem("token"),
-          }
-        }
-        )
-        .then(async () => {
-          const response = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
-          );
-          window.localStorage.setItem("firstName", response.data.firstName);
-          setFirstName(response.data.firstName);
-        });
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        setUser(response.data);
+      window.localStorage.setItem("profile", JSON.stringify(response.data))
+
     } catch (error) {
       console.log("not teacher, user");
     }
@@ -333,79 +311,59 @@ export default function Profile({ user }) {
   
   const changeDes = async () => {
     try {
-      await axios
+      const token = localStorage.getItem('token');
+
+      const response =    await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`,
         { 
           about: updateDes,
         },
         {
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Methods": "PATCH",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: "Bearer " + window.localStorage.getItem("token"),
-          }
+            Authorization: `Bearer ${token}`,
+          },
         })
-        .then(async () => {
-          const response = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
-          );
-          window.localStorage.setItem("Des", response.data.Description);
-          localStorage.setItem("teacherId", userId);
-        });
+        setUser(response.data);
+      window.localStorage.setItem("profile", JSON.stringify(response.data))
     } catch (error) {
       console.log("can't update");
     }
     setUpdateDes("");
-    navigate("/Teacher")
+    navigate(`/newTeacher/${userId}`)
   };
+
+  console.log(updateLastName);
   const changeLastName = async () => {
     try {
-      await axios
+      const token = localStorage.getItem('token');
+     const response = await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/users/${userId}`, {
           lastName: updateLastName,
         },
         {
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Methods": "PATCH",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: "Bearer " + window.localStorage.getItem("token"),
-          }
+            Authorization: `Bearer ${token}`,
+          },
         })
-        .then(async () => {
-          const response = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
-          );
-          window.localStorage.setItem("lastName", response.data.lastName);
-          setLastName(response.data.lastName);
-        });
+        setUser(response.data);
+      window.localStorage.setItem("profile", JSON.stringify(response.data))
     } catch (error) {
       console.log("not user, teacher");
     }
     try {
-      await axios
+      const token = localStorage.getItem('token');
+
+      const response =  await axios
         .patch(process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`, {
           lastName: updateLastName,
         },
         {
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Methods": "PATCH",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: "Bearer " + window.localStorage.getItem("token"),
-          }
+            Authorization: `Bearer ${token}`,
+          },
         })
-        .then(async () => {
-          const response = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
-          );
-          window.localStorage.setItem("lastName", response.data.lastName);
-          setLastName(response.data.lastName);
-        });
+        setUser(response.data);
+      window.localStorage.setItem("profile", JSON.stringify(response.data))
     } catch (error) {
       console.log("not teacher, user");
     }
@@ -446,10 +404,10 @@ export default function Profile({ user }) {
                   <button onClick={postDetailsCover}>تثبيت</button>
                 ) : null}
               </div>{" "}
-              {updateProfilePic ? (
+              {user?.avatar ? (
                 <div style={{ zIndex: "10", marginTop: "-80px" }}>
                   <img
-                    src={updateProfilePic.replace('http://', 'https://')}
+                    src={user?.avatar.replace('http://', 'https://')}
                     alt={user.firstName + "me"}
                     width="150"
                     height="150"
@@ -517,9 +475,9 @@ export default function Profile({ user }) {
                 ) : null} */}
               </div>
               <h2>
-                {firstName}
+                {user?.firstName}
                 {"  "}
-                {lastName}
+                {user?.lastName}
               </h2>
               <div className="profileAllButtons">
                 <div
@@ -595,11 +553,11 @@ export default function Profile({ user }) {
                     <input
                       type="text"
                       placeholder="الاسم"
-                      style={{ width: "70%" }}
+                      style={{ width: "70%", padding:"5px 10px" }}
                       onChange={(e) => setUpdateFirstName(e.target.value)}
                       value={updateFirstName}
                     />
-                    <button onClick={changeName}>تثبيت</button>
+                    <button  style={{width:"20%", padding:"5px 10px", background:"#fcedd5"}} onClick={changeName}>تثبيت</button>
                   </div>
                   <div
                     style={{
@@ -613,29 +571,32 @@ export default function Profile({ user }) {
                     <input
                       type="text"
                       placeholder="العائلة"
-                      style={{ width: "70%" }}
+                      style={{ width: "70%" , padding:"5px 10px"}}
                       value={updateLastName}
                       onChange={(e) => setUpdateLastName(e.target.value)}
                     />
-                    <button onClick={changeLastName}>تثبيت</button>
+                    <button  style={{width:"20%", padding:"5px 10px", background:"#fcedd5"}}  onClick={changeLastName}>تثبيت</button>
                   </div>
                    <div
                     style={{
                       width: "100%",
                       display: "flex",
+                      flexDirection:"column",
                       justifyContent: "space-around",
                       alignItems: "center",
                       marginTop: "20px",
+                      gap:"10px"
                     }}
                   >
+                    <div>السيرة الذاتية</div>
                     <textarea
                       type="text"
                       placeholder="السيرة الذاتية"
-                      style={{ width: "70%" }}
+                      style={{ width: "100%" , height:"20vh"}}
                       value={updateDes}
                       onChange={(e) => setUpdateDes(e.target.value)}
                     />
-                    <button onClick={changeDes}>تثبيت</button>
+                    <button style={{width:"50%", padding:"5px 10px", background:"#fcedd5", marginBottom:"20px"}} onClick={changeDes}>تثبيت</button>
                   </div>
                 </div>
               ) : null}
@@ -648,7 +609,7 @@ export default function Profile({ user }) {
               >
                 <div className="CoverTheCover">
                   <div style={{position:"absolute", right:"5px", top:"250px"}}>
-                  <AboutUserPop />
+                  <AboutUserPop user={user} />
                   </div>
                 <div
                   style={{
@@ -666,8 +627,8 @@ export default function Profile({ user }) {
                 >
                   <img
                     src={
-                      updateProfilePic
-                        ? updateProfilePic.replace('http://', 'https://')
+                      user?.avatar
+                        ? user?.avatar.replace('http://', 'https://')
                         : "https://img.icons8.com/material-rounded/24/null/user.png"
                     }
                     alt="profile"
@@ -696,9 +657,9 @@ export default function Profile({ user }) {
                   ) : null}
                 </div>
                 <h2>
-                  {firstName}
+                  {user?.firstName}
                   {"  "}
-                  {lastName}
+                  {user?.lastName}
                 </h2>
                 {/* <h2>{user?.user?.email}</h2> */}
                 </div>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './AboutUser.css'; // import the CSS file
 
-function Component() {
-  const user = JSON.parse(localStorage.getItem('profile'));
+function Component({user}) {
+  // const user = JSON.parse(localStorage.getItem('profile'));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handlePopoverHover = () => {
