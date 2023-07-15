@@ -22,9 +22,6 @@
 
 
   @media (max-width: 567px) {
-    .changeStyle{
-        display: block;
-      }
       .videoAndRepliesNewProfile{
         height: fit-content;
         display: flex;
