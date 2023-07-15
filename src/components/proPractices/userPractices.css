@@ -19,9 +19,7 @@
     justify-content: space-evenly;
     align-items: center;
   }
-  .changeStyle{
-    /* display: none; */
-  }
+
 
   @media (max-width: 567px) {
     .changeStyle{
