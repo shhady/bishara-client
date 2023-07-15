@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Posts/styles.css";
 import { useNavigate, Link } from "react-router-dom";
 export default function Courses({
+
   user
 }) {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));

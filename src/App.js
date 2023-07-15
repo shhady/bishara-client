@@ -145,6 +145,10 @@ export default function App() {
               course={course}
               setUpdateComponent={setUpdateComponent}
             />}/>
+            <Route path="/courses/:id" exact element={<Courses
+              user={user}
+              setUser={setUser}
+            />}/>
           <Route path="/CreateCourseForTeacher" element={<CreateCourseForTeacher/>} />
           <Route path="/teachers" exact element={ <Teachers
               user={user}

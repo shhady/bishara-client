@@ -40,7 +40,7 @@ export default function Profile({ user,setUser }) {
   const [updateFirstName, setUpdateFirstName] = useState(user?.firstName);
   const [updateLastName, setUpdateLastName] = useState(user?.lastName);
   const [updateDes,setUpdateDes] = useState(user?.about)
-
+const [uploading, setUploading] = useState(null)
   // useEffect(() => {
   //   try{
   //     const getavatar = async () => {
@@ -78,10 +78,10 @@ export default function Profile({ user,setUser }) {
         onUploadProgress: (p) => {
           const percentComplete = Math.round((p.loaded * 100) / p.total);
           setFileUpload({ fileName: image.name, percentComplete });
-          console.log(`${percentComplete}% uploaded`);
+          setUploading(`${percentComplete}%`);
         },
       })
-      .then((res) => {setUrl(res.data.secure_url);})
+      .then((res) => setUrl(res.data.secure_url))
       // .then((data) => {
       //   (data.url);
       // })
@@ -90,7 +90,7 @@ export default function Profile({ user,setUser }) {
         console.log(err);
       });
   };
-  console.log(url);
+  console.log(uploading);
   const postDetailsCover = () => {
     const formData = new FormData();
     formData.append("file", image);
@@ -101,7 +101,7 @@ export default function Profile({ user,setUser }) {
         onUploadProgress: (p) => {
           const percentComplete = Math.round((p.loaded * 100) / p.total);
           setFileUpload({ fileName: image.name, percentComplete });
-          console.log(`${percentComplete}% uploaded`);
+          console.log(`${percentComplete}%`);
         },
       })
       .then((res) => setUrlCover(res.data.secure_url))
@@ -147,41 +147,6 @@ export default function Profile({ user,setUser }) {
     }
 
   }, [user]);
-  // const handleLogoutFromAllDevices = async () => {
-  //   const response = await axios.post(
-  //     process.env.REACT_APP_BACKEND_URL + `/teachers/logoutAll`,
-  //     {},
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Accept: "application/json",
-  //         Authorization: window.localStorage.getItem("token"),
-  //       },
-  //     }
-  //   );
-
-  //   if (response.status === 200) {
-  //     // REMOVE TOKEN
-  //     window.localStorage.removeItem("token");
-  //   }
-
-  //   // localStorage.removeItem("profile");
-  //   // await axios.post(process.env.REACT_APP_BACKEND_URL+"/users/logoutAll");
-  //   dispatch({ type: "LOGOUT" });
-  //   navigate("/");
-  //   setUser(null);
-  // };
-
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const result = await axios.get(
-  //       process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
-  //     );
-  //     setTeacherDetails(result.data);
-  //   };
-  //   fetch();
-  //   console.log(teacherDetails);
-  // }, [user, userId]);
 
   useEffect(() => {
     if (!url) return;
@@ -200,7 +165,8 @@ export default function Profile({ user,setUser }) {
             },
           })
           setUser(response.data);
-         window.localStorage.setItem("profile", JSON.stringify(response.data))
+         window.localStorage.setItem("profile", JSON.stringify(response.data));
+         setUploading(null)
 
       };
       changePhoto();
@@ -221,7 +187,8 @@ export default function Profile({ user,setUser }) {
             },
           })
          setUser(response.data);
-         window.localStorage.setItem("profile", JSON.stringify(response.data))
+         window.localStorage.setItem("profile", JSON.stringify(response.data));
+         setUploading(null)
       };
       changePhoto();
     } catch (error) {
@@ -230,30 +197,7 @@ export default function Profile({ user,setUser }) {
     
     setShowButtonAvatarUpdate(false);
   }, [url]);
-  // const handleUserLogoutFromAllDevices = async () => {
-  //   const response = await axios.post(
-  //     process.env.REACT_APP_BACKEND_URL + `/users/logoutAll`,
-  //     {},
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Accept: "application/json",
-  //         Authorization: window.localStorage.getItem("token"),
-  //       },
-  //     }
-  //   );
-
-  //   if (response.status === 200) {
-  //     // REMOVE TOKEN
-  //     window.localStorage.removeItem("token");
-  //   }
-
-  //   // localStorage.removeItem("profile");
-  //   // await axios.post(process.env.REACT_APP_BACKEND_URL+"/users/logoutAll");
-  //   dispatch({ type: "LOGOUT" });
-  //   navigate("/");
-  //   setUser(null);
-  // };
+ 
 
   const gotohomepage = () => {
     navigate("/");
@@ -262,8 +206,6 @@ export default function Profile({ user,setUser }) {
   const studentsPractices = () => {
     navigate("/newReview");
   };
-
-
 
   const changeName = async () => {
     try {
@@ -369,6 +311,8 @@ export default function Profile({ user,setUser }) {
     }
     setUpdateLastName("");
   };
+
+  console.log(fileUpload);
   return (
     <div>
       {user ? (
@@ -456,24 +400,8 @@ export default function Profile({ user,setUser }) {
                 {showButtonAvatarUpdate ? (
                   <button onClick={postDetails}>تثبيت</button>
                 ) : null}
-                {/* <Input
-                  type="file"
-                  id="changeProfilePic"
-                  hidden
-                  onClick={() => setShowButtonAvatarUpdate(true)}
-                />
-                {!showButtonAvatarUpdate ? (
-                  <Button as="label" htmlFor="changeProfilePic">
-                    <FontAwesomeIcon icon={faCamera} />
-                  </Button>
-                ) : null}
-
-                {showButtonAvatarUpdate ? (
-                  <button type="submit" onClick={handleUpdateAvatar}>
-                    تثبيت
-                  </button>
-                ) : null} */}
               </div>
+              {uploading ? (<div style={{textAlign:"center"}}>{uploading}</div>):(null)}
               <h2>
                 {user?.firstName}
                 {"  "}
@@ -663,7 +591,10 @@ export default function Profile({ user,setUser }) {
                 </h2>
                 {/* <h2>{user?.user?.email}</h2> */}
                 </div>
+              
+
               </div>
+              {uploading ? (<div style={{textAlign:"center"}}>{uploading}</div>):(null)}
               <div className="profileAllButtonsUser">
                   {showPractice ? (
                     <div
