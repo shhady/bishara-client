@@ -132,7 +132,7 @@ const redirectToSubscription = () => {
     if (file) {
       if (file.type.includes("image")) {
         // Handle the case when a photo is selected
-        alert("Photo is not accepted");
+        alert("لا يمكن رفع صورة, الرجاء رفع فيديو او تسجيل صوتي");
         e.target.value = null; // Clear the file input
       } else if (file.size > 104857500) {
         setMoreThan("more than 100mb");

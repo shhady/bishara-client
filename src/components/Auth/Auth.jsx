@@ -100,7 +100,7 @@ export default function Auth({ user, setUser, setUserProp }) {
       
       // setTeacherData(result.data);
       setUser(result.data.user);
-      setUserProp(result.data.user);
+      // setUserProp(result.data.user);
       if(result.data.user.subscriptionPlan){
         const plan = await axios.get( process.env.REACT_APP_BACKEND_URL + `/subscription-plans/${result.data.user.subscriptionPlan}`,{
           headers: {

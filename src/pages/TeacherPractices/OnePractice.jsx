@@ -48,11 +48,12 @@ export default function TeacherPractices({ practices }) {
     <div>
       {practice && (
         <div className="practicesNew" style={{ marginTop: "80px", position:'relative' }}>
+           {practice.RecordReply.length > 0 || practice.videoReply.length > 0 && 
            <div style={{ position: "absolute", left: "10px", top: '10px' }}>
           <Link to={`/EditReplies/${practice._id}`}>
             <button>تعديل الرد</button>
           </Link>
-        </div>
+        </div>}
           <div>الاسم: {practice?.studentFirstName} {practice?.studentLastName}</div>
           {practice?.courseId === "evaluation" ? (
             <>
@@ -63,7 +64,8 @@ export default function TeacherPractices({ practices }) {
           ) : (
             <>
               <div>الدوره: {practice?.courseName} / {practice?.courseLevel}</div>
-              <div>{practice?.video}</div>
+              <Link to={`/NewLesson/${practice.courseId}?name=${practice.uniqueLink}&playlist=${practice.playlistId}`}
+               style={{textDecoration:"none", color:"black"}}><>الدرس: {practice.video}</></Link>
             </>
           )}
 

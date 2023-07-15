@@ -10,12 +10,11 @@ import ChangePasswordUser from "../../components/ChangePassword/ChangePasswordUs
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AboutUserPop from "../../components/AboutUser/AboutUserPop";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
-export default function Profile({ userProp }) {
-  const user = JSON.parse(localStorage.getItem("profile"));
+import UserPracticesForProfile from "../../components/proPractices/UserPracticesForProfile";
+export default function Profile({ user }) {
+  // const user = JSON.parse(localStorage.getItem("profile"));
  
   const navigate = useNavigate();
-  
-  const [userPractices, setUserPractices] = useState([]);
   const [userId, setUserId] = useState(null);
   const [firstName, setFirstName] = useState(
     window.localStorage.getItem("firstName")
@@ -23,11 +22,9 @@ export default function Profile({ userProp }) {
   const [lastName, setLastName] = useState(
     window.localStorage.getItem("lastName")
   );
-  const [practiceId, setPracticeId] = useState(null);
-  const [avatar, setAvatar] = useState(null);
+
   const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(false);
   const [showButtonCoverUpdate, setShowButtonCoverUpdate] = useState(false);
-  const [teacherDetails, setTeacherDetails] = useState(null);
   const [showFormCreateCourse, setShowFormCreateCourse] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [url, setUrl] = useState(null);
@@ -47,7 +44,6 @@ export default function Profile({ userProp }) {
     ""
   );
   const [updateDes,setUpdateDes] = useState('')
-  const [poster, setPoster] = useState("");
 
   useEffect(() => {
     try{
@@ -73,17 +69,7 @@ export default function Profile({ userProp }) {
       getavatar();
     } catch(e){console.log("no photo");}
   }, [userId]);
-  useEffect(() => {
-    function MyVideo() {
-      if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-        // code to run if user is using Safari
-        setPoster(
-          "https://images.pexels.com/photos/6044198/pexels-photo-6044198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        );
-      }
-    }
-    MyVideo();
-  }, []);
+
 
 
   const postDetails = () => {
@@ -158,18 +144,13 @@ export default function Profile({ userProp }) {
     setShowButtonCoverUpdate(false);
   }, [urlCover]);
   useEffect(() => {
-    if (userProp) {
-      // const userid = userProp.user ? userProp.user._id : userProp.teacher._id;
+    if (user) {
       setUserId(user._id);
     } else {
-      // const userid = user.user ? user.user._id : user.teacher._id;
       setUserId(user._id);
     }
 
-    // const userAvatar = user.user ? user.user.avatar : user.teacher.avatar;
-    // console.log(userAvatar);
-    // setProfilePicture(userAvatar);
-  }, [userProp, user]);
+  }, [user]);
   // const handleLogoutFromAllDevices = async () => {
   //   const response = await axios.post(
   //     process.env.REACT_APP_BACKEND_URL + `/teachers/logoutAll`,
@@ -283,9 +264,6 @@ export default function Profile({ userProp }) {
   //   setUser(null);
   // };
 
-  const goToCreateCourse = () => {
-    navigate("/createCourse");
-  };
   const gotohomepage = () => {
     navigate("/");
   };
@@ -293,181 +271,8 @@ export default function Profile({ userProp }) {
   const studentsPractices = () => {
     navigate("/newReview");
   };
-  const addStudent = ()=>{
-    navigate("/addStudent");
-  }
 
-  useEffect(() => {
-    if (user.role === "teacher" || user.role === 'admin') return;
-    const fetch = async () => {
-      const res = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${user._id}`
-      );
-      setUserPractices(res.data);
-      console.log(res.data)
-    };
-    fetch();
-  }, [userId]);
 
- 
-  const deletePractice = (practice) => {
-    setPracticeId(practice._id);
-    const deleteThePractice = async () => {
-      await axios
-        .delete(
-          process.env.REACT_APP_BACKEND_URL + `/practices/${practice._id}`
-        )
-        .then(async () => {
-          const res = await axios.get(
-            process.env.REACT_APP_BACKEND_URL + `/studentpractices/${userId}`
-          );
-          setUserPractices(res.data);
-        });
-    };
-    deleteThePractice();
-  };
-
-  const markAsSeen = async (practice) => {
-    await axios.patch(
-      process.env.REACT_APP_BACKEND_URL + `/studentpractices/${practice._id}`,
-      {
-        replySeen: true,
-      }
-    );
-  };
-
-  const showRec =(practice,i)=>{
-    return practice.RecordReply?.map((rec)=>{
-      return <div key={practice.replyId} style={{display: 'flex', justifyContent:'center', alignItems:'center',marginTop: ".5rem", borderRadius:"20px"}}>
-        <audio 
-        style={{width:'100%'}}
-      controls
-    >
-      <source src={rec.RecordingReply.replace('http://', 'https://')} type="audio/mp4" />
-    </audio>
-      </div>
-    })
-  }
-  const showData = () => {
-    return userPractices?.map((practice,i) => {
-      return (
-        <div
-          className="practiceAndReply"
-          style={{
-            height:"fit-content",
-            borderRight: "1px solid black",
-            borderBottom: "1px solid #e1e1e1",
-            padding: "10px",
-            backgroundColor: i % 2 === 0 ? "#c7c5c5" : "white"
-          }}
-          key={practice._id}
-          onClick={() => markAsSeen(practice)}
-        >
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div>
-              <div onClick={()=>console.log(practice)}>
-              {" "}
-                الاستاذ: {" "}
-                {practice.teacherFirstName} {practice.teacherLastName}
-              </div>
-              <div>
-                {" "}
-                 {" "}
-                {practice.courseName ? <>الدوره: {practice.courseName}</> : <>الهدف: {practice.goal}</>}
-              </div>
-              <div>
-              {" "}
-                 {/* {" "}<Link to={`/NewLesson/${course._id}?name=${lesson.snippet.resourceId.videoId}&playlist=${course.playlistId}`}></Link> */}
-                 
-  {practice.courseName ? <Link to={`/NewLesson/${practice.courseId}?name=${practice.uniqueLink}&playlist=${practice.playlistId
-}`} style={{textDecoration:"none", color:"black"}}><>الدرس: {practice.video}</></Link> : <>اين تعلمت: {practice.whereStudied}</>}
-                
-                
-              </div>
-            </div>
-            <div>
-              <button onClick={() => deletePractice(practice)} style={{backgroundColor:"#fee4b9", width:"80px"}}>
-                حذف التمرين
-              </button>
-            </div>
-          </div>
-          <div
-           className="videoAndRepliesProfile">
-            <div
-            className="StudentVideoProfile"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor:"#fee4b9",
-                marginBottom:"10px"
-              }}
-            >
-              <video
-                key={practice.myPractice}
-                controls
-                preload="metadata"
-                height="250px"
-                style={{
-                  width: "90%",
-                  height: "90%",
-                  minHeight: "230px",
-                  maxHeight: "230px",
-                  border: "1px solid #e1e1e1",
-                  marginTop:"10px",
-                  marginBottom:"10px"
-                }}
-              >
-                <source src={practice.myPractice.replace('http://', 'https://')} type="video/mp4" />
-              </video>
-              
-            </div>
-            
-            <div  className="replyForVideoProfile">
-              {practice.reply ? (
-              <div className="theComment">{practice.reply}</div>):(null)}
-              
-              {practice.videoReply ? (
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: ".5rem",
-                    height: "100%",
-                    maxHeight: "250px",
-                  }}
-                >
-                  {practice.videoReply.length === 0 ?(<></>):(<>{practice.videoReply.map((reply, i) => {
-                    return (
-                      <video
-                        key={reply.theVideoReply + `${i}`}
-                        controls
-                        preload="metadata"
-                        className="videos4Profile"
-                        poster={poster}
-                      >
-                        <source src={reply.theVideoReply.replace('http://', 'https://')} type="video/mp4" />
-                      </video>
-                    );
-                  })}</>)}
-                  
-                </div>
-              ) : null}
-              <div  className="audioProfile">
-                      {showRec(practice,i)}
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    });
-  };
-
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': "Bearer " + window.localStorage.getItem("token")
-  }
- 
 
   const changeName = async () => {
     try {
@@ -975,7 +780,7 @@ export default function Profile({ userProp }) {
                     الصفحة الرئيسية
                   </div>
                 </div>
-              {showPractice ? <div>{showData()}</div> : null}
+              {showPractice ? <div><UserPracticesForProfile user={user}/></div> : null}
 
               {showChangePassUser ? (
                 <div>

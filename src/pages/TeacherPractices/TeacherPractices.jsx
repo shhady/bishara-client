@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVideo, faPen, faMicrophone } from '@fortawesome/free-solid-svg-icons';
+import { faTableCellsLarge, faBars, faMicrophone } from '@fortawesome/free-solid-svg-icons';
 import AddReply from './AddReply';
 import axios from 'axios';
 import './NewTeacherPractices.css';
@@ -10,7 +10,7 @@ export default function TeacherPractices({ practices }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [updatedPractices, setUpdatedPractices] = useState(practices);
-
+  const [videosStyle,setVideosStyle] = useState(true)
   // useEffect(() => {
   //   setUpdatedPractices(practices);
   // }, [practices]);
@@ -24,7 +24,9 @@ export default function TeacherPractices({ practices }) {
     });
     setUpdatedPractices(updatedPracticesArray);
   };
-
+  const changeToOneFr = ()=>{
+    setVideosStyle(!videosStyle)
+}
   const handleVideoAdd = (updatedPractice) => {
     const updatedPracticesArray = updatedPractices.map((practice) => {
       if (practice._id === updatedPractice._id) {
@@ -78,7 +80,9 @@ export default function TeacherPractices({ practices }) {
               <div>
                 الدوره: {practice.courseName} / {practice.courseLevel}
               </div>
-              <div>{practice.video}</div>
+               <Link to={`/NewLesson/${practice.courseId}?name=${practice.uniqueLink}&playlist=${practice.playlistId}`}
+               style={{textDecoration:"none", color:"black"}}><>الدرس: {practice.video}</></Link>
+              
             </>
           )}
         </div>
@@ -100,7 +104,11 @@ export default function TeacherPractices({ practices }) {
             </video>
           </div>
           <div style={{ padding: '10px' }}>
-            <div className="RepliesVideos" style={{ marginBottom: '10px' }}>
+            {practice.videoReply && practice.videoReply.length > 0 ? (<>
+              {!videosStyle ? <FontAwesomeIcon icon={faTableCellsLarge}  onClick={changeToOneFr}/>:<FontAwesomeIcon icon={faBars}  onClick={changeToOneFr}/>}
+            </>):(null)}
+            <div className= {videosStyle ? "RepliesVideos":"RepliesVideosTable"} style={{ marginBottom: '10px' }}>
+              
               {practice.videoReply.map((reply, index) => (
                 <div key={index}>
                   <video

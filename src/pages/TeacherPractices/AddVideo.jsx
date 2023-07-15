@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import axios from 'axios';
-
+import { useParams } from 'react-router-dom';
 const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
   const [commentText, setCommentText] = useState('');
   const [formData, setFormData] = useState({});
@@ -11,18 +11,20 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
   const [videoUrl, setVideoUrl] = useState('')
   const [fileUpload, setFileUpload] = useState(null);
   const [moreThan, setMoreThan] = useState(null);
+  const {id}  = useParams()
+  console.log(id);
   useEffect(() => {
     const fetchReplies = async () => {
       try {
         const getReplies = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/replies/${user._id}`);
-        setAutoReplies(getReplies.data.filter(replies => replies.uniqueLink === practice.uniqueLink && replies.nameOfProblem ));
+        setAutoReplies(getReplies.data.filter(replies => replies.uniqueLink === practice.uniqueLink && replies.nameOfProblem || !replies.uniqueLink && !practice.uniqueLink && replies.nameOfProblem ));
         console.log(getReplies.data.filter(replies => replies.uniqueLink === practice.uniqueLink));
       } catch (error) {
         console.log(error);
       }
     };
     fetchReplies();
-  }, []);
+  }, [id, practice.uniqueLink, user._id]);
 
   // const handleOpenWidget = () => {
   //   let myWidget = window.cloudinary.createUploadWidget(
@@ -234,7 +236,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
     if (file) {
       if (file.type.includes("image")) {
         // Handle the case when a photo is selected
-        alert("Photo is not accepted");
+        alert("لا يمكن رفع صورة, الرجاء رفع فيديو او تسجيل صوتي");
         e.target.value = null; // Clear the file input
       } else if (file.size > 104857500) {
         setMoreThan("more than 100mb");
@@ -252,7 +254,9 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
 />
 
             </label>
-             <div style={{textAlign:"center"}}>الحجم الاقصى"100" ميجا بايت</div></>
+            {moreThan ? (<>الفيديو اكبر من الحجم الاقصى وهو 100 ميجا بايت</>):(<div style={{textAlign:"center"}}>الحجم الاقصى"100" ميجا بايت</div>)}
+            
+             </>
             }
       {/* </form> */}
     </div>

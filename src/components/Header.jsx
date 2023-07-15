@@ -6,17 +6,6 @@ import TeachersPop from "./TeachersPop";
 import CoursesPop from "./CoursesPop";
 import NotificationsPop from "./NotificationsPop";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import {
-  faUser,
-  faBars,
-  faMessage,
-  faBell,
-  faChalkboardUser,
-  faMusic,
-  faUsersRays,
-} from "@fortawesome/free-solid-svg-icons";
 import MessengerIcon from "./Messenger/messengerIcon/MessengerIcon";
 
 // import { io } from "socket.io-client";

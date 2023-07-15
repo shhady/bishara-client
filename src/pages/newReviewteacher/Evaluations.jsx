@@ -1,5 +1,4 @@
-import React, { useState,useEffect } from 'react'
-import axios from 'axios';
+import React from 'react'
 import './stylingPractices.css'
 import TeacherPractices from "../TeacherPractices/TeacherPractices"
 export default function Evaluations({user,practices,socket}) {

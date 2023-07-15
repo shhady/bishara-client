@@ -85,7 +85,7 @@ export default function Evaluation({teacher, user, setUser}) {
     </div>
     {!user &&  <div className='notSub'><div>الرجاء تسجيل الدخول</div><div> <button onClick={()=> navigate("/auth")} className='uploadEvaBtn'>تسجيل الدخول</button></div></div>}
     {user?.status === "triedOnce" && plan?.status !== 'active' && <div className='notSub'><div>يجب الاشتراك للحصول على تقييم لعزفك مرة اخرى</div><div> <button onClick={()=> navigate("/subscription")} className='uploadEvaBtn'>للاشتراك</button></div></div>}
-    {user && plan?.teacherId !== teacher._id ? (<div  style={{display:"flex", justifyContent:"center",flexDirection:"column", alignItems:"center", height:"100%"}}><h3>انت مشترك مع معلم اخر</h3><button onClick={()=>navigate(`/newTeacher/${plan?.teacherId}`)} style={{background:"#fcedd5", padding:"10px 15px"}}>{plan?.teacherName}</button></div>):(null)}
+    {user && plan && plan?.teacherId !== teacher._id ? (<div  style={{display:"flex", justifyContent:"center",flexDirection:"column", alignItems:"center", height:"100%"}}><h3>انت مشترك مع معلم اخر</h3><button onClick={()=>navigate(`/newTeacher/${plan?.teacherId}`)} style={{background:"#fcedd5", padding:"10px 15px"}}>{plan?.teacherName}</button></div>):(null)}
     {(plan?.teacherId === teacher._id && plan?.status === 'active'|| user?.status === "canTry")  && <div className='notSub'>
       <form className='formEvaluation' onSubmit={postDetails}>
       <div style={{width:"100%", textAlign:'center', fontWeight:"bold"}}>
@@ -129,7 +129,7 @@ export default function Evaluation({teacher, user, setUser}) {
             if (file) {
               if (file.type.includes("image")) {
              // Handle the case when a photo is selected
-             alert("Photo is not accepted");
+             alert("لا يمكن رفع صورة, الرجاء رفع فيديو او تسجيل صوتي");
                e.target.value = null; // Clear the file input
               } else if (file.size > 104857500) {
               setMoreThan("more than 100mb");
