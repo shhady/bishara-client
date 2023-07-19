@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Suspense } from "react";
-import { BrowserRouter, Navigate, Route , Routes} from "react-router-dom";
+import { BrowserRouter, Route , Routes} from "react-router-dom";
 import Header from "./components/Header";
 import { io } from "socket.io-client";
-import Zoom from "./pages/zoom/Zoom";
+import Zoom from "./pages/payment/Payment";
 
 import EditReplies from "./pages/TeacherPractices/EditReplies";
 const Home = React.lazy(() => import("./pages/HomePage/Home"));
@@ -15,7 +15,6 @@ const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 const CreateTeacher = React.lazy(() => import("./components/Form/CreateTeacher"));
 const Auth = React.lazy(() => import("./components/Auth/Auth"));
 const QA = React.lazy(() => import("./pages/QA/QA"));
-const Lesson = React.lazy(() => import("./pages/Lesson/Lesson"));
 const PaidStudent = React.lazy(() => import("./pages/addingStudent/PaidStudent"));
 const ForgetPassword = React.lazy(() => import("./components/ForgetPassword"));
 const Notifications = React.lazy(() => import("./components/Notifications"));
@@ -114,13 +113,13 @@ export default function App() {
           <Route path="/auth" exact element={ <Auth user={user} setUser={setUser}  />}/>
           <Route path="/forgetpassword" exact element={ <ForgetPassword />}/>
           <Route path="/NewTeacher/:id" exact element={ <NewTeacher user={user} setUser={setUser}/>}/>
-          <Route path="/NewCourse/:id" exact element={ <NewCourse />}/>
+          <Route path="/NewCourse/:id" exact element={ <NewCourse user={user}/>}/>
           <Route path="/GeneralButton" exact element={ <GeneralButton user={user} />}/>
           <Route path="/qa" element={ <QA user={user}/>}/>
           <Route path="/StudentMyPractice/:id" exact element={<StudentMyPractice user={user} setUser={setUser}/>}/>
           <Route path="/NewLesson/:id" exact element={<NewLesson user={user} setUser={setUser} />}/>
-          <Route path="/NewMessenger/:id" exact element={<NewMessenger socket={socket}/>}/>
-          <Route path="/chatting" exact element={<NewChatBox socket={socket}/>}/>
+          <Route path="/NewMessenger/:id" exact element={<NewMessenger socket={socket} user={user}/> }/>
+          <Route path="/chatting" exact element={<NewChatBox socket={socket} user={user}/>}/>
           <Route path="/OnePractice/:id" exact element={<OnePractice socket={socket}/>}/>
           <Route path="/subscription" exact element={<Subscription user={user} setUser={setUser}/>}/>
           <Route path="/NewProfile" exact element={<NewProfile user={user} seUser={setUser}/>}/>
@@ -158,7 +157,7 @@ export default function App() {
               setUpdateComponent={setUpdateComponent}
               updateComponent={setUpdateComponent}
             />}/>
-            <Route path="/zoom" exact element={ <Zoom/>}/>
+            <Route path="/zoom" exact element={ <Zoom user={user}/>}/>
           <Route path="/StudentsPractices" exact element={<StudentsPractices user={user} setUser={setUser} />}/>
           <Route path="/messenger" exact element={ user ? (
               <Messenger

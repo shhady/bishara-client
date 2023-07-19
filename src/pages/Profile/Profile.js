@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 import CreateCourse from "../../components/Course/CreateCourse";
 import ChangePassword from "../../components/ChangePassword/ChangePassword";
@@ -16,13 +15,6 @@ export default function Profile({ user,setUser }) {
  
   const navigate = useNavigate();
   const [userId, setUserId] = useState(null);
-  const [firstName, setFirstName] = useState(
-    window.localStorage.getItem("firstName")
-  );
-  const [lastName, setLastName] = useState(
-    window.localStorage.getItem("lastName")
-  );
-
   const [showButtonAvatarUpdate, setShowButtonAvatarUpdate] = useState(false);
   const [showButtonCoverUpdate, setShowButtonCoverUpdate] = useState(false);
   const [showFormCreateCourse, setShowFormCreateCourse] = useState(false);
@@ -41,31 +33,6 @@ export default function Profile({ user,setUser }) {
   const [updateLastName, setUpdateLastName] = useState(user?.lastName);
   const [updateDes,setUpdateDes] = useState(user?.about)
 const [uploading, setUploading] = useState(null)
-  // useEffect(() => {
-  //   try{
-  //     const getavatar = async () => {
-  //       const res = await axios.get(
-  //         process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
-  //       );
-  //       setUpdateProfilePic(res.data.avatar);
-  //       // console.log(res.data);
-  //     };
-  //     getavatar();
-  //   }catch(e){
-  //     console.log("no photo");
-  //   }
-  //   try{
-  //     const getavatar = async () => {
-  //       const res = await axios.get(
-  //         process.env.REACT_APP_BACKEND_URL + `/teachers/${userId}`
-  //       );
-  //       setUpdateProfilePic(res.data.avatar);
-  //       // console.log(res.data);
-  //     };
-  //     getavatar();
-  //   } catch(e){console.log("no photo");}
-  // }, [userId]);
-
 
 
   const postDetails = () => {
@@ -145,7 +112,6 @@ const [uploading, setUploading] = useState(null)
     } else {
       setUserId(user._id);
     }
-
   }, [user]);
 
   useEffect(() => {

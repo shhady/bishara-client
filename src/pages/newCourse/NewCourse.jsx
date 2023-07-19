@@ -1,16 +1,14 @@
 import React,{useState, useEffect} from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import CourseDetails from './CourseDetails'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCirclePlay,
-  faPenToSquare,
-  faCamera,
 } from "@fortawesome/free-solid-svg-icons";
 const youtubeurl = "https://www.googleapis.com/youtube/v3/playlistItems";
-export default function NewCourse() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+export default function NewCourse({user}) {
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   // const [user, setUser] = useState('') 
     const [course, setCourse] = useState('')
     const [lessons,setLessons]  = useState([])

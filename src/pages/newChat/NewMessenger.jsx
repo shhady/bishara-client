@@ -1,17 +1,15 @@
 import React,{useState, useEffect} from 'react'
-import NewChatBox from './NewChatBox';
 import NewTeachersList from './NewTeachersList'
 import "./newMessenger.css"
 import axios from 'axios';
 import MyConversation from './MyConversation';
 import { useParams } from 'react-router-dom';
-export default function NewMessenger({socket}) {
+export default function NewMessenger({socket,user}) {
     // const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("profile")));
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const [chats, setChats] = useState([]) 
     const [arrived, setArrived] = useState(null);
     const [currentChat, setCurrentChat] = useState(null)
-    const [messages, setMessages] = useState(null)
     const {id} = useParams()
     // useEffect(()=>{
     //     userData?.user ? setUser(userData.user):(setUser(userData.teacher)) 

@@ -26,14 +26,6 @@ export default function Notifications({user}) {
     setUserL(user.lastName)
     setUserId(user._id)
     setUserAvatar(user.avatar)
-    // user.user
-    //   ? setUserF(user.user.firstName)
-    //   : setUserF(user.teacher.firstName);
-    // user.user ? setUserL(user.user.lastName) : setUserL(user.teacher.lastName);
-    // user.user ? setUserId(user.user._id) : setUserId(user.teacher._id);
-    // user.user
-    //   ? setUserAvatar(user.user.avatar)
-    //   : setUserAvatar(user.teacher.avatar);
   }, [user]);
   useEffect(() => {
     const fetch = async () => {

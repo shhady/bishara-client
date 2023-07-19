@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
 import "./newMessenger.css"
-import StartChat from '../../components/Messenger/StartChat'
+
 import { useNavigate } from 'react-router-dom'
 export default function NewTeachersList({user,chats}) {
     const [teachers, setTeachers] = useState([])

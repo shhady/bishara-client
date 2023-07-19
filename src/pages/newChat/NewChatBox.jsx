@@ -5,8 +5,8 @@ import "./newMessenger.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-export default function NewChatBox({socket}) {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+export default function NewChatBox({socket, user}) {
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   // const [user, setUser] = useState('') 
   const urlParams = new URLSearchParams(window.location.search);
 const conversationId = urlParams.get('currentChat');
@@ -28,7 +28,7 @@ useEffect(()=>{
   setsecondId(res.data?.members.find((m) => m !== user._id))
 }
 getConv()
-},[user])
+},[user,friendId])
 
 // useEffect(()=>{
 //   theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 

@@ -4,7 +4,7 @@
     height: 90vh;
     background-image: url('/public/hero.jpg');
     background-position:center;
-    background-size: cover;
+    background-size: fill;
     background-repeat: no-repeat;
 }
 

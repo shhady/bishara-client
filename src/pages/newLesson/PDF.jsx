@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-export default function PDF({course,name}) {
+export default function PDF({course,name,user}) {
   // const [theUser, setTheUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const plan  =   JSON.parse(localStorage.getItem("plan"))
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const [fileUrl, setFileUrl] = useState('')
     const [uploadFile, setUploadFile] = useState('')
     const [fileId, setFileId] = useState('')
@@ -62,7 +61,7 @@ export default function PDF({course,name}) {
   return (
     <div className='divOfUploadBtn'>
         {fileUrl ? (<>
-        {plan?.teacherId === course?.owner && plan?.status === 'active'  || user._id ===  course?.owner? ( <div className='uploadPracticeBtnDiv'>
+        {plan?.teacherId === course?.owner && plan?.status === 'active'  || user?._id ===  course?.owner? ( <div className='uploadPracticeBtnDiv'>
         <a
     href={fileUrl}
     target="_blank"
@@ -70,7 +69,7 @@ export default function PDF({course,name}) {
         textDecoration: "none",
         color: "black"}}>ملف النوته</a></div>):(<div>  <button className='uploadPracticeBtn' onClick={openNotification}>ملف النوته</button> </div>)}
         
-        {user?._id === course?.owner || user.role === "admin" ? (<button className='uploadPracticeBtn' onClick={deleteTheFile} style={{ background:"red"}}>delete</button>):(null)}
+        {user?._id === course?.owner || user?.role === "admin" ? (<button className='uploadPracticeBtn' onClick={deleteTheFile} style={{ background:"red"}}>delete</button>):(null)}
         </>
         ):(
             <>

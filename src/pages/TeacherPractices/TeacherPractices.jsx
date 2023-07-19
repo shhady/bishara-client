@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTableCellsLarge, faBars, faMicrophone } from '@fortawesome/free-solid-svg-icons';
+import { faTableCellsLarge, faBars } from '@fortawesome/free-solid-svg-icons';
 import AddReply from './AddReply';
-import axios from 'axios';
 import './NewTeacherPractices.css';
 import { Link } from 'react-router-dom';
 
@@ -11,9 +10,6 @@ export default function TeacherPractices({ practices }) {
   const [itemsPerPage] = useState(10);
   const [updatedPractices, setUpdatedPractices] = useState(practices);
   const [videosStyle,setVideosStyle] = useState(true)
-  // useEffect(() => {
-  //   setUpdatedPractices(practices);
-  // }, [practices]);
 
   const handleCommentAdd = (updatedPractice) => {
     const updatedPracticesArray = updatedPractices.map((practice) => {
@@ -147,7 +143,7 @@ export default function TeacherPractices({ practices }) {
         </div>
 
         {/* Edit reply button */}
-        {practice.RecordReply.length > 0 || practice.videoReply.length > 0 && 
+        {(practice.RecordReply.length > 0 || practice.videoReply.length > 0) && 
         <div style={{ position: 'absolute', left: '10px', top: '10px' }}>
           <Link to={`/EditReplies/${practice._id}`}>
             <button>تعديل الرد</button>

@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
   const [commentText, setCommentText] = useState('');
-  const [formData, setFormData] = useState({});
   const [video, setVideo] = useState('');
   const [autoReplies, setAutoReplies] = useState([]);
   const unique_id = uuid();
@@ -26,21 +25,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
     fetchReplies();
   }, [id, practice.uniqueLink, user._id]);
 
-  // const handleOpenWidget = () => {
-  //   let myWidget = window.cloudinary.createUploadWidget(
-  //     {
-  //       cloudName: 'djvbchw2x',
-  //       uploadPreset: 'bisharaHaroni',
-  //     },
-  //     (error, result) => {
-  //       if (!error && result && result.event === 'success') {
-  //         setFormData({ ...formData, image: result.info.secure_url });
-  //         setVideo(result.info.secure_url);
-  //       }
-  //     }
-  //   );
-  //   myWidget.open();
-  // };
+
   const postDetails = () => {
     const formData = new FormData();
     formData.append("file", video);

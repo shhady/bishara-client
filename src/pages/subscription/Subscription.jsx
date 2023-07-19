@@ -2,19 +2,25 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
-import "./subscription.css"
-import { Link } from "react-router-dom"
+import "./subscription.css";
+import Payment from "../payment/Payment"
+import { Link } from "react-router-dom";
+import Tcs from '../../components/t&cs/Tcs';
 const Subscription = ({ user, setUser }) => {
   const [selectedTeacherYear, setSelectedTeacherYear] = useState(null);
   const [selectedTeacher6Months, setSelectedTeacher6Months] = useState(null);
   const [teachers, setTeachers] = useState([]);
   const plan = JSON.parse(localStorage.getItem("plan"));
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [period, setPeriod] = useState(null);
+  const [TcsShow, setTcsShow] = useState("Tcs")
+  const [showTeacherRequied, setShowTeacherRequied] = useState(null)
   // const plan = null
-  const endDate = moment(plan?.endDate);
-  // const endDate = moment().subtract(5, 'days');
+  // const endDate = moment(plan?.endDate);
+  const endDate = moment().subtract(5, 'days');
   const remainingMonths = endDate.diff(moment(), 'months');
   const remainingDays = endDate.diff(moment().add(remainingMonths, 'months'), 'days');
-
+  
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
@@ -36,43 +42,45 @@ const Subscription = ({ user, setUser }) => {
     setSelectedTeacher6Months(teacher);
   };
 
-  const handleSubscriptionUpdate = async (period) => {
-    let selectedTeacher = null;
+  // const handleSubscriptionUpdate = async (period) => {
+  //   let selectedTeacher = null;
 
-    if (period === 'year') {
-      selectedTeacher = selectedTeacherYear;
-    } else if (period === '6 months') {
-      selectedTeacher = selectedTeacher6Months;
-    }
+  //   if (period === 'year') {
+  //     selectedTeacher = selectedTeacherYear;
+  //   } else if (period === '6 months') {
+  //     selectedTeacher = selectedTeacher6Months;
+  //   }
 
-    if (selectedTeacher) {
-      console.log(period);
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.put(
-          `${process.env.REACT_APP_BACKEND_URL}/subscription-plans/${plan?._id}`,
-          {
-            period: period,
-            teacherName: selectedTeacher.name,
-            teacherId: selectedTeacher.value,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        console.log(response);
-        window.localStorage.setItem('plan', JSON.stringify(response.data));
-        setSelectedTeacherYear(null);
-        setSelectedTeacher6Months(null);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
+  //   if (selectedTeacher) {
+  //     console.log(period);
+  //     try {
+  //       const token = localStorage.getItem('token');
+  //       const response = await axios.put(
+  //         `${process.env.REACT_APP_BACKEND_URL}/subscription-plans/${plan?._id}`,
+  //         {
+  //           period: period,
+  //           teacherName: selectedTeacher.name,
+  //           teacherId: selectedTeacher.value,
+  //         },
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
+  //       console.log(response);
+  //       window.localStorage.setItem('plan', JSON.stringify(response.data));
+  //       setSelectedTeacherYear(null);
+  //       setSelectedTeacher6Months(null);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }
+  // };
 
-  const handleSubscriptionSubmit = async (period) => {
+  const handleSubscriptionSubmit = async () => {
+    
+    console.log(period);
     let selectedTeacher = null;
 
     if (period === 'year') {
@@ -125,6 +133,28 @@ const Subscription = ({ user, setUser }) => {
           console.error('Failed to create subscription plan:', error.message);
         }
       }
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.put(
+          `${process.env.REACT_APP_BACKEND_URL}/subscription-plans/${plan?._id}`,
+          {
+            period: period,
+            teacherName: selectedTeacher.name,
+            teacherId: selectedTeacher.value,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response);
+        window.localStorage.setItem('plan', JSON.stringify(response.data));
+        setSelectedTeacherYear(null);
+        setSelectedTeacher6Months(null);
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -140,8 +170,10 @@ const Subscription = ({ user, setUser }) => {
   }));
 
   return (
-    <div style={{ marginTop: '100px' }}>
-      <h1 className='titleSubscription'>استمتع بفترة تجريبية مجانية لمدة 7 أيام</h1>
+    <div>
+     {isPopupOpen ?  <> {TcsShow === "Tcs" ? <div style={{marginTop:"100px", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}><div><Tcs/></div><div className='TcsBtns'><button onClick={()=>setTcsShow("payment")} className='TcsBtn'>موافق</button><button className='TcsBtn' onClick={()=>setIsPopupOpen(null)} >غير موافق</button></div> </div>:<><button style={{marginTop:"100px"}} onClick={()=>setIsPopupOpen(null)} className='TcsBtn'>صفحة الاشتراك</button><Payment user={user} handleSubscriptionSubmit={handleSubscriptionSubmit} period={period} selectedTeacher={selectedTeacherYear ?selectedTeacherYear:selectedTeacher6Months} setIsPopupOpen={setIsPopupOpen}/></>}</> : 
+     <><div className='subscriptionPage'>
+      <h1 className='titleSubscription'>استمتع بتجربة مجانية واحدة قبل الاشتراك</h1>
       <div className='textSubscriptionContainer'>
         <div className='textSubscription'>دروس خصوصية غير محدودة مع مدرس خاص</div>
         <div className='textSubscription'>*منهاج خاص بك</div>
@@ -179,18 +211,35 @@ const Subscription = ({ user, setUser }) => {
             onChange={handleTeacherSelectYear}
             placeholder='Select a teacher'
           />
-                <button className='Months12Btn' onClick={() => handleSubscriptionSubmit('year')}>
+          {showTeacherRequied && <div>يجب اختيار معلم</div>}
+                <button className='Months12Btn' onClick={() => {
+    if (selectedTeacherYear) {
+      setTcsShow("Tcs");
+      setIsPopupOpen(true);
+      setPeriod('year');
+    } else {
+      setShowTeacherRequied(true);
+    }
+  }}>
                   اختر سنوي
                 </button>
                 </>
-              ) : (
-                <> <Select
+              ) : (<> <Select
             options={teacherOptions}
             value={selectedTeacherYear}
             onChange={handleTeacherSelectYear}
             placeholder='Select a teacher'
           />
-                <button className='Months12Btn' onClick={() => handleSubscriptionUpdate('year')}>
+          {showTeacherRequied && <div>يجب اختيار معلم</div>}
+                <button className='Months12Btn' onClick={() => {
+    if (selectedTeacherYear) {
+      setTcsShow("Tcs");
+      setIsPopupOpen(true);
+      setPeriod('year');
+    } else {
+      setShowTeacherRequied(true);
+    }
+  }}>
                   تجديد لمدة سنة
                 </button>
                 </>
@@ -226,7 +275,17 @@ const Subscription = ({ user, setUser }) => {
             onChange={handleTeacherSelect6Months}
             placeholder='Select a teacher'
           />
-                <button className='Months6Btn' onClick={() => handleSubscriptionSubmit('6 months')}>
+                    {showTeacherRequied && <div>يجب اختيار معلم</div>}
+
+                <button className='Months6Btn' onClick={() => {
+    if (selectedTeacher6Months) {
+      setTcsShow("Tcs");
+      setIsPopupOpen(true);
+      setPeriod('6 months');
+    } else {
+      setShowTeacherRequied(true);
+    }
+  }}>
                   ستة أشهر
                 </button>
                 </>
@@ -237,7 +296,17 @@ const Subscription = ({ user, setUser }) => {
             onChange={handleTeacherSelect6Months}
             placeholder='Select a teacher'
           />
-                <button className='Months6Btn' onClick={() => handleSubscriptionUpdate('6 months')}>
+                    {showTeacherRequied && <div>يجب اختيار معلم</div>}
+
+                <button className='Months6Btn' onClick={() => {
+    if (selectedTeacher6Months) {
+      setTcsShow("Tcs");
+      setIsPopupOpen(true);
+      setPeriod('6 months');
+    } else {
+      setShowTeacherRequied(true);
+    }
+  }}>
                   تجديد ستة أشهر
                 </button>
                 </>
@@ -246,7 +315,7 @@ const Subscription = ({ user, setUser }) => {
           )}</>):(<>للاشتراك يجب تسجيل الدخول<br/><Link to="/auth"> <button style={{padding:"5px 15px", margin:"10px", color:"black", background:"#fcedd5"}}>تسجيل الدخول</button></Link></>)}
           
         </div>
-      </div>
+      </div></div></>} 
     </div>
   );
 };

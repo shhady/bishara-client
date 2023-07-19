@@ -38,7 +38,7 @@ export default function NewLesson({user, setUser}) {
     useEffect(()=>{
         const theVideo = lessons.filter((v)=>v.snippet.resourceId.videoId === name)
         setVideoName(theVideo[0]?.snippet.title)
-    },[lessons])
+    },[lessons,name])
     useEffect(() => {
         const fetch = async () => {
           const result = await axios.get(
@@ -47,7 +47,7 @@ export default function NewLesson({user, setUser}) {
           setLessons(result.data.items);
         };
         fetch();
-      }, []);
+      }, [playlistId]);
       
       const drawSuggestions = ()=>{
         return lessons?.map((lesson,i)=>{

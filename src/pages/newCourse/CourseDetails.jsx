@@ -115,7 +115,7 @@ export default function CourseDetails({ course, setCourse, user }) {
         className='courseCover'
         style={{ backgroundImage: `url(${updatedPhoto})` , position:"relative"}}
       >
-       {user._id === course.owner ? (<div style={{position:"absolute", right:"50%", bottom:"0", background:"white", borderRadius:"50%", padding:"5px 5px", width:"30px", height:"30px", display:"flex", justifyContent:"center", alignItems:"center"}} >
+       {user?._id === course.owner ? (<div style={{position:"absolute", right:"50%", bottom:"0", background:"white", borderRadius:"50%", padding:"5px 5px", width:"30px", height:"30px", display:"flex", justifyContent:"center", alignItems:"center"}} >
          <label htmlFor="file-input" className="file-input-label">
             <FontAwesomeIcon icon={faCamera} />
           </label>
@@ -142,7 +142,7 @@ export default function CourseDetails({ course, setCourse, user }) {
         <button style={{width:"100%"}} onClick={handleSaveTitleClick}>حفظ</button></div>
       ) : (
         <h2 style={{ fontSize: '22px', textAlign: 'center'}}>{course.title}
-         {user._id === course.owner ? (  <FontAwesomeIcon
+         {user?._id === course.owner ? (  <FontAwesomeIcon
             icon={faPen}
             size='xs'
             onClick={handleEditTitleClick}
@@ -166,7 +166,7 @@ export default function CourseDetails({ course, setCourse, user }) {
         ) : (
           <h2 style={{ textAlign: 'center' }}>
           {course.level}
-       {user._id === course.owner ? ( <FontAwesomeIcon
+       {user?._id === course.owner ? ( <FontAwesomeIcon
             icon={faPen}
             size='xs'
             onClick={handleEditLevelClick}
