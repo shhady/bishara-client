@@ -16,8 +16,8 @@ const Subscription = ({ user, setUser }) => {
   const [TcsShow, setTcsShow] = useState("Tcs")
   const [showTeacherRequied, setShowTeacherRequied] = useState(null)
   // const plan = null
-  // const endDate = moment(plan?.endDate);
-  const endDate = moment().subtract(5, 'days');
+  const endDate = moment(plan?.endDate);
+  // const endDate = moment().subtract(5, 'days');
   const remainingMonths = endDate.diff(moment(), 'months');
   const remainingDays = endDate.diff(moment().add(remainingMonths, 'months'), 'days');
   
