@@ -11,6 +11,9 @@ export default function NewHero({user}) {
   const remainingDays = endDate.diff(moment().add(remainingMonths, 'months'), 'days');
   return (
     <div className='newHero'>
+      {/* <div className='circles1'>interaction</div>
+      <div className='circles2'>try once</div>
+      <div className='circles3'>subscribe</div> */}
       <div className='containerHero'>
         <div className='smallContainer'>
         <h1 className='title1'>منصة فنان التعليميه</h1>

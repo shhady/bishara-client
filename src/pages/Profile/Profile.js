@@ -419,7 +419,7 @@ const [uploading, setUploading] = useState(null)
                 >
                   تعديل الملف
                 </div>
-                {/* <div
+                <div
                   className="profileButtons3"
                   style={{ height: "40px" }}
                   onClick={() => {
@@ -429,7 +429,7 @@ const [uploading, setUploading] = useState(null)
                   }}
                 >
                   تغيير كلمة المرور
-                </div> */}
+                </div>
 
               </div>
               {showFormCreateCourse ? <CreateCourse /> : null}

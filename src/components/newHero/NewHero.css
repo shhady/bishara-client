@@ -6,8 +6,45 @@
     background-position:center;
     background-size: fill;
     background-repeat: no-repeat;
+    /* position: relative; */
 }
-
+/* 
+.circles1{
+    position: absolute;
+    top: 20%;
+    right: 20%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circles2{
+    position: absolute;
+    top: 35%;
+    right: 45%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circles3{
+    position: absolute;
+    top: 55%;
+    left: 20%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
 .containerHero{
     height: 100%;
     display: flex;
