@@ -34,7 +34,15 @@
     align-items: flex-start;
     gap:10px
 }
-
+.plan3{
+    width: 100%;
+    /* border: 1px solid black; */
+    text-align: center;
+    margin-top: 50px;
+    margin: 50px auto;
+    background-color: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
 .plan2{
     width: 100%;
     /* border: 1px solid black; */
@@ -42,7 +50,8 @@
     margin-top: 50px;
     margin: 50px auto;
     background-color: white;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);}
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
 .plan1{
     width: 100%;
     /* border: 1px solid black; */
@@ -156,7 +165,7 @@
 
 .plansContainer{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap:50px;
     padding: 0px 50px;
 }

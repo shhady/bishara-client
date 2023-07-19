@@ -51,6 +51,15 @@
     padding: 10px 20px;
     margin-bottom: 25px;
 }
+.button3{
+    background-color: white;
+    font-size: 24px;
+    color: rgb(158, 78, 233);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 40px;
+    margin-bottom: 25px;
+}
 .bottomText{
     text-align: center;
     font-weight: bold;

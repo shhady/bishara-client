@@ -9,6 +9,7 @@ import Tcs from '../../components/t&cs/Tcs';
 const Subscription = ({ user, setUser }) => {
   const [selectedTeacherYear, setSelectedTeacherYear] = useState(null);
   const [selectedTeacher6Months, setSelectedTeacher6Months] = useState(null);
+  const [selectedTeacher3Months, setSelectedTeacher3Months] = useState(null);
   const [teachers, setTeachers] = useState([]);
   const plan = JSON.parse(localStorage.getItem("plan"));
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -21,6 +22,7 @@ const Subscription = ({ user, setUser }) => {
   const remainingMonths = endDate.diff(moment(), 'months');
   const remainingDays = endDate.diff(moment().add(remainingMonths, 'months'), 'days');
   
+  console.log(period)
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
@@ -40,6 +42,9 @@ const Subscription = ({ user, setUser }) => {
 
   const handleTeacherSelect6Months = (teacher) => {
     setSelectedTeacher6Months(teacher);
+  };
+  const handleTeacherSelect3Months = (teacher) => {
+    setSelectedTeacher3Months(teacher);
   };
 
   // const handleSubscriptionUpdate = async (period) => {
@@ -87,6 +92,8 @@ const Subscription = ({ user, setUser }) => {
       selectedTeacher = selectedTeacherYear;
     } else if (period === '6 months') {
       selectedTeacher = selectedTeacher6Months;
+    }else if (period === '3 months') {
+      selectedTeacher = selectedTeacher3Months;
     }
 
     if (selectedTeacher) {
@@ -182,6 +189,74 @@ const Subscription = ({ user, setUser }) => {
         <div className='textSubscription'>دروس زوم (zoom)جماعية</div>
       </div>
       <div className='plansContainer'>
+      
+        <div className='plan2'>
+          <h2 className='titleSubscription'>ستة أشهر</h2>
+          شهري/ <strong>199₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>299₪</strong></s></span>
+          <div className='invoiceLine'>فاتورة 6 أشهر 1194 شيكل</div>
+          <div className='textSubscription6'>* لتحقيق النتائج المرغوبة، يجب على الفرد أن يلتزم بالدراسة لمدة لا تقل عن 6 أشهر</div>
+         {user ? (<>{endDate.isAfter(moment()) ? (
+            <>
+            {remainingMonths > 0 && (
+              <h3>
+                باقي
+                {' '}
+                {remainingMonths} {remainingMonths === 1 ? 'شهر' : 'اشهر'}
+                {' و'}
+                {remainingDays} {remainingDays === 1 ? 'يوم' : 'ايام'}  للاشتراك
+              </h3>
+            )}
+            </>
+          ) : (
+            <>
+              {!plan ? (
+                <>
+                <Select
+            options={teacherOptions}
+            value={selectedTeacher6Months}
+            onChange={handleTeacherSelect6Months}
+            placeholder='Select a teacher'
+          />
+                    {showTeacherRequied && <div>يجب اختيار معلم</div>}
+
+                <button className='Months6Btn' onClick={() => {
+    if (selectedTeacher6Months) {
+      setTcsShow("Tcs");
+      setIsPopupOpen(true);
+      setPeriod('6 months');
+    } else {
+      setShowTeacherRequied(true);
+    }
+  }}>
+                  ستة أشهر
+                </button>
+                </>
+              ) : (<>
+                <Select
+            options={teacherOptions}
+            value={selectedTeacher6Months}
+            onChange={handleTeacherSelect6Months}
+            placeholder='Select a teacher'
+          />
+                    {showTeacherRequied && <div>يجب اختيار معلم</div>}
+
+                <button className='Months6Btn' onClick={() => {
+              if (selectedTeacher6Months) {
+                setTcsShow("Tcs");
+                setIsPopupOpen(true);
+                setPeriod('6 months');
+                     } else {
+                   setShowTeacherRequied(true);
+                 }
+              }}>
+                  تجديد ستة أشهر
+                </button>
+                </>
+              )}
+            </>
+          )}</>):(<>للاشتراك يجب تسجيل الدخول<br/><Link to="/auth"> <button style={{padding:"5px 15px", margin:"10px", color:"black", background:"#fcedd5"}}>تسجيل الدخول</button></Link></>)}
+          
+        </div>
         <div className='plan1'>
           <div className='colorful'>
             استفد من أفضل قيمة ممكنة
@@ -248,11 +323,11 @@ const Subscription = ({ user, setUser }) => {
           )}</>):(<>للاشتراك يجب تسجيل الدخول<br/><Link to="/auth"> <button style={{padding:"5px 15px", margin:"10px", color:"black", background:"#fcedd5"}}>تسجيل الدخول</button></Link></>)}
          
         </div>
-        <div className='plan2'>
-          <h2 className='titleSubscription'>ستة أشهر</h2>
-          شهري/ <strong>199₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>299₪</strong></s></span>
-          <div className='invoiceLine'>فاتورة 6 أشهر 1194 شيكل</div>
-          <div className='textSubscription6'>* لتحقيق النتائج المرغوبة، يجب على الفرد أن يلتزم بالدراسة لمدة لا تقل عن 6 أشهر</div>
+        <div className='plan3'>
+          <h2 className='titleSubscription'>ثلاثة أشهر</h2>
+          شهري/ <strong>230₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>399₪</strong></s></span>
+          <div className='invoiceLine'>فاتورة 3 أشهر 690 شيكل</div>
+          <div className='textSubscription6'>* لتحقيق النتائج المرغوبة، يجب على الفرد أن يلتزم بالدراسة لمدة لا تقل عن 3 أشهر</div>
          {user ? (<>{endDate.isAfter(moment()) ? (
             <>
             {remainingMonths > 0 && (
@@ -271,43 +346,43 @@ const Subscription = ({ user, setUser }) => {
                 <>
                 <Select
             options={teacherOptions}
-            value={selectedTeacher6Months}
-            onChange={handleTeacherSelect6Months}
+            value={selectedTeacher3Months}
+            onChange={handleTeacherSelect3Months}
             placeholder='Select a teacher'
           />
                     {showTeacherRequied && <div>يجب اختيار معلم</div>}
 
                 <button className='Months6Btn' onClick={() => {
-    if (selectedTeacher6Months) {
+    if (selectedTeacher3Months) {
       setTcsShow("Tcs");
       setIsPopupOpen(true);
-      setPeriod('6 months');
+      setPeriod('3 months');
     } else {
       setShowTeacherRequied(true);
     }
   }}>
-                  ستة أشهر
+                  ثلاثة أشهر
                 </button>
                 </>
               ) : (<>
                 <Select
             options={teacherOptions}
-            value={selectedTeacher6Months}
-            onChange={handleTeacherSelect6Months}
+            value={selectedTeacher3Months}
+            onChange={handleTeacherSelect3Months}
             placeholder='Select a teacher'
           />
                     {showTeacherRequied && <div>يجب اختيار معلم</div>}
 
                 <button className='Months6Btn' onClick={() => {
-    if (selectedTeacher6Months) {
+    if (selectedTeacher3Months) {
       setTcsShow("Tcs");
       setIsPopupOpen(true);
-      setPeriod('6 months');
+      setPeriod('3 months');
     } else {
       setShowTeacherRequied(true);
     }
   }}>
-                  تجديد ستة أشهر
+                  تجديد ثلاثة أشهر
                 </button>
                 </>
               )}
