@@ -48,7 +48,7 @@ const navigate =useNavigate()
             style={{height:"100vh",width:"100vw"}}
               ref={iframeRef}
               className="popup-iframe"
-              src={`https://secure.cardcom.solutions/Interface/LowProfile.aspx?codepage=65001&Operation=1&TerminalNumber=1000&UserName=test9611&SumToBill=${period === "year" ? 1500:1194}
+              src={`${process.env.REACT_PAYMENT}&SumToBill=${period === "year" ? 1500:1194}
               &CoinID=1&Language=ar&ProductName=item1&APILevel=10&SuccessRedirectUrl=https://secure.cardcom.solutions/SuccessAndFailDealPage/Success.aspx&ErrorRedirectUrl=https://secure.cardcom.solutions/SuccessAndFailDealPage/Fail.aspx&IndicatorUrl=www.google.com&ReturnValue=1234&&AutoRedirect=true&InvoiceHead.CustName=${user.firstName}&InvoiceHead.SendByEmail=true&InvoiceHead.Email=${user.email}&InvoiceHead.Language=ar&InvoiceHead.CoinID=1&CardOwnerEmail=${user.email}&MaxNumOfPayments=${period === "year" ? 12:6}&InvoiceLines1.Description=${period}&InvoiceLines1.Price=${period === "year" ? 1500:1194}&InvoiceLines1.Quantity=1`}
               title="Cardcom Popup"
             />
