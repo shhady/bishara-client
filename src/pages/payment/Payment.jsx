@@ -40,6 +40,7 @@ const navigate =useNavigate()
     };
   }, []);
 
+  console.log(process.env.REACT_APP_TERMINAL);
   return (
     <div style={{margin:"0px auto"}}>
         <div className="popup-overlay">
