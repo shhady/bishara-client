@@ -119,7 +119,6 @@ export default function Auth({ user, setUser, setUserProp }) {
         `https://bisharaserver.herokuapp.com/teachers/login`,
         studentlogin
       );
-      console.log(result.data.teacher);
       window.localStorage.setItem("profile", JSON.stringify(result.data.teacher));
       window.localStorage.setItem("token", result.data.token);
       window.localStorage.setItem("profilePic", result.data.teacher.avatar);

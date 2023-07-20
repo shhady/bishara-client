@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import moment from 'moment';
 import ScrollAnimation from '../scroll/ScrollAnimation'
 export default function NewHero({user}) {
-  console.log(user);
   const plan = JSON.parse(localStorage.getItem("plan"));
   const endDate = moment(plan?.endDate);
   const remainingMonths = endDate.diff(moment(), 'months');

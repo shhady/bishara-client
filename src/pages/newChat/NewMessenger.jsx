@@ -33,11 +33,11 @@ export default function NewMessenger({socket,user}) {
           };
           getConversations();
     },[id])
-   console.log(chats)
 
-   useEffect(()=>{
-       console.log(chats.filter((c)=>c.showAtTeacher !== "false"))
-      },[chats])
+
+  //  useEffect(()=>{
+  //      console.log(chats.filter((c)=>c.showAtTeacher !== "false"))
+  //     },[chats])
 
       useEffect(() => {
         // socket.current = io("ws://localhost:8900");
@@ -58,8 +58,6 @@ export default function NewMessenger({socket,user}) {
                 }
               };
               getConversations();
-            console.log(data)
-            console.log("arrived")
             setArrived("arrived")
         });
       }, [socket]);

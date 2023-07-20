@@ -61,9 +61,7 @@ useEffect(() => {
   const handleReceivedMessage = (data) => {
     const urlParams = new URLSearchParams(window.location.search);
     const conversationId = urlParams.get('currentChat');
-    console.log(conversationId);
-    console.log(data.userName);
-    console.log(conversationId !== data.userName ? 'no match' : 'match');
+    // console.log(conversationId !== data.userName ? 'no match' : 'match');
 
     if (conversationId !== data.userName) {
       setChats((prevChats) => [...prevChats, { message: 'got a new message', data }]);

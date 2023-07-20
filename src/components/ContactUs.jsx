@@ -42,7 +42,6 @@ export default function ContactUs({ user }) {
       // Create a POST request to the backend route
       const response = await axios.post(process.env.REACT_APP_BACKEND_URL +'/send-email', { name, email, message });
       if (response.status === 200) {
-        console.log(response);
         alert('Email sent successfully!');
         setName(user ? `${user.firstName} ${user.lastName}` : '');
         setEmail(user ? user.email : '');

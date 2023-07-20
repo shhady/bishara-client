@@ -45,8 +45,6 @@ export default function App() {
   const [updateComponent, setUpdateComponent] = useState(null);
   const [chatNotification, setChatNotification] = useState(null);
 
-
-  console.log(user);
   useEffect(() => {
     if (!user) return;
     if(user.user){
@@ -72,7 +70,7 @@ export default function App() {
     socketInstances.push(socketInstance);
   
     setSocket(socketInstance);
-    console.log(socketInstance);
+   // console.log(socketInstance);
   
     return () => {
       socketInstance.disconnect();
@@ -90,7 +88,7 @@ export default function App() {
     };
   }, [userId, socket]);
   
-  console.log(socket);
+  //console.log(socket);
   return (
     <div>
       <Suspense fallback={<></>}>

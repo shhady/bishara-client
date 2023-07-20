@@ -65,7 +65,7 @@ export default function Teacher({
     })
     setEvaluation(filteredCourses)
   },[filteredCourses]);
-  console.log(evaluation)
+
   if (!teacherInfo)
     return (
       <div

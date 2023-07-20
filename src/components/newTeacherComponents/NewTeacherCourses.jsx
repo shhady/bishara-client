@@ -13,7 +13,7 @@ export default function NewTeacherCourses({id}) {
     };
     fetch();
   }, [id]);
-  console.log(courses)
+
 
   const drawCourses = ()=>{
    return courses.map(course => {

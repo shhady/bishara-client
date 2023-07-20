@@ -29,7 +29,7 @@ export default function CourseDetails({ course, setCourse, user }) {
               setFileUpload(`${percentComplete}%`);
             },
           })
-          .then((res) => {setPhotoUrl(res.data.secure_url); console.log(res.data)})
+          .then((res) => setPhotoUrl(res.data.secure_url))
           .catch((err) => {
             console.log(err);
           });
@@ -62,7 +62,7 @@ export default function CourseDetails({ course, setCourse, user }) {
     setUpdatedTitle(course.title)
     setUpdatedLevel(course.level)
     setUpdatedPhoto(course.coursePhoto)
-    console.log(course);
+    
   },[course])
   const handleEditTitleClick = () => {
     setEditingTitle(true);
@@ -71,7 +71,7 @@ export default function CourseDetails({ course, setCourse, user }) {
   const handleEditLevelClick = () => {
     setEditingLevel(true);
   };
-  console.log(updatedLevel);
+  
   const handleSaveTitleClick = async () => {
     if(!updatedTitle) return;
     try {
@@ -108,7 +108,7 @@ export default function CourseDetails({ course, setCourse, user }) {
     }
   };
 
-  console.log(imageCourse);
+  
   return (
     <div>
       <div

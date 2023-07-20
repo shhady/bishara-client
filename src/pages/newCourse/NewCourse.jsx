@@ -15,7 +15,7 @@ export default function NewCourse({user}) {
     const [open, setOpen] = useState("")
     const {id} = useParams()
     const navigate = useNavigate()
-    console.log(id)
+   
   const [courseDisc, setCourseDisc] = useState()
     const [editingDiscMode,setEditingDiscMode] =useState(true)
     // useEffect(()=>{
@@ -28,7 +28,6 @@ export default function NewCourse({user}) {
                 process.env.REACT_APP_BACKEND_URL + `/courses/${id}`
               );
               setCourse(res.data)
-              console.log(res.data);
               setCourseDisc(res.data.description)
         }
         fetchData()
@@ -65,7 +64,6 @@ export default function NewCourse({user}) {
             `${youtubeurl}?part=snippet&playlistId=${course.playlistId}&maxResults=50&key=${process.env.REACT_APP_YOUTUBE_KEY}`
           );
           setLessons(result.data.items);
-            console.log(result.data.items)
         };
         fetch();
       }, [course]);

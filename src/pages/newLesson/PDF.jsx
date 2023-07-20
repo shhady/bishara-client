@@ -21,7 +21,7 @@ export default function PDF({course,name,user}) {
     const redirectToSubscription = () => {
       navigate("/subscription");
     };
-  console.log(course);
+
     useEffect(() => {
         const fetch = async () => {
           const response = await axios.get(
@@ -30,14 +30,14 @@ export default function PDF({course,name,user}) {
           );
           setFileUrl(response.data[0].fileUrl);
           setFileId(response.data[0]._id)
-          console.log(response.data[0])
+          
         };
         fetch();
       }, [name]);
      
       const addLink = async (e) => {
         e.preventDefault()
-        console.log("done")
+        
        await axios
       .post(process.env.REACT_APP_BACKEND_URL + "/files", {
         fileUrl: uploadFile,
@@ -51,7 +51,6 @@ export default function PDF({course,name,user}) {
        await axios.delete(process.env.REACT_APP_BACKEND_URL + `/files/${fileId}`)
             setFileUrl(null)
           };
-      console.log(user);
 
       // const openAlert =()=>{
       //   alert("لتحميل الملفات يجب الاشتراك");

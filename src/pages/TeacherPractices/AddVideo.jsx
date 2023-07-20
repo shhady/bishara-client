@@ -11,13 +11,12 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
   const [fileUpload, setFileUpload] = useState(null);
   const [moreThan, setMoreThan] = useState(null);
   const {id}  = useParams()
-  console.log(id);
   useEffect(() => {
     const fetchReplies = async () => {
       try {
         const getReplies = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/replies/${user._id}`);
         setAutoReplies(getReplies.data.filter(replies => replies.uniqueLink === practice.uniqueLink && replies.nameOfProblem || !replies.uniqueLink && !practice.uniqueLink && replies.nameOfProblem ));
-        console.log(getReplies.data.filter(replies => replies.uniqueLink === practice.uniqueLink));
+        // console.log(getReplies.data.filter(replies => replies.uniqueLink === practice.uniqueLink));
       } catch (error) {
         console.log(error);
       }

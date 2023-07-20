@@ -49,7 +49,6 @@ useEffect(() => {
   // socket.current = io("ws://localhost:8900");
   socket?.on("getMessage", (data) => {
     console.log("got it")
-    console.log(data)
     setArrivalMessage({
       sender: data.senderId,
       text: data.text,
@@ -64,7 +63,6 @@ useEffect(() => {
     setMessages((prev) => [...prev, arrivalMessage]);
 }, [arrivalMessage, conversationId, from]);
 useEffect(() => {
-  console.log(secondId);
 
   const getUser = async () => {
     try {
@@ -72,7 +70,6 @@ useEffect(() => {
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/users/${secondId}`
       );
-      console.log(response.data);
       setSecondUser(response.data);
     } catch (error) {
       console.log("error");
@@ -83,7 +80,6 @@ useEffect(() => {
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/teachers/${secondId}`
       );
-      console.log(response.data);
       setSecondUser(response.data);
     } catch (error) {
       console.log("error");

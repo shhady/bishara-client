@@ -13,7 +13,7 @@ const navigate =useNavigate()
       const responseCode = url.searchParams.get('ResponseCode');
   
       // Log the ResponseCode
-      console.log('Received ResponseCode from iframe:', responseCode);
+      // console.log('Received ResponseCode from iframe:', responseCode);
       if(responseCode == 0){
         handleSubscriptionSubmit(period)
        

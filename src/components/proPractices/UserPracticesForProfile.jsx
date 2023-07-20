@@ -20,7 +20,6 @@ export default function UserPracticesForProfile({ user }) {
           `${process.env.REACT_APP_BACKEND_URL}/studentpractices/${user._id}`
         );
         setUserPractices(res.data);
-        console.log(res.data);
       } catch (error) {
         console.error('Error fetching user practices:', error);
       }

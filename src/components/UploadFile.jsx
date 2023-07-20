@@ -78,13 +78,6 @@ export default function UploadFile({ courseInfo, lesson, id , paidUpdate, ifNotU
   };
 
 
-
-  useEffect(() => {
-    console.log(theFile?.fileUrl);
-  }, [theFile, id]);
-
-
-
   const deleteTheFile = (theFile) => {
     axios
       .delete(process.env.REACT_APP_BACKEND_URL + `/files/${theFile._id}`)

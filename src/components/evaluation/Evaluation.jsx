@@ -4,7 +4,6 @@ import axios from 'axios';
 import "./evaluation.css"
 import { useNavigate } from 'react-router-dom';
 export default function Evaluation({teacher, user, setUser}) {
-  console.log({t:teacher , u:user});
   const [expTime,setExpTime]= useState(user?.experience)
   const [goal, setGoal] = useState(user?.goal)
   const [whereStudied,setWhereStudied] = useState(user?.whereStudied);
@@ -15,7 +14,7 @@ export default function Evaluation({teacher, user, setUser}) {
   const [fileUpload, setFileUpload] = useState('')
   const plan  =   JSON.parse(localStorage.getItem("plan"))
   const navigate = useNavigate()
-  console.log(plan);
+
   const postDetails = (e) => {
     e.preventDefault()
     const formData = new FormData();
@@ -36,7 +35,7 @@ export default function Evaluation({teacher, user, setUser}) {
       });
   };
 
-  console.log(status);
+ 
   useEffect(() => {
     if (!videoUrl) return;
     
@@ -65,12 +64,10 @@ export default function Evaluation({teacher, user, setUser}) {
                    status: status === "canTry" ? "triedOnce": status
                  }
                )
-               
-               console.log(response.data);
                window.localStorage.setItem('profile', JSON.stringify(response.data.user));
                setUser(response.data.user);
                navigate('/profile');
-        console.log(res);
+       
       } catch (e) {
         console.log(e);
       }

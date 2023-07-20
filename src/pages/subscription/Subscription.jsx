@@ -22,7 +22,7 @@ const Subscription = ({ user, setUser }) => {
   const remainingMonths = endDate.diff(moment(), 'months');
   const remainingDays = endDate.diff(moment().add(remainingMonths, 'months'), 'days');
   
-  console.log(period)
+  
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
@@ -85,7 +85,6 @@ const Subscription = ({ user, setUser }) => {
 
   const handleSubscriptionSubmit = async () => {
     
-    console.log(period);
     let selectedTeacher = null;
 
     if (period === 'year') {
@@ -126,8 +125,8 @@ const Subscription = ({ user, setUser }) => {
           }
         );
         window.localStorage.setItem("profile", JSON.stringify(result.data));
-        console.log('Subscription plan:', result.data);
-        console.log('Subscription plan created:', response.data);
+        // console.log('Subscription plan:', result.data);
+        // console.log('Subscription plan created:', response.data);
         window.localStorage.setItem('plan', JSON.stringify(response.data));
         setUser(result.data);
         // Reset selected values
@@ -155,7 +154,7 @@ const Subscription = ({ user, setUser }) => {
             },
           }
         );
-        console.log(response);
+       
         window.localStorage.setItem('plan', JSON.stringify(response.data));
         setSelectedTeacherYear(null);
         setSelectedTeacher6Months(null);

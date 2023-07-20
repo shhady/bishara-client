@@ -10,8 +10,7 @@ export default function NewTeacher({user, setUser}) {
     const userId= user?._id
     const [open, setOpen] = useState('NewTeacherCourses')
     const {id} = useParams()
-    console.log(user)
-    console.log(teacher)
+   
  
       useEffect(() => {
         const fetch = async () => {

@@ -20,7 +20,6 @@ export default function Notifications({user}) {
   const [userPractices, setUserPractices] = useState([]);
   const [userPracticesNotSeen, setUserPracticesNotSeen] = useState([]);
   const navigate = useNavigate();
-  console.log(teacherPracticesNotifications);
   useEffect(() => {
     setUserF(user.firstName)
     setUserL(user.lastName)

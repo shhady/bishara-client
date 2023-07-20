@@ -206,7 +206,7 @@ export default function StudentsPractices({ user }) {
     setFileUpload(null);
     setPracticeId(null);
   };
-  console.log(teacherPractices)
+
   const showData = () => {
     return teacherPractices?.reverse().map((practice) => {
       return (

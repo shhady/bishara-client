@@ -325,7 +325,7 @@ export default function CreateTeacher() {
   const handleChange = (e) => {
     setTeacher({ ...teacher, [e.target.name]: e.target.value });
   };
-  console.log(fileUploadCover);
+
   return (
     <div className="createTeacherContainer">
       <form className="createTeacherForm" onSubmit={handleSubmit}>

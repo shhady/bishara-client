@@ -21,7 +21,7 @@ export default function TeachersPop({
     };
     fetch();
   }, []);
-  console.log(courses)
+
   if (!courses)
     return (
       <div

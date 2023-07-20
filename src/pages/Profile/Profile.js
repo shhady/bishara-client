@@ -57,7 +57,7 @@ const [uploading, setUploading] = useState(null)
         console.log(err);
       });
   };
-  console.log(uploading);
+  
   const postDetailsCover = () => {
     const formData = new FormData();
     formData.append("file", image);
@@ -240,7 +240,7 @@ const [uploading, setUploading] = useState(null)
     navigate(`/newTeacher/${userId}`)
   };
 
-  console.log(updateLastName);
+  
   const changeLastName = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -278,7 +278,7 @@ const [uploading, setUploading] = useState(null)
     setUpdateLastName("");
   };
 
-  console.log(fileUpload);
+  
   return (
     <div>
       {user ? (

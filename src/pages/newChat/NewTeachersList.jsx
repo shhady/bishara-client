@@ -7,7 +7,6 @@ export default function NewTeachersList({user,chats}) {
     const [teachers, setTeachers] = useState([])
     const [conversations, setConversations] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
-    console.log(user)
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -23,9 +22,9 @@ export default function NewTeachersList({user,chats}) {
       
             setTeachers(userTeachers);
       
-            console.log(userTeachers); // Logging filtered teachers
+            // console.log(userTeachers); // Logging filtered teachers
       
-            console.log(chats); // Logging chats array
+            // console.log(chats); // Logging chats array
           } catch (error) {
             console.error("Error fetching data:", error);
           }
@@ -34,8 +33,7 @@ export default function NewTeachersList({user,chats}) {
         fetchData();
       }, [user, chats]);
       
-   console.log(teachers)
-   console.log(chats)
+  
   const navigate = useNavigate();
  
   useEffect(() => {
@@ -92,7 +90,7 @@ export default function NewTeachersList({user,chats}) {
     navigate(`/chatting?currentChat=${currentChat?._id}&to=${currentChat?.receiver}&from=${currentChat?.senderId}`);
   },[currentChat])
 
-  console.log(currentChat)
+
     const drawTeachers = () => {
         return teachers.map((teacher) =>{
             return <div key={teacher._id} className="teacherInRightSide" style={{cursor:"pointer"}}>

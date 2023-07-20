@@ -34,7 +34,7 @@ export default function Practices({ user, socket }) {
   }, [user]);
 
   useEffect(() => {
-    console.log(filteredPractices);
+    // console.log(filteredPractices);
   }, []); // Run once when the component mounts
 
   return (

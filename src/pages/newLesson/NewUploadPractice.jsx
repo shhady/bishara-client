@@ -30,7 +30,7 @@ const redirectToSubscription = () => {
   navigate("/subscription");
 };
     const navigate = useNavigate();
-    console.log(user)
+   
     useEffect(() => {
         if (!user) return;
         setSocket(
@@ -93,7 +93,6 @@ const redirectToSubscription = () => {
             }
           )
           
-          console.log(response.data);
           window.localStorage.setItem('profile', JSON.stringify(response.data.user));
           setUser(response.data.user);
          await socket.emit("sendNotificationComment", {

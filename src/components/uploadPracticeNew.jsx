@@ -18,9 +18,6 @@ export default function UploadPracticeNew() {
       myWidget.open()
     }
   
-    console.log(formData)
-    console.log(video)
-
   
   return (
     <div>
