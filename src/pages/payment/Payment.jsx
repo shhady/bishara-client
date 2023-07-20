@@ -48,7 +48,7 @@ const navigate =useNavigate()
             style={{height:"100vh",width:"100vw"}}
               ref={iframeRef}
               className="popup-iframe"
-              src={`${process.env.REACT_APP_PAYMENT_URL}?codepage=65001&Operation=1&TerminalNumber=${process.env.REACT_APP_TERMINAL}&UserName=${process.env.REACT_APP_USER_NAME}&SumToBill=${period === "year" ? 1500 : period === "6 months" ? 1194 : 690}
+              src={`https://secure.cardcom.solutions/Interface/LowProfile.aspx?codepage=${process.env.REACT_APP_CODE_PAGE}&Operation=${process.env.REACT_APP_OPERATION}&TerminalNumber=${process.env.REACT_APP_TERMINAL}&UserName=${process.env.REACT_APP_USER_NAME}&SumToBill=${period === "year" ? 1500 : period === "6 months" ? 1194 : 690}
               &CoinID=1&Language=ar&ProductName=item1&APILevel=10&SuccessRedirectUrl=https://secure.cardcom.solutions/SuccessAndFailDealPage/Success.aspx&ErrorRedirectUrl=https://secure.cardcom.solutions/SuccessAndFailDealPage/Fail.aspx&IndicatorUrl=www.google.com&ReturnValue=1234&&AutoRedirect=true&InvoiceHead.CustName=${user.firstName}&InvoiceHead.SendByEmail=true&InvoiceHead.Email=${user.email}&InvoiceHead.Language=ar&InvoiceHead.CoinID=1&CardOwnerEmail=${user.email}&MaxNumOfPayments=${period === "year" ? 12: period === "6 months" ? 6 : 3}&InvoiceLines1.Description=${period}&InvoiceLines1.Price=${period === "year" ? 1500: period === "6 months" ? 1194 : 690}&InvoiceLines1.Quantity=1`}
               title="Cardcom Popup"
             />
