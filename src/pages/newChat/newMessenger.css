@@ -125,9 +125,10 @@
 
     /* Adjust styles for mobile devices in .messageContainer */
     .messageContainer {
-        height: calc(100vh - 185px);
+        height: calc(100vh - 180px);
         overflow-y: scroll;
         position: relative;
+        top:120px;
         /* Remove 'top' and 'width' properties, as they are not necessary */
     }
 
