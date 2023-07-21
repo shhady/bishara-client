@@ -120,21 +120,21 @@
         margin-top: 60px;
         background-color: antiquewhite;
         min-height: calc(100vh - 60px);
-        position: relative;
+        /* position: relative; */
     }
 
     /* Adjust styles for mobile devices in .messageContainer */
     .messageContainer {
         height: calc(100vh - 185px);
         overflow-y: scroll;
-        position: relative;
+        position: fixed;
         top:125px;
         /* Remove 'top' and 'width' properties, as they are not necessary */
     }
 
     /* Adjust styles for mobile devices in .inputMessages */
     .inputMessages {
-        position: absolute;
+        position: fixed;
         bottom: 2px;
         width: 100%;
         /* Remove 'height' property, as it is not necessary */
