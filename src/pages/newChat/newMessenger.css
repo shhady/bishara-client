@@ -117,9 +117,9 @@
 
     /* Adjust styles for mobile devices in .ChatPage */
     .ChatPage {
-        margin-top: 60px;
+        margin-top: 0px; 
         background-color: antiquewhite;
-        height: calc(100vh - 177px); /* Subtract the height of the fixed header */
+        height: calc(100vh - 200px); /* Subtract the height of the fixed header */
     }
     
     /* Remove position: fixed from .secondUserInfo */
@@ -129,8 +129,8 @@
         justify-content: flex-start;
         align-items: center;
         border-bottom: 1px solid black;
-        position: fixed; 
-        top: 60px;
+        /* position: fixed;  */
+        margin-top: 60px;
         height: 50px;
         background-color: rgb(208, 215, 219);
         width: 100%;
@@ -141,6 +141,8 @@
         /* height: 50vh; */
         overflow-y: scroll;
         width: 100%;
+        height: 75vh;
+        /* height:  calc(100vh - 177px); */
         /* margin-top:127px ; */
         /* position: fixed; */
         
@@ -149,7 +151,7 @@
 
     /* Adjust styles for mobile devices in .inputMessages */
     .inputMessages {
-        /* position: fixed; */
+        position: fixed;
         bottom: 0px;
         width: 100%;
         height: 50px;
