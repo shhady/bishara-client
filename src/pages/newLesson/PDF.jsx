@@ -60,7 +60,7 @@ export default function PDF({course,name,user}) {
   return (
     <div className='divOfUploadBtn'>
         {fileUrl ? (<>
-        {plan?.teacherId === course?.owner && plan?.status === 'active'  || user?._id ===  course?.owner? ( <div className='uploadPracticeBtnDiv'>
+        {(plan?.teacherId === course?.owner && plan?.status === 'active' ) || user?._id ===  course?.owner? ( <div className='uploadPracticeBtnDiv'>
         <a
     href={fileUrl}
     target="_blank"

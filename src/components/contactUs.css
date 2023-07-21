@@ -108,7 +108,7 @@ textarea {
 @media (max-width: 768px) {
     .contact-button {
         position: fixed;
-        bottom: 0px;
+        bottom: 50px;
         right:0px;
         background: rgb(46, 45, 45);
         color: white;

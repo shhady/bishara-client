@@ -34,7 +34,7 @@ const NewProfile = React.lazy(() => import("./pages/Profile/NewProfile"));
 const ChooseTeacher = React.lazy(() => import("./pages/subscription/ChooseTeacher"));
 const ChosenTeacher = React.lazy(() => import("./pages/subscription/ChosenTeacher"));
 const MyStudents = React.lazy(() => import("./pages/myStudents/MyStudents"));
-
+const BottomMenu = React.lazy(() => import("../src/components/menu-bottom/BottomMenu"));
 
 export default function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -102,6 +102,7 @@ export default function App() {
             chatNotification={chatNotification}
             setChatNotification={setChatNotification}
           />
+          <BottomMenu user={user} socket={socket}/>
           <Routes>
 
           <Route path="/" exact element={<Home

@@ -34,7 +34,7 @@ export default function NewLesson({user, setUser}) {
     //   if(!theUser) return ;
     //     theUser?.user ? setUser(theUser.user):(setUser(theUser.teacher)) 
     // },[theUser])
-    
+    console.log(user);
     useEffect(()=>{
         const theVideo = lessons.filter((v)=>v.snippet.resourceId.videoId === name)
         setVideoName(theVideo[0]?.snippet.title)
@@ -84,7 +84,7 @@ export default function NewLesson({user, setUser}) {
         {drawSuggestions()}
         </div>
         <div className='UploadPDownloadF'>
-            {user?._id === course?.owner || user?.role === "admin" ? (<PDF course={course} name={name}/>
+            {user?._id === course?.owner || user?.role === "admin" ? (<PDF course={course} name={name} user={user}/>
             ):( <>{user ? (<><PDF course={course} name={name} user={user}/><NewUploadPractice course={course} uniqueLink={name} videoName={videoName} user={user} setUser={setUser}/></>):
             (<div style={{color:"red"}}>يجب تسجيل الدخول لتحميل الملفات ورفع التمارين للحصول على تقييم العزف <Link to="/auth">لتسجيل الدخول اضغط هنا</Link></div>)
             }</>)}

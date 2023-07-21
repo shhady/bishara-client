@@ -1,0 +1,46 @@
+
+.bottomMenu{
+    display: none;
+}
+.icon-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .icon-content > div {
+    margin: -5px 0; 
+    font-size: smaller;/* Adjust the margin as desired */
+  }
+  .auth{
+    display: none;
+  }
+  
+  .practiceIcon{
+    position: relative;
+  }
+  .redDot{
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    right: 0;
+    top: 3px;
+    background-color: red;
+    border-radius: 50%;
+  }
+@media (max-width: 767px) {
+    .bottomMenu{
+        display:flex;
+        height: 50px;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: whitesmoke;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px;
+        z-index: 999;
+    }
+}

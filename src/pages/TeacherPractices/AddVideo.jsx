@@ -63,6 +63,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
               replyId: unique_id,
             },
           ],
+          
         };
     
         onVideoAdd(updatedPractice);
@@ -77,8 +78,14 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
             uniqueLink: practice.uniqueLink || null,
             teacherId: practice.teacherId,
             replyId: unique_id,
+            replySeen: "false"
           });
-    
+          await axios.patch(
+            process.env.REACT_APP_BACKEND_URL + `/studentpractices/${practice._id}`,
+            {
+              replySeen: false,
+            }
+          )
           if (commentText) {
             await axios.post(`${process.env.REACT_APP_BACKEND_URL}/replies`, {
               theVideoReply: videoUrl,
@@ -128,6 +135,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
           replyId: selectedUniqueId,
         },
       ],
+      replySeen:"false"
     };
 
     onVideoAdd(updatedPractice);
@@ -143,7 +151,12 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
         teacherId: practice.teacherId,
         replyId: selectedUniqueId,
       });
-
+      await axios.patch(
+        process.env.REACT_APP_BACKEND_URL + `/studentpractices/${practice._id}`,
+        {
+          replySeen: false,
+        }
+      )
       setCommentText('');
       setVideo('');
 

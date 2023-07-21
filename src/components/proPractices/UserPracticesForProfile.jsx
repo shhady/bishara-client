@@ -217,5 +217,5 @@ const changeToOneFr = ()=>{
     });
   };
 
-  return <div>{showData()}</div>;
+  return <div style={{marginBottom:"50px"}}>{showData()}</div>;
 }
