@@ -119,13 +119,13 @@
     .ChatPage {
         margin-top: 60px;
         background-color: antiquewhite;
-        min-height: calc(100vh - 60px);
+        max-height: calc(100vh - 60px);
         /* position: relative; */
     }
 
     /* Adjust styles for mobile devices in .messageContainer */
     .messageContainer {
-        height: calc(100vh - 185px);
+        height: calc(100vh - 200px);
         overflow-y: scroll;
         position: fixed;
         top:125px;
