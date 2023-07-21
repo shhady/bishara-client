@@ -13,10 +13,42 @@ export default function BottomMenu({ user, socket }) {
   const [practices, setPractices] = useState([]);
   const history = useHistory(); // Get the history object
 
+    useEffect(()=>{
+        if (user.role === 'admin' || user.role === 'teacher') {
+           try{
+         const fetchPractices = async () => {
+             const res = await axios.get(
+               `${process.env.REACT_APP_BACKEND_URL}/mypractices/${user._id}`
+             );
+             setPractices(res.data);
+           };
+           fetchPractices();
+        } catch (e) {
+            console.log(e)
+        }
+          } else {
+            const fetchUserPractices = async () => {
+                try {
+                  const res = await axios.get(
+                    `${process.env.REACT_APP_BACKEND_URL}/studentpractices/${user._id}`
+                  );
+                  setUserPractices(res.data);
+                } catch (error) {
+                  console.error('Error fetching user practices:', error);
+                }
+              };
+              fetchUserPractices();
+          }
+    },[user])
   useEffect(() => {
     if (location.pathname.includes('auth') || location.pathname.includes('chatting')) {
       setMenu("auth");
-    } else {
+    } 
+    else if (location.pathname.includes('newReview')) { // <-- Add closing parenthesis here
+      setPractices([]);
+      console.log('review');
+    } 
+    else {
       setMenu('bottomMenu');
     }
   }, [location]);
