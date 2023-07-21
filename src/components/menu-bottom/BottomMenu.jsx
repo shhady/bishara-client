@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faUser, faMusic, faUsersLine, faLayerGroup } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 
-export default function BottomMenu({user}) {
+export default function BottomMenu({user, socket}) {
   const [menu, setMenu] = useState('bottomMenu');
 //   const { auth } = useParams();
   const location = useLocation();
@@ -23,6 +23,13 @@ export default function BottomMenu({user}) {
 
   console.log("Content after /:", urlContent);
 
+  useEffect(() => {
+    socket?.on("getNotificationComment", (data) => {
+      console.log('listening for getNotificationComment event...');
+      console.log(data);
+      // setRedLightNotificationReply(true);
+    });
+  }, [socket]);
   useEffect(()=>{
         if(urlContent.includes('auth') || urlContent.includes('profile') || urlContent.includes('chatting')) return;
         try {
