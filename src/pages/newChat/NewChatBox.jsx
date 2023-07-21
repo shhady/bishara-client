@@ -162,11 +162,13 @@ useEffect(() => {
 
 
   return (
-    <div className='ChatPage'>
-      <div className='secondUserInfo'>
+    <>
+    <div className='secondUserInfo'>
         <img src={secondUser?.avatar ? secondUser?.avatar  : "https://img.icons8.com/material-rounded/24/null/user.png"} alt={secondUser?.firstName} height='40px' width='40px' style={{borderRadius:"50%", marginLeft:"20px"}}/>
         <div>{secondUser?.firstName} {secondUser?.lastName}</div>
       </div>
+    <div className='ChatPage'>
+      
       <div className="messageContainer">
     {messages.map((m, index) => (
       <Message key={index} message={m} own={m.sender === user._id} />
@@ -194,5 +196,6 @@ useEffect(() => {
                   </div>
       </div>
     </div>
+    </>
   )
 }
