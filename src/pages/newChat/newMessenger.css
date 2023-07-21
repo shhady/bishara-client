@@ -136,16 +136,16 @@
         align-items: center;
         border-bottom: 1px solid black;
         position: absolute; 
-        top:0px;
-        height: 30px;
+        top:0;
+        height: 50px;
         background-color: rgb(208, 215, 219);
         width: 100%;
     }
     .messageContainer{
-        height:calc(100% - 90px);
+        height:calc(100% - 110px);
         overflow-y: scroll;
         position:absolute;
-        top:30px;
+        top:50;
         width: 100%; 
     }
     .inputMessages{
