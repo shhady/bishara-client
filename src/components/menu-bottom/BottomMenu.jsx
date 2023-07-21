@@ -26,7 +26,7 @@ export default function BottomMenu({user, socket}) {
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
       console.log('listening for getNotificationComment event...');
-      console.log(data);
+      setPractices(...practices.push(data));
       // setRedLightNotificationReply(true);
     });
   }, [socket]);
