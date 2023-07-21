@@ -136,7 +136,7 @@
         width: 100%;
     }
     .messageContainer{
-        height:75vh;
+        height:calc(100vh - 120px - 5px);
         overflow-y: scroll;
         position: fixed;
         top:120px;
@@ -144,7 +144,7 @@
     }
     .inputMessages{
         position: fixed;
-        top:120px + 80vh;
+        bottom:0;
         width: 100%;
     }
     
