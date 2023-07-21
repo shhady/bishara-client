@@ -57,7 +57,7 @@
    
 }
 .messageContainer{
-    height:70vh;
+    height:78vh;
     overflow-y: scroll;
 }
 .inputMessages{
@@ -125,4 +125,27 @@
          margin: 60px auto;
          background-color: antiquewhite;
     }
+    .secondUserInfo{
+        padding: 10px 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: 1px solid black;
+        position: fixed;
+        top:60px;
+        width: 100%;
+    }
+    .messageContainer{
+        height:80vh;
+        overflow-y: scroll;
+        position: fixed;
+        top:120px;
+        width: 100%;
+    }
+    .inputMessages{
+        position: fixed;
+        top:120px + 80vh;
+        width: 100%;
+    }
+    
 }

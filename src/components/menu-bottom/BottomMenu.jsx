@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./bottomMenu.css";
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faUser, faMusic, faUsersLine, faLayerGroup } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
@@ -11,16 +11,16 @@ export default function BottomMenu({ user, socket }) {
   const urlContent = location.pathname; // Extract content after the first "/"
   const [userPractices, setUserPractices] = useState([]);
   const [practices, setPractices] = useState([]);
-  const history = useHistory(); // Get the history object
+  const navigate = useNavigate(); // Get the history object
 
     useEffect(()=>{
-        if (user.role === 'admin' || user.role === 'teacher') {
+        if (user?.role === 'admin' || user?.role === 'teacher') {
            try{
          const fetchPractices = async () => {
              const res = await axios.get(
                `${process.env.REACT_APP_BACKEND_URL}/mypractices/${user._id}`
              );
-             setPractices(res.data);
+             setPractices(res.data.filter((practice)=> !practice.reply && practice.videoReply.length === 0 && practice.RecordReply.length === 0 ));
            };
            fetchPractices();
         } catch (e) {
@@ -32,7 +32,7 @@ export default function BottomMenu({ user, socket }) {
                   const res = await axios.get(
                     `${process.env.REACT_APP_BACKEND_URL}/studentpractices/${user._id}`
                   );
-                  setUserPractices(res.data);
+                  setUserPractices(res.data.filter((practice)=> practice.replySeen === 'false'));
                 } catch (error) {
                   console.error('Error fetching user practices:', error);
                 }
@@ -43,10 +43,6 @@ export default function BottomMenu({ user, socket }) {
   useEffect(() => {
     if (location.pathname.includes('auth') || location.pathname.includes('chatting')) {
       setMenu("auth");
-    } 
-    else if (location.pathname.includes('newReview')) { // <-- Add closing parenthesis here
-      setPractices([]);
-      console.log('review');
     } 
     else {
       setMenu('bottomMenu');
@@ -73,7 +69,7 @@ export default function BottomMenu({ user, socket }) {
       setUserPractices([]);
     }
     // Navigate to the desired page after updating the state
-    history.push("/newReview");
+    navigate("/newReview");
   };
 
   return (
