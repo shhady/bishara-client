@@ -119,29 +119,44 @@
     .ChatPage {
         margin-top: 60px;
         background-color: antiquewhite;
-        max-height: calc(100vh - 60px);
-        /* position: relative; */
+        height: calc(100vh - 75px); /* Subtract the height of the fixed header */
     }
-
+    
+    /* Remove position: fixed from .secondUserInfo */
+    .secondUserInfo {
+        padding: 10px 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: 1px solid black;
+        /* position: fixed; */ /* Remove position: fixed */
+        top: 60px;
+        height: 7vh;
+        background-color: rgb(208, 215, 219);
+        width: 100%;
+        z-index: 999;
+    }
     /* Adjust styles for mobile devices in .messageContainer */
     .messageContainer {
-        height: calc(100vh - 200px);
+        /* height: 50vh; */
         overflow-y: scroll;
-        position: fixed;
-        top:125px;
+        width: 100%;
+        /* position: fixed; */
+        
         /* Remove 'top' and 'width' properties, as they are not necessary */
     }
 
     /* Adjust styles for mobile devices in .inputMessages */
     .inputMessages {
-        position: fixed;
-        bottom: 2px;
+        /* position: fixed; */
+        bottom: 0px;
         width: 100%;
+        height: 5vh;
         /* Remove 'height' property, as it is not necessary */
     }
 
     /* Adjust styles for mobile devices in .secondUserInfo */
-    .secondUserInfo {
+    /* .secondUserInfo {
         padding: 10px 20px;
         display: flex;
         justify-content: flex-start;
@@ -149,9 +164,9 @@
         border-bottom: 1px solid black;
         position: fixed;
         top: 60px;
-        height: 50px;
+        height: 7vh;
         background-color: rgb(208, 215, 219);
         width: 100%;
         z-index: 999;
-    }
+    } */
 }
