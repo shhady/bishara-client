@@ -125,10 +125,10 @@
 
     /* Adjust styles for mobile devices in .messageContainer */
     .messageContainer {
-        height: calc(100vh - 180px);
+        height: calc(100vh - 185px);
         overflow-y: scroll;
         position: relative;
-        top:120px;
+        top:125px;
         /* Remove 'top' and 'width' properties, as they are not necessary */
     }
 
@@ -152,5 +152,6 @@
         height: 50px;
         background-color: rgb(208, 215, 219);
         width: 100%;
+        z-index: 999;
     }
 }
