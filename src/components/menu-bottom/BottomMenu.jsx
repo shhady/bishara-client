@@ -26,7 +26,13 @@ export default function BottomMenu({user, socket}) {
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
       console.log('listening for getNotificationComment event...');
-      setPractices(...practices.push(data));
+      if (user.role === "admin" || user.role === "teacher") {
+        // Use the functional update form to add the new data to the state
+        setPractices((prevPractices) => [...prevPractices, data]);
+      } else {
+        // Use the functional update form to add the new data to the state
+        setUserPractices((prevUserPractices) => [...prevUserPractices, data]);
+      }
       // setRedLightNotificationReply(true);
     });
   }, [socket]);
