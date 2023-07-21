@@ -119,7 +119,7 @@
     .ChatPage {
         margin-top: 60px;
         background-color: antiquewhite;
-        height: calc(100vh - 125px); /* Subtract the height of the fixed header */
+        height: calc(100vh - 177px); /* Subtract the height of the fixed header */
     }
     
     /* Remove position: fixed from .secondUserInfo */
@@ -141,7 +141,7 @@
         /* height: 50vh; */
         overflow-y: scroll;
         width: 100%;
-        margin-top:127px ;
+        /* margin-top:127px ; */
         /* position: fixed; */
         
         /* Remove 'top' and 'width' properties, as they are not necessary */
@@ -152,7 +152,7 @@
         /* position: fixed; */
         bottom: 0px;
         width: 100%;
-        height: 5vh;
+        height: 50px;
         /* Remove 'height' property, as it is not necessary */
     }
 
