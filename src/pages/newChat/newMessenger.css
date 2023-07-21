@@ -136,7 +136,7 @@
         width: 100%;
     }
     .messageContainer{
-        height:80vh;
+        height:75vh;
         overflow-y: scroll;
         position: fixed;
         top:120px;
