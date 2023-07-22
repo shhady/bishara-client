@@ -14,7 +14,7 @@ export default function Evaluation({teacher, user, setUser}) {
   const [fileUpload, setFileUpload] = useState('')
   const plan  =   JSON.parse(localStorage.getItem("plan"))
   const navigate = useNavigate()
-
+console.log(expTime);
   const postDetails = (e) => {
     e.preventDefault()
     const formData = new FormData();
@@ -67,7 +67,7 @@ export default function Evaluation({teacher, user, setUser}) {
                window.localStorage.setItem('profile', JSON.stringify(response.data.user));
                setUser(response.data.user);
                navigate('/profile');
-       
+                 console.log(response);
       } catch (e) {
         console.log(e);
       }
@@ -85,26 +85,31 @@ export default function Evaluation({teacher, user, setUser}) {
     {user && plan && plan?.teacherId !== teacher._id ? (<div  style={{display:"flex", justifyContent:"center",flexDirection:"column", alignItems:"center", height:"100%"}}><h3>انت مشترك مع معلم اخر</h3><button onClick={()=>navigate(`/newTeacher/${plan?.teacherId}`)} style={{background:"#fcedd5", padding:"10px 15px"}}>{plan?.teacherName}</button></div>):(null)}
     {(plan?.teacherId === teacher._id && plan?.status === 'active'|| user?.status === "canTry" && !plan)  && <div className='notSub'>
       <form className='formEvaluation' onSubmit={postDetails}>
-      <div style={{width:"100%", textAlign:'center', fontWeight:"bold"}}>
-           خبرتك في العزف </div>      
+      <div style={{ width: "100%", textAlign: 'center', fontWeight: "bold" }}>
+  خبرتك في العزف
+</div>
 
-          <div style={{width:"100%", textAlign:'center'}}>
-          <select
-           className='inputFormEva'
-  value={expTime}
-  onChange={(e) => setExpTime(e.target.value)}
-  required
->
-  <option value="" disabled hidden >
-    اختر المده
-  </option>
-  <option value="1-6 اشهر">1-6 اشهر</option>
-  <option value="6-12 اشهر">6-12 اشهر</option>
-  <option value="1-2 سنوات">1-2 سنوات</option>
-  <option value="2-3 سنوات">2-3 سنوات</option>
-  <option value="3-4 سنوات">3-4 سنوات</option>
-  <option value="اكثر من 5 سنوات">اكثر من 5 سنوات</option>
-</select>
+<div style={{ width: "100%", textAlign: 'center' }}>
+  <select
+    className='inputFormEva'
+    value={expTime}
+    onChange={(e) => setExpTime(e.target.value)}
+    required
+  >
+    {/* Add the conditional rendering here */}
+    {!expTime && (
+      <option value="" >
+        اختر المده
+      </option>
+    )}
+
+    <option value="1-6 اشهر">1-6 اشهر</option>
+    <option value="6-12 اشهر">6-12 اشهر</option>
+    <option value="1-2 سنوات">1-2 سنوات</option>
+    <option value="2-3 سنوات">2-3 سنوات</option>
+    <option value="3-4 سنوات">3-4 سنوات</option>
+    <option value="اكثر من 5 سنوات">اكثر من 5 سنوات</option>
+  </select>
 </div>
     <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", gap:"15px", width:"60%"}}>
           <input className='inputFormEva' type="text" value={ whereStudied} onChange={(e)=> setWhereStudied(e.target.value)} placeholder="اين تعلمت" required/>
