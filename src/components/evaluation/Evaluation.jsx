@@ -14,7 +14,7 @@ export default function Evaluation({teacher, user, setUser}) {
   const [fileUpload, setFileUpload] = useState('')
   const plan  =   JSON.parse(localStorage.getItem("plan"))
   const navigate = useNavigate()
-console.log(expTime);
+
   const postDetails = (e) => {
     e.preventDefault()
     const formData = new FormData();
@@ -67,7 +67,7 @@ console.log(expTime);
                window.localStorage.setItem('profile', JSON.stringify(response.data.user));
                setUser(response.data.user);
                navigate('/profile');
-                 console.log(response);
+                
       } catch (e) {
         console.log(e);
       }
