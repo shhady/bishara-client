@@ -13,7 +13,7 @@ const PopupIframeButton = ({ user, handleSubscriptionSubmit, period, setIsPopupO
       if (responseCode === '0') {
         handleSubscriptionSubmit(period);
         setTimeout(function () {
-          navigate(`/newTeacher/${selectedTeacher.value}`);
+          navigate(`/newTeacher/${selectedTeacher?.value}`);
         }, 3000);
       } else {
         setTimeout(function () {
@@ -21,7 +21,7 @@ const PopupIframeButton = ({ user, handleSubscriptionSubmit, period, setIsPopupO
         }, 3000);
       }
     }
-  }, [handleSubscriptionSubmit, period, selectedTeacher.value, setIsPopupOpen, navigate]);
+  }, [handleSubscriptionSubmit, period, selectedTeacher?.value, setIsPopupOpen, navigate]);
 
   React.useEffect(() => {
     window.addEventListener('message', handleIframeMessage);
