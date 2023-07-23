@@ -120,10 +120,10 @@
     .ChatPage {
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 60px);
+        height: 100vh;
         box-sizing: border-box;
         overflow: hidden;
-        margin-top: 60px;
+        
       }
       
       /* Adjust styles for mobile devices in .secondUserInfo */
@@ -136,13 +136,15 @@
         height: 50px;
         background-color: rgb(208, 215, 219);
         width: 100%;
+        position: fixed;
+        margin-top: 60px;
       }
       
       /* Adjust styles for mobile devices in .messageContainer */
       .messageContainer {
         flex-grow: 1;
         overflow-y: scroll;
-        padding: 0px 10px 60px 10px;
+        padding: 113px 10px 60px 10px;
       }
       
       /* Adjust styles for mobile devices in .inputMessages */
@@ -171,6 +173,7 @@
         background-color: transparent;
         outline: none;
         cursor: pointer;
+        color: black;
       }
 
     /* Adjust styles for mobile devices in .secondUserInfo */
