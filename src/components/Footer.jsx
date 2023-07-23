@@ -39,9 +39,9 @@ export default function Footer() {
           </div> 
         ):(null)}
         </div>
-        <Link to= "/terms_and_conditions">
+        <Link to= "/terms_and_conditions" style={{textDecoration:"none", color:"black"}}>
         <div>الشروط والاحكام</div></Link>
-        <Link to="/privacy_policy">
+        <Link to="/privacy_policy" style={{textDecoration:"none", color:"black"}}>
         <div>سياسة الخصوصية</div></Link>
       </div>
       <div style={{ textAlign: "center" }}>all rights reserved &copy;</div>
