@@ -26,6 +26,14 @@ const GoogleAuthSignIn = ({ setUser, setShowLoginFailMessage }) => {
 
       navigate("/profile");
       setUser(result.data.user);
+      if(result.data.user.subscriptionPlan){
+        const plan = await axios.get( process.env.REACT_APP_BACKEND_URL + `/subscription-plans/${result.data.user.subscriptionPlan}`,{
+          headers: {
+            Authorization: `Bearer ${result.data.token}`,
+          },
+        })
+        window.localStorage.setItem("plan",JSON.stringify(plan.data))
+      }
     } catch (error) {
       setShowLoginFailMessage(true);
     }
