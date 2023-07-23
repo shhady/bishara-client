@@ -191,7 +191,7 @@ const Subscription = ({ user, setUser }) => {
       
         <div className='plan2'>
           <h2 className='titleSubscription'>ستة أشهر</h2>
-          شهري/ <strong>199₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>299₪</strong></s></span>
+          شهري/ <strong>149 ₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>299₪</strong></s></span>
           <div className='invoiceLine'>فاتورة 6 أشهر 1194 شيكل</div>
           <div className='textSubscription6'>* لتحقيق النتائج المرغوبة، يجب على الفرد أن يلتزم بالدراسة لمدة لا تقل عن 6 أشهر</div>
          {user ? (<>{endDate.isAfter(moment()) ? (
@@ -261,7 +261,7 @@ const Subscription = ({ user, setUser }) => {
             استفد من أفضل قيمة ممكنة
           </div>
           <h2 className='titleSubscription'>سنوي</h2>
-          شهري/ <strong>125₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>209₪</strong></s></span>
+          شهري/ <strong>104₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>209₪</strong></s></span>
           <div className='invoiceLine'>فاتورة سنوية 1500 شيكل</div>
           <div style={{ fontWeight: "bold", padding: "10px 30px" }}> اجعل الموسيقى من أولوياتك لمدة 365 يوماً القادمة</div>
           <div style={{ fontWeight: "bold", padding: "10px 30px" }}>وفر الكثير مع الرزمة الأكثر شيوعًا</div>
@@ -324,9 +324,9 @@ const Subscription = ({ user, setUser }) => {
         </div>
         <div className='plan3'>
           <h2 className='titleSubscription'>ثلاثة أشهر</h2>
-          شهري/ <strong>230₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>399₪</strong></s></span>
+          شهري/ <strong>190₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>399₪</strong></s></span>
           <div className='invoiceLine'>فاتورة 3 أشهر 690 شيكل</div>
-          <div className='textSubscription6'>* لتحقيق النتائج المرغوبة، يجب على الفرد أن يلتزم بالدراسة لمدة لا تقل عن 3 أشهر</div>
+          <div className='textSubscription6'>* اشتراك لمدة 3 اشهر,  تمكنك من رفع فيديوهات لعزفك وتلقي رد من معلمك</div>
          {user ? (<>{endDate.isAfter(moment()) ? (
             <>
             {remainingMonths > 0 && (

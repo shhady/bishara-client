@@ -79,6 +79,7 @@
     justify-content: flex-start;
     align-items: center;
     border-bottom: 1px solid black;
+    background-color: rgb(208, 215, 219);
 }
 
 @media (max-width: 768px) {
