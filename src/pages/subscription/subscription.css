@@ -170,23 +170,27 @@
     padding: 0px 50px;
 }
 @media (max-width:600px) {
-    .plansContainer{
+    .plansContainer {
         display: grid;
         grid-template-columns: 1fr;
-        gap:50px;
+        gap: 50px;
         padding: 0px 20px;
-    }
-    .plan2{
+      }
+    
+      .plan1 {
+        width: 100%;
+        border: 1px solid black;
+        text-align: center;
+        margin: 0px auto;
+        /* Set the order of plan1 to be first on mobile */
+        order: -1;
+      }
+    
+      .plan2 {
         width: 100%;
         border: 1px solid black;
         text-align: center;
         margin-top: 50px;
         margin: 50px auto;
-    }
-    .plan1{
-        width: 100%;
-        border: 1px solid black;
-        text-align: center;
-        margin: 0px auto;
-    }
+      }
 }
