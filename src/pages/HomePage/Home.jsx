@@ -10,6 +10,7 @@ import ContactUs from "../../components/ContactUs";
 export default function Home({user, setUser}) {
 
   useEffect(() => {
+    if(!user) return;
     if(user.role === "admim" || user.role === "teacher") return;
     // Check if user exists and has a valid createdAt date
     if (user && new Date(user.createdAt) < new Date('2023-07-23T00:00:00Z')) {
