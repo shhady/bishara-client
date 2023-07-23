@@ -3,7 +3,11 @@ import React, { useState } from 'react'
 
 export default function PrivacyPolicy() {
     const [lang, setLang] = useState('ar')
-    console.log(lang);
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+      
   return (
     <div style={{margin:"100px 0px", textAlign:"start", padding:"20px 20px"}}>
         <div style={{display:'flex', justifyContent:"space-between", alignItems:"center"}} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
