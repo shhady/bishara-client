@@ -8,19 +8,23 @@ import CoursesHomePage from "../../components/CoursesHomePage";
 import NewHero from "../../components/newHero/NewHero";
 import ContactUs from "../../components/ContactUs";
 export default function Home({user, setUser}) {
-
   useEffect(() => {
-    if(!user) return;
-    if(user?.role === "admin" || user?.role === "teacher") return;
-    // Check if user exists and has a valid createdAt date
-    if (user && new Date(user?.createdAt) < new Date('2023-07-23T00:00:00Z')) {
+    if (!user) return;
+  
+    const profileData = JSON.parse(window.localStorage.getItem("profile"));
+    const createdAtDate = profileData?.createdAt;
+  
+    if (
+      (user.role !== "admin" && user.role !== "teacher") &&
+      ((new Date(user.createdAt) < new Date('2023-07-23T00:00:00Z')) || 
+      (createdAtDate && new Date(createdAtDate) < new Date('2023-07-23T00:00:00Z')))
+    ) {
       // Clear local storage
       window.localStorage.removeItem('profile');
       window.localStorage.removeItem('token');
       setUser(null);
     }
   }, [user, setUser]);
-
   console.log(user);
   return (
     <div className="HomePage">
