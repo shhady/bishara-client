@@ -120,10 +120,10 @@
     .ChatPage {
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 60px);      
-          overflow: hidden; 
-        margin-top: 60px;/* Subtract the height of the fixed header */
-    }
+        height: calc(100vh - 60px); /* Account for fixed header's height */
+        overflow: hidden;
+        margin-top: 60px;
+      }
     
     /* Remove position: fixed from .secondUserInfo */
     .secondUserInfo {
@@ -141,18 +141,11 @@
     }
     /* Adjust styles for mobile devices in .messageContainer */
     .messageContainer {
-        /* height: 50vh; */
         overflow-y: scroll;
         width: 100%;
-        height: calc(100vh - 110px);
-        padding: 0px 0px 60px 0px;
-        /* height: 75vh; */
-        /* height:  calc(100vh - 177px); */
-        /* margin-top:127px ; */
-        /* position: fixed; */
-        
-        /* Remove 'top' and 'width' properties, as they are not necessary */
-    }
+        flex-grow: 1; 
+        padding: 0px 0px 60px 0px; /* Add some padding to the bottom to prevent content from being covered by inputMessages */
+      }
 
     /* Adjust styles for mobile devices in .inputMessages */
     .inputMessages {
@@ -160,8 +153,7 @@
         bottom: 0px;
         width: 100%;
         height: 50px;
-        /* Remove 'height' property, as it is not necessary */
-    }
+      }
 
     /* Adjust styles for mobile devices in .secondUserInfo */
     /* .secondUserInfo {
