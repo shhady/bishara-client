@@ -5,6 +5,8 @@ import { io } from "socket.io-client";
 import Zoom from "./pages/payment/Payment";
 
 import EditReplies from "./pages/TeacherPractices/EditReplies";
+import Tcs from "./components/t&cs/Tcs";
+import PrivacyPolicy from "./components/privacyPolicy/PrivacyPolicy";
 const Home = React.lazy(() => import("./pages/HomePage/Home"));
 const StudentsPractices = React.lazy(() => import("./components/StudentsPractices"));
 const Messenger = React.lazy(() => import("./components/Messenger/Messenger"));
@@ -126,8 +128,10 @@ export default function App() {
           <Route path="/chooseTeacher/:id" exact element={<ChosenTeacher user={user} setUser={setUser}/>}/>
           <Route path="/myStudents/:id" exact element={<MyStudents user={user}/>}/>
           <Route path="/editReplies/:id" exact element={<EditReplies user={user}/>}/>
-
           
+          <Route path="/terms_and_conditions" exact element={<Tcs user={user}/>}/>
+          <Route path="/privacy_Policy" exact element={<PrivacyPolicy user={user}/>}/>
+
           <Route path="/NewReview" exact element={<NewReview socket={socket}/>}/>
           <Route path="/addStudent" exact element={<PaidStudent user={user} setUser={setUser}/>}/>
           <Route path="/Notifications" exact element={<Notifications user={user} setUser={setUser} />}/>

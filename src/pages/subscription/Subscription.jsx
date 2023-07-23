@@ -177,7 +177,7 @@ const Subscription = ({ user, setUser }) => {
 
   return (
     <div>
-     {isPopupOpen ?  <> {TcsShow === "Tcs" ? <div style={{marginTop:"100px", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}><div><Tcs/></div><div className='TcsBtns'><button onClick={()=>setTcsShow("payment")} className='TcsBtn'>موافق</button><button className='TcsBtn' onClick={()=>setIsPopupOpen(null)} >غير موافق</button></div> </div>:<><button style={{marginTop:"100px"}} onClick={()=>setIsPopupOpen(null)} className='TcsBtn'>صفحة الاشتراك</button><Payment user={user} handleSubscriptionSubmit={handleSubscriptionSubmit} period={period} selectedTeacher={selectedTeacherYear ?selectedTeacherYear:selectedTeacher6Months} setIsPopupOpen={setIsPopupOpen}/></>}</> : 
+     {isPopupOpen ?  <> {TcsShow === "Tcs" ? <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}><div><Tcs/></div><div className='TcsBtns'><button onClick={()=>setTcsShow("payment")} className='TcsBtn'>موافق</button><button className='TcsBtn' onClick={()=>setIsPopupOpen(null)} >غير موافق</button></div> </div>:<><button style={{marginTop:"100px"}} onClick={()=>setIsPopupOpen(null)} className='TcsBtn'>صفحة الاشتراك</button><Payment user={user} handleSubscriptionSubmit={handleSubscriptionSubmit} period={period} selectedTeacher={selectedTeacherYear ?selectedTeacherYear:selectedTeacher6Months} setIsPopupOpen={setIsPopupOpen}/></>}</> : 
      <><div className='subscriptionPage'>
       <h1 className='titleSubscription'>استمتع بتجربة مجانية واحدة قبل الاشتراك</h1>
       <div className='textSubscriptionContainer'>

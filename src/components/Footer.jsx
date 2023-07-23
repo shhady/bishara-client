@@ -4,6 +4,7 @@ import {
   faPhone,
   faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
+import "./footer.css";
 import {Link} from "react-router-dom"
 export default function Footer() {
   const [showContactUs, setShowContactUs]=useState(false)
@@ -18,17 +19,11 @@ export default function Footer() {
         height: "15vh",
         marginTop: "30px",
         borderTop: "1.5px solid #e1e1e1",
+        marginBottom:"50px"
       }}
     >
       <div
-        style={{
-          width: "70%",
-          margin: "auto",
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          // marginTop: "30px",
-        }}
+       className="footer"
       >
         <Link to="/qa" style={{textDecoration:"none", color:"black"}}>
         <div>أسئلة متكرره</div>
@@ -44,7 +39,10 @@ export default function Footer() {
           </div> 
         ):(null)}
         </div>
-        <div>انضم الينا</div>
+        <Link to= "/terms_and_conditions">
+        <div>الشروط والاحكام</div></Link>
+        <Link to="/privacy_policy">
+        <div>سياسة الخصوصية</div></Link>
       </div>
       <div style={{ textAlign: "center" }}>all rights reserved &copy;</div>
     </div>
