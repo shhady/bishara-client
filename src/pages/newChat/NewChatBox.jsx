@@ -173,7 +173,6 @@ useEffect(() => {
     ))}
     <div ref={scrollRef} />
   </div>
-      <div>
         <div className='inputMessages'>
       <form onSubmit={handleSubmit} style={{width:"100%"}}>
                   <input
@@ -192,7 +191,7 @@ useEffect(() => {
                   </button>
                   </form>
                   </div>
-      </div>
+      
     </div>
   )
 }
