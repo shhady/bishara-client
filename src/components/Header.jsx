@@ -649,7 +649,13 @@ export default function Header({
                         <img
                           src={user.avatar ? user.avatar.replace('http://', 'https://'): "https://img.icons8.com/material-rounded/24/null/user.png"}
                           alt="user"
-                          width="25px"
+                          style={{
+                            height: "40px",
+                            width: "40px",
+                            borderRadius: "50%",
+                            // marginLeft: "20px",
+                            // marginRight: "20px",
+                          }}
                         />
                         {/* <FontAwesomeIcon icon={faUser} size="1.5em" /> */}
                       </div>
