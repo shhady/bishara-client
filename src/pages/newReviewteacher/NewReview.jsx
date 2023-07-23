@@ -56,18 +56,24 @@ export default function NewReview({ socket }) {
           style={{
             cursor: 'pointer',
             background: filter === 'Practices' ? '#fee4b9' : 'none',
+            // position:'relative'
           }}
         >
-          تمارين {numOfPractices > 0 ? `(${numOfPractices})` : ''}
+           {numOfPractices > 0 ? <strong>تمارين ({numOfPractices})</strong> : 'تمارين'}
+
+          {/* {numOfPractices > 0 && <div style={{position:'absolute', borderRadius:"50%", width:"15px", height:'15px', top:"0px", right:"0px", background:"red"}}></div>} */}
         </div>
         <div
           onClick={() => setFilter('Evaluations')}
           style={{
             cursor: 'pointer',
             background: filter === 'Evaluations' ? '#fee4b9' : 'none',
+            // position:'relative'
           }}
         >
-          تقييم {numOfEvaluations > 0 ? `(${numOfEvaluations})` : ''}
+           {numOfEvaluations > 0 ? <strong>منهاج ({numOfEvaluations}) </strong> : 'منهاج'}
+          {/* {numOfEvaluations > 0 && <div style={{borderRadius:"50%", width:"15px", height:'15px', top:"0px", right:"15px", background:"red"}}></div>} */}
+
         </div>
         <div
           onClick={() => setFilter('Done')}

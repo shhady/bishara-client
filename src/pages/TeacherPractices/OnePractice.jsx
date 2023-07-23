@@ -100,7 +100,7 @@ export default function TeacherPractices({ practices }) {
             </div>
           </div>
 
-          <div style={{ padding: '15px', border: '1px solid black', marginTop: '10px' }}>
+          <div style={{ padding: '15px', border: '1px solid black', marginTop: '10px' , marginBottom:"60px"}}>
             <AddReply
               practice={practice}
               onCommentAdd={handleCommentAdd}

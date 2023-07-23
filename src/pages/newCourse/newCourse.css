@@ -79,6 +79,7 @@ background-color: black;
     .lessons{
         display: grid;
         grid-template-columns: 1fr;
+        margin-bottom: 60px;
     }
     .lessonOfLessons{
         width: 100%;

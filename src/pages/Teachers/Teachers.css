@@ -153,6 +153,9 @@ div {
     .lessonsHomePage {
         margin-right: 0px;
     }
+    .teachersCards{
+        margin-bottom: 60px;
+    }
 }
 
 @media (max-width: 500px) {
@@ -163,6 +166,8 @@ div {
     } */
     .teachersCards {
         width: 90%;
+        margin-bottom: 60px;
+
     }
     .lessonsHomePage {
         margin-right: 0px;
