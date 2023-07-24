@@ -118,7 +118,7 @@ export default function NewCourse({user}) {
         {open === "description" ? (<div style={{width:"80%", margin:"auto"}}>
           {editingDiscMode ? (
             <div style={{display:"flex", flexDirection:"column", gap:"20px", alignItems:"center", justifyContent:'center'}} >
-              {user._id === course.owner ? ( <button style={{width:"20vw", display:"flex", alignSelf:"flex-start", alignItems:"center", justifyContent:'center'}} onClick={()=>setEditingDiscMode(false)}>تعديل</button>):(null)}
+              {user?._id === course.owner ? ( <button style={{width:"20vw", display:"flex", alignSelf:"flex-start", alignItems:"center", justifyContent:'center'}} onClick={()=>setEditingDiscMode(false)}>تعديل</button>):(null)}
            
           <div className='courseDiscCss'>{course.description} </div>  
           </div>
