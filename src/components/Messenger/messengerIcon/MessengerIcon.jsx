@@ -51,9 +51,9 @@ useEffect(()=>{
   const urlParams = new URLSearchParams(window.location.search);
     const from = urlParams.get('from');
     const to = urlParams.get('to');
-    console.log("match or not", user)
+    console.log("match or not")
   if (user?._id === from || user?._id === to) {
-    console.log("match or not", user)
+    console.log("match or not")
     setChats([])
   }
 },[location])

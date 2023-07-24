@@ -49,7 +49,6 @@ export default function BottomMenu({ user, socket }) {
     }
   }, [location]);
 
-  console.log("Content after /:", urlContent);
 
   useEffect(() => {
     socket?.on("getNotificationComment", (data) => {
