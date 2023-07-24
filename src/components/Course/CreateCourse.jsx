@@ -164,8 +164,8 @@ export default function CreateCourse() {
             required
           >
             <option value="">المستوى</option>
-            <option value="مبتدأ">مبتدأ</option>
-            <option value="مبتدأ/متوسط">مبتدأ/متوسط</option>
+            <option value="مبتدئ">مبتدئ</option>
+            <option value="مبتدئ/متوسط">مبتدئ/متوسط</option>
             <option value="متوسط">متوسط</option>
             <option value="متوسط/متقدم">متوسط/متقدم</option>
             <option value="متقدم">متقدم</option>

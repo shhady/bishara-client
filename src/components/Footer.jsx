@@ -10,7 +10,7 @@ export default function Footer() {
   const [showContactUs, setShowContactUs]=useState(false)
   function sendEmail() 
 {
-    window.location.assign("mailto:bisharaweb@gmail.com");
+    window.location.assign("mailto:funanmusic@gmail.com");
 }
   return (
     <div

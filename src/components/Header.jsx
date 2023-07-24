@@ -1047,7 +1047,7 @@ export default function Header({
                     className="blackBackgroundtext"
                     style={{ color: "white" }}
                   >
-                    المدرسين
+                    المدرسون
                   </span>
                 </div>
               </Link>

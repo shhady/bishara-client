@@ -68,7 +68,7 @@ export default function PrivacyPolicy() {
 <br/>
 <strong>
 الاتصال بنا</strong> <br/>
-إذا كان لديك أي أسئلة أو استفسارات أو طلبات تتعلق بسياسة الخصوصية هذه أو بياناتك، يُرجى التواصل معنا عبر البريد الإلكتروني bashbash1111@gmail.com.
+إذا كان لديك أي أسئلة أو استفسارات أو طلبات تتعلق بسياسة الخصوصية هذه أو بياناتك، يُرجى التواصل معنا عبر البريد الإلكتروني funanmusic@gmail.com.
 
 </div> : <div dir='ltr'>
 <h3>Effective Date: 23.7.2023</h3>
@@ -117,7 +117,7 @@ Funan.org welcomes users of all ages, including children. We do not knowingly co
 Funan.org reserves the right to modify or update this Privacy Policy from time to time. Any changes will be posted on this page, and the effective date will be updated accordingly. We encourage you to review this Privacy Policy periodically to stay informed about how we protect your information.
 
 <h4>Contact Us</h4>
-If you have any questions, concerns, or requests regarding this Privacy Policy or your data, please contact us at bashbash1111@gmail.com.
+If you have any questions, concerns, or requests regarding this Privacy Policy or your data, please contact us at funanmusic@gmail.com.
     </div>}
         
         </div>

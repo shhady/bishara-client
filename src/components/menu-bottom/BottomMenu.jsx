@@ -137,7 +137,7 @@ export default function BottomMenu({ user, socket }) {
       <Link style={{ textDecoration: "none", color: "black" }} to="/teachers">
         <div className='icon-content'>
           <div><FontAwesomeIcon icon={faUsersLine} /></div>
-          <div>المدرسين</div>
+          <div>المدرسون</div>
         </div>
       </Link>
     </div>

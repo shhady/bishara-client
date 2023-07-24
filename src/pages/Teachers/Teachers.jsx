@@ -93,7 +93,7 @@ export default function Teachers({
         }}
       >
         <div>
-          <h1 style={{ fontWeight: "bold" }}>المدرسين</h1>
+          <h1 style={{ fontWeight: "bold" }}>المدرسون</h1>
         </div>
       </div>
       <div className="teachersCards">{drawData()}</div>
