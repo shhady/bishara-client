@@ -30,7 +30,7 @@ export default function BottomMenu({ user, socket }) {
             const fetchUserPractices = async () => {
                 try {
                   const res = await axios.get(
-                    `${process.env.REACT_APP_BACKEND_URL}/studentpractices/${user._id}`
+                    `${process.env.REACT_APP_BACKEND_URL}/studentpractices/${user?._id}`
                   );
                   setUserPractices(res.data.filter((practice)=> practice.replySeen === 'false'));
                 } catch (error) {
