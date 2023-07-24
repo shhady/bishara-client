@@ -846,7 +846,7 @@ export default function Header({
                       src="https://img.icons8.com/ios/50/null/user-group-man-man.png"
                       width="25px"
                     />
-                    <div style={{ fontWeight: "700" }}>مدرسين</div>
+                    <div style={{ fontWeight: "700" }}>مدرسون</div>
                   </div>
                 </div>
               </div>

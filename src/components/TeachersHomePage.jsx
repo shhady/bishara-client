@@ -95,7 +95,7 @@ export default function TeachersPop({ setTeachersHover }) {
         }}
         // onMouseOut={() => setTeachersHover(false)}
       >
-        <div style={{ fontWeight: "bold", fontSize: "28px", marginRight:"10px"}}>مدرسين</div>
+        <div style={{ fontWeight: "bold", fontSize: "28px", marginRight:"10px"}}>مدرسون</div>
         <Link to="/teachers" style={{ textDecoration: "none" }}>
           <div
             onClick={() => setTeachersHover(false)}

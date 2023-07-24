@@ -10,7 +10,7 @@ export default function FreeVideos() {
               fontSize: "28px",
               fontWeight: "bold",
               marginRight:"5px"
-            }}>عزف مدرسين</div>
+            }}>عزف مدرسون</div>
             <div className='allVideos'>
             <div  className="videoFree">
             <iframe
