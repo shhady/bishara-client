@@ -117,6 +117,7 @@
     justify-content: space-evenly;
     align-items: center;
     width: 50%;
+    gap:20px
 }
 .subscriptionPage{
     margin-top: 80px;
@@ -160,6 +161,9 @@
     .aboutTeacher{
         width: 90%;
         margin: auto;
+    }
+    .TcsBtns{
+        margin-bottom: 60px;
     }
 }
 

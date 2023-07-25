@@ -38,8 +38,8 @@ export default function NewHero({user}) {
         {/* {user?.teacher?._id && <Link to={`/mystudents/${user?._id}`}><button className='button2'>المشتركين</button></Link>} */}
 
       <div className='bottomText'>
-        دروس خصوصية غير محدودة بسعر 110 شيكل شهرياً - فترة تجريبية مجانية لمدة 7 أيام
-      </div>
+        دروس خصوصية غير محدودة بسعر 110 شيكل شهرياً 
+              </div>
       <ScrollAnimation/>
       </div>
         </div>

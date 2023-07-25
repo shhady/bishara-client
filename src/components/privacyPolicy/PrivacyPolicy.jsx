@@ -9,13 +9,14 @@ export default function PrivacyPolicy() {
       }, []);
       
   return (
-    <div style={{margin:"100px 0px", textAlign:"start", padding:"20px 20px"}}>
+    <div style={{ textAlign:"start", padding:"20px 20px"}}  className='TcsContent'>
         <div style={{display:'flex', justifyContent:"space-between", alignItems:"center"}} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-       {lang === 'ar' ? <h2>سياسة الخصوصية</h2> : <h2>privacy policy </h2>} 
+        {lang === 'ar' ? <h2>سياسة الخصوصية</h2> : <h2>Privacy Policy</h2>}
         <button style={{padding:"5px 10px", background:"#fcedd5"}} onClick={()=> setLang(lang === 'ar'? 'en':'ar')}>{lang === "ar"? ('To English'):('للعربية')}</button>
+        
         </div>
         {lang === 'ar' ?  <div  style={{padding:"15px 20px"}}>
-           
+       
           
 لن يشارك فنان أبدًا معلوماتك الشخصية مع أي طرف ثالث. سيتم استخدام أي معلومات نجمعها, لتخصيص منصة فنان لك وتحسين جودة الخدمة التي نقدمها. قد يتضمن ذلك محاولات لتخصيص التوصيات لدروسك بناءً على سجل المشاهدة السابق ، أو تشغيل تنبيهات البريد الإلكتروني بناءً على الفنانين الذين قمت بوضع إشارة مرجعية عليهم. يمكنك إلغاء الاشتراك في رسائل البريد الإلكتروني في أي وقت في حسابك ، ويمكنك طلب حذف البيانات وتصدير البيانات في أي وقت أيضًا. لمزيد من الأسئلة ، اتصل بمسؤول حماية البيانات لدينا ، بشارة هاروني ، على
  funanmusic@gmail.com.

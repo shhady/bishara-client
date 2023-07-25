@@ -6,6 +6,7 @@ import "./subscription.css";
 import Payment from "../payment/Payment"
 import { Link } from "react-router-dom";
 import Tcs from '../../components/t&cs/Tcs';
+import PrivacyPolicy from '../../components/privacyPolicy/PrivacyPolicy';
 const Subscription = ({ user, setUser }) => {
   const [selectedTeacherYear, setSelectedTeacherYear] = useState(null);
   const [selectedTeacher6Months, setSelectedTeacher6Months] = useState(null);
@@ -15,6 +16,7 @@ const Subscription = ({ user, setUser }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [period, setPeriod] = useState(null);
   const [TcsShow, setTcsShow] = useState("Tcs")
+  const [TorP, setTorP] = useState('t')
   const [showTeacherRequied, setShowTeacherRequied] = useState(null)
   // const plan = null
   const endDate = moment(plan?.endDate);
@@ -177,7 +179,21 @@ const Subscription = ({ user, setUser }) => {
 
   return (
     <div>
-     {isPopupOpen ?  <> {TcsShow === "Tcs" ? <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}><div><Tcs/></div><div className='TcsBtns'><button onClick={()=>setTcsShow("payment")} className='TcsBtn'>موافق</button><button className='TcsBtn' onClick={()=>setIsPopupOpen(null)} >غير موافق</button></div> </div>:<><button style={{marginTop:"100px"}} onClick={()=>setIsPopupOpen(null)} className='TcsBtn'>صفحة الاشتراك</button><Payment user={user} handleSubscriptionSubmit={handleSubscriptionSubmit} period={period} selectedTeacher={selectedTeacherYear ?selectedTeacherYear:selectedTeacher6Months} setIsPopupOpen={setIsPopupOpen}/></>}</> : 
+     {isPopupOpen ?  <> {TcsShow === "Tcs" ? <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+      <div>
+        <div style={{ display:"flex", width:'80%', margin:" 100px auto 0px auto",display:"flex", justifyContent:"space-evenly", alignItems:"center"}}>
+          <div onClick={()=>setTorP('t')} style={{borderBottom:"1px solid black",padding:"5px 20px", cursor:"pointer", background:TorP === 't' ? ("#fcedd5"):("white")}}>الشروط والاحكام</div>
+          <div onClick={()=>setTorP('p')} style={{borderBottom:"1px solid black",padding:"5px 20px", cursor:"pointer", background:TorP === 'p' ? ("#fcedd5"):("white")}}>سياسة الخصوصية</div>
+        </div>
+        {TorP === 't' ? (<><h2 style={{textAlign:"center"}}>الشروط والاحكام</h2><Tcs/></>):( <><h2 style={{textAlign:"center"}}>سياسة الخصوصية</h2> <PrivacyPolicy/></>)}
+      </div>
+      <div className='TcsBtns'>
+      <button onClick={()=>setTcsShow("payment")} className='TcsBtn'>موافق</button>
+      <button className='TcsBtn' onClick={()=>setIsPopupOpen(null)} >غير موافق</button></div> 
+      </div>:<><button style={{marginTop:"100px"}} onClick={()=>setIsPopupOpen(null)} className='TcsBtn'>صفحة الاشتراك</button>
+      <Payment user={user} handleSubscriptionSubmit={handleSubscriptionSubmit}
+       period={period} selectedTeacher={selectedTeacherYear ?selectedTeacherYear:selectedTeacher6Months} setIsPopupOpen={setIsPopupOpen}/>
+       </>}</> : 
      <><div className='subscriptionPage'>
       <h1 className='titleSubscription'>استمتع بتجربة مجانية واحدة قبل الاشتراك</h1>
       <div className='textSubscriptionContainer'>
