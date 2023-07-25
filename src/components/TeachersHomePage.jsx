@@ -101,7 +101,7 @@ export default function TeachersPop({ setTeachersHover }) {
             onClick={() => setTeachersHover(false)}
             style={{ color: "black", borderBottom: "1px solid #e1e1e1", marginLeft:"14px" }}
           >
-            جميع المدرسون
+            جميع المدرسين
           </div>
         </Link>
       </div>

@@ -122,7 +122,7 @@ export default function TeachersPop({ setTeachersHover, setUpdateComponent }) {
               }}
               style={{ color: "black", cursor: "pointer" }}
             >
-              جميع المدرسون
+              جميع المدرسين
             </div>
           </Link>
         </div>
