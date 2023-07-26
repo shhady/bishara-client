@@ -66,7 +66,7 @@ export default function Auth({ user, setUser, setUserProp }) {
   //   e.preventDefault();
   //   try {
   //     const result = await axios.post(
-  //       `https://bisharaserver.herokuapp.com/teachers/login`,
+  //       `${process.env.REACT_APP_BACKEND_URL}/teachers/login`,
   //       studentlogin
   //     );
   //     window.localStorage.setItem("profile", JSON.stringify(result.data));
@@ -116,7 +116,7 @@ export default function Auth({ user, setUser, setUserProp }) {
     }
     try {
       const result = await axios.post(
-        `https://bisharaserver.herokuapp.com/teachers/login`,
+        `${process.env.REACT_APP_BACKEND_URL}/teachers/login`,
         studentlogin
       );
       window.localStorage.setItem("profile", JSON.stringify(result.data.teacher));

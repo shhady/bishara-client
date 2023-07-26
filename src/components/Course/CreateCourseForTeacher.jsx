@@ -12,16 +12,7 @@
 
 //     })
 
-//     const title = useRef()
-//         const getMeTeacher = async(e)=>{
-//             e.preventDefault();
-//             const res =await axios.get("https://bisharaserver.herokuapp.com/teacher",
-//             {
-//                 params: { email },
-//               }
-//             )
-//             setTeacher(res.data);
-//         }
+
        
 //   return (
 //     <div>
@@ -80,7 +71,7 @@ export default function CreateCourseForTeacher() {
  
   const getMeTeacher = async(e)=>{
                 e.preventDefault();
-                const res =await axios.get("https://bisharaserver.herokuapp.com/teacher",
+                const res =await axios.get(`${process.env.REACT_APP_BACKEND_URL}/teacher`,
                 {
                     params: { email },
                   }

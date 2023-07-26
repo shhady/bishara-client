@@ -68,7 +68,7 @@ export default function App() {
   let socketInstances = [];
 
   useEffect(() => {
-    const socketInstance = io("https://bisharaserver.herokuapp.com/");
+    const socketInstance = io(`${process.env.REACT_APP_BACKEND_URL}`);
     socketInstances.push(socketInstance);
   
     setSocket(socketInstance);

@@ -16,8 +16,7 @@ useEffect(() => {
     if (!user) return;
     setSocket(
       io(
-        // "https://dawrafun1.herokuapp.com/" ||
-        "https://bisharaserver.herokuapp.com/"
+        `${process.env.REACT_APP_BACKEND_URL}`
       )
     );
   }, [user]);
