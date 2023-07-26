@@ -8,9 +8,9 @@ const PopupIframeButton = ({ user, handleSubscriptionSubmit, period, setIsPopupO
   const handleIframeMessage = React.useCallback((event) => {
     if (event.source === iframeRef?.current?.contentWindow) {
       const url = new URL(event.data.value);
-      console.log(event);
+      // console.log(event);
       const responseCode = url.searchParams.get('ResponseCode');
-      console.log(responseCode)
+      // console.log(responseCode)
       if (responseCode === '0') {
         handleSubscriptionSubmit(period);
         setTimeout(function () {
@@ -40,8 +40,8 @@ const PopupIframeButton = ({ user, handleSubscriptionSubmit, period, setIsPopupO
             style={{ height: "100vh", width: "100vw" }}
             ref={iframeRef}
             className="popup-iframe"
-            src={`${process.env.REACT_APP_PAYMENT_URL}?codepage=${process.env.REACT_APP_CODE_PAGE}&Operation=1&TerminalNumber=${process.env.REACT_APP_TERMINAL}&UserName=${process.env.REACT_APP_USER_NAME}&SumToBill=${period === "year" ? 1 : period === "6 months" ? 882 : 616}
-              &CoinID=1&Language=ar&ProductName=item1&APILevel=10&SuccessRedirectUrl=https://secure.cardcom.solutions/SuccessAndFailDealPage/Success.aspx&ErrorRedirectUrl=https://secure.cardcom.solutions/SuccessAndFailDealPage/Fail.aspx&IndicatorUrl=${process.env.REACT_APP_WEBHOOK_URL}&ReturnValue=1234&&AutoRedirect=true&InvoiceHead.CustName=${user.firstName}&InvoiceHead.SendByEmail=true&InvoiceHead.Email=${user.email}&InvoiceHead.Language=ar&InvoiceHead.CoinID=1&CardOwnerEmail=${user.email}&MaxNumOfPayments=${period === "year" ? 12 : period === "6 months" ? 6 : 3}&InvoiceLines1.Description=${period === 'year' ? "سنة" : period === "6 months" ? "6 اشهر":"3 اشهر"}&InvoiceLines1.Price=${period === "year" ? 1 : period === "6 months" ? 882 : 616}&InvoiceLines1.Quantity=1`}
+            src={`${process.env.REACT_APP_PAYMENT_URL}?codepage=${process.env.REACT_APP_CODE_PAGE}&Operation=1&TerminalNumber=${process.env.REACT_APP_TERMINAL}&UserName=${process.env.REACT_APP_USER_NAME}&SumToBill=${period === "year" ? 1548 : period === "6 months" ? 882 : 616}
+              &CoinID=1&Language=ar&ProductName=item1&APILevel=10&SuccessRedirectUrl=https://secure.cardcom.solutions/SuccessAndFailDealPage/Success.aspx&ErrorRedirectUrl=https://secure.cardcom.solutions/SuccessAndFailDealPage/Fail.aspx&IndicatorUrl=${process.env.REACT_APP_WEBHOOK_URL}&ReturnValue=1234&&AutoRedirect=true&InvoiceHead.CustName=${user.firstName}&InvoiceHead.SendByEmail=true&InvoiceHead.Email=${user.email}&InvoiceHead.Language=ar&InvoiceHead.CoinID=1&CardOwnerEmail=${user.email}&MaxNumOfPayments=${period === "year" ? 12 : period === "6 months" ? 6 : 3}&InvoiceLines1.Description=${period === 'year' ? "سنة" : period === "6 months" ? "6 اشهر":"3 اشهر"}&InvoiceLines1.Price=${period === "year" ? 1548 : period === "6 months" ? 882 : 616}&InvoiceLines1.Quantity=1`}
             title="Cardcom Popup"
           />
         </div>
