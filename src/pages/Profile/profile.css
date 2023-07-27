@@ -4,6 +4,7 @@
     gap: 1rem;
     width: 60%;
     margin: 15px auto;
+    
 }
 .profileAllButtonsUser {
     display: grid;
@@ -126,6 +127,7 @@
         gap: 1rem;
         width: 80%;
         margin: 15px auto;
+        margin-bottom: 70px;
     }
     .profileAllButtonsUser {
         display: grid;
@@ -133,6 +135,7 @@
         gap: 1rem;
         width: 80%;
         margin: 15px auto;
+        margin-bottom: 70px;
     }
 
 

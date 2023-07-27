@@ -101,7 +101,7 @@ export default function CreateCourse() {
   }, [final]);
 
   return (
-    <div style={{ width: "80%" }}>
+    <div style={{ width: "80%", marginBottom:"70px" }}>
       <form onSubmit={handleSubmit}>
         <div className="createCourseForm">
           <input

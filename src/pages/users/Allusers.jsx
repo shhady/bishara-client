@@ -62,28 +62,33 @@ export default function Allusers() {
     <div style={{ marginTop: '100px', marginBottom: '80px' }} dir='ltr'>
       <h2 style={{ textAlign: 'center' }}>جميع المستخدمين</h2>
       <div className="filter-container">
+        <div>
         <label htmlFor="filterOption" style={{marginRight:"15px"}}>Filter:</label>
         <select
           id="filterOption"
           value={filterOption}
           onChange={(e) => applyFilter(e.target.value)}
+          style={{width: "100%"}}
         >
           <option value="all">جميع المستخدمين</option>
           <option value="canTry">لم يجرب</option>
           <option value="triedOnce">جرب مره</option>
           <option value="subscriptionPlan">مشترك</option>
         </select>
-            <br/>
+        </div>
+        <div>
         <label htmlFor="sortOption" style={{marginRight:"15px"}}>Sort:</label>
         <select
           id="sortOption"
           value={sortOption}
           onChange={(e) => applySort(e.target.value)}
+          style={{width: "100%"}}
         >
           <option value="none">ترتيب</option>
           <option value="ascending">الاقدم</option>
           <option value="descending">الاحدث</option>
         </select>
+        </div>
       </div>
       <div className="table-container">
         <table className="user-table">

@@ -10,6 +10,9 @@
   .filter-container{
     width: 80%;
     margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:40px
   }
   .user-table {
     width: 100%;
