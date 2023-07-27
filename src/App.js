@@ -37,6 +37,7 @@ const ChooseTeacher = React.lazy(() => import("./pages/subscription/ChooseTeache
 const ChosenTeacher = React.lazy(() => import("./pages/subscription/ChosenTeacher"));
 const MyStudents = React.lazy(() => import("./pages/myStudents/MyStudents"));
 const BottomMenu = React.lazy(() => import("../src/components/menu-bottom/BottomMenu"));
+const AllUsers = React.lazy(() => import("./pages/users/Allusers"));
 
 export default function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -129,6 +130,8 @@ export default function App() {
           <Route path="/myStudents/:id" exact element={<MyStudents user={user}/>}/>
           <Route path="/editReplies/:id" exact element={<EditReplies user={user}/>}/>
           
+          <Route path="/allUsers" exact element={<AllUsers user={user}/>}/>
+
           <Route path="/terms_and_conditions" exact element={<Tcs user={user}/>}/>
           <Route path="/privacy_Policy" exact element={<PrivacyPolicy user={user}/>}/>
 

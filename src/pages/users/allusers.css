@@ -1,0 +1,64 @@
+/* Allusers.css */
+
+/* CSS for the user table */
+.table-container {
+    width: 90%;
+    margin: auto;
+    /* Enable horizontal scrolling on small screens */
+    overflow-x: auto;
+  }
+  .filter-container{
+    width: 80%;
+    margin: auto;
+  }
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .user-table th,
+  .user-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Background color for rows with subscriptionPlan and status is Active */
+  .active-subscription-row {
+    background-color: #ffd700; /* Use your desired background color for Active users with subscription */
+  }
+  
+  /* Background color for rows with subscriptionPlan but status is not Active */
+  .colored-row {
+    background-color: #a56767; /* Use your desired background color for users with subscription but not Active */
+  }
+  
+  /* Responsive styles for mobile */
+  @media (max-width: 768px) {
+    .user-table th:nth-child(3),
+    .user-table th:nth-child(4) {
+      display: none; /* Hide Status and CreatedAt header on mobile */
+    }
+  
+    .user-table td:nth-child(3),
+    .user-table td:nth-child(4) {
+      display: block; /* Display Status and CreatedAt info as blocks on mobile */
+    }
+  
+    /* Additional row for mobile display */
+    .mobile-info-row td {
+      padding: 8px;
+    }
+  
+    .mobile-info-row td:nth-child(1),
+    .mobile-info-row td:nth-child(2) {
+      display: none; /* Hide empty columns on mobile */
+    }
+    .table-container {
+        width: 95%;
+        margin: auto;
+        /* Enable horizontal scrolling on small screens */
+        overflow-x: auto;
+      }
+  }
+  

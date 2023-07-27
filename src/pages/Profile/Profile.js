@@ -387,10 +387,15 @@ const [uploading, setUploading] = useState(null)
                 اضافة طالب
               </div> */}
               
-              {user.role === "admin" ? (<Link to="/CreateCourseForTeacher" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons1"
+              {user.role === "admin" ? (<><Link to="/CreateCourseForTeacher" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons1"
                   style={{ height: "40px" }}>
                 انشئ دورة لمعلم اخر
-              </div></Link>):(null)}
+              </div></Link>
+              <Link to="/allusers" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons1"
+                  style={{ height: "40px" }}>
+               جميع المستخدمين
+              </div></Link>
+              </>):(null)}
               {user.role === "admin" || user.role === "teacher" ? (<Link to="/GeneralButton" style={{textDecoration:"none", color:"black"}}> <div className="profileButtons5"
                   style={{ height: "40px" }}>
 
