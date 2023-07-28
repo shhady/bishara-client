@@ -1125,7 +1125,7 @@ export default function Header({
                       </span>
                     </div>
                   </Link>
-                  <Link to="" style={{ textDecoration: "none" }}>
+                  <Link to="/subscription" style={{ textDecoration: "none" }}>
                     <div
                       onClick={() => {
                         setOpenMenu(!openMenu);

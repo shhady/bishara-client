@@ -1,11 +1,19 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import "./tcs.css"
+import {  useLocation } from 'react-router-dom';
+
 export default function Tcs() {
+  const [marginTop, setMarginTop] = useState('')
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname.includes('terms')) {
+        setMarginTop("100px")
+    }
+  }, [location]);
   return (
     <div>
-    
-    <div className='TcsContent'>
-        
+    <div className='TcsContent' style={{padding:"10px 10px", marginTop:`${marginTop}`}}>
+    <h2 style={{textAlign:"center"}}>الشروط والاحكام</h2>
     لن يشارك فنان أبدًا معلوماتك الشخصية مع أي طرف ثالث. سيتم استخدام أي معلومات نجمعها من قبلنا فقط لتخصيص منصة فنان لك وتحسين جودة الخدمة التي نقدمها. قد يتضمن ذلك محاولات لتخصيص التوصيات لدروسك بناءً على سجل المشاهدة السابق ، أو تشغيل تنبيهات البريد الإلكتروني بناءً على الفنانين الذين قمت بوضع إشارة مرجعية عليهم. يمكنك إلغاء الاشتراك في رسائل البريد الإلكتروني في أي وقت في حسابك ، ويمكنك طلب حذف البيانات وتصدير البيانات في أي وقت أيضًا. لمزيد من الأسئلة ، اتصل بمسؤول حماية البيانات لدينا ، بشارة هاروني ، على
      funanmusic@gmail.com.
     تكشف سياسة الخصوصية هذه عن ممارسات الخصوصية للموقع. تنطبق سياسة الخصوصية هذه فقط على المعلومات التي تم جمعها بواسطة فنان أو الشركات التابعة لها على الموقع الإلكتروني وسوف تُعلمك بما يلي:

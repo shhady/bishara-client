@@ -137,7 +137,7 @@ export default function Courses({
 
   return (
     <div
-      style={{ display: "grid", gridAutoColumns: "3fr 1fr" }}
+      style={{ display: "grid", gridAutoColumns: "3fr 1fr", marginBottom:"70px" }}
       onMouseOver={window.localStorage.removeItem("title")}
     >
       <div className="TopOfPage">{instruments}</div>

@@ -183,10 +183,10 @@ const Subscription = ({ user, setUser }) => {
      {isPopupOpen ?  <> {TcsShow === "Tcs" ? <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
       <div>
         <div style={{ display:"flex", width:'80%', margin:" 100px auto 0px auto",display:"flex", justifyContent:"space-evenly", alignItems:"center"}}>
-          <div onClick={()=>setTorP('t')} style={{borderBottom:"1px solid black",padding:"5px 20px", cursor:"pointer", background:TorP === 't' ? ("#fcedd5"):("white")}}>الشروط والاحكام</div>
-          <div onClick={()=>setTorP('p')} style={{borderBottom:"1px solid black",padding:"5px 20px", cursor:"pointer", background:TorP === 'p' ? ("#fcedd5"):("white")}}>سياسة الخصوصية</div>
+          <h4 onClick={()=>setTorP('t')} style={{borderBottom:"1px solid black",padding:"5px 20px", cursor:"pointer", background:TorP === 't' ? ("#fcedd5"):("white")}}>الشروط والاحكام</h4>
+          <h4 onClick={()=>setTorP('p')} style={{borderBottom:"1px solid black",padding:"5px 20px", cursor:"pointer", background:TorP === 'p' ? ("#fcedd5"):("white")}}>سياسة الخصوصية</h4>
         </div>
-        {TorP === 't' ? (<><h2 style={{textAlign:"center"}}>الشروط والاحكام</h2><Tcs/></>):( <><h2 style={{textAlign:"center"}}>سياسة الخصوصية</h2> <PrivacyPolicy/></>)}
+        {TorP === 't' ? (<><Tcs/></>):( <><PrivacyPolicy/></>)}
       </div>
       <div className='TcsBtns'>
       <button onClick={()=>setTcsShow("payment")} className='TcsBtn'>موافق</button>

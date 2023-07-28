@@ -67,8 +67,8 @@ export default function NewMessenger({socket,user}) {
       
       <div>
       <h2>المحادثات</h2> 
-      {chats.map((chat) =>(
-        <div onClick={()=>setCurrentChat(chat)}>
+      {chats.map((chat,i) =>(
+        <div onClick={()=>setCurrentChat(chat)} key={i}>
       <MyConversation currentUser={user} conversation={chat} socket={socket}/>
       </div>
       ))}

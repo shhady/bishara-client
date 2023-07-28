@@ -157,7 +157,7 @@ const styles = {
     justifyContent: 'center', // Added justifyContent property
     gap: '10px',
     maxWidth: '1200px', // Added maxWidth property
-    margin: '0 auto', // Added margin property for center alignment
+    margin: '0 auto 70px auto', // Added margin property for center alignment
   },
   studentContainer: {
     display: 'flex',

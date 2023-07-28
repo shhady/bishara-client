@@ -1,7 +1,7 @@
 .TcsContent{
     width: 90%;
     margin: 10px auto;
-    height: 62vh;
+    height: 60vh;
     overflow-y: auto; /* Add vertical scroll when content overflows */
     border:1px solid black
 }

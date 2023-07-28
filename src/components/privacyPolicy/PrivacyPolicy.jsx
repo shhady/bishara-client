@@ -1,22 +1,29 @@
 
 import React, { useState, useEffect } from 'react'
+import {  useLocation } from 'react-router-dom';
 
 export default function PrivacyPolicy() {
     const [lang, setLang] = useState('ar')
-    
+    const [marginTop, setMarginTop] = useState('')
+    const location = useLocation();
     useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
-      
+      useEffect(() => {
+        if (location.pathname.includes('privacy')) {
+            setMarginTop("100px")
+            console.log('gooo');
+        }
+      }, [location]);
   return (
-    <div style={{ textAlign:"start", padding:"20px 20px"}}  className='TcsContent'>
+    <div style={{ textAlign:"start", padding:"20px 10px", marginTop:`${marginTop}`}}  className='TcsContent'>
         <div style={{display:'flex', justifyContent:"space-between", alignItems:"center"}} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-        {lang === 'ar' ? <h2>سياسة الخصوصية</h2> : <h2>Privacy Policy</h2>}
+        {/* {lang === 'ar' ? <h2>سياسة الخصوصية</h2> : <h2>Privacy Policy</h2>} */}
         <button style={{padding:"5px 10px", background:"#fcedd5"}} onClick={()=> setLang(lang === 'ar'? 'en':'ar')}>{lang === "ar"? ('To English'):('للعربية')}</button>
         
         </div>
-        {lang === 'ar' ?  <div  style={{padding:"15px 20px"}}>
-       
+        {lang === 'ar' ?  <div  style={{padding:"15px 20px 70px 20px", marginBottom:"70px"}}>
+        <h2>سياسة الخصوصية</h2>
           
 لن يشارك فنان أبدًا معلوماتك الشخصية مع أي طرف ثالث. سيتم استخدام أي معلومات نجمعها, لتخصيص منصة فنان لك وتحسين جودة الخدمة التي نقدمها. قد يتضمن ذلك محاولات لتخصيص التوصيات لدروسك بناءً على سجل المشاهدة السابق ، أو تشغيل تنبيهات البريد الإلكتروني بناءً على الفنانين الذين قمت بوضع إشارة مرجعية عليهم. يمكنك إلغاء الاشتراك في رسائل البريد الإلكتروني في أي وقت في حسابك ، ويمكنك طلب حذف البيانات وتصدير البيانات في أي وقت أيضًا. لمزيد من الأسئلة ، اتصل بمسؤول حماية البيانات لدينا ، بشارة هاروني ، على
  funanmusic@gmail.com.
@@ -150,7 +157,7 @@ export default function PrivacyPolicy() {
 (4) معلومات كافية بشكل معقول للسماح لوكيل حقوق الطبع والنشر بالاتصال بك ، مثل العنوان ورقم الهاتف وعنوان البريد الإلكتروني إذا كان متاحًا ؛
 (5) إقرار بأن لديك اعتقاد حسن النية بأن استخدام المواد بالطريقة المشكو منها غير مصرح به من قبل مالك حقوق الطبع والنشر أو وكيله أو القانون ؛ وتقر بأنه في حالة عدم امتثالك لجميع متطلبات هذا القسم ، فقد لا يكون إشعار قانون الألفية الجديدة لحقوق طبع ونشر المواد الرقمية الخاص بك صالحًا.
 
-</div> : <div dir='ltr' style={{padding:"15px 20px"}}>
+</div> : <div dir='ltr' style={{padding:"15px 20px 70px 20px"}}>
     <h3>Privacy Policy</h3>
     <p>The artist will never share your personal information with any third party. Any information we collect will be used to personalize the artist's platform for you and improve the quality of the service we provide. This may include attempts to personalize recommendations for your lessons based on your previous viewing history or setting up email alerts based on the artists you have bookmarked. You can unsubscribe from email messages at any time in your account, and you can also request data deletion and data export at any time. For further questions, contact our data protection administrator, Bashar Harouni, at funanmusic@gmail.com.</p>
 
