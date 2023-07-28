@@ -68,7 +68,8 @@
 .profileButtons5:hover {
     border-bottom: 1px solid rgb(25, 24, 24);
     transition: all 0.5s;
-    color: black
+    color: black;
+    background-color: rgb(247, 220, 188);
 }
 
 .coverProfile {
