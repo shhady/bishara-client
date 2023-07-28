@@ -149,6 +149,7 @@ const Subscription = ({ user, setUser }) => {
             period: period,
             teacherName: selectedTeacher.name,
             teacherId: selectedTeacher.value,
+            status: "active"
           },
           {
             headers: {
