@@ -209,7 +209,7 @@ const Subscription = ({ user, setUser }) => {
         <div className='plan2'>
           <h2 className='titleSubscription'>ستة أشهر</h2>
           شهري/ <strong>125₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>299₪</strong></s></span>
-          <div className='invoiceLine'>فاتورة 6 أشهر 1194 شيكل</div>
+          <div className='invoiceLine'>فاتورة 6 أشهر 882 شيكل</div>
           <div className='textSubscription6'>* لتحقيق النتائج المرغوبة، يجب على الفرد أن يلتزم بالدراسة لمدة لا تقل عن 6 أشهر</div>
          {user ? (<>{endDate.isAfter(moment()) ? (
             <>
@@ -342,7 +342,7 @@ const Subscription = ({ user, setUser }) => {
         <div className='plan3'>
           <h2 className='titleSubscription'>ثلاثة أشهر</h2>
           شهري/ <strong>175₪</strong> <span style={{ color: "red", margin: "10px" }}><s><strong>399₪</strong></s></span>
-          <div className='invoiceLine'>فاتورة 3 أشهر 690 شيكل</div>
+          <div className='invoiceLine'>فاتورة 3 أشهر 616 شيكل</div>
           <div className='textSubscription6'>* اشتراك لمدة 3 اشهر,  تمكنك من رفع فيديوهات لعزفك وتلقي رد من معلمك</div>
          {user ? (<>{endDate.isAfter(moment()) ? (
             <>
