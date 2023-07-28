@@ -14,7 +14,8 @@ export default function NewUploadPractice({course, videoName, uniqueLink, user, 
       const [videoUrl, setVideoUrl] = useState('')
       const [fileUpload, setFileUpload] = useState(null);
       const plan  =   JSON.parse(localStorage.getItem("plan"))
- 
+      const [showTimeNotification, setShowTimeNotification] = useState(false);
+
     // const [formData, setFormData] = useState({})
     const [showNotification, setShowNotification] = useState(false);
 
@@ -25,7 +26,14 @@ const openNotification = () => {
 const closeNotification = () => {
   setShowNotification(!showNotification);
 };
+const openTimeNotification = () => {
+  setShowTimeNotification(true);
+  setTimeout(() => setShowTimeNotification(false), 5000);
+};
 
+const closeTimeNotification = () => {
+  setShowNotification(false);
+};
 const redirectToSubscription = () => {
   navigate("/subscription");
 };
@@ -65,7 +73,7 @@ const redirectToSubscription = () => {
           });
       };
   
-   
+    
     useEffect(() => {
    
         const fetch = async () => {
@@ -94,7 +102,7 @@ const redirectToSubscription = () => {
           )
           
           window.localStorage.setItem('profile', JSON.stringify(response.data.user));
-          setUser(response.data.user);
+         
          await socket.emit("sendNotificationComment", {
             senderName: user?.firstName,
             senderFamily: user?.lastName,
@@ -104,7 +112,24 @@ const redirectToSubscription = () => {
             videoId: uniqueLink,
             courseid: course._id,
           });
-          navigate('/profile')
+          if (user.status === "canTry") {
+            openTimeNotification();
+      
+            // Wait for the notification delay and then navigate to '/profile'
+            setTimeout(() => {
+              setUser(response.data.user);
+              navigate('/profile');
+            }, 6000);
+          } else {
+            // Check if the user has a subscription plan
+            const plan = JSON.parse(localStorage.getItem("plan"));
+            if (plan?.status === "active") {
+              // Directly navigate to '/profile'
+              setUser(response.data.user);
+              navigate('/profile');
+            }
+          }
+            
         };
         fetch();
       }, [videoUrl]);
@@ -165,6 +190,18 @@ const redirectToSubscription = () => {
             <button style={{padding:"10px 15px"}} onClick={closeNotification}>اغلاق</button>
             </div>
           </div>
+         
+        )}
+         {showTimeNotification && (
+          <div className="notification">
+            <p>اهلاً, {user?.firstName} {user?.lastName} <br/> تعليق المعلم سيكون خلال 48 ساعه</p>
+            <span className="notification_progress"></span>
+            <div style={{padding:"3px 10px", display:"flex", justifyContent:"space-between", alignItems:'center'}}>
+            {/* <button  style={{padding:"10px 15px"}} onClick={redirectToSubscription}>اشتراك</button> */}
+            <button style={{padding:"10px 15px"}} onClick={closeTimeNotification}>اغلاق</button>
+            </div>
+          </div>
+         
         )}
     </div>
   )

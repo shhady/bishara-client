@@ -14,6 +14,7 @@ export default function Evaluation({teacher, user, setUser}) {
   const [fileUpload, setFileUpload] = useState('')
   const plan  =   JSON.parse(localStorage.getItem("plan"))
   const navigate = useNavigate()
+  const [showTimeNotification, setShowTimeNotification] = useState(false);
 
   const postDetails = (e) => {
     e.preventDefault()
@@ -35,7 +36,14 @@ export default function Evaluation({teacher, user, setUser}) {
       });
   };
 
- 
+  const openTimeNotification = () => {
+    setShowTimeNotification(true);
+    setTimeout(() => setShowTimeNotification(false), 5000);
+  };
+  
+  const closeTimeNotification = () => {
+    setShowTimeNotification(false);
+  };
   useEffect(() => {
     if (!videoUrl) return;
     
@@ -65,8 +73,23 @@ export default function Evaluation({teacher, user, setUser}) {
                  }
                )
                window.localStorage.setItem('profile', JSON.stringify(response.data.user));
-               setUser(response.data.user);
-               navigate('/profile');
+               if (user.status === "canTry") {
+                openTimeNotification();
+          
+                // Wait for the notification delay and then navigate to '/profile'
+                setTimeout(() => {
+                  setUser(response.data.user);
+                  navigate('/profile');
+                }, 6000);
+              } else {
+                // Check if the user has a subscription plan
+                const plan = JSON.parse(localStorage.getItem("plan"));
+                if (plan?.status === "active") {
+                  // Directly navigate to '/profile'
+                  setUser(response.data.user);
+                  navigate('/profile');
+                }
+              }
                 
       } catch (e) {
         console.log(e);
@@ -151,6 +174,17 @@ export default function Evaluation({teacher, user, setUser}) {
     </form>
     </div>
     }
+     {showTimeNotification && (
+          <div className="notification">
+            <p>اهلاً, {user?.firstName} {user?.lastName} <br/> تعليق المعلم سيكون خلال 48 ساعه</p>
+            <span className="notification_progress"></span>
+            <div style={{padding:"3px 10px", display:"flex", justifyContent:"space-between", alignItems:'center'}}>
+            {/* <button  style={{padding:"10px 15px"}} onClick={redirectToSubscription}>اشتراك</button> */}
+            <button style={{padding:"10px 15px"}} onClick={closeTimeNotification}>اغلاق</button>
+            </div>
+          </div>
+         
+        )}
     </div>
   )
 }

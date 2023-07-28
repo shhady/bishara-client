@@ -8,7 +8,7 @@
   margin: 15px auto;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  /* gap:2rem; */
+  gap:1rem;
   /* overflow-x: scroll; */
   /* overflow-y: none; */
 
@@ -41,7 +41,15 @@
   width: 90%;
   margin: auto;
 }
+.teachersCard {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 
+}
 @media (max-width: 1040px) {
   .teacherAvatars1 {
     width: 90%;
@@ -50,6 +58,7 @@
     /* grid-template-columns: repeat(10,1fr); */
     gap: 1rem;
     overflow-x: scroll;
+    grid-template-columns: repeat(10, 1fr);
     /* margin-right: 15px; */
   }
 }
@@ -67,7 +76,15 @@
     width: 100%;
 
   }
-
+  .teachersCard {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  
+  }
   /* .teacherAvatars{
         width: 90%;
         margin:auto;
@@ -102,15 +119,7 @@
   background: #424141;
 }
 
-.teachersCard {
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  cursor: pointer;
 
-}
 
 .teacherCard {
   height: fit-content;
