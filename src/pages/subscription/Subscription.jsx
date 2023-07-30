@@ -188,9 +188,9 @@ const Subscription = ({ user, setUser }) => {
         </div>
         {TorP === 't' ? (<><Tcs/></>):( <><PrivacyPolicy/></>)}
       </div>
-      //<div className='TcsBtns'>
-     // <button onClick={()=>setTcsShow("payment")} className='TcsBtn'>موافق</button>
-      //<button className='TcsBtn' onClick={()=>setIsPopupOpen(null)} >غير موافق</button></div> 
+      <div className='TcsBtns'>
+      <button onClick={()=>setTcsShow("payment")} className='TcsBtn'>موافق</button>
+      <button className='TcsBtn' onClick={()=>setIsPopupOpen(null)} >غير موافق</button></div> 
       </div>:<><button style={{marginTop:"100px"}} onClick={()=>setIsPopupOpen(null)} className='TcsBtn'>صفحة الاشتراك</button>
       <Payment user={user} handleSubscriptionSubmit={handleSubscriptionSubmit}
        period={period} selectedTeacher={selectedTeacherYear ?selectedTeacherYear:selectedTeacher6Months} setIsPopupOpen={setIsPopupOpen}/>
