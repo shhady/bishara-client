@@ -1,7 +1,17 @@
 .TcsContent{
     width: 90%;
     margin: 10px auto;
-    height: 60vh;
+    height: 70vh;
     overflow-y: auto; /* Add vertical scroll when content overflows */
     border:1px solid black
+}
+
+@media (max-width:767px) {
+    .TcsContent{
+        width: 90%;
+        margin: 10px auto;
+        height: 63vh;
+        overflow-y: auto; /* Add vertical scroll when content overflows */
+        border:1px solid black
+    }
 }
