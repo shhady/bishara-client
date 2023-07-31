@@ -1,0 +1,52 @@
+/* Style for the social icons container */
+.social-icons {
+    position: fixed;
+    left: 0;
+    bottom: 180px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(48, 45, 45,0.5);
+    border-radius: 5px;
+  }
+  
+  /* Style for each social icon */
+   .iconYoutube {
+    /* display: inline-block; */
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    color: red;
+    transition: background-color 0.3s;
+  }
+   .iconFacebook {
+    /* display: inline-block; */
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    color: blue;
+    transition: background-color 0.3s;
+  }
+  .iconInstagram {
+    /* display: inline-block; */
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    color: white;
+    transition: background-color 0.3s;
+    background-image: linear-gradient(45deg, #833AB4, #FD1D1D, #F77737, #C32AA3);
+    background-size: 100% 100%;
+    animation: gradientAnimation 8s infinite;
+  }
+  
