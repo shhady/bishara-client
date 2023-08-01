@@ -14,7 +14,15 @@
    margin: 10px auto;
 
   }
-  
+  .iconEmail{
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+  }
   /* Style for each social icon */
    .iconYoutube {
     /* display: inline-block; */
@@ -25,6 +33,17 @@
     background-position: center;
     border-radius: 50%;
     color: red;
+    transition: background-color 0.3s;
+  }
+
+  .iconTiktok{
+    width: 25px;
+    height: 22px;
+    margin: 7px 5px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    color: black;
     transition: background-color 0.3s;
   }
    .iconFacebook {
