@@ -1,15 +1,18 @@
 /* Style for the social icons container */
 .social-icons {
-    position: fixed;
-    left: 0;
-    bottom: 180px;
-    z-index: 9999;
+    /* position: fixed; */
+    /* left: 0; */
+    /* bottom: 180px; */
+    /* z-index: 9999; */
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
-    background-color: rgba(48, 45, 45,0.5);
-    border-radius: 5px;
+    gap:10px;
+    /* background-color: rgba(48, 45, 45,0.5); */
+    /* border-radius: 5px; */
+   margin: 10px auto;
+
   }
   
   /* Style for each social icon */

@@ -7,7 +7,6 @@ import TeachersHomePage from "../../components/TeachersHomePage";
 import CoursesHomePage from "../../components/CoursesHomePage";
 import NewHero from "../../components/newHero/NewHero";
 import ContactUs from "../../components/ContactUs";
-import SocialMedia from "../../components/socialMedia/SocialMedia";
 export default function Home({user, setUser}) {
   useEffect(() => {
     if (!user) return;
@@ -38,7 +37,6 @@ export default function Home({user, setUser}) {
       <About />
       <ContactUs user={user}/>
       <Footer />
-      {/* <SocialMedia /> */}
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import React , {useState}from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faPhone,
   faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
 import "./footer.css";
 import {Link} from "react-router-dom"
+import SocialMedia from "./socialMedia/SocialMedia";
 export default function Footer() {
   const [showContactUs, setShowContactUs]=useState(false)
   function sendEmail() 
@@ -16,7 +16,7 @@ export default function Footer() {
     <div
       style={{
         // background: "rgba(27,26,31,255)",
-        height: "15vh",
+        height: "20vh",
         marginTop: "30px",
         borderTop: "1.5px solid #e1e1e1",
         marginBottom:"50px"
@@ -44,7 +44,8 @@ export default function Footer() {
         <Link to="/privacy_policy" style={{textDecoration:"none", color:"black"}}>
         <div>سياسة الخصوصية</div></Link>
       </div>
-      <div style={{ textAlign: "center" }}>all rights reserved &copy;</div>
+      <div><SocialMedia /></div>
+      <div style={{ textAlign: "center"}}>all rights reserved &copy;</div>
     </div>
   );
 }
