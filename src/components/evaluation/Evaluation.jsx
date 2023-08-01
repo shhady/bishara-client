@@ -101,8 +101,7 @@ export default function Evaluation({teacher, user, setUser}) {
 
   return (
     <div className='containerEvaluation'>
-    <div className='evaDesc'> تحميل فيديو لنفسك وأنت تعزف الموسيقى للحصول على تعليقات من معلمك يُعد أداة تعلم قيمة ومريحة. من خلال تسجيل أدائك على الفيديو، تمنح معلمك نظرة شاملة على قدراتك الموسيقية، مما يتيح تقييمًا أكثر دقة وفهمًا أعمق لبناء منهاج خاص بك. 
-    </div>
+   
     {!user &&  <div className='notSub'><div>الرجاء تسجيل الدخول</div><div> <button onClick={()=> navigate("/auth")} className='uploadEvaBtn'>تسجيل الدخول</button></div></div>}
     {user?.status === "triedOnce" && plan?.status !== 'active' && <div className='notSub'><div>يجب الاشتراك للحصول على تقييم لعزفك مرة اخرى</div><div> <button onClick={()=> navigate("/subscription")} className='uploadEvaBtn'>للاشتراك</button></div></div>}
     {user && plan && plan?.teacherId !== teacher?._id ? (<div  style={{display:"flex", justifyContent:"center",flexDirection:"column", alignItems:"center", height:"100%"}}><h3>انت مشترك مع معلم اخر</h3><button onClick={()=>navigate(`/newTeacher/${plan?.teacherId}`)} style={{background:"#fcedd5", padding:"10px 15px"}}>{plan?.teacherName}</button></div>):(null)}
@@ -185,6 +184,8 @@ export default function Evaluation({teacher, user, setUser}) {
           </div>
          
         )}
+         <div className='evaDesc'> تحميل فيديو لنفسك وأنت تعزف الموسيقى للحصول على تعليقات من معلمك يُعد أداة تعلم قيمة ومريحة. من خلال تسجيل أدائك على الفيديو، تمنح معلمك نظرة شاملة على قدراتك الموسيقية، مما يتيح تقييمًا أكثر دقة وفهمًا أعمق لبناء منهاج خاص بك. 
+    </div>
     </div>
   )
 }

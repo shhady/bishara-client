@@ -62,7 +62,7 @@ export default function NewMessenger({socket,user}) {
         });
       }, [socket]);
   return (
-    <>
+    <div style={{marginBottom:"50px"}}>
      {user?.role === "admin" || user?.role === "teacher" ? (<div className='messengerPageTeacher'>
       
       <div>
@@ -79,14 +79,14 @@ export default function NewMessenger({socket,user}) {
   </div>):(<div className='messengerPage'>
   <h2>المحادثات</h2> 
       <div className='testest'>
-     {chats.length > 0 ? (<> {chats.map((chat) =>(
-         <div>
+     {chats.length > 0 ? (<> {chats.map((chat, i) =>(
+         <div key={i}>
       <MyConversation currentUser={user} conversation={chat} socket={socket}/></div>
       ))}</>):(<h3 style={{textAlign:"center", borderBottom:"1px solid black"}}>اختر المعلم الذي تريد محادثته</h3>)}
      
       </div>
       <div>
-      <h2 style={{textAlign:"center"}}>المعلمين</h2>
+      <h2 style={{textAlign:"center"}}>المعلمون</h2>
       <NewTeachersList user={user} chats={chats}/>
       </div>
       {/* <NewChatBox user={user}/> */}
@@ -94,7 +94,7 @@ export default function NewMessenger({socket,user}) {
     
    
         
-        </>
+        </div>
     
   )
 }

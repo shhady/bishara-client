@@ -24,7 +24,7 @@ export default function NewTeacher({user, setUser}) {
     
       
   return (
-    <div>
+    <div style={{marginBottom:"70px"}}>
         <div className='cover' style={{ backgroundImage: `url(${teacher?.cover})` }}>
             <div className='onTopOfCover'>
                 <div className='imageProfileNew'>

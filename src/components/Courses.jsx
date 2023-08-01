@@ -109,7 +109,7 @@ export default function Courses({
           // onClick={() => {
           //   handleClick(post);
           // }}
-          style={{ cursor: "pointer", padding: "5px", borderRadius: "5px", borderRadius: "25px"  }}
+          style={{ cursor: "pointer", padding: "5px", borderRadius: "5px", borderRadius: "25px", marginBottom:"20px"  }}
         >
          
           <img

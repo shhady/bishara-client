@@ -274,16 +274,18 @@ box-shadow:  20px 20px 60px #d5d5d5,
         width: 100vw;
         background: rgba(98, 98, 100, 0.3);
     }
-    .menu-details{
+    .menu-details {
         display: flex;
         flex-direction: column;
-        align-items:center;
-        position:fixed;
-        top:0;
-        right:0;
-        height:100vh;
-        width:100%;
-        background:black;
+        align-items: center;
+        /* Use position: fixed instead of position: absolute */
+        position: fixed;
+        /* Position the element to cover the bottomMenu */
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 100%;
+        background: black;
         color: white;
         transition: all 0.5s;
         z-index: 999;
