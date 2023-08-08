@@ -213,7 +213,11 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
                 padding:"5px 25px",
                 margin:'10px auto'}} onClick={postDetails}>ارسال</button>):(null)}
          {video ? <>
-          {fileUpload?.percentComplete ? (<>{fileUpload?.percentComplete}%</>): (<div style={{display:'flex', justifyContent:'center', alignItems:'center'}}> {video.name}  <button onClick={()=> {setVideo(null); setVideoUrl(null)}} style={{background:"red", marginRight:"10px"}}>X</button></div>)}</>:  <><label for="inputTag">
+          {fileUpload?.percentComplete ? 
+          (<>{fileUpload?.percentComplete}%</>):
+           (<div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+             {video.name}  <button onClick={()=> {setVideo(null); setVideoUrl(null)}} 
+             style={{background:"red", marginRight:"10px"}}>X</button></div>)}</>:  <><label for="inputTag">
               <div style={{
                 cursor:"pointer",
                 textAlign:"center",
@@ -226,33 +230,36 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
               >
               ارفع فيديو  </div>
               <input
-  type="file"
-  id="inputTag"
-  accept="audio/*, video/*"
-  onChange={(e) => {
-    const file = e.target.files[0];
-    if (file) {
-      if (file.type.includes("image")) {
+        type="file"
+         id="inputTag"
+         accept="audio/*, video/*"
+         onChange={(e) => {
+         const file = e.target.files[0];
+         if (file) {
+          if (file.type.includes("image")) {
         // Handle the case when a photo is selected
         alert("لا يمكن رفع صورة, الرجاء رفع فيديو او تسجيل صوتي");
         e.target.value = null; // Clear the file input
       } else if (file.size > 104857500) {
-        setMoreThan("more than 100mb");
+        setMoreThan(`${file.size} "more than 100mb"`);
       } else {
         setVideo(file);
       }
-    }
-  }}
-  style={{ display: "none" }}
-  onClick={() => {
-    setVideoUrl(null);
-    setVideo(null);
-    setMoreThan(null);
-  }}
+     }
+      }}
+     style={{ display: "none" }}
+     onClick={() => {
+      setVideoUrl(null);
+      setVideo(null);
+       setMoreThan(null);
+       }}
 />
 
             </label>
-            {moreThan ? (<>الفيديو اكبر من الحجم الاقصى وهو 100 ميجا بايت <div>File Size: {Math.round(video.size / 1024 / 1024)} MB</div></>):(<div style={{textAlign:"center"}}>الحجم الاقصى"100" ميجا بايت</div>)}
+            {moreThan ? (<>الفيديو اكبر من الحجم الاقصى وهو 100 ميجا بايت 
+            <div>{moreThan}</div></>
+              ):(
+              <div style={{textAlign:"center"}}>الحجم الاقصى"100" ميجا بايت</div>)}
             
              </>
             }
