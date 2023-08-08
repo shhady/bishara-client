@@ -206,12 +206,14 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
           value={commentText}
           onChange={handleInputChange}
         />
-        {video ? (<button style={{
+        {video ? (<>
+        <div>{Math.round(video.size / 1024 / 1024)} MB</div>
+        <button style={{
                 cursor:"pointer",
                 textAlign:"center",
                 background: '#fcedd5',
                 padding:"5px 25px",
-                margin:'10px auto'}} onClick={postDetails}>ارسال</button>):(null)}
+                margin:'10px auto'}} onClick={postDetails}>ارسال</button></>):(null)}
          {video ? <>
           {fileUpload?.percentComplete ? 
           (<>{fileUpload?.percentComplete}%</>):
@@ -241,7 +243,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
         alert("لا يمكن رفع صورة, الرجاء رفع فيديو او تسجيل صوتي");
         e.target.value = null; // Clear the file input
       } else if (file.size > 104857500) {
-        setMoreThan(`${Math.round(file.size / 1024 / 1024)} MB more than 100MB`);
+        setMoreThan(`${Math.round(file.size / 1024 / 1024)} MB  more than 100MB`);
       } else {
         setVideo(file);
       }
