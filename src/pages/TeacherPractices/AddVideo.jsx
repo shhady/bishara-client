@@ -213,7 +213,6 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
                 padding:"5px 25px",
                 margin:'10px auto'}} onClick={postDetails}>ارسال</button>):(null)}
          {video ? <>
-          <div>File Size: {Math.round(video.size / 1024 / 1024)} MB</div>
           {fileUpload?.percentComplete ? (<>{fileUpload?.percentComplete}%</>): (<div style={{display:'flex', justifyContent:'center', alignItems:'center'}}> {video.name}  <button onClick={()=> {setVideo(null); setVideoUrl(null)}} style={{background:"red", marginRight:"10px"}}>X</button></div>)}</>:  <><label for="inputTag">
               <div style={{
                 cursor:"pointer",
@@ -253,7 +252,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
 />
 
             </label>
-            {moreThan ? (<>الفيديو اكبر من الحجم الاقصى وهو 100 ميجا بايت</>):(<div style={{textAlign:"center"}}>الحجم الاقصى"100" ميجا بايت</div>)}
+            {moreThan ? (<>الفيديو اكبر من الحجم الاقصى وهو 100 ميجا بايت <div>File Size: {Math.round(video.size / 1024 / 1024)} MB</div></>):(<div style={{textAlign:"center"}}>الحجم الاقصى"100" ميجا بايت</div>)}
             
              </>
             }
