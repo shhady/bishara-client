@@ -241,7 +241,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
         alert("لا يمكن رفع صورة, الرجاء رفع فيديو او تسجيل صوتي");
         e.target.value = null; // Clear the file input
       } else if (file.size > 104857500) {
-        setMoreThan(`${file.size} "more than 100mb"`);
+        setMoreThan(`${Math.round(file.size / 1024 / 1024)} MB more than 100MB`);
       } else {
         setVideo(file);
       }
