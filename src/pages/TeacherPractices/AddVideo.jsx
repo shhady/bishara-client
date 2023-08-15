@@ -206,14 +206,14 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
           value={commentText}
           onChange={handleInputChange}
         />
-        {video ? (<>
-        <div>{Math.round(video.size / 1024 / 1024)} MB</div>
+        {video ? (<div style={{display:'flex', justifyContent:'center', alignItems:'center', flexDirection:"column"}}> 
+        <div>الحجم:  <strong>{Math.round(video.size / 1024 / 1024)} MB</strong>.</div>
         <button style={{
                 cursor:"pointer",
                 textAlign:"center",
                 background: '#fcedd5',
                 padding:"5px 25px",
-                margin:'10px auto'}} onClick={postDetails}>ارسال</button></>):(null)}
+                margin:'10px auto'}} onClick={postDetails}>ارسال</button></div>):(null)}
          {video ? <>
           {fileUpload?.percentComplete ? 
           (<>{fileUpload?.percentComplete}%</>):
@@ -243,7 +243,7 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
         alert("لا يمكن رفع صورة, الرجاء رفع فيديو او تسجيل صوتي");
         e.target.value = null; // Clear the file input
       } else if (file.size > 104857500) {
-        setMoreThan(`${Math.round(file.size / 1024 / 1024)} MB  more than 100MB`);
+        setMoreThan(`الحجم: ${Math.round(file.size / 1024 / 1024)} MB `);
       } else {
         setVideo(file);
       }
@@ -258,8 +258,8 @@ const AddVideo = ({ practice, onVideoAdd, socket, user }) => {
 />
 
             </label>
-            {moreThan ? (<>الفيديو اكبر من الحجم الاقصى وهو 100 ميجا بايت 
-            <div>{moreThan}</div></>
+            {moreThan ? (<div style={{display:'flex', justifyContent:'center', alignItems:'center', flexDirection:"column"}}>الفيديو اكبر من الحجم الاقصى وهو 100 ميجا بايت 
+            <div><strong>{moreThan}</strong></div></div>
               ):(
               <div style={{textAlign:"center"}}>الحجم الاقصى"100" ميجا بايت</div>)}
             
