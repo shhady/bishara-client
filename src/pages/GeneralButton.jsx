@@ -48,7 +48,7 @@ export default function GeneralButton({user}) {
               nameOfProblem: nameOfProblem,
               practiceId: "general",
               uniqueLink: "general",
-              teacherId: user.teacher._id
+              teacherId: user._id
             });
             window.location.reload()
           };
