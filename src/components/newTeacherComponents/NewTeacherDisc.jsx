@@ -61,8 +61,8 @@ export default function NewTeacherDisc({ id, user }) {
       ) : (
         <div>
            {user?._id === id && ( <button style={{width:"20vw", display:"flex", alignSelf:"flex-end", alignItems:"center", justifyContent:'center'}} onClick={() => setEditMode(true)}>تعديل</button>)}
-          <p>{teacher.about}</p>
-         kjh
+          <p>{teacher.about} kkk</p>
+        
         </div>
       )}
     </div>
