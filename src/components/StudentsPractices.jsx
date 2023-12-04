@@ -20,6 +20,9 @@ export default function StudentsPractices({ user }) {
   const [onlyForTeacher, setOnlyForTeacher] = useState([]);
   const [openButtons, setOpenButtons] = useState(false);
   const [showButtons, setShowButtons] = useState([]);
+
+
+
   const postDetails = (practice) => {
     const formData = new FormData();
     formData.append("file", video);
@@ -39,6 +42,9 @@ export default function StudentsPractices({ user }) {
         console.log(err);
       });
   };
+
+
+  
   useEffect(() => {}, [url]);
 
   const addTeacherVideoReply = (practice) => {
